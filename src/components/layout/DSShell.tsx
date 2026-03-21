@@ -1,13 +1,13 @@
 import { useRef, type ReactNode } from "react";
 import { AppProviders } from "./AppProviders";
-import { DSNav } from "./DSNav";
-import { DSFooter } from "./DSFooter";
-import { LiquidGlassFilter } from "./LiquidGlassFilter";
-import { AppearanceModal } from "./AppearanceModal";
-import { ContextMenu } from "./ContextMenu";
-import { BackgroundPicker } from "./BackgroundPicker";
-import { useBackground, COLOR_BACKGROUNDS } from "@/context/BackgroundContext";
-import { useContrastColor } from "@/hooks/useContrastColor";
+import { DSNav } from "../header/DSNav";
+import { DSFooter } from "../footer/DSFooter";
+import { LiquidGlassFilter } from "../glass/LiquidGlassFilter";
+import { AppearanceModal } from "../modal/AppearanceModal";
+import { ContextMenu } from "../modal/ContextMenu";
+import { BackgroundPicker } from "../modal/BackgroundPicker";
+import { useBackground, COLOR_BACKGROUNDS } from "@/components/context/BackgroundContext";
+import { useContrastColor } from "@/components/hooks/useContrastColor";
 
 interface DSShellProps {
   currentPath: string;

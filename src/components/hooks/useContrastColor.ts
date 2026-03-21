@@ -1,5 +1,5 @@
 import { useState, useEffect, type RefObject } from "react";
-import { useContrast, getGlobalContrast, type ContrastTheme } from "@/context/ContrastContext";
+import { useContrast, getGlobalContrast, type ContrastTheme } from "@/components/context/ContrastContext";
 
 /**
  * Lightweight luminance helper for standalone fallback (no canvas).

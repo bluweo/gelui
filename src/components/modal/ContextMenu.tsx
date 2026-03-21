@@ -1,8 +1,8 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { createPortal } from "react-dom";
-import { useBackground } from "@/context/BackgroundContext";
-import { useAppearance } from "@/context/AppearanceContext";
-import { useContrastColor } from "@/hooks/useContrastColor";
+import { useBackground } from "@/components/context/BackgroundContext";
+import { useAppearance } from "@/components/context/AppearanceContext";
+import { useContrastColor } from "@/components/hooks/useContrastColor";
 import {
   Gallery,
   Setting2,

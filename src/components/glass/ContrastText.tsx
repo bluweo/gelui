@@ -1,6 +1,6 @@
 import { useRef, type ReactNode } from "react";
-import { useContrastColor } from "@/hooks/useContrastColor";
-import type { ContrastTheme } from "@/context/ContrastContext";
+import { useContrastColor } from "@/components/hooks/useContrastColor";
+import type { ContrastTheme } from "@/components/context/ContrastContext";
 
 interface ContrastTextProps {
   children: ReactNode;

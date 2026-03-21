@@ -4,7 +4,7 @@
  * Usage: <LayerStatus />
  * Props: layers (optional override)
  */
-import DSCard from "./DSCard.astro";
+import DSCard from "../card/DSCard.astro";
 
 interface Props {
   layers?: { layer: string; phase: string; status: "complete" | "wip" | "planned" }[];

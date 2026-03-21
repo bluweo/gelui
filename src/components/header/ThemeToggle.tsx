@@ -1,5 +1,5 @@
 import { Sun1, Moon } from "iconsax-react";
-import { useAppearance } from "@/context/AppearanceContext";
+import { useAppearance } from "@/components/context/AppearanceContext";
 
 export function ThemeToggle() {
   const { theme, toggleTheme } = useAppearance();

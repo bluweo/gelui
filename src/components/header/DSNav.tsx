@@ -11,8 +11,8 @@ import {
   Login,
   HambergerMenu,
 } from "iconsax-react";
-import { useAppearance } from "@/context/AppearanceContext";
-import { useContrastColor } from "@/hooks/useContrastColor";
+import { useAppearance } from "@/components/context/AppearanceContext";
+import { useContrastColor } from "@/components/hooks/useContrastColor";
 
 const DS_NAV = [
   { href: "/design-system", id: "Overview", icon: Home2, label: "Overview" },

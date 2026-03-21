@@ -4,9 +4,9 @@ import {
   useAppearance,
   type RadiusPreset,
   type ShadowPreset,
-} from "@/context/AppearanceContext";
-import { LiquidGlassSlider } from "@/islands/LiquidGlassSlider";
-import { useDraggableModal } from "@/hooks/useDraggableModal";
+} from "@/components/context/AppearanceContext";
+import { LiquidGlassSlider } from "@/components/glass/LiquidGlassSlider";
+import { useDraggableModal } from "@/components/hooks/useDraggableModal";
 
 /* ------------------------------------------------------------------ */
 /*  Preset options                                                     */

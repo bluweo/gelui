@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import { useBackground, type BgOption, type BgType, COLOR_BACKGROUNDS } from "@/context/BackgroundContext";
-import { useDraggableModal } from "@/hooks/useDraggableModal";
+import { useBackground, type BgOption, type BgType, COLOR_BACKGROUNDS } from "@/components/context/BackgroundContext";
+import { useDraggableModal } from "@/components/hooks/useDraggableModal";
 import { Gallery, Video, Colorfilter, TickCircle, VideoPlay } from "iconsax-react";
 
 type TabKey = "image" | "video" | "color";
