@@ -1,0 +1,30 @@
+---
+/**
+ * QuickStats — Key metrics grid
+ * Usage: <QuickStats />
+ * Props: stats (optional override)
+ */
+import DSCard from "./DSCard.astro";
+
+interface Props {
+  stats?: { value: string | number; label: string }[];
+}
+
+const { stats = [
+  { value: 12, label: "Token categories" },
+  { value: 4, label: "Glass levels" },
+  { value: 9, label: "Font sizes" },
+  { value: 3, label: "Shadow presets" },
+] } = Astro.props;
+---
+
+<DSCard title="Quick Stats" description="Current system coverage" span={2}>
+  <div class="grid grid-cols-2 gap-4">
+    {stats.map((s) => (
+      <div class="flex flex-col gap-1 p-3 rounded-[var(--glass-radius-sm)] bg-white/[0.03] border border-[var(--glass-border)]">
+        <span class="text-[24px] font-[650]">{s.value}</span>
+        <span class="text-[11px] opacity-45">{s.label}</span>
+      </div>
+    ))}
+  </div>
+</DSCard>

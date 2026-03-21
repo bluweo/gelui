@@ -1,0 +1,46 @@
+---
+/**
+ * ArchitectureDiagram — Layer list + architecture image side by side
+ * Usage: <ArchitectureDiagram />
+ */
+const LAYERS = [
+  { num: "06", name: "Layouts", desc: "Page grids, shells, composition" },
+  { num: "05", name: "Patterns", desc: "Recurring UI patterns & flows" },
+  { num: "04", name: "Components", desc: "Multi-primitive compositions" },
+  { num: "03", name: "Primitives", desc: "Single-purpose building blocks" },
+  { num: "02", name: "Tokens", desc: "Colors, typography, spacing, glass" },
+  { num: "01", name: "Core", desc: "CSS reset, variables, Tailwind v4" },
+];
+---
+
+<div class="relative overflow-hidden rounded-[var(--glass-radius)]">
+  <div class="grid grid-cols-[auto_1fr] max-[860px]:grid-cols-1">
+
+    {/* ── Left: Layer list ── */}
+    <div class="glass-1 glass-specular flex flex-col justify-center px-7 py-8 max-[540px]:px-5 max-[540px]:py-6 rounded-l-[var(--glass-radius)] rounded-r-none max-[860px]:rounded-l-none max-[860px]:rounded-t-[var(--glass-radius)] max-[860px]:rounded-br-none">
+      <p class="text-[10px] font-[650] uppercase tracking-[0.08em] text-black/70 dark:text-white/70 mb-4">6 Layers</p>
+      <div class="flex flex-col gap-1.5">
+        {LAYERS.map((layer) => (
+          <div class="group flex items-baseline gap-3 py-3 px-4 rounded-[var(--glass-radius-sm)] bg-white/[0.45] dark:bg-white/[0.06] border border-white/[0.5] dark:border-white/[0.08] transition-all duration-200 ease-[var(--transition-apple)] cursor-default hover:bg-white dark:hover:bg-white/[0.15] hover:shadow-[0_2px_8px_rgba(0,0,0,0.06)]">
+            <span class="text-[16px] font-[400] text-black/80 dark:text-white/80 w-6 shrink-0 transition-colors duration-200 group-hover:text-black dark:group-hover:text-white">{layer.num}</span>
+            <div class="flex flex-col gap-0.5">
+              <span class="text-[13px] font-[620] leading-tight">{layer.name}</span>
+              <span class="text-[11px] opacity-35 leading-snug transition-opacity duration-200 group-hover:opacity-55">{layer.desc}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    {/* ── Right: Architecture image ── */}
+    <div class="flex items-center justify-center overflow-hidden rounded-r-[var(--glass-radius)] max-[860px]:rounded-r-none max-[860px]:rounded-b-[var(--glass-radius)]">
+      <img
+        src="/resources/images/gelui-architecture-layer.png"
+        alt="GelUI 6-layer architecture — isometric glass stack"
+        class="w-full h-full object-cover"
+        loading="eager"
+      />
+    </div>
+
+  </div>
+</div>

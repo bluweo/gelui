@@ -1,0 +1,61 @@
+---
+/**
+ * ProjectStructure — Folder tree mapped to 6-layer architecture
+ * Usage: <ProjectStructure />
+ */
+import DSCard from "./DSCard.astro";
+
+const leftTree = `<span class="opacity-40">gelui/</span>
+\u251C\u2500\u2500 <span class="opacity-40">public/</span>
+\u2502   \u251C\u2500\u2500 backgrounds/          <span class="opacity-30">\u2500\u2500 image backgrounds (light/dark)</span>
+\u2502   \u251C\u2500\u2500 video-backgrounds/    <span class="opacity-30">\u2500\u2500 video backgrounds (light/dark)</span>
+\u2502   \u2514\u2500\u2500 logos/                 <span class="opacity-30">\u2500\u2500 brand logos + favicon SVGs</span>
+\u2502
+\u251C\u2500\u2500 <span class="opacity-40">src/</span>
+\u2502   \u251C\u2500\u2500 <span style="color: var(--color-brand);">tokens/</span>               <span class="opacity-30">\u2500\u2500 <b>Layer 2</b> Design tokens (TS)</span>
+\u2502   \u2502   \u251C\u2500\u2500 colors.ts         <span class="opacity-30">\u2500\u2500 color scales (50\u2013900)</span>
+\u2502   \u2502   \u251C\u2500\u2500 brand.ts          <span class="opacity-30">\u2500\u2500 brand palette</span>
+\u2502   \u2502   \u251C\u2500\u2500 typography.ts     <span class="opacity-30">\u2500\u2500 font sizes, weights, leading</span>
+\u2502   \u2502   \u251C\u2500\u2500 spacing.ts        <span class="opacity-30">\u2500\u2500 spacing scale</span>
+\u2502   \u2502   \u251C\u2500\u2500 radii.ts          <span class="opacity-30">\u2500\u2500 border radius presets</span>
+\u2502   \u2502   \u251C\u2500\u2500 shadows.ts        <span class="opacity-30">\u2500\u2500 shadow presets (soft/medium/hard)</span>
+\u2502   \u2502   \u251C\u2500\u2500 glass.ts          <span class="opacity-30">\u2500\u2500 glass levels, specular, borders</span>
+\u2502   \u2502   \u251C\u2500\u2500 motion.ts         <span class="opacity-30">\u2500\u2500 easing & duration tokens</span>
+\u2502   \u2502   \u251C\u2500\u2500 breakpoints.ts    <span class="opacity-30">\u2500\u2500 responsive breakpoints</span>
+\u2502   \u2502   \u2514\u2500\u2500 index.ts          <span class="opacity-30">\u2500\u2500 barrel export</span>
+\u2502   \u2502
+\u2502   \u251C\u2500\u2500 <span style="color: var(--color-brand);">styles/</span>               <span class="opacity-30">\u2500\u2500 <b>Layer 1</b> Core CSS</span>
+\u2502   \u2502   \u2514\u2500\u2500 global.css        <span class="opacity-30">\u2500\u2500 @theme, @utility, glass classes</span>`;
+
+const rightTree = `\u2502   \u251C\u2500\u2500 <span style="color: var(--color-brand);">context/</span>              <span class="opacity-30">\u2500\u2500 React context providers</span>
+\u2502   \u2502   \u251C\u2500\u2500 AppearanceContext <span class="opacity-30">\u2500\u2500 theme, glass settings</span>
+\u2502   \u2502   \u2514\u2500\u2500 BackgroundContext <span class="opacity-30">\u2500\u2500 bg image/video/color state</span>
+\u2502   \u2502
+\u2502   \u251C\u2500\u2500 <span style="color: var(--color-brand);">islands/</span>              <span class="opacity-30">\u2500\u2500 <b>Layer 3\u20135</b> React islands</span>
+\u2502   \u2502   \u251C\u2500\u2500 DSShell.tsx       <span class="opacity-30">\u2500\u2500 root shell (bg, filters, nav)</span>
+\u2502   \u2502   \u251C\u2500\u2500 DSNav.tsx         <span class="opacity-30">\u2500\u2500 gel glass top navigation</span>
+\u2502   \u2502   \u251C\u2500\u2500 ContextMenu.tsx   <span class="opacity-30">\u2500\u2500 right-click context menu</span>
+\u2502   \u2502   \u251C\u2500\u2500 AppearanceModal   <span class="opacity-30">\u2500\u2500 theme/glass settings modal</span>
+\u2502   \u2502   \u251C\u2500\u2500 BackgroundPicker  <span class="opacity-30">\u2500\u2500 image/video/color picker</span>
+\u2502   \u2502   \u251C\u2500\u2500 LiquidGlassFilter <span class="opacity-30">\u2500\u2500 SVG displacement filter</span>
+\u2502   \u2502   \u2514\u2500\u2500 ThemeToggle.tsx   <span class="opacity-30">\u2500\u2500 dark/light switch</span>
+\u2502   \u2502
+\u2502   \u251C\u2500\u2500 <span style="color: var(--color-brand);">layouts/</span>              <span class="opacity-30">\u2500\u2500 <b>Layer 6</b> Astro layouts</span>
+\u2502   \u2502   \u251C\u2500\u2500 BaseLayout.astro  <span class="opacity-30">\u2500\u2500 HTML shell, fonts, meta</span>
+\u2502   \u2502   \u2514\u2500\u2500 DSLayout.astro    <span class="opacity-30">\u2500\u2500 DS page wrapper</span>
+\u2502   \u2502
+\u2502   \u251C\u2500\u2500 <span style="color: var(--color-brand);">pages/</span>                <span class="opacity-30">\u2500\u2500 Astro file-based routing</span>
+\u2502   \u2502   \u251C\u2500\u2500 design-system/    <span class="opacity-30">\u2500\u2500 DS pages (overview, tokens\u2026)</span>
+\u2502   \u2502   \u2514\u2500\u2500 api/              <span class="opacity-30">\u2500\u2500 server endpoints</span>
+\u2502   \u2502
+\u2502   \u251C\u2500\u2500 <span style="color: var(--color-brand);">components/ds/</span>        <span class="opacity-30">\u2500\u2500 Astro helper components</span>
+\u2502   \u251C\u2500\u2500 <span style="color: var(--color-brand);">hooks/</span>                <span class="opacity-30">\u2500\u2500 React hooks (draggable, etc.)</span>
+\u2502   \u2514\u2500\u2500 <span style="color: var(--color-brand);">utils/</span>                <span class="opacity-30">\u2500\u2500 cn(), color-utils</span>`;
+---
+
+<DSCard title="Project Structure" description="How the codebase maps to the 6-layer architecture" span={4}>
+  <div class="grid grid-cols-2 gap-5 max-[860px]:grid-cols-1">
+    <pre class="text-[11px] font-mono leading-[1.8] opacity-70 overflow-x-auto"><code set:html={leftTree} /></pre>
+    <pre class="text-[11px] font-mono leading-[1.8] opacity-70 overflow-x-auto"><code set:html={rightTree} /></pre>
+  </div>
+</DSCard>

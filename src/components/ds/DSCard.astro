@@ -1,0 +1,68 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+  span?: 1 | 2 | 3 | 4;
+  frost?: boolean;
+  frostHeight?: string;
+  class?: string;
+}
+
+const { title, description, span = 1, frost = false, frostHeight = "140px", class: className = "" } = Astro.props;
+
+const spanClass =
+  span === 4 ? "col-span-full" :
+  span === 3 ? "col-span-3 max-[860px]:col-span-2 max-[540px]:col-span-1" :
+  span === 2 ? "col-span-2 max-[540px]:col-span-1" :
+  "";
+
+// Auto-enable frost when there's a title (has text header to make readable)
+const useFrost = frost || !!title;
+---
+
+<div class:list={[
+  "glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5",
+  spanClass,
+  className,
+]}>
+  {/* Gradient frost zone — makes header text readable on glass */}
+  {useFrost && (
+    <div class="ds-card-frost absolute top-0 left-0 right-0 pointer-events-none z-0 rounded-t-[var(--glass-radius)]" style={`height: ${frostHeight};`} />
+  )}
+
+  {title && (
+    <div class="relative z-[1] flex flex-col gap-1 mb-5">
+      <h2 class="text-[15px] font-[600]">{title}</h2>
+      {description && (
+        <p class="text-[11px] opacity-45 font-mono">{description}</p>
+      )}
+    </div>
+  )}
+  <div class:list={[useFrost && "relative z-[1]"]}>
+    <slot />
+  </div>
+</div>
+
+<style is:global>
+  /* Gradient frost zone — light mode */
+  .ds-card-frost {
+    background: linear-gradient(
+      180deg,
+      rgba(255,255,255,0.95) 0%,
+      rgba(255,255,255,0.82) 45%,
+      rgba(255,255,255,0.3) 78%,
+      transparent 100%
+    );
+  }
+
+  /* Gradient frost zone — dark mode */
+  [data-theme="dark"] .ds-card-frost {
+    background: linear-gradient(
+      180deg,
+      rgba(0,0,0,0.88) 0%,
+      rgba(0,0,0,0.7) 45%,
+      rgba(0,0,0,0.2) 78%,
+      transparent 100%
+    );
+  }
+</style>

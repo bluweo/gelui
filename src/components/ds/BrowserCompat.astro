@@ -1,0 +1,65 @@
+---
+/**
+ * BrowserCompat — Browser compatibility grid + feature table
+ * Usage: <BrowserCompat />
+ */
+import DSCard from "./DSCard.astro";
+
+const BROWSERS = [
+  { name: "Chrome", version: "111+", color: "#4285F4", icon: `<svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><circle cx="12" cy="12" r="4.5" opacity=".9"/><path d="M12 2a10 10 0 0 1 8.66 5h-5.34A5.5 5.5 0 0 0 12 6.5a5.5 5.5 0 0 0-3.32 1.12L5.5 2.66A9.96 9.96 0 0 1 12 2z" opacity=".7" fill="#EA4335"/><path d="M3.34 7A10 10 0 0 0 7 20.66l3.18-5.5A5.5 5.5 0 0 1 6.5 12a5.5 5.5 0 0 1 .61-2.5L3.34 7z" opacity=".7" fill="#FBBC05"/><path d="M20.66 7A10 10 0 0 1 7 20.66l3.18-5.5A5.5 5.5 0 0 0 17.5 12a5.5 5.5 0 0 0-.61-2.5L20.66 7z" opacity=".7" fill="#34A853"/></svg>` },
+  { name: "Edge", version: "111+", color: "#0078D7", icon: `<svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M21 12.1c0-.7-.1-1.4-.3-2.1-.7-2.6-2.8-4.7-5.3-5.6a9.9 9.9 0 0 0-6.8.2C6.3 5.6 4.5 7.5 3.5 9.8c-.6 1.4-.8 2.9-.6 4.4.3 2 1.2 3.8 2.7 5.1 1.5 1.3 3.4 2.1 5.4 2.3.8.1 1.6.1 2.4 0 1.6-.3 3-.9 4.2-1.9.3-.3.6-.5.9-.8-1.3.8-2.8 1.2-4.3 1.2-.9 0-1.8-.2-2.6-.5-2.1-.9-3.4-3-3.4-5.3 0-.4.1-.8.2-1.2.3-1.1 1-2 2-2.5 1-.5 2.2-.6 3.3-.2 1 .3 1.9 1.1 2.4 2 .2.4.4.9.4 1.4l4.5-1.7z" opacity=".85"/></svg>` },
+  { name: "Safari", version: "18+", color: "#007AFF", icon: `<svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><circle cx="12" cy="12" r="10" opacity=".15"/><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1" opacity=".4"/><polygon points="6.5,17.5 10.5,10.5 17.5,6.5 13.5,13.5" opacity=".7"/><circle cx="12" cy="12" r="1.2"/></svg>` },
+  { name: "Firefox", version: "128+", color: "#FF7139", icon: `<svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M20.5 10.5c-.2-1-.5-1.8-.9-2.5-.5-.8-1.1-1.5-1.8-2.1-.3-.2-.5-.4-.8-.6.2.5.4 1.1.4 1.7 0 .3 0 .5-.1.8-.2-.8-.7-1.5-1.3-2-.6-.5-1.3-.9-2.1-1.1-.4-.1-.8-.2-1.2-.2h-.3c-.1 0-.2 0-.3.1-.5.1-.9.3-1.2.6l-.1.1c-.1.1-.1.2-.1.3v.1c0 .2.1.3.2.5.1.1.3.3.4.4.2.2.3.4.4.6.1.3.2.6.2.9 0 .6-.2 1.2-.5 1.7-.4.5-.9.9-1.5 1.1-.3.1-.7.2-1 .2h-.2c-.6.1-1.2.3-1.7.6-.4.3-.7.6-.9 1-.4.7-.5 1.5-.4 2.3.1.6.3 1.2.6 1.7.3.5.7 1 1.2 1.4 1 .8 2.3 1.3 3.6 1.3h.4c1.6-.1 3-.8 4.1-1.8 1.1-1.1 1.7-2.5 1.8-4 0-.4 0-.8-.1-1.2z" opacity=".85"/></svg>` },
+  { name: "Samsung", version: "28+", color: "#1428A0", icon: `<svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><rect x="3" y="3" width="18" height="18" rx="4" opacity=".15"/><path d="M7.5 15.5c0 .8.6 1.5 1.5 1.5h6c.8 0 1.5-.7 1.5-1.5v-2c0-.8-.7-1.5-1.5-1.5H9c-.8 0-1.5-.7-1.5-1.5v-2C7.5 8.2 8.2 7.5 9 7.5h6c.8 0 1.5.7 1.5 1.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".7"/></svg>` },
+  { name: "Opera", version: "98+", color: "#FF1B2D", icon: `<svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18.5c-1.8 0-3.4-.9-4.3-2.4-.7-1.1-1.2-2.7-1.2-4.6v-3c0-1.9.5-3.5 1.2-4.6C8.6 4.4 10.2 3.5 12 3.5s3.4.9 4.3 2.4c.7 1.1 1.2 2.7 1.2 4.6v3c0 1.9-.5 3.5-1.2 4.6-.9 1.5-2.5 2.4-4.3 2.4z" opacity=".7"/></svg>` },
+];
+
+const FEATURES = [
+  { feature: "backdrop-filter: blur()", chrome: "76+", firefox: "103+", safari: "9+", status: "full" as const },
+  { feature: "CSS color-mix()", chrome: "111+", firefox: "113+", safari: "16.2+", status: "full" as const },
+  { feature: "CSS nesting", chrome: "113+", firefox: "117+", safari: "16.6+", status: "full" as const },
+  { feature: "oklch() / oklab()", chrome: "111+", firefox: "113+", safari: "15.4+", status: "full" as const },
+  { feature: "View Transitions (SPA)", chrome: "111+", firefox: "\u2014", safari: "18+", status: "partial" as const },
+  { feature: "View Transitions (MPA)", chrome: "126+", firefox: "\u2014", safari: "18.2+", status: "partial" as const },
+];
+---
+
+<DSCard title="Browser Compatibility" description="Minimum versions for full feature support" span={4}>
+  <!-- Browser grid -->
+  <div class="grid grid-cols-6 gap-3 mb-5 max-[860px]:grid-cols-3 max-[540px]:grid-cols-2">
+    {BROWSERS.map((browser) => (
+      <div class="flex flex-col items-center gap-2 p-3 rounded-[var(--glass-radius-sm)] bg-white/[0.03] border border-[var(--glass-border)] text-center">
+        <div class="w-10 h-10 rounded-[12px] flex items-center justify-center" style={`background: color-mix(in srgb, ${browser.color} 12%, transparent); color: ${browser.color};`}>
+          <Fragment set:html={browser.icon} />
+        </div>
+        <div class="flex flex-col gap-0.5">
+          <span class="text-[12px] font-[600]">{browser.name}</span>
+          <span class="text-[15px] font-[700] tracking-[-0.02em]">{browser.version}</span>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <!-- Feature support table -->
+  <div class="flex flex-col gap-0">
+    <div class="flex items-center gap-3 px-3 py-2 text-[10px] font-[600] uppercase tracking-[0.05em] opacity-40">
+      <span class="flex-1">Feature</span>
+      <span class="w-16 text-center">Chrome</span>
+      <span class="w-16 text-center">Firefox</span>
+      <span class="w-16 text-center">Safari</span>
+    </div>
+    {FEATURES.map((row) => (
+      <div class={`flex items-center gap-3 px-3 py-2 rounded-[6px] ${row.status === "partial" ? "bg-amber-500/[0.04]" : "bg-white/[0.01]"}`}>
+        <span class="flex-1 text-[12px] font-[500] font-mono">{row.feature}</span>
+        <span class="w-16 text-center text-[11px] font-[600] opacity-60">{row.chrome}</span>
+        <span class={`w-16 text-center text-[11px] font-[600] ${row.firefox === "\u2014" ? "opacity-25" : "opacity-60"}`}>{row.firefox}</span>
+        <span class="w-16 text-center text-[11px] font-[600] opacity-60">{row.safari}</span>
+      </div>
+    ))}
+  </div>
+
+  <div class="mt-4 flex items-start gap-2 px-3 py-2.5 rounded-[var(--glass-radius-sm)] bg-amber-500/[0.06] border border-amber-500/[0.1]">
+    <span class="text-[13px] shrink-0">{"\u26A0\uFE0F"}</span>
+    <span class="text-[11px] opacity-55 leading-relaxed">Firefox lacks View Transitions API support. All glass effects degrade gracefully &mdash; backdrop-filter and color-mix are supported across all modern browsers.</span>
+  </div>
+</DSCard>

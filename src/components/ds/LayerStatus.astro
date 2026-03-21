@@ -1,0 +1,41 @@
+---
+/**
+ * LayerStatus — Implementation progress per layer
+ * Usage: <LayerStatus />
+ * Props: layers (optional override)
+ */
+import DSCard from "./DSCard.astro";
+
+interface Props {
+  layers?: { layer: string; phase: string; status: "complete" | "wip" | "planned" }[];
+}
+
+const { layers = [
+  { layer: "Core", phase: "Done", status: "complete" },
+  { layer: "Tokens", phase: "Done", status: "complete" },
+  { layer: "Primitives", phase: "Phase 2", status: "wip" },
+  { layer: "Components", phase: "Phase 3", status: "planned" },
+  { layer: "Patterns", phase: "Phase 4", status: "planned" },
+  { layer: "Layouts", phase: "Phase 5", status: "planned" },
+] } = Astro.props;
+---
+
+<DSCard title="Layer Status" description="Implementation progress" span={2}>
+  <div class="flex flex-col gap-2.5">
+    {layers.map((item) => (
+      <div class="flex items-center justify-between py-1.5 px-3 rounded-[var(--glass-radius-sm)] bg-white/[0.02]">
+        <span class="text-[13px] font-[500]">{item.layer}</span>
+        <div class="flex items-center gap-2">
+          <span class="text-[10px] font-mono opacity-45">{item.phase}</span>
+          <span
+            class={`w-2 h-2 rounded-full ${
+              item.status === "complete" ? "bg-green-400" :
+              item.status === "wip" ? "bg-amber-400" :
+              "bg-white/20"
+            }`}
+          />
+        </div>
+      </div>
+    ))}
+  </div>
+</DSCard>

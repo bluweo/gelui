@@ -1,0 +1,36 @@
+---
+/**
+ * HeroText — Floating transparent hero text banner
+ * No panel, no glass — text floats directly on the background.
+ * Usage: <HeroText />
+ */
+---
+
+<div class="col-span-full flex flex-col items-center text-center py-16 max-[540px]:py-10">
+  <!-- Pill badge -->
+  <span class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-[11px] font-[600] tracking-[0.02em] contrast-muted mb-6">
+    Welcome to Gel UI
+    <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" class="opacity-50"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .962 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.582a.5.5 0 0 1 0 .962L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.962 0z"/></svg>
+  </span>
+
+  <!-- Main headline -->
+  <h1 class="text-[48px] max-[860px]:text-[36px] max-[540px]:text-[28px] font-[750] tracking-[-0.035em] leading-[1.22] mb-6 contrast-text drop-shadow-[0_2px_20px_rgba(0,0,0,0.08)] max-w-[900px]">
+    Design systems that feel<br />
+    <span class="contrast-muted">alive, layered, and adaptive.</span>
+  </h1>
+
+  <!-- Sub-headline -->
+  <p class="text-[16px] max-[540px]:text-[14px] leading-[1.7] contrast-text max-w-[780px] mb-8 drop-shadow-[0_1px_8px_rgba(0,0,0,0.06)]">
+    Build with a unified system that transforms tokens into fully composed interfaces. From primitives to layouts, every layer works together with precision and clarity. Adaptive glass, real-time contrast, and fluid interactions come built-in by default. Create faster, scale effortlessly, and deliver experiences that go beyond static UI.
+  </p>
+
+  <!-- CTA buttons -->
+  <div class="flex items-center gap-3">
+    <a href="/design-system/tokens" class="inline-flex items-center gap-1.5 px-6 py-2.5 rounded-full bg-white dark:bg-white/90 text-black text-[13px] font-[620] no-underline shadow-[0_2px_12px_rgba(0,0,0,0.1)] transition-all duration-200 hover:shadow-[0_4px_20px_rgba(0,0,0,0.15)] hover:scale-[1.03] active:scale-[0.98]">
+      Explore Tokens
+    </a>
+    <a href="/design-system/primitives" class="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full border border-white/[0.2] dark:border-white/[0.12] bg-white/[0.08] dark:bg-white/[0.04] backdrop-blur-[8px] text-[13px] font-[600] contrast-muted no-underline transition-all duration-200 hover:bg-white/[0.16] dark:hover:bg-white/[0.1]">
+      Learn More
+    </a>
+  </div>
+</div>

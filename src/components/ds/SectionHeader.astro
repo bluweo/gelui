@@ -1,0 +1,19 @@
+---
+interface Props {
+  title: string;
+  subtitle?: string;
+}
+
+const { title, subtitle } = Astro.props;
+---
+
+<div class="col-span-full mb-2 mt-8 first:mt-0">
+  <h2 class="text-2xl font-bold tracking-tight" style="color: var(--text-primary);">
+    {title}
+  </h2>
+  {subtitle && (
+    <p class="text-sm mt-1" style="color: var(--text-secondary);">
+      {subtitle}
+    </p>
+  )}
+</div>

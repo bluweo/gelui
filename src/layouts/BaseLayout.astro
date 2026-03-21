@@ -1,0 +1,30 @@
+---
+import { ClientRouter } from "astro:transitions";
+import "@fontsource-variable/plus-jakarta-sans";
+import "@/styles/global.css";
+
+interface Props {
+  title?: string;
+}
+
+const { title = "GelUI" } = Astro.props;
+---
+
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <link rel="icon" type="image/svg+xml" href="/logos/bluweo-logo.svg" />
+    <ClientRouter />
+  </head>
+  <body class="font-sans min-h-screen overflow-x-hidden leading-normal" style="color: var(--text-primary);">
+    <slot />
+
+    <!-- Version badge — bottom right -->
+    <div class="fixed bottom-3 right-4 z-50 text-[10px] font-mono font-[500] opacity-30 hover:opacity-60 transition-opacity duration-300 pointer-events-none contrast-muted select-none">
+      v0.1
+    </div>
+  </body>
+</html>

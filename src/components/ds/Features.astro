@@ -1,0 +1,26 @@
+---
+/**
+ * Features — Showcase of all GelUI capabilities with tag filtering
+ * Usage: <Features />
+ */
+import DSCard from "./DSCard.astro";
+import { FeaturesGrid } from "@/islands/FeaturesGrid";
+---
+
+<DSCard span={4} frost={true} frostHeight="240px">
+  <FeaturesGrid client:load />
+</DSCard>
+
+<style is:global>
+  @keyframes featureCardIn {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+</style>

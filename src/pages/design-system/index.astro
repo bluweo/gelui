@@ -1,0 +1,34 @@
+---
+import DSLayout from "@/layouts/DSLayout.astro";
+import HeroText from "@/components/ds/HeroText.astro";
+import HeroBanner from "@/components/ds/HeroBanner.astro";
+import ArchitectureDiagram from "@/components/ds/ArchitectureDiagram.astro";
+import TechStack from "@/components/ds/TechStack.astro";
+import Features from "@/components/ds/Features.astro";
+import BrowserCompat from "@/components/ds/BrowserCompat.astro";
+import QuickStats from "@/components/ds/QuickStats.astro";
+import LayerStatus from "@/components/ds/LayerStatus.astro";
+import ProjectStructure from "@/components/ds/ProjectStructure.astro";
+import RightClickHint from "@/components/ds/RightClickHint.astro";
+---
+
+<DSLayout title="Overview — GelUI Design System">
+  <RightClickHint />
+  <div class="w-full grid grid-cols-4 gap-5 max-[860px]:grid-cols-2 max-[860px]:gap-4 max-[540px]:grid-cols-1 max-[540px]:gap-3">
+
+    <HeroText />
+
+    <!-- Hero row: 1/3 + 2/3 -->
+    <div class="col-span-full grid grid-cols-[1fr_2fr] gap-5 max-[860px]:grid-cols-1 max-[860px]:gap-4 max-[540px]:gap-3">
+      <HeroBanner />
+      <ArchitectureDiagram />
+    </div>
+    <Features />
+    <TechStack />
+    <BrowserCompat />
+    <QuickStats />
+    <LayerStatus />
+    <ProjectStructure />
+
+  </div>
+</DSLayout>
