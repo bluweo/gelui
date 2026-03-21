@@ -855,6 +855,32 @@ body {
   color: rgba(255, 255, 255, 0.6);
 }
 
+/* ─── Hero CTA Buttons (contrast-aware) ─── */
+[data-contrast="light"] .hero-btn-primary {
+  background: rgba(30, 30, 35, 0.88);
+  color: #ffffff;
+}
+[data-contrast="dark"] .hero-btn-primary {
+  background: rgba(255, 255, 255, 0.92);
+  color: #111111;
+}
+[data-contrast="light"] .hero-btn-secondary {
+  background: rgba(30, 30, 35, 0.06);
+  border: 1px solid rgba(30, 30, 35, 0.15);
+  color: rgba(30, 30, 35, 0.7);
+}
+[data-contrast="light"] .hero-btn-secondary:hover {
+  background: rgba(30, 30, 35, 0.12);
+}
+[data-contrast="dark"] .hero-btn-secondary {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.7);
+}
+[data-contrast="dark"] .hero-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+
 /* ─── Glass Tooltip ─── */
 .gel-tooltip {
   transform: translateX(-50%) translateY(0);

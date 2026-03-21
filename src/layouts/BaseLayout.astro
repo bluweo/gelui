@@ -17,14 +17,12 @@ const { title = "GelUI" } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <link rel="icon" type="image/svg+xml" href="/logos/bluweo-logo.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <ClientRouter />
   </head>
   <body class="font-sans min-h-screen overflow-x-hidden leading-normal" style="color: var(--text-primary);">
     <slot />
-
-    <!-- Version badge — bottom right -->
-    <div class="fixed bottom-3 right-4 z-50 text-[10px] font-mono font-[500] opacity-30 hover:opacity-60 transition-opacity duration-300 pointer-events-none contrast-muted select-none">
-      v0.1
-    </div>
   </body>
 </html>

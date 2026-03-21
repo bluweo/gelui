@@ -2,7 +2,7 @@
 /**
  * RightClickHint — Floating radar-pulse dot with hint text
  * Tells users they can right-click to change background & appearance.
- * Auto-hides after 8 seconds. Click to dismiss.
+ * Uses contrast detection for text color.
  * Usage: <RightClickHint />
  */
 ---
@@ -10,22 +10,18 @@
 <div id="right-click-hint" class="fixed right-[5%] top-[45%] z-50 flex flex-col items-center gap-3 pointer-events-none max-[860px]:right-[3%] max-[640px]:hidden" style="opacity:0; transition: opacity 0.5s ease-out, transform 0.5s ease-out;">
   <!-- Radar pulse dot -->
   <div class="relative w-5 h-5">
-    <!-- Outer pulse ring 1 -->
-    <span class="absolute inset-0 rounded-full bg-white/30 dark:bg-white/20 animate-[radarPulse_2.4s_ease-out_infinite]"></span>
-    <!-- Outer pulse ring 2 (delayed) -->
-    <span class="absolute inset-0 rounded-full bg-white/25 dark:bg-white/15 animate-[radarPulse_2.4s_ease-out_0.8s_infinite]"></span>
-    <!-- Outer pulse ring 3 (delayed more) -->
-    <span class="absolute inset-0 rounded-full bg-white/20 dark:bg-white/10 animate-[radarPulse_2.4s_ease-out_1.6s_infinite]"></span>
-    <!-- Core dot -->
-    <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-white dark:bg-white shadow-[0_0_12px_rgba(255,255,255,0.6),0_0_4px_rgba(255,255,255,0.9)] animate-[dotGlow_2.4s_ease-in-out_infinite]"></span>
+    <span id="rch-ring1" class="absolute inset-0 rounded-full animate-[radarPulse_2.4s_ease-out_infinite]" style="background: rgba(255,255,255,0.3);"></span>
+    <span id="rch-ring2" class="absolute inset-0 rounded-full animate-[radarPulse_2.4s_ease-out_0.8s_infinite]" style="background: rgba(255,255,255,0.25);"></span>
+    <span id="rch-ring3" class="absolute inset-0 rounded-full animate-[radarPulse_2.4s_ease-out_1.6s_infinite]" style="background: rgba(255,255,255,0.2);"></span>
+    <span id="rch-dot" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full animate-[dotGlow_2.4s_ease-in-out_infinite]" style="background: #ffffff; box-shadow: 0 0 12px rgba(255,255,255,0.6), 0 0 4px rgba(255,255,255,0.9);"></span>
   </div>
 
   <!-- Hint text -->
   <div class="flex flex-col items-center gap-1 animate-[floatY_3s_ease-in-out_infinite]">
-    <p class="text-[11px] font-[600] text-white dark:text-white drop-shadow-[0_1px_6px_rgba(0,0,0,0.4)] whitespace-nowrap">
+    <p id="rch-title" class="text-[11px] font-[600] drop-shadow-[0_1px_6px_rgba(0,0,0,0.4)] whitespace-nowrap" style="color: #ffffff;">
       Right-click anywhere
     </p>
-    <p class="text-[10px] font-[400] text-white/70 dark:text-white/70 drop-shadow-[0_1px_4px_rgba(0,0,0,0.3)] whitespace-nowrap">
+    <p id="rch-sub" class="text-[10px] font-[400] drop-shadow-[0_1px_4px_rgba(0,0,0,0.3)] whitespace-nowrap" style="color: rgba(255,255,255,0.7);">
       Change background & appearance
     </p>
   </div>
@@ -46,11 +42,9 @@
   @keyframes dotGlow {
     0%, 100% {
       opacity: 1;
-      box-shadow: 0 0 12px rgba(255, 255, 255, 0.6), 0 0 4px rgba(255, 255, 255, 0.9);
     }
     50% {
       opacity: 0.7;
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 8px rgba(255, 255, 255, 1);
     }
   }
 
@@ -62,17 +56,6 @@
       transform: translateY(-6px);
     }
   }
-
-  @keyframes fadeInHint {
-    from {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
 </style>
 
 <script>
@@ -80,6 +63,52 @@
     let hintDismissed = false;
     const hint = document.getElementById('right-click-hint');
     if (!hint) return;
+
+    const ring1 = document.getElementById('rch-ring1');
+    const ring2 = document.getElementById('rch-ring2');
+    const ring3 = document.getElementById('rch-ring3');
+    const dot = document.getElementById('rch-dot');
+    const title = document.getElementById('rch-title');
+    const sub = document.getElementById('rch-sub');
+
+    // Update colors based on contrast
+    function updateContrast() {
+      const main = document.querySelector('main[data-contrast]');
+      const contrast = main?.getAttribute('data-contrast') || 'dark';
+      const isDark = contrast === 'dark';
+
+      const color = isDark ? '255,255,255' : '0,0,0';
+      const solid = isDark ? '#ffffff' : '#000000';
+
+      if (ring1) ring1.style.background = `rgba(${color},0.3)`;
+      if (ring2) ring2.style.background = `rgba(${color},0.25)`;
+      if (ring3) ring3.style.background = `rgba(${color},0.2)`;
+      if (dot) {
+        dot.style.background = solid;
+        dot.style.boxShadow = `0 0 12px rgba(${color},0.6), 0 0 4px rgba(${color},0.9)`;
+      }
+      if (title) {
+        title.style.color = solid;
+        title.style.filter = isDark
+          ? 'drop-shadow(0 1px 6px rgba(0,0,0,0.4))'
+          : 'drop-shadow(0 1px 6px rgba(255,255,255,0.4))';
+      }
+      if (sub) {
+        sub.style.color = `rgba(${color},0.7)`;
+        sub.style.filter = isDark
+          ? 'drop-shadow(0 1px 4px rgba(0,0,0,0.3))'
+          : 'drop-shadow(0 1px 4px rgba(255,255,255,0.3))';
+      }
+    }
+
+    // Watch for contrast changes on <main>
+    const observer = new MutationObserver(updateContrast);
+    const main = document.querySelector('main[data-contrast]');
+    if (main) {
+      observer.observe(main, { attributes: true, attributeFilter: ['data-contrast'] });
+    }
+    // Initial check
+    updateContrast();
 
     // Fade in on load after a short delay
     setTimeout(() => {
@@ -95,6 +124,7 @@
       hint.style.transform = 'translateY(-10px)';
       document.removeEventListener('contextmenu', dismissHint);
       window.removeEventListener('scroll', handleScroll);
+      observer.disconnect();
     }
 
     // Show/hide based on scroll position

@@ -1,61 +1,123 @@
 ---
 /**
  * ProjectStructure — Folder tree mapped to 6-layer architecture
+ * Browser Support style: left title panel + right folder tree
  * Usage: <ProjectStructure />
  */
 import DSCard from "./DSCard.astro";
 
-const leftTree = `<span class="opacity-40">gelui/</span>
-\u251C\u2500\u2500 <span class="opacity-40">public/</span>
-\u2502   \u251C\u2500\u2500 backgrounds/          <span class="opacity-30">\u2500\u2500 image backgrounds (light/dark)</span>
-\u2502   \u251C\u2500\u2500 video-backgrounds/    <span class="opacity-30">\u2500\u2500 video backgrounds (light/dark)</span>
-\u2502   \u2514\u2500\u2500 logos/                 <span class="opacity-30">\u2500\u2500 brand logos + favicon SVGs</span>
-\u2502
-\u251C\u2500\u2500 <span class="opacity-40">src/</span>
-\u2502   \u251C\u2500\u2500 <span style="color: var(--color-brand);">tokens/</span>               <span class="opacity-30">\u2500\u2500 <b>Layer 2</b> Design tokens (TS)</span>
-\u2502   \u2502   \u251C\u2500\u2500 colors.ts         <span class="opacity-30">\u2500\u2500 color scales (50\u2013900)</span>
-\u2502   \u2502   \u251C\u2500\u2500 brand.ts          <span class="opacity-30">\u2500\u2500 brand palette</span>
-\u2502   \u2502   \u251C\u2500\u2500 typography.ts     <span class="opacity-30">\u2500\u2500 font sizes, weights, leading</span>
-\u2502   \u2502   \u251C\u2500\u2500 spacing.ts        <span class="opacity-30">\u2500\u2500 spacing scale</span>
-\u2502   \u2502   \u251C\u2500\u2500 radii.ts          <span class="opacity-30">\u2500\u2500 border radius presets</span>
-\u2502   \u2502   \u251C\u2500\u2500 shadows.ts        <span class="opacity-30">\u2500\u2500 shadow presets (soft/medium/hard)</span>
-\u2502   \u2502   \u251C\u2500\u2500 glass.ts          <span class="opacity-30">\u2500\u2500 glass levels, specular, borders</span>
-\u2502   \u2502   \u251C\u2500\u2500 motion.ts         <span class="opacity-30">\u2500\u2500 easing & duration tokens</span>
-\u2502   \u2502   \u251C\u2500\u2500 breakpoints.ts    <span class="opacity-30">\u2500\u2500 responsive breakpoints</span>
-\u2502   \u2502   \u2514\u2500\u2500 index.ts          <span class="opacity-30">\u2500\u2500 barrel export</span>
-\u2502   \u2502
-\u2502   \u251C\u2500\u2500 <span style="color: var(--color-brand);">styles/</span>               <span class="opacity-30">\u2500\u2500 <b>Layer 1</b> Core CSS</span>
-\u2502   \u2502   \u2514\u2500\u2500 global.css        <span class="opacity-30">\u2500\u2500 @theme, @utility, glass classes</span>`;
+interface TreeItem {
+  name: string;
+  type: "folder" | "file";
+  layer?: string;
+  desc?: string;
+  count?: number;
+  children?: TreeItem[];
+}
 
-const rightTree = `\u2502   \u251C\u2500\u2500 <span style="color: var(--color-brand);">context/</span>              <span class="opacity-30">\u2500\u2500 React context providers</span>
-\u2502   \u2502   \u251C\u2500\u2500 AppearanceContext <span class="opacity-30">\u2500\u2500 theme, glass settings</span>
-\u2502   \u2502   \u2514\u2500\u2500 BackgroundContext <span class="opacity-30">\u2500\u2500 bg image/video/color state</span>
-\u2502   \u2502
-\u2502   \u251C\u2500\u2500 <span style="color: var(--color-brand);">islands/</span>              <span class="opacity-30">\u2500\u2500 <b>Layer 3\u20135</b> React islands</span>
-\u2502   \u2502   \u251C\u2500\u2500 DSShell.tsx       <span class="opacity-30">\u2500\u2500 root shell (bg, filters, nav)</span>
-\u2502   \u2502   \u251C\u2500\u2500 DSNav.tsx         <span class="opacity-30">\u2500\u2500 gel glass top navigation</span>
-\u2502   \u2502   \u251C\u2500\u2500 ContextMenu.tsx   <span class="opacity-30">\u2500\u2500 right-click context menu</span>
-\u2502   \u2502   \u251C\u2500\u2500 AppearanceModal   <span class="opacity-30">\u2500\u2500 theme/glass settings modal</span>
-\u2502   \u2502   \u251C\u2500\u2500 BackgroundPicker  <span class="opacity-30">\u2500\u2500 image/video/color picker</span>
-\u2502   \u2502   \u251C\u2500\u2500 LiquidGlassFilter <span class="opacity-30">\u2500\u2500 SVG displacement filter</span>
-\u2502   \u2502   \u2514\u2500\u2500 ThemeToggle.tsx   <span class="opacity-30">\u2500\u2500 dark/light switch</span>
-\u2502   \u2502
-\u2502   \u251C\u2500\u2500 <span style="color: var(--color-brand);">layouts/</span>              <span class="opacity-30">\u2500\u2500 <b>Layer 6</b> Astro layouts</span>
-\u2502   \u2502   \u251C\u2500\u2500 BaseLayout.astro  <span class="opacity-30">\u2500\u2500 HTML shell, fonts, meta</span>
-\u2502   \u2502   \u2514\u2500\u2500 DSLayout.astro    <span class="opacity-30">\u2500\u2500 DS page wrapper</span>
-\u2502   \u2502
-\u2502   \u251C\u2500\u2500 <span style="color: var(--color-brand);">pages/</span>                <span class="opacity-30">\u2500\u2500 Astro file-based routing</span>
-\u2502   \u2502   \u251C\u2500\u2500 design-system/    <span class="opacity-30">\u2500\u2500 DS pages (overview, tokens\u2026)</span>
-\u2502   \u2502   \u2514\u2500\u2500 api/              <span class="opacity-30">\u2500\u2500 server endpoints</span>
-\u2502   \u2502
-\u2502   \u251C\u2500\u2500 <span style="color: var(--color-brand);">components/ds/</span>        <span class="opacity-30">\u2500\u2500 Astro helper components</span>
-\u2502   \u251C\u2500\u2500 <span style="color: var(--color-brand);">hooks/</span>                <span class="opacity-30">\u2500\u2500 React hooks (draggable, etc.)</span>
-\u2502   \u2514\u2500\u2500 <span style="color: var(--color-brand);">utils/</span>                <span class="opacity-30">\u2500\u2500 cn(), color-utils</span>`;
+const TREE: TreeItem[] = [
+  {
+    name: "public/", type: "folder", children: [
+      { name: "backgrounds/", type: "folder", desc: "Image backgrounds" },
+      { name: "video-backgrounds/", type: "folder", desc: "Video backgrounds" },
+      { name: "logos/", type: "folder", desc: "SVG logos & favicons", count: 12 },
+    ]
+  },
+  {
+    name: "src/", type: "folder", children: [
+      { name: "tokens/", type: "folder", layer: "Layer 2", desc: "Design tokens", count: 10 },
+      { name: "styles/", type: "folder", layer: "Layer 1", desc: "Core CSS & utilities", count: 1 },
+      { name: "context/", type: "folder", desc: "React context providers", count: 3 },
+      { name: "islands/", type: "folder", layer: "Layer 3–5", desc: "React islands", count: 11 },
+      { name: "components/", type: "folder", desc: "Astro components", count: 12 },
+      { name: "layouts/", type: "folder", layer: "Layer 6", desc: "Astro layouts", count: 2 },
+      { name: "pages/", type: "folder", desc: "File-based routing", count: 8 },
+      { name: "hooks/", type: "folder", desc: "React hooks", count: 2 },
+      { name: "utils/", type: "folder", desc: "Helpers & utilities", count: 2 },
+    ]
+  },
+];
+
+const CONFIG_FILES = [
+  { name: "astro.config.ts", desc: "Astro configuration" },
+  { name: "tailwind.config.ts", desc: "Tailwind CSS v4 config" },
+  { name: "tsconfig.json", desc: "TypeScript config" },
+  { name: "package.json", desc: "Dependencies & scripts" },
+];
 ---
 
-<DSCard title="Project Structure" description="How the codebase maps to the 6-layer architecture" span={4}>
-  <div class="grid grid-cols-2 gap-5 max-[860px]:grid-cols-1">
-    <pre class="text-[11px] font-mono leading-[1.8] opacity-70 overflow-x-auto"><code set:html={leftTree} /></pre>
-    <pre class="text-[11px] font-mono leading-[1.8] opacity-70 overflow-x-auto"><code set:html={rightTree} /></pre>
+<DSCard span={4} frost={true} frostHeight="220px">
+  <div class="grid grid-cols-[1fr_2fr] gap-8 max-[860px]:grid-cols-1 max-[860px]:gap-6">
+
+    {/* ── Left: Title + description + config files ── */}
+    <div class="flex flex-col pt-4 pl-3">
+      <span class="text-[10px] font-[650] uppercase tracking-[0.1em] text-black/40 dark:text-white/40 mb-2">Architecture</span>
+      <h2 class="text-[28px] max-[540px]:text-[22px] font-[750] tracking-[-0.03em] leading-[1.2] text-black dark:text-white mb-3">
+        Project Structure
+      </h2>
+      <p class="text-[14px] leading-[1.65] text-black/70 dark:text-white/70 max-w-[300px] mb-6">
+        A clean codebase mapped to the 6-layer glassmorphism architecture — from design tokens to page layouts.
+      </p>
+
+      {/* Config files list */}
+      <div class="flex flex-col gap-1.5 mt-auto">
+        <span class="text-[10px] font-[650] uppercase tracking-[0.1em] text-black/30 dark:text-white/30 mb-1">Root Config</span>
+        {CONFIG_FILES.map((file) => (
+          <div class="flex items-center gap-2.5 py-2 px-3 rounded-[var(--glass-radius-sm)] bg-white dark:bg-[#1a1a24] border border-black/[0.06] dark:border-white/[0.08] transition-all duration-200 hover:shadow-[0_2px_8px_rgba(0,0,0,0.06)]">
+            <svg class="w-4 h-4 text-black/40 dark:text-white/40 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+            </svg>
+            <span class="text-[12px] font-mono font-[500] text-black/70 dark:text-white/65">{file.name}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    {/* ── Right: Folder tree ── */}
+    <div class="flex flex-col gap-1">
+      {TREE.map((root) => (
+        <div class="mb-2">
+          {/* Root folder */}
+          <div class="flex items-center gap-2.5 py-2.5 px-4 rounded-t-[var(--glass-radius-sm)] bg-gray-50 dark:bg-white/[0.04] border border-black/[0.06] dark:border-white/[0.08] border-b-0">
+            <svg class="w-5 h-5 text-black/60 dark:text-white/55 shrink-0" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M19.5 21a3 3 0 0 0 3-3v-4.5a3 3 0 0 0-3-3h-15a3 3 0 0 0-3 3V18a3 3 0 0 0 3 3h15ZM1.5 10.146V6a3 3 0 0 1 3-3h5.379a2.25 2.25 0 0 1 1.59.659l2.122 2.121c.14.141.331.22.53.22H19.5a3 3 0 0 1 3 3v1.146A4.483 4.483 0 0 0 19.5 9h-15a4.483 4.483 0 0 0-3 1.146Z" />
+            </svg>
+            <span class="text-[14px] font-[650] text-black/80 dark:text-white/80">{root.name}</span>
+          </div>
+
+          {/* Child folders */}
+          <div class="border-x border-b border-black/[0.06] dark:border-white/[0.08] rounded-b-[var(--glass-radius-sm)] overflow-hidden">
+            {root.children?.map((child, i) => (
+              <div class:list={[
+                "flex items-center gap-3 py-3 px-4 pl-8 bg-white dark:bg-[#1a1a24] transition-all duration-150 hover:bg-gray-50 dark:hover:bg-white/[0.03] group",
+                i < (root.children?.length ?? 0) - 1 && "border-b border-black/[0.04] dark:border-white/[0.04]",
+              ]}>
+                {/* Folder icon */}
+                <svg class="w-4.5 h-4.5 text-black/40 dark:text-white/40 shrink-0 group-hover:text-black/60 dark:group-hover:text-white/60 transition-colors" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M19.5 21a3 3 0 0 0 3-3v-4.5a3 3 0 0 0-3-3h-15a3 3 0 0 0-3 3V18a3 3 0 0 0 3 3h15ZM1.5 10.146V6a3 3 0 0 1 3-3h5.379a2.25 2.25 0 0 1 1.59.659l2.122 2.121c.14.141.331.22.53.22H19.5a3 3 0 0 1 3 3v1.146A4.483 4.483 0 0 0 19.5 9h-15a4.483 4.483 0 0 0-3 1.146Z" />
+                </svg>
+
+                {/* Name */}
+                <span class="text-[13px] font-mono font-[500] text-black/75 dark:text-white/70 min-w-[120px]">{child.name}</span>
+
+                {/* Description */}
+                <span class="text-[12px] text-black/40 dark:text-white/35 flex-1 truncate">{child.desc}</span>
+
+                {/* Layer badge */}
+                {child.layer && (
+                  <span class="text-[10px] font-[600] px-2 py-0.5 rounded-full bg-black/[0.06] dark:bg-white/[0.08] text-black/50 dark:text-white/45 whitespace-nowrap">{child.layer}</span>
+                )}
+
+                {/* File count */}
+                {child.count && (
+                  <span class="text-[11px] font-[600] text-black/30 dark:text-white/25 tabular-nums min-w-[24px] text-right">{child.count}</span>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+
   </div>
 </DSCard>

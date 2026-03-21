@@ -243,17 +243,17 @@ export function FeaturesGrid() {
             {/* Content */}
             <div className="flex flex-col gap-2 p-4">
               <div className="flex flex-col gap-0.5">
-                <span className="text-[13px] font-[650] leading-tight text-black dark:text-white">
+                <span className="text-[15px] font-[650] leading-tight text-black dark:text-white">
                   {f.title}
                 </span>
                 <span
-                  className="text-[9px] font-[600] uppercase tracking-[0.05em] leading-none"
+                  className="text-[10px] font-[600] uppercase tracking-[0.05em] leading-none"
                   style={{ color: f.color }}
                 >
                   {f.tag}
                 </span>
               </div>
-              <p className="text-[11.5px] text-gray-500 dark:text-gray-400 leading-[1.55]">
+              <p className="text-[13px] text-black/70 dark:text-white/70 leading-[1.55]">
                 {f.desc}
               </p>
             </div>

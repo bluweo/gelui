@@ -143,9 +143,9 @@ export function ContrastProvider({ children }: { children: ReactNode }) {
       return;
     }
 
-    /* ── Video: extract theme from ID (e.g. "video:dark:name") ── */
+    /* ── Video: extract theme from ID or src path ── */
     if (currentBgType === "video") {
-      if (currentBgId.includes("dark")) {
+      if (currentBgId.includes("dark") || currentBg.includes("/dark/")) {
         uniformThemeRef.current = "dark";
       } else {
         uniformThemeRef.current = "light";
@@ -237,14 +237,9 @@ export function ContrastProvider({ children }: { children: ReactNode }) {
       const threshold = 150;
 
       // If we have a uniform theme (color preset, video, or image fallback)
+      // Ignore bias for uniform backgrounds — the theme is already known
+      // and glass surface darkening is not enough to flip contrast on solid backgrounds
       if (uniformThemeRef.current !== null) {
-        // For uniform themes, bias can still shift the result
-        // e.g. a "light" background with bias=-40 may become "dark"
-        if (bias !== 0) {
-          // Approximate: "light" ≈ lum 180, "dark" ≈ lum 80
-          const approxLum = uniformThemeRef.current === "light" ? 180 : 80;
-          return (approxLum + bias) > threshold ? "light" : "dark";
-        }
         return uniformThemeRef.current;
       }
 

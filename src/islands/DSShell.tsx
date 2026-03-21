@@ -71,7 +71,9 @@ function BackgroundLayer() {
 
 function DSShellInner({ currentPath, children }: DSShellProps) {
   const mainRef = useRef<HTMLElement>(null);
+  const footerRef = useRef<HTMLElement>(null);
   const contrast = useContrastColor(mainRef);
+  const footerContrast = useContrastColor(footerRef);
 
   return (
     <>
@@ -87,10 +89,73 @@ function DSShellInner({ currentPath, children }: DSShellProps) {
         <main
           ref={mainRef}
           data-contrast={contrast}
-          className="flex-1 min-w-0 max-w-[1200px] mx-auto w-full"
+          className="flex-1 min-w-0 max-w-[1400px] mx-auto w-full"
         >
           {children}
         </main>
+
+        {/* Footer */}
+        <footer ref={footerRef} className="w-full mt-8 mb-2 -mx-4 px-0 max-[540px]:-mx-3" style={{ width: "calc(100% + 2rem)" }} data-contrast={footerContrast}>
+          {/* Full-width border line — edge to edge, no gap */}
+          <div
+            className="w-full h-px mb-4"
+            style={{
+              background: footerContrast === "dark"
+                ? "rgba(255,255,255,0.3)"
+                : "rgba(0,0,0,0.2)",
+            }}
+          />
+          <div className="max-w-[1400px] mx-auto flex items-center justify-between gap-4 px-4 pb-3 max-[640px]:flex-col max-[640px]:gap-3">
+            {/* Left: Copyright */}
+            <p
+              className="text-[13px] font-[500]"
+              style={{ color: footerContrast === "dark" ? "#ffffff" : "#000000" }}
+            >
+              &copy; {new Date().getFullYear()} Bluweo. All rights reserved.
+            </p>
+
+            {/* Center: Links */}
+            <div className="flex items-center gap-5 max-[640px]:gap-3">
+              <a
+                href="#"
+                className="text-[13px] font-[500] hover:opacity-60 transition-opacity duration-200 no-underline"
+                style={{ color: footerContrast === "dark" ? "#ffffff" : "#000000" }}
+              >
+                Cookie Policy
+              </a>
+              <span
+                className="text-[13px]"
+                style={{ color: footerContrast === "dark" ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.25)" }}
+              >·</span>
+              <a
+                href="#"
+                className="text-[13px] font-[500] hover:opacity-60 transition-opacity duration-200 no-underline"
+                style={{ color: footerContrast === "dark" ? "#ffffff" : "#000000" }}
+              >
+                Privacy Policy
+              </a>
+              <span
+                className="text-[13px]"
+                style={{ color: footerContrast === "dark" ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.25)" }}
+              >·</span>
+              <a
+                href="#"
+                className="text-[13px] font-[500] hover:opacity-60 transition-opacity duration-200 no-underline"
+                style={{ color: footerContrast === "dark" ? "#ffffff" : "#000000" }}
+              >
+                Terms & Conditions
+              </a>
+            </div>
+
+            {/* Right: Version */}
+            <span
+              className="text-[12px] font-mono font-[500] select-none"
+              style={{ color: footerContrast === "dark" ? "#ffffff" : "#000000" }}
+            >
+              v0.2
+            </span>
+          </div>
+        </footer>
       </div>
     </>
   );

@@ -1,0 +1,73 @@
+---
+/**
+ * Viewports — Responsive breakpoint overview
+ * Usage: <Viewports />
+ */
+import DSCard from "./DSCard.astro";
+
+const BREAKPOINTS = [
+  { label: "Mobile S", range: "320–480px", trigger: "max-[480px]", behavior: "Login icon-only, smallest padding", icon: "📱" },
+  { label: "Mobile L", range: "481–640px", trigger: "max-[540px] / max-[640px]", behavior: "1-col grid, center nav hidden", icon: "📱" },
+  { label: "Tablet", range: "641–860px", trigger: "max-[860px]", behavior: "2-col grid, hero banner stacks", icon: "📋" },
+  { label: "Laptop", range: "861–1024px", trigger: "max-[1024px]", behavior: "Center nav beside logo, 4-col grid", icon: "💻" },
+  { label: "Desktop", range: "1025–1536px", trigger: "—", behavior: "Full layout, center nav centered", icon: "🖥️" },
+  { label: "Large", range: "1537px+", trigger: "—", behavior: "Content capped at 1400px, centered", icon: "🖥️" },
+];
+---
+
+<DSCard span={4} frost={true} frostHeight="200px">
+  <div class="flex flex-col pt-3 pl-2 mb-6">
+    <span class="text-[10px] font-[650] uppercase tracking-[0.1em] text-black/40 dark:text-white/40 mb-2">Responsive</span>
+    <h2 class="text-[28px] max-[540px]:text-[22px] font-[750] tracking-[-0.03em] leading-[1.2] text-black dark:text-white mb-2">Viewports & Breakpoints</h2>
+    <p class="text-[14px] max-[540px]:text-[13px] leading-[1.6] text-black/60 dark:text-white/60 max-w-[620px]">6 responsive breakpoints ensure every surface adapts from pocket to panorama. Content max-width is 1400px.</p>
+  </div>
+
+  {/* Viewport cards */}
+  <div class="grid grid-cols-6 gap-2.5 max-[860px]:grid-cols-3 max-[540px]:grid-cols-2">
+    {BREAKPOINTS.map((bp, i) => (
+      <div class="group flex flex-col rounded-[var(--glass-radius-sm)] bg-white dark:bg-[#1a1a24] border border-gray-100 dark:border-white/[0.08] overflow-hidden transition-all duration-200 hover:shadow-[0_4px_16px_rgba(0,0,0,0.08)]">
+        {/* Device visual */}
+        <div class="w-full aspect-[4/3] bg-gray-50 dark:bg-white/[0.04] flex items-center justify-center">
+          <div class="flex flex-col items-center gap-1.5">
+            {/* Device frame — width scales with breakpoint */}
+            <div
+              class="rounded-[4px] border-2 border-black/70 dark:border-white/70 bg-white dark:bg-white/[0.06] transition-transform duration-200 group-hover:scale-105"
+              style={`width: ${16 + i * 8}px; height: ${22 + i * 4}px;`}
+            />
+            <span class="text-[13px] font-[600] text-black/70 dark:text-white/60" style="font-family: 'Google Sans', sans-serif;">{bp.range}</span>
+          </div>
+        </div>
+
+        {/* Info */}
+        <div class="flex flex-col gap-1 px-3 py-3">
+          <span class="text-[15px] font-[650] text-black dark:text-white leading-tight">{bp.label}</span>
+          {bp.trigger !== "—" && (
+            <code class="text-[10px] font-mono text-blue-500/70 dark:text-blue-400/60 leading-none">{bp.trigger}</code>
+          )}
+          <p class="text-[13px] text-black/70 dark:text-white/70 leading-[1.55] mt-0.5">{bp.behavior}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  {/* Scale bar */}
+  <div class="mt-5 px-1">
+    <div class="relative h-[6px] rounded-full bg-gray-100 dark:bg-white/[0.06] overflow-hidden">
+      <div class="absolute top-0 left-0 h-full rounded-full" style="width: 6.5%; background: #F472B6;" />
+      <div class="absolute top-0 h-full rounded-full" style="left: 6.5%; width: 10%; background: #FB923C;" />
+      <div class="absolute top-0 h-full rounded-full" style="left: 16.5%; width: 14%; background: #FBBF24;" />
+      <div class="absolute top-0 h-full rounded-full" style="left: 30.5%; width: 10.5%; background: #34D399;" />
+      <div class="absolute top-0 h-full rounded-full" style="left: 41%; width: 33%; background: #60A5FA;" />
+      <div class="absolute top-0 h-full rounded-full" style="left: 74%; width: 26%; background: #818CF8;" />
+    </div>
+    <div class="flex justify-between mt-1.5 px-0.5">
+      <span class="text-[14px] font-[600] text-black/80 dark:text-white/80" style="font-family: 'Google Sans', sans-serif;">320px</span>
+      <span class="text-[14px] font-[600] text-black/80 dark:text-white/80" style="font-family: 'Google Sans', sans-serif;">480</span>
+      <span class="text-[14px] font-[600] text-black/80 dark:text-white/80" style="font-family: 'Google Sans', sans-serif;">640</span>
+      <span class="text-[14px] font-[600] text-black/80 dark:text-white/80" style="font-family: 'Google Sans', sans-serif;">860</span>
+      <span class="text-[14px] font-[600] text-black/80 dark:text-white/80" style="font-family: 'Google Sans', sans-serif;">1024</span>
+      <span class="text-[14px] font-[600] text-black/80 dark:text-white/80" style="font-family: 'Google Sans', sans-serif;">1536</span>
+      <span class="text-[14px] font-[600] text-black/80 dark:text-white/80" style="font-family: 'Google Sans', sans-serif;">1920+</span>
+    </div>
+  </div>
+</DSCard>
