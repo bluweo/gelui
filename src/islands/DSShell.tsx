@@ -155,7 +155,7 @@ function DSShellInner({ currentPath, children }: DSShellProps) {
                 border: `1px solid ${footerContrast === "dark" ? "rgba(255,255,255,0.25)" : "rgba(0,0,0,0.15)"}`,
               }}
             >
-              v0.2.2
+              v0.2.3
             </span>
           </div>
         </footer>

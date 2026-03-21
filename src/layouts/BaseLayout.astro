@@ -5,9 +5,27 @@ import "@/styles/global.css";
 
 interface Props {
   title?: string;
+  description?: string;
+  keywords?: string;
+  ogImage?: string;
+  ogType?: string;
+  canonicalUrl?: string;
+  noindex?: boolean;
 }
 
-const { title = "GelUI" } = Astro.props;
+const {
+  title = "GelUI",
+  description = "A glassmorphism-first design system with volumetric gel surfaces, adaptive contrast, and real-time appearance tuning.",
+  keywords = "design system, glassmorphism, UI framework, glass UI, gel UI, Astro, React, Tailwind CSS, dark mode, adaptive contrast",
+  ogImage = "/resources/images/gelui-og.png",
+  ogType = "website",
+  canonicalUrl,
+  noindex = false,
+} = Astro.props;
+
+const siteUrl = Astro.site?.toString() ?? "https://gelui.bluweo.com";
+const canonical = canonicalUrl ?? new URL(Astro.url.pathname, siteUrl).toString();
+const ogImageUrl = ogImage.startsWith("http") ? ogImage : new URL(ogImage, siteUrl).toString();
 ---
 
 <html lang="en" data-theme="light">
@@ -15,11 +33,56 @@ const { title = "GelUI" } = Astro.props;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
+
+    <!-- Primary Meta Tags -->
     <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content="Bluweo" />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    {!noindex && <meta name="robots" content="index, follow" />}
+    <link rel="canonical" href={canonical} />
+
+    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/logos/bluweo-logo.svg" />
+    <link rel="apple-touch-icon" href="/logos/bluweo-logo.svg" />
+
+    <!-- Open Graph / Facebook / LinkedIn -->
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:site_name" content="GelUI Design System" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonical} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "GelUI Design System",
+      "url": siteUrl,
+      "description": description,
+      "creator": {
+        "@type": "Organization",
+        "name": "Bluweo",
+        "url": "https://bluweo.com"
+      }
+    })} />
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- View Transitions -->
     <ClientRouter />
   </head>
   <body class="font-sans min-h-screen overflow-x-hidden leading-normal" style="color: var(--text-primary);">
