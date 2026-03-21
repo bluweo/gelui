@@ -149,10 +149,13 @@ function DSShellInner({ currentPath, children }: DSShellProps) {
 
             {/* Right: Version */}
             <span
-              className="text-[12px] font-mono font-[500] select-none"
-              style={{ color: footerContrast === "dark" ? "#ffffff" : "#000000" }}
+              className="text-[12px] font-mono font-[500] select-none px-2.5 py-1 rounded-full"
+              style={{
+                color: footerContrast === "dark" ? "#ffffff" : "#000000",
+                border: `1px solid ${footerContrast === "dark" ? "rgba(255,255,255,0.25)" : "rgba(0,0,0,0.15)"}`,
+              }}
             >
-              v0.2
+              v0.2.1
             </span>
           </div>
         </footer>

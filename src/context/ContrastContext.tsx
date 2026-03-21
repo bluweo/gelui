@@ -143,15 +143,81 @@ export function ContrastProvider({ children }: { children: ReactNode }) {
       return;
     }
 
-    /* ── Video: extract theme from ID or src path ── */
+    /* ── Video: sample a frame from the <video> element ── */
     if (currentBgType === "video") {
+      // Initial fallback from path
       if (currentBgId.includes("dark") || currentBg.includes("/dark/")) {
         uniformThemeRef.current = "dark";
       } else {
         uniformThemeRef.current = "light";
       }
       setVersion((v) => v + 1);
-      return;
+
+      // Try to sample the actual video frame for accurate contrast
+      const sampleVideo = () => {
+        const video = document.querySelector("video") as HTMLVideoElement | null;
+        if (!video || video.readyState < 2) return;
+
+        const cw = window.innerWidth;
+        const ch = window.innerHeight;
+
+        if (!canvasRef.current) {
+          canvasRef.current = document.createElement("canvas");
+        }
+        const canvas = canvasRef.current;
+        canvas.width = cw;
+        canvas.height = ch;
+
+        const ctx = canvas.getContext("2d", { willReadFrequently: true });
+        if (!ctx) return;
+        ctxRef.current = ctx;
+
+        // Draw video frame with cover fit
+        const vw = video.videoWidth;
+        const vh = video.videoHeight;
+        const vRatio = vw / vh;
+        const cRatio = cw / ch;
+        let sx = 0, sy = 0, sw = vw, sh = vh;
+        if (vRatio > cRatio) {
+          sw = vh * cRatio;
+          sx = (vw - sw) / 2;
+        } else {
+          sh = vw / cRatio;
+          sy = (vh - sh) / 2;
+        }
+        ctx.drawImage(video, sx, sy, sw, sh, 0, 0, cw, ch);
+        canvasReadyRef.current = true;
+        uniformThemeRef.current = null; // canvas is now the source of truth
+        setVersion((v) => v + 1);
+      };
+
+      // Wait for video to be ready, then sample periodically
+      const tryInterval = setInterval(() => {
+        const video = document.querySelector("video") as HTMLVideoElement | null;
+        if (video && video.readyState >= 2) {
+          sampleVideo();
+          clearInterval(tryInterval);
+
+          // Re-sample periodically as video plays (every 3s)
+          const playInterval = setInterval(() => {
+            if (document.querySelector("video")) {
+              sampleVideo();
+            } else {
+              clearInterval(playInterval);
+            }
+          }, 3000);
+
+          // Clean up on unmount handled by effect cleanup
+          (window as any).__videoContrastInterval = playInterval;
+        }
+      }, 300);
+
+      return () => {
+        clearInterval(tryInterval);
+        if ((window as any).__videoContrastInterval) {
+          clearInterval((window as any).__videoContrastInterval);
+        }
+      };
     }
 
     /* ── Image: draw to canvas for per-region sampling ── */

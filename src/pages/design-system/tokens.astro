@@ -68,10 +68,96 @@ const radiiRawEntries = Object.entries(radii.raw) as Array<[string, string]>;
 <DSLayout title="Design Tokens — GelUI">
   <div class="w-full grid grid-cols-4 gap-5 max-[860px]:grid-cols-2 max-[860px]:gap-4 max-[540px]:grid-cols-1 max-[540px]:gap-3">
 
-    <!-- Section Header -->
-    <div class="col-span-full mb-2">
-      <h1 class="text-[24px] font-[650] tracking-[-0.02em] leading-tight">Design Tokens</h1>
-      <p class="text-[13px] mt-1 opacity-50">Atomic visual decisions. 3-tier system: Core (immutable) &rarr; Semantic (remappable) &rarr; Component (internal). Tokens are the API contract.</p>
+    <!-- Hero Banner: Desktop (≥768px) — single card with overlay image -->
+    <div class="col-span-full glass-1 glass-specular rounded-[var(--glass-radius)] overflow-hidden relative md:block hidden">
+      <div class="w-full min-h-[420px] max-[860px]:min-h-[340px] relative">
+        <!-- Background image — right area -->
+        <div class="absolute top-6 right-14 bottom-14 left-[38%] overflow-hidden rounded-[var(--glass-radius)]">
+          <img
+            src="/resources/images/gelui-design-token.png"
+            alt="Design Token Architecture"
+            class="w-full h-full object-cover object-center rounded-[var(--glass-radius)]"
+          />
+        </div>
+        <!-- Overlaid content -->
+        <div class="absolute inset-0 p-8 flex flex-col justify-between">
+          <div class="w-[36%] max-[860px]:w-[50%] flex items-start justify-between">
+            <h1 class="text-[38px] max-[860px]:text-[30px] font-[700] tracking-[-0.03em] leading-[1.1] text-black dark:text-white">
+              Design<br/>Tokens
+            </h1>
+            <div class="text-right pt-2">
+              <span class="text-[11px] font-[500] leading-tight text-black/40 dark:text-white/40 block">Token</span>
+              <span class="text-[11px] font-[500] leading-tight text-black/40 dark:text-white/40 block">Architecture</span>
+              <span class="text-[11px] font-[500] leading-tight text-black/40 dark:text-white/40 block">2026</span>
+            </div>
+          </div>
+          <div class="flex items-end justify-between gap-5">
+            <div class="max-w-[420px]">
+              <div class="flex items-center gap-2">
+                <span class="text-black/30 dark:text-white/30 text-[14px] font-mono">//</span>
+                <span class="text-[13px] text-black/60 dark:text-white/55 leading-relaxed">
+                  The atomic building blocks of every visual decision. Our 3-tier architecture ensures consistency across themes, modes, and platforms.
+                </span>
+              </div>
+            </div>
+            <div class="flex gap-3">
+              <div class="glass-1 rounded-[calc(var(--glass-radius)*0.7)] px-5 py-4 min-w-[160px]">
+                <span class="text-[22px] font-[700] text-black dark:text-white block leading-tight">3 Tiers</span>
+                <span class="text-[12px] text-black/50 dark:text-white/45 block mt-0.5">Core → Semantic → Component</span>
+              </div>
+              <div class="glass-1 rounded-[calc(var(--glass-radius)*0.7)] px-5 py-4 min-w-[160px]">
+                <span class="text-[22px] font-[700] text-black dark:text-white block leading-tight">120+</span>
+                <span class="text-[12px] text-black/50 dark:text-white/45 block mt-0.5">Tokens across color, type & space</span>
+              </div>
+              <div class="glass-1 rounded-[calc(var(--glass-radius)*0.7)] px-5 py-4 min-w-[160px]">
+                <span class="text-[22px] font-[700] text-black dark:text-white block leading-tight">Dark + Light</span>
+                <span class="text-[12px] text-black/50 dark:text-white/45 block mt-0.5">Full theme support built-in</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hero Banner: Mobile/Tablet (<768px) — two col-span-2 items -->
+    <div class="col-span-2 glass-1 glass-specular rounded-[var(--glass-radius)] overflow-hidden p-5 flex flex-col justify-between md:hidden">
+      <div>
+        <div class="flex items-start justify-between mb-3">
+          <h1 class="text-[22px] font-[700] tracking-[-0.03em] leading-[1.1] text-black dark:text-white">
+            Design Tokens
+          </h1>
+          <div class="text-right pt-1 shrink-0 ml-3">
+            <span class="text-[10px] font-[500] leading-tight text-black/40 dark:text-white/40 block">Token Architecture 2026</span>
+          </div>
+        </div>
+        <div class="flex items-start gap-2">
+          <span class="text-black/30 dark:text-white/30 text-[12px] font-mono shrink-0">//</span>
+          <span class="text-[12px] text-black/60 dark:text-white/55 leading-relaxed">
+            The atomic building blocks of every visual decision. Our 3-tier architecture ensures consistency across themes, modes, and platforms.
+          </span>
+        </div>
+      </div>
+      <div class="grid grid-cols-3 gap-2 mt-4">
+        <div class="glass-1 rounded-[calc(var(--glass-radius)*0.7)] px-3 py-3">
+          <span class="text-[14px] font-[700] text-black dark:text-white block leading-tight">3 Tiers</span>
+          <span class="text-[9px] text-black/50 dark:text-white/45 block mt-0.5">Core → Semantic → Component</span>
+        </div>
+        <div class="glass-1 rounded-[calc(var(--glass-radius)*0.7)] px-3 py-3">
+          <span class="text-[14px] font-[700] text-black dark:text-white block leading-tight">120+</span>
+          <span class="text-[9px] text-black/50 dark:text-white/45 block mt-0.5">Tokens across color, type & space</span>
+        </div>
+        <div class="glass-1 rounded-[calc(var(--glass-radius)*0.7)] px-3 py-3">
+          <span class="text-[14px] font-[700] text-black dark:text-white block leading-tight">Dark + Light</span>
+          <span class="text-[9px] text-black/50 dark:text-white/45 block mt-0.5">Full theme support built-in</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-span-2 glass-1 glass-specular rounded-[var(--glass-radius)] overflow-hidden md:hidden">
+      <img
+        src="/resources/images/gelui-design-token.png"
+        alt="Design Token Architecture"
+        class="w-full h-[200px] object-cover object-center"
+      />
     </div>
 
     <!-- ════════════════════════════════════════
@@ -606,3 +692,4 @@ const radiiRawEntries = Object.entries(radii.raw) as Array<[string, string]>;
 
 
 </DSLayout>
+
