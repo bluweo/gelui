@@ -89,7 +89,7 @@ function DSShellInner({ currentPath, children }: DSShellProps) {
         <main
           ref={mainRef}
           data-contrast={contrast}
-          className="flex-1 min-w-0 max-w-[1400px] mx-auto w-full"
+          className="flex-1 min-w-0 max-w-[1100px] min-[1537px]:max-w-[1400px] mx-auto w-full"
         >
           {children}
         </main>
@@ -105,7 +105,7 @@ function DSShellInner({ currentPath, children }: DSShellProps) {
                 : "rgba(0,0,0,0.2)",
             }}
           />
-          <div className="max-w-[1400px] mx-auto flex items-center justify-between gap-4 px-4 pb-3 max-[640px]:flex-col max-[640px]:gap-3">
+          <div className="max-w-[1100px] min-[1537px]:max-w-[1400px] mx-auto flex items-center justify-between gap-4 px-4 pb-3 max-[640px]:flex-col max-[640px]:gap-3">
             {/* Left: Copyright */}
             <p
               className="text-[13px] font-[500]"
@@ -155,7 +155,7 @@ function DSShellInner({ currentPath, children }: DSShellProps) {
                 border: `1px solid ${footerContrast === "dark" ? "rgba(255,255,255,0.25)" : "rgba(0,0,0,0.15)"}`,
               }}
             >
-              v0.2.1
+              v0.2.2
             </span>
           </div>
         </footer>

@@ -1877,3 +1877,28 @@ html[data-navigated] * {
 .scrollbar-hide::-webkit-scrollbar { display: none; }
 .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 
+/* ═══════════════════════════════════════════════
+   TOKEN HERO FROST (left-to-right)
+   ═══════════════════════════════════════════════ */
+.token-hero-frost {
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0.95) 0%,
+    rgba(255,255,255,0.85) 40%,
+    rgba(255,255,255,0.4) 75%,
+    transparent 100%
+  );
+}
+[data-theme="dark"] [data-frost-mobile] {
+  background: rgba(0,0,0,0.82) !important;
+}
+[data-theme="dark"] .token-hero-frost {
+  background: linear-gradient(
+    90deg,
+    rgba(0,0,0,0.90) 0%,
+    rgba(0,0,0,0.75) 40%,
+    rgba(0,0,0,0.3) 75%,
+    transparent 100%
+  );
+}
+

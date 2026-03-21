@@ -70,6 +70,8 @@ const radiiRawEntries = Object.entries(radii.raw) as Array<[string, string]>;
 
     <!-- Hero Banner: Desktop (≥768px) — single card with overlay image -->
     <div class="col-span-full glass-1 glass-specular rounded-[var(--glass-radius)] overflow-hidden relative md:block hidden">
+      <!-- Frost zone for readable text on left side -->
+      <div class="absolute top-0 left-0 bottom-0 w-[45%] pointer-events-none z-[1] rounded-l-[var(--glass-radius)] token-hero-frost" />
       <div class="w-full min-h-[420px] max-[860px]:min-h-[340px] relative">
         <!-- Background image — right area -->
         <div class="absolute top-6 right-14 bottom-14 left-[38%] overflow-hidden rounded-[var(--glass-radius)]">
@@ -80,7 +82,7 @@ const radiiRawEntries = Object.entries(radii.raw) as Array<[string, string]>;
           />
         </div>
         <!-- Overlaid content -->
-        <div class="absolute inset-0 p-8 flex flex-col justify-between">
+        <div class="absolute inset-0 p-8 flex flex-col justify-between z-[2]">
           <div class="w-[36%] max-[860px]:w-[50%] flex items-start justify-between">
             <h1 class="text-[38px] max-[860px]:text-[30px] font-[700] tracking-[-0.03em] leading-[1.1] text-black dark:text-white">
               Design<br/>Tokens
@@ -120,8 +122,10 @@ const radiiRawEntries = Object.entries(radii.raw) as Array<[string, string]>;
     </div>
 
     <!-- Hero Banner: Mobile/Tablet (<768px) — two col-span-2 items -->
-    <div class="col-span-2 glass-1 glass-specular rounded-[var(--glass-radius)] overflow-hidden p-5 flex flex-col justify-between md:hidden">
-      <div>
+    <div class="col-span-2 glass-1 glass-specular rounded-[var(--glass-radius)] overflow-hidden p-5 flex flex-col justify-between md:hidden relative">
+      <!-- Frost zone for readable text — solid coverage -->
+      <div class="absolute inset-0 pointer-events-none z-0 rounded-[var(--glass-radius)]" style="background: rgba(255,255,255,0.88);" data-frost-mobile />
+      <div class="relative z-[1]">
         <div class="flex items-start justify-between mb-3">
           <h1 class="text-[22px] font-[700] tracking-[-0.03em] leading-[1.1] text-black dark:text-white">
             Design Tokens
@@ -137,7 +141,7 @@ const radiiRawEntries = Object.entries(radii.raw) as Array<[string, string]>;
           </span>
         </div>
       </div>
-      <div class="grid grid-cols-3 gap-2 mt-4">
+      <div class="relative z-[1] grid grid-cols-3 gap-2 mt-4">
         <div class="glass-1 rounded-[calc(var(--glass-radius)*0.7)] px-3 py-3">
           <span class="text-[14px] font-[700] text-black dark:text-white block leading-tight">3 Tiers</span>
           <span class="text-[9px] text-black/50 dark:text-white/45 block mt-0.5">Core → Semantic → Component</span>
