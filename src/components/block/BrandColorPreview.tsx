@@ -1,7 +1,9 @@
 import { useState, useEffect, useRef, useCallback } from "react";
+import { createPortal } from "react-dom";
 import { brand as defaultBrand } from "@/tokens/brand";
 import { colors as defaultColors } from "@/tokens/colors";
 import { extractDominantColors, generateScale, isLightColor, textOnColor, textOnColorMuted, autoLabelColors } from "@/utils/color-extract";
+import { useDraggableModal } from "@/components/hooks/useDraggableModal";
 
 /* ── Types ── */
 interface BrandEntry { hex: string; label: string; role: string; scale: Record<string, string> }
@@ -95,6 +97,10 @@ export function BrandColorPreview() {
   const [dragOver, setDragOver] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
   const modalFileRef = useRef<HTMLInputElement>(null);
+
+  const closeUploadModal = useCallback(() => setShowUploadModal(false), []);
+  const { panelRef, panelStyle, backdropDragged, onDragStart } =
+    useDraggableModal({ isOpen: showUploadModal, onClose: closeUploadModal });
 
   // Theme detection
   useEffect(() => {
@@ -422,28 +428,32 @@ export function BrandColorPreview() {
         })}
       </div>
 
-      {/* ═══ Upload Logo Modal ═══ */}
-      {showUploadModal && (
-        <div className="fixed inset-0 z-[9999] flex items-center justify-center" onClick={() => setShowUploadModal(false)}>
-          {/* Backdrop */}
-          <div className="absolute inset-0 bg-black/30 dark:bg-black/50 backdrop-blur-[4px]" />
-
-          {/* Modal — glass panel style */}
+      {/* ═══ Upload Logo Modal (draggable, portal) ═══ */}
+      {showUploadModal && createPortal(
+        <div
+          className={`fixed inset-0 z-[900] bg-black/20 backdrop-blur-[var(--glass-blur-overlay)] animate-backdrop-fade-in flex items-center justify-center overflow-y-auto p-5 dark:bg-black/40 ${backdropDragged ? "items-start justify-start p-0" : ""}`}
+          onClick={closeUploadModal}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Upload brand logo"
+        >
           <div
-            className="glass-panel relative rounded-[var(--glass-radius)] overflow-hidden px-6 pt-5 pb-5"
-            style={{ width: 440, maxWidth: "90vw" }}
+            ref={panelRef}
+            className="glass-panel max-h-[calc(100vh-40px)] animate-picker-enter select-none cursor-grab active:cursor-grabbing"
+            style={{ ...panelStyle, width: 380, maxWidth: "90vw", padding: "24px 24px 20px" }}
             onClick={(e) => e.stopPropagation()}
+            onMouseDown={onDragStart}
           >
             {/* Header */}
-            <div className="flex items-center justify-between pb-3">
-              <h3 className="text-[17px] font-[650] text-black dark:text-white" style={{ fontFamily: "var(--font-heading)" }}>Upload Brand Logo</h3>
+            <div className="flex items-center justify-between mb-4 relative z-[1]">
+              <span className="text-[16px] font-[650] text-text-primary tracking-[-0.02em]">Upload Brand Logo</span>
               <button
-                onClick={() => setShowUploadModal(false)}
                 className="w-7 h-7 flex items-center justify-center border-none bg-black/6 rounded-full cursor-pointer text-text-secondary transition-all duration-200 ease-default hover:bg-black/10 hover:text-text-primary dark:bg-white/8 dark:hover:bg-white/14"
+                onClick={closeUploadModal}
+                onMouseDown={(e) => e.stopPropagation()}
+                aria-label="Close"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="text-black/50 dark:text-white/50">
-                  <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
-                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
               </button>
             </div>
 
@@ -454,50 +464,38 @@ export function BrandColorPreview() {
               </p>
             </div>
 
-            {/* Drop zone */}
-            <div className="pb-5">
-              <div
-                className={`relative flex flex-col items-center justify-center gap-3 py-10 px-6 rounded-[var(--glass-radius-sm)] border-2 border-dashed transition-all duration-200 cursor-pointer ${
-                  dragOver
-                    ? "border-black/30 dark:border-white/30 bg-white dark:bg-[#1a1a1f]"
-                    : "border-black/[0.12] dark:border-white/[0.1] bg-white dark:bg-[#1a1a1f] hover:border-black/20 dark:hover:border-white/20"
-                }`}
-                onClick={() => modalFileRef.current?.click()}
-                onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
-                onDragLeave={() => setDragOver(false)}
-                onDrop={handleDrop}
-              >
-                {/* Upload icon */}
-                <div className="w-14 h-14 rounded-full bg-black/[0.04] dark:bg-white/[0.06] flex items-center justify-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-black/35 dark:text-white/30">
-                    <path d="M12 15V3m0 0l-3 3m3-3l3 3" />
-                    <path d="M2 17l.621 2.485A2 2 0 0 0 4.561 21h14.878a2 2 0 0 0 1.94-1.515L22 17" />
-                  </svg>
-                </div>
-
-                <div className="flex flex-col items-center gap-1">
-                  <span className="text-[14px] font-[600] text-black/70 dark:text-white/65">
-                    {dragOver ? "Drop your logo here" : "Click to upload or drag & drop"}
-                  </span>
-                  <span className="text-[12px] text-black/40 dark:text-white/35">
-                    PNG, JPG, or SVG — max 2MB
-                  </span>
-                </div>
-
-                <input
-                  ref={modalFileRef}
-                  type="file"
-                  accept="image/png,image/jpeg,image/svg+xml"
-                  className="hidden"
-                  onChange={handleUpload}
-                />
+            {/* Drop zone — solid background */}
+            <div
+              className={`relative flex flex-col items-center justify-center gap-3 py-10 px-6 rounded-[var(--glass-radius-sm)] border-2 border-dashed transition-all duration-200 cursor-pointer mb-5 ${
+                dragOver
+                  ? "border-black/30 dark:border-white/30 bg-white dark:bg-[#1a1a1f]"
+                  : "border-black/[0.12] dark:border-white/[0.1] bg-white dark:bg-[#1a1a1f] hover:border-black/20 dark:hover:border-white/20"
+              }`}
+              onClick={() => modalFileRef.current?.click()}
+              onMouseDown={(e) => e.stopPropagation()}
+              onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
+              onDragLeave={() => setDragOver(false)}
+              onDrop={handleDrop}
+            >
+              <div className="w-14 h-14 rounded-full bg-black/[0.04] dark:bg-white/[0.06] flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-black/35 dark:text-white/30">
+                  <path d="M12 15V3m0 0l-3 3m3-3l3 3" />
+                  <path d="M2 17l.621 2.485A2 2 0 0 0 4.561 21h14.878a2 2 0 0 0 1.94-1.515L22 17" />
+                </svg>
               </div>
+              <div className="flex flex-col items-center gap-1">
+                <span className="text-[14px] font-[600] text-black/70 dark:text-white/65">
+                  {dragOver ? "Drop your logo here" : "Click to upload or drag & drop"}
+                </span>
+                <span className="text-[12px] text-black/40 dark:text-white/35">PNG, JPG, or SVG — max 2MB</span>
+              </div>
+              <input ref={modalFileRef} type="file" accept="image/png,image/jpeg,image/svg+xml" className="hidden" onChange={handleUpload} />
             </div>
 
             {/* Sample logos */}
-            <div className="pt-3 pb-1">
+            <div className="pb-1">
               <span className="text-[11px] font-[600] uppercase tracking-[0.06em] text-black/40 dark:text-white/35 mb-2.5 block">Or try a sample logo</span>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2" onMouseDown={(e) => e.stopPropagation()}>
                 {[
                   { src: "/logos/uigel-logo.svg", label: "UIGel" },
                   { src: "/logos/browsers/chrome.svg", label: "Chrome" },
@@ -539,7 +537,8 @@ export function BrandColorPreview() {
               </p>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </>
   );
