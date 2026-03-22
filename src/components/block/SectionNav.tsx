@@ -18,6 +18,8 @@ export function SectionNav() {
   const [visible, setVisible] = useState(false);
   const [contrast, setContrast] = useState<"light" | "dark">("light");
   const observerRef = useRef<IntersectionObserver | null>(null);
+  const clickLockRef = useRef<string | null>(null);
+  const clickLockTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Check viewport width
   useEffect(() => {
@@ -82,7 +84,8 @@ export function SectionNav() {
           }
         });
 
-        if (best) setActiveId(best);
+        // Only update if not locked by a recent click
+        if (best && !clickLockRef.current) setActiveId(best);
       },
       { rootMargin: "-80px 0px -40% 0px", threshold: [0, 0.25, 0.5, 0.75, 1] }
     );
@@ -108,8 +111,18 @@ export function SectionNav() {
     };
   }, [discover]);
 
-  const handleClick = useCallback((el: Element) => {
-    el.scrollIntoView({ behavior: "smooth", block: "start" });
+  const handleClick = useCallback((label: string, el: Element) => {
+    // Lock active to clicked section — ignore observer for 1.5s
+    clickLockRef.current = label;
+    setActiveId(label);
+
+    if (clickLockTimerRef.current) clearTimeout(clickLockTimerRef.current);
+    clickLockTimerRef.current = setTimeout(() => {
+      clickLockRef.current = null;
+    }, 1500);
+
+    const y = el.getBoundingClientRect().top + window.scrollY - 90;
+    window.scrollTo({ top: Math.max(0, y), behavior: "smooth" });
   }, []);
 
   if (!visible || sections.length === 0) return null;
@@ -124,8 +137,9 @@ export function SectionNav() {
     <nav
       className="fixed z-50 flex flex-col"
       style={{
-        top: 90,
+        top: "50%",
         right: 20,
+        transform: "translateY(-50%)",
         width: 120,
         pointerEvents: "auto",
       }}
@@ -143,7 +157,7 @@ export function SectionNav() {
           return (
             <button
               key={s.label}
-              onClick={() => handleClick(s.el)}
+              onClick={() => handleClick(s.label, s.el)}
               className="relative flex items-center text-left py-[7px] bg-transparent border-none cursor-pointer transition-all duration-200 group"
               style={{
                 color: isActive ? activeTextColor : textColor,
