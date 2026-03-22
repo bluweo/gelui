@@ -166,7 +166,7 @@ export function DSNav({ currentPath: initialPath }: DSNavProps) {
         {/* ── Left: Logo pinned to page edge ── */}
         <a ref={logoRef} href="/design-system" className="flex items-center shrink-0">
           <img
-            src={logoContrast === "dark" ? "/logos/bluweo-logo-white.svg" : "/logos/bluweo-logo.svg"}
+            src={logoContrast === "dark" ? "/logos/uigel-logo-white.svg" : "/logos/uigel-logo.svg"}
             alt="GelUI"
             className="w-14 h-14 max-[640px]:w-12 max-[640px]:h-12 drop-shadow-[0_2px_8px_rgba(0,0,0,0.12)]"
           />

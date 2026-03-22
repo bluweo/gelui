@@ -549,92 +549,120 @@ const radiiRawEntries = Object.entries(radii.raw) as Array<[string, string]>;
         <p class="text-[13px] leading-[1.6] text-black/60 dark:text-white/55">4px base unit system for consistent rhythm</p>
       </div>
 
-      <div class="flex flex-col rounded-[var(--glass-radius-sm)] overflow-hidden relative z-[1]">
-        <!-- Table header -->
-        <div class="flex w-full">
-          <div class="w-[70px] shrink-0 px-3 py-2.5 bg-black/[0.04] dark:bg-white/[0.06] border-b border-black/[0.06] dark:border-white/[0.08]">
-            <span class="text-[11px] font-[650] uppercase tracking-[0.06em] text-black/60 dark:text-white/50">Step</span>
+      <!-- Semantic spacing groups -->
+      <div class="relative z-[1]">
+        <div class="grid grid-cols-4 gap-3 mb-5 max-[860px]:grid-cols-2">
+          {[
+            { label: "XS", name: "componentXs", step: "1", value: "0.25rem", px: "4px", desc: "Badge padding" },
+            { label: "SM", name: "componentSm", step: "2", value: "0.5rem", px: "8px", desc: "Compact elements" },
+            { label: "MD", name: "componentMd", step: "3", value: "0.75rem", px: "12px", desc: "Standard internal" },
+            { label: "LG", name: "componentLg", step: "4", value: "1rem", px: "16px", desc: "Generous internal" },
+          ].map((s) => (
+            <div class="p-4 rounded-[var(--glass-radius-sm)] bg-white/80 dark:bg-black/50 border border-black/[0.06] dark:border-white/[0.08] flex flex-col items-center gap-2">
+              <span class="text-[10px] font-[650] uppercase tracking-[0.06em] text-white px-2 py-0.5 rounded-full bg-black/70 dark:bg-white/20">{s.label}</span>
+              <div class="flex items-center justify-center w-full h-10">
+                <div class="rounded-[3px]" style={`width: ${s.px}; height: ${s.px}; min-width: 4px; min-height: 4px; background-color: var(--token-preview-fill);`} />
+              </div>
+              <span class="text-[13px] font-mono font-[600] text-black/80 dark:text-white/75">{s.px}</span>
+              <span class="text-[10px] text-black/40 dark:text-white/35 text-center">{s.desc}</span>
+            </div>
+          ))}
+        </div>
+
+        <div class="grid grid-cols-4 gap-3 mb-5 max-[860px]:grid-cols-2">
+          {[
+            { label: "Section", step: "5", value: "1.25rem", px: "20px", desc: "Between sections" },
+            { label: "Panel", step: "6", value: "1.5rem", px: "24px", desc: "Panel padding" },
+            { label: "Page", step: "8", value: "2rem", px: "32px", desc: "Page margins" },
+            { label: "Grid", step: "4", value: "1rem", px: "16px", desc: "Bento grid gap" },
+          ].map((s) => (
+            <div class="p-4 rounded-[var(--glass-radius-sm)] bg-white/80 dark:bg-black/50 border border-black/[0.06] dark:border-white/[0.08] flex flex-col items-center gap-2">
+              <span class="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/60 dark:text-white/45 px-2 py-0.5 rounded-full border border-black/[0.08] dark:border-white/[0.1]">{s.label}</span>
+              <div class="flex items-center justify-center w-full h-10">
+                <div class="rounded-[3px]" style={`width: ${s.px}; height: ${s.px}; min-width: 4px; min-height: 4px; background-color: var(--token-preview-fill);`} />
+              </div>
+              <span class="text-[13px] font-mono font-[600] text-black/80 dark:text-white/75">{s.px}</span>
+              <span class="text-[10px] text-black/40 dark:text-white/35 text-center">{s.desc}</span>
+            </div>
+          ))}
+        </div>
+
+        <!-- Raw scale reference — compact 2-column table -->
+        <div class="relative z-[1]">
+          <span class="text-[10px] font-[600] uppercase tracking-[0.06em] text-black/40 dark:text-white/35 mb-2 block">Raw Scale</span>
+          <div class="grid grid-cols-2 gap-x-4 gap-y-0 rounded-[var(--glass-radius-sm)] overflow-hidden">
+            {Object.entries(spacing.raw).filter(([k]) => k !== "0").map(([step, value]) => (
+              <div class="flex items-center gap-3 py-2 border-b border-black/[0.03] dark:border-white/[0.04]">
+                <span class="text-[12px] font-[600] text-black/70 dark:text-white/65 w-[24px] shrink-0">{step}</span>
+                <div class="rounded-[2px]" style={`width: calc(${value} * 1.8); height: 8px; min-width: 4px; background-color: var(--token-preview-fill);`} />
+                <span class="text-[11px] font-mono text-black/40 dark:text-white/35">{value}</span>
+              </div>
+            ))}
           </div>
-          <div class="w-[80px] shrink-0 px-3 py-2.5 bg-black/[0.04] dark:bg-white/[0.06] border-b border-black/[0.06] dark:border-white/[0.08]">
-            <span class="text-[11px] font-[650] uppercase tracking-[0.06em] text-black/60 dark:text-white/50">Value</span>
-          </div>
-          <div class="flex-1 px-3 py-2.5 bg-black/[0.04] dark:bg-white/[0.06] border-b border-black/[0.06] dark:border-white/[0.08]">
-            <span class="text-[11px] font-[650] uppercase tracking-[0.06em] text-black/60 dark:text-white/50">Preview</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════
+         Border Radius
+         ════════════════════════════════════════ -->
+    <div class="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
+      <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 160px;" />
+      <div class="relative flex flex-col gap-1 mb-6 pt-1 pl-1">
+        <span class="text-[10px] font-[650] uppercase tracking-[0.1em] text-black/40 dark:text-white/40 mb-1">Shape</span>
+        <h2 class="text-[24px] font-[750] tracking-[-0.03em] leading-[1.2] text-black dark:text-white mb-1">Border Radius</h2>
+        <p class="text-[13px] leading-[1.6] text-black/60 dark:text-white/55">8 raw values + 3 configurable presets</p>
+      </div>
+
+      <div class="relative z-[1] flex flex-col gap-6">
+        <!-- Raw radii — 2-column grid -->
+        <div>
+          <h3 class="text-[14px] font-[650] text-black/80 dark:text-white/75 mb-3">Raw Values</h3>
+          <div class="grid grid-cols-2 gap-x-4 gap-y-0 rounded-[var(--glass-radius-sm)] overflow-hidden">
+            {Object.entries(radii.raw).slice(0, 8).map(([name, value]) => (
+              <div class="flex items-center gap-3 py-2.5 border-b border-black/[0.03] dark:border-white/[0.04]">
+                <div
+                  class="w-8 h-8 border-2 shrink-0"
+                  style={`border-radius: ${value}; opacity: 0.4; border-color: var(--token-preview-border)`}
+                />
+                <span class="text-[12px] font-[600] text-black/70 dark:text-white/65 w-[20px] shrink-0">{name}</span>
+                <span class="text-[11px] font-mono text-black/40 dark:text-white/35">{value}</span>
+              </div>
+            ))}
           </div>
         </div>
 
-        <!-- Spacing rows -->
-        {Object.entries(spacing.raw).filter(([k]) => k !== "0").map(([step, value]) => (
-          <div class="flex w-full items-center border-b border-black/[0.03] dark:border-white/[0.04] last:border-b-0 hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors duration-150">
-            <div class="w-[70px] shrink-0 px-3 py-3">
-              <span class="text-[12px] font-[600] text-black/80 dark:text-white/80">{step}</span>
+        <!-- Presets table — proper columns -->
+        <div>
+          <h3 class="text-[14px] font-[650] text-black/80 dark:text-white/75 mb-3">Presets</h3>
+          <div class="flex flex-col rounded-[var(--glass-radius-sm)] overflow-hidden">
+            <!-- Header -->
+            <div class="grid grid-cols-[90px_1fr_1fr_1fr_1fr] bg-black/[0.04] dark:bg-white/[0.06] border-b border-black/[0.06] dark:border-white/[0.08]">
+              <div class="px-3 py-2.5"><span class="text-[11px] font-[650] uppercase tracking-[0.06em] text-black/60 dark:text-white/50">Preset</span></div>
+              <div class="px-3 py-2.5 text-center"><span class="text-[11px] font-[650] uppercase tracking-[0.06em] text-black/60 dark:text-white/50">LG</span></div>
+              <div class="px-3 py-2.5 text-center"><span class="text-[11px] font-[650] uppercase tracking-[0.06em] text-black/60 dark:text-white/50">Main</span></div>
+              <div class="px-3 py-2.5 text-center"><span class="text-[11px] font-[650] uppercase tracking-[0.06em] text-black/60 dark:text-white/50">SM</span></div>
+              <div class="px-3 py-2.5 text-center"><span class="text-[11px] font-[650] uppercase tracking-[0.06em] text-black/60 dark:text-white/50">Pill</span></div>
             </div>
-            <div class="w-[80px] shrink-0 px-3 py-3">
-              <span class="text-[12px] font-mono text-black/50 dark:text-white/40 px-2 py-0.5 rounded-full bg-black/[0.03] dark:bg-white/[0.05] border border-black/[0.06] dark:border-white/[0.08]">{value}</span>
-            </div>
-            <div class="flex-1 px-3 py-3 flex items-center">
-              <div
-                class="h-5 rounded-[4px]"
-                style={`width: calc(${value} * 2.5); background-color: var(--accent, #3700FF); opacity: 0.45;`}
-              />
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-
-    <!-- ════════════════════════════════════════
-         Border Radii
-         ════════════════════════════════════════ -->
-    <div class="col-span-1 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
-      <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 150px;" />
-      <div class="relative flex flex-col gap-1 mb-6 pt-1 pl-1">
-        <span class="text-[10px] font-[650] uppercase tracking-[0.1em] text-black/40 dark:text-white/40 mb-1">Shape</span>
-        <h2 class="text-[22px] font-[750] tracking-[-0.03em] leading-[1.2] text-black dark:text-white mb-1">Border Radii</h2>
-        <p class="text-[12px] leading-[1.6] text-black/60 dark:text-white/55">Raw values + 3 presets</p>
-      </div>
-
-      <div class="flex flex-wrap gap-3">
-        {Object.entries(radii.raw).slice(0, 8).map(([name, value]) => (
-          <div class="flex flex-col items-center gap-1.5">
-            <div
-              class="w-12 h-12 border-2"
-              style={`border-radius: ${value}; opacity: 0.4; border-color: var(--accent, #3700FF)`}
-            />
-            <span class="text-[12px] font-mono opacity-40">{value}</span>
-          </div>
-        ))}
-      </div>
-    </div>
-
-    <!-- ════════════════════════════════════════
-         Radius Presets
-         ════════════════════════════════════════ -->
-    <div class="col-span-1 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
-      <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 150px;" />
-      <div class="relative flex flex-col gap-1 mb-6 pt-1 pl-1">
-        <span class="text-[10px] font-[650] uppercase tracking-[0.1em] text-black/40 dark:text-white/40 mb-1">Shape</span>
-        <h2 class="text-[22px] font-[750] tracking-[-0.03em] leading-[1.2] text-black dark:text-white mb-1">Radius Presets</h2>
-        <p class="text-[12px] leading-[1.6] text-black/60 dark:text-white/55">User-configurable</p>
-      </div>
-
-      <div class="flex flex-col gap-4">
-        {radiiPresetEntries.map(([name, preset]) => (
-          <div class="flex flex-col gap-1.5">
-            <span class="text-[11.5px] font-[550]">{name}</span>
-            <div class="flex gap-2">
-              {Object.entries(preset).map(([key, val]) => (
-                <div class="flex flex-col items-center gap-1">
-                  <div
-                    class="w-9 h-9 opacity-30"
-                    style={`border-radius: ${val}; background-color: var(--accent, #3700FF)`}
-                  />
-                  <span class="text-[12px] font-mono opacity-40">{val}</span>
+            <!-- Rows -->
+            {radiiPresetEntries.map(([name, preset]) => (
+              <div class="grid grid-cols-[90px_1fr_1fr_1fr_1fr] items-center border-b border-black/[0.03] dark:border-white/[0.04] last:border-b-0 hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors duration-150">
+                <div class="px-3 py-3">
+                  <span class="text-[12px] font-[600] text-black/80 dark:text-white/80 capitalize">{name}</span>
                 </div>
-              ))}
-            </div>
+                {Object.entries(preset).map(([key, val]) => (
+                  <div class="px-3 py-3 flex flex-col items-center gap-1.5">
+                    <div
+                      class="w-8 h-8 border-2 shrink-0"
+                      style={`border-radius: ${val}; opacity: 0.35; border-color: var(--token-preview-border)`}
+                    />
+                    <span class="text-[11px] font-mono text-black/40 dark:text-white/35">{val}</span>
+                  </div>
+                ))}
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
       </div>
     </div>
 
@@ -649,16 +677,18 @@ const radiiRawEntries = Object.entries(radii.raw) as Array<[string, string]>;
         <p class="text-[13px] leading-[1.6] text-black/60 dark:text-white/55">Three elevation levels — Flat, Soft, and Elevated</p>
       </div>
 
-      <div class="grid grid-cols-3 gap-4 max-[540px]:grid-cols-1">
+      <div class="grid grid-cols-3 gap-5 max-[540px]:grid-cols-1">
         {shadowPresetEntries.map(([name, preset]) => (
           <div class="flex flex-col items-center gap-3">
-            <div
-              class="w-full h-20 rounded-[var(--glass-radius)] bg-[var(--glass-bg,rgba(255,255,255,0.06))]"
-              style={`box-shadow: ${preset.glass}`}
-            />
-            <span class="text-[11.5px] font-[550]">{name}</span>
-            <span class="text-[12px] font-mono opacity-40 break-all text-center">
-              {preset.glass === "none" ? "none" : "multi-layer"}
+            <div class="w-full flex items-center justify-center py-8">
+              <div
+                class="w-24 h-24 rounded-[var(--glass-radius)] bg-white dark:bg-white/10"
+                style={`box-shadow: ${preset.glass}`}
+              />
+            </div>
+            <span class="text-[13px] font-[650] capitalize text-black dark:text-white">{name}</span>
+            <span class="text-[11px] font-mono text-black/35 dark:text-white/30 break-all text-center leading-relaxed max-w-[200px]">
+              {preset.glass === "none" ? "box-shadow: none" : preset.glass.split(",").slice(0, 2).join(",") + "..."}
             </span>
           </div>
         ))}
@@ -676,113 +706,154 @@ const radiiRawEntries = Object.entries(radii.raw) as Array<[string, string]>;
         <p class="text-[13px] leading-[1.6] text-black/60 dark:text-white/55">4 depth levels for glass morphism effects</p>
       </div>
 
-      <div class="grid grid-cols-4 gap-3 max-[860px]:grid-cols-2 max-[540px]:grid-cols-2">
+      <div class="grid grid-cols-4 gap-4 max-[860px]:grid-cols-2 max-[540px]:grid-cols-2">
         {glassLevelEntries.map(([level, data]) => (
-          <div class={`glass-${level} flex flex-col items-center justify-center gap-2 py-5 px-2 rounded-[var(--glass-radius-sm)]`}>
-            <span class="text-[17px] font-[650]">{level}</span>
-            <span class="text-[11.5px] opacity-55">{data.label}</span>
-            <div class="flex flex-col items-center gap-0.5 mt-1">
-              <span class="text-[12px] font-mono opacity-40">blur: {data.blur}px</span>
-              <span class="text-[12px] font-mono opacity-40">sat: {data.saturate}</span>
-              <span class="text-[12px] font-mono opacity-40">alpha: {data.bgAlpha}</span>
-            </div>
+          <div class={`glass-${level} glass-specular flex flex-col items-center justify-center gap-1.5 py-6 px-3 rounded-[var(--glass-radius-sm)]`}>
+            <span class="text-[32px] font-[750] leading-none text-black/70 dark:text-white/70">{level}</span>
+            <span class="text-[12px] font-[600] text-black/60 dark:text-white/55 mt-1">{data.label}</span>
+            <table class="mt-3 text-[10px] font-mono text-black/45 dark:text-white/35 border-separate" style="border-spacing: 0;">
+              <tr>
+                <td class="pr-2 py-0.5 text-right text-black/30 dark:text-white/25">blur</td>
+                <td class="py-0.5 font-[600] text-black/60 dark:text-white/50">{data.blur}px</td>
+              </tr>
+              <tr>
+                <td class="pr-2 py-0.5 text-right text-black/30 dark:text-white/25">sat</td>
+                <td class="py-0.5 font-[600] text-black/60 dark:text-white/50">{data.saturate}×</td>
+              </tr>
+              <tr>
+                <td class="pr-2 py-0.5 text-right text-black/30 dark:text-white/25">alpha</td>
+                <td class="py-0.5 font-[600] text-black/60 dark:text-white/50">{data.bgAlpha}</td>
+              </tr>
+            </table>
           </div>
         ))}
       </div>
     </div>
 
     <!-- ════════════════════════════════════════
-         Glass Types
+         Glass Types — no wrapper, direct on background
          ════════════════════════════════════════ -->
-    <div class="col-span-full glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
-      <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 170px;" />
-      <div class="relative flex flex-col gap-1 mb-6 pt-1 pl-1">
-        <span class="text-[10px] font-[650] uppercase tracking-[0.1em] text-black/40 dark:text-white/40 mb-1">Material</span>
-        <h2 class="text-[24px] font-[750] tracking-[-0.03em] leading-[1.2] text-black dark:text-white mb-1">Glass Types</h2>
-        <p class="text-[13px] leading-[1.6] text-black/60 dark:text-white/55">6 distinct glass effect categories for layered transparency</p>
+    <div class="col-span-full flex flex-col gap-1 mb-2 pt-1 pl-1">
+      <span class="text-[10px] font-[650] uppercase tracking-[0.1em] contrast-muted mb-1">Material</span>
+      <h2 class="text-[24px] font-[750] tracking-[-0.03em] leading-[1.2] mb-1 contrast-text" style="font-family: var(--font-heading)">Glass Types</h2>
+      <p class="text-[13px] leading-[1.6] contrast-muted">8 distinct glass effects — shown directly on your background for a real preview</p>
+    </div>
+
+    <!-- 1. Transparent -->
+    <div class="col-span-2 max-[860px]:col-span-2 max-[540px]:col-span-1 glass-transparent rounded-[var(--glass-radius)] p-5 min-h-[140px] flex flex-col justify-between relative overflow-hidden glass-type-card">
+      <div class="flex items-start justify-between">
+        <div>
+          <span class="text-[15px] font-[650] glass-type-title">Transparent</span>
+          <p class="text-[11px] glass-type-sub mt-0.5">Border only — fully see-through</p>
+        </div>
+        <span class="text-[10px] font-mono px-2 py-0.5 rounded-full glass-type-tag">glass-transparent</span>
       </div>
+    </div>
 
-      <!-- 3×2 grid of glass types -->
-      <div class="grid grid-cols-3 gap-5 max-[540px]:grid-cols-1">
-        <!-- 1. Transparent -->
-        <div class="flex flex-col gap-3">
-          <div class="glass-transparent rounded-[var(--glass-radius)] p-6 min-h-[120px] flex items-center justify-center">
-            <span class="text-[13px] font-[550]">Transparent</span>
-          </div>
-          <div class="flex flex-col gap-1">
-            <span class="text-[11.5px] font-[550]">Transparent</span>
-            <span class="text-[10px] opacity-40">No blur, no background. Border only &mdash; fully see-through.</span>
-            <span class="text-[12px] font-mono opacity-35 mt-0.5">glass-transparent</span>
-          </div>
+    <!-- 2. Standard Glass -->
+    <div class="col-span-2 max-[860px]:col-span-2 max-[540px]:col-span-1 glass-1 glass-specular rounded-[var(--glass-radius)] p-5 min-h-[140px] flex flex-col justify-between relative overflow-hidden glass-type-card">
+      <div class="flex items-start justify-between relative z-[1]">
+        <div>
+          <span class="text-[15px] font-[650] glass-type-title">Standard Glass</span>
+          <p class="text-[11px] glass-type-sub mt-0.5">Backdrop blur + semi-transparent background</p>
         </div>
+        <span class="text-[10px] font-mono px-2 py-0.5 rounded-full glass-type-tag whitespace-nowrap">glass-0 · glass-3</span>
+      </div>
+    </div>
 
-        <!-- 2. Standard Glass -->
-        <div class="flex flex-col gap-3">
-          <div class="glass-1 glass-specular rounded-[var(--glass-radius)] p-6 min-h-[120px] flex items-center justify-center relative">
-            <span class="text-[13px] font-[550] relative z-[1]">Standard Glass</span>
-          </div>
-          <div class="flex flex-col gap-1">
-            <span class="text-[11.5px] font-[550]">Standard Glass</span>
-            <span class="text-[10px] opacity-40">Backdrop blur + semi-transparent background. 4 intensity levels (0&ndash;3).</span>
-            <span class="text-[12px] font-mono opacity-35 mt-0.5">glass-0 &middot; glass-1 &middot; glass-2 &middot; glass-3</span>
-          </div>
+    <!-- 3. Gel Glass -->
+    <div class="col-span-2 max-[860px]:col-span-2 max-[540px]:col-span-1 gel-glass rounded-[var(--glass-radius)] p-5 min-h-[140px] flex flex-col justify-between relative overflow-hidden glass-type-card">
+      <div class="gel-glass-shine"></div>
+      <div class="flex items-start justify-between relative z-[3]">
+        <div>
+          <span class="text-[15px] font-[650] glass-type-title">Gel Glass</span>
+          <p class="text-[11px] glass-type-sub mt-0.5">Volumetric inset shadows + specular highlight</p>
         </div>
+        <span class="text-[10px] font-mono px-2 py-0.5 rounded-full glass-type-tag">gel-glass</span>
+      </div>
+    </div>
 
-        <!-- 3. Gel Glass -->
-        <div class="flex flex-col gap-3">
-          <div class="gel-glass p-6 min-h-[120px] flex items-center justify-center relative">
-            <div class="gel-glass-shine"></div>
-            <span class="text-[13px] font-[550] relative z-[3]">Gel Glass</span>
-          </div>
-          <div class="flex flex-col gap-1">
-            <span class="text-[11.5px] font-[550]">Gel Glass</span>
-            <span class="text-[10px] opacity-40">10-layer volumetric inset shadows + specular highlight. Physical depth.</span>
-            <span class="text-[12px] font-mono opacity-35 mt-0.5">gel-glass &middot; gel-glass-context-menu</span>
-          </div>
+    <!-- 4. Glass on Glass -->
+    <div class="col-span-2 max-[860px]:col-span-2 max-[540px]:col-span-1 glass-1 glass-specular rounded-[var(--glass-radius)] p-5 min-h-[140px] flex flex-col justify-between relative overflow-hidden glass-type-card">
+      <div class="flex items-start justify-between relative z-[1]">
+        <div>
+          <span class="text-[15px] font-[650] glass-type-title">Glass on Glass</span>
+          <p class="text-[11px] glass-type-sub mt-0.5">Layered transparency at different levels</p>
         </div>
-
-        <!-- 4. Glass on Glass -->
-        <div class="flex flex-col gap-3">
-          <div class="gel-glass-nav rounded-[var(--glass-radius)] p-4 min-h-[120px] flex items-center justify-center relative">
-            <div class="glass-1 glass-specular rounded-[var(--glass-radius-sm)] px-5 py-3 relative z-[1]">
-              <span class="text-[13px] font-[550] relative z-[1]">Glass on Glass</span>
-            </div>
-          </div>
-          <div class="flex flex-col gap-1">
-            <span class="text-[11.5px] font-[550]">Glass on Glass</span>
-            <span class="text-[10px] opacity-40">Strong glass outer with lighter glass inner. Different transparency levels layered.</span>
-            <span class="text-[12px] font-mono opacity-35 mt-0.5">gel-glass-nav &rarr; glass-1 glass-specular</span>
-          </div>
+        <span class="text-[10px] font-mono px-2 py-0.5 rounded-full glass-type-tag whitespace-nowrap">glass-1 → glass-1</span>
+      </div>
+      <div class="flex justify-center mt-3 relative z-[1]">
+        <div class="glass-1 glass-specular rounded-[var(--glass-radius-sm)] px-6 py-2.5">
+          <span class="text-[11px] font-[550] relative z-[1]" style="opacity: 0.6">Inner glass panel</span>
         </div>
+      </div>
+    </div>
 
-        <!-- 5. Glass on Gel -->
-        <div class="flex flex-col gap-3">
-          <div class="gel-glass p-4 min-h-[120px] flex items-center justify-center relative">
-            <div class="gel-glass-shine"></div>
-            <div class="glass-1 glass-specular rounded-[var(--glass-radius-sm)] px-5 py-3 relative z-[3]">
-              <span class="text-[13px] font-[550] relative z-[1]">Glass on Gel</span>
-            </div>
-          </div>
-          <div class="flex flex-col gap-1">
-            <span class="text-[11.5px] font-[550]">Glass on Gel</span>
-            <span class="text-[10px] opacity-40">Volumetric gel outer with glass inner. Deepest compound layering effect.</span>
-            <span class="text-[12px] font-mono opacity-35 mt-0.5">gel-glass &rarr; glass-1 glass-specular</span>
-          </div>
+    <!-- 5. Glass on Gel -->
+    <div class="col-span-2 max-[860px]:col-span-2 max-[540px]:col-span-1 gel-glass rounded-[var(--glass-radius)] p-5 min-h-[140px] flex flex-col justify-between relative overflow-hidden glass-type-card">
+      <div class="gel-glass-shine"></div>
+      <div class="flex items-start justify-between relative z-[3]">
+        <div>
+          <span class="text-[15px] font-[650] glass-type-title">Glass on Gel</span>
+          <p class="text-[11px] glass-type-sub mt-0.5">Deepest compound layering effect</p>
         </div>
+        <span class="text-[10px] font-mono px-2 py-0.5 rounded-full glass-type-tag whitespace-nowrap">gel → glass-1</span>
+      </div>
+      <div class="flex justify-center mt-3 relative z-[3]">
+        <div class="glass-1 glass-specular rounded-[var(--glass-radius-sm)] px-6 py-2.5">
+          <span class="text-[11px] font-[550] relative z-[1]" style="opacity: 0.6">Inner glass panel</span>
+        </div>
+      </div>
+    </div>
 
-        <!-- 6. Gel on Glass -->
-        <div class="flex flex-col gap-3">
-          <div class="glass-1 glass-specular rounded-[var(--glass-radius)] p-4 min-h-[120px] flex items-center justify-center relative">
-            <div class="gel-glass rounded-[var(--glass-radius-sm)] px-5 py-3 relative z-[1]">
-              <div class="gel-glass-shine"></div>
-              <span class="text-[13px] font-[550] relative z-[3]">Gel on Glass</span>
-            </div>
-          </div>
-          <div class="flex flex-col gap-1">
-            <span class="text-[11.5px] font-[550]">Gel on Glass</span>
-            <span class="text-[10px] opacity-40">Standard glass outer with volumetric gel inner. Inverted compound layering.</span>
-            <span class="text-[12px] font-mono opacity-35 mt-0.5">glass-1 glass-specular &rarr; gel-glass</span>
-          </div>
+    <!-- 6. Gel on Glass -->
+    <div class="col-span-2 max-[860px]:col-span-2 max-[540px]:col-span-1 glass-1 glass-specular rounded-[var(--glass-radius)] p-5 min-h-[140px] flex flex-col justify-between relative overflow-hidden glass-type-card">
+      <div class="flex items-start justify-between relative z-[1]">
+        <div>
+          <span class="text-[15px] font-[650] glass-type-title">Gel on Glass</span>
+          <p class="text-[11px] glass-type-sub mt-0.5">Inverted compound layering</p>
+        </div>
+        <span class="text-[10px] font-mono px-2 py-0.5 rounded-full glass-type-tag whitespace-nowrap">glass-1 → gel</span>
+      </div>
+      <div class="flex justify-center mt-3 relative z-[1]">
+        <div class="gel-glass rounded-[var(--glass-radius-sm)] px-6 py-2.5 relative">
+          <div class="gel-glass-shine"></div>
+          <span class="text-[11px] font-[550] relative z-[3]" style="opacity: 0.6">Inner gel panel</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. Gel on Gel -->
+    <div class="col-span-2 max-[860px]:col-span-2 max-[540px]:col-span-1 gel-glass rounded-[var(--glass-radius)] p-5 min-h-[140px] flex flex-col justify-between relative overflow-hidden glass-type-card">
+      <div class="gel-glass-shine"></div>
+      <div class="flex items-start justify-between relative z-[3]">
+        <div>
+          <span class="text-[15px] font-[650] glass-type-title">Gel on Gel</span>
+          <p class="text-[11px] glass-type-sub mt-0.5">Double volumetric depth</p>
+        </div>
+        <span class="text-[10px] font-mono px-2 py-0.5 rounded-full glass-type-tag whitespace-nowrap">gel → gel</span>
+      </div>
+      <div class="flex justify-center mt-3 relative z-[3]">
+        <div class="gel-glass rounded-[var(--glass-radius-sm)] px-6 py-2.5 relative">
+          <div class="gel-glass-shine"></div>
+          <span class="text-[11px] font-[550] relative z-[3]" style="opacity: 0.6">Inner gel panel</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8. Gel on Transparent -->
+    <div class="col-span-2 max-[860px]:col-span-2 max-[540px]:col-span-1 glass-transparent rounded-[var(--glass-radius)] p-5 min-h-[140px] flex flex-col justify-between relative overflow-hidden glass-type-card">
+      <div class="flex items-start justify-between">
+        <div>
+          <span class="text-[15px] font-[650] glass-type-title">Gel on Transparent</span>
+          <p class="text-[11px] glass-type-sub mt-0.5">Volumetric element on borderless surface</p>
+        </div>
+        <span class="text-[10px] font-mono px-2 py-0.5 rounded-full glass-type-tag whitespace-nowrap">transparent → gel</span>
+      </div>
+      <div class="flex justify-center mt-3">
+        <div class="gel-glass rounded-[var(--glass-radius-sm)] px-6 py-2.5 relative">
+          <div class="gel-glass-shine"></div>
+          <span class="text-[11px] font-[550] relative z-[3]" style="opacity: 0.6">Inner gel panel</span>
         </div>
       </div>
     </div>
@@ -790,62 +861,137 @@ const radiiRawEntries = Object.entries(radii.raw) as Array<[string, string]>;
     <!-- ════════════════════════════════════════
          Motion
          ════════════════════════════════════════ -->
-    <div class="col-span-1 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
-      <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 150px;" />
+    <div class="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
+      <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 160px;" />
       <div class="relative flex flex-col gap-1 mb-6 pt-1 pl-1">
         <span class="text-[10px] font-[650] uppercase tracking-[0.1em] text-black/40 dark:text-white/40 mb-1">Animation</span>
-        <h2 class="text-[22px] font-[750] tracking-[-0.03em] leading-[1.2] text-black dark:text-white mb-1">Motion</h2>
-        <p class="text-[12px] leading-[1.6] text-black/60 dark:text-white/55">Duration + easing tokens</p>
+        <h2 class="text-[24px] font-[750] tracking-[-0.03em] leading-[1.2] text-black dark:text-white mb-1" style="font-family: var(--font-heading)">Motion</h2>
+        <p class="text-[13px] leading-[1.6] text-black/60 dark:text-white/55">Duration + easing tokens for smooth transitions</p>
       </div>
 
-      <div class="flex flex-col gap-1 mb-4">
-        <span class="text-[11.5px] font-[550] uppercase opacity-45 tracking-[0.04em] mb-1">Duration</span>
-        {Object.entries(motion.duration).map(([name, value]) => (
-          <div class="flex items-center justify-between gap-4 py-1.5">
-            <span class="text-[11.5px] font-mono font-[500]">{name}</span>
-            <span class="text-[11.5px] font-mono opacity-40">{value}</span>
+      <div class="grid grid-cols-2 gap-5 max-[540px]:grid-cols-1">
+        <!-- Duration -->
+        <div>
+          <div class="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white/60 dark:bg-black/30">
+            <div class="px-3 py-2 bg-black/[0.04] dark:bg-white/[0.06] border-b border-black/[0.06] dark:border-white/[0.06]">
+              <span class="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/45 dark:text-white/40">Duration — hover to preview</span>
+            </div>
+            {durationEntries.map(([name, value], idx) => {
+              const ms = parseInt(value) || 0;
+              return (
+                <div
+                  class:list={[
+                    "motion-row group relative px-3 py-3 cursor-pointer",
+                    idx < durationEntries.length - 1 && "border-b border-black/[0.04] dark:border-white/[0.04]"
+                  ]}
+                >
+                  <div class="flex items-center justify-between gap-3 mb-2">
+                    <span class="text-[12px] font-[600] text-black/75 dark:text-white/70">{name}</span>
+                    <span class="text-[11px] font-mono text-black/40 dark:text-white/35 tabular-nums">{value}</span>
+                  </div>
+                  <!-- Animation track -->
+                  <div class="relative h-1.5 rounded-full bg-black/[0.06] dark:bg-white/[0.06] overflow-hidden">
+                    <div
+                      class="motion-dot absolute top-0 left-0 h-full w-3 rounded-full bg-black/30 dark:bg-white/40"
+                      style={`transition-duration: ${value}; transition-timing-function: ease-in-out;`}
+                    />
+                  </div>
+                </div>
+              );
+            })}
           </div>
-        ))}
-      </div>
-      <div class="flex flex-col gap-1">
-        <span class="text-[11.5px] font-[550] uppercase opacity-45 tracking-[0.04em] mb-1">Easing</span>
-        {Object.entries(motion.easing).map(([name, value]) => (
-          <div class="flex items-center justify-between gap-4 py-1.5">
-            <span class="text-[11.5px] font-mono font-[500]">{name}</span>
-            <span class="text-[11.5px] font-mono opacity-40 text-right break-all">{value}</span>
+        </div>
+
+        <!-- Easing -->
+        <div>
+          <div class="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white/60 dark:bg-black/30">
+            <div class="px-3 py-2 bg-black/[0.04] dark:bg-white/[0.06] border-b border-black/[0.06] dark:border-white/[0.06]">
+              <span class="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/45 dark:text-white/40">Easing — hover to preview</span>
+            </div>
+            {easingEntries.map(([name, value], idx) => (
+              <div
+                class:list={[
+                  "motion-row group relative px-3 py-3 cursor-pointer",
+                  idx < easingEntries.length - 1 && "border-b border-black/[0.04] dark:border-white/[0.04]"
+                ]}
+              >
+                <div class="flex items-center justify-between gap-3 mb-2">
+                  <span class="text-[12px] font-[600] text-black/75 dark:text-white/70">{name}</span>
+                  <span class="text-[10px] font-mono text-black/35 dark:text-white/30 text-right max-w-[180px] truncate" title={value}>{value}</span>
+                </div>
+                <!-- Animation track -->
+                <div class="relative h-1.5 rounded-full bg-black/[0.06] dark:bg-white/[0.06] overflow-hidden">
+                  <div
+                    class="motion-dot absolute top-0 left-0 h-full w-3 rounded-full bg-black/30 dark:bg-white/40"
+                    style={`transition-duration: 600ms; transition-timing-function: ${value};`}
+                  />
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
       </div>
+
+      <script>
+        document.querySelectorAll('.motion-row').forEach(row => {
+          const dot = row.querySelector('.motion-dot');
+          if (!dot) return;
+          let isRight = false;
+
+          row.addEventListener('mouseenter', () => {
+            isRight = !isRight;
+            (dot as HTMLElement).style.left = isRight ? 'calc(100% - 12px)' : '0px';
+          });
+        });
+      </script>
     </div>
 
     <!-- ════════════════════════════════════════
          Breakpoints & Z-Index
          ════════════════════════════════════════ -->
-    <div class="col-span-1 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
-      <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 150px;" />
+    <div class="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
+      <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 160px;" />
       <div class="relative flex flex-col gap-1 mb-6 pt-1 pl-1">
         <span class="text-[10px] font-[650] uppercase tracking-[0.1em] text-black/40 dark:text-white/40 mb-1">Layout</span>
-        <h2 class="text-[22px] font-[750] tracking-[-0.03em] leading-[1.2] text-black dark:text-white mb-1">Breakpoints & Z-Index</h2>
-        <p class="text-[12px] leading-[1.6] text-black/60 dark:text-white/55">Responsive + layering values</p>
+        <h2 class="text-[24px] font-[750] tracking-[-0.03em] leading-[1.2] text-black dark:text-white mb-1" style="font-family: var(--font-heading)">Breakpoints & Z-Index</h2>
+        <p class="text-[13px] leading-[1.6] text-black/60 dark:text-white/55">Responsive breakpoints + layering values</p>
       </div>
 
-      <div class="flex flex-col gap-1 mb-4">
-        <span class="text-[11.5px] font-[550] uppercase opacity-45 tracking-[0.04em] mb-1">Breakpoints</span>
-        {Object.entries(breakpoints).map(([name, value]) => (
-          <div class="flex items-center justify-between gap-4 py-1.5">
-            <span class="text-[11.5px] font-mono font-[500]">{name}</span>
-            <span class="text-[11.5px] font-mono opacity-40">{value}px</span>
+      <div class="grid grid-cols-2 gap-5 max-[540px]:grid-cols-1">
+        <!-- Breakpoints -->
+        <div>
+          <div class="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white/60 dark:bg-black/30">
+            <div class="flex items-center justify-between px-3 py-2 bg-black/[0.04] dark:bg-white/[0.06] border-b border-black/[0.06] dark:border-white/[0.06]">
+              <span class="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/45 dark:text-white/40">Token</span>
+              <span class="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/45 dark:text-white/40">Min Width</span>
+            </div>
+            {breakpointEntries.map(([name, value], idx) => (
+              <div class:list={["flex items-center justify-between gap-3 px-3 py-2.5", idx < breakpointEntries.length - 1 && "border-b border-black/[0.04] dark:border-white/[0.04]"]}>
+                <span class="text-[12px] font-[600] text-black/75 dark:text-white/70">{name}</span>
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded-full bg-black/[0.05] dark:bg-white/[0.07] text-black/50 dark:text-white/40 tabular-nums">{value}px</span>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-      <div class="flex flex-col gap-1">
-        <span class="text-[11.5px] font-[550] uppercase opacity-45 tracking-[0.04em] mb-1">Z-Index</span>
-        {Object.entries(zIndex).map(([name, value]) => (
-          <div class="flex items-center justify-between gap-4 py-1.5">
-            <span class="text-[11.5px] font-mono font-[500]">{name}</span>
-            <span class="text-[11.5px] font-mono opacity-40">{value}</span>
+        </div>
+
+        <!-- Z-Index -->
+        <div>
+          <div class="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white/60 dark:bg-black/30">
+            <div class="flex items-center justify-between px-3 py-2 bg-black/[0.04] dark:bg-white/[0.06] border-b border-black/[0.06] dark:border-white/[0.06]">
+              <span class="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/45 dark:text-white/40">Layer</span>
+              <span class="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/45 dark:text-white/40">Value</span>
+            </div>
+            {zIndexEntries.map(([name, value], idx) => (
+              <div class:list={["flex items-center justify-between gap-3 px-3 py-2.5", idx < zIndexEntries.length - 1 && "border-b border-black/[0.04] dark:border-white/[0.04]"]}>
+                <span class="text-[12px] font-[600] text-black/75 dark:text-white/70">{name}</span>
+                <div class="flex items-center gap-2">
+                  <div class="h-1.5 rounded-full bg-black/10 dark:bg-white/10" style={`width: ${Math.max(value / 15, 4)}px;`} />
+                  <span class="text-[11px] font-mono text-black/40 dark:text-white/35 tabular-nums">{value}</span>
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
       </div>
     </div>
 

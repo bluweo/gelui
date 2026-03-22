@@ -833,11 +833,60 @@ body {
   color: rgba(255, 255, 255, 0.92);
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
 }
+[data-contrast="light"] .contrast-text {
+  color: rgba(30, 30, 35, 0.88);
+}
+[data-contrast="dark"] .contrast-text {
+  color: rgba(255, 255, 255, 0.92);
+}
 [data-contrast="light"] .contrast-muted {
   color: rgba(30, 30, 35, 0.52);
 }
 [data-contrast="dark"] .contrast-muted {
   color: rgba(255, 255, 255, 0.6);
+}
+
+/* ─── Glass Type cards — contrast-aware text for transparent panels ─── */
+[data-contrast="light"] .glass-type-title {
+  color: rgba(30, 30, 35, 0.88);
+}
+[data-contrast="dark"] .glass-type-title {
+  color: rgba(255, 255, 255, 0.92);
+}
+[data-contrast="light"] .glass-type-sub {
+  color: rgba(30, 30, 35, 0.45);
+}
+[data-contrast="dark"] .glass-type-sub {
+  color: rgba(255, 255, 255, 0.45);
+}
+[data-contrast="light"] .glass-type-tag {
+  background: rgba(30, 30, 35, 0.06);
+  color: rgba(30, 30, 35, 0.4);
+}
+[data-contrast="dark"] .glass-type-tag {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.4);
+}
+/* Override for glass panels that already have their own frosted bg */
+:is(.glass-0, .glass-1, .glass-2, .glass-3) .glass-type-title {
+  color: rgba(30, 30, 35, 0.88);
+}
+[data-theme="dark"] :is(.glass-0, .glass-1, .glass-2, .glass-3) .glass-type-title {
+  color: rgba(255, 255, 255, 0.92);
+}
+:is(.glass-0, .glass-1, .glass-2, .glass-3) .glass-type-sub {
+  color: rgba(30, 30, 35, 0.45);
+}
+[data-theme="dark"] :is(.glass-0, .glass-1, .glass-2, .glass-3) .glass-type-sub {
+  color: rgba(255, 255, 255, 0.4);
+}
+:is(.glass-0, .glass-1, .glass-2, .glass-3) .glass-type-tag {
+  background: rgba(30, 30, 35, 0.06);
+  color: rgba(30, 30, 35, 0.4);
+}
+[data-theme="dark"] :is(.glass-0, .glass-1, .glass-2, .glass-3) .glass-type-tag {
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.35);
 }
 
 /*
@@ -1881,6 +1930,18 @@ html[data-navigated] * {
    ═══════════════════════════════════════════════ */
 .scrollbar-hide::-webkit-scrollbar { display: none; }
 .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ═══════════════════════════════════════════════
+   TOKEN PREVIEW COLORS (theme-aware)
+   ═══════════════════════════════════════════════ */
+:root {
+  --token-preview-fill: rgba(0,0,0,0.2);
+  --token-preview-border: rgba(0,0,0,0.25);
+}
+[data-theme="dark"] {
+  --token-preview-fill: rgba(255,255,255,0.25);
+  --token-preview-border: rgba(255,255,255,0.3);
+}
 
 /* ═══════════════════════════════════════════════
    FONT ROLE ASSIGNMENTS
