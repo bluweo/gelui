@@ -17,6 +17,7 @@ export interface BrandColor {
 }
 
 export const brand: BrandColor[] = [
-  { key: "blue", hex: "#3700FF", label: "Primary", role: "primary" },
-  { key: "gold", hex: "#F2C215", label: "Gold Accent", role: "accent" },
+  { key: "forest", hex: "#354334", label: "Forest Green", role: "primary" },
+  { key: "olive", hex: "#4A5E48", label: "Olive Green", role: "secondary" },
+  { key: "gold", hex: "#FFC800", label: "Golden Yellow", role: "accent" },
 ];

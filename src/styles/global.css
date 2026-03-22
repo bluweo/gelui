@@ -9,80 +9,44 @@
 /* ═══════════════════════════════════════════════
    STATIC THEME TOKENS
    Values known at build time — generates utility classes.
-   e.g. bg-raw-blue-500, text-md, gap-4, rounded-lg, z-modal
+   e.g. bg-raw-forest-500, text-md, gap-4, rounded-lg, z-modal
    ═══════════════════════════════════════════════ */
 @theme {
-  /* ── Colors: Raw palette — brand primary (#3700FF) ── */
-  --color-raw-blue-50: #F6F5FA;
-  --color-raw-blue-100: #E9E5F5;
-  --color-raw-blue-200: #CBC0F2;
-  --color-raw-blue-300: #A28CF2;
-  --color-raw-blue-400: #6D47F5;
-  --color-raw-blue-500: #3700FF;
-  --color-raw-blue-600: #2F05C7;
-  --color-raw-blue-700: #28089B;
-  --color-raw-blue-800: #210B6F;
-  --color-raw-blue-900: #1A0D4A;
+  /* ── Colors: Raw palette — brand Forest Green (#354334) ── */
+  --color-raw-forest-50: #F4F6F4;
+  --color-raw-forest-100: #E3E8E3;
+  --color-raw-forest-200: #C2CEC1;
+  --color-raw-forest-300: #97AD96;
+  --color-raw-forest-400: #6B8669;
+  --color-raw-forest-500: #354334;
+  --color-raw-forest-600: #2D392C;
+  --color-raw-forest-700: #252F25;
+  --color-raw-forest-800: #1D251D;
+  --color-raw-forest-900: #161B16;
 
-  /* ── Colors: Raw palette — brand gold accent (#F2C215) ── */
-  --color-raw-gold-50: #F9F9F5;
-  --color-raw-gold-100: #F4F1E6;
-  --color-raw-gold-200: #EFE5C3;
-  --color-raw-gold-300: #EDD992;
-  --color-raw-gold-400: #ECCA51;
-  --color-raw-gold-500: #F2C218;
-  --color-raw-gold-600: #BD970F;
-  --color-raw-gold-700: #937710;
-  --color-raw-gold-800: #6A5711;
-  --color-raw-gold-900: #463B10;
+  /* ── Colors: Raw palette — brand Olive Green (#4A5E48) ── */
+  --color-raw-olive-50: #F5F7F5;
+  --color-raw-olive-100: #E5EAE5;
+  --color-raw-olive-200: #C6D1C5;
+  --color-raw-olive-300: #9FB39E;
+  --color-raw-olive-400: #748F73;
+  --color-raw-olive-500: #4A5E48;
+  --color-raw-olive-600: #3E503D;
+  --color-raw-olive-700: #334233;
+  --color-raw-olive-800: #283428;
+  --color-raw-olive-900: #1E261E;
 
-  /* ── Colors: Raw palette — brand brand 2 (#34299C) ── */
-  --color-raw-color2-50: #F6F6F9;
-  --color-raw-color2-100: #E9E9F2;
-  --color-raw-color2-200: #CDCAE7;
-  --color-raw-color2-300: #A8A2DD;
-  --color-raw-color2-400: #766CD0;
-  --color-raw-color2-500: #352A9D;
-  --color-raw-color2-600: #392E9E;
-  --color-raw-color2-700: #30277C;
-  --color-raw-color2-800: #26205B;
-  --color-raw-color2-900: #1D1A3D;
-
-  /* ── Colors: Raw palette — brand brand 3 (#493FC3) ── */
-  --color-raw-color3-50: #F6F6F9;
-  --color-raw-color3-100: #EAE9F1;
-  --color-raw-color3-200: #CECCE6;
-  --color-raw-color3-300: #A9A4DA;
-  --color-raw-color3-400: #7871CC;
-  --color-raw-color3-500: #4C41C3;
-  --color-raw-color3-600: #3C3498;
-  --color-raw-color3-700: #322B78;
-  --color-raw-color3-800: #272358;
-  --color-raw-color3-900: #1E1C3B;
-
-  /* ── Colors: Raw palette — brand brand 4 (#1E184D) ── */
-  --color-raw-color4-50: #F6F6F9;
-  --color-raw-color4-100: #EAE9F1;
-  --color-raw-color4-200: #CFCCE6;
-  --color-raw-color4-300: #ABA4DA;
-  --color-raw-color4-400: #7B71CC;
-  --color-raw-color4-500: #1F184E;
-  --color-raw-color4-600: #403498;
-  --color-raw-color4-700: #342B78;
-  --color-raw-color4-800: #292358;
-  --color-raw-color4-900: #1F1C3B;
-
-  /* ── Colors: Raw palette — brand brand 1 (#6366F1) ── */
-  --color-raw-color1-50: #F5F6F9;
-  --color-raw-color1-100: #E6E7F4;
-  --color-raw-color1-200: #C4C4EE;
-  --color-raw-color1-300: #9596EA;
-  --color-raw-color1-400: #5457E8;
-  --color-raw-color1-500: #6467F2;
-  --color-raw-color1-600: #1417B8;
-  --color-raw-color1-700: #141690;
-  --color-raw-color1-800: #131467;
-  --color-raw-color1-900: #121345;
+  /* ── Colors: Raw palette — brand Golden Yellow (#FFC800) ── */
+  --color-raw-gold-50: #FFFBF0;
+  --color-raw-gold-100: #FFF4D6;
+  --color-raw-gold-200: #FFE9A8;
+  --color-raw-gold-300: #FFDD74;
+  --color-raw-gold-400: #FFD23E;
+  --color-raw-gold-500: #FFC800;
+  --color-raw-gold-600: #D4A700;
+  --color-raw-gold-700: #A98500;
+  --color-raw-gold-800: #7E6400;
+  --color-raw-gold-900: #544300;
 
   --color-raw-gray-50: #F9F9FA;
   --color-raw-gray-100: #F0F0F2;
@@ -224,7 +188,7 @@
   --animate-pulse: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 
   /* ── Semantic colors (runtime-swappable via :root + AppearanceContext) ── */
-  --color-primary: #3700FF;
+  --color-primary: #354334;
   --color-primary-hover: #2C00CC;
   --color-error: #FF3B30;
   --color-success: #34C759;
@@ -279,7 +243,7 @@
    ═══════════════════════════════════════════════ */
 :root {
   /* ── Semantic colors ── */
-  --color-primary: #3700FF;
+  --color-primary: #354334;
   --color-primary-hover: #2C00CC;
   --color-error: #FF3B30;
   --color-success: #34C759;

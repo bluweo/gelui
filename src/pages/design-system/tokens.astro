@@ -2,9 +2,8 @@
 import DSLayout from "@/components/layout/DSLayout.astro";
 import TokenHero from "@/components/block/TokenHero.astro";
 import { FontSizeWeightTable } from "@/components/block/FontSizeWeightTable";
+import { BrandColorPreview } from "@/components/block/BrandColorPreview";
 import {
-  colors,
-  brand,
   typography,
   spacing,
   radii,
@@ -14,44 +13,8 @@ import {
   breakpoints,
   zIndex,
 } from "@/tokens";
-import { isLightBg, textOnBg, textOnBgMuted, resolveSemanticHex } from "@/utils/color-utils";
 
-/* ─── Helpers ─── */
-
-function getBrandScale(key: string): Record<string, string> | null {
-  const raw = colors.raw as Record<string, unknown>;
-  const scale = raw[key];
-  if (scale && typeof scale === "object" && "50" in scale) {
-    return scale as Record<string, string>;
-  }
-  return null;
-}
-
-const ROLE_LABELS: Record<string, string> = { primary: "Primary", secondary: "Secondary", accent: "Accent" };
-const ROLE_ORDER: Record<string, number> = { primary: 0, secondary: 1, accent: 2 };
-
-const sortedBrand = [...brand].sort(
-  (a, b) => (ROLE_ORDER[a.role ?? "accent"] ?? 2) - (ROLE_ORDER[b.role ?? "accent"] ?? 2),
-);
-
-const primaryBrand = sortedBrand.find((b) => b.role === "primary") ?? sortedBrand[0];
-const primaryScale = getBrandScale(primaryBrand.key);
-const baseHex = primaryScale?.["500"] ?? primaryBrand.hex;
-const darkHex = primaryScale?.["800"] ?? baseHex;
-const mutedHex = primaryScale?.["300"] ?? baseHex;
-const tintHex = primaryScale?.["50"] ?? baseHex;
-const grayHex = colors.raw.gray[500];
-
-const derived = [
-  { label: "Dark", hex: darkHex },
-  { label: "Gray", hex: grayHex },
-  { label: "Muted", hex: mutedHex },
-  { label: "Tint", hex: tintHex },
-];
-
-const gridCols = sortedBrand.length <= 2 ? "grid-cols-2" : sortedBrand.length === 3 ? "grid-cols-3" : "grid-cols-4";
-
-// Pre-compute entries to avoid `as` type casts in Astro template (parser can't handle them)
+/* ─── Pre-compute entries ─── */
 const radiiPresetEntries = Object.entries(radii.presets) as Array<[string, Record<string, string>]>;
 const shadowPresetEntries = Object.entries(shadows.presets) as Array<[string, Record<string, string>]>;
 const glassLevelEntries = Object.entries(glass.levels) as Array<[string, { blur: number; saturate: number; bgAlpha: number; label: string }]>;
@@ -62,8 +25,6 @@ const durationEntries = Object.entries(motion.duration) as Array<[string, string
 const easingEntries = Object.entries(motion.easing) as Array<[string, string]>;
 const breakpointEntries = Object.entries(breakpoints) as Array<[string, number]>;
 const zIndexEntries = Object.entries(zIndex) as Array<[string, number]>;
-const semanticColorEntries = Object.entries(colors.semantic) as Array<[string, { light: string; dark: string }]>;
-const textColorEntries = Object.entries(colors.text) as Array<[string, { light: string; dark: string }]>;
 const radiiRawEntries = Object.entries(radii.raw) as Array<[string, string]>;
 ---
 
@@ -76,272 +37,7 @@ const radiiRawEntries = Object.entries(radii.raw) as Array<[string, string]>;
 
     <TokenHero />
 
-    <!-- ════════════════════════════════════════
-         Brand Colour Scheme
-         ════════════════════════════════════════ -->
-    <div class="col-span-2 row-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
-      <!-- Frost zone for readable text -->
-      <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 200px;" />
-      <div class="relative flex flex-col gap-1 mb-6 pt-1 pl-1">
-        <span class="text-[10px] font-[650] uppercase tracking-[0.1em] text-black/40 dark:text-white/40 mb-1">Colour System</span>
-        <h2 class="text-[24px] font-[750] tracking-[-0.03em] leading-[1.2] text-black dark:text-white mb-1">Brand Colour Scheme</h2>
-        <p class="text-[13px] leading-[1.6] text-black/60 dark:text-white/55">{brand.length} brand colour{brand.length !== 1 ? "s" : ""} derived from logo &middot; auto-generated scales</p>
-      </div>
-
-      <div class="flex flex-col gap-6">
-        <!-- Hero: primary swatch + derived colours -->
-        <div class="flex gap-3 max-[540px]:flex-col">
-          <div
-            class="relative flex-1 min-w-0 min-h-[120px] rounded-[var(--glass-radius)] border border-white/10 flex flex-col justify-end p-4"
-            style={`background-color: ${baseHex}`}
-          >
-            <span class="text-[13px] font-semibold leading-tight" style={`color: ${textOnBg(baseHex)}`}>
-              {primaryBrand.label}
-            </span>
-            <span class="text-[11px] font-mono mt-0.5" style={`color: ${textOnBgMuted(baseHex)}`}>
-              {baseHex}
-            </span>
-          </div>
-
-          <div class="grid grid-cols-2 gap-2 w-[42%] max-[540px]:w-full shrink-0">
-            {derived.map((d) => (
-              <div
-                class="relative w-full aspect-[1.15/1] rounded-[var(--glass-radius-sm)] border border-white/10 flex flex-col justify-end p-2.5"
-                style={`background-color: ${d.hex}`}
-              >
-                <span class="text-[13px] font-medium leading-tight" style={`color: ${textOnBg(d.hex)}`}>
-                  {d.label}
-                </span>
-                <span class="text-[11px] font-mono mt-0.5" style={`color: ${textOnBgMuted(d.hex)}`}>
-                  {d.hex}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <!-- Colour Scheme: all brand swatches -->
-        <div class="flex flex-col gap-2">
-          <span class="text-[11.5px] font-[550] uppercase opacity-45 tracking-[0.04em]">Colour Scheme</span>
-          <div class={`grid ${gridCols} gap-3 max-[540px]:grid-cols-2`}>
-            {sortedBrand.map((b) => {
-              const scale = getBrandScale(b.key);
-              const hex = scale?.["500"] ?? b.hex;
-              return (
-                <div
-                  class="relative w-full h-[72px] rounded-[var(--glass-radius-sm)] border border-white/10 flex flex-col justify-end p-3"
-                  style={`background-color: ${hex}`}
-                >
-                  <span class="text-[12px] font-semibold leading-tight" style={`color: ${textOnBg(hex)}`}>
-                    {ROLE_LABELS[b.role ?? ""] ?? b.label}
-                  </span>
-                  <span class="text-[12px] font-mono mt-0.5" style={`color: ${textOnBgMuted(hex)}`}>
-                    {hex}
-                  </span>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        <!-- Scales: detailed strips per colour -->
-        <div class="flex flex-col gap-2">
-          <span class="text-[11.5px] font-[550] uppercase opacity-45 tracking-[0.04em]">Scales</span>
-          <div class="flex flex-col gap-3">
-            {sortedBrand.map((b) => {
-              const scale = getBrandScale(b.key);
-              const hex = scale?.["500"] ?? b.hex;
-              return (
-                <div class="flex flex-col gap-3 p-4 rounded-[var(--glass-radius-sm)] bg-white/90 dark:bg-black/60 border border-black/[0.06] dark:border-white/[0.08]">
-                  <div class="flex items-center gap-3">
-                    <div class="w-12 h-12 shrink-0 rounded-[10px] border border-white/10" style={`background-color: ${hex}`} />
-                    <div class="flex-1 min-w-0">
-                      <div class="flex items-center gap-2">
-                        <span class="text-[12px] font-[600] text-black dark:text-white">{b.label}</span>
-                        {b.role && (
-                          <span class="text-[12px] font-mono text-black/50 dark:text-white/50 px-1.5 py-0.5 rounded-[4px] bg-black/[0.04] dark:bg-white/[0.08]">
-                            {ROLE_LABELS[b.role] ?? b.role}
-                          </span>
-                        )}
-                      </div>
-                      <span class="text-[12px] font-mono text-black/40 dark:text-white/40">{hex}</span>
-                    </div>
-                  </div>
-                  {scale && (
-                    <div class="flex gap-1">
-                      {Object.entries(scale).map(([shade, color]) => (
-                        <div class="flex flex-col items-center gap-0.5 flex-1 min-w-0">
-                          <div
-                            class="w-full h-5 rounded-[3px]"
-                            style={`background-color: ${color}`}
-                            title={`${shade}: ${color}`}
-                          />
-                          <span class="text-[10px] font-mono text-black/40 dark:text-white/40">{shade}</span>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              );
-            })}
-            <!-- Gray scale -->
-            <div class="flex flex-col gap-3 p-4 rounded-[var(--glass-radius-sm)] bg-white/90 dark:bg-black/60 border border-black/[0.06] dark:border-white/[0.08]">
-              <div class="flex items-center gap-3">
-                <div class="w-12 h-12 shrink-0 rounded-[10px] border border-white/10" style={`background-color: ${colors.raw.gray[500]}`} />
-                <div class="flex-1 min-w-0">
-                  <span class="text-[12px] font-[600] text-black dark:text-white">Gray</span>
-                  <br />
-                  <span class="text-[12px] font-mono text-black/40 dark:text-white/40">{colors.raw.gray[500]}</span>
-                </div>
-              </div>
-              <div class="flex gap-1">
-                {Object.entries(colors.raw.gray).map(([shade, color]) => (
-                  <div class="flex flex-col items-center gap-0.5 flex-1 min-w-0">
-                    <div
-                      class="w-full h-5 rounded-[3px]"
-                      style={`background-color: ${color}`}
-                      title={`${shade}: ${color}`}
-                    />
-                    <span class="text-[10px] font-mono text-black/40 dark:text-white/40">{shade}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ════════════════════════════════════════
-         Colors: Semantic
-         ════════════════════════════════════════ -->
-    <div class="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
-      <!-- Frost zone for readable text -->
-      <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 180px;" />
-      <div class="relative flex flex-col gap-1 mb-6 pt-1 pl-1">
-        <span class="text-[10px] font-[650] uppercase tracking-[0.1em] text-black/40 dark:text-white/40 mb-1">Design Decisions</span>
-        <h2 class="text-[24px] font-[750] tracking-[-0.03em] leading-[1.2] text-black dark:text-white mb-1">Semantic Colors</h2>
-        <p class="text-[13px] leading-[1.6] text-black/60 dark:text-white/55">Remappable intent-based tokens with light and dark variants</p>
-      </div>
-
-      <div class="flex flex-col rounded-[var(--glass-radius-sm)] overflow-hidden">
-        <!-- Table header -->
-        <div class="flex w-full">
-          <div class="w-[100px] shrink-0 px-3 py-2.5 bg-black/[0.04] dark:bg-white/[0.06] border-b border-black/[0.06] dark:border-white/[0.08]">
-            <span class="text-[11px] font-[650] uppercase tracking-[0.06em] text-black/60 dark:text-white/50">Token</span>
-          </div>
-          <div class="flex-1 flex items-center gap-2 px-3 py-2.5 bg-black/[0.04] dark:bg-white/[0.06] border-b border-black/[0.06] dark:border-white/[0.08]">
-            <span class="text-[13px]">☀️</span>
-            <span class="text-[11px] font-[650] uppercase tracking-[0.06em] text-black/60 dark:text-white/50">Light</span>
-          </div>
-          <div class="flex-1 flex items-center gap-2 px-3 py-2.5 bg-black/[0.04] dark:bg-white/[0.06] border-b border-black/[0.06] dark:border-white/[0.08]">
-            <span class="text-[13px]">🌙</span>
-            <span class="text-[11px] font-[650] uppercase tracking-[0.06em] text-black/60 dark:text-white/50">Dark</span>
-          </div>
-        </div>
-
-        <!-- Color rows -->
-        {Object.entries(colors.semantic).map(([name, vals], idx) => {
-          const lightHex = resolveSemanticHex(vals.light);
-          const darkHexVal = resolveSemanticHex(vals.dark);
-          return (
-            <div class="flex w-full border-b border-black/[0.03] dark:border-white/[0.04] last:border-b-0">
-              {/* Token name */}
-              <div class="w-[100px] shrink-0 flex items-center px-3 py-3">
-                <span class="text-[12px] font-[600] text-black/80 dark:text-white/80">{name}</span>
-              </div>
-              {/* Light swatch */}
-              <div class="flex-1 flex items-center gap-3 px-3 py-2">
-                <div
-                  class="flex-1 min-h-[48px] rounded-[8px] flex flex-col justify-end p-2.5"
-                  style={`background-color: ${lightHex}`}
-                >
-                  <span class="text-[11px] font-mono" style={`color: ${textOnBgMuted(lightHex)}`}>
-                    {vals.light}
-                  </span>
-                </div>
-              </div>
-              {/* Dark swatch */}
-              <div class="flex-1 flex items-center gap-3 px-3 py-2">
-                <div
-                  class="flex-1 min-h-[48px] rounded-[8px] flex flex-col justify-end p-2.5 relative"
-                  style={`background-color: ${darkHexVal}`}
-                >
-                  <span class="text-[11px] font-mono" style={`color: ${textOnBgMuted(darkHexVal)}`}>
-                    {vals.dark}
-                  </span>
-                  <span class="absolute top-1.5 right-2.5 text-[22px] font-bold leading-none opacity-10" style={`color: ${textOnBg(darkHexVal)}`}>
-                    {String(idx + 1).padStart(2, "0")}
-                  </span>
-                </div>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    </div>
-
-    <!-- ════════════════════════════════════════
-         Colors: Text
-         ════════════════════════════════════════ -->
-    <div class="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
-      <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 160px;" />
-      <div class="relative flex flex-col gap-1 mb-6 pt-1 pl-1">
-        <span class="text-[10px] font-[650] uppercase tracking-[0.1em] text-black/40 dark:text-white/40 mb-1">Hierarchy</span>
-        <h2 class="text-[24px] font-[750] tracking-[-0.03em] leading-[1.2] text-black dark:text-white mb-1">Text Colors</h2>
-        <p class="text-[13px] leading-[1.6] text-black/60 dark:text-white/55">Opacity-based text hierarchy for consistent readability</p>
-      </div>
-
-      <div class="flex flex-col rounded-[var(--glass-radius-sm)] overflow-hidden">
-        <!-- Table header -->
-        <div class="flex w-full">
-          <div class="w-[100px] shrink-0 px-3 py-2.5 bg-black/[0.04] dark:bg-white/[0.06] border-b border-black/[0.06] dark:border-white/[0.08]">
-            <span class="text-[11px] font-[650] uppercase tracking-[0.06em] text-black/60 dark:text-white/50">Token</span>
-          </div>
-          <div class="flex-1 flex items-center gap-2 px-3 py-2.5 bg-black/[0.04] dark:bg-white/[0.06] border-b border-black/[0.06] dark:border-white/[0.08]">
-            <span class="text-[13px]">☀️</span>
-            <span class="text-[11px] font-[650] uppercase tracking-[0.06em] text-black/60 dark:text-white/50">Light</span>
-          </div>
-          <div class="flex-1 flex items-center gap-2 px-3 py-2.5 bg-black/[0.04] dark:bg-white/[0.06] border-b border-black/[0.06] dark:border-white/[0.08]">
-            <span class="text-[13px]">🌙</span>
-            <span class="text-[11px] font-[650] uppercase tracking-[0.06em] text-black/60 dark:text-white/50">Dark</span>
-          </div>
-        </div>
-
-        <!-- Text color rows -->
-        {Object.entries(colors.text).map(([name, vals]) => {
-          const isOnColor = name.startsWith("on");
-          const lightBg = isOnColor ? (name === "onPrimary" ? "var(--color-raw-blue-500, #3700FF)" : "#FF6961") : "#ffffff";
-          const darkBg = isOnColor ? (name === "onPrimary" ? "var(--color-raw-blue-500, #3700FF)" : "#FF6961") : "#1a1a1a";
-          return (
-            <div class="flex w-full border-b border-black/[0.03] dark:border-white/[0.04] last:border-b-0">
-              {/* Token name */}
-              <div class="w-[100px] shrink-0 flex items-center px-3 py-3">
-                <span class="text-[12px] font-[600] text-black/80 dark:text-white/80">{name}</span>
-              </div>
-              {/* Light preview */}
-              <div class="flex-1 flex items-center gap-3 px-3 py-3">
-                <div class="flex-1 py-2.5 px-3 rounded-[8px] border border-black/[0.06] dark:border-white/[0.06]" style={`background-color: ${lightBg}`}>
-                  <span data-font-preview style={`--font-preview: var(--font-body); color: ${vals.light}`} class="text-[13px] font-[550]">
-                    Sample text
-                  </span>
-                </div>
-                <span class="text-[11px] font-mono text-black/35 dark:text-white/30 shrink-0 w-[90px]">{vals.light}</span>
-              </div>
-              {/* Dark preview */}
-              <div class="flex-1 flex items-center gap-3 px-3 py-3">
-                <div class="flex-1 py-2.5 px-3 rounded-[8px] border border-black/[0.06] dark:border-white/[0.06]" style={`background-color: ${darkBg}`}>
-                  <span data-font-preview style={`--font-preview: var(--font-body); color: ${vals.dark}`} class="text-[13px] font-[550]">
-                    Sample text
-                  </span>
-                </div>
-                <span class="text-[11px] font-mono text-black/35 dark:text-white/30 shrink-0 w-[90px]">{vals.dark}</span>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    </div>
+    <BrandColorPreview client:load />
 
     <!-- ════════════════════════════════════════
          Typography: Font Families
@@ -985,7 +681,7 @@ const radiiRawEntries = Object.entries(radii.raw) as Array<[string, string]>;
               <div class:list={["flex items-center justify-between gap-3 px-3 py-2.5", idx < zIndexEntries.length - 1 && "border-b border-black/[0.04] dark:border-white/[0.04]"]}>
                 <span class="text-[12px] font-[600] text-black/75 dark:text-white/70">{name}</span>
                 <div class="flex items-center gap-2">
-                  <div class="h-1.5 rounded-full bg-black/10 dark:bg-white/10" style={`width: ${Math.max(value / 15, 4)}px;`} />
+                  <div class="h-1.5 rounded-full bg-black/10 dark:bg-white/10" style={`width: ${Math.min(Math.max(value / 15, 4), 60)}px;`} />
                   <span class="text-[11px] font-mono text-black/40 dark:text-white/35 tabular-nums">{value}</span>
                 </div>
               </div>
