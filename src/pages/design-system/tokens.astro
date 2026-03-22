@@ -35,9 +35,9 @@ const radiiRawEntries = Object.entries(radii.raw) as Array<[string, string]>;
 >
   <div class="w-full grid grid-cols-4 gap-5 max-[860px]:grid-cols-2 max-[860px]:gap-4 max-[540px]:grid-cols-1 max-[540px]:gap-3">
 
-    <div data-section="Overview"><TokenHero /></div>
+    <TokenHero />
 
-    <BrandColorPreview client:load data-section="Brand Colors" />
+    <BrandColorPreview client:load />
 
     <!-- ════════════════════════════════════════
          Typography: Font Families
@@ -217,7 +217,7 @@ const radiiRawEntries = Object.entries(radii.raw) as Array<[string, string]>;
     <!-- ════════════════════════════════════════
          Typography: Sizes & Weights
          ════════════════════════════════════════ -->
-    <div data-section="{section_label}" class="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
+    <div data-section="Sizes & Weights" class="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
       <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 160px;" />
       <div class="relative flex flex-col gap-1 mb-6 pt-1 pl-1">
         <span class="text-[10px] font-[650] uppercase tracking-[0.1em] text-black/40 dark:text-white/40 mb-1">Typography</span>
@@ -237,7 +237,7 @@ const radiiRawEntries = Object.entries(radii.raw) as Array<[string, string]>;
     <!-- ════════════════════════════════════════
          Spacing
          ════════════════════════════════════════ -->
-    <div data-section="{section_label}" class="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
+    <div data-section="Spacing" class="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
       <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 160px;" />
       <div class="relative flex flex-col gap-1 mb-6 pt-1 pl-1">
         <span class="text-[10px] font-[650] uppercase tracking-[0.1em] text-black/40 dark:text-white/40 mb-1">Layout</span>
@@ -302,7 +302,7 @@ const radiiRawEntries = Object.entries(radii.raw) as Array<[string, string]>;
     <!-- ════════════════════════════════════════
          Border Radius
          ════════════════════════════════════════ -->
-    <div data-section="{section_label}" class="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
+    <div data-section="Border Radius" class="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
       <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 160px;" />
       <div class="relative flex flex-col gap-1 mb-6 pt-1 pl-1">
         <span class="text-[10px] font-[650] uppercase tracking-[0.1em] text-black/40 dark:text-white/40 mb-1">Shape</span>
@@ -365,7 +365,7 @@ const radiiRawEntries = Object.entries(radii.raw) as Array<[string, string]>;
     <!-- ════════════════════════════════════════
          Shadow Presets
          ════════════════════════════════════════ -->
-    <div data-section="{section_label}" class="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
+    <div data-section="Shadows" class="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
       <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 160px;" />
       <div class="relative flex flex-col gap-1 mb-6 pt-1 pl-1">
         <span class="text-[10px] font-[650] uppercase tracking-[0.1em] text-black/40 dark:text-white/40 mb-1">Depth</span>
@@ -394,7 +394,7 @@ const radiiRawEntries = Object.entries(radii.raw) as Array<[string, string]>;
     <!-- ════════════════════════════════════════
          Glass Levels
          ════════════════════════════════════════ -->
-    <div data-section="{section_label}" class="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
+    <div data-section="Glass Levels" class="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
       <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 160px;" />
       <div class="relative flex flex-col gap-1 mb-6 pt-1 pl-1">
         <span class="text-[10px] font-[650] uppercase tracking-[0.1em] text-black/40 dark:text-white/40 mb-1">Transparency</span>
@@ -557,7 +557,7 @@ const radiiRawEntries = Object.entries(radii.raw) as Array<[string, string]>;
     <!-- ════════════════════════════════════════
          Motion
          ════════════════════════════════════════ -->
-    <div data-section="{section_label}" class="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
+    <div data-section="Motion" class="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
       <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 160px;" />
       <div class="relative flex flex-col gap-1 mb-6 pt-1 pl-1">
         <span class="text-[10px] font-[650] uppercase tracking-[0.1em] text-black/40 dark:text-white/40 mb-1">Animation</span>
@@ -645,7 +645,7 @@ const radiiRawEntries = Object.entries(radii.raw) as Array<[string, string]>;
     <!-- ════════════════════════════════════════
          Breakpoints & Z-Index
          ════════════════════════════════════════ -->
-    <div data-section="{section_label}" class="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
+    <div data-section="Breakpoints" class="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
       <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 160px;" />
       <div class="relative flex flex-col gap-1 mb-6 pt-1 pl-1">
         <span class="text-[10px] font-[650] uppercase tracking-[0.1em] text-black/40 dark:text-white/40 mb-1">Layout</span>

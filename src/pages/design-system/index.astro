@@ -19,18 +19,18 @@ import RightClickHint from "@/components/block/RightClickHint.astro";
   <RightClickHint />
   <div class="w-full grid grid-cols-4 gap-5 max-[860px]:grid-cols-2 max-[860px]:gap-4 max-[540px]:grid-cols-1 max-[540px]:gap-3">
 
-    <div data-section="Overview"><HeroText /></div>
+    <HeroText />
 
     <!-- Hero row: 1/3 + 2/3 -->
     <div data-section="Architecture" class="col-span-full grid grid-cols-[1fr_2fr] gap-5 max-[860px]:grid-cols-1 max-[860px]:gap-4 max-[540px]:gap-3">
       <HeroBanner />
       <ArchitectureDiagram />
     </div>
-    <div data-section="Features"><Features /></div>
-    <div data-section="Tech Stack"><TechStack /></div>
-    <div data-section="Viewports"><Viewports /></div>
-    <div data-section="Browser Support"><BrowserCompat /></div>
-    <div data-section="Project Structure"><ProjectStructure /></div>
+    <div data-section="Features" class="col-span-full"><Features /></div>
+    <div data-section="Tech Stack" class="col-span-full"><TechStack /></div>
+    <div data-section="Viewports" class="col-span-full"><Viewports /></div>
+    <div data-section="Browser Support" class="col-span-full"><BrowserCompat /></div>
+    <div data-section="Project Structure" class="col-span-full"><ProjectStructure /></div>
 
   </div>
 </DSLayout>

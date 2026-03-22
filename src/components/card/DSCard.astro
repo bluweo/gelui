@@ -8,7 +8,7 @@ interface Props {
   class?: string;
 }
 
-const { title, description, span = 1, frost = false, frostHeight = "140px", class: className = "" } = Astro.props;
+const { title, description, span = 1, frost = false, frostHeight = "140px", class: className = "", ...restProps } = Astro.props;
 
 const spanClass =
   span === 4 ? "col-span-full" :
@@ -24,7 +24,7 @@ const useFrost = frost || !!title;
   "glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5",
   spanClass,
   className,
-]}>
+]} {...restProps}>
   {/* Gradient frost zone — makes header text readable on glass */}
   {useFrost && (
     <div class="ds-card-frost absolute top-0 left-0 right-0 pointer-events-none z-0 rounded-t-[var(--glass-radius)]" style={`height: ${frostHeight};`} />
