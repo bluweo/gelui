@@ -191,7 +191,7 @@ export function BrandColorPreview() {
   return (
     <>
       {/* ═══ Brand Colour Scheme ═══ */}
-      <div className="col-span-2 row-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
+      <div data-section="Brand Colors" className="col-span-2 row-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
         <div className="absolute inset-0 pointer-events-none ds-card-frost" style={{ height: 200 }} />
 
         {/* Header with logo */}
@@ -326,7 +326,7 @@ export function BrandColorPreview() {
       </div>
 
       {/* ═══ Semantic Colors ═══ */}
-      <div className="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
+      <div data-section="Semantic Colors" className="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
         <div className="absolute inset-0 pointer-events-none ds-card-frost" style={{ height: 180 }} />
         <div className="relative flex flex-col gap-1 mb-6 pt-1 pl-1">
           <span className="text-[10px] font-[650] uppercase tracking-[0.1em] text-black/40 dark:text-white/40 mb-1">Design Decisions</span>
@@ -378,7 +378,7 @@ export function BrandColorPreview() {
       </div>
 
       {/* ═══ Text Colors ═══ */}
-      <div className="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
+      <div data-section="Text Colors" className="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
         <div className="absolute inset-0 pointer-events-none ds-card-frost" style={{ height: 160 }} />
         <div className="relative flex flex-col gap-1 mb-6 pt-1 pl-1">
           <span className="text-[10px] font-[650] uppercase tracking-[0.1em] text-black/40 dark:text-white/40 mb-1">Hierarchy</span>

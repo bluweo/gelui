@@ -7,6 +7,7 @@ import { AppearanceModal } from "../modal/AppearanceModal";
 import { ContextMenu } from "../modal/ContextMenu";
 import { BackgroundPicker } from "../modal/BackgroundPicker";
 import { FontPickerModal } from "../modal/FontPickerModal";
+import { SectionNav } from "../block/SectionNav";
 import { useBackground, COLOR_BACKGROUNDS } from "@/components/context/BackgroundContext";
 import { useContrastColor } from "@/components/hooks/useContrastColor";
 
@@ -85,6 +86,7 @@ function DSShellInner({ currentPath, children }: DSShellProps) {
       <AppearanceModal />
       <BackgroundPicker />
       <FontPickerModal />
+      <SectionNav />
       <div className="min-h-screen flex flex-col p-4 gap-4 max-[540px]:p-3 max-[540px]:gap-3">
         <DSNav currentPath={currentPath} />
         {/* Spacer for fixed nav + gap below */}
