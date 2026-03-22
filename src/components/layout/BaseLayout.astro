@@ -84,6 +84,50 @@ const ogImageUrl = ogImage.startsWith("http") ? ogImage : new URL(ogImage, siteU
 
     <!-- View Transitions -->
     <ClientRouter />
+
+    <!-- Blocking script: restore fonts from localStorage before paint to prevent FOUC -->
+    <script is:inline>
+    (function() {
+      try {
+        var stored = JSON.parse(localStorage.getItem("gelui-appearance") || "{}");
+        var fonts = stored.fonts;
+        if (!fonts) return;
+        var rs = document.documentElement.style;
+        var SAME = "SAME_AS_BODY";
+        var bodyFont = fonts.body || "Google Sans";
+        var bodyStack = "'" + bodyFont + "', 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', system-ui, sans-serif";
+
+        rs.setProperty("--font-sans", bodyStack);
+        rs.setProperty("--font-body", bodyStack);
+        rs.setProperty("--font-heading", fonts.heading === SAME ? bodyStack : "'" + (fonts.heading || bodyFont) + "', " + bodyStack);
+        rs.setProperty("--font-ui", fonts.ui === SAME ? bodyStack : "'" + (fonts.ui || bodyFont) + "', " + bodyStack);
+
+        if (fonts.mono && fonts.mono !== "System Default") {
+          rs.setProperty("--font-mono", "'" + fonts.mono + "', ui-monospace, monospace");
+        }
+        if (fonts.data) {
+          rs.setProperty("--font-data", "'" + fonts.data + "', " + bodyStack);
+        }
+        if (fonts.accent) {
+          rs.setProperty("--font-accent", "'" + fonts.accent + "', " + bodyStack);
+        }
+
+        // Also load Google Fonts that aren't the default
+        var toLoad = [bodyFont, fonts.heading, fonts.ui, fonts.mono, fonts.data, fonts.accent];
+        toLoad.forEach(function(f) {
+          if (!f || f === "Plus Jakarta Sans" || f === "Google Sans" || f === "System Default" || f === SAME) return;
+          var id = "google-font-" + f.replace(/\s+/g, "-").toLowerCase();
+          if (!document.getElementById(id)) {
+            var link = document.createElement("link");
+            link.id = id;
+            link.rel = "stylesheet";
+            link.href = "https://fonts.googleapis.com/css2?family=" + encodeURIComponent(f) + ":wght@400;500;600;700&display=swap";
+            document.head.appendChild(link);
+          }
+        });
+      } catch(e) {}
+    })();
+    </script>
   </head>
   <body class="font-sans min-h-screen overflow-x-hidden leading-normal" style="color: var(--text-primary);">
     <slot />

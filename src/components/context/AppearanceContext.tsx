@@ -15,6 +15,16 @@ import {
 export type RadiusPreset = "minimal" | "medium" | "large";
 export type ShadowPreset = "flat" | "soft" | "elevated";
 export type ThemeMode = "light" | "dark";
+export type FontRole = "heading" | "body" | "ui" | "mono" | "data" | "accent";
+
+export interface FontSettings {
+  heading: string;       // "SAME_AS_BODY" = use body font
+  body: string;
+  ui: string;            // "SAME_AS_BODY" = use body font
+  mono: string;
+  data: string | null;   // null = not enabled
+  accent: string | null; // null = not enabled
+}
 
 interface AppearanceContextValue {
   transparency: number;
@@ -32,6 +42,14 @@ interface AppearanceContextValue {
   modalOpen: boolean;
   openModal: () => void;
   closeModal: () => void;
+  fonts: FontSettings;
+  setFontRole: (role: FontRole, font: string | null) => void;
+  fontPickerOpen: boolean;
+  openFontPicker: (role?: FontRole) => void;
+  closeFontPicker: () => void;
+  activeFontRole: FontRole;
+  fontPreviewText: string;
+  setFontPreviewText: (v: string) => void;
 }
 
 /* ------------------------------------------------------------------ */
@@ -43,6 +61,16 @@ const DEFAULT_RADIUS: RadiusPreset = "medium";
 const DEFAULT_BLUR = 24;
 const DEFAULT_SHADOW: ShadowPreset = "soft";
 const DEFAULT_THEME: ThemeMode = "light";
+const SAME_AS_BODY = "SAME_AS_BODY";
+const DEFAULT_FONTS: FontSettings = {
+  heading: "Google Sans",
+  body: "Google Sans",
+  ui: SAME_AS_BODY,
+  mono: "System Default",
+  data: null,
+  accent: null,
+};
+export { SAME_AS_BODY };
 
 /* ------------------------------------------------------------------ */
 /*  localStorage persistence                                           */
@@ -56,6 +84,7 @@ interface StoredAppearance {
   blurIntensity: number;
   shadowPreset: ShadowPreset;
   theme: ThemeMode;
+  fonts?: FontSettings;
 }
 
 function loadStored(): Partial<StoredAppearance> {
@@ -122,6 +151,10 @@ export function AppearanceProvider({ children }: { children: ReactNode }) {
   const [shadowPreset, setShadowPreset] = useState<ShadowPreset>(DEFAULT_SHADOW);
   const [theme, setTheme] = useState<ThemeMode>(DEFAULT_THEME);
   const [modalOpen, setModalOpen] = useState(false);
+  const [fonts, setFonts] = useState<FontSettings>({ ...DEFAULT_FONTS });
+  const [fontPickerOpen, setFontPickerOpen] = useState(false);
+  const [fontPreviewText, setFontPreviewText] = useState("The quick brown fox jumps over the lazy dog");
+  const [activeFontRole, setActiveFontRole] = useState<FontRole>("primary");
 
   const hydratedRef = useRef(false);
 
@@ -133,17 +166,27 @@ export function AppearanceProvider({ children }: { children: ReactNode }) {
     if (stored.blurIntensity !== undefined) setBlurIntensity(stored.blurIntensity);
     if (stored.shadowPreset !== undefined) setShadowPreset(stored.shadowPreset);
     if (stored.theme !== undefined) setTheme(stored.theme);
+    if (stored.fonts !== undefined) setFonts({ ...DEFAULT_FONTS, ...stored.fonts });
     hydratedRef.current = true;
   }, []);
 
   /* Persist to localStorage on every change (after hydration) */
   useEffect(() => {
     if (!hydratedRef.current) return;
-    saveStored({ transparency, radiusPreset, blurIntensity, shadowPreset, theme });
-  }, [transparency, radiusPreset, blurIntensity, shadowPreset, theme]);
+    saveStored({ transparency, radiusPreset, blurIntensity, shadowPreset, theme, fonts });
+  }, [transparency, radiusPreset, blurIntensity, shadowPreset, theme, fonts]);
 
   const openModal = useCallback(() => setModalOpen(true), []);
   const closeModal = useCallback(() => setModalOpen(false), []);
+  const openFontPicker = useCallback((role: FontRole = "primary") => {
+    setActiveFontRole(role);
+    setFontPickerOpen(true);
+  }, []);
+  const closeFontPicker = useCallback(() => setFontPickerOpen(false), []);
+
+  const setFontRole = useCallback((role: FontRole, font: string | null) => {
+    setFonts((prev) => ({ ...prev, [role]: font }));
+  }, []);
   const toggleTheme = useCallback(() => setTheme((t) => (t === "light" ? "dark" : "light")), []);
 
   const resetToDefaults = useCallback(() => {
@@ -151,6 +194,7 @@ export function AppearanceProvider({ children }: { children: ReactNode }) {
     setRadiusPreset(DEFAULT_RADIUS);
     setBlurIntensity(DEFAULT_BLUR);
     setShadowPreset(DEFAULT_SHADOW);
+    setFonts({ ...DEFAULT_FONTS });
   }, []);
 
   /* Apply CSS variables to :root whenever settings change */
@@ -318,6 +362,96 @@ export function AppearanceProvider({ children }: { children: ReactNode }) {
     ].join(","));
   }, [transparency, radiusPreset, blurIntensity, shadowPreset, theme]);
 
+  /* Apply multi-role font families and dynamically load from Google Fonts */
+  useEffect(() => {
+    const root = document.documentElement;
+    const rs = root.style;
+
+    const loadFont = (fontName: string) => {
+      if (fontName === "Plus Jakarta Sans" || fontName === "Google Sans" || fontName === "System Default" || fontName === SAME_AS_BODY) return;
+      const linkId = `google-font-${fontName.replace(/\s+/g, "-").toLowerCase()}`;
+      if (!document.getElementById(linkId)) {
+        const link = document.createElement("link");
+        link.id = linkId;
+        link.rel = "stylesheet";
+        link.href = `https://fonts.googleapis.com/css2?family=${encodeURIComponent(fontName)}:wght@400;500;600;700&display=swap`;
+        document.head.appendChild(link);
+      }
+    };
+
+    // Body font (base for everything)
+    const bodyStack = `'${fonts.body}', 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', system-ui, sans-serif`;
+    rs.setProperty("--font-sans", bodyStack);
+    rs.setProperty("--font-body", bodyStack);
+    loadFont(fonts.body);
+
+    // Heading font
+    if (fonts.heading === SAME_AS_BODY) {
+      rs.setProperty("--font-heading", bodyStack);
+    } else {
+      rs.setProperty("--font-heading", `'${fonts.heading}', ${bodyStack}`);
+      loadFont(fonts.heading);
+    }
+
+    // UI font
+    if (fonts.ui === SAME_AS_BODY) {
+      rs.setProperty("--font-ui", bodyStack);
+    } else {
+      rs.setProperty("--font-ui", `'${fonts.ui}', ${bodyStack}`);
+      loadFont(fonts.ui);
+    }
+
+    // Mono font
+    if (fonts.mono === "System Default") {
+      rs.setProperty("--font-mono", "'SF Mono', SFMono-Regular, ui-monospace, Menlo, monospace");
+    } else {
+      rs.setProperty("--font-mono", `'${fonts.mono}', ui-monospace, monospace`);
+      loadFont(fonts.mono);
+    }
+
+    // Data font (optional)
+    if (fonts.data) {
+      rs.setProperty("--font-data", `'${fonts.data}', ${bodyStack}`);
+      loadFont(fonts.data);
+    } else {
+      rs.removeProperty("--font-data");
+    }
+
+    // Accent font (optional)
+    if (fonts.accent) {
+      rs.setProperty("--font-accent", `'${fonts.accent}', ${bodyStack}`);
+      loadFont(fonts.accent);
+    } else {
+      rs.removeProperty("--font-accent");
+    }
+  }, [fonts]);
+
+  /* Listen for custom event from Astro components to open font picker */
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const role = (e as CustomEvent).detail?.role as FontRole | undefined;
+      if (role) {
+        setActiveFontRole(role);
+        setFontPickerOpen(true);
+        // Dispatch a follow-up to tell the modal to go to browse view
+        setTimeout(() => window.dispatchEvent(new CustomEvent("gelui:font-picker-browse")), 50);
+      } else {
+        setFontPickerOpen(true);
+      }
+    };
+    window.addEventListener("gelui:open-font-picker", handler);
+
+    const resetHandler = () => {
+      setFonts({ ...DEFAULT_FONTS });
+    };
+    window.addEventListener("gelui:reset-fonts", resetHandler);
+
+    return () => {
+      window.removeEventListener("gelui:open-font-picker", handler);
+      window.removeEventListener("gelui:reset-fonts", resetHandler);
+    };
+  }, []);
+
   return (
     <AppearanceContext.Provider
       value={{
@@ -328,6 +462,10 @@ export function AppearanceProvider({ children }: { children: ReactNode }) {
         theme, setTheme, toggleTheme,
         resetToDefaults,
         modalOpen, openModal, closeModal,
+        fonts, setFontRole,
+        fontPickerOpen, openFontPicker, closeFontPicker,
+        activeFontRole,
+        fontPreviewText, setFontPreviewText,
       }}
     >
       {children}

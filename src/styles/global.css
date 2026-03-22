@@ -132,8 +132,13 @@
   --tracking-wide: 0.06em;
 
   /* ── Font families ── */
-  --font-sans: 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-sans: 'Google Sans', 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-body: var(--font-sans);
+  --font-heading: var(--font-sans);
+  --font-ui: var(--font-sans);
   --font-mono: 'SF Mono', SFMono-Regular, ui-monospace, Menlo, monospace;
+  --font-data: var(--font-sans);
+  --font-accent: var(--font-sans);
 
   /* ── Spacing scale (4px base) ── */
   --spacing-0: 0;
@@ -1876,6 +1881,38 @@ html[data-navigated] * {
    ═══════════════════════════════════════════════ */
 .scrollbar-hide::-webkit-scrollbar { display: none; }
 .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ═══════════════════════════════════════════════
+   FONT ROLE ASSIGNMENTS
+   ═══════════════════════════════════════════════ */
+h1:not([data-font-preview]), h2:not([data-font-preview]), h3:not([data-font-preview]), h4:not([data-font-preview]), h5:not([data-font-preview]), h6:not([data-font-preview]) { font-family: var(--font-heading) !important; }
+p:not([data-font-preview]), li, td, th, dd, dt, blockquote { font-family: var(--font-body) !important; }
+button, input, select, textarea, label, nav, nav *, a { font-family: var(--font-ui); }
+code:not([data-font-preview]), pre:not([data-font-preview]), kbd, samp { font-family: var(--font-mono) !important; }
+/* Font preview elements use their own CSS variable for font-family */
+[data-font-preview] { font-family: var(--font-preview) !important; }
+
+/* ═══════════════════════════════════════════════
+   CARD FROST ZONE (top-to-bottom)
+   ═══════════════════════════════════════════════ */
+.ds-card-frost {
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,0.95) 0%,
+    rgba(255,255,255,0.82) 45%,
+    rgba(255,255,255,0.3) 78%,
+    transparent 100%
+  );
+}
+[data-theme="dark"] .ds-card-frost {
+  background: linear-gradient(
+    180deg,
+    rgba(0,0,0,0.88) 0%,
+    rgba(0,0,0,0.7) 45%,
+    rgba(0,0,0,0.2) 78%,
+    transparent 100%
+  );
+}
 
 /* ═══════════════════════════════════════════════
    TOKEN HERO FROST (left-to-right)
