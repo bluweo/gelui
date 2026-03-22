@@ -1,0 +1,46 @@
+---
+/**
+ * PrimitivesHero — Hero banner for the Primitives page.
+ * Same pattern as TokenHero: glass card + frost zone + stat cards.
+ */
+---
+
+<div data-section="Overview" class="col-span-full glass-1 glass-specular rounded-[var(--glass-radius)] overflow-hidden relative p-8 min-h-[260px] flex flex-col justify-between max-[540px]:p-5 max-[540px]:min-h-[200px]">
+  <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 220px;" />
+
+  <!-- Top: Title + Badge -->
+  <div class="relative z-[1] flex items-start justify-between mb-auto">
+    <div class="flex flex-col gap-1">
+      <h1 class="text-[38px] max-[860px]:text-[30px] max-[540px]:text-[24px] font-[700] tracking-[-0.03em] leading-[1.1] text-black dark:text-white" style="font-family: var(--font-heading)">
+        Primitives
+      </h1>
+      <span class="text-[13px] text-black/50 dark:text-white/40 mt-1">Composed building blocks</span>
+    </div>
+    <span class="text-[11px] text-right text-black/40 dark:text-white/30 leading-tight max-[540px]:hidden">
+      Design System<br />Layer 3
+    </span>
+  </div>
+
+  <!-- Bottom: Description + Stats -->
+  <div class="relative z-[1] flex flex-col gap-5 mt-8">
+    <div class="flex items-center gap-1.5 text-[13px] text-black/55 dark:text-white/50 max-w-[520px]">
+      <span class="text-black/30 dark:text-white/20 font-mono shrink-0">//</span>
+      <span>Reusable style compositions that bridge tokens and components. Each primitive combines typography, spacing, color, and motion tokens into a ready-to-use pattern.</span>
+    </div>
+
+    <div class="flex gap-3 max-[540px]:flex-col">
+      <div class="glass-1 rounded-[calc(var(--glass-radius)*0.7)] px-5 py-4 min-w-[140px]">
+        <span class="text-[22px] font-[700] text-black dark:text-white block leading-tight">8</span>
+        <span class="text-[12px] text-black/50 dark:text-white/45 block mt-0.5">Categories</span>
+      </div>
+      <div class="glass-1 rounded-[calc(var(--glass-radius)*0.7)] px-5 py-4 min-w-[140px]">
+        <span class="text-[22px] font-[700] text-black dark:text-white block leading-tight">40+</span>
+        <span class="text-[12px] text-black/50 dark:text-white/45 block mt-0.5">Primitives</span>
+      </div>
+      <div class="glass-1 rounded-[calc(var(--glass-radius)*0.7)] px-5 py-4 min-w-[140px]">
+        <span class="text-[22px] font-[700] text-black dark:text-white block leading-tight">Dark + Light</span>
+        <span class="text-[12px] text-black/50 dark:text-white/45 block mt-0.5">Full theme support</span>
+      </div>
+    </div>
+  </div>
+</div>
