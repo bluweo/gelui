@@ -1940,6 +1940,12 @@ code:not([data-font-preview]), pre:not([data-font-preview]), kbd, samp { font-fa
 [data-font-preview] { font-family: var(--font-preview) !important; }
 
 /* ═══════════════════════════════════════════════
+   GLOBAL TYPE SCALE — controlled by [A|A|A] toggle
+   Sets --type-scale on :root, used by components
+   ═══════════════════════════════════════════════ */
+:root { --type-scale: 1; }
+
+/* ═══════════════════════════════════════════════
    CARD FROST ZONE (top-to-bottom)
    ═══════════════════════════════════════════════ */
 .ds-card-frost {

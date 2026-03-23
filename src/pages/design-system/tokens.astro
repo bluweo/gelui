@@ -73,30 +73,36 @@ const radiiRawEntries = Object.entries(radii.raw) as Array<[string, string]>;
         </div>
       </div>
       <script>
-        // Reset all fonts to defaults
-        document.getElementById('font-reset-trigger')?.addEventListener('click', () => {
-          window.dispatchEvent(new CustomEvent('gelui:reset-fonts'));
-        });
-        // Main settings icon — opens roles view
-        document.getElementById('font-picker-trigger')?.addEventListener('click', () => {
-          window.dispatchEvent(new CustomEvent('gelui:open-font-picker'));
-        });
-        // Individual role settings — opens directly to browse view for that role
-        document.querySelectorAll('.font-role-setting-btn').forEach((btn) => {
-          btn.addEventListener('click', () => {
-            const role = (btn as HTMLElement).dataset.role;
-            window.dispatchEvent(new CustomEvent('gelui:open-font-picker', { detail: { role } }));
+        function initFontFamiliesBlock() {
+          // Reset all fonts to defaults
+          document.getElementById('font-reset-trigger')?.addEventListener('click', () => {
+            window.dispatchEvent(new CustomEvent('gelui:reset-fonts'));
           });
-        });
-        // Sync preview text from font picker modal to font family block
-        window.addEventListener('gelui:font-preview-text', (e) => {
-          const text = (e as CustomEvent).detail?.text;
-          if (text) {
-            document.querySelectorAll('.font-sample-text').forEach((el) => {
-              el.textContent = text;
+          // Main settings icon — opens roles view
+          document.getElementById('font-picker-trigger')?.addEventListener('click', () => {
+            window.dispatchEvent(new CustomEvent('gelui:open-font-picker'));
+          });
+          // Individual role settings — opens directly to browse view for that role
+          document.querySelectorAll('.font-role-setting-btn').forEach((btn) => {
+            btn.addEventListener('click', () => {
+              const role = (btn as HTMLElement).dataset.role;
+              window.dispatchEvent(new CustomEvent('gelui:open-font-picker', { detail: { role } }));
             });
-          }
-        });
+          });
+          // Sync preview text from font picker modal to font family block
+          window.addEventListener('gelui:font-preview-text', (e) => {
+            const text = (e as CustomEvent).detail?.text;
+            if (text) {
+              document.querySelectorAll('.font-sample-text').forEach((el) => {
+                el.textContent = text;
+              });
+            }
+          });
+        }
+        // Run on initial load
+        initFontFamiliesBlock();
+        // Re-run after View Transitions navigation
+        document.addEventListener('astro:page-load', initFontFamiliesBlock);
       </script>
 
       <div class="flex flex-col gap-4 relative z-[1]">

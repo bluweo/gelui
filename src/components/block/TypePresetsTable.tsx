@@ -121,11 +121,89 @@ const TAG_COLORS: Record<string, { bg: string; darkBg: string; text: string; dar
   a: { bg: "#d8e8ff", darkBg: "#d8e8ff", text: "#2050a0", darkText: "#2050a0" },
 };
 
+/* ─── Explicit scale presets with clean values ─── */
+type ScaleKey = "small" | "medium" | "large";
+
+// Each row: [size, weight, lh] — all values exist in SIZE_OPTIONS, WEIGHT_OPTIONS, LH_OPTIONS
+const SCALE_MAP: Record<ScaleKey, Array<{ size: string; weight: number; lh: string }>> = {
+  small: [
+    { size: "28px", weight: 700, lh: "1.1" },   // Display
+    { size: "24px", weight: 700, lh: "1.2" },   // H1
+    { size: "20px", weight: 650, lh: "1.25" },  // H2
+    { size: "17px", weight: 600, lh: "1.3" },   // H3
+    { size: "15px", weight: 600, lh: "1.35" },  // H4
+    { size: "13px", weight: 550, lh: "1.4" },   // H5
+    { size: "11px", weight: 550, lh: "1.4" },   // H6
+    { size: "13px", weight: 400, lh: "1.5" },   // Body
+    { size: "11px", weight: 400, lh: "1.4" },   // Body Sm
+    { size: "10px", weight: 500, lh: "1.4" },   // Caption
+    { size: "9px",  weight: 600, lh: "1.2" },   // Overline
+    { size: "11px", weight: 550, lh: "1" },     // Label
+    { size: "11px", weight: 500, lh: "1.4" },   // Code
+    { size: "10px", weight: 500, lh: "1.4" },   // Code Sm
+    { size: "13px", weight: 500, lh: "1.4" },   // Link
+  ],
+  medium: [
+    { size: "36px", weight: 750, lh: "1.1" },   // Display
+    { size: "30px", weight: 750, lh: "1.2" },   // H1
+    { size: "24px", weight: 700, lh: "1.25" },  // H2
+    { size: "20px", weight: 650, lh: "1.3" },   // H3
+    { size: "17px", weight: 600, lh: "1.35" },  // H4
+    { size: "15px", weight: 600, lh: "1.4" },   // H5
+    { size: "13px", weight: 600, lh: "1.4" },   // H6
+    { size: "15px", weight: 450, lh: "1.6" },   // Body
+    { size: "13px", weight: 450, lh: "1.5" },   // Body Sm
+    { size: "11.5px", weight: 500, lh: "1.4" }, // Caption
+    { size: "10px", weight: 650, lh: "1.2" },   // Overline
+    { size: "13px", weight: 600, lh: "1" },     // Label
+    { size: "13px", weight: 500, lh: "1.5" },   // Code
+    { size: "11px", weight: 500, lh: "1.4" },   // Code Sm
+    { size: "15px", weight: 550, lh: "1.5" },   // Link
+  ],
+  large: [
+    { size: "44px", weight: 800, lh: "1.05" },  // Display
+    { size: "36px", weight: 800, lh: "1.1" },   // H1
+    { size: "30px", weight: 750, lh: "1.2" },   // H2
+    { size: "24px", weight: 700, lh: "1.25" },  // H3
+    { size: "20px", weight: 650, lh: "1.3" },   // H4
+    { size: "17px", weight: 650, lh: "1.35" },  // H5
+    { size: "15px", weight: 650, lh: "1.35" },  // H6
+    { size: "17px", weight: 500, lh: "1.7" },   // Body
+    { size: "15px", weight: 500, lh: "1.6" },   // Body Sm
+    { size: "13px", weight: 550, lh: "1.4" },   // Caption
+    { size: "11px", weight: 700, lh: "1.2" },   // Overline
+    { size: "15px", weight: 650, lh: "1" },     // Label
+    { size: "15px", weight: 500, lh: "1.5" },   // Code
+    { size: "13px", weight: 500, lh: "1.4" },   // Code Sm
+    { size: "17px", weight: 600, lh: "1.5" },   // Link
+  ],
+};
+
+// Global scale factor for DSShell (used for scaling all page text)
+const SCALE_FACTORS: Record<ScaleKey, number> = { small: 0.82, medium: 1.0, large: 1.22 };
+
+function scalePresets(scale: ScaleKey): TypePreset[] {
+  const scaleValues = SCALE_MAP[scale];
+  return INITIAL_PRESETS.map((p, i) => ({
+    ...p,
+    size: scaleValues[i].size,
+    weight: scaleValues[i].weight,
+    lh: scaleValues[i].lh,
+  }));
+}
+
 export function TypePresetsTable() {
-  const [presets, setPresets] = useState(INITIAL_PRESETS);
+  // Restore scale from localStorage
+  const [scale, setScale] = useState<ScaleKey>(() => {
+    if (typeof window !== "undefined") {
+      return (localStorage.getItem("gelui-type-scale") as ScaleKey) || "medium";
+    }
+    return "medium";
+  });
+  const [presets, setPresets] = useState(() => scalePresets(scale));
   const [isDark, setIsDark] = useState(false);
   const [editingIdx, setEditingIdx] = useState<number | null>(null);
-  const isModified = JSON.stringify(presets) !== JSON.stringify(INITIAL_PRESETS);
+  const isModified = scale !== "medium" || JSON.stringify(presets) !== JSON.stringify(INITIAL_PRESETS);
 
   useEffect(() => {
     const check = () => setIsDark(document.documentElement.getAttribute("data-theme") === "dark");
@@ -134,6 +212,13 @@ export function TypePresetsTable() {
     obs.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
     return () => obs.disconnect();
   }, []);
+
+  // Apply scale globally — adjust font-size on all text elements in main content
+  useEffect(() => {
+    localStorage.setItem("gelui-type-scale", scale);
+    // Dispatch custom event so DSShell applies it globally
+    window.dispatchEvent(new CustomEvent("gelui-type-scale-change"));
+  }, [scale]);
 
   const getFontFamily = (role: string) => {
     switch (role) {
@@ -173,10 +258,47 @@ export function TypePresetsTable() {
 
   return (
     <>
-      {/* Reset button — absolute top right, always visible */}
-      <div style={{ position: "absolute", top: "20px", right: "20px", zIndex: 2 }}>
+      {/* Scale toggle + Reset — absolute top right */}
+      <div style={{ position: "absolute", top: "20px", right: "20px", zIndex: 2, display: "flex", alignItems: "center", gap: "8px" }}>
+        {/* [A|A|A] scale toggle */}
+        <div
+          className="flex items-end rounded-full overflow-hidden"
+          style={{
+            background: isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.05)",
+            border: `1px solid ${isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)"}`,
+            padding: "2px",
+          }}
+        >
+          {(["small", "medium", "large"] as ScaleKey[]).map((s) => {
+            const isActive = scale === s;
+            const fontSize = s === "small" ? "10px" : s === "medium" ? "13px" : "16px";
+            return (
+              <button
+                key={s}
+                onClick={() => { setScale(s); setPresets(scalePresets(s)); }}
+                className="flex items-center justify-center cursor-pointer border-none transition-all duration-200"
+                style={{
+                  width: "30px",
+                  height: "30px",
+                  borderRadius: "100px",
+                  background: isActive ? (isDark ? "rgba(255,255,255,0.9)" : "rgba(0,0,0,0.85)") : "transparent",
+                  color: isActive ? (isDark ? "#000" : "#fff") : (isDark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.35)"),
+                  fontSize,
+                  fontWeight: isActive ? 700 : 600,
+                  fontFamily: "var(--font-heading)",
+                  lineHeight: "1",
+                }}
+                title={`${s.charAt(0).toUpperCase() + s.slice(1)} type scale`}
+              >
+                A
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Reset button */}
         <button
-          onClick={() => setPresets(INITIAL_PRESETS)}
+          onClick={() => { setScale("medium"); setPresets(scalePresets("medium")); }}
           className="flex items-center gap-1.5 px-3.5 py-2 rounded-full text-[11px] font-[550] transition-all duration-200 cursor-pointer hover:scale-105"
           style={{
             background: isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.05)",
@@ -190,7 +312,7 @@ export function TypePresetsTable() {
         </button>
       </div>
 
-      <div className="flex flex-col rounded-[var(--glass-radius-sm)] overflow-hidden" style={{ background: isDark ? "rgba(0,0,0,0.6)" : "rgba(255,255,255,0.95)" }}>
+      <div data-type-presets-table className="flex flex-col rounded-[var(--glass-radius-sm)] overflow-hidden" style={{ background: isDark ? "rgba(0,0,0,0.6)" : "rgba(255,255,255,0.95)" }}>
         {/* Header */}
         <div
           className="flex items-center px-4 py-2.5 gap-4"

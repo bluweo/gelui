@@ -1,4 +1,4 @@
-import { useRef, type ReactNode } from "react";
+import { useRef, useEffect, type ReactNode } from "react";
 import { AppProviders } from "./AppProviders";
 import { DSNav } from "../header/DSNav";
 import { DSFooter } from "../footer/DSFooter";
@@ -77,6 +77,53 @@ function DSShellInner({ currentPath, children }: DSShellProps) {
   const footerRef = useRef<HTMLElement>(null);
   const contrast = useContrastColor(mainRef);
   const footerContrast = useContrastColor(footerRef);
+
+  // Global type scale — reads from localStorage, applies to all text in <main>
+  useEffect(() => {
+    const applyScale = () => {
+      const scale = localStorage.getItem("gelui-type-scale") || "medium";
+      const factors: Record<string, number> = { small: 0.82, medium: 1.0, large: 1.22 };
+      const factor = factors[scale] ?? 1;
+      document.documentElement.style.setProperty("--type-scale", String(factor));
+
+      const main = mainRef.current;
+      if (!main) return;
+
+      const elements = main.querySelectorAll("h1, h2, h3, h4, h5, h6, p, span, label, a, button, li, td, th, code, pre, input, textarea, select");
+      elements.forEach((el) => {
+        const htmlEl = el as HTMLElement;
+        if (htmlEl.closest("[data-type-presets-table]") || htmlEl.closest("nav")) return;
+
+        if (!htmlEl.dataset.origFontSize) {
+          htmlEl.dataset.origFontSize = window.getComputedStyle(htmlEl).fontSize;
+        }
+
+        const origSize = parseFloat(htmlEl.dataset.origFontSize);
+        if (origSize && factor !== 1) {
+          htmlEl.style.fontSize = `${Math.round(origSize * factor * 10) / 10}px`;
+        } else if (factor === 1) {
+          htmlEl.style.fontSize = "";
+        }
+      });
+    };
+
+    applyScale();
+
+    // Listen for scale changes from TypePresetsTable
+    const handleStorage = (e: StorageEvent) => {
+      if (e.key === "gelui-type-scale") applyScale();
+    };
+    window.addEventListener("storage", handleStorage);
+
+    // Also listen for custom event (same-tab updates)
+    const handleCustom = () => applyScale();
+    window.addEventListener("gelui-type-scale-change", handleCustom);
+
+    return () => {
+      window.removeEventListener("storage", handleStorage);
+      window.removeEventListener("gelui-type-scale-change", handleCustom);
+    };
+  }, [currentPath]); // Re-run when page changes
 
   return (
     <>
