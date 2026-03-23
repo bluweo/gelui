@@ -263,7 +263,7 @@ function FocusInput({
   return (
     <div className="relative">
       {icon === "search" && (
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" className="absolute left-3.5 top-1/2 -translate-y-1/2 transition-colors duration-200" style={{ color: focused ? (isDark ? "rgba(255,255,255,0.85)" : "rgba(0,0,0,0.8)") : (isDark ? "rgba(255,255,255,0.25)" : "rgba(0,0,0,0.3)") }}><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round" className="absolute left-3.5 top-1/2 -translate-y-1/2" style={{ color: focused ? (isDark ? "rgba(255,255,255,0.85)" : "rgba(0,0,0,0.8)") : (isDark ? "rgba(255,255,255,0.25)" : "rgba(0,0,0,0.3)"), strokeWidth: focused ? 2.5 : 1.5, transition: "color 200ms, stroke-width 200ms" }}><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg>
       )}
       {validState === "valid" && (
         <div className="absolute right-3.5 top-1/2 -translate-y-1/2 w-5 h-5 rounded-full flex items-center justify-center" style={{ background: "rgba(52,199,89,0.15)" }}>
