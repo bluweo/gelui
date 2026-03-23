@@ -6,6 +6,7 @@ import { PrimitiveControls } from "@/components/block/PrimitiveControls";
 import { InputFieldsDemo } from "@/components/block/InputFieldsDemo";
 import { PrimitiveNavigation } from "@/components/block/PrimitiveNavigation";
 import { SliderDemo } from "@/components/block/SliderDemo";
+import { ControlsDemo } from "@/components/block/ControlsDemo";
 
 /* ─── Spacing ─── */
 const spacingComps = [
@@ -601,60 +602,7 @@ const elevations = [
         <h2 class="text-[24px] font-[750] tracking-[-0.03em] leading-[1.2] text-black dark:text-white mb-1" style="font-family: var(--font-heading)">Controls</h2>
         <p class="text-[13px] leading-[1.6] text-black/60 dark:text-white/55">Toggle, checkbox, radio, and segmented controls</p>
       </div>
-      <div class="flex flex-col gap-4">
-        <!-- Toggle & Checkbox -->
-        <div class="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white dark:bg-[#1a1a1a]">
-          <div class="px-4 py-2.5 bg-black/[0.06] dark:bg-white/[0.08] border-b border-black/10 dark:border-white/10">
-            <span class="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/70 dark:text-white/70">Toggle & Checkbox</span>
-          </div>
-          <div class="p-4 flex flex-col">
-            <div class="flex items-center justify-between py-2.5 border-b border-black/10 dark:border-white/10">
-              <span class="text-[12px] font-[500] text-black/60 dark:text-white/60">Toggle Off</span>
-              <div class="relative w-11 h-6 rounded-full bg-black/10 dark:bg-white/10 cursor-pointer"><div class="absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white shadow-sm"></div></div>
-            </div>
-            <div class="flex items-center justify-between py-2.5 border-b border-black/10 dark:border-white/10">
-              <span class="text-[12px] font-[500] text-black/60 dark:text-white/60">Toggle On</span>
-              <div class="relative w-11 h-6 rounded-full bg-[#354334] cursor-pointer"><div class="absolute top-0.5 right-0.5 w-5 h-5 rounded-full bg-white shadow-sm"></div></div>
-            </div>
-            <div class="flex items-center justify-between py-2.5 border-b border-black/10 dark:border-white/10">
-              <span class="text-[12px] font-[500] text-black/60 dark:text-white/60">Unchecked</span>
-              <div class="w-5 h-5 rounded-[5px] border-2 border-black/20 dark:border-white/20 bg-white/60 dark:bg-black/30 cursor-pointer"></div>
-            </div>
-            <div class="flex items-center justify-between py-2.5">
-              <span class="text-[12px] font-[500] text-black/60 dark:text-white/60">Checked</span>
-              <div class="w-5 h-5 rounded-[5px] bg-[#354334] flex items-center justify-center cursor-pointer"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12" /></svg></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Radio & Segmented -->
-        <div class="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white dark:bg-[#1a1a1a]">
-          <div class="px-4 py-2.5 bg-black/[0.06] dark:bg-white/[0.08] border-b border-black/10 dark:border-white/10">
-            <span class="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/70 dark:text-white/70">Radio & Segmented</span>
-          </div>
-          <div class="p-4 flex flex-col">
-            <div class="flex items-center justify-between py-2.5 border-b border-black/10 dark:border-white/10">
-              <span class="text-[12px] font-[500] text-black/60 dark:text-white/60">Unselected</span>
-              <div class="w-5 h-5 rounded-full border-2 border-black/20 dark:border-white/20 bg-white/60 dark:bg-black/30 cursor-pointer"></div>
-            </div>
-            <div class="flex items-center justify-between py-2.5 border-b border-black/10 dark:border-white/10">
-              <span class="text-[12px] font-[500] text-black/60 dark:text-white/60">Selected</span>
-              <div class="w-5 h-5 rounded-full border-2 border-[#354334] bg-white/60 dark:bg-black/30 flex items-center justify-center cursor-pointer"><div class="w-2.5 h-2.5 rounded-full bg-[#354334]"></div></div>
-            </div>
-            <div class="flex flex-col gap-2 py-2.5 border-b border-black/10 dark:border-white/10">
-              <span class="text-[10px] font-[500] text-black/45 dark:text-white/40">Segmented Control</span>
-              <div class="inline-flex rounded-full bg-black/[0.04] dark:bg-white/[0.06] p-1 gap-0.5 self-start">
-                <span class="text-[12px] font-[600] px-4 py-1.5 rounded-full bg-black/80 dark:bg-white/80 text-white dark:text-black cursor-pointer">Day</span>
-                <span class="text-[12px] font-[600] px-4 py-1.5 rounded-full text-black/50 dark:text-white/40 cursor-pointer hover:text-black/70 dark:hover:text-white/60 transition-colors">Week</span>
-                <span class="text-[12px] font-[600] px-4 py-1.5 rounded-full text-black/50 dark:text-white/40 cursor-pointer hover:text-black/70 dark:hover:text-white/60 transition-colors">Month</span>
-              </div>
-            </div>
-            <div class="py-2.5">
-              <SliderDemo client:load />
-            </div>
-          </div>
-        </div>
-      </div>
+      <ControlsDemo client:load />
     </div>
 
     <!-- ═══════════════════════════════════
