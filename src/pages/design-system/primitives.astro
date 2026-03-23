@@ -5,6 +5,7 @@ import { TypePresetsTable } from "@/components/block/TypePresetsTable";
 import { PrimitiveControls } from "@/components/block/PrimitiveControls";
 import { InputFieldsDemo } from "@/components/block/InputFieldsDemo";
 import { PrimitiveNavigation } from "@/components/block/PrimitiveNavigation";
+import { SliderDemo } from "@/components/block/SliderDemo";
 
 /* ─── Spacing ─── */
 const spacingComps = [
@@ -648,9 +649,8 @@ const elevations = [
                 <span class="text-[12px] font-[600] px-4 py-1.5 rounded-full text-black/50 dark:text-white/40 cursor-pointer hover:text-black/70 dark:hover:text-white/60 transition-colors">Month</span>
               </div>
             </div>
-            <div class="flex flex-col gap-2 py-2.5">
-              <span class="text-[10px] font-[500] text-black/45 dark:text-white/40">Slider</span>
-              <input type="range" min="0" max="100" value="60" class="appearance-slider w-full max-w-[280px]" />
+            <div class="py-2.5">
+              <SliderDemo client:load />
             </div>
           </div>
         </div>
