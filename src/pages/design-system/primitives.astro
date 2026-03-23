@@ -3,6 +3,7 @@ import DSLayout from "@/components/layout/DSLayout.astro";
 import PrimitivesHero from "@/components/block/PrimitivesHero.astro";
 import { TypePresetsTable } from "@/components/block/TypePresetsTable";
 import { PrimitiveControls } from "@/components/block/PrimitiveControls";
+import { InputFieldsDemo } from "@/components/block/InputFieldsDemo";
 import { PrimitiveNavigation } from "@/components/block/PrimitiveNavigation";
 
 /* ─── Spacing ─── */
@@ -201,7 +202,7 @@ const elevations = [
             class:list={[
               !s.isSolid && s.cls,
               s.isSolid && "bg-white dark:bg-[#1a1a1a] border border-black/[0.08] dark:border-white/[0.1]",
-              "rounded-[var(--glass-radius-sm)] px-4 flex-1 min-h-0 flex items-center justify-between relative",
+              "rounded-[var(--glass-radius-sm)] px-5 py-4 flex-1 min-h-[70px] flex items-center justify-between relative",
             ]}
           >
             {s.hasShine && <div class="gel-glass-shine"></div>}
@@ -324,74 +325,118 @@ const elevations = [
         <p class="text-[13px] leading-[1.6] text-black/60 dark:text-white/55">Visual separators for content sections and groups</p>
       </div>
 
-      <div class="grid grid-cols-2 gap-6 max-[540px]:grid-cols-1">
+      <div class="flex flex-col gap-4 flex-1">
         <!-- Horizontal -->
-        <div class="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white/60 dark:bg-black/30">
-          <div class="px-3 py-2 bg-black/[0.04] dark:bg-white/[0.06] border-b border-black/[0.06] dark:border-white/[0.06]">
-            <span class="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/45 dark:text-white/40">Horizontal</span>
+        <div class="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white dark:bg-[#1a1a1a] flex-1">
+          <div class="px-3 py-2 bg-black/[0.06] dark:bg-white/[0.08] border-b border-black/[0.08] dark:border-white/[0.08]">
+            <span class="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/80 dark:text-white/80">Horizontal</span>
           </div>
           <div class="flex flex-col gap-4 p-4">
             <div>
-              <span class="text-[10px] text-black/35 dark:text-white/30 mb-2 block">Default</span>
-              <div class="w-full h-px bg-black/[0.08] dark:bg-white/[0.08]"></div>
+              <span class="text-[10px] font-[500] text-black/70 dark:text-white/70 mb-2 block">Default</span>
+              <div class="w-full h-px bg-black/15 dark:bg-white/15"></div>
             </div>
             <div>
-              <span class="text-[10px] text-black/35 dark:text-white/30 mb-2 block">Bold</span>
-              <div class="w-full h-[2px] bg-black/[0.15] dark:bg-white/[0.15]"></div>
+              <span class="text-[10px] font-[500] text-black/70 dark:text-white/70 mb-2 block">Bold</span>
+              <div class="w-full h-[2px] bg-black/25 dark:bg-white/25"></div>
             </div>
             <div>
-              <span class="text-[10px] text-black/35 dark:text-white/30 mb-2 block">Dashed</span>
-              <div class="w-full border-t border-dashed border-black/[0.12] dark:border-white/[0.12]"></div>
+              <span class="text-[10px] font-[500] text-black/70 dark:text-white/70 mb-2 block">Dashed</span>
+              <div class="w-full border-t border-dashed border-black/20 dark:border-white/20"></div>
             </div>
             <div>
-              <span class="text-[10px] text-black/35 dark:text-white/30 mb-2 block">With label</span>
+              <span class="text-[10px] font-[500] text-black/70 dark:text-white/70 mb-2 block">With label</span>
               <div class="flex items-center gap-3">
-                <div class="flex-1 h-px bg-black/[0.08] dark:bg-white/[0.08]"></div>
-                <span class="text-[10px] font-[550] text-black/30 dark:text-white/25 uppercase tracking-wider">or</span>
-                <div class="flex-1 h-px bg-black/[0.08] dark:bg-white/[0.08]"></div>
+                <div class="flex-1 h-px bg-black/15 dark:bg-white/15"></div>
+                <span class="text-[10px] font-[550] text-black/50 dark:text-white/50 uppercase tracking-wider">or</span>
+                <div class="flex-1 h-px bg-black/15 dark:bg-white/15"></div>
               </div>
             </div>
             <div>
-              <span class="text-[10px] text-black/35 dark:text-white/30 mb-2 block">With icon</span>
+              <span class="text-[10px] font-[500] text-black/70 dark:text-white/70 mb-2 block">With icon</span>
               <div class="flex items-center gap-3">
-                <div class="flex-1 h-px bg-black/[0.08] dark:bg-white/[0.08]"></div>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-black/20 dark:text-white/20"><circle cx="12" cy="12" r="3" /></svg>
-                <div class="flex-1 h-px bg-black/[0.08] dark:bg-white/[0.08]"></div>
+                <div class="flex-1 h-px bg-black/15 dark:bg-white/15"></div>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-black/40 dark:text-white/40"><circle cx="12" cy="12" r="3" /></svg>
+                <div class="flex-1 h-px bg-black/15 dark:bg-white/15"></div>
               </div>
             </div>
           </div>
         </div>
 
         <!-- Vertical + Spacing -->
-        <div class="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white/60 dark:bg-black/30">
-          <div class="px-3 py-2 bg-black/[0.04] dark:bg-white/[0.06] border-b border-black/[0.06] dark:border-white/[0.06]">
-            <span class="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/45 dark:text-white/40">Vertical & Spacing</span>
+        <div class="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white dark:bg-[#1a1a1a] flex-1">
+          <div class="px-3 py-2 bg-black/[0.06] dark:bg-white/[0.08] border-b border-black/[0.08] dark:border-white/[0.08]">
+            <span class="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/80 dark:text-white/80">Vertical & Spacing</span>
           </div>
           <div class="flex flex-col gap-4 p-4">
             <div>
-              <span class="text-[10px] text-black/35 dark:text-white/30 mb-2 block">Vertical divider</span>
+              <span class="text-[10px] font-[500] text-black/70 dark:text-white/70 mb-2 block">Vertical divider</span>
               <div class="flex items-center gap-4 h-[40px]">
-                <span class="text-[11px] text-black/50 dark:text-white/45">Left</span>
-                <div class="w-px h-full bg-black/[0.1] dark:bg-white/[0.1]"></div>
-                <span class="text-[11px] text-black/50 dark:text-white/45">Right</span>
+                <span class="text-[11px] text-black/70 dark:text-white/70">Left</span>
+                <div class="w-px h-full bg-black/20 dark:bg-white/20"></div>
+                <span class="text-[11px] text-black/70 dark:text-white/70">Right</span>
               </div>
             </div>
             <div>
-              <span class="text-[10px] text-black/35 dark:text-white/30 mb-2 block">Inset divider</span>
+              <span class="text-[10px] font-[500] text-black/70 dark:text-white/70 mb-2 block">Inset divider</span>
               <div class="px-4">
-                <div class="w-full h-px bg-black/[0.06] dark:bg-white/[0.06]"></div>
+                <div class="w-full h-px bg-black/15 dark:bg-white/15"></div>
               </div>
             </div>
             <div>
-              <span class="text-[10px] text-black/35 dark:text-white/30 mb-2 block">Gradient fade</span>
-              <div class="w-full h-px" style="background: linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.12) 30%, rgba(0,0,0,0.12) 70%, transparent 100%)"></div>
+              <span class="text-[10px] font-[500] text-black/70 dark:text-white/70 mb-2 block">Gradient fade</span>
+              <div class="w-full h-px" style="background: linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.2) 30%, rgba(0,0,0,0.2) 70%, transparent 100%)"></div>
             </div>
             <div>
-              <span class="text-[10px] text-black/35 dark:text-white/30 mb-2 block">Section break</span>
+              <span class="text-[10px] font-[500] text-black/70 dark:text-white/70 mb-2 block">Section break</span>
               <div class="flex items-center gap-2 justify-center">
-                <div class="w-1 h-1 rounded-full bg-black/15 dark:bg-white/15"></div>
-                <div class="w-1 h-1 rounded-full bg-black/15 dark:bg-white/15"></div>
-                <div class="w-1 h-1 rounded-full bg-black/15 dark:bg-white/15"></div>
+                <div class="w-1 h-1 rounded-full bg-black/25 dark:bg-white/25"></div>
+                <div class="w-1 h-1 rounded-full bg-black/25 dark:bg-white/25"></div>
+                <div class="w-1 h-1 rounded-full bg-black/25 dark:bg-white/25"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Glass Dividers — transparent background -->
+        <div class="rounded-[var(--glass-radius-sm)] overflow-hidden border contrast-border flex-1" style="background: transparent;">
+          <div class="px-3 py-2 border-b contrast-border">
+            <span class="text-[10px] font-[650] uppercase tracking-[0.06em] contrast-text-muted">Glass</span>
+          </div>
+          <div class="flex flex-col gap-5 p-4">
+            <div>
+              <span class="text-[10px] font-[500] contrast-text-muted mb-2 block">Etched line</span>
+              <div class="w-full h-px relative">
+                <div class="absolute inset-0" style="background: linear-gradient(180deg, rgba(255,255,255,0.4) 0%, rgba(0,0,0,0.08) 50%, rgba(255,255,255,0.2) 100%); height: 2px;"></div>
+              </div>
+            </div>
+            <div>
+              <span class="text-[10px] font-[500] contrast-text-muted mb-2 block">Groove</span>
+              <div class="w-full relative" style="height: 2px;">
+                <div class="absolute top-0 left-0 right-0 h-px" style="background: rgba(0,0,0,0.12);"></div>
+                <div class="absolute top-px left-0 right-0 h-px" style="background: rgba(255,255,255,0.35);"></div>
+              </div>
+            </div>
+            <div>
+              <span class="text-[10px] font-[500] contrast-text-muted mb-2 block">Ridge</span>
+              <div class="w-full relative" style="height: 2px;">
+                <div class="absolute top-0 left-0 right-0 h-px" style="background: rgba(255,255,255,0.4);"></div>
+                <div class="absolute top-px left-0 right-0 h-px" style="background: rgba(0,0,0,0.15);"></div>
+              </div>
+            </div>
+            <div>
+              <span class="text-[10px] font-[500] contrast-text-muted mb-2 block">Frosted slit</span>
+              <div class="w-full" style="height: 4px; background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.25) 40%, rgba(255,255,255,0.25) 60%, rgba(255,255,255,0.05) 100%); backdrop-filter: blur(2px); border-radius: 2px;"></div>
+            </div>
+            <div>
+              <span class="text-[10px] font-[500] contrast-text-muted mb-2 block">Vertical glass</span>
+              <div class="flex items-center gap-4 h-[40px]">
+                <span class="text-[11px] contrast-text-muted">Left</span>
+                <div class="h-full relative" style="width: 2px;">
+                  <div class="absolute top-0 bottom-0 left-0 w-px" style="background: rgba(0,0,0,0.1);"></div>
+                  <div class="absolute top-0 bottom-0 left-px w-px" style="background: rgba(255,255,255,0.35);"></div>
+                </div>
+                <span class="text-[11px] contrast-text-muted">Right</span>
               </div>
             </div>
           </div>
@@ -409,44 +454,7 @@ const elevations = [
         <h2 class="text-[24px] font-[750] tracking-[-0.03em] leading-[1.2] text-black dark:text-white mb-1" style="font-family: var(--font-heading)">Input Fields</h2>
         <p class="text-[13px] leading-[1.6] text-black/60 dark:text-white/55">Glass-styled form elements with validation states</p>
       </div>
-      <div class="flex flex-col gap-5">
-        <div class="flex flex-col gap-1.5">
-          <label class="text-[12px] font-[600] text-black/60 dark:text-white/55">Text Input</label>
-          <input type="text" placeholder="Enter your name..." class="w-full px-4 py-3 rounded-[var(--glass-radius-sm)] bg-white/70 dark:bg-black/30 border border-black/[0.08] dark:border-white/[0.08] text-[14px] text-black/80 dark:text-white/80 placeholder:text-black/30 dark:placeholder:text-white/25 outline-none focus:border-black/20 dark:focus:border-white/20 focus:ring-2 focus:ring-black/[0.06] dark:focus:ring-white/[0.06] transition-all duration-200" style="font-family: var(--font-ui)" />
-        </div>
-        <div class="flex flex-col gap-1.5">
-          <label class="text-[12px] font-[600] text-black/60 dark:text-white/55">Search</label>
-          <div class="relative">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="absolute left-3.5 top-1/2 -translate-y-1/2 text-black/30 dark:text-white/25"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg>
-            <input type="text" placeholder="Search components..." class="w-full pl-10 pr-4 py-3 rounded-[var(--glass-radius-sm)] bg-white/70 dark:bg-black/30 border border-black/[0.08] dark:border-white/[0.08] text-[14px] text-black/80 dark:text-white/80 placeholder:text-black/30 dark:placeholder:text-white/25 outline-none focus:border-black/20 dark:focus:border-white/20 transition-all duration-200" style="font-family: var(--font-ui)" />
-          </div>
-        </div>
-        <div class="flex flex-col gap-1.5">
-          <label class="text-[12px] font-[600] text-black/60 dark:text-white/55">Select</label>
-          <select class="w-full px-4 py-3 rounded-[var(--glass-radius-sm)] bg-white/70 dark:bg-black/30 border border-black/[0.08] dark:border-white/[0.08] text-[14px] text-black/80 dark:text-white/80 outline-none focus:border-black/20 dark:focus:border-white/20 transition-all duration-200 cursor-pointer appearance-none" style="font-family: var(--font-ui); background-image: url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E&quot;); background-repeat: no-repeat; background-position: right 14px center;">
-            <option>Choose a component...</option>
-            <option>Button</option>
-            <option>Card</option>
-            <option>Modal</option>
-            <option>Input</option>
-          </select>
-        </div>
-        <div class="flex flex-col gap-1.5">
-          <label class="text-[12px] font-[600] text-black/60 dark:text-white/55">Textarea</label>
-          <textarea rows="3" placeholder="Write a description..." class="w-full px-4 py-3 rounded-[var(--glass-radius-sm)] bg-white/70 dark:bg-black/30 border border-black/[0.08] dark:border-white/[0.08] text-[14px] text-black/80 dark:text-white/80 placeholder:text-black/30 dark:placeholder:text-white/25 outline-none focus:border-black/20 dark:focus:border-white/20 transition-all duration-200 resize-none" style="font-family: var(--font-ui)"></textarea>
-        </div>
-        <div class="flex flex-col gap-1.5">
-          <label class="text-[12px] font-[600] text-black/60 dark:text-white/55">Validation States</label>
-          <div class="grid grid-cols-2 gap-3 max-[540px]:grid-cols-1">
-            <input type="text" value="Valid input" class="px-4 py-3 rounded-[var(--glass-radius-sm)] bg-white/70 dark:bg-black/30 border-2 border-green-400/50 text-[14px] text-black/80 dark:text-white/80 outline-none" style="font-family: var(--font-ui)" readonly />
-            <input type="text" value="Invalid input" class="px-4 py-3 rounded-[var(--glass-radius-sm)] bg-white/70 dark:bg-black/30 border-2 border-red-400/50 text-[14px] text-black/80 dark:text-white/80 outline-none" style="font-family: var(--font-ui)" readonly />
-          </div>
-        </div>
-        <div class="flex flex-col gap-1.5">
-          <label class="text-[12px] font-[600] text-black/60 dark:text-white/55">Disabled</label>
-          <input type="text" value="Cannot edit" disabled class="w-full px-4 py-3 rounded-[var(--glass-radius-sm)] bg-black/[0.03] dark:bg-white/[0.03] border border-black/[0.04] dark:border-white/[0.04] text-[14px] text-black/30 dark:text-white/25 outline-none cursor-not-allowed" style="font-family: var(--font-ui)" />
-        </div>
-      </div>
+      <InputFieldsDemo client:load />
     </div>
 
     <!-- ═══════════════════════════════════
