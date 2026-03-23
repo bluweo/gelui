@@ -467,73 +467,123 @@ const elevations = [
         <h2 class="text-[24px] font-[750] tracking-[-0.03em] leading-[1.2] text-black dark:text-white mb-1" style="font-family: var(--font-heading)">Badges & Labels</h2>
         <p class="text-[13px] leading-[1.6] text-black/60 dark:text-white/55">Status indicators, tags, and label primitives</p>
       </div>
-      <div class="flex flex-col gap-5">
-        <div>
-          <span class="text-[11px] font-[600] uppercase tracking-[0.06em] text-black/40 dark:text-white/35 mb-3 block">Status Badge</span>
-          <div class="flex items-center gap-2 flex-wrap">
-            <span class="text-[11px] font-[600] px-2.5 py-1 rounded-full bg-green-500/15 text-green-500">Success</span>
-            <span class="text-[11px] font-[600] px-2.5 py-1 rounded-full bg-amber-500/15 text-amber-500">Warning</span>
-            <span class="text-[11px] font-[600] px-2.5 py-1 rounded-full bg-red-400/15 text-red-400">Error</span>
-            <span class="text-[11px] font-[600] px-2.5 py-1 rounded-full bg-blue-400/15 text-blue-400">Info</span>
-            <span class="text-[11px] font-[600] px-2.5 py-1 rounded-full bg-black/[0.06] dark:bg-white/[0.08] text-black/50 dark:text-white/45">Neutral</span>
+      <div class="grid grid-cols-2 gap-4 max-[540px]:grid-cols-1">
+        <!-- Status group -->
+        <div class="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white dark:bg-[#1a1a1a]">
+          <div class="px-4 py-2.5 bg-black/[0.06] dark:bg-white/[0.08] border-b border-black/10 dark:border-white/10">
+            <span class="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/70 dark:text-white/70">Status Badges</span>
           </div>
-        </div>
-        <div>
-          <span class="text-[11px] font-[600] uppercase tracking-[0.06em] text-black/40 dark:text-white/35 mb-3 block">Status Dot</span>
-          <div class="flex items-center gap-5 flex-wrap">
-            <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-green-500"></span><span class="text-[12px] text-black/60 dark:text-white/55">Online</span></span>
-            <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-amber-400"></span><span class="text-[12px] text-black/60 dark:text-white/55">Away</span></span>
-            <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-red-400"></span><span class="text-[12px] text-black/60 dark:text-white/55">Busy</span></span>
-            <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-gray-400"></span><span class="text-[12px] text-black/60 dark:text-white/55">Offline</span></span>
-          </div>
-        </div>
-        <div>
-          <span class="text-[11px] font-[600] uppercase tracking-[0.06em] text-black/40 dark:text-white/35 mb-3 block">Tags</span>
-          <div class="flex items-center gap-2 flex-wrap">
-            <span class="text-[12px] font-[550] px-3 py-1.5 rounded-full bg-white/80 dark:bg-black/40 border border-black/[0.06] dark:border-white/[0.08] text-black/60 dark:text-white/55 flex items-center gap-1.5">React <span class="text-[10px] cursor-pointer opacity-40 hover:opacity-80">&times;</span></span>
-            <span class="text-[12px] font-[550] px-3 py-1.5 rounded-full bg-white/80 dark:bg-black/40 border border-black/[0.06] dark:border-white/[0.08] text-black/60 dark:text-white/55 flex items-center gap-1.5">Tailwind <span class="text-[10px] cursor-pointer opacity-40 hover:opacity-80">&times;</span></span>
-            <span class="text-[12px] font-[550] px-3 py-1.5 rounded-full bg-white/80 dark:bg-black/40 border border-black/[0.06] dark:border-white/[0.08] text-black/60 dark:text-white/55 flex items-center gap-1.5">Astro <span class="text-[10px] cursor-pointer opacity-40 hover:opacity-80">&times;</span></span>
-          </div>
-        </div>
-        <div>
-          <span class="text-[11px] font-[600] uppercase tracking-[0.06em] text-black/40 dark:text-white/35 mb-3 block">Chip (Selectable)</span>
-          <div class="flex items-center gap-2 flex-wrap">
-            <span class="text-[11px] font-[600] uppercase tracking-[0.04em] px-3 py-1.5 rounded-full bg-black/80 dark:bg-white/80 text-white dark:text-black cursor-pointer">Active</span>
-            <span class="text-[11px] font-[600] uppercase tracking-[0.04em] px-3 py-1.5 rounded-full bg-black/[0.04] dark:bg-white/[0.06] text-black/50 dark:text-white/40 cursor-pointer hover:bg-black/[0.08] dark:hover:bg-white/[0.12] transition-colors">Inactive</span>
-            <span class="text-[11px] font-[600] uppercase tracking-[0.04em] px-3 py-1.5 rounded-full bg-black/[0.04] dark:bg-white/[0.06] text-black/50 dark:text-white/40 cursor-pointer hover:bg-black/[0.08] dark:hover:bg-white/[0.12] transition-colors">Another</span>
-          </div>
-        </div>
-        {/* Avatar */}
-        <div>
-          <span class="text-[11px] font-[600] uppercase tracking-[0.06em] text-black/40 dark:text-white/35 mb-3 block">Avatar</span>
-          <div class="flex items-end gap-3">
-            <div class="flex flex-col items-center gap-1.5">
-              <div class="w-8 h-8 rounded-full bg-[#354334] flex items-center justify-center"><span class="text-[10px] font-[650] text-white">A</span></div>
-              <span class="text-[10px] text-black/35 dark:text-white/30">xs</span>
+          <div class="p-4 flex flex-col">
+            <div class="flex items-center justify-between py-2.5 border-b border-black/10 dark:border-white/10">
+              <span class="text-[12px] font-[500] text-black/60 dark:text-white/60">Success</span>
+              <span class="text-[11px] font-[600] px-2.5 py-1 rounded-full bg-green-500/15 text-green-500">Success</span>
             </div>
-            <div class="flex flex-col items-center gap-1.5">
-              <div class="w-10 h-10 rounded-full bg-[#4A5E48] flex items-center justify-center"><span class="text-[12px] font-[650] text-white">BW</span></div>
-              <span class="text-[10px] text-black/35 dark:text-white/30">sm</span>
+            <div class="flex items-center justify-between py-2.5 border-b border-black/10 dark:border-white/10">
+              <span class="text-[12px] font-[500] text-black/60 dark:text-white/60">Warning</span>
+              <span class="text-[11px] font-[600] px-2.5 py-1 rounded-full bg-amber-500/15 text-amber-500">Warning</span>
             </div>
-            <div class="flex flex-col items-center gap-1.5">
-              <div class="w-12 h-12 rounded-full bg-[#FFC800] flex items-center justify-center"><span class="text-[14px] font-[650] text-black/70">UI</span></div>
-              <span class="text-[10px] text-black/35 dark:text-white/30">md</span>
+            <div class="flex items-center justify-between py-2.5 border-b border-black/10 dark:border-white/10">
+              <span class="text-[12px] font-[500] text-black/60 dark:text-white/60">Error</span>
+              <span class="text-[11px] font-[600] px-2.5 py-1 rounded-full bg-red-400/15 text-red-400">Error</span>
             </div>
-            <div class="flex flex-col items-center gap-1.5">
-              <div class="w-16 h-16 rounded-full bg-black/[0.06] dark:bg-white/[0.08] flex items-center justify-center overflow-hidden">
-                <img src="/logos/uigel-logo.svg" alt="Avatar" class="w-10 h-10 object-contain" />
+            <div class="flex items-center justify-between py-2.5 border-b border-black/10 dark:border-white/10">
+              <span class="text-[12px] font-[500] text-black/60 dark:text-white/60">Info</span>
+              <span class="text-[11px] font-[600] px-2.5 py-1 rounded-full bg-blue-400/15 text-blue-400">Info</span>
+            </div>
+            <div class="flex items-center justify-between py-2.5">
+              <span class="text-[12px] font-[500] text-black/60 dark:text-white/60">Neutral</span>
+              <span class="text-[11px] font-[600] px-2.5 py-1 rounded-full bg-black/[0.06] dark:bg-white/[0.08] text-black/50 dark:text-white/45">Neutral</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Status Dots group -->
+        <div class="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white dark:bg-[#1a1a1a]">
+          <div class="px-4 py-2.5 bg-black/[0.06] dark:bg-white/[0.08] border-b border-black/10 dark:border-white/10">
+            <span class="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/70 dark:text-white/70">Status Dots</span>
+          </div>
+          <div class="p-4 flex flex-col">
+            <div class="flex items-center justify-between py-2.5 border-b border-black/10 dark:border-white/10">
+              <span class="text-[12px] font-[500] text-black/60 dark:text-white/60">Online</span>
+              <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-green-500"></span></span>
+            </div>
+            <div class="flex items-center justify-between py-2.5 border-b border-black/10 dark:border-white/10">
+              <span class="text-[12px] font-[500] text-black/60 dark:text-white/60">Away</span>
+              <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span></span>
+            </div>
+            <div class="flex items-center justify-between py-2.5 border-b border-black/10 dark:border-white/10">
+              <span class="text-[12px] font-[500] text-black/60 dark:text-white/60">Busy</span>
+              <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-red-400"></span></span>
+            </div>
+            <div class="flex items-center justify-between py-2.5">
+              <span class="text-[12px] font-[500] text-black/60 dark:text-white/60">Offline</span>
+              <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-gray-400"></span></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tags & Chips group -->
+        <div class="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white dark:bg-[#1a1a1a]">
+          <div class="px-4 py-2.5 bg-black/[0.04] dark:bg-white/[0.06] border-b border-black/[0.06] dark:border-white/[0.06]">
+            <span class="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/70 dark:text-white/70">Tags & Chips</span>
+          </div>
+          <div class="p-4 flex flex-col gap-4">
+            <div>
+              <span class="text-[10px] font-[500] text-black/45 dark:text-white/40 mb-2 block">Removable Tags</span>
+              <div class="flex items-center gap-2 flex-wrap">
+                <span class="text-[12px] font-[550] px-3 py-1.5 rounded-full bg-black/[0.04] dark:bg-white/[0.06] border border-black/[0.08] dark:border-white/[0.08] text-black/70 dark:text-white/60 flex items-center gap-1.5">React <span class="text-[10px] cursor-pointer opacity-40 hover:opacity-80">&times;</span></span>
+                <span class="text-[12px] font-[550] px-3 py-1.5 rounded-full bg-black/[0.04] dark:bg-white/[0.06] border border-black/[0.08] dark:border-white/[0.08] text-black/70 dark:text-white/60 flex items-center gap-1.5">Tailwind <span class="text-[10px] cursor-pointer opacity-40 hover:opacity-80">&times;</span></span>
+                <span class="text-[12px] font-[550] px-3 py-1.5 rounded-full bg-black/[0.04] dark:bg-white/[0.06] border border-black/[0.08] dark:border-white/[0.08] text-black/70 dark:text-white/60 flex items-center gap-1.5">Astro <span class="text-[10px] cursor-pointer opacity-40 hover:opacity-80">&times;</span></span>
               </div>
-              <span class="text-[10px] text-black/35 dark:text-white/30">lg</span>
             </div>
-            {/* Avatar group */}
-            <div class="flex flex-col items-center gap-1.5 ml-3">
+            <div>
+              <span class="text-[10px] font-[500] text-black/45 dark:text-white/40 mb-2 block">Selectable Chips</span>
+              <div class="flex items-center gap-2 flex-wrap">
+                <span class="text-[11px] font-[600] uppercase tracking-[0.04em] px-3 py-1.5 rounded-full bg-black/80 dark:bg-white/80 text-white dark:text-black cursor-pointer">Active</span>
+                <span class="text-[11px] font-[600] uppercase tracking-[0.04em] px-3 py-1.5 rounded-full bg-black/[0.04] dark:bg-white/[0.06] text-black/50 dark:text-white/40 cursor-pointer hover:bg-black/[0.08] dark:hover:bg-white/[0.12] transition-colors">Inactive</span>
+                <span class="text-[11px] font-[600] uppercase tracking-[0.04em] px-3 py-1.5 rounded-full bg-black/[0.04] dark:bg-white/[0.06] text-black/50 dark:text-white/40 cursor-pointer hover:bg-black/[0.08] dark:hover:bg-white/[0.12] transition-colors">Another</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Avatar group -->
+        <div class="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white dark:bg-[#1a1a1a]">
+          <div class="px-4 py-2.5 bg-black/[0.04] dark:bg-white/[0.06] border-b border-black/[0.06] dark:border-white/[0.06]">
+            <span class="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/70 dark:text-white/70">Avatars</span>
+          </div>
+          <div class="p-4 flex flex-col gap-4">
+            <div>
+              <span class="text-[10px] font-[500] text-black/45 dark:text-white/40 mb-2 block">Sizes</span>
+              <div class="flex items-end gap-3">
+                <div class="flex flex-col items-center gap-1.5">
+                  <div class="w-8 h-8 rounded-full bg-[#354334] flex items-center justify-center"><span class="text-[10px] font-[650] text-white">A</span></div>
+                  <span class="text-[10px] text-black/50 dark:text-white/45">xs</span>
+                </div>
+                <div class="flex flex-col items-center gap-1.5">
+                  <div class="w-10 h-10 rounded-full bg-[#4A5E48] flex items-center justify-center"><span class="text-[12px] font-[650] text-white">BW</span></div>
+                  <span class="text-[10px] text-black/50 dark:text-white/45">sm</span>
+                </div>
+                <div class="flex flex-col items-center gap-1.5">
+                  <div class="w-12 h-12 rounded-full bg-[#FFC800] flex items-center justify-center"><span class="text-[14px] font-[650] text-black/70">UI</span></div>
+                  <span class="text-[10px] text-black/50 dark:text-white/45">md</span>
+                </div>
+                <div class="flex flex-col items-center gap-1.5">
+                  <div class="w-16 h-16 rounded-full bg-black/[0.06] dark:bg-white/[0.08] flex items-center justify-center overflow-hidden">
+                    <img src="/logos/uigel-logo.svg" alt="Avatar" class="w-10 h-10 object-contain" />
+                  </div>
+                  <span class="text-[10px] text-black/50 dark:text-white/45">lg</span>
+                </div>
+              </div>
+            </div>
+            <div>
+              <span class="text-[10px] font-[500] text-black/45 dark:text-white/40 mb-2 block">Group</span>
               <div class="flex -space-x-2.5">
-                <div class="w-9 h-9 rounded-full bg-[#354334] flex items-center justify-center border-2 border-white dark:border-black z-[3]"><span class="text-[10px] font-[650] text-white">A</span></div>
-                <div class="w-9 h-9 rounded-full bg-[#4A5E48] flex items-center justify-center border-2 border-white dark:border-black z-[2]"><span class="text-[10px] font-[650] text-white">B</span></div>
-                <div class="w-9 h-9 rounded-full bg-[#FFC800] flex items-center justify-center border-2 border-white dark:border-black z-[1]"><span class="text-[10px] font-[650] text-black/70">C</span></div>
-                <div class="w-9 h-9 rounded-full bg-black/[0.06] dark:bg-white/[0.1] flex items-center justify-center border-2 border-white dark:border-black z-[0]"><span class="text-[9px] font-[600] text-black/40 dark:text-white/40">+3</span></div>
+                <div class="w-9 h-9 rounded-full bg-[#354334] flex items-center justify-center border-2 border-white dark:border-[#1a1a1a] z-[3]"><span class="text-[10px] font-[650] text-white">A</span></div>
+                <div class="w-9 h-9 rounded-full bg-[#4A5E48] flex items-center justify-center border-2 border-white dark:border-[#1a1a1a] z-[2]"><span class="text-[10px] font-[650] text-white">B</span></div>
+                <div class="w-9 h-9 rounded-full bg-[#FFC800] flex items-center justify-center border-2 border-white dark:border-[#1a1a1a] z-[1]"><span class="text-[10px] font-[650] text-black/70">C</span></div>
+                <div class="w-9 h-9 rounded-full bg-black/[0.06] dark:bg-white/[0.1] flex items-center justify-center border-2 border-white dark:border-[#1a1a1a] z-[0]"><span class="text-[9px] font-[600] text-black/40 dark:text-white/40">+3</span></div>
               </div>
-              <span class="text-[10px] text-black/35 dark:text-white/30">group</span>
             </div>
           </div>
         </div>
@@ -550,57 +600,59 @@ const elevations = [
         <h2 class="text-[24px] font-[750] tracking-[-0.03em] leading-[1.2] text-black dark:text-white mb-1" style="font-family: var(--font-heading)">Controls</h2>
         <p class="text-[13px] leading-[1.6] text-black/60 dark:text-white/55">Toggle, checkbox, radio, and segmented controls</p>
       </div>
-      <div class="flex flex-col gap-5">
-        <div>
-          <span class="text-[11px] font-[600] uppercase tracking-[0.06em] text-black/40 dark:text-white/35 mb-3 block">Toggle Switch</span>
-          <div class="flex items-center gap-6">
-            <label class="flex items-center gap-3 cursor-pointer">
-              <div class="relative w-11 h-6 rounded-full bg-black/10 dark:bg-white/10"><div class="absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white shadow-sm"></div></div>
-              <span class="text-[13px] text-black/60 dark:text-white/55">Off</span>
-            </label>
-            <label class="flex items-center gap-3 cursor-pointer">
-              <div class="relative w-11 h-6 rounded-full bg-[#354334]"><div class="absolute top-0.5 right-0.5 w-5 h-5 rounded-full bg-white shadow-sm"></div></div>
-              <span class="text-[13px] text-black/60 dark:text-white/55">On</span>
-            </label>
+      <div class="flex flex-col gap-4">
+        <!-- Toggle & Checkbox -->
+        <div class="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white dark:bg-[#1a1a1a]">
+          <div class="px-4 py-2.5 bg-black/[0.06] dark:bg-white/[0.08] border-b border-black/10 dark:border-white/10">
+            <span class="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/70 dark:text-white/70">Toggle & Checkbox</span>
+          </div>
+          <div class="p-4 flex flex-col">
+            <div class="flex items-center justify-between py-2.5 border-b border-black/10 dark:border-white/10">
+              <span class="text-[12px] font-[500] text-black/60 dark:text-white/60">Toggle Off</span>
+              <div class="relative w-11 h-6 rounded-full bg-black/10 dark:bg-white/10 cursor-pointer"><div class="absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white shadow-sm"></div></div>
+            </div>
+            <div class="flex items-center justify-between py-2.5 border-b border-black/10 dark:border-white/10">
+              <span class="text-[12px] font-[500] text-black/60 dark:text-white/60">Toggle On</span>
+              <div class="relative w-11 h-6 rounded-full bg-[#354334] cursor-pointer"><div class="absolute top-0.5 right-0.5 w-5 h-5 rounded-full bg-white shadow-sm"></div></div>
+            </div>
+            <div class="flex items-center justify-between py-2.5 border-b border-black/10 dark:border-white/10">
+              <span class="text-[12px] font-[500] text-black/60 dark:text-white/60">Unchecked</span>
+              <div class="w-5 h-5 rounded-[5px] border-2 border-black/20 dark:border-white/20 bg-white/60 dark:bg-black/30 cursor-pointer"></div>
+            </div>
+            <div class="flex items-center justify-between py-2.5">
+              <span class="text-[12px] font-[500] text-black/60 dark:text-white/60">Checked</span>
+              <div class="w-5 h-5 rounded-[5px] bg-[#354334] flex items-center justify-center cursor-pointer"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12" /></svg></div>
+            </div>
           </div>
         </div>
-        <div>
-          <span class="text-[11px] font-[600] uppercase tracking-[0.06em] text-black/40 dark:text-white/35 mb-3 block">Checkbox</span>
-          <div class="flex items-center gap-6">
-            <label class="flex items-center gap-2.5 cursor-pointer">
-              <div class="w-5 h-5 rounded-[5px] border-2 border-black/20 dark:border-white/20 bg-white/60 dark:bg-black/30"></div>
-              <span class="text-[13px] text-black/60 dark:text-white/55">Unchecked</span>
-            </label>
-            <label class="flex items-center gap-2.5 cursor-pointer">
-              <div class="w-5 h-5 rounded-[5px] bg-[#354334] flex items-center justify-center"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12" /></svg></div>
-              <span class="text-[13px] text-black/60 dark:text-white/55">Checked</span>
-            </label>
+
+        <!-- Radio & Segmented -->
+        <div class="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white dark:bg-[#1a1a1a]">
+          <div class="px-4 py-2.5 bg-black/[0.06] dark:bg-white/[0.08] border-b border-black/10 dark:border-white/10">
+            <span class="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/70 dark:text-white/70">Radio & Segmented</span>
           </div>
-        </div>
-        <div>
-          <span class="text-[11px] font-[600] uppercase tracking-[0.06em] text-black/40 dark:text-white/35 mb-3 block">Radio</span>
-          <div class="flex items-center gap-6">
-            <label class="flex items-center gap-2.5 cursor-pointer">
-              <div class="w-5 h-5 rounded-full border-2 border-black/20 dark:border-white/20 bg-white/60 dark:bg-black/30"></div>
-              <span class="text-[13px] text-black/60 dark:text-white/55">Option A</span>
-            </label>
-            <label class="flex items-center gap-2.5 cursor-pointer">
-              <div class="w-5 h-5 rounded-full border-2 border-[#354334] bg-white/60 dark:bg-black/30 flex items-center justify-center"><div class="w-2.5 h-2.5 rounded-full bg-[#354334]"></div></div>
-              <span class="text-[13px] text-black/60 dark:text-white/55">Option B</span>
-            </label>
+          <div class="p-4 flex flex-col">
+            <div class="flex items-center justify-between py-2.5 border-b border-black/10 dark:border-white/10">
+              <span class="text-[12px] font-[500] text-black/60 dark:text-white/60">Unselected</span>
+              <div class="w-5 h-5 rounded-full border-2 border-black/20 dark:border-white/20 bg-white/60 dark:bg-black/30 cursor-pointer"></div>
+            </div>
+            <div class="flex items-center justify-between py-2.5 border-b border-black/10 dark:border-white/10">
+              <span class="text-[12px] font-[500] text-black/60 dark:text-white/60">Selected</span>
+              <div class="w-5 h-5 rounded-full border-2 border-[#354334] bg-white/60 dark:bg-black/30 flex items-center justify-center cursor-pointer"><div class="w-2.5 h-2.5 rounded-full bg-[#354334]"></div></div>
+            </div>
+            <div class="flex flex-col gap-2 py-2.5 border-b border-black/10 dark:border-white/10">
+              <span class="text-[10px] font-[500] text-black/45 dark:text-white/40">Segmented Control</span>
+              <div class="inline-flex rounded-full bg-black/[0.04] dark:bg-white/[0.06] p-1 gap-0.5 self-start">
+                <span class="text-[12px] font-[600] px-4 py-1.5 rounded-full bg-black/80 dark:bg-white/80 text-white dark:text-black cursor-pointer">Day</span>
+                <span class="text-[12px] font-[600] px-4 py-1.5 rounded-full text-black/50 dark:text-white/40 cursor-pointer hover:text-black/70 dark:hover:text-white/60 transition-colors">Week</span>
+                <span class="text-[12px] font-[600] px-4 py-1.5 rounded-full text-black/50 dark:text-white/40 cursor-pointer hover:text-black/70 dark:hover:text-white/60 transition-colors">Month</span>
+              </div>
+            </div>
+            <div class="flex flex-col gap-2 py-2.5">
+              <span class="text-[10px] font-[500] text-black/45 dark:text-white/40">Slider</span>
+              <input type="range" min="0" max="100" value="60" class="appearance-slider w-full max-w-[280px]" />
+            </div>
           </div>
-        </div>
-        <div>
-          <span class="text-[11px] font-[600] uppercase tracking-[0.06em] text-black/40 dark:text-white/35 mb-3 block">Segmented Control</span>
-          <div class="inline-flex rounded-full bg-black/[0.04] dark:bg-white/[0.06] p-1 gap-0.5">
-            <span class="text-[12px] font-[600] px-4 py-1.5 rounded-full bg-black/80 dark:bg-white/80 text-white dark:text-black cursor-pointer">Day</span>
-            <span class="text-[12px] font-[600] px-4 py-1.5 rounded-full text-black/50 dark:text-white/40 cursor-pointer hover:text-black/70 dark:hover:text-white/60 transition-colors">Week</span>
-            <span class="text-[12px] font-[600] px-4 py-1.5 rounded-full text-black/50 dark:text-white/40 cursor-pointer hover:text-black/70 dark:hover:text-white/60 transition-colors">Month</span>
-          </div>
-        </div>
-        <div>
-          <span class="text-[11px] font-[600] uppercase tracking-[0.06em] text-black/40 dark:text-white/35 mb-3 block">Slider</span>
-          <input type="range" min="0" max="100" value="60" class="appearance-slider w-full max-w-[300px]" />
         </div>
       </div>
     </div>
