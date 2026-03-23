@@ -7,6 +7,7 @@ import { InputFieldsDemo } from "@/components/block/InputFieldsDemo";
 import { PrimitiveNavigation } from "@/components/block/PrimitiveNavigation";
 import { SliderDemo } from "@/components/block/SliderDemo";
 import { ControlsDemo } from "@/components/block/ControlsDemo";
+import { GlassControlsDemo } from "@/components/block/GlassControlsDemo";
 
 /* ─── Spacing ─── */
 const spacingComps = [
@@ -603,6 +604,18 @@ const elevations = [
         <p class="text-[13px] leading-[1.6] text-black/60 dark:text-white/55">Toggle, checkbox, radio, and segmented controls</p>
       </div>
       <ControlsDemo client:load />
+    </div>
+
+    <!-- ═══════════════════════════════════
+         6b. Glass Controls
+         ═══════════════════════════════════ -->
+    <div data-section="Glass Controls" class="col-span-2 relative overflow-hidden rounded-[var(--glass-radius)] p-5 border contrast-border" style="background: transparent;">
+      <div class="relative flex flex-col gap-1 mb-6 pt-1 pl-1">
+        <span class="text-[10px] font-[650] uppercase tracking-[0.1em] contrast-text-muted mb-1">Gel Style</span>
+        <h2 class="text-[24px] font-[750] tracking-[-0.03em] leading-[1.2] text-black dark:text-white mb-1 contrast-text" style="font-family: var(--font-heading)">Glass Controls</h2>
+        <p class="text-[13px] leading-[1.6] contrast-text-muted">Volumetric gel-styled toggles, checkboxes, radios, and sliders</p>
+      </div>
+      <GlassControlsDemo client:load />
     </div>
 
     <!-- ═══════════════════════════════════

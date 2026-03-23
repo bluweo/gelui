@@ -1,5 +1,56 @@
-import { useState } from "react";
-import { LiquidGlassSlider } from "@/components/glass/LiquidGlassSlider";
+import { useState, useRef, useCallback } from "react";
+
+/* ─── Simple Flat Slider ─── */
+function FlatSlider({ value, onChange }: { value: number; onChange: (v: number) => void }) {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const percent = value / 100;
+
+  const resolve = useCallback((clientX: number) => {
+    const track = trackRef.current;
+    if (!track) return;
+    const rect = track.getBoundingClientRect();
+    const ratio = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+    onChange(Math.round(ratio * 100));
+  }, [onChange]);
+
+  const onPointerDown = useCallback((e: React.PointerEvent) => {
+    (e.target as HTMLElement).setPointerCapture(e.pointerId);
+    resolve(e.clientX);
+  }, [resolve]);
+
+  const onPointerMove = useCallback((e: React.PointerEvent) => {
+    if (e.buttons !== 1) return;
+    resolve(e.clientX);
+  }, [resolve]);
+
+  return (
+    <div
+      ref={trackRef}
+      className="relative h-6 flex items-center cursor-pointer select-none touch-none"
+      onPointerDown={onPointerDown}
+      onPointerMove={onPointerMove}
+    >
+      {/* Track background */}
+      <div className="absolute left-0 right-0 h-[5px] rounded-full" style={{ background: "rgba(0,0,0,0.08)" }}>
+        {/* Fill */}
+        <div
+          className="h-full rounded-full transition-[width] duration-50"
+          style={{ width: `${percent * 100}%`, background: "rgba(0,0,0,0.35)" }}
+        />
+      </div>
+      {/* Thumb — simple flat circle */}
+      <div
+        className="absolute w-[18px] h-[18px] rounded-full bg-white border-2 transition-[left] duration-50"
+        style={{
+          left: `${percent * 100}%`,
+          transform: "translateX(-50%)",
+          borderColor: "rgba(0,0,0,0.2)",
+          boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
+        }}
+      />
+    </div>
+  );
+}
 
 export function ControlsDemo() {
   const [toggleOff, setToggleOff] = useState(false);
@@ -21,7 +72,6 @@ export function ControlsDemo() {
           <span className="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/70 dark:text-white/70">Toggle & Checkbox</span>
         </div>
         <div className="p-4 flex flex-col">
-          {/* Toggle Off/On */}
           <div className={rowClass}>
             <span className={labelClass}>Toggle Off</span>
             <button
@@ -87,7 +137,6 @@ export function ControlsDemo() {
           <span className="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/70 dark:text-white/70">Radio & Segmented</span>
         </div>
         <div className="p-4 flex flex-col">
-          {/* Radio */}
           <div className={rowClass}>
             <span className={labelClass}>Option A</span>
             <button
@@ -135,20 +184,13 @@ export function ControlsDemo() {
             </div>
           </div>
 
-          {/* Slider */}
+          {/* Simple Flat Slider */}
           <div className="py-2.5">
             <div className="flex items-center justify-between mb-1">
               <span className="text-[10px] font-[500] text-black/45 dark:text-white/40">Slider</span>
-              <span className="text-[10px] font-mono text-black/35 dark:text-white/30">{slider}%</span>
+              <span className="text-[13px] font-[600] font-mono text-black/70 dark:text-white/65">{slider}%</span>
             </div>
-            <LiquidGlassSlider
-              min={0}
-              max={100}
-              step={1}
-              value={slider}
-              onChange={setSlider}
-              ariaLabel="Demo slider"
-            />
+            <FlatSlider value={slider} onChange={setSlider} />
           </div>
         </div>
       </div>
