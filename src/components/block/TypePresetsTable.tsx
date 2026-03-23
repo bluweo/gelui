@@ -13,6 +13,82 @@ interface TypePreset {
   isLink?: boolean;
 }
 
+/* ─── Syntax color tokens — dark & light ─── */
+const SYN_DARK = {
+  keyword: "#c792ea",
+  name: "#82aaff",
+  string: "#c3e88d",
+  operator: "#89ddff",
+  property: "#f78c6c",
+  punctuation: "#babed8",
+  text: "#d6deeb",
+};
+const SYN_LIGHT = {
+  keyword: "#7c3aed",    // purple
+  name: "#2563eb",       // blue
+  string: "#16a34a",     // green
+  operator: "#0891b2",   // cyan
+  property: "#ea580c",   // orange
+  punctuation: "#6b7280", // gray
+  text: "#1f2937",       // dark gray
+};
+
+/* Static syntax-highlighted code blocks */
+function CodePreview({ sample, size, weight, lh, isDark }: { sample: string; size: string; weight: number; lh: string; isDark: boolean }) {
+  const syn = isDark ? SYN_DARK : SYN_LIGHT;
+  const highlighted = getHighlightedCode(sample, syn);
+  return (
+    <div
+      className="rounded-[8px] px-3.5 py-2.5 overflow-hidden"
+      style={{
+        background: isDark ? "#1a1a1a" : "#ffffff",
+        border: `1px solid ${isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.08)"}`,
+      }}
+    >
+      <code
+        className="block whitespace-nowrap overflow-hidden text-ellipsis"
+        style={{
+          fontSize: size,
+          fontWeight: weight,
+          lineHeight: lh,
+          fontFamily: "var(--font-mono)",
+          color: syn.text,
+        }}
+      >
+        {highlighted}
+      </code>
+    </div>
+  );
+}
+
+function getHighlightedCode(sample: string, syn: typeof SYN_DARK): React.ReactNode {
+  if (sample.includes("const theme")) {
+    return (
+      <>
+        <span style={{ color: syn.keyword }}>const</span>
+        <span style={{ color: syn.text }}> </span>
+        <span style={{ color: syn.name }}>theme</span>
+        <span style={{ color: syn.text }}> </span>
+        <span style={{ color: syn.operator }}>=</span>
+        <span style={{ color: syn.text }}> </span>
+        <span style={{ color: syn.string }}>&apos;glassmorphism&apos;</span>
+        <span style={{ color: syn.punctuation }}>;</span>
+      </>
+    );
+  }
+  if (sample.includes("var(--glass")) {
+    return (
+      <>
+        <span style={{ color: syn.keyword }}>var</span>
+        <span style={{ color: syn.punctuation }}>(</span>
+        <span style={{ color: syn.property }}>--glass-radius</span>
+        <span style={{ color: syn.punctuation }}>)</span>
+      </>
+    );
+  }
+  return <span style={{ color: syn.text }}>{sample}</span>;
+}
+
 const INITIAL_PRESETS: TypePreset[] = [
   { name: "Display", tag: "h1", size: "36px", weight: 750, lh: "1.1", ls: "-0.035em", role: "Heading", sample: "Design systems that feel alive" },
   { name: "H1", tag: "h1", size: "30px", weight: 750, lh: "1.2", ls: "-0.03em", role: "Heading", sample: "Page heading" },
@@ -177,19 +253,23 @@ export function TypePresetsTable() {
 
             {/* Preview */}
             <div className="flex-1 min-w-0 overflow-hidden">
-              <span
-                className={`block ${t.tag !== "p" ? "truncate" : ""} ${t.isLink ? "underline decoration-1 underline-offset-2" : ""}`}
-                style={{
-                  fontSize: t.size,
-                  fontWeight: t.weight,
-                  lineHeight: t.lh,
-                  letterSpacing: t.ls,
-                  fontFamily: getFontFamily(t.role),
-                  color: t.isLink ? (isDark ? "#97AD96" : "#354334") : (isDark ? "rgba(255,255,255,0.8)" : "rgba(0,0,0,0.8)"),
-                }}
-              >
-                {t.sample}
-              </span>
+              {t.tag === "code" ? (
+                <CodePreview sample={t.sample} size={t.size} weight={t.weight} lh={t.lh} isDark={isDark} />
+              ) : (
+                <span
+                  className={`block ${t.tag !== "p" ? "truncate" : ""} ${t.isLink ? "underline decoration-1 underline-offset-2" : ""}`}
+                  style={{
+                    fontSize: t.size,
+                    fontWeight: t.weight,
+                    lineHeight: t.lh,
+                    letterSpacing: t.ls,
+                    fontFamily: getFontFamily(t.role),
+                    color: t.isLink ? (isDark ? "#97AD96" : "#354334") : (isDark ? "rgba(255,255,255,0.8)" : "rgba(0,0,0,0.8)"),
+                  }}
+                >
+                  {t.sample}
+                </span>
+              )}
             </div>
 
             {/* Size (plain text) */}

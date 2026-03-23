@@ -254,6 +254,89 @@ const elevations = [
     </div>
 
     <!-- ═══════════════════════════════════
+         3b. Card Panels
+         ═══════════════════════════════════ -->
+    <div data-section="Card Panels" class="col-span-full">
+      <div class="flex flex-col gap-1 mb-5 pl-1">
+        <span class="text-[10px] font-[650] uppercase tracking-[0.1em] contrast-muted mb-1">Containers</span>
+        <h2 class="text-[24px] font-[750] tracking-[-0.03em] leading-[1.2] contrast-text mb-1" style="font-family: var(--font-heading)">Card Panels</h2>
+        <p class="text-[13px] leading-[1.6] contrast-muted">5 panel recipes — glass + frost + border combined into usable containers</p>
+      </div>
+
+      <div class="grid grid-cols-3 gap-5 max-[860px]:grid-cols-2 max-[540px]:grid-cols-1">
+
+        <!-- 1. Standard Card -->
+        <div class="glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5 min-h-[200px] flex flex-col justify-between">
+          <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 140px;" />
+          <div class="relative z-[1]">
+            <span class="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/80 dark:text-white/80 px-2 py-0.5 rounded-full bg-black/[0.06] dark:bg-white/[0.08] inline-block mb-2">Standard</span>
+            <p class="text-[13px] font-[600] text-black/80 dark:text-white/80 mb-1">glass-1 + ds-card-frost</p>
+            <p class="text-[11px] text-black/50 dark:text-white/45">Default card for text-heavy content. 95% frost ensures maximum readability on any background.</p>
+          </div>
+          <div class="relative z-[1] flex items-center gap-2 mt-3">
+            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded-[4px] bg-black/[0.05] dark:bg-white/[0.08] text-black/40 dark:text-white/35">backdrop-filter</span>
+            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded-[4px] bg-black/[0.05] dark:bg-white/[0.08] text-black/40 dark:text-white/35">frost-95%</span>
+          </div>
+        </div>
+
+        <!-- 2. Clear Card -->
+        <div class="glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5 min-h-[200px] flex flex-col justify-between">
+          <div class="absolute inset-0 pointer-events-none ds-card-frost-clear" style="height: 140px;" />
+          <div class="relative z-[1]">
+            <span class="text-[10px] font-[650] uppercase tracking-[0.06em] contrast-muted px-2 py-0.5 rounded-full bg-black/[0.06] dark:bg-white/[0.08] inline-block mb-2">Clear</span>
+            <p class="text-[13px] font-[600] contrast-text mb-1">glass-1 + ds-card-frost-clear</p>
+            <p class="text-[11px] contrast-muted">Showcase card for visual elements. 15% frost lets the background show through for context.</p>
+          </div>
+          <div class="relative z-[1] flex items-center gap-2 mt-3">
+            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded-[4px] bg-black/[0.05] dark:bg-white/[0.08] text-black/40 dark:text-white/35">backdrop-filter</span>
+            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded-[4px] bg-black/[0.05] dark:bg-white/[0.08] text-black/40 dark:text-white/35">frost-15%</span>
+          </div>
+        </div>
+
+        <!-- 3. Transparent Card -->
+        <div class="relative overflow-hidden rounded-[var(--glass-radius)] p-5 min-h-[200px] flex flex-col justify-between border contrast-border">
+          <div>
+            <span class="text-[10px] font-[650] uppercase tracking-[0.06em] contrast-muted px-2 py-0.5 rounded-full bg-black/[0.06] dark:bg-white/[0.08] inline-block mb-2">Transparent</span>
+            <p class="text-[13px] font-[600] contrast-text mb-1">border only — no glass</p>
+            <p class="text-[11px] contrast-muted">Content floats directly on the wallpaper. Border-only container for gel/glass button showcases.</p>
+          </div>
+          <div class="flex items-center gap-2 mt-3">
+            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded-[4px] bg-black/[0.06] dark:bg-white/[0.08] contrast-muted">no blur</span>
+            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded-[4px] bg-black/[0.06] dark:bg-white/[0.08] contrast-muted">no frost</span>
+          </div>
+        </div>
+
+        <!-- 4. Plain Glass -->
+        <div class="glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5 min-h-[200px] flex flex-col justify-between">
+          <div>
+            <span class="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/80 dark:text-white/80 px-2 py-0.5 rounded-full bg-black/[0.06] dark:bg-white/[0.08] inline-block mb-2">Plain Glass</span>
+            <p class="text-[13px] font-[600] text-black/80 dark:text-white/80 mb-1">glass-1 — no frost</p>
+            <p class="text-[11px] text-black/50 dark:text-white/45">Glass blur without frost overlay. For small cards, badges, or elements where content is short and readable.</p>
+          </div>
+          <div class="flex items-center gap-2 mt-3">
+            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded-[4px] bg-black/[0.05] dark:bg-white/[0.08] text-black/40 dark:text-white/35">backdrop-filter</span>
+            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded-[4px] bg-black/[0.05] dark:bg-white/[0.08] text-black/40 dark:text-white/35">no frost</span>
+          </div>
+        </div>
+
+        <!-- 5. Token Frost (left-to-right) -->
+        <div class="glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5 min-h-[200px] flex flex-col justify-between">
+          <div class="absolute inset-0 pointer-events-none token-hero-frost" />
+          <div class="relative z-[1]">
+            <span class="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/80 dark:text-white/80 px-2 py-0.5 rounded-full bg-black/[0.06] dark:bg-white/[0.08] inline-block mb-2">Directional</span>
+            <p class="text-[13px] font-[600] text-black/80 dark:text-white/80 mb-1">glass-1 + token-hero-frost</p>
+            <p class="text-[11px] text-black/50 dark:text-white/45">Left-to-right frost. Text on the left stays readable, image/content on the right shows through.</p>
+          </div>
+          <div class="relative z-[1] flex items-center gap-2 mt-3">
+            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded-[4px] bg-black/[0.05] dark:bg-white/[0.08] text-black/40 dark:text-white/35">backdrop-filter</span>
+            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded-[4px] bg-black/[0.05] dark:bg-white/[0.08] text-black/40 dark:text-white/35">frost-L→R</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════
          4. Input Fields
          ═══════════════════════════════════ -->
     <div data-section="Inputs" class="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
