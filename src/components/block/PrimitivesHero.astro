@@ -1,46 +1,77 @@
 ---
 /**
  * PrimitivesHero — Hero banner for the Primitives page.
- * Same pattern as TokenHero: glass card + frost zone + stat cards.
+ * 2-column layout: left text+stats, right image (50% width).
+ * Mobile: stacks vertically.
  */
 ---
 
-<div data-section="Overview" class="col-span-full glass-1 glass-specular rounded-[var(--glass-radius)] overflow-hidden relative p-8 min-h-[260px] flex flex-col justify-between max-[540px]:p-5 max-[540px]:min-h-[200px]">
-  <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 220px;" />
+<div data-section="Overview" class="col-span-full glass-1 glass-specular rounded-[var(--glass-radius)] overflow-hidden relative">
+  <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 280px;" />
 
-  <!-- Top: Title + Badge -->
-  <div class="relative z-[1] flex items-start justify-between mb-auto">
-    <div class="flex flex-col gap-1">
-      <h1 class="text-[38px] max-[860px]:text-[30px] max-[540px]:text-[24px] font-[700] tracking-[-0.03em] leading-[1.1] text-black dark:text-white" style="font-family: var(--font-heading)">
-        Primitives
-      </h1>
-      <span class="text-[13px] text-black/50 dark:text-white/40 mt-1">Composed building blocks</span>
-    </div>
-    <span class="text-[11px] text-right text-black/40 dark:text-white/30 leading-tight max-[540px]:hidden">
-      Design System<br />Layer 3
-    </span>
-  </div>
+  <div class="relative z-[1] grid grid-cols-2 max-[860px]:grid-cols-1">
 
-  <!-- Bottom: Description + Stats -->
-  <div class="relative z-[1] flex flex-col gap-5 mt-8">
-    <div class="flex items-center gap-1.5 text-[13px] text-black/55 dark:text-white/50 max-w-[520px]">
-      <span class="text-black/30 dark:text-white/20 font-mono shrink-0">//</span>
-      <span>Reusable style compositions that bridge tokens and components. Each primitive combines typography, spacing, color, and motion tokens into a ready-to-use pattern.</span>
+    <!-- Left: Title + Description + Stats -->
+    <div class="flex flex-col justify-between p-8 max-[540px]:p-5">
+      <div>
+        <h1 class="text-[36px] max-[860px]:text-[28px] max-[540px]:text-[24px] font-[750] tracking-[-0.035em] leading-[1.1] text-black dark:text-white mb-4" style="font-family: var(--font-heading)">
+          Primitives
+        </h1>
+        <p class="text-[14px] leading-[1.7] text-black/60 dark:text-white/50 max-w-[420px] mb-3">
+          The foundational building blocks of Gel UI. Pre-composed patterns that combine tokens into reusable typography, buttons, surfaces, inputs, and layout structures — ready to assemble into full components.
+        </p>
+        <p class="text-[12px] leading-[1.6] text-black/40 dark:text-white/30 max-w-[380px] italic">
+          Design System — Layer 3 · Primitives
+        </p>
+      </div>
+
+      <!-- Stats row -->
+      <div class="grid grid-cols-3 gap-3 mt-6 max-w-[520px]">
+        <div class="glass-1 rounded-[calc(var(--glass-radius)*0.65)] px-6 py-5">
+          <div class="flex items-baseline gap-2">
+            <span class="text-[48px] font-[750] text-black dark:text-white leading-none tracking-[-0.02em]">10</span>
+            <span class="text-[12px] text-green-500">●</span>
+          </div>
+          <p class="text-[14px] text-black/50 dark:text-white/45 mt-2">Categories</p>
+        </div>
+        <div class="glass-1 rounded-[calc(var(--glass-radius)*0.65)] px-6 py-5">
+          <div class="flex items-baseline gap-2">
+            <span class="text-[48px] font-[750] text-black dark:text-white leading-none tracking-[-0.02em]">60+</span>
+            <span class="text-[12px] text-green-500">●</span>
+          </div>
+          <p class="text-[14px] text-black/50 dark:text-white/45 mt-2">Primitives</p>
+        </div>
+        <div class="glass-1 rounded-[calc(var(--glass-radius)*0.65)] px-6 py-5">
+          <div class="flex items-baseline gap-2">
+            <span class="text-[48px] font-[750] text-black dark:text-white leading-none tracking-[-0.02em]">4</span>
+            <span class="text-[12px] text-amber-500">●</span>
+          </div>
+          <p class="text-[14px] text-black/50 dark:text-white/45 mt-2">Font Roles</p>
+        </div>
+      </div>
+
+      <!-- CTA button — left aligned below stats -->
+      <div class="mt-4">
+        <a href="#typography" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-black/20 dark:border-white/20 text-[13px] font-[600] text-black/70 dark:text-white/60 hover:bg-black/5 dark:hover:bg-white/5 hover:text-black dark:hover:text-white transition-all duration-200 no-underline">
+          Explore primitives
+          <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-black/80 dark:bg-white/85 text-white dark:text-black shrink-0">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M17 17V7.8H7.8"/></svg>
+          </span>
+        </a>
+      </div>
     </div>
 
-    <div class="flex gap-3 max-[540px]:flex-col">
-      <div class="glass-1 rounded-[calc(var(--glass-radius)*0.7)] px-5 py-4 min-w-[140px]">
-        <span class="text-[22px] font-[700] text-black dark:text-white block leading-tight">10</span>
-        <span class="text-[12px] text-black/50 dark:text-white/45 block mt-0.5">Categories</span>
-      </div>
-      <div class="glass-1 rounded-[calc(var(--glass-radius)*0.7)] px-5 py-4 min-w-[140px]">
-        <span class="text-[22px] font-[700] text-black dark:text-white block leading-tight">60+</span>
-        <span class="text-[12px] text-black/50 dark:text-white/45 block mt-0.5">Primitives</span>
-      </div>
-      <div class="glass-1 rounded-[calc(var(--glass-radius)*0.7)] px-5 py-4 min-w-[140px]">
-        <span class="text-[22px] font-[700] text-black dark:text-white block leading-tight">Dark + Light</span>
-        <span class="text-[12px] text-black/50 dark:text-white/45 block mt-0.5">Full theme support</span>
+    <!-- Right: Image (50% width, minimal padding) -->
+    <div class="flex items-center justify-center p-2 max-[860px]:order-first max-[860px]:p-3">
+      <div class="w-full h-full rounded-[var(--glass-radius)] overflow-hidden bg-black/[0.03] dark:bg-white/[0.03]">
+        <img
+          src="/resources/images/gelui-primitives.png"
+          alt="GelUI Primitives"
+          class="w-full h-full object-cover object-center"
+          style="min-height: 240px;"
+        />
       </div>
     </div>
+
   </div>
 </div>

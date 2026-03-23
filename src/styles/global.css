@@ -1219,9 +1219,15 @@ html[data-navigated] * {
   background-color: var(--gel-glass-bg, rgba(255, 255, 255, 0.23));
   border: none;
 
-  /* White text + icons */
-  color: white;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  /* Contrast-aware text — dark on light backgrounds, white on dark */
+  color: rgba(30, 30, 35, 0.75);
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.25);
+
+  /* Dark background → white text */
+  [data-contrast="dark"] & {
+    color: rgba(255, 255, 255, 0.92);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  }
 
   /* Pre-computed volumetric shadow */
   box-shadow: var(--gel-shadow-nav);
@@ -1935,6 +1941,46 @@ code:not([data-font-preview]), pre:not([data-font-preview]), kbd, samp { font-fa
     rgba(0,0,0,0.88) 0%,
     rgba(0,0,0,0.7) 45%,
     rgba(0,0,0,0.2) 78%,
+    transparent 100%
+  );
+}
+
+/* Frost zone — half-width variant (left side only, for button showcase block) */
+.ds-card-frost-half {
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0.92) 0%,
+    rgba(255,255,255,0.85) 42%,
+    rgba(255,255,255,0.3) 52%,
+    transparent 58%
+  );
+}
+[data-theme="dark"] .ds-card-frost-half {
+  background: linear-gradient(
+    90deg,
+    rgba(0,0,0,0.85) 0%,
+    rgba(0,0,0,0.75) 42%,
+    rgba(0,0,0,0.2) 52%,
+    transparent 58%
+  );
+}
+
+/* Frost zone — clear glass variant (10% opacity, for showcase blocks) */
+.ds-card-frost-clear {
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,0.15) 0%,
+    rgba(255,255,255,0.10) 45%,
+    rgba(255,255,255,0.04) 78%,
+    transparent 100%
+  );
+}
+[data-theme="dark"] .ds-card-frost-clear {
+  background: linear-gradient(
+    180deg,
+    rgba(0,0,0,0.15) 0%,
+    rgba(0,0,0,0.10) 45%,
+    rgba(0,0,0,0.04) 78%,
     transparent 100%
   );
 }

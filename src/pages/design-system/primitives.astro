@@ -1,27 +1,9 @@
 ---
 import DSLayout from "@/components/layout/DSLayout.astro";
 import PrimitivesHero from "@/components/block/PrimitivesHero.astro";
-
-/* ─── Typography presets ─── */
-const typePresets = [
-  { name: "Display", size: "36px", weight: 750, lh: "1.1", ls: "-0.035em", role: "Heading", sample: "Design systems that feel alive" },
-  { name: "H1", size: "30px", weight: 750, lh: "1.2", ls: "-0.03em", role: "Heading", sample: "Page heading" },
-  { name: "H2", size: "24px", weight: 700, lh: "1.25", ls: "-0.02em", role: "Heading", sample: "Section heading" },
-  { name: "H3", size: "20px", weight: 650, lh: "1.3", ls: "-0.015em", role: "Heading", sample: "Subsection heading" },
-  { name: "H4", size: "17px", weight: 600, lh: "1.35", ls: "-0.01em", role: "Heading", sample: "Card heading" },
-  { name: "H5", size: "15px", weight: 600, lh: "1.4", ls: "0", role: "Heading", sample: "Small heading" },
-  { name: "H6", size: "13px", weight: 600, lh: "1.4", ls: "0.02em", role: "Heading", sample: "Micro heading" },
-  { name: "Body", size: "15px", weight: 450, lh: "1.6", ls: "0", role: "Body", sample: "The quick brown fox jumps over the lazy dog. Adaptive glass and fluid interactions." },
-  { name: "Body Sm", size: "13px", weight: 450, lh: "1.5", ls: "0", role: "Body", sample: "Smaller body text for descriptions and secondary content." },
-  { name: "Caption", size: "11.5px", weight: 500, lh: "1.4", ls: "0.02em", role: "UI", sample: "Caption text for metadata" },
-  { name: "Overline", size: "10px", weight: 650, lh: "1.2", ls: "0.1em", role: "UI", sample: "OVERLINE LABEL" },
-  { name: "Label", size: "13px", weight: 600, lh: "1", ls: "0.02em", role: "UI", sample: "Form label" },
-  { name: "Code", size: "13px", weight: 500, lh: "1.5", ls: "0", role: "Mono", sample: "const theme = 'glassmorphism';" },
-  { name: "Code Sm", size: "11px", weight: 500, lh: "1.4", ls: "0", role: "Mono", sample: "var(--glass-radius)" },
-  { name: "Link", size: "15px", weight: 550, lh: "1.5", ls: "0", role: "Body", sample: "Learn more about GelUI →", isLink: true },
-];
-
-const roleColors: Record<string, string> = { Heading: "#354334", Body: "#4A5E48", UI: "#78788A", Mono: "#A98500" };
+import { TypePresetsTable } from "@/components/block/TypePresetsTable";
+import { PrimitiveControls } from "@/components/block/PrimitiveControls";
+import { PrimitiveNavigation } from "@/components/block/PrimitiveNavigation";
 
 /* ─── Spacing ─── */
 const spacingComps = [
@@ -62,79 +44,135 @@ const elevations = [
         <p class="text-[13px] leading-[1.6] text-black/60 dark:text-white/55">14 typography compositions — headings, body, UI labels, and code</p>
       </div>
 
-      <div class="flex flex-col rounded-[var(--glass-radius-sm)] overflow-hidden">
-        <div class="flex items-center px-4 py-2.5 bg-black/[0.04] dark:bg-white/[0.06] border-b border-black/[0.06] dark:border-white/[0.08] gap-4">
-          <span class="w-[70px] shrink-0 text-[10px] font-[650] uppercase tracking-[0.06em] text-black/45 dark:text-white/40">Preset</span>
-          <span class="flex-1 text-[10px] font-[650] uppercase tracking-[0.06em] text-black/45 dark:text-white/40">Preview</span>
-          <span class="w-[50px] text-[10px] font-[650] uppercase tracking-[0.06em] text-black/45 dark:text-white/40 text-right max-[540px]:hidden">Size</span>
-          <span class="w-[45px] text-[10px] font-[650] uppercase tracking-[0.06em] text-black/45 dark:text-white/40 text-right max-[540px]:hidden">Weight</span>
-          <span class="w-[50px] text-[10px] font-[650] uppercase tracking-[0.06em] text-black/45 dark:text-white/40 text-right max-[860px]:hidden">Role</span>
-        </div>
-        {typePresets.map((t, idx) => {
-          const fontFamily = t.role === "Mono" ? "var(--font-mono)" : t.role === "UI" ? "var(--font-ui)" : t.role === "Body" ? "var(--font-body)" : "var(--font-heading)";
-          return (
-            <div class:list={["flex items-center px-4 py-3 gap-4", idx < typePresets.length - 1 && "border-b border-black/[0.04] dark:border-white/[0.04]"]}>
-              <div class="w-[70px] shrink-0"><span class="text-[11px] font-[600] text-black/75 dark:text-white/70">{t.name}</span></div>
-              <div class="flex-1 min-w-0 overflow-hidden">
-                <span class:list={["block truncate text-black/80 dark:text-white/80", t.isLink && "underline decoration-1 underline-offset-2 text-[#354334] dark:text-[#97AD96] cursor-pointer hover:opacity-70"]} style={`font-size:${t.size};font-weight:${t.weight};line-height:${t.lh};letter-spacing:${t.ls};font-family:${fontFamily};`}>{t.sample}</span>
-              </div>
-              <span class="w-[50px] text-[11px] font-mono text-black/40 dark:text-white/35 text-right tabular-nums max-[540px]:hidden">{t.size}</span>
-              <span class="w-[45px] text-[11px] font-mono text-black/40 dark:text-white/35 text-right tabular-nums max-[540px]:hidden">{t.weight}</span>
-              <span class="w-[50px] max-[860px]:hidden"><span class="text-[9px] font-[600] px-1.5 py-0.5 rounded-full text-white" style={`background:${roleColors[t.role]}`}>{t.role}</span></span>
-            </div>
-          );
-        })}
-      </div>
+      <TypePresetsTable client:load />
     </div>
 
     <!-- ═══════════════════════════════════
          2. Buttons
          ═══════════════════════════════════ -->
     <div data-section="Buttons" class="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
-      <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 160px;" />
+      <div class="absolute inset-0 pointer-events-none ds-card-frost-half z-0" />
       <div class="relative flex flex-col gap-1 mb-6 pt-1 pl-1">
         <span class="text-[10px] font-[650] uppercase tracking-[0.1em] text-black/40 dark:text-white/40 mb-1">Interactive</span>
         <h2 class="text-[24px] font-[750] tracking-[-0.03em] leading-[1.2] text-black dark:text-white mb-1" style="font-family: var(--font-heading)">Buttons</h2>
         <p class="text-[13px] leading-[1.6] text-black/60 dark:text-white/55">Gel, glass, and ghost variants with sizes and states</p>
       </div>
 
-      <div class="flex flex-col gap-5">
-        <div>
-          <span class="text-[11px] font-[600] uppercase tracking-[0.06em] text-black/40 dark:text-white/35 mb-3 block">Gel Button</span>
-          <div class="flex items-center gap-3 flex-wrap">
-            <button class="gel-btn gel-btn-pill text-[13px] py-2 px-5">Small</button>
-            <button class="gel-btn gel-btn-pill">Medium</button>
-            <button class="gel-btn gel-btn-pill text-[17px] py-3 px-7">Large</button>
-            <button class="gel-btn gel-btn-circle-sm"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg></button>
-            <button class="gel-btn gel-btn-circle"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 12h16M12 4v16" /></svg></button>
+      <div class="grid grid-cols-2 gap-5 max-[860px]:grid-cols-1">
+        <!-- Left column: Table-based groups -->
+        <div class="flex flex-col gap-5">
+          <!-- Solid Buttons table -->
+          <div class="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white/60 dark:bg-black/30">
+            <div class="px-3 py-2 bg-black/[0.04] dark:bg-white/[0.06] border-b border-black/[0.06] dark:border-white/[0.06]">
+              <span class="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/45 dark:text-white/40">Solid</span>
+            </div>
+            <div class="flex items-center justify-between px-4 py-3.5 border-b border-black/[0.04] dark:border-white/[0.04]">
+              <span class="text-[12px] font-[550] text-black/60 dark:text-white/55">Pill</span>
+              <button class="rounded-[var(--glass-radius-pill)] px-5 py-2 text-[13px] font-[600] cursor-pointer border-none bg-black dark:bg-white text-white dark:text-black transition-all duration-200 hover:scale-105">Button</button>
+            </div>
+            <div class="flex items-center justify-between px-4 py-3.5 border-b border-black/[0.04] dark:border-white/[0.04]">
+              <span class="text-[12px] font-[550] text-black/60 dark:text-white/55">Rounded</span>
+              <button class="rounded-[var(--glass-radius)] px-5 py-2 text-[13px] font-[600] cursor-pointer border-none bg-black dark:bg-white text-white dark:text-black transition-all duration-200 hover:scale-105">Button</button>
+            </div>
+            <div class="flex items-center justify-between px-4 py-3.5">
+              <span class="text-[12px] font-[550] text-black/60 dark:text-white/55">Small</span>
+              <button class="rounded-[var(--glass-radius-sm)] px-4 py-1.5 text-[12px] font-[600] cursor-pointer border-none bg-black dark:bg-white text-white dark:text-black transition-all duration-200 hover:scale-105">Button</button>
+            </div>
+          </div>
+          <!-- Ghost Buttons table -->
+          <div class="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white/60 dark:bg-black/30">
+            <div class="px-3 py-2 bg-black/[0.04] dark:bg-white/[0.06] border-b border-black/[0.06] dark:border-white/[0.06]">
+              <span class="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/45 dark:text-white/40">Ghost</span>
+            </div>
+            <div class="flex items-center justify-between px-4 py-3.5 border-b border-black/[0.04] dark:border-white/[0.04]">
+              <span class="text-[12px] font-[550] text-black/60 dark:text-white/55">Pill</span>
+              <button class="bg-transparent rounded-[var(--glass-radius-pill)] px-5 py-2 text-[13px] font-[550] cursor-pointer border border-black/15 dark:border-white/15 transition-all duration-200 hover:bg-black/[0.04] dark:hover:bg-white/[0.06] text-black/70 dark:text-white/65">Button</button>
+            </div>
+            <div class="flex items-center justify-between px-4 py-3.5">
+              <span class="text-[12px] font-[550] text-black/60 dark:text-white/55">Rounded</span>
+              <button class="bg-transparent rounded-[var(--glass-radius-sm)] px-5 py-2 text-[13px] font-[550] cursor-pointer border border-black/15 dark:border-white/15 transition-all duration-200 hover:bg-black/[0.04] dark:hover:bg-white/[0.06] text-black/70 dark:text-white/65">Button</button>
+            </div>
+          </div>
+          <!-- Action Pair table -->
+          <div class="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white/60 dark:bg-black/30">
+            <div class="px-3 py-2 bg-black/[0.04] dark:bg-white/[0.06] border-b border-black/[0.06] dark:border-white/[0.06]">
+              <span class="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/45 dark:text-white/40">Action Pair</span>
+            </div>
+            <div class="flex items-center justify-center gap-3 px-4 py-4">
+              <button class="bg-transparent rounded-[var(--glass-radius-pill)] px-6 py-2.5 text-[13px] font-[550] cursor-pointer border border-black/12 dark:border-white/15 transition-all duration-200 hover:bg-black/[0.04] dark:hover:bg-white/[0.06] text-black/50 dark:text-white/60">Cancel</button>
+              <button class="rounded-[var(--glass-radius)] px-6 py-2.5 text-[13px] font-[600] cursor-pointer border-none bg-black dark:bg-white text-white dark:text-black transition-all duration-200 hover:scale-105">Apply</button>
+            </div>
+          </div>
+          <!-- Link table -->
+          <div class="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white/60 dark:bg-black/30">
+            <div class="px-3 py-2 bg-black/[0.04] dark:bg-white/[0.06] border-b border-black/[0.06] dark:border-white/[0.06]">
+              <span class="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/45 dark:text-white/40">Link</span>
+            </div>
+            <div class="flex items-center justify-between px-4 py-3.5 border-b border-black/[0.04] dark:border-white/[0.04]">
+              <span class="text-[12px] font-[550] text-black/60 dark:text-white/55">Underline</span>
+              <button class="bg-transparent border-none text-[14px] font-[550] text-[#354334] dark:text-[#97AD96] underline underline-offset-2 cursor-pointer hover:opacity-70 transition-opacity px-0 py-0">Learn more</button>
+            </div>
+            <div class="flex items-center justify-between px-4 py-3.5">
+              <span class="text-[12px] font-[550] text-black/60 dark:text-white/55">Arrow</span>
+              <button class="bg-transparent border-none text-[14px] font-[550] text-[#354334] dark:text-[#97AD96] cursor-pointer hover:opacity-70 transition-opacity px-0 py-0 flex items-center gap-1">Explore <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg></button>
+            </div>
           </div>
         </div>
-        <div>
-          <span class="text-[11px] font-[600] uppercase tracking-[0.06em] text-black/40 dark:text-white/35 mb-3 block">Glass Button</span>
-          <div class="flex items-center gap-3 flex-wrap">
-            <button class="glass-1 glass-specular rounded-[var(--glass-radius-pill)] px-5 py-2.5 text-[14px] font-[550] cursor-pointer border-none transition-all duration-200 hover:scale-105">Glass Pill</button>
-            <button class="glass-1 glass-specular rounded-[var(--glass-radius-sm)] px-5 py-2.5 text-[14px] font-[550] cursor-pointer border-none transition-all duration-200 hover:scale-105">Glass Rounded</button>
+
+        <!-- Right column: Gel, Glass, States — transparent, contrast-aware -->
+        <div class="flex flex-col gap-5">
+          <!-- Gel Buttons table -->
+          <div class="rounded-[var(--glass-radius-sm)] overflow-hidden border border-black/[0.06] dark:border-white/[0.06]">
+            <div class="px-3 py-2 border-b border-black/[0.06] dark:border-white/[0.06]">
+              <span class="text-[10px] font-[650] uppercase tracking-[0.06em] contrast-muted">Gel</span>
+            </div>
+            <div class="flex items-center justify-between px-4 py-3.5 border-b border-black/[0.04] dark:border-white/[0.04]">
+              <span class="text-[12px] font-[550] contrast-muted">Sizes</span>
+              <div class="flex items-center gap-2.5 flex-wrap justify-end">
+                <button class="gel-btn gel-btn-pill text-[13px] py-2 px-5">Small</button>
+                <button class="gel-btn gel-btn-pill">Medium</button>
+                <button class="gel-btn gel-btn-pill text-[17px] py-3 px-7">Large</button>
+              </div>
+            </div>
+            <div class="flex items-center justify-between px-4 py-3.5">
+              <span class="text-[12px] font-[550] contrast-muted">Icons</span>
+              <div class="flex items-center gap-2.5">
+                <button class="gel-btn gel-btn-circle-sm"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg></button>
+                <button class="gel-btn gel-btn-circle"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 12h16M12 4v16" /></svg></button>
+              </div>
+            </div>
           </div>
-        </div>
-        <div>
-          <span class="text-[11px] font-[600] uppercase tracking-[0.06em] text-black/40 dark:text-white/35 mb-3 block">Ghost Button</span>
-          <div class="flex items-center gap-3 flex-wrap">
-            <button class="bg-transparent rounded-[var(--glass-radius-pill)] px-5 py-2.5 text-[14px] font-[550] cursor-pointer border border-black/15 dark:border-white/15 transition-all duration-200 hover:bg-black/[0.04] dark:hover:bg-white/[0.06] hover:scale-105 text-black/70 dark:text-white/65">Ghost Pill</button>
-            <button class="bg-transparent rounded-[var(--glass-radius-sm)] px-5 py-2.5 text-[14px] font-[550] cursor-pointer border border-black/15 dark:border-white/15 transition-all duration-200 hover:bg-black/[0.04] dark:hover:bg-white/[0.06] hover:scale-105 text-black/70 dark:text-white/65">Ghost Rounded</button>
+          <!-- Glass Buttons table -->
+          <div class="rounded-[var(--glass-radius-sm)] overflow-hidden border border-black/[0.06] dark:border-white/[0.06]">
+            <div class="px-3 py-2 border-b border-black/[0.06] dark:border-white/[0.06]">
+              <span class="text-[10px] font-[650] uppercase tracking-[0.06em] contrast-muted">Glass</span>
+            </div>
+            <div class="flex items-center justify-between px-4 py-3.5 border-b border-black/[0.04] dark:border-white/[0.04]">
+              <span class="text-[12px] font-[550] contrast-muted">Pill</span>
+              <button class="glass-1 glass-specular rounded-[var(--glass-radius-pill)] px-5 py-2.5 text-[14px] font-[550] cursor-pointer border-none transition-all duration-200 hover:scale-105">Glass Pill</button>
+            </div>
+            <div class="flex items-center justify-between px-4 py-3.5">
+              <span class="text-[12px] font-[550] contrast-muted">Rounded</span>
+              <button class="glass-1 glass-specular rounded-[var(--glass-radius-sm)] px-5 py-2.5 text-[14px] font-[550] cursor-pointer border-none transition-all duration-200 hover:scale-105">Glass Rounded</button>
+            </div>
           </div>
-        </div>
-        <div>
-          <span class="text-[11px] font-[600] uppercase tracking-[0.06em] text-black/40 dark:text-white/35 mb-3 block">Link Button</span>
-          <div class="flex items-center gap-3 flex-wrap">
-            <button class="bg-transparent border-none text-[14px] font-[550] text-[#354334] dark:text-[#97AD96] underline underline-offset-2 cursor-pointer hover:opacity-70 transition-opacity px-0 py-0">Learn more</button>
-            <button class="bg-transparent border-none text-[14px] font-[550] text-[#354334] dark:text-[#97AD96] cursor-pointer hover:opacity-70 transition-opacity px-0 py-0 flex items-center gap-1">Explore <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg></button>
-          </div>
-        </div>
-        <div>
-          <span class="text-[11px] font-[600] uppercase tracking-[0.06em] text-black/40 dark:text-white/35 mb-3 block">States</span>
-          <div class="flex items-center gap-3 flex-wrap">
-            <button class="gel-btn gel-btn-pill">Default</button>
-            <button class="gel-btn gel-btn-pill opacity-50 cursor-not-allowed" disabled>Disabled</button>
+          <!-- States table -->
+          <div class="rounded-[var(--glass-radius-sm)] overflow-hidden border border-black/[0.06] dark:border-white/[0.06]">
+            <div class="px-3 py-2 border-b border-black/[0.06] dark:border-white/[0.06]">
+              <span class="text-[10px] font-[650] uppercase tracking-[0.06em] contrast-muted">States</span>
+            </div>
+            <div class="flex items-center justify-between px-4 py-3.5 border-b border-black/[0.04] dark:border-white/[0.04]">
+              <span class="text-[12px] font-[550] contrast-muted">Default</span>
+              <button class="gel-btn gel-btn-pill">Default</button>
+            </div>
+            <div class="flex items-center justify-between px-4 py-3.5 border-b border-black/[0.04] dark:border-white/[0.04]">
+              <span class="text-[12px] font-[550] contrast-muted">Hover</span>
+              <button class="gel-btn gel-btn-pill scale-105">Hover</button>
+            </div>
+            <div class="flex items-center justify-between px-4 py-3.5">
+              <span class="text-[12px] font-[550] contrast-muted">Disabled</span>
+              <button class="gel-btn gel-btn-pill opacity-50 cursor-not-allowed" disabled>Disabled</button>
+            </div>
           </div>
         </div>
       </div>
@@ -183,6 +221,43 @@ const elevations = [
               <div class="flex-1 h-px bg-black/[0.08] dark:bg-white/[0.08]"></div>
               <span class="text-[10px] font-[550] text-black/30 dark:text-white/25 uppercase tracking-wider">or</span>
               <div class="flex-1 h-px bg-black/[0.08] dark:bg-white/[0.08]"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Frost Zones */}
+      <div class="mt-5">
+        <span class="text-[11px] font-[600] uppercase tracking-[0.06em] text-black/40 dark:text-white/35 mb-3 block">Frost Zones</span>
+        <div class="grid grid-cols-3 gap-4 max-[860px]:grid-cols-2 max-[540px]:grid-cols-1">
+          <div class="relative rounded-[var(--glass-radius-sm)] overflow-hidden h-[160px] border border-black/[0.06] dark:border-white/[0.06]">
+            <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 100%;" />
+            <div class="relative z-[1] p-4 flex flex-col justify-between h-full">
+              <div>
+                <span class="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/80 dark:text-white/80 px-2 py-0.5 rounded-full bg-black/[0.06] dark:bg-white/[0.08] inline-block mb-2">Standard</span>
+                <p class="text-[12px] font-[600] text-black/80 dark:text-white/80">ds-card-frost</p>
+              </div>
+              <p class="text-[11px] text-black/50 dark:text-white/45">95% → transparent. Max readability.</p>
+            </div>
+          </div>
+          <div class="relative rounded-[var(--glass-radius-sm)] overflow-hidden h-[160px] border border-black/[0.06] dark:border-white/[0.06]">
+            <div class="absolute inset-0 pointer-events-none ds-card-frost-half" />
+            <div class="relative z-[1] p-4 flex flex-col justify-between h-full">
+              <div>
+                <span class="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/80 dark:text-white/80 px-2 py-0.5 rounded-full bg-black/[0.06] dark:bg-white/[0.08] inline-block mb-2">Half</span>
+                <p class="text-[12px] font-[600] text-black/80 dark:text-white/80">ds-card-frost-half</p>
+              </div>
+              <p class="text-[11px] text-black/50 dark:text-white/45">Left opaque, right see-through.</p>
+            </div>
+          </div>
+          <div class="relative rounded-[var(--glass-radius-sm)] overflow-hidden h-[160px] border border-black/[0.06] dark:border-white/[0.06]">
+            <div class="absolute inset-0 pointer-events-none ds-card-frost-clear" style="height: 100%;" />
+            <div class="relative z-[1] p-4 flex flex-col justify-between h-full">
+              <div>
+                <span class="text-[10px] font-[650] uppercase tracking-[0.06em] contrast-muted px-2 py-0.5 rounded-full bg-black/[0.06] dark:bg-white/[0.08] inline-block mb-2">Clear</span>
+                <p class="text-[12px] font-[600] contrast-text">ds-card-frost-clear</p>
+              </div>
+              <p class="text-[11px] contrast-muted">15% → transparent. See-through.</p>
             </div>
           </div>
         </div>

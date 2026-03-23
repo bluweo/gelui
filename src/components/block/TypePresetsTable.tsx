@@ -1,0 +1,250 @@
+import { useState, useEffect, useCallback } from "react";
+import { PresetEditorModal } from "@/components/modal/PresetEditorModal";
+
+interface TypePreset {
+  name: string;
+  tag: string;
+  size: string;
+  weight: number;
+  lh: string;
+  ls: string;
+  role: string;
+  sample: string;
+  isLink?: boolean;
+}
+
+const INITIAL_PRESETS: TypePreset[] = [
+  { name: "Display", tag: "h1", size: "36px", weight: 750, lh: "1.1", ls: "-0.035em", role: "Heading", sample: "Design systems that feel alive" },
+  { name: "H1", tag: "h1", size: "30px", weight: 750, lh: "1.2", ls: "-0.03em", role: "Heading", sample: "Page heading" },
+  { name: "H2", tag: "h2", size: "24px", weight: 700, lh: "1.25", ls: "-0.02em", role: "Heading", sample: "Section heading" },
+  { name: "H3", tag: "h3", size: "20px", weight: 650, lh: "1.3", ls: "-0.015em", role: "Heading", sample: "Subsection heading" },
+  { name: "H4", tag: "h4", size: "17px", weight: 600, lh: "1.35", ls: "-0.01em", role: "Heading", sample: "Card heading" },
+  { name: "H5", tag: "h5", size: "15px", weight: 600, lh: "1.4", ls: "0", role: "Heading", sample: "Small heading" },
+  { name: "H6", tag: "h6", size: "13px", weight: 600, lh: "1.4", ls: "0.02em", role: "Heading", sample: "Micro heading" },
+  { name: "Body", tag: "p", size: "15px", weight: 450, lh: "1.6", ls: "0", role: "Body", sample: "Every surface in Gel UI is designed to feel alive — blurring, refracting, and breathing with the content behind it. From volumetric gel shadows to adaptive contrast detection, each layer responds to its environment in real time." },
+  { name: "Body Sm", tag: "p", size: "13px", weight: 450, lh: "1.5", ls: "0", role: "Body", sample: "Smaller body text for descriptions and secondary content." },
+  { name: "Caption", tag: "span", size: "11.5px", weight: 500, lh: "1.4", ls: "0.02em", role: "UI", sample: "Caption text for metadata" },
+  { name: "Overline", tag: "span", size: "10px", weight: 650, lh: "1.2", ls: "0.1em", role: "UI", sample: "OVERLINE LABEL" },
+  { name: "Label", tag: "label", size: "13px", weight: 600, lh: "1", ls: "0.02em", role: "UI", sample: "Form label" },
+  { name: "Code", tag: "code", size: "13px", weight: 500, lh: "1.5", ls: "0", role: "Mono", sample: "const theme = 'glassmorphism';" },
+  { name: "Code Sm", tag: "code", size: "11px", weight: 500, lh: "1.4", ls: "0", role: "Mono", sample: "var(--glass-radius)" },
+  { name: "Link", tag: "a", size: "15px", weight: 550, lh: "1.5", ls: "0", role: "Body", sample: "Learn more about GelUI →", isLink: true },
+];
+
+const TAG_COLORS: Record<string, { bg: string; darkBg: string; text: string; darkText: string }> = {
+  h1: { bg: "#e8e8ff", darkBg: "#e8e8ff", text: "#3030a0", darkText: "#3030a0" },
+  h2: { bg: "#f0e0ff", darkBg: "#f0e0ff", text: "#6030a0", darkText: "#6030a0" },
+  h3: { bg: "#e0f0ff", darkBg: "#e0f0ff", text: "#2060a0", darkText: "#2060a0" },
+  h4: { bg: "#e0ffe8", darkBg: "#e0ffe8", text: "#208050", darkText: "#208050" },
+  h5: { bg: "#f5f5d8", darkBg: "#f5f5d8", text: "#808020", darkText: "#808020" },
+  h6: { bg: "#ffe8d8", darkBg: "#ffe8d8", text: "#a06020", darkText: "#a06020" },
+  p: { bg: "#e0f0e0", darkBg: "#e0f0e0", text: "#306030", darkText: "#306030" },
+  span: { bg: "#ececec", darkBg: "#ececec", text: "#505050", darkText: "#505050" },
+  label: { bg: "#f0e0f0", darkBg: "#f0e0f0", text: "#803080", darkText: "#803080" },
+  code: { bg: "#f0ecd8", darkBg: "#f0ecd8", text: "#706020", darkText: "#706020" },
+  a: { bg: "#d8e8ff", darkBg: "#d8e8ff", text: "#2050a0", darkText: "#2050a0" },
+};
+
+export function TypePresetsTable() {
+  const [presets, setPresets] = useState(INITIAL_PRESETS);
+  const [isDark, setIsDark] = useState(false);
+  const [editingIdx, setEditingIdx] = useState<number | null>(null);
+  const isModified = JSON.stringify(presets) !== JSON.stringify(INITIAL_PRESETS);
+
+  useEffect(() => {
+    const check = () => setIsDark(document.documentElement.getAttribute("data-theme") === "dark");
+    check();
+    const obs = new MutationObserver(check);
+    obs.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+    return () => obs.disconnect();
+  }, []);
+
+  const getFontFamily = (role: string) => {
+    switch (role) {
+      case "Mono": return "var(--font-mono)";
+      case "UI": return "var(--font-ui)";
+      case "Body": return "var(--font-body)";
+      default: return "var(--font-heading)";
+    }
+  };
+
+  const getTagStyle = (tag: string) => {
+    const tc = TAG_COLORS[tag] ?? { bg: "#ececec", darkBg: "#3a3a3a", text: "#505050", darkText: "#d0d0d0" };
+    return {
+      background: isDark ? tc.darkBg : tc.bg,
+      color: isDark ? tc.darkText : tc.text,
+    };
+  };
+
+  const handleApply = useCallback((size: string, weight: string, lh: string) => {
+    if (editingIdx === null) return;
+    setPresets((prev) => {
+      const next = [...prev];
+      next[editingIdx] = { ...next[editingIdx], size, weight: Number(weight), lh };
+      return next;
+    });
+  }, [editingIdx]);
+
+  const editingPreset = editingIdx !== null ? presets[editingIdx] : null;
+
+  // Get a visible tint of the tag color for hover
+  const getRowHoverBg = (tag: string) => {
+    const tc = TAG_COLORS[tag];
+    if (!tc) return isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.05)";
+    // Use the tag color directly — it's already a light/dark tint
+    return isDark ? tc.darkBg : tc.bg;
+  };
+
+  return (
+    <>
+      {/* Reset button — absolute top right, always visible */}
+      <div style={{ position: "absolute", top: "20px", right: "20px", zIndex: 2 }}>
+        <button
+          onClick={() => setPresets(INITIAL_PRESETS)}
+          className="flex items-center gap-1.5 px-3.5 py-2 rounded-full text-[11px] font-[550] transition-all duration-200 cursor-pointer hover:scale-105"
+          style={{
+            background: isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.05)",
+            color: isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.45)",
+            border: `1px solid ${isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)"}`,
+            opacity: isModified ? 1 : 0.4,
+          }}
+          disabled={!isModified}
+        >
+          Reset
+        </button>
+      </div>
+
+      <div className="flex flex-col rounded-[var(--glass-radius-sm)] overflow-hidden" style={{ background: isDark ? "rgba(0,0,0,0.6)" : "rgba(255,255,255,0.95)" }}>
+        {/* Header */}
+        <div
+          className="flex items-center px-4 py-2.5 gap-4"
+          style={{
+            background: isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)",
+            borderBottom: `1px solid ${isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.06)"}`,
+          }}
+        >
+          <span className="w-[70px] shrink-0 text-[10px] font-semibold uppercase tracking-widest" style={{ color: isDark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.45)" }}>Preset</span>
+          <span className="w-[55px] shrink-0 text-[10px] font-semibold uppercase tracking-widest hidden md:block" style={{ color: isDark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.45)" }}>Tag</span>
+          <span className="flex-1 text-[10px] font-semibold uppercase tracking-widest" style={{ color: isDark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.45)" }}>Preview</span>
+          <span className="w-[50px] text-[10px] font-semibold uppercase tracking-widest text-right hidden sm:block" style={{ color: isDark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.45)" }}>Size</span>
+          <span className="w-[50px] text-[10px] font-semibold uppercase tracking-widest text-right hidden sm:block" style={{ color: isDark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.45)" }}>Weight</span>
+          <span className="w-[65px] text-[10px] font-semibold uppercase tracking-widest text-right hidden md:block" style={{ color: isDark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.45)" }}>Line Height</span>
+          <span className="w-[60px] text-[10px] font-semibold uppercase tracking-widest text-right hidden md:block" style={{ color: isDark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.45)" }}>Role</span>
+          <span className="w-[24px] shrink-0" />
+        </div>
+
+        {/* Rows */}
+        {presets.map((t, idx) => (
+          <div
+            key={t.name}
+            className="type-preset-row group flex items-center px-4 lg:px-6 py-3 gap-4 transition-all duration-200 ease-out cursor-pointer"
+            onClick={() => setEditingIdx(idx)}
+            style={{
+              background: idx % 2 === 0 ? (isDark ? "rgba(0,0,0,0.3)" : "rgba(255,255,255,0.7)") : "transparent",
+              borderBottom: `1px solid ${isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.08)"}`,
+              ...(idx === 0 ? { paddingTop: "1.25rem" } : {}),
+              ...(idx === presets.length - 1 ? { paddingBottom: "1.25rem" } : {}),
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.06)";
+              e.currentTarget.style.borderBottom = `2px solid ${isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.4)"}`;
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = idx % 2 === 0 ? (isDark ? "rgba(0,0,0,0.3)" : "rgba(255,255,255,0.7)") : "transparent";
+              e.currentTarget.style.borderBottom = `1px solid ${isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.08)"}`;
+            }}
+          >
+            {/* Name */}
+            <div className="w-[70px] shrink-0">
+              <span className="text-[11px] font-semibold transition-colors duration-200" style={{ color: isDark ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.75)" }}>{t.name}</span>
+            </div>
+
+            {/* Tag */}
+            <div className="w-[55px] shrink-0 hidden md:block">
+              <span
+                className="text-[11px] font-mono font-medium px-2 py-1 rounded-[6px] tag-light"
+                style={{
+                  ...getTagStyle(t.tag),
+                  ["--tag-bg" as string]: TAG_COLORS[t.tag]?.bg,
+                  ["--tag-dark-bg" as string]: TAG_COLORS[t.tag]?.darkBg,
+                  ["--tag-text" as string]: TAG_COLORS[t.tag]?.text,
+                  ["--tag-dark-text" as string]: TAG_COLORS[t.tag]?.darkText,
+                }}
+              >
+                &lt;{t.tag}&gt;
+              </span>
+            </div>
+
+            {/* Preview */}
+            <div className="flex-1 min-w-0 overflow-hidden">
+              <span
+                className={`block ${t.tag !== "p" ? "truncate" : ""} ${t.isLink ? "underline decoration-1 underline-offset-2" : ""}`}
+                style={{
+                  fontSize: t.size,
+                  fontWeight: t.weight,
+                  lineHeight: t.lh,
+                  letterSpacing: t.ls,
+                  fontFamily: getFontFamily(t.role),
+                  color: t.isLink ? (isDark ? "#97AD96" : "#354334") : (isDark ? "rgba(255,255,255,0.8)" : "rgba(0,0,0,0.8)"),
+                }}
+              >
+                {t.sample}
+              </span>
+            </div>
+
+            {/* Size (plain text) */}
+            <div className="w-[50px] text-right hidden sm:block">
+              <span className="text-[11px] font-mono" style={{ color: isDark ? "rgba(255,255,255,0.35)" : "rgba(0,0,0,0.4)" }}>{t.size}</span>
+            </div>
+
+            {/* Weight (plain text) */}
+            <div className="w-[50px] text-right hidden sm:block">
+              <span className="text-[11px] font-mono" style={{ color: isDark ? "rgba(255,255,255,0.35)" : "rgba(0,0,0,0.4)" }}>{t.weight}</span>
+            </div>
+
+            {/* Line Height (plain text) */}
+            <div className="w-[65px] text-right hidden md:block">
+              <span className="text-[11px] font-mono" style={{ color: isDark ? "rgba(255,255,255,0.35)" : "rgba(0,0,0,0.4)" }}>{t.lh}</span>
+            </div>
+
+            {/* Role */}
+            <div className="w-[60px] hidden md:block">
+              <span
+                className="text-[10px] font-semibold uppercase tracking-wide px-2 py-0.5 rounded-full"
+                style={{
+                  background: isDark ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.8)",
+                  color: isDark ? "rgba(255,255,255,0.8)" : "#fff",
+                }}
+              >
+                {t.role}
+              </span>
+            </div>
+
+            {/* Settings icon — visible on hover */}
+            <div className="w-[24px] shrink-0 flex items-center justify-center opacity-0 group-hover:opacity-50 transition-opacity duration-200">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="3" />
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+              </svg>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Unified Editor Modal */}
+      {editingPreset && (
+        <PresetEditorModal
+          isOpen={editingIdx !== null}
+          onClose={() => setEditingIdx(null)}
+          presetName={editingPreset.name}
+          sample={editingPreset.sample}
+          fontFamily={getFontFamily(editingPreset.role)}
+          size={editingPreset.size}
+          weight={String(editingPreset.weight)}
+          lh={editingPreset.lh}
+          onApply={handleApply}
+        />
+      )}
+    </>
+  );
+}
