@@ -1,5 +1,45 @@
 ---
 import DSLayout from "@/components/layout/DSLayout.astro";
+import LayoutsHero from "@/components/block/LayoutsHero.astro";
+
+/* ─── Section data ─── */
+const sections = [
+  {
+    id: "page-shells",
+    label: "Page Shells",
+    title: "Page Shells",
+    description: "Full-page container systems that define the outermost structure of an application screen.",
+    items: ["App Shell", "Auth Shell", "Dashboard Shell", "Marketing Shell"],
+  },
+  {
+    id: "grid-systems",
+    label: "Grid Systems",
+    title: "Grid Systems",
+    description: "Flexible grid primitives for arranging content in rows, columns, and creative tile patterns.",
+    items: ["Bento Grid", "Masonry", "Responsive Columns", "Fixed Sidebar"],
+  },
+  {
+    id: "navigation-layouts",
+    label: "Navigation Layouts",
+    title: "Navigation Layouts",
+    description: "Structural patterns that combine navigation elements with content areas for wayfinding.",
+    items: ["Top Nav + Content", "Side Nav + Content", "Bottom Nav (Mobile)", "Breadcrumb Layout"],
+  },
+  {
+    id: "content-layouts",
+    label: "Content Layouts",
+    title: "Content Layouts",
+    description: "Purpose-built arrangements for displaying articles, media, comparisons, and rich content.",
+    items: ["Article", "Gallery", "Split View", "Comparison"],
+  },
+  {
+    id: "responsive",
+    label: "Responsive",
+    title: "Responsive",
+    description: "Utilities and demos for adaptive behavior across breakpoints, container queries, and fluid scales.",
+    items: ["Breakpoint Demos", "Container Queries", "Fluid Typography", "Adaptive Spacing"],
+  },
+];
 ---
 
 <DSLayout
@@ -7,20 +47,33 @@ import DSLayout from "@/components/layout/DSLayout.astro";
   description="Page-level composition in GelUI: responsive grids, shells, bento layouts, and page templates. Build adaptive glassmorphism layouts that work across all viewports."
   keywords="page layouts, responsive grids, bento layouts, page templates, glass layouts, responsive design, viewport breakpoints"
 >
-  <div class="w-full grid grid-cols-4 gap-5 max-[860px]:grid-cols-2 max-[540px]:grid-cols-1">
+  <div class="w-full grid grid-cols-4 gap-5 max-[860px]:grid-cols-2 max-[860px]:gap-4 max-[540px]:grid-cols-1 max-[540px]:gap-3">
 
-    <div class="col-span-full mb-2">
-      <h1 class="text-[24px] font-[650] tracking-[-0.02em] leading-tight">Layouts</h1>
-      <p class="text-[13px] mt-1 opacity-50">Page-level composition: grids, responsive shells, bento layouts, and page templates.</p>
-    </div>
+    <LayoutsHero />
 
-    <div class="col-span-full glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-8 flex flex-col items-center justify-center min-h-[280px] gap-4">
-      <span class="text-[48px] font-[650] opacity-10">L6</span>
-      <span class="text-[15px] font-[550] opacity-60">Coming in Phase 5</span>
-      <p class="text-[12px] opacity-35 max-w-[400px] text-center font-mono">
-        Layout primitives (BentoGrid, PageShell, SplitView, ResponsiveStack) will be documented here with responsive breakpoint demos.
-      </p>
-    </div>
+    {sections.map((section) => (
+      <div data-section={section.label} id={section.id} class="col-span-2 max-[540px]:col-span-1 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
+        <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 160px;" />
+
+        <div class="relative flex flex-col gap-1 mb-6 pt-1 pl-1">
+          <span class="text-[10px] font-[650] uppercase tracking-[0.1em] text-black/40 dark:text-white/40 mb-1">{section.label}</span>
+          <h2 class="text-[24px] font-[750] tracking-[-0.03em] leading-[1.2] text-black dark:text-white mb-1" style="font-family: var(--font-heading)">{section.title}</h2>
+          <p class="text-[13px] leading-[1.6] text-black/60 dark:text-white/55">{section.description}</p>
+        </div>
+
+        <div class="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white dark:bg-[#1a1a1a]">
+          {section.items.map((item, i) => (
+            <div class:list={[
+              "flex items-center justify-between px-4 py-3.5",
+              i < section.items.length - 1 ? "border-b border-black/[0.06] dark:border-white/[0.06]" : ""
+            ]}>
+              <span class="text-[13px] font-[550] text-black/70 dark:text-white/60">{item}</span>
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-[650] uppercase tracking-[0.04em] bg-amber-500/10 text-amber-600 dark:text-amber-400">Coming Soon</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    ))}
 
   </div>
 </DSLayout>

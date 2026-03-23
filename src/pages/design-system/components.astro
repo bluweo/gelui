@@ -1,26 +1,113 @@
 ---
 import DSLayout from "@/components/layout/DSLayout.astro";
+import ComponentsHero from "@/components/block/ComponentsHero.astro";
+
+/* ─── Section definitions ─── */
+const sections = [
+  {
+    id: "data-display",
+    label: "Data Display",
+    title: "Data Display",
+    description: "Rich data presentation components for tables, lists, timelines, and statistical visualizations.",
+    items: ["DataTable", "List", "Tree View", "Timeline", "Stats Card"],
+  },
+  {
+    id: "overlay",
+    label: "Overlay",
+    title: "Overlay",
+    description: "Layered UI elements that float above the page — modals, drawers, popovers, and transient notifications.",
+    items: ["Modal", "Drawer", "Sheet", "Popover", "Tooltip", "Toast"],
+  },
+  {
+    id: "forms",
+    label: "Forms",
+    title: "Forms",
+    description: "Compound form patterns combining inputs, validation, and multi-step flows into cohesive experiences.",
+    items: ["Form Group", "Field Validation", "Multi-step Form", "File Upload"],
+  },
+  {
+    id: "cards",
+    label: "Cards",
+    title: "Cards",
+    description: "Content container compositions for profiles, statistics, media, and pricing — all glass-first.",
+    items: ["Profile Card", "Stat Card", "Media Card", "Pricing Card"],
+  },
+  {
+    id: "navigation",
+    label: "Navigation",
+    title: "Navigation",
+    description: "Structural navigation components — headers, sidebars, footers, and step-based flows.",
+    items: ["Header", "Sidebar", "Footer", "Pagination", "Stepper"],
+  },
+  {
+    id: "feedback",
+    label: "Feedback",
+    title: "Feedback",
+    description: "User feedback and confirmation patterns — toasts, banners, notifications, and confirmation dialogs.",
+    items: ["Toast", "Alert Banner", "Notification", "Confirmation Dialog"],
+  },
+];
 ---
 
 <DSLayout
   title="Components — GelUI Design System"
-  description="Multi-primitive compositions in GelUI: Card, Modal, Dropdown, Tabs, and compound elements. Production-ready glassmorphism components with adaptive theming."
-  keywords="UI components, glass cards, modals, dropdowns, tabs, compound components, glassmorphism, adaptive theming"
+  description="Multi-primitive compositions in GelUI: production-ready UI blocks with adaptive theming, responsive behavior, and accessibility built in."
+  keywords="UI components, glass cards, modals, drawers, data tables, forms, navigation, feedback, glassmorphism, adaptive theming"
 >
-  <div class="w-full grid grid-cols-4 gap-5 max-[860px]:grid-cols-2 max-[540px]:grid-cols-1">
+  <div class="w-full grid grid-cols-4 gap-5 max-[860px]:grid-cols-2 max-[860px]:gap-4 max-[540px]:grid-cols-1 max-[540px]:gap-3">
 
-    <div class="col-span-full mb-2">
-      <h1 class="text-[24px] font-[650] tracking-[-0.02em] leading-tight">Components</h1>
-      <p class="text-[13px] mt-1 opacity-50">Multi-primitive compositions: Card, Modal, Dropdown, Tabs, and compound elements.</p>
-    </div>
+    <ComponentsHero />
 
-    <div class="col-span-full glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-8 flex flex-col items-center justify-center min-h-[280px] gap-4">
-      <span class="text-[48px] font-[650] opacity-10">L4</span>
-      <span class="text-[15px] font-[550] opacity-60">Coming in Phase 3</span>
-      <p class="text-[12px] opacity-35 max-w-[400px] text-center font-mono">
-        Compound components (Card, Modal, Dropdown, Tabs, Toast, ContextMenu) will be documented here with interactive demos and prop tables.
-      </p>
-    </div>
+    {sections.map((section) => (
+      <div
+        data-section={section.label}
+        id={section.id}
+        class="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5"
+      >
+        <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 160px;" />
+
+        <div class="relative flex flex-col gap-1 mb-6 pt-1 pl-1">
+          <span class="text-[10px] font-[650] uppercase tracking-[0.1em] text-black/40 dark:text-white/40 mb-1">
+            {section.label}
+          </span>
+          <h2
+            class="text-[24px] font-[750] tracking-[-0.03em] leading-[1.2] text-black dark:text-white mb-1"
+            style="font-family: var(--font-heading)"
+          >
+            {section.title}
+          </h2>
+          <p class="text-[13px] leading-[1.6] text-black/60 dark:text-white/55">
+            {section.description}
+          </p>
+        </div>
+
+        <!-- Planned items table -->
+        <div class="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white dark:bg-[#1a1a1a]">
+          <div class="px-3 py-2 bg-black/[0.04] dark:bg-white/[0.06] border-b border-black/[0.06] dark:border-white/[0.06]">
+            <span class="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/45 dark:text-white/40">
+              Planned Components
+            </span>
+          </div>
+          {section.items.map((item, i) => (
+            <div
+              class:list={[
+                "flex items-center justify-between px-4 py-3",
+                i < section.items.length - 1
+                  ? "border-b border-black/[0.04] dark:border-white/[0.04]"
+                  : "",
+              ]}
+            >
+              <span class="text-[13px] font-[550] text-black/70 dark:text-white/60">
+                {item}
+              </span>
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-[650] uppercase tracking-[0.04em] bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20">
+                Coming Soon
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+    ))}
 
   </div>
 </DSLayout>
