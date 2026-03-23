@@ -4,7 +4,7 @@ import { useState } from "react";
 function TabBar({ tabs, defaultTab }: { tabs: string[]; defaultTab?: string }) {
   const [active, setActive] = useState(defaultTab || tabs[0]);
   return (
-    <div className="flex border-b border-black/[0.08] dark:border-white/[0.08]">
+    <div className="flex border-b border-black/10 dark:border-white/10">
       {tabs.map((tab) => (
         <button
           key={tab}
@@ -32,10 +32,10 @@ function PillTabs({ tabs, defaultTab }: { tabs: string[]; defaultTab?: string })
         <button
           key={tab}
           onClick={() => setActive(tab)}
-          className={`text-[13px] font-[${active === tab ? "600" : "500"}] px-4 py-2 rounded-full cursor-pointer border-none transition-all duration-200 ${
+          className={`text-[13px] px-4 py-2 rounded-full cursor-pointer border-none transition-all duration-200 ${
             active === tab
-              ? "bg-white/80 dark:bg-white/10 text-black/80 dark:text-white/80 shadow-sm"
-              : "text-black/40 dark:text-white/35 hover:text-black/60 dark:hover:text-white/50 bg-transparent"
+              ? "font-[600] bg-white/80 dark:bg-white/10 text-black/80 dark:text-white/80 shadow-sm"
+              : "font-[500] text-black/40 dark:text-white/35 hover:text-black/60 dark:hover:text-white/50 bg-transparent"
           }`}
         >
           {tab}
@@ -55,15 +55,15 @@ function NavItems() {
   ];
 
   return (
-    <div className="flex flex-col gap-0.5 w-[220px]">
+    <div className="flex flex-col gap-0.5">
       {items.map((item) => (
         <button
           key={item.label}
           onClick={() => setActive(item.label)}
-          className={`flex items-center gap-2.5 px-3 py-2 rounded-[var(--glass-radius-sm)] text-[13px] no-underline cursor-pointer border-none text-left transition-all duration-150 ${
+          className={`flex items-center gap-2.5 px-3 py-2.5 rounded-[var(--glass-radius-sm)] text-[13px] no-underline cursor-pointer border-none text-left transition-all duration-150 w-full ${
             active === item.label
-              ? "bg-black/[0.04] dark:bg-white/[0.06] font-[600] text-black/75 dark:text-white/70"
-              : "font-[500] text-black/45 dark:text-white/40 hover:bg-black/[0.02] dark:hover:bg-white/[0.03] bg-transparent"
+              ? "bg-black/[0.06] dark:bg-white/[0.08] font-[600] text-black/75 dark:text-white/70"
+              : "font-[500] text-black/45 dark:text-white/40 hover:bg-black/[0.03] dark:hover:bg-white/[0.04] bg-transparent"
           }`}
         >
           {item.icon}
@@ -77,35 +77,51 @@ function NavItems() {
 /* ═══ Main Export ═══ */
 export function PrimitiveNavigation() {
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-4">
       {/* Tab Bar */}
-      <div>
-        <span className="text-[11px] font-[600] uppercase tracking-[0.06em] text-black/40 dark:text-white/35 mb-3 block">Tab Bar</span>
-        <TabBar tabs={["Overview", "Settings", "Activity"]} />
+      <div className="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white dark:bg-[#1a1a1a]">
+        <div className="px-4 py-2.5 bg-black/[0.06] dark:bg-white/[0.08] border-b border-black/10 dark:border-white/10">
+          <span className="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/70 dark:text-white/70">Tab Bar</span>
+        </div>
+        <div className="p-4">
+          <TabBar tabs={["Overview", "Settings", "Activity"]} />
+        </div>
       </div>
 
       {/* Pill Tabs */}
-      <div>
-        <span className="text-[11px] font-[600] uppercase tracking-[0.06em] text-black/40 dark:text-white/35 mb-3 block">Pill Tabs</span>
-        <PillTabs tabs={["All", "Active", "Archived"]} />
+      <div className="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white dark:bg-[#1a1a1a]">
+        <div className="px-4 py-2.5 bg-black/[0.06] dark:bg-white/[0.08] border-b border-black/10 dark:border-white/10">
+          <span className="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/70 dark:text-white/70">Pill Tabs</span>
+        </div>
+        <div className="p-4">
+          <PillTabs tabs={["All", "Active", "Archived"]} />
+        </div>
       </div>
 
       {/* Breadcrumb */}
-      <div>
-        <span className="text-[11px] font-[600] uppercase tracking-[0.06em] text-black/40 dark:text-white/35 mb-3 block">Breadcrumb</span>
-        <nav className="flex items-center gap-1.5 text-[13px]">
-          <a href="#" className="text-black/40 dark:text-white/35 hover:text-black/60 dark:hover:text-white/50 no-underline transition-colors" onClick={(e) => e.preventDefault()}>Home</a>
-          <span className="text-black/20 dark:text-white/15">/</span>
-          <a href="#" className="text-black/40 dark:text-white/35 hover:text-black/60 dark:hover:text-white/50 no-underline transition-colors" onClick={(e) => e.preventDefault()}>Design System</a>
-          <span className="text-black/20 dark:text-white/15">/</span>
-          <span className="text-black/70 dark:text-white/65 font-[550]">Primitives</span>
-        </nav>
+      <div className="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white dark:bg-[#1a1a1a]">
+        <div className="px-4 py-2.5 bg-black/[0.06] dark:bg-white/[0.08] border-b border-black/10 dark:border-white/10">
+          <span className="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/70 dark:text-white/70">Breadcrumb</span>
+        </div>
+        <div className="p-4">
+          <nav className="flex items-center gap-1.5 text-[13px]">
+            <a href="#" className="text-black/45 dark:text-white/40 hover:text-black/65 dark:hover:text-white/55 no-underline transition-colors" onClick={(e) => e.preventDefault()}>Home</a>
+            <span className="text-black/20 dark:text-white/15">/</span>
+            <a href="#" className="text-black/45 dark:text-white/40 hover:text-black/65 dark:hover:text-white/55 no-underline transition-colors" onClick={(e) => e.preventDefault()}>Design System</a>
+            <span className="text-black/20 dark:text-white/15">/</span>
+            <span className="text-black/75 dark:text-white/70 font-[600]">Primitives</span>
+          </nav>
+        </div>
       </div>
 
       {/* Nav Items */}
-      <div>
-        <span className="text-[11px] font-[600] uppercase tracking-[0.06em] text-black/40 dark:text-white/35 mb-3 block">Nav Item</span>
-        <NavItems />
+      <div className="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white dark:bg-[#1a1a1a]">
+        <div className="px-4 py-2.5 bg-black/[0.06] dark:bg-white/[0.08] border-b border-black/10 dark:border-white/10">
+          <span className="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/70 dark:text-white/70">Nav Items</span>
+        </div>
+        <div className="p-4">
+          <NavItems />
+        </div>
       </div>
     </div>
   );

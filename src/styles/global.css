@@ -1779,6 +1779,38 @@ html[data-navigated] * {
   100% { transform: translateX(100%); }
 }
 
+/* Skeleton shimmer — sliding highlight over a pulsing base */
+.skeleton-shimmer {
+  position: relative;
+  overflow: hidden;
+  animation: skeleton-pulse 2s ease-in-out infinite;
+}
+.skeleton-shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255,255,255,0.4) 40%,
+    rgba(255,255,255,0.4) 60%,
+    transparent 100%
+  );
+  animation: skeleton-wave 1.8s ease-in-out infinite;
+}
+[data-theme="dark"] .skeleton-shimmer::after {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255,255,255,0.08) 40%,
+    rgba(255,255,255,0.08) 60%,
+    transparent 100%
+  );
+}
+
 /* ═══════════════════════════════════════════════
    NATIVE RANGE INPUT STYLING
    Cannot be done in Tailwind — pseudo-elements

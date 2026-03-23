@@ -626,72 +626,98 @@ const elevations = [
       <div class="relative flex flex-col gap-1 mb-6 pt-1 pl-1">
         <span class="text-[10px] font-[650] uppercase tracking-[0.1em] text-black/40 dark:text-white/40 mb-1">Spacing</span>
         <h2 class="text-[24px] font-[750] tracking-[-0.03em] leading-[1.2] text-black dark:text-white mb-1" style="font-family: var(--font-heading)">Layout Compositions</h2>
-        <p class="text-[13px] leading-[1.6] text-black/60 dark:text-white/55">Padding and gap presets for consistent spacing</p>
+        <p class="text-[13px] leading-[1.6] text-black/60 dark:text-white/55">Padding, gap, and alignment presets</p>
       </div>
-      {/* Padding presets */}
-      <span class="text-[11px] font-[600] uppercase tracking-[0.06em] text-black/40 dark:text-white/35 mb-3 block">Padding Presets</span>
-      <div class="grid grid-cols-5 gap-3 max-[860px]:grid-cols-3 max-[540px]:grid-cols-2 mb-6">
-        {spacingComps.map((s) => (
-          <div class="flex flex-col items-center gap-2">
-            <div class="relative rounded-[var(--glass-radius-sm)] border-2 border-dashed border-black/[0.12] dark:border-white/[0.1] bg-white/60 dark:bg-black/30" style={`padding: ${s.value}`}>
-              <div class="w-8 h-8 rounded-[4px] bg-black/8 dark:bg-white/8 flex items-center justify-center">
-                <span class="text-[9px] font-mono text-black/30 dark:text-white/25">{s.value}</span>
-              </div>
-            </div>
-            <div class="text-center">
-              <span class="text-[12px] font-[650] text-black/70 dark:text-white/65 block">{s.name}</span>
-              <span class="text-[10px] text-black/40 dark:text-white/35">{s.desc}</span>
+
+      <div class="flex flex-col gap-4">
+        <!-- Padding Presets -->
+        <div class="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white dark:bg-[#1a1a1a]">
+          <div class="px-4 py-2.5 bg-black/[0.06] dark:bg-white/[0.08] border-b border-black/10 dark:border-white/10">
+            <span class="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/70 dark:text-white/70">Padding Presets</span>
+          </div>
+          <div class="p-4">
+            <div class="grid grid-cols-5 gap-3 max-[860px]:grid-cols-3 max-[540px]:grid-cols-2">
+              {spacingComps.map((s) => (
+                <div class="flex flex-col items-center gap-2">
+                  <div class="relative rounded-[var(--glass-radius-sm)] border-2 border-dashed border-black/12 dark:border-white/10 bg-black/[0.02] dark:bg-white/[0.03]" style={`padding: ${s.value}`}>
+                    <div class="w-8 h-8 rounded-[4px] bg-black/8 dark:bg-white/8 flex items-center justify-center">
+                      <span class="text-[9px] font-mono text-black/35 dark:text-white/30">{s.value}</span>
+                    </div>
+                  </div>
+                  <div class="text-center">
+                    <span class="text-[11px] font-[650] text-black/70 dark:text-white/65 block">{s.name}</span>
+                    <span class="text-[9px] text-black/45 dark:text-white/40">{s.desc}</span>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
-        ))}
-      </div>
+        </div>
 
-      {/* Stack (vertical) */}
-      <span class="text-[11px] font-[600] uppercase tracking-[0.06em] text-black/40 dark:text-white/35 mb-3 block">Stack (Vertical)</span>
-      <div class="flex gap-6 mb-6 max-[540px]:flex-col">
-        <div class="flex flex-col gap-2 p-3 rounded-[var(--glass-radius-sm)] border border-dashed border-black/[0.1] dark:border-white/[0.08] bg-white/40 dark:bg-black/20">
-          <div class="h-5 rounded bg-black/8 dark:bg-white/8 w-full"></div>
-          <div class="h-5 rounded bg-black/8 dark:bg-white/8 w-full"></div>
-          <div class="h-5 rounded bg-black/8 dark:bg-white/8 w-full"></div>
-          <span class="text-[10px] font-mono text-black/30 dark:text-white/25 text-center">gap: 8px</span>
+        <!-- Stack & Inline -->
+        <div class="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white dark:bg-[#1a1a1a]">
+          <div class="px-4 py-2.5 bg-black/[0.06] dark:bg-white/[0.08] border-b border-black/10 dark:border-white/10">
+            <span class="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/70 dark:text-white/70">Stack & Inline</span>
+          </div>
+          <div class="p-4 flex flex-col gap-4">
+            <div class="flex items-center justify-between py-2 border-b border-black/[0.06] dark:border-white/[0.06]">
+              <span class="text-[12px] font-[500] text-black/60 dark:text-white/55">Vertical (gap: 8px)</span>
+              <div class="flex flex-col gap-2">
+                <div class="h-3 w-16 rounded bg-black/8 dark:bg-white/8"></div>
+                <div class="h-3 w-16 rounded bg-black/8 dark:bg-white/8"></div>
+                <div class="h-3 w-16 rounded bg-black/8 dark:bg-white/8"></div>
+              </div>
+            </div>
+            <div class="flex items-center justify-between py-2 border-b border-black/[0.06] dark:border-white/[0.06]">
+              <span class="text-[12px] font-[500] text-black/60 dark:text-white/55">Vertical (gap: 16px)</span>
+              <div class="flex flex-col gap-4">
+                <div class="h-3 w-16 rounded bg-black/8 dark:bg-white/8"></div>
+                <div class="h-3 w-16 rounded bg-black/8 dark:bg-white/8"></div>
+                <div class="h-3 w-16 rounded bg-black/8 dark:bg-white/8"></div>
+              </div>
+            </div>
+            <div class="flex items-center justify-between py-2 border-b border-black/[0.06] dark:border-white/[0.06]">
+              <span class="text-[12px] font-[500] text-black/60 dark:text-white/55">Horizontal (gap: 8px)</span>
+              <div class="flex gap-2">
+                <div class="w-8 h-6 rounded bg-black/8 dark:bg-white/8"></div>
+                <div class="w-8 h-6 rounded bg-black/8 dark:bg-white/8"></div>
+                <div class="w-8 h-6 rounded bg-black/8 dark:bg-white/8"></div>
+              </div>
+            </div>
+            <div class="flex items-center justify-between py-2">
+              <span class="text-[12px] font-[500] text-black/60 dark:text-white/55">Horizontal (gap: 16px)</span>
+              <div class="flex gap-4">
+                <div class="w-8 h-6 rounded bg-black/8 dark:bg-white/8"></div>
+                <div class="w-8 h-6 rounded bg-black/8 dark:bg-white/8"></div>
+                <div class="w-8 h-6 rounded bg-black/8 dark:bg-white/8"></div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="flex flex-col gap-4 p-3 rounded-[var(--glass-radius-sm)] border border-dashed border-black/[0.1] dark:border-white/[0.08] bg-white/40 dark:bg-black/20">
-          <div class="h-5 rounded bg-black/8 dark:bg-white/8 w-full"></div>
-          <div class="h-5 rounded bg-black/8 dark:bg-white/8 w-full"></div>
-          <div class="h-5 rounded bg-black/8 dark:bg-white/8 w-full"></div>
-          <span class="text-[10px] font-mono text-black/30 dark:text-white/25 text-center">gap: 16px</span>
-        </div>
-      </div>
 
-      {/* Inline (horizontal) */}
-      <span class="text-[11px] font-[600] uppercase tracking-[0.06em] text-black/40 dark:text-white/35 mb-3 block">Inline (Horizontal)</span>
-      <div class="flex gap-6 mb-6 max-[540px]:flex-col">
-        <div class="flex gap-2 p-3 rounded-[var(--glass-radius-sm)] border border-dashed border-black/[0.1] dark:border-white/[0.08] bg-white/40 dark:bg-black/20">
-          <div class="w-12 h-8 rounded bg-black/8 dark:bg-white/8"></div>
-          <div class="w-12 h-8 rounded bg-black/8 dark:bg-white/8"></div>
-          <div class="w-12 h-8 rounded bg-black/8 dark:bg-white/8"></div>
-          <span class="text-[10px] font-mono text-black/30 dark:text-white/25 self-center ml-1">gap: 8px</span>
-        </div>
-        <div class="flex gap-4 p-3 rounded-[var(--glass-radius-sm)] border border-dashed border-black/[0.1] dark:border-white/[0.08] bg-white/40 dark:bg-black/20">
-          <div class="w-12 h-8 rounded bg-black/8 dark:bg-white/8"></div>
-          <div class="w-12 h-8 rounded bg-black/8 dark:bg-white/8"></div>
-          <div class="w-12 h-8 rounded bg-black/8 dark:bg-white/8"></div>
-          <span class="text-[10px] font-mono text-black/30 dark:text-white/25 self-center ml-1">gap: 16px</span>
-        </div>
-      </div>
-
-      {/* Center + Spacer */}
-      <span class="text-[11px] font-[600] uppercase tracking-[0.06em] text-black/40 dark:text-white/35 mb-3 block">Center + Spacer</span>
-      <div class="flex gap-4 max-[540px]:flex-col">
-        <div class="flex-1 flex items-center justify-center p-4 rounded-[var(--glass-radius-sm)] border border-dashed border-black/[0.1] dark:border-white/[0.08] bg-white/40 dark:bg-black/20 min-h-[80px]">
-          <div class="w-10 h-10 rounded bg-black/10 dark:bg-white/10 flex items-center justify-center"><span class="text-[9px] font-mono text-black/30 dark:text-white/25">Center</span></div>
-        </div>
-        <div class="flex-1 flex items-center p-4 rounded-[var(--glass-radius-sm)] border border-dashed border-black/[0.1] dark:border-white/[0.08] bg-white/40 dark:bg-black/20 min-h-[80px]">
-          <div class="w-10 h-6 rounded bg-black/10 dark:bg-white/10"></div>
-          <div class="flex-1"></div>
-          <span class="text-[9px] font-mono text-black/25 dark:text-white/20">← spacer →</span>
-          <div class="flex-1"></div>
-          <div class="w-10 h-6 rounded bg-black/10 dark:bg-white/10"></div>
+        <!-- Center & Spacer -->
+        <div class="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white dark:bg-[#1a1a1a]">
+          <div class="px-4 py-2.5 bg-black/[0.06] dark:bg-white/[0.08] border-b border-black/10 dark:border-white/10">
+            <span class="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/70 dark:text-white/70">Center & Spacer</span>
+          </div>
+          <div class="p-4 flex flex-col gap-4">
+            <div class="flex items-center justify-between py-2 border-b border-black/[0.06] dark:border-white/[0.06]">
+              <span class="text-[12px] font-[500] text-black/60 dark:text-white/55">Center</span>
+              <div class="w-28 h-12 rounded-[var(--glass-radius-sm)] border border-dashed border-black/12 dark:border-white/10 flex items-center justify-center">
+                <div class="w-6 h-6 rounded bg-black/10 dark:bg-white/10"></div>
+              </div>
+            </div>
+            <div class="flex items-center justify-between py-2">
+              <span class="text-[12px] font-[500] text-black/60 dark:text-white/55">Spacer</span>
+              <div class="w-28 h-8 rounded-[var(--glass-radius-sm)] border border-dashed border-black/12 dark:border-white/10 flex items-center px-1.5">
+                <div class="w-4 h-4 rounded bg-black/10 dark:bg-white/10"></div>
+                <div class="flex-1"></div>
+                <span class="text-[8px] font-mono text-black/25 dark:text-white/20">↔</span>
+                <div class="flex-1"></div>
+                <div class="w-4 h-4 rounded bg-black/10 dark:bg-white/10"></div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -699,25 +725,86 @@ const elevations = [
     <!-- ═══════════════════════════════════
          8. Elevation
          ═══════════════════════════════════ -->
-    <div data-section="Elevation" class="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
+    <div data-section="Elevation" class="col-span-full glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
       <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 160px;" />
       <div class="relative flex flex-col gap-1 mb-6 pt-1 pl-1">
-        <span class="text-[10px] font-[650] uppercase tracking-[0.1em] text-black/40 dark:text-white/40 mb-1">Depth</span>
+        <span class="text-[10px] font-[650] uppercase tracking-[0.1em] text-black/40 dark:text-white/40 mb-1">Depth & Loading</span>
         <h2 class="text-[24px] font-[750] tracking-[-0.03em] leading-[1.2] text-black dark:text-white mb-1" style="font-family: var(--font-heading)">Elevation</h2>
-        <p class="text-[13px] leading-[1.6] text-black/60 dark:text-white/55">Shadow depth levels for visual hierarchy</p>
+        <p class="text-[13px] leading-[1.6] text-black/60 dark:text-white/55">Shadow depth levels and skeleton loading states</p>
       </div>
-      <div class="flex gap-4 items-end flex-wrap">
-        {elevations.map((e) => (
-          <div class="flex flex-col items-center gap-3">
-            <div class="w-20 h-20 rounded-[var(--glass-radius-sm)] bg-white/90 dark:bg-black/60 flex items-center justify-center border border-black/[0.04] dark:border-white/[0.06] transition-shadow duration-300" style={`box-shadow: ${e.shadow}`}>
-              <span class="text-[10px] font-mono text-black/30 dark:text-white/25">z-{e.z}</span>
+
+      <div class="grid grid-cols-2 gap-5 max-[860px]:grid-cols-1">
+        <!-- Left: Shadow Depths -->
+        <div class="rounded-[var(--glass-radius-sm)] overflow-hidden border contrast-border" style="background: transparent;">
+          <div class="px-4 py-2.5 border-b contrast-border" style="background: transparent;">
+            <span class="text-[10px] font-[650] uppercase tracking-[0.06em] contrast-text-muted">Shadow Depths</span>
+          </div>
+          <div class="p-4 flex flex-col gap-6">
+            {elevations.map((e) => (
+              <div
+                class="w-full rounded-[var(--glass-radius-sm)] bg-white dark:bg-[#222] p-4 flex items-center justify-between transition-shadow duration-300"
+                style={`box-shadow: ${e.shadow}`}
+              >
+                <div>
+                  <span class="text-[16px] font-[700] text-black/85 dark:text-white/80 block">{e.name}</span>
+                  <span class="text-[13px] text-black/55 dark:text-white/50">{e.desc}</span>
+                </div>
+                <span class="text-[12px] font-mono font-[500] text-black/35 dark:text-white/30">z-{e.z}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Right: Skeleton Loader -->
+        <div class="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white dark:bg-[#1a1a1a]">
+          <div class="px-4 py-2.5 bg-black/[0.06] dark:bg-white/[0.08] border-b border-black/10 dark:border-white/10">
+            <span class="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/70 dark:text-white/70">Skeleton Loader</span>
+          </div>
+          <div class="p-5 flex flex-col gap-5">
+            <!-- Card skeleton -->
+            <div>
+              <span class="text-[10px] font-[500] text-black/45 dark:text-white/40 mb-3 block">Card Loading</span>
+              <div class="flex flex-col gap-3 p-4 rounded-[var(--glass-radius-sm)] bg-black/[0.02] dark:bg-white/[0.03] border border-black/[0.04] dark:border-white/[0.04]">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-full bg-black/[0.06] dark:bg-white/[0.06] skeleton-shimmer"></div>
+                  <div class="flex-1 flex flex-col gap-1.5">
+                    <div class="h-3 rounded bg-black/[0.06] dark:bg-white/[0.06] w-[40%] skeleton-shimmer"></div>
+                    <div class="h-2.5 rounded bg-black/[0.04] dark:bg-white/[0.04] w-[60%] skeleton-shimmer"></div>
+                  </div>
+                </div>
+                <div class="h-2.5 rounded bg-black/[0.05] dark:bg-white/[0.05] w-full skeleton-shimmer"></div>
+                <div class="h-2.5 rounded bg-black/[0.05] dark:bg-white/[0.05] w-[85%] skeleton-shimmer"></div>
+                <div class="h-2.5 rounded bg-black/[0.04] dark:bg-white/[0.04] w-[70%] skeleton-shimmer"></div>
+              </div>
             </div>
-            <div class="text-center">
-              <span class="text-[12px] font-[650] text-black/70 dark:text-white/65 block">{e.name}</span>
-              <span class="text-[10px] text-black/40 dark:text-white/35">{e.desc}</span>
+
+            <!-- List skeleton -->
+            <div>
+              <span class="text-[10px] font-[500] text-black/45 dark:text-white/40 mb-3 block">List Loading</span>
+              <div class="flex flex-col gap-3">
+                {[80, 65, 90, 55].map((w) => (
+                  <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-[6px] bg-black/[0.05] dark:bg-white/[0.05] skeleton-shimmer shrink-0"></div>
+                    <div class="flex-1 flex flex-col gap-1.5">
+                      <div class="h-2.5 rounded bg-black/[0.06] dark:bg-white/[0.06] skeleton-shimmer" style={`width: ${w}%`}></div>
+                      <div class="h-2 rounded bg-black/[0.03] dark:bg-white/[0.03] skeleton-shimmer" style={`width: ${w - 20}%`}></div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <!-- Image skeleton -->
+            <div>
+              <span class="text-[10px] font-[500] text-black/45 dark:text-white/40 mb-3 block">Media Loading</span>
+              <div class="grid grid-cols-3 gap-2">
+                <div class="aspect-square rounded-[var(--glass-radius-sm)] bg-black/[0.05] dark:bg-white/[0.05] skeleton-shimmer"></div>
+                <div class="aspect-square rounded-[var(--glass-radius-sm)] bg-black/[0.04] dark:bg-white/[0.04] skeleton-shimmer"></div>
+                <div class="aspect-square rounded-[var(--glass-radius-sm)] bg-black/[0.05] dark:bg-white/[0.05] skeleton-shimmer"></div>
+              </div>
             </div>
           </div>
-        ))}
+        </div>
       </div>
     </div>
 
@@ -729,54 +816,49 @@ const elevations = [
       <div class="relative flex flex-col gap-1 mb-6 pt-1 pl-1">
         <span class="text-[10px] font-[650] uppercase tracking-[0.1em] text-black/40 dark:text-white/40 mb-1">Loading</span>
         <h2 class="text-[24px] font-[750] tracking-[-0.03em] leading-[1.2] text-black dark:text-white mb-1" style="font-family: var(--font-heading)">Feedback</h2>
-        <p class="text-[13px] leading-[1.6] text-black/60 dark:text-white/55">Spinner, progress bar, and skeleton loading states</p>
+        <p class="text-[13px] leading-[1.6] text-black/60 dark:text-white/55">Spinner and progress bar indicators</p>
       </div>
 
-      <div class="flex flex-col gap-5">
-        {/* Spinner */}
-        <div>
-          <span class="text-[11px] font-[600] uppercase tracking-[0.06em] text-black/40 dark:text-white/35 mb-3 block">Spinner</span>
-          <div class="flex items-center gap-6">
-            <div class="w-5 h-5 border-2 border-black/10 dark:border-white/10 border-t-[#354334] dark:border-t-[#97AD96] rounded-full animate-spin"></div>
-            <div class="w-7 h-7 border-2 border-black/10 dark:border-white/10 border-t-[#354334] dark:border-t-[#97AD96] rounded-full animate-spin"></div>
-            <div class="w-10 h-10 border-[3px] border-black/10 dark:border-white/10 border-t-[#354334] dark:border-t-[#97AD96] rounded-full animate-spin"></div>
+      <div class="flex flex-col gap-4">
+        <!-- Spinner -->
+        <div class="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white dark:bg-[#1a1a1a]">
+          <div class="px-4 py-2.5 bg-black/[0.06] dark:bg-white/[0.08] border-b border-black/10 dark:border-white/10">
+            <span class="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/70 dark:text-white/70">Spinner</span>
           </div>
-        </div>
-
-        {/* Progress */}
-        <div>
-          <span class="text-[11px] font-[600] uppercase tracking-[0.06em] text-black/40 dark:text-white/35 mb-3 block">Progress Bar</span>
-          <div class="flex flex-col gap-3">
-            <div>
-              <div class="flex justify-between mb-1"><span class="text-[10px] text-black/40 dark:text-white/35">Loading...</span><span class="text-[10px] font-mono text-black/30 dark:text-white/25">25%</span></div>
-              <div class="w-full h-1.5 rounded-full bg-black/[0.06] dark:bg-white/[0.06] overflow-hidden"><div class="h-full rounded-full bg-[#354334] dark:bg-[#97AD96] transition-all duration-500" style="width: 25%"></div></div>
+          <div class="p-4 flex flex-col">
+            <div class="flex items-center justify-between py-2.5 border-b border-black/10 dark:border-white/10">
+              <span class="text-[12px] font-[500] text-black/60 dark:text-white/55">Small</span>
+              <div class="w-5 h-5 border-2 border-black/10 dark:border-white/10 border-t-[#354334] dark:border-t-[#97AD96] rounded-full animate-spin"></div>
             </div>
-            <div>
-              <div class="flex justify-between mb-1"><span class="text-[10px] text-black/40 dark:text-white/35">Uploading...</span><span class="text-[10px] font-mono text-black/30 dark:text-white/25">68%</span></div>
-              <div class="w-full h-1.5 rounded-full bg-black/[0.06] dark:bg-white/[0.06] overflow-hidden"><div class="h-full rounded-full bg-[#FFC800] transition-all duration-500" style="width: 68%"></div></div>
+            <div class="flex items-center justify-between py-2.5 border-b border-black/10 dark:border-white/10">
+              <span class="text-[12px] font-[500] text-black/60 dark:text-white/55">Medium</span>
+              <div class="w-7 h-7 border-2 border-black/10 dark:border-white/10 border-t-[#354334] dark:border-t-[#97AD96] rounded-full animate-spin"></div>
             </div>
-            <div>
-              <div class="flex justify-between mb-1"><span class="text-[10px] text-black/40 dark:text-white/35">Complete</span><span class="text-[10px] font-mono text-black/30 dark:text-white/25">100%</span></div>
-              <div class="w-full h-1.5 rounded-full bg-black/[0.06] dark:bg-white/[0.06] overflow-hidden"><div class="h-full rounded-full bg-green-500 transition-all duration-500" style="width: 100%"></div></div>
+            <div class="flex items-center justify-between py-2.5">
+              <span class="text-[12px] font-[500] text-black/60 dark:text-white/55">Large</span>
+              <div class="w-10 h-10 border-[3px] border-black/10 dark:border-white/10 border-t-[#354334] dark:border-t-[#97AD96] rounded-full animate-spin"></div>
             </div>
           </div>
         </div>
 
-        {/* Skeleton */}
-        <div>
-          <span class="text-[11px] font-[600] uppercase tracking-[0.06em] text-black/40 dark:text-white/35 mb-3 block">Skeleton Loader</span>
-          <div class="flex flex-col gap-3 p-4 rounded-[var(--glass-radius-sm)] bg-white/60 dark:bg-black/30 border border-black/[0.04] dark:border-white/[0.04]">
-            {/* Card skeleton */}
-            <div class="flex items-center gap-3">
-              <div class="w-10 h-10 rounded-full bg-black/[0.06] dark:bg-white/[0.06] animate-pulse"></div>
-              <div class="flex-1 flex flex-col gap-1.5">
-                <div class="h-3 rounded bg-black/[0.06] dark:bg-white/[0.06] w-[40%] animate-pulse"></div>
-                <div class="h-2.5 rounded bg-black/[0.04] dark:bg-white/[0.04] w-[60%] animate-pulse"></div>
-              </div>
+        <!-- Progress Bar -->
+        <div class="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white dark:bg-[#1a1a1a]">
+          <div class="px-4 py-2.5 bg-black/[0.06] dark:bg-white/[0.08] border-b border-black/10 dark:border-white/10">
+            <span class="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/70 dark:text-white/70">Progress Bar</span>
+          </div>
+          <div class="p-4 flex flex-col">
+            <div class="py-3 border-b border-black/[0.06] dark:border-white/[0.06]">
+              <div class="flex justify-between mb-1.5"><span class="text-[11px] font-[500] text-black/55 dark:text-white/50">Loading...</span><span class="text-[11px] font-mono text-black/40 dark:text-white/35">25%</span></div>
+              <div class="w-full h-2 rounded-full bg-black/[0.06] dark:bg-white/[0.06] overflow-hidden"><div class="h-full rounded-full bg-[#354334] dark:bg-[#97AD96]" style="width: 25%"></div></div>
             </div>
-            <div class="h-2.5 rounded bg-black/[0.05] dark:bg-white/[0.05] w-full animate-pulse"></div>
-            <div class="h-2.5 rounded bg-black/[0.05] dark:bg-white/[0.05] w-[85%] animate-pulse"></div>
-            <div class="h-2.5 rounded bg-black/[0.04] dark:bg-white/[0.04] w-[70%] animate-pulse"></div>
+            <div class="py-3 border-b border-black/[0.06] dark:border-white/[0.06]">
+              <div class="flex justify-between mb-1.5"><span class="text-[11px] font-[500] text-black/55 dark:text-white/50">Uploading...</span><span class="text-[11px] font-mono text-black/40 dark:text-white/35">68%</span></div>
+              <div class="w-full h-2 rounded-full bg-black/[0.06] dark:bg-white/[0.06] overflow-hidden"><div class="h-full rounded-full bg-[#FFC800]" style="width: 68%"></div></div>
+            </div>
+            <div class="py-3">
+              <div class="flex justify-between mb-1.5"><span class="text-[11px] font-[500] text-black/55 dark:text-white/50">Complete</span><span class="text-[11px] font-mono text-black/40 dark:text-white/35">100%</span></div>
+              <div class="w-full h-2 rounded-full bg-black/[0.06] dark:bg-white/[0.06] overflow-hidden"><div class="h-full rounded-full bg-green-500" style="width: 100%"></div></div>
+            </div>
           </div>
         </div>
       </div>
@@ -790,61 +872,9 @@ const elevations = [
       <div class="relative flex flex-col gap-1 mb-6 pt-1 pl-1">
         <span class="text-[10px] font-[650] uppercase tracking-[0.1em] text-black/40 dark:text-white/40 mb-1">Wayfinding</span>
         <h2 class="text-[24px] font-[750] tracking-[-0.03em] leading-[1.2] text-black dark:text-white mb-1" style="font-family: var(--font-heading)">Navigation</h2>
-        <p class="text-[13px] leading-[1.6] text-black/60 dark:text-white/55">Tab bar, breadcrumb, and nav item primitives</p>
+        <p class="text-[13px] leading-[1.6] text-black/60 dark:text-white/55">Interactive tab bars, breadcrumbs, and nav items</p>
       </div>
-
-      <div class="flex flex-col gap-5">
-        {/* Tabs */}
-        <div>
-          <span class="text-[11px] font-[600] uppercase tracking-[0.06em] text-black/40 dark:text-white/35 mb-3 block">Tab Bar</span>
-          <div class="flex border-b border-black/[0.08] dark:border-white/[0.08]">
-            <button class="px-4 py-2.5 text-[13px] font-[600] border-b-2 border-[#354334] dark:border-[#97AD96] text-[#354334] dark:text-[#97AD96] bg-transparent cursor-pointer -mb-px">Overview</button>
-            <button class="px-4 py-2.5 text-[13px] font-[500] text-black/40 dark:text-white/35 bg-transparent border-b-2 border-transparent cursor-pointer hover:text-black/60 dark:hover:text-white/50 transition-colors -mb-px">Settings</button>
-            <button class="px-4 py-2.5 text-[13px] font-[500] text-black/40 dark:text-white/35 bg-transparent border-b-2 border-transparent cursor-pointer hover:text-black/60 dark:hover:text-white/50 transition-colors -mb-px">Activity</button>
-          </div>
-        </div>
-
-        {/* Pill Tabs */}
-        <div>
-          <span class="text-[11px] font-[600] uppercase tracking-[0.06em] text-black/40 dark:text-white/35 mb-3 block">Pill Tabs</span>
-          <div class="inline-flex rounded-full bg-black/[0.04] dark:bg-white/[0.06] p-1 gap-0.5">
-            <span class="text-[13px] font-[600] px-4 py-2 rounded-full bg-white/80 dark:bg-white/10 text-black/80 dark:text-white/80 cursor-pointer shadow-sm">All</span>
-            <span class="text-[13px] font-[500] px-4 py-2 rounded-full text-black/40 dark:text-white/35 cursor-pointer hover:text-black/60 dark:hover:text-white/50 transition-colors">Active</span>
-            <span class="text-[13px] font-[500] px-4 py-2 rounded-full text-black/40 dark:text-white/35 cursor-pointer hover:text-black/60 dark:hover:text-white/50 transition-colors">Archived</span>
-          </div>
-        </div>
-
-        {/* Breadcrumb */}
-        <div>
-          <span class="text-[11px] font-[600] uppercase tracking-[0.06em] text-black/40 dark:text-white/35 mb-3 block">Breadcrumb</span>
-          <nav class="flex items-center gap-1.5 text-[13px]">
-            <a href="#" class="text-black/40 dark:text-white/35 hover:text-black/60 dark:hover:text-white/50 no-underline transition-colors">Home</a>
-            <span class="text-black/20 dark:text-white/15">/</span>
-            <a href="#" class="text-black/40 dark:text-white/35 hover:text-black/60 dark:hover:text-white/50 no-underline transition-colors">Design System</a>
-            <span class="text-black/20 dark:text-white/15">/</span>
-            <span class="text-black/70 dark:text-white/65 font-[550]">Primitives</span>
-          </nav>
-        </div>
-
-        {/* Nav Items */}
-        <div>
-          <span class="text-[11px] font-[600] uppercase tracking-[0.06em] text-black/40 dark:text-white/35 mb-3 block">Nav Item</span>
-          <div class="flex flex-col gap-0.5 w-[220px]">
-            <a href="#" class="flex items-center gap-2.5 px-3 py-2 rounded-[var(--glass-radius-sm)] bg-black/[0.04] dark:bg-white/[0.06] text-[13px] font-[600] text-black/75 dark:text-white/70 no-underline">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m9.02 2.84-5.39 4.2C2.73 7.74 2 9.23 2 10.36v7.41c0 2.32 1.89 4.22 4.21 4.22h11.58c2.32 0 4.21-1.9 4.21-4.21V10.5c0-1.21-.81-2.76-1.8-3.45l-6.18-4.33c-1.4-.98-3.65-.93-5 .12Z" /></svg>
-              Overview
-            </a>
-            <a href="#" class="flex items-center gap-2.5 px-3 py-2 rounded-[var(--glass-radius-sm)] text-[13px] font-[500] text-black/45 dark:text-white/40 no-underline hover:bg-black/[0.02] dark:hover:bg-white/[0.03] transition-colors">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="3" /><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06c.5.5 1.21.67 1.82.33h0a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v0c.26.6.79 1.03 1.39 1.08H21a2 2 0 0 1 0 4h-.09" /></svg>
-              Settings
-            </a>
-            <a href="#" class="flex items-center gap-2.5 px-3 py-2 rounded-[var(--glass-radius-sm)] text-[13px] font-[500] text-black/45 dark:text-white/40 no-underline hover:bg-black/[0.02] dark:hover:bg-white/[0.03] transition-colors">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>
-              Team
-            </a>
-          </div>
-        </div>
-      </div>
+      <PrimitiveNavigation client:load />
     </div>
 
   </div>
