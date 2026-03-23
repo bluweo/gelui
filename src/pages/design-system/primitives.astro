@@ -180,77 +180,40 @@ const elevations = [
     <!-- ═══════════════════════════════════
          3. Glass Surfaces
          ═══════════════════════════════════ -->
-    <div data-section="Surfaces" class="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
+    <div data-section="Surfaces" class="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5 flex flex-col">
       <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 160px;" />
-      <div class="relative flex flex-col gap-1 mb-6 pt-1 pl-1">
+      <div class="relative flex flex-col gap-1 mb-5 pt-1 pl-1 shrink-0">
         <span class="text-[10px] font-[650] uppercase tracking-[0.1em] text-black/40 dark:text-white/40 mb-1">Material</span>
         <h2 class="text-[24px] font-[750] tracking-[-0.03em] leading-[1.2] text-black dark:text-white mb-1" style="font-family: var(--font-heading)">Glass Surfaces</h2>
-        <p class="text-[13px] leading-[1.6] text-black/60 dark:text-white/55">6 surface primitives for cards, panels, and overlays</p>
+        <p class="text-[13px] leading-[1.6] text-black/60 dark:text-white/55">7 surface primitives for cards, panels, and overlays</p>
       </div>
-      <div class="grid grid-cols-3 gap-3 max-[540px]:grid-cols-2">
+      <div class="flex flex-col gap-2 flex-1">
         {[
-          { cls: "glass-0", label: "Subtle", name: "glass-0" },
-          { cls: "glass-1 glass-specular", label: "Card", name: "glass-1" },
-          { cls: "glass-2 glass-specular", label: "Modal", name: "glass-2" },
-          { cls: "glass-3 glass-specular", label: "Overlay", name: "glass-3" },
-          { cls: "gel-glass", label: "Gel", name: "gel-glass", hasShine: true },
-          { cls: "glass-transparent", label: "Transparent", name: "transparent" },
+          { cls: "glass-transparent", label: "Transparent", name: "glass-transparent", desc: "Border only, no blur" },
+          { cls: "glass-0", label: "Subtle", name: "glass-0", desc: "Minimal blur, light tint" },
+          { cls: "glass-1 glass-specular", label: "Card", name: "glass-1", desc: "Standard card surface" },
+          { cls: "glass-2 glass-specular", label: "Modal", name: "glass-2", desc: "Stronger blur for dialogs" },
+          { cls: "glass-3 glass-specular", label: "Overlay", name: "glass-3", desc: "Maximum blur depth" },
+          { cls: "gel-glass", label: "Gel", name: "gel-glass", desc: "Volumetric inset shadows", hasShine: true },
+          { cls: "", label: "Solid", name: "solid", desc: "100% opaque, no transparency", isSolid: true },
         ].map((s) => (
-          <div class="flex flex-col gap-2">
-            <div class:list={[s.cls, "rounded-[var(--glass-radius-sm)] h-20 flex items-center justify-center relative"]}>
-              {s.hasShine && <div class="gel-glass-shine"></div>}
-              <span class:list={["text-[11px] font-mono text-black/40 dark:text-white/35", s.hasShine && "relative z-[3]"]}>{s.name}</span>
+          <div
+            class:list={[
+              !s.isSolid && s.cls,
+              s.isSolid && "bg-white dark:bg-[#1a1a1a] border border-black/[0.08] dark:border-white/[0.1]",
+              "rounded-[var(--glass-radius-sm)] px-4 flex-1 min-h-0 flex items-center justify-between relative",
+            ]}
+          >
+            {s.hasShine && <div class="gel-glass-shine"></div>}
+            <div class:list={["flex flex-col gap-0.5", s.hasShine && "relative z-[3]"]}>
+              <span class="text-[13px] font-[600] text-black/80 dark:text-white/80">{s.label}</span>
+              <span class="text-[11px] text-black/45 dark:text-white/40 max-[540px]:hidden">{s.desc}</span>
             </div>
-            <span class="text-[11px] font-[600] text-black/60 dark:text-white/55">{s.label}</span>
+            <span class:list={["text-[10px] font-mono px-2 py-1 rounded-[5px] bg-black/[0.05] dark:bg-white/[0.08] text-black/45 dark:text-white/35 shrink-0", s.hasShine && "relative z-[3]"]}>{s.name}</span>
           </div>
         ))}
       </div>
 
-      {/* Divider */}
-      <div class="mt-5">
-        <span class="text-[11px] font-[600] uppercase tracking-[0.06em] text-black/40 dark:text-white/35 mb-3 block">Divider</span>
-        <div class="flex flex-col gap-4">
-          <div>
-            <span class="text-[10px] text-black/35 dark:text-white/30 mb-1.5 block">Horizontal</span>
-            <div class="w-full h-px bg-black/[0.08] dark:bg-white/[0.08]"></div>
-          </div>
-          <div>
-            <span class="text-[10px] text-black/35 dark:text-white/30 mb-1.5 block">With label</span>
-            <div class="flex items-center gap-3">
-              <div class="flex-1 h-px bg-black/[0.08] dark:bg-white/[0.08]"></div>
-              <span class="text-[10px] font-[550] text-black/30 dark:text-white/25 uppercase tracking-wider">or</span>
-              <div class="flex-1 h-px bg-black/[0.08] dark:bg-white/[0.08]"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Frost Zones */}
-      <div class="mt-5">
-        <span class="text-[11px] font-[600] uppercase tracking-[0.06em] text-black/40 dark:text-white/35 mb-3 block">Frost Zones</span>
-        <div class="grid grid-cols-2 gap-4 max-[540px]:grid-cols-1">
-          <div class="relative rounded-[var(--glass-radius-sm)] overflow-hidden h-[160px] border border-black/[0.06] dark:border-white/[0.06]">
-            <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 100%;" />
-            <div class="relative z-[1] p-4 flex flex-col justify-between h-full">
-              <div>
-                <span class="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/80 dark:text-white/80 px-2 py-0.5 rounded-full bg-black/[0.06] dark:bg-white/[0.08] inline-block mb-2">Standard</span>
-                <p class="text-[12px] font-[600] text-black/80 dark:text-white/80">ds-card-frost</p>
-              </div>
-              <p class="text-[11px] text-black/50 dark:text-white/45">95% → transparent. Max readability.</p>
-            </div>
-          </div>
-          <div class="relative rounded-[var(--glass-radius-sm)] overflow-hidden h-[160px] border border-black/[0.06] dark:border-white/[0.06]">
-            <div class="absolute inset-0 pointer-events-none ds-card-frost-clear" style="height: 100%;" />
-            <div class="relative z-[1] p-4 flex flex-col justify-between h-full">
-              <div>
-                <span class="text-[10px] font-[650] uppercase tracking-[0.06em] contrast-muted px-2 py-0.5 rounded-full bg-black/[0.06] dark:bg-white/[0.08] inline-block mb-2">Clear</span>
-                <p class="text-[12px] font-[600] contrast-text">ds-card-frost-clear</p>
-              </div>
-              <p class="text-[11px] contrast-muted">15% → transparent. See-through.</p>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
 
     <!-- ═══════════════════════════════════
@@ -279,17 +242,17 @@ const elevations = [
           </div>
         </div>
 
-        <!-- 2. Clear Card -->
+        <!-- 2. Haze Card -->
         <div class="glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5 min-h-[200px] flex flex-col justify-between">
-          <div class="absolute inset-0 pointer-events-none ds-card-frost-clear" style="height: 140px;" />
+          <div class="absolute inset-0 pointer-events-none ds-card-frost-haze" style="height: 140px;" />
           <div class="relative z-[1]">
-            <span class="text-[10px] font-[650] uppercase tracking-[0.06em] contrast-muted px-2 py-0.5 rounded-full bg-black/[0.06] dark:bg-white/[0.08] inline-block mb-2">Clear</span>
-            <p class="text-[13px] font-[600] contrast-text mb-1">glass-1 + ds-card-frost-clear</p>
-            <p class="text-[11px] contrast-muted">Showcase card for visual elements. 15% frost lets the background show through for context.</p>
+            <span class="text-[10px] font-[650] uppercase tracking-[0.06em] contrast-muted px-2 py-0.5 rounded-full bg-black/[0.06] dark:bg-white/[0.08] inline-block mb-2">Haze</span>
+            <p class="text-[13px] font-[600] contrast-text mb-1">glass-1 + ds-card-frost-haze</p>
+            <p class="text-[11px] contrast-muted">Partial see-through card. 35% frost for showcasing visual elements with some background context.</p>
           </div>
           <div class="relative z-[1] flex items-center gap-2 mt-3">
             <span class="text-[9px] font-mono px-1.5 py-0.5 rounded-[4px] bg-black/[0.05] dark:bg-white/[0.08] text-black/40 dark:text-white/35">backdrop-filter</span>
-            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded-[4px] bg-black/[0.05] dark:bg-white/[0.08] text-black/40 dark:text-white/35">frost-15%</span>
+            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded-[4px] bg-black/[0.05] dark:bg-white/[0.08] text-black/40 dark:text-white/35">frost-35%</span>
           </div>
         </div>
 
@@ -333,6 +296,106 @@ const elevations = [
           </div>
         </div>
 
+        <!-- 6. Solid Card -->
+        <div class="relative overflow-hidden rounded-[var(--glass-radius)] p-5 min-h-[200px] flex flex-col justify-between bg-white dark:bg-[#1a1a1a] border border-black/[0.06] dark:border-white/[0.08]">
+          <div>
+            <span class="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/80 dark:text-white/80 px-2 py-0.5 rounded-full bg-black/[0.06] dark:bg-white/[0.08] inline-block mb-2">Solid</span>
+            <p class="text-[13px] font-[600] text-black/80 dark:text-white/80 mb-1">100% opaque — no glass</p>
+            <p class="text-[11px] text-black/50 dark:text-white/45">Fully opaque card with no transparency, blur, or frost. Maximum contrast for data-heavy or critical content.</p>
+          </div>
+          <div class="flex items-center gap-2 mt-3">
+            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded-[4px] bg-black/[0.05] dark:bg-white/[0.08] text-black/40 dark:text-white/35">no blur</span>
+            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded-[4px] bg-black/[0.05] dark:bg-white/[0.08] text-black/40 dark:text-white/35">no frost</span>
+            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded-[4px] bg-black/[0.05] dark:bg-white/[0.08] text-black/40 dark:text-white/35">opaque</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════
+         3c. Dividers
+         ═══════════════════════════════════ -->
+    <div data-section="Dividers" class="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
+      <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 140px;" />
+      <div class="relative flex flex-col gap-1 mb-6 pt-1 pl-1">
+        <span class="text-[10px] font-[650] uppercase tracking-[0.1em] text-black/40 dark:text-white/40 mb-1">Separator</span>
+        <h2 class="text-[24px] font-[750] tracking-[-0.03em] leading-[1.2] text-black dark:text-white mb-1" style="font-family: var(--font-heading)">Dividers</h2>
+        <p class="text-[13px] leading-[1.6] text-black/60 dark:text-white/55">Visual separators for content sections and groups</p>
+      </div>
+
+      <div class="grid grid-cols-2 gap-6 max-[540px]:grid-cols-1">
+        <!-- Horizontal -->
+        <div class="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white/60 dark:bg-black/30">
+          <div class="px-3 py-2 bg-black/[0.04] dark:bg-white/[0.06] border-b border-black/[0.06] dark:border-white/[0.06]">
+            <span class="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/45 dark:text-white/40">Horizontal</span>
+          </div>
+          <div class="flex flex-col gap-4 p-4">
+            <div>
+              <span class="text-[10px] text-black/35 dark:text-white/30 mb-2 block">Default</span>
+              <div class="w-full h-px bg-black/[0.08] dark:bg-white/[0.08]"></div>
+            </div>
+            <div>
+              <span class="text-[10px] text-black/35 dark:text-white/30 mb-2 block">Bold</span>
+              <div class="w-full h-[2px] bg-black/[0.15] dark:bg-white/[0.15]"></div>
+            </div>
+            <div>
+              <span class="text-[10px] text-black/35 dark:text-white/30 mb-2 block">Dashed</span>
+              <div class="w-full border-t border-dashed border-black/[0.12] dark:border-white/[0.12]"></div>
+            </div>
+            <div>
+              <span class="text-[10px] text-black/35 dark:text-white/30 mb-2 block">With label</span>
+              <div class="flex items-center gap-3">
+                <div class="flex-1 h-px bg-black/[0.08] dark:bg-white/[0.08]"></div>
+                <span class="text-[10px] font-[550] text-black/30 dark:text-white/25 uppercase tracking-wider">or</span>
+                <div class="flex-1 h-px bg-black/[0.08] dark:bg-white/[0.08]"></div>
+              </div>
+            </div>
+            <div>
+              <span class="text-[10px] text-black/35 dark:text-white/30 mb-2 block">With icon</span>
+              <div class="flex items-center gap-3">
+                <div class="flex-1 h-px bg-black/[0.08] dark:bg-white/[0.08]"></div>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-black/20 dark:text-white/20"><circle cx="12" cy="12" r="3" /></svg>
+                <div class="flex-1 h-px bg-black/[0.08] dark:bg-white/[0.08]"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Vertical + Spacing -->
+        <div class="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white/60 dark:bg-black/30">
+          <div class="px-3 py-2 bg-black/[0.04] dark:bg-white/[0.06] border-b border-black/[0.06] dark:border-white/[0.06]">
+            <span class="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/45 dark:text-white/40">Vertical & Spacing</span>
+          </div>
+          <div class="flex flex-col gap-4 p-4">
+            <div>
+              <span class="text-[10px] text-black/35 dark:text-white/30 mb-2 block">Vertical divider</span>
+              <div class="flex items-center gap-4 h-[40px]">
+                <span class="text-[11px] text-black/50 dark:text-white/45">Left</span>
+                <div class="w-px h-full bg-black/[0.1] dark:bg-white/[0.1]"></div>
+                <span class="text-[11px] text-black/50 dark:text-white/45">Right</span>
+              </div>
+            </div>
+            <div>
+              <span class="text-[10px] text-black/35 dark:text-white/30 mb-2 block">Inset divider</span>
+              <div class="px-4">
+                <div class="w-full h-px bg-black/[0.06] dark:bg-white/[0.06]"></div>
+              </div>
+            </div>
+            <div>
+              <span class="text-[10px] text-black/35 dark:text-white/30 mb-2 block">Gradient fade</span>
+              <div class="w-full h-px" style="background: linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.12) 30%, rgba(0,0,0,0.12) 70%, transparent 100%)"></div>
+            </div>
+            <div>
+              <span class="text-[10px] text-black/35 dark:text-white/30 mb-2 block">Section break</span>
+              <div class="flex items-center gap-2 justify-center">
+                <div class="w-1 h-1 rounded-full bg-black/15 dark:bg-white/15"></div>
+                <div class="w-1 h-1 rounded-full bg-black/15 dark:bg-white/15"></div>
+                <div class="w-1 h-1 rounded-full bg-black/15 dark:bg-white/15"></div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
