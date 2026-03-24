@@ -5,6 +5,16 @@ import { RegistryViewer } from "@/components/block/RegistryViewer";
 import registryData from "@/registry/registry.json";
 
 const components = registryData.components;
+const lastUpdated = registryData.lastUpdated || "unknown";
+const totalComponents = components.length;
+const byLayer = components.reduce((acc: Record<string, number>, c: any) => {
+  acc[c.layer] = (acc[c.layer] || 0) + 1;
+  return acc;
+}, {} as Record<string, number>);
+const byStatus = components.reduce((acc: Record<string, number>, c: any) => {
+  acc[c.status] = (acc[c.status] || 0) + 1;
+  return acc;
+}, {} as Record<string, number>);
 ---
 
 <DSLayout
@@ -25,6 +35,21 @@ const components = registryData.components;
         <span class="text-[10px] font-[650] uppercase tracking-[0.1em] text-black/40 dark:text-white/40 mb-1">Developer Tools</span>
         <h2 class="text-[24px] font-[750] tracking-[-0.03em] leading-[1.2] text-black dark:text-white mb-1" style="font-family: var(--font-heading)">Component Registry</h2>
         <p class="text-[13px] leading-[1.6] text-black/60 dark:text-white/55">Search, filter, and explore all registered components</p>
+        <!-- Validation indicator -->
+        <div class="flex items-center gap-3 mt-3 flex-wrap">
+          <span class="inline-flex items-center gap-1.5 text-[11px] font-mono px-2.5 py-1 rounded-full bg-green-500/10 text-green-600 dark:text-green-400">
+            <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+            {totalComponents} components
+          </span>
+          <span class="inline-flex items-center gap-1.5 text-[11px] font-mono px-2.5 py-1 rounded-full bg-black/[0.04] dark:bg-white/[0.06] text-black/50 dark:text-white/40">
+            Updated {lastUpdated}
+          </span>
+          {Object.entries(byLayer).map(([layer, count]) => (
+            <span class="text-[10px] font-mono text-black/35 dark:text-white/30">
+              {layer}: {count}
+            </span>
+          ))}
+        </div>
       </div>
 
       <RegistryViewer client:load components={components} />

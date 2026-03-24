@@ -1,106 +1,174 @@
 /**
- * Registry Validation Script
+ * Registry Validation Script (Enhanced)
  * Run: npx tsx src/registry/validate.ts
  *
  * Checks:
- * 1. All file paths exist (unless "inline")
+ * 1. Required fields present on every entry
  * 2. No duplicate IDs
  * 3. All composedOf references are valid IDs
  * 4. All slot accepts references are valid IDs (or "*")
- * 5. Required fields are present
+ * 5. File existence for every non-inline entry
+ * 6. Orphan detection: .tsx files in src/primitives/ not in registry
+ * 7. Export verification: exportName actually exists in the file
+ * 8. Summary stats by layer, category, status
+ *
+ * Exit code 0 = all pass, 1 = errors found
  */
 
-import { readFileSync, existsSync } from "fs";
+import { existsSync } from "fs";
 import { resolve } from "path";
+import {
+  ROOT,
+  readRegistry,
+  scanPrimitiveFiles,
+  findOrphans,
+  findMissing,
+  parseExports,
+  formatReport,
+  bold,
+  green,
+  yellow,
+  red,
+  cyan,
+  dim,
+  type ValidationReport,
+  type OrphanFile,
+  type MissingEntry,
+} from "./utils.js";
 
-interface RegistryEntry {
-  id: string;
-  name: string;
-  path: string;
-  composedOf?: string[];
-  slots?: Record<string, { accepts: string[] }>;
-  [key: string]: unknown;
-}
+// ── Load Registry ───────────────────────────────────────────────
+const registry = readRegistry();
+const components = registry.components as Array<Record<string, unknown>>;
 
-const ROOT = resolve(import.meta.dirname || __dirname, "../..");
-const registryPath = resolve(import.meta.dirname || __dirname, "registry.json");
+// ── Build Report ────────────────────────────────────────────────
+const report: ValidationReport = {
+  totalRegistryEntries: components.length,
+  filesChecked: 0,
+  orphans: [],
+  missing: [],
+  exportMismatches: [],
+  layerStats: {},
+  categoryStats: {},
+  statusStats: {},
+  errors: [],
+  warnings: [],
+};
 
-const raw = readFileSync(registryPath, "utf-8");
-const registry = JSON.parse(raw) as { components: RegistryEntry[] };
-
-let errors = 0;
-let warnings = 0;
-
-function error(msg: string) { console.error(`❌ ERROR: ${msg}`); errors++; }
-function warn(msg: string) { console.warn(`⚠️  WARN:  ${msg}`); warnings++; }
-function ok(msg: string) { console.log(`✅ ${msg}`); }
-
-// Collect all IDs
+// ── 1. Duplicate ID Check ───────────────────────────────────────
 const allIds = new Set<string>();
-const duplicates = new Set<string>();
-
-for (const c of registry.components) {
-  if (allIds.has(c.id)) {
-    duplicates.add(c.id);
-    error(`Duplicate ID: "${c.id}"`);
+for (const c of components) {
+  const id = c.id as string;
+  if (allIds.has(id)) {
+    report.errors.push(`Duplicate ID: "${id}"`);
   }
-  allIds.add(c.id);
+  allIds.add(id);
 }
 
-// Validate each component
-for (const c of registry.components) {
-  // Required fields
-  if (!c.id) error(`Missing ID on component "${c.name}"`);
-  if (!c.name) error(`Missing name on "${c.id}"`);
-  if (!c.path) error(`Missing path on "${c.id}"`);
+// ── 2. Required Fields ─────────────────────────────────────────
+for (const c of components) {
+  if (!c.id) report.errors.push(`Missing "id" on component "${c.name}"`);
+  if (!c.name) report.errors.push(`Missing "name" on "${c.id}"`);
+  if (!c.path) report.errors.push(`Missing "path" on "${c.id}"`);
+}
 
-  // File existence (skip "inline" components)
-  if (c.path !== "inline" && !c.path.startsWith("src/styles/")) {
-    const fullPath = resolve(ROOT, c.path);
-    if (!existsSync(fullPath)) {
-      warn(`File not found for "${c.id}": ${c.path}`);
+// ── 3. File Existence ───────────────────────────────────────────
+const registryPaths = new Set<string>();
+for (const c of components) {
+  const path = c.path as string;
+  if (!path || path === "inline" || path.startsWith("src/styles/")) continue;
+
+  registryPaths.add(path);
+  report.filesChecked++;
+
+  const fullPath = resolve(ROOT, path);
+  if (!existsSync(fullPath)) {
+    // Gracefully handle old "dsl/primitives.tsx" paths
+    if (path.includes("dsl/")) {
+      report.warnings.push(`Legacy path for "${c.id}": ${path} (file not found, may need sync)`);
+    } else {
+      report.errors.push(`File not found for "${c.id}": ${path}`);
     }
   }
+}
 
-  // composedOf references
-  if (c.composedOf) {
-    for (const ref of c.composedOf) {
-      if (!allIds.has(ref)) {
-        warn(`"${c.id}" composedOf references unknown ID: "${ref}"`);
+// ── 4. Export Verification ──────────────────────────────────────
+for (const c of components) {
+  const exportName = c.exportName as string | undefined;
+  const path = c.path as string;
+
+  if (!exportName || !path || path === "inline" || path.startsWith("src/styles/")) continue;
+
+  const fullPath = resolve(ROOT, path);
+  if (!existsSync(fullPath)) continue; // already caught in file existence check
+
+  const fileExports = parseExports(fullPath);
+  if (!fileExports.includes(exportName)) {
+    report.exportMismatches.push({
+      id: c.id as string,
+      exportName,
+      filePath: path,
+    });
+  }
+}
+
+// ── 5. composedOf References ────────────────────────────────────
+for (const c of components) {
+  const refs = c.composedOf as string[] | undefined;
+  if (!refs) continue;
+  for (const ref of refs) {
+    if (!allIds.has(ref)) {
+      report.warnings.push(`"${c.id}" composedOf references unknown ID: "${ref}"`);
+    }
+  }
+}
+
+// ── 6. Slot accepts References ──────────────────────────────────
+for (const c of components) {
+  const slots = c.slots as Record<string, { accepts: string[] }> | undefined;
+  if (!slots) continue;
+  for (const [slotName, slot] of Object.entries(slots)) {
+    for (const ref of slot.accepts) {
+      if (ref !== "*" && !allIds.has(ref)) {
+        report.warnings.push(`"${c.id}" slot "${slotName}" accepts unknown ID: "${ref}"`);
       }
     }
   }
-
-  // Slot accepts references
-  if (c.slots) {
-    for (const [slotName, slot] of Object.entries(c.slots)) {
-      for (const ref of slot.accepts) {
-        if (ref !== "*" && !allIds.has(ref)) {
-          warn(`"${c.id}" slot "${slotName}" accepts unknown ID: "${ref}"`);
-        }
-      }
-    }
-  }
 }
 
-// Summary
-console.log("\n" + "═".repeat(50));
-console.log(`Registry: ${registry.components.length} components`);
-console.log(`IDs: ${allIds.size} unique`);
+// ── 7. Orphan Detection ────────────────────────────────────────
+const scannedFiles = scanPrimitiveFiles();
+const primitivePaths = new Set(
+  components
+    .filter((c) => typeof c.path === "string" && (c.path as string).includes("primitives/"))
+    .map((c) => c.path as string)
+);
 
-const layers = new Map<string, number>();
-for (const c of registry.components) {
-  const layer = (c as any).layer || "unknown";
-  layers.set(layer, (layers.get(layer) || 0) + 1);
-}
-for (const [layer, count] of [...layers.entries()].sort()) {
-  console.log(`  ${layer}: ${count}`);
+// Also include all registry paths for broader orphan check
+for (const p of registryPaths) {
+  primitivePaths.add(p);
 }
 
-console.log(`\nResult: ${errors} errors, ${warnings} warnings`);
-if (errors === 0 && warnings === 0) {
-  ok("Registry is valid! ✨");
-}
-console.log("═".repeat(50));
+report.orphans = findOrphans(primitivePaths, scannedFiles);
 
-process.exit(errors > 0 ? 1 : 0);
+// ── 8. Missing File Detection (primitives only) ────────────────
+const primEntries = components
+  .filter((c) => typeof c.path === "string" && (c.path as string).includes("primitives/"))
+  .map((c) => ({ id: c.id as string, path: c.path as string }));
+report.missing = findMissing(primEntries);
+
+// ── 9. Stats ────────────────────────────────────────────────────
+for (const c of components) {
+  const layer = (c.layer as string) || "unknown";
+  const category = (c.category as string) || "unknown";
+  const status = (c.status as string) || "unknown";
+
+  report.layerStats[layer] = (report.layerStats[layer] || 0) + 1;
+  report.categoryStats[category] = (report.categoryStats[category] || 0) + 1;
+  report.statusStats[status] = (report.statusStats[status] || 0) + 1;
+}
+
+// ── Output ──────────────────────────────────────────────────────
+formatReport(report);
+
+// ── Exit Code ───────────────────────────────────────────────────
+process.exit(report.errors.length > 0 ? 1 : 0);

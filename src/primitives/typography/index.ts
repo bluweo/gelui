@@ -1,0 +1,6 @@
+export { Heading } from "./Heading";
+export { Text } from "./Text";
+export { Label } from "./Label";
+export { Caption } from "./Caption";
+export { Code } from "./Code";
+export { Link } from "./Link";

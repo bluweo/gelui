@@ -9,7 +9,10 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "registry:check": "npx tsx src/registry/validate.ts",
+    "registry:add": "npx tsx src/registry/add-component.ts",
+    "registry:sync": "npx tsx src/registry/sync.ts"
   },
   "dependencies": {
     "@astrojs/node": "^10.0.3",
