@@ -1232,18 +1232,24 @@ html[data-navigated] * {
   background-color: var(--gel-glass-bg, rgba(255, 255, 255, 0.23));
   border: none;
 
-  /* Contrast-aware text — dark on light backgrounds, white on dark */
-  color: rgba(30, 30, 35, 0.75);
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.25);
+  /* Contrast-aware text — adapts to background via data-contrast */
+  /* Default: dark text for light backgrounds (glass on white/light) */
+  color: rgba(30, 30, 35, 0.8);
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
 
-  /* Dark background → white text (check both data-contrast on ancestors AND dark theme) */
+  /* Dark background → white text */
   [data-contrast="dark"] & {
     color: rgba(255, 255, 255, 0.92);
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
   }
   [data-theme="dark"] & {
     color: rgba(255, 255, 255, 0.88);
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  }
+
+  /* When inside a transparent card (no frost), use contrast from parent */
+  .btn-transparent-context & {
+    color: inherit;
   }
 
   /* Pre-computed volumetric shadow */

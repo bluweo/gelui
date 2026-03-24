@@ -1,8 +1,13 @@
+import { useRef } from "react";
 import { Button } from "@/primitives/buttons";
+import { useContrastColor } from "@/components/hooks/useContrastColor";
 
 export function ButtonsRightColumn() {
+  const ref = useRef<HTMLDivElement>(null);
+  const contrast = useContrastColor(ref);
+
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+    <div ref={ref} data-contrast={contrast} style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
       {/* Gel Buttons table */}
       <div className="rounded-[var(--glass-radius-sm)] overflow-hidden border contrast-border">
         <div className="px-3 py-2 border-b contrast-border">
