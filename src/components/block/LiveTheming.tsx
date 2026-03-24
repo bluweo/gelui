@@ -6,7 +6,7 @@ import { Badge, Tag } from "@/primitives/data";
 import { Toggle } from "@/primitives/controls";
 import { Spinner } from "@/primitives/feedback";
 import { useDarkMode } from "@/primitives/hooks/useDarkMode";
-import { useAppearance, type RadiusPreset, type ShadowPreset } from "@/components/context/AppearanceContext";
+import type { RadiusPreset, ShadowPreset } from "@/components/context/AppearanceContext";
 import { LiquidGlassSlider } from "@/components/glass/LiquidGlassSlider";
 
 /* ─── CSS Variable definitions ─── */
@@ -108,12 +108,59 @@ function HowItWorks({ isDark }: { isDark: boolean }) {
   );
 }
 
+/* ─── Read/write appearance from localStorage (bypasses React context) ─── */
+const STORAGE_KEY = "gelui-appearance";
+function readAppearance() {
+  try {
+    const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+    return {
+      transparency: stored.transparency ?? 0.64,
+      radiusPreset: stored.radiusPreset ?? "medium",
+      blurIntensity: stored.blurIntensity ?? 24,
+      shadowPreset: stored.shadowPreset ?? "soft",
+    };
+  } catch { return { transparency: 0.64, radiusPreset: "medium", blurIntensity: 24, shadowPreset: "soft" }; }
+}
+function writeAppearance(key: string, value: any) {
+  try {
+    const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+    stored[key] = value;
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(stored));
+    // Dispatch event so AppearanceContext picks up the change
+    window.dispatchEvent(new StorageEvent("storage", { key: STORAGE_KEY }));
+    // Also force a re-render in AppearanceContext by dispatching custom event
+    window.dispatchEvent(new CustomEvent("gelui-appearance-change", { detail: { [key]: value } }));
+  } catch {}
+}
+
 /* ─── Column 2: Embedded Appearance Controls ─── */
 function AppearanceControls({ isDark }: { isDark: boolean }) {
   const [mounted, setMounted] = useState(false);
-  useEffect(() => { setMounted(true); }, []);
+  const [transparency, setTransparencyLocal] = useState(0.64);
+  const [radiusPreset, setRadiusLocal] = useState("medium");
+  const [blurIntensity, setBlurLocal] = useState(24);
+  const [shadowPreset, setShadowLocal] = useState("soft");
 
-  // Only call useAppearance after mount (avoids SSR crash — no provider during SSR)
+  // Read from localStorage on mount
+  useEffect(() => {
+    const vals = readAppearance();
+    setTransparencyLocal(vals.transparency);
+    setRadiusLocal(vals.radiusPreset);
+    setBlurLocal(vals.blurIntensity);
+    setShadowLocal(vals.shadowPreset);
+    setMounted(true);
+
+    // Poll for external changes (from the Appearance modal)
+    const id = setInterval(() => {
+      const v = readAppearance();
+      setTransparencyLocal(v.transparency);
+      setRadiusLocal(v.radiusPreset);
+      setBlurLocal(v.blurIntensity);
+      setShadowLocal(v.shadowPreset);
+    }, 500);
+    return () => clearInterval(id);
+  }, []);
+
   if (!mounted) {
     return (
       <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: isDark ? "rgba(0,0,0,0.30)" : "rgba(255,255,255,0.60)", border: `1px solid ${isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)"}`, height: "100%", display: "flex", alignItems: "center", justifyContent: "center", padding: 20 }}>
@@ -122,11 +169,13 @@ function AppearanceControls({ isDark }: { isDark: boolean }) {
     );
   }
 
-  return <AppearanceControlsInner isDark={isDark} />;
-}
-
-function AppearanceControlsInner({ isDark }: { isDark: boolean }) {
-  const { transparency, setTransparency, radiusPreset, setRadiusPreset, blurIntensity, setBlurIntensity, shadowPreset, setShadowPreset, resetToDefaults } = useAppearance();
+  const setTransparency = (v: number) => { setTransparencyLocal(v); writeAppearance("transparency", v); };
+  const setRadiusPreset = (v: string) => { setRadiusLocal(v); writeAppearance("radiusPreset", v); };
+  const setBlurIntensity = (v: number) => { setBlurLocal(v); writeAppearance("blurIntensity", v); };
+  const setShadowPreset = (v: string) => { setShadowLocal(v); writeAppearance("shadowPreset", v); };
+  const resetToDefaults = () => {
+    setTransparency(0.64); setRadiusPreset("medium"); setBlurIntensity(24); setShadowPreset("soft");
+  };
 
   const tableBg = isDark ? "rgba(0,0,0,0.30)" : "rgba(255,255,255,0.60)";
   const headerBg = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)";
