@@ -7,3 +7,4 @@ export { Link } from "./Link";
 export { Blockquote } from "./Blockquote";
 export { List } from "./List";
 export { Kbd } from "./Kbd";
+export { Overline } from "./Overline";

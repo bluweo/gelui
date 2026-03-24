@@ -6,7 +6,7 @@
       "id": "heading",
       "name": "Heading",
       "displayName": "Heading",
-      "description": "H1–H6 headings with font role and tracking",
+      "description": "Heading (h1-h6) with optional display variant for hero/banner titles",
       "layer": "primitive",
       "category": "typography",
       "status": "stable",
@@ -26,6 +26,10 @@
           ],
           "default": "2",
           "description": "Heading level"
+        },
+        "display": {
+          "type": "boolean",
+          "default": false
         }
       },
       "documentedOn": "/design-system/primitives",
@@ -97,8 +101,8 @@
       "layer": "primitive",
       "category": "typography",
       "status": "stable",
-      "version": "0.8.0",
-      "path": "inline",
+      "version": "0.20.1",
+      "path": "src/primitives/typography/Overline.tsx",
       "isReact": false,
       "props": {},
       "documentedOn": "/design-system/primitives",
@@ -107,7 +111,8 @@
         "overline",
         "label",
         "uppercase"
-      ]
+      ],
+      "exportName": "Overline"
     },
     {
       "id": "label",

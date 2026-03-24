@@ -6,7 +6,7 @@ export { useDarkMode } from "./hooks/useDarkMode";
 export { useClickOutside } from "./hooks/useClickOutside";
 
 // Re-export all components by category
-export { Heading, Text, Label, Caption, Code, Link, Blockquote, List, Kbd } from "./typography";
+export { Heading, Text, Label, Caption, Code, Link, Blockquote, List, Kbd, Overline } from "./typography";
 export { Button, IconButton, LinkButton, ButtonGroup } from "./buttons";
 export { Card, Surface, Divider, Accordion, ScrollArea } from "./surfaces";
 export { Input, SearchInput, Textarea, Select, SearchableSelect, PasswordInput, NumberInput, FormGroup } from "./inputs";
@@ -66,6 +66,7 @@ import { Icon } from "./media/Icon";
 import { Blockquote } from "./typography/Blockquote";
 import { List } from "./typography/List";
 import { Kbd } from "./typography/Kbd";
+import { Overline } from "./typography/Overline";
 import { ColorSwatch } from "./data/ColorSwatch";
 import { Overlay } from "./feedback/Overlay";
 import { Modal } from "./feedback/Modal";
@@ -142,6 +143,7 @@ export const PRIMITIVE_MAP: Record<string, React.ComponentType<any>> = {
   blockquote: Blockquote,
   list: List,
   kbd: Kbd,
+  overline: Overline,
   // Data Display (additional)
   "color-swatch": ColorSwatch,
   // Overlays

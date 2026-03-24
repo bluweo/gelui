@@ -411,6 +411,7 @@ function ComponentPreview({ id, isDark }: { id: string; isDark: boolean }) {
     ),
     "blockquote": <Primitives.Blockquote author="Dieter Rams">Less, but better.</Primitives.Blockquote>,
     "list": <Primitives.List items={["Typography", "Buttons", "Surfaces"]} />,
+    "overline": <Primitives.Overline>Category Label</Primitives.Overline>,
     "kbd": (
       <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
         <Primitives.Kbd>⌘</Primitives.Kbd><Primitives.Kbd>K</Primitives.Kbd>
