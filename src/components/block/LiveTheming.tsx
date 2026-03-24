@@ -72,9 +72,9 @@ function HowItWorks({ isDark }: { isDark: boolean }) {
     { variable: "--glass-shadow", label: "", setBy: "", category: "" },
   ]);
 
-  const tableBg = isDark ? "#1a1a1a" : "#ffffff";
+  const tableBg = isDark ? "rgba(0,0,0,0.30)" : "rgba(255,255,255,0.60)";
   const headerBg = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)";
-  const borderColor = isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.08)";
+  const borderColor = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)";
   const rowBorder = isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)";
   const headerText = isDark ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.45)";
   const labelText = isDark ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.7)";
@@ -150,11 +150,11 @@ function HowItWorks({ isDark }: { isDark: boolean }) {
 function TryIt({ isDark }: { isDark: boolean }) {
   const [toggled, setToggled] = useState(false);
 
-  const tableBg = isDark ? "#1a1a1a" : "#ffffff";
-  const borderColor = isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.08)";
+  const tableBg = isDark ? "rgba(0,0,0,0.30)" : "rgba(255,255,255,0.60)";
+  const borderColor = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)";
   const headerBg = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)";
   const headerText = isDark ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.45)";
-  const rowBorder = isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)";
+  const rowBorder = isDark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.04)";
   const labelText = isDark ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.55)";
   const noteText = isDark ? "rgba(255,255,255,0.35)" : "rgba(0,0,0,0.35)";
   const noteBg = isDark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.03)";
@@ -216,9 +216,9 @@ function TryIt({ isDark }: { isDark: boolean }) {
 function LiveVariablesTable({ isDark }: { isDark: boolean }) {
   const values = useLiveCSSVars(CSS_VARS);
 
-  const tableBg = isDark ? "#1a1a1a" : "#ffffff";
+  const tableBg = isDark ? "rgba(0,0,0,0.30)" : "rgba(255,255,255,0.60)";
   const headerBg = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)";
-  const borderColor = isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.08)";
+  const borderColor = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)";
   const rowBorder = isDark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.04)";
   const headerText = isDark ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.45)";
   const labelText = isDark ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.7)";
