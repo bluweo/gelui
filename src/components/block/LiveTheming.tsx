@@ -382,8 +382,8 @@ export function LiveTheming() {
         {showVars ? "Hide" : "Show"} Variables
         <span className="text-[10px] font-mono contrast-muted">{CSS_VARS.length}</span>
       </button>
-      {/* 3-column layout: Settings | Appearance | Live Preview — stacks on mobile */}
-      <div className="grid grid-cols-3 gap-4 mb-4 max-[860px]:grid-cols-1 max-[860px]:gap-3">
+      {/* 3-column layout: Settings | Appearance | Live Preview — stacks on smaller screens */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 mb-4">
         <SettingsPreview />
         <AppearanceControls isDark={isDark} />
         <LivePreview />
