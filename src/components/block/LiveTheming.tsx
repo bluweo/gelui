@@ -237,8 +237,8 @@ function LivePreview() {
   const [toggled, setToggled] = useState(false);
 
   return (
-    <div className="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white/60 dark:bg-black/30 h-full">
-      {/* Header — identical to Breakpoints block */}
+    <div className="rounded-[var(--glass-radius-sm)] overflow-hidden glass-1 glass-specular h-full">
+      {/* Header */}
       <div className="flex items-center px-3 py-2 bg-black/[0.04] dark:bg-white/[0.06] border-b border-black/[0.06] dark:border-white/[0.06]">
         <span className="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/45 dark:text-white/40">Live Preview</span>
       </div>
