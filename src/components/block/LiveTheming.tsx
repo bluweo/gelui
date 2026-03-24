@@ -110,6 +110,22 @@ function HowItWorks({ isDark }: { isDark: boolean }) {
 
 /* ─── Column 2: Embedded Appearance Controls ─── */
 function AppearanceControls({ isDark }: { isDark: boolean }) {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
+
+  // Only call useAppearance after mount (avoids SSR crash — no provider during SSR)
+  if (!mounted) {
+    return (
+      <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: isDark ? "rgba(0,0,0,0.30)" : "rgba(255,255,255,0.60)", border: `1px solid ${isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)"}`, height: "100%", display: "flex", alignItems: "center", justifyContent: "center", padding: 20 }}>
+        <span style={{ fontSize: 12, color: isDark ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.3)" }}>Loading...</span>
+      </div>
+    );
+  }
+
+  return <AppearanceControlsInner isDark={isDark} />;
+}
+
+function AppearanceControlsInner({ isDark }: { isDark: boolean }) {
   const { transparency, setTransparency, radiusPreset, setRadiusPreset, blurIntensity, setBlurIntensity, shadowPreset, setShadowPreset, resetToDefaults } = useAppearance();
 
   const tableBg = isDark ? "rgba(0,0,0,0.30)" : "rgba(255,255,255,0.60)";
