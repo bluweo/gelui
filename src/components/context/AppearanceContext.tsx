@@ -176,6 +176,22 @@ export function AppearanceProvider({ children }: { children: ReactNode }) {
     saveStored({ transparency, radiusPreset, blurIntensity, shadowPreset, theme, fonts });
   }, [transparency, radiusPreset, blurIntensity, shadowPreset, theme, fonts]);
 
+  /* Listen for external changes (e.g. from LiveTheming island writing to localStorage) */
+  useEffect(() => {
+    const handleExternalChange = () => {
+      const stored = loadStored();
+      if (stored.transparency !== undefined && stored.transparency !== transparency) setTransparency(stored.transparency);
+      if (stored.radiusPreset !== undefined && stored.radiusPreset !== radiusPreset) setRadiusPreset(stored.radiusPreset);
+      if (stored.blurIntensity !== undefined && stored.blurIntensity !== blurIntensity) setBlurIntensity(stored.blurIntensity);
+      if (stored.shadowPreset !== undefined && stored.shadowPreset !== shadowPreset) setShadowPreset(stored.shadowPreset);
+    };
+    window.addEventListener("gelui-appearance-change", handleExternalChange);
+    window.addEventListener("storage", (e) => { if (e.key === STORAGE_KEY) handleExternalChange(); });
+    return () => {
+      window.removeEventListener("gelui-appearance-change", handleExternalChange);
+    };
+  }, [transparency, radiusPreset, blurIntensity, shadowPreset]);
+
   const openModal = useCallback(() => setModalOpen(true), []);
   const closeModal = useCallback(() => setModalOpen(false), []);
   const openFontPicker = useCallback((role: FontRole = "primary") => {
