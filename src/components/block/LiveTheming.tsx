@@ -169,11 +169,8 @@ function AppearanceControls({ isDark }: { isDark: boolean }) {
   const rowBorder = isDark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.04)";
   const headerText = isDark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.45)";
   const labelText = isDark ? "rgba(255,255,255,0.70)" : "rgba(0,0,0,0.75)";
-  const valueText = isDark ? "rgba(255,255,255,0.35)" : "rgba(0,0,0,0.40)";
-  const segBg = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.05)";
-  const segActiveBg = isDark ? "rgba(255,255,255,0.95)" : "#fff";
-  const segActiveText = isDark ? "#000" : "#000";
-  const segInactiveText = isDark ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.4)";
+  // Colors now handled by Tailwind classes (text-text-secondary, text-text-tertiary)
+  // and glass-preset-btn/glass-preset-active CSS utilities
 
   const radiusOptions: { label: string; value: RadiusPreset }[] = [
     { label: "Minimal", value: "minimal" },
@@ -187,21 +184,7 @@ function AppearanceControls({ isDark }: { isDark: boolean }) {
     { label: "Elevated", value: "elevated" },
   ];
 
-  const segStyle = (active: boolean): React.CSSProperties => ({
-    flex: 1,
-    padding: "6px 0",
-    fontSize: "11px",
-    fontFamily: "var(--font-sans)",
-    fontWeight: active ? 600 : 450,
-    textAlign: "center",
-    borderRadius: "var(--glass-radius-pill, 100px)",
-    background: active ? segActiveBg : "transparent",
-    color: active ? segActiveText : segInactiveText,
-    border: "none",
-    cursor: "pointer",
-    transition: "all 200ms ease",
-    boxShadow: active ? "0 1px 4px rgba(0,0,0,0.08)" : "none",
-  });
+  // Use the same glass-preset classes as the Appearance modal
 
   return (
     <div className="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white/60 dark:bg-black/30 h-full flex flex-col">
@@ -214,18 +197,18 @@ function AppearanceControls({ isDark }: { isDark: boolean }) {
       {/* Transparency */}
       <div className="px-3 py-2.5 border-b border-black/[0.04] dark:border-white/[0.04]">
         <div className="flex justify-between mb-2">
-          <span className="text-[10px] font-[650] uppercase tracking-[0.04em] text-black/60 dark:text-white/55">Transparency</span>
-          <span className="text-[11px] font-mono text-black/50 dark:text-white/40 tabular-nums">{Math.round(transparency * 100)}%</span>
+          <span className="text-[11.5px] font-[600] uppercase tracking-[0.06em] text-text-secondary">Transparency</span>
+          <span className="text-[11.5px] font-[600] text-text-tertiary tabular-nums">{Math.round(transparency * 100)}%</span>
         </div>
-        <LiquidGlassSlider min={0} max={100} step={1} value={Math.round(transparency * 100)} onChange={(v) => setTransparency(v / 100)} />
+        <LiquidGlassSlider min={0.2} max={1.0} step={0.01} value={transparency} onChange={setTransparency} />
       </div>
 
       {/* Border Radius */}
       <div className="px-3 py-2.5 border-b border-black/[0.04] dark:border-white/[0.04]">
-        <span className="text-[10px] font-[650] uppercase tracking-[0.04em] text-black/60 dark:text-white/55 block mb-2">Border Radius</span>
-        <div style={{ display: "flex", gap: 2, padding: 3, borderRadius: "var(--glass-radius-pill, 100px)", background: segBg }}>
+        <span className="text-[11.5px] font-[600] uppercase tracking-[0.06em] text-text-secondary block mb-2">Border Radius</span>
+        <div className="flex gap-1 p-[3px] bg-black/6 rounded-glass-sm dark:bg-white/6">
           {radiusOptions.map(o => (
-            <button key={o.value} onClick={() => setRadiusPreset(o.value)} style={segStyle(radiusPreset === o.value)}>{o.label}</button>
+            <button key={o.value} onClick={() => setRadiusPreset(o.value)} className={`glass-preset-btn ${radiusPreset === o.value ? "glass-preset-active" : ""}`}>{o.label}</button>
           ))}
         </div>
       </div>
@@ -233,18 +216,18 @@ function AppearanceControls({ isDark }: { isDark: boolean }) {
       {/* Blur Intensity */}
       <div className="px-3 py-2.5 border-b border-black/[0.04] dark:border-white/[0.04]">
         <div className="flex justify-between mb-2">
-          <span className="text-[10px] font-[650] uppercase tracking-[0.04em] text-black/60 dark:text-white/55">Blur Intensity</span>
-          <span className="text-[11px] font-mono text-black/50 dark:text-white/40 tabular-nums">{blurIntensity}px</span>
+          <span className="text-[11.5px] font-[600] uppercase tracking-[0.06em] text-text-secondary">Blur Intensity</span>
+          <span className="text-[11.5px] font-[600] text-text-tertiary tabular-nums">{blurIntensity}px</span>
         </div>
         <LiquidGlassSlider min={0} max={60} step={1} value={blurIntensity} onChange={setBlurIntensity} />
       </div>
 
       {/* Shadow Depth */}
       <div className="px-3 py-2.5">
-        <span className="text-[10px] font-[650] uppercase tracking-[0.04em] text-black/60 dark:text-white/55 block mb-2">Shadow Depth</span>
-        <div style={{ display: "flex", gap: 2, padding: 3, borderRadius: "var(--glass-radius-pill, 100px)", background: segBg }}>
+        <span className="text-[11.5px] font-[600] uppercase tracking-[0.06em] text-text-secondary block mb-2">Shadow Depth</span>
+        <div className="flex gap-1 p-[3px] bg-black/6 rounded-glass-sm dark:bg-white/6">
           {shadowOptions.map(o => (
-            <button key={o.value} onClick={() => setShadowPreset(o.value)} style={segStyle(shadowPreset === o.value)}>{o.label}</button>
+            <button key={o.value} onClick={() => setShadowPreset(o.value)} className={`glass-preset-btn ${shadowPreset === o.value ? "glass-preset-active" : ""}`}>{o.label}</button>
           ))}
         </div>
       </div>
