@@ -4,19 +4,8 @@ import { useDarkMode } from "@/primitives/hooks/useDarkMode";
 export function ButtonsShowcase() {
   const isDark = useDarkMode();
 
-  const labelStyle = {
-    fontSize: "12px",
-    fontWeight: 550,
-    color: isDark ? "rgba(255,255,255,0.55)" : "rgba(0,0,0,0.6)",
-  };
-
-  const headerStyle = {
-    fontSize: "10px",
-    fontWeight: 650,
-    letterSpacing: "0.06em",
-    textTransform: "uppercase" as const,
-    color: isDark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.45)",
-  };
+  const labelColor = isDark ? "rgba(255,255,255,0.55)" : "rgba(0,0,0,0.6)";
+  const headerColor = isDark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.45)";
 
   const tableBg = isDark ? "rgba(0,0,0,0.3)" : "rgba(255,255,255,0.6)";
   const headerBg = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)";
@@ -28,18 +17,18 @@ export function ButtonsShowcase() {
       {/* Solid Buttons */}
       <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: tableBg }}>
         <div style={{ padding: "8px 12px", background: headerBg, borderBottom: `1px solid ${borderColor}` }}>
-          <span style={headerStyle}>Solid</span>
+          <span className="type-overline" style={{ color: headerColor }}>Solid</span>
         </div>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 16px", borderBottom: `1px solid ${rowBorder}` }}>
-          <span style={labelStyle}>Pill</span>
+          <span className="type-label" style={{ color: labelColor }}>Pill</span>
           <Button variant="solid" size="md">Button</Button>
         </div>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 16px", borderBottom: `1px solid ${rowBorder}` }}>
-          <span style={labelStyle}>Rounded</span>
+          <span className="type-label" style={{ color: labelColor }}>Rounded</span>
           <Button variant="solid" size="md" style={{ borderRadius: "var(--glass-radius, 16px)" }}>Button</Button>
         </div>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 16px" }}>
-          <span style={labelStyle}>Small</span>
+          <span className="type-label" style={{ color: labelColor }}>Small</span>
           <Button variant="solid" size="sm">Button</Button>
         </div>
       </div>
@@ -47,14 +36,14 @@ export function ButtonsShowcase() {
       {/* Ghost Buttons */}
       <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: tableBg }}>
         <div style={{ padding: "8px 12px", background: headerBg, borderBottom: `1px solid ${borderColor}` }}>
-          <span style={headerStyle}>Ghost</span>
+          <span className="type-overline" style={{ color: headerColor }}>Ghost</span>
         </div>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 16px", borderBottom: `1px solid ${rowBorder}` }}>
-          <span style={labelStyle}>Pill</span>
+          <span className="type-label" style={{ color: labelColor }}>Pill</span>
           <Button variant="ghost" size="md">Button</Button>
         </div>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 16px" }}>
-          <span style={labelStyle}>Rounded</span>
+          <span className="type-label" style={{ color: labelColor }}>Rounded</span>
           <Button variant="ghost" size="md" style={{ borderRadius: "var(--glass-radius-sm, 10px)" }}>Button</Button>
         </div>
       </div>
@@ -62,7 +51,7 @@ export function ButtonsShowcase() {
       {/* Action Pair */}
       <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: tableBg }}>
         <div style={{ padding: "8px 12px", background: headerBg, borderBottom: `1px solid ${borderColor}` }}>
-          <span style={headerStyle}>Action Pair</span>
+          <span className="type-overline" style={{ color: headerColor }}>Action Pair</span>
         </div>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "12px", padding: "16px" }}>
           <Button variant="ghost" size="md">Cancel</Button>
@@ -73,14 +62,14 @@ export function ButtonsShowcase() {
       {/* Link Buttons */}
       <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: tableBg }}>
         <div style={{ padding: "8px 12px", background: headerBg, borderBottom: `1px solid ${borderColor}` }}>
-          <span style={headerStyle}>Link</span>
+          <span className="type-overline" style={{ color: headerColor }}>Link</span>
         </div>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 16px", borderBottom: `1px solid ${rowBorder}` }}>
-          <span style={labelStyle}>Underline</span>
+          <span className="type-label" style={{ color: labelColor }}>Underline</span>
           <LinkButton underline>Learn more</LinkButton>
         </div>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 16px" }}>
-          <span style={labelStyle}>Arrow</span>
+          <span className="type-label" style={{ color: labelColor }}>Arrow</span>
           <LinkButton arrow>Explore</LinkButton>
         </div>
       </div>

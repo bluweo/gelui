@@ -29,21 +29,20 @@ export function Blockquote({
       }}
     >
       <div
+        className="type-body"
         style={{
           fontStyle: "italic",
-          fontSize: "14px",
-          lineHeight: 1.6,
           color: dark ? "rgba(255,255,255,0.8)" : "rgba(0,0,0,0.75)",
-          fontFamily: "var(--font-ui)",
+          fontFamily: "var(--font-body)",
         }}
       >
         {children}
       </div>
       {(author || source) && (
         <footer
+          className="type-caption"
           style={{
             marginTop: "8px",
-            fontSize: "12px",
             color: dark ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.45)",
             fontFamily: "var(--font-ui)",
             fontStyle: "normal",

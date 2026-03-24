@@ -25,7 +25,7 @@ export function TypographyExtras() {
         </div>
         <div className="flex max-[540px]:flex-col">
           <div className="flex-1 p-4 border-r border-black/[0.04] dark:border-white/[0.04] max-[540px]:border-r-0 max-[540px]:border-b">
-            <Label className="text-[11px] font-[600] text-black/60 dark:text-white/55 block mb-3">Unordered</Label>
+            <Label className="type-label text-black/60 dark:text-white/55 block mb-3">Unordered</Label>
             <List
               items={[
                 "Design tokens",
@@ -36,7 +36,7 @@ export function TypographyExtras() {
             />
           </div>
           <div className="flex-1 p-4">
-            <Label className="text-[11px] font-[600] text-black/60 dark:text-white/55 block mb-3">Ordered</Label>
+            <Label className="type-label text-black/60 dark:text-white/55 block mb-3">Ordered</Label>
             <List
               ordered
               items={[
@@ -66,7 +66,7 @@ export function TypographyExtras() {
             key={shortcut.label}
             className={`flex items-center justify-between gap-3 px-3 py-2.5 ${i < arr.length - 1 ? "border-b border-black/[0.04] dark:border-white/[0.04]" : ""}`}
           >
-            <span className="text-[12px] font-[600] text-black/75 dark:text-white/70">{shortcut.label}</span>
+            <span className="type-label text-black/75 dark:text-white/70">{shortcut.label}</span>
             <div className="flex items-center gap-1">
               {shortcut.keys.map((key, j) => (
                 <span key={j} className="flex items-center gap-1">

@@ -25,14 +25,13 @@ export function List({
   };
 
   const itemStyle: CSSProperties = {
-    fontSize: "14px",
-    lineHeight: 1.5,
     color: dark ? "rgba(255,255,255,0.8)" : "rgba(0,0,0,0.75)",
-    fontFamily: "var(--font-ui)",
+    fontFamily: "var(--font-body)",
     display: "flex",
     alignItems: "baseline",
     gap: "10px",
   };
+  const itemClassName = "type-body";
 
   const bulletStyle: CSSProperties = {
     flexShrink: 0,
@@ -67,7 +66,7 @@ export function List({
       }}
     >
       {items.map((item, i) => (
-        <div key={i} role="listitem" style={itemStyle}>
+        <div key={i} role="listitem" className={itemClassName} style={itemStyle}>
           {ordered ? (
             <span style={numberStyle}>{i + 1}.</span>
           ) : (
