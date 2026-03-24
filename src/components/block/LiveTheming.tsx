@@ -65,16 +65,6 @@ function HowItWorks({ isDark }: { isDark: boolean }) {
     { variable: "--glass-shadow", label: "", setBy: "", category: "" },
   ]);
 
-  const tableBg = isDark ? "rgba(0,0,0,0.30)" : "rgba(255,255,255,0.60)";
-  const headerBg = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)";
-  const borderColor = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)";
-  const rowBorder = isDark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.04)";
-  const headerText = isDark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.45)";
-  const labelText = isDark ? "rgba(255,255,255,0.70)" : "rgba(0,0,0,0.75)";
-  const monoText = isDark ? "rgba(255,255,255,0.35)" : "rgba(0,0,0,0.40)";
-  const pillBg = isDark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.05)";
-  const pillColor = isDark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.5)";
-
   const chains = [
     { setting: "Border Radius", variable: "--glass-radius", previewType: "radius" },
     { setting: "Blur Intensity", variable: "--glass-blur", previewType: "blur" },
@@ -82,26 +72,20 @@ function HowItWorks({ isDark }: { isDark: boolean }) {
   ];
 
   return (
-    <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: tableBg, border: `1px solid ${borderColor}`, height: "100%" }}>
-      <div className="px-3 py-2" style={{ background: headerBg, borderBottom: `1px solid ${borderColor}` }}>
-        <span className="text-[10px] font-[650] uppercase tracking-[0.06em] leading-none" style={{ color: headerText }}>How It Works</span>
+    <div className="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white/60 dark:bg-black/30 h-full">
+      <div className="flex items-center justify-between px-3 py-2 bg-black/[0.04] dark:bg-white/[0.06] border-b border-black/[0.06] dark:border-white/[0.06]">
+        <span className="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/45 dark:text-white/40">Setting</span>
+        <span className="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/45 dark:text-white/40">CSS Variable</span>
       </div>
       {chains.map((ch, idx) => {
         const liveVal = liveVars[ch.variable] || "";
-        const displayVal = liveVal.length > 18 ? liveVal.slice(0, 18) + "…" : liveVal;
+        const displayVal = liveVal.length > 20 ? liveVal.slice(0, 20) + "…" : liveVal;
         return (
-          <div key={ch.variable} style={{ display: "flex", alignItems: "center", padding: "10px 12px", borderBottom: idx < chains.length - 1 ? `1px solid ${rowBorder}` : "none", gap: "8px" }}>
-            <span style={{ fontSize: "12px", fontWeight: 600, fontFamily: "inherit", color: labelText, minWidth: 90, flexShrink: 0 }}>{ch.setting}</span>
-            <Arrow isDark={isDark} />
-            <div style={{ flex: 1, minWidth: 0 }}>
-              <span style={{ fontSize: "11px", fontFamily: "var(--font-mono)", fontVariantNumeric: "tabular-nums", padding: "2px 8px", borderRadius: "100px", background: pillBg, color: pillColor, display: "inline-block" }}>{ch.variable}</span>
-              <span style={{ fontSize: "10px", fontFamily: "var(--font-mono)", fontVariantNumeric: "tabular-nums", color: isDark ? "rgba(255,255,255,0.25)" : "rgba(0,0,0,0.2)", display: "block", marginTop: 2 }}>{displayVal}</span>
-            </div>
-            <Arrow isDark={isDark} />
-            <div style={{ width: 32, height: 32, flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
-              {ch.previewType === "radius" && <div style={{ width: 28, height: 28, borderRadius: "var(--glass-radius, 12px)", background: isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.05)", border: `2px solid ${isDark ? "rgba(255,255,255,0.12)" : "rgba(0,0,0,0.08)"}` }} />}
-              {ch.previewType === "blur" && <div style={{ width: 28, height: 28, borderRadius: 6, backdropFilter: "blur(var(--glass-blur, 12px))", WebkitBackdropFilter: "blur(var(--glass-blur, 12px))", background: isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.02)", border: `1px solid ${isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.05)"}` }} />}
-              {ch.previewType === "shadow" && <div style={{ width: 28, height: 28, borderRadius: 6, background: isDark ? "rgba(255,255,255,0.06)" : "#fff", boxShadow: "var(--glass-shadow, 0 2px 8px rgba(0,0,0,0.1))" }} />}
+          <div key={ch.variable} className={`flex items-center justify-between gap-3 px-3 py-2.5 ${idx < chains.length - 1 ? "border-b border-black/[0.04] dark:border-white/[0.04]" : ""}`}>
+            <span className="text-[12px] font-[600] text-black/75 dark:text-white/70">{ch.setting}</span>
+            <div className="text-right">
+              <span className="text-[11px] font-mono px-2 py-0.5 rounded-full bg-black/[0.05] dark:bg-white/[0.07] text-black/50 dark:text-white/40 tabular-nums">{ch.variable}</span>
+              <span className="block text-[10px] font-mono text-black/30 dark:text-white/25 mt-0.5 tabular-nums">{displayVal}</span>
             </div>
           </div>
         );
@@ -220,25 +204,25 @@ function AppearanceControls({ isDark }: { isDark: boolean }) {
   });
 
   return (
-    <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: tableBg, border: `1px solid ${borderColor}`, height: "100%", display: "flex", flexDirection: "column" }}>
+    <div className="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white/60 dark:bg-black/30 h-full flex flex-col">
       {/* Header */}
-      <div className="px-3 py-2 flex items-center justify-between" style={{ background: headerBg, borderBottom: `1px solid ${borderColor}` }}>
-        <span className="text-[10px] font-[650] uppercase tracking-[0.06em] leading-none" style={{ color: headerText }}>Appearance</span>
-        <button onClick={resetToDefaults} style={{ fontSize: "10px", fontWeight: 550, color: isDark ? "rgba(255,255,255,0.35)" : "rgba(0,0,0,0.35)", background: "none", border: "none", cursor: "pointer" }}>Reset</button>
+      <div className="flex items-center justify-between px-3 py-2 bg-black/[0.04] dark:bg-white/[0.06] border-b border-black/[0.06] dark:border-white/[0.06]">
+        <span className="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/45 dark:text-white/40">Appearance</span>
+        <button onClick={resetToDefaults} className="text-[10px] font-[550] text-black/35 dark:text-white/35 bg-transparent border-none cursor-pointer hover:opacity-70">Reset</button>
       </div>
 
       {/* Transparency */}
-      <div style={{ padding: "10px 12px", borderBottom: `1px solid ${rowBorder}` }}>
-        <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8 }}>
-          <span className="text-[10px] font-[650] uppercase tracking-[0.04em]" style={{ color: labelText }}>Transparency</span>
-          <span style={{ fontSize: "11px", fontFamily: "var(--font-mono)", fontVariantNumeric: "tabular-nums", lineHeight: 1.4, color: valueText }}>{Math.round(transparency * 100)}%</span>
+      <div className="px-3 py-2.5 border-b border-black/[0.04] dark:border-white/[0.04]">
+        <div className="flex justify-between mb-2">
+          <span className="text-[10px] font-[650] uppercase tracking-[0.04em] text-black/60 dark:text-white/55">Transparency</span>
+          <span className="text-[11px] font-mono text-black/50 dark:text-white/40 tabular-nums">{Math.round(transparency * 100)}%</span>
         </div>
         <LiquidGlassSlider min={0} max={100} step={1} value={Math.round(transparency * 100)} onChange={(v) => setTransparency(v / 100)} />
       </div>
 
       {/* Border Radius */}
-      <div style={{ padding: "10px 12px", borderBottom: `1px solid ${rowBorder}` }}>
-        <span className="text-[10px] font-[650] uppercase tracking-[0.04em] block mb-2" style={{ color: labelText }}>Border Radius</span>
+      <div className="px-3 py-2.5 border-b border-black/[0.04] dark:border-white/[0.04]">
+        <span className="text-[10px] font-[650] uppercase tracking-[0.04em] text-black/60 dark:text-white/55 block mb-2">Border Radius</span>
         <div style={{ display: "flex", gap: 2, padding: 3, borderRadius: "var(--glass-radius-pill, 100px)", background: segBg }}>
           {radiusOptions.map(o => (
             <button key={o.value} onClick={() => setRadiusPreset(o.value)} style={segStyle(radiusPreset === o.value)}>{o.label}</button>
@@ -247,17 +231,17 @@ function AppearanceControls({ isDark }: { isDark: boolean }) {
       </div>
 
       {/* Blur Intensity */}
-      <div style={{ padding: "10px 12px", borderBottom: `1px solid ${rowBorder}` }}>
-        <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8 }}>
-          <span className="text-[10px] font-[650] uppercase tracking-[0.04em]" style={{ color: labelText }}>Blur Intensity</span>
-          <span style={{ fontSize: "11px", fontFamily: "var(--font-mono)", fontVariantNumeric: "tabular-nums", lineHeight: 1.4, color: valueText }}>{blurIntensity}px</span>
+      <div className="px-3 py-2.5 border-b border-black/[0.04] dark:border-white/[0.04]">
+        <div className="flex justify-between mb-2">
+          <span className="text-[10px] font-[650] uppercase tracking-[0.04em] text-black/60 dark:text-white/55">Blur Intensity</span>
+          <span className="text-[11px] font-mono text-black/50 dark:text-white/40 tabular-nums">{blurIntensity}px</span>
         </div>
         <LiquidGlassSlider min={0} max={60} step={1} value={blurIntensity} onChange={setBlurIntensity} />
       </div>
 
       {/* Shadow Depth */}
-      <div style={{ padding: "10px 12px" }}>
-        <span className="text-[10px] font-[650] uppercase tracking-[0.04em] block mb-2" style={{ color: labelText }}>Shadow Depth</span>
+      <div className="px-3 py-2.5">
+        <span className="text-[10px] font-[650] uppercase tracking-[0.04em] text-black/60 dark:text-white/55 block mb-2">Shadow Depth</span>
         <div style={{ display: "flex", gap: 2, padding: 3, borderRadius: "var(--glass-radius-pill, 100px)", background: segBg }}>
           {shadowOptions.map(o => (
             <button key={o.value} onClick={() => setShadowPreset(o.value)} style={segStyle(shadowPreset === o.value)}>{o.label}</button>
@@ -280,37 +264,37 @@ function LivePreview({ isDark }: { isDark: boolean }) {
   const labelText = isDark ? "rgba(255,255,255,0.70)" : "rgba(0,0,0,0.75)";
 
   return (
-    <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: tableBg, border: `1px solid ${borderColor}`, height: "100%" }}>
-      <div className="px-3 py-2" style={{ background: headerBg, borderBottom: `1px solid ${borderColor}` }}>
-        <span className="text-[10px] font-[650] uppercase tracking-[0.06em] leading-none" style={{ color: headerText }}>Live Preview</span>
+    <div className="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white/60 dark:bg-black/30 h-full">
+      <div className="flex items-center px-3 py-2 bg-black/[0.04] dark:bg-white/[0.06] border-b border-black/[0.06] dark:border-white/[0.06]">
+        <span className="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/45 dark:text-white/40">Live Preview</span>
       </div>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "10px 12px", borderBottom: `1px solid ${rowBorder}` }}>
-        <span style={{ fontSize: "12px", fontWeight: 600, fontFamily: "inherit", color: labelText }}>Gel Button</span>
+      <div className="flex items-center justify-between gap-3 px-3 py-2.5 border-b border-black/[0.04] dark:border-white/[0.04]">
+        <span className="text-[12px] font-[600] text-black/75 dark:text-white/70">Gel Button</span>
         <Button variant="gel" size="sm">Button</Button>
       </div>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "10px 12px", borderBottom: `1px solid ${rowBorder}` }}>
-        <span style={{ fontSize: "12px", fontWeight: 600, fontFamily: "inherit", color: labelText }}>Glass Card</span>
+      <div className="flex items-center justify-between gap-3 px-3 py-2.5 border-b border-black/[0.04] dark:border-white/[0.04]">
+        <span className="text-[12px] font-[600] text-black/75 dark:text-white/70">Glass Card</span>
         <Card glass={1} style={{ padding: "6px 14px" }}>
-          <span style={{ fontSize: "11px", color: isDark ? "rgba(255,255,255,0.65)" : "rgba(0,0,0,0.65)" }}>Content</span>
+          <span className="text-[11px] text-black/65 dark:text-white/65">Content</span>
         </Card>
       </div>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "10px 12px", borderBottom: `1px solid ${rowBorder}`, gap: 10 }}>
-        <span style={{ fontSize: "12px", fontWeight: 600, fontFamily: "inherit", color: labelText, flexShrink: 0 }}>Input</span>
+      <div className="flex items-center justify-between gap-3 px-3 py-2.5 border-b border-black/[0.04] dark:border-white/[0.04]">
+        <span className="text-[12px] font-[600] text-black/75 dark:text-white/70 shrink-0">Input</span>
         <Input placeholder="Type here..." style={{ maxWidth: 140, fontSize: 12 }} />
       </div>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "10px 12px", borderBottom: `1px solid ${rowBorder}` }}>
-        <span style={{ fontSize: "12px", fontWeight: 600, fontFamily: "inherit", color: labelText }}>Toggle</span>
+      <div className="flex items-center justify-between gap-3 px-3 py-2.5 border-b border-black/[0.04] dark:border-white/[0.04]">
+        <span className="text-[12px] font-[600] text-black/75 dark:text-white/70">Toggle</span>
         <Toggle checked={toggled} onChange={setToggled} />
       </div>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "10px 12px", borderBottom: `1px solid ${rowBorder}` }}>
-        <span style={{ fontSize: "12px", fontWeight: 600, fontFamily: "inherit", color: labelText }}>Badges</span>
-        <div style={{ display: "flex", gap: 5, alignItems: "center" }}>
+      <div className="flex items-center justify-between gap-3 px-3 py-2.5 border-b border-black/[0.04] dark:border-white/[0.04]">
+        <span className="text-[12px] font-[600] text-black/75 dark:text-white/70">Badges</span>
+        <div className="flex gap-1.5 items-center">
           <Badge variant="success">Live</Badge>
           <Tag variant="info">v0.20</Tag>
         </div>
       </div>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "10px 12px" }}>
-        <span style={{ fontSize: "12px", fontWeight: 600, fontFamily: "inherit", color: labelText }}>Spinner</span>
+      <div className="flex items-center justify-between gap-3 px-3 py-2.5">
+        <span className="text-[12px] font-[600] text-black/75 dark:text-white/70">Spinner</span>
         <Spinner size={18} />
       </div>
     </div>
