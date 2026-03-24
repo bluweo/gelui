@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import type { ComponentRegistryEntry, Layer, Status, Category } from "@/registry/types";
+import * as Primitives from "@/primitives";
 
 /* ═══════════════════════════════════════════════
    RegistryViewer — Interactive component registry table
@@ -74,6 +75,237 @@ function getLayerTextColor(layer: Layer): string {
   return "#fff";
 }
 
+/* ── Interactive Preview Wrappers ── */
+
+function TogglePreview() {
+  const [on, setOn] = useState(false);
+  return <Primitives.Toggle checked={on} onChange={setOn} />;
+}
+
+function CheckboxPreview() {
+  const [checked, setChecked] = useState(true);
+  return <Primitives.Checkbox checked={checked} onChange={setChecked} />;
+}
+
+function RadioPreview() {
+  const [val, setVal] = useState("a");
+  return (
+    <div style={{ display: "flex", gap: 16 }}>
+      <Primitives.Radio checked={val === "a"} onChange={() => setVal("a")} />
+      <Primitives.Radio checked={val === "b"} onChange={() => setVal("b")} />
+    </div>
+  );
+}
+
+function SliderPreview() {
+  const [val, setVal] = useState(50);
+  return <Primitives.Slider value={val} onChange={setVal} />;
+}
+
+function GelTogglePreview() {
+  const [on, setOn] = useState(false);
+  return <Primitives.Toggle variant="gel" checked={on} onChange={setOn} />;
+}
+
+function GelCheckboxPreview() {
+  const [checked, setChecked] = useState(true);
+  return <Primitives.Checkbox variant="gel" checked={checked} onChange={setChecked} />;
+}
+
+function GelRadioPreview() {
+  const [val, setVal] = useState("a");
+  return (
+    <div style={{ display: "flex", gap: 16 }}>
+      <Primitives.Radio variant="gel" checked={val === "a"} onChange={() => setVal("a")} />
+      <Primitives.Radio variant="gel" checked={val === "b"} onChange={() => setVal("b")} />
+    </div>
+  );
+}
+
+/* ── Component Preview ── */
+
+function ComponentPreview({ id, isDark }: { id: string; isDark: boolean }) {
+  const previews: Record<string, React.ReactNode> = {
+    "button": (
+      <div style={{ display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center" }}>
+        <Primitives.Button variant="solid" size="sm">Solid</Primitives.Button>
+        <Primitives.Button variant="glass" size="sm">Glass</Primitives.Button>
+        <Primitives.Button variant="ghost" size="sm">Ghost</Primitives.Button>
+        <Primitives.Button variant="gel" size="sm">Gel</Primitives.Button>
+      </div>
+    ),
+    "input": <Primitives.Input placeholder="Type something..." />,
+    "toggle": <TogglePreview />,
+    "checkbox": <CheckboxPreview />,
+    "heading": (
+      <div>
+        <Primitives.Heading level={1}>Heading 1</Primitives.Heading>
+        <Primitives.Heading level={3}>Heading 3</Primitives.Heading>
+      </div>
+    ),
+    "text": <Primitives.Text>The quick brown fox jumps over the lazy dog.</Primitives.Text>,
+    "badge": (
+      <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
+        <Primitives.Badge variant="default">Default</Primitives.Badge>
+        <Primitives.Badge variant="success">Success</Primitives.Badge>
+        <Primitives.Badge variant="warning">Warning</Primitives.Badge>
+        <Primitives.Badge variant="error">Error</Primitives.Badge>
+      </div>
+    ),
+    "spinner": <Primitives.Spinner size={24} />,
+    "progress": <Primitives.Progress value={65} />,
+    "skeleton": <Primitives.Skeleton width="100%" height={40} />,
+    "avatar": (
+      <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+        <Primitives.Avatar name="John Doe" size={40} status="online" />
+        <Primitives.Avatar name="Jane" size={32} status="busy" />
+      </div>
+    ),
+    "tag": (
+      <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
+        <Primitives.Tag variant="default">Default</Primitives.Tag>
+        <Primitives.Tag variant="success">Success</Primitives.Tag>
+        <Primitives.Tag variant="info">Info</Primitives.Tag>
+      </div>
+    ),
+    "divider": <Primitives.Divider />,
+    "card": (
+      <Primitives.Card variant="glass" style={{ padding: 16 }}>
+        <Primitives.Text>Card content</Primitives.Text>
+      </Primitives.Card>
+    ),
+    "label": <Primitives.Label>Email address</Primitives.Label>,
+    "caption": <Primitives.Caption>Last updated 2 minutes ago</Primitives.Caption>,
+    "code": <Primitives.Code>const x = 42;</Primitives.Code>,
+    "link": <Primitives.Link href="#">Learn more</Primitives.Link>,
+    "search-input": <Primitives.SearchInput placeholder="Search..." />,
+    "textarea": <Primitives.Textarea placeholder="Write a description..." />,
+    "custom-select": <Primitives.Select options={[{value:"1",label:"Option A"},{value:"2",label:"Option B"},{value:"3",label:"Option C"}]} />,
+    "select": <Primitives.Select options={[{value:"1",label:"Option A"},{value:"2",label:"Option B"},{value:"3",label:"Option C"}]} />,
+    "radio": <RadioPreview />,
+    "segmented-control": <Primitives.SegmentedControl options={["Day","Week","Month"]} value="Week" onChange={() => {}} />,
+    "slider": <SliderPreview />,
+    "icon-button": <Primitives.IconButton>+</Primitives.IconButton>,
+    "link-button": <Primitives.LinkButton>Learn more &rarr;</Primitives.LinkButton>,
+    "tab-bar": <Primitives.TabBar tabs={["Overview","Settings","Activity"]} activeTab="Settings" onTabChange={() => {}} />,
+    "pill-tabs": <Primitives.PillTabs tabs={["All","Active","Archived"]} activeTab="All" onTabChange={() => {}} />,
+    "breadcrumb": <Primitives.Breadcrumb items={[{label:"Home"},{label:"Design System"},{label:"Registry"}]} />,
+    "nav-item": <Primitives.NavItem label="Settings" active={true} />,
+    "surface": <Primitives.Surface level={1} style={{ padding: 16, minHeight: 60 }}><Primitives.Text size="sm">Surface level 1</Primitives.Text></Primitives.Surface>,
+    "box": <Primitives.Box style={{ padding: 12, border: "1px dashed rgba(128,128,128,0.3)" }}>Box content</Primitives.Box>,
+    "stack": (
+      <Primitives.Stack gap={8}>
+        <div style={{ padding: 8, background: "rgba(128,128,128,0.1)", borderRadius: 4 }}>Item 1</div>
+        <div style={{ padding: 8, background: "rgba(128,128,128,0.1)", borderRadius: 4 }}>Item 2</div>
+        <div style={{ padding: 8, background: "rgba(128,128,128,0.1)", borderRadius: 4 }}>Item 3</div>
+      </Primitives.Stack>
+    ),
+    "inline": (
+      <Primitives.Inline gap={8}>
+        <Primitives.Badge>A</Primitives.Badge>
+        <Primitives.Badge>B</Primitives.Badge>
+        <Primitives.Badge>C</Primitives.Badge>
+      </Primitives.Inline>
+    ),
+    "grid": (
+      <Primitives.Grid columns={3} gap={8}>
+        <div style={{ padding: 8, background: "rgba(128,128,128,0.1)", borderRadius: 4, textAlign: "center" }}>1</div>
+        <div style={{ padding: 8, background: "rgba(128,128,128,0.1)", borderRadius: 4, textAlign: "center" }}>2</div>
+        <div style={{ padding: 8, background: "rgba(128,128,128,0.1)", borderRadius: 4, textAlign: "center" }}>3</div>
+      </Primitives.Grid>
+    ),
+    "center": <Primitives.Center style={{ height: 60 }}><Primitives.Badge>Centered</Primitives.Badge></Primitives.Center>,
+    "spacer": (
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <Primitives.Badge>Before</Primitives.Badge>
+        <Primitives.Spacer size={32} />
+        <Primitives.Badge>After (32px gap)</Primitives.Badge>
+      </div>
+    ),
+    "modal": <span style={{ color: isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.5)", fontSize: 12 }}>Use &quot;Open Full Preview&quot; below</span>,
+    "overlay": <span style={{ color: isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.5)", fontSize: 12 }}>Use &quot;Open Full Preview&quot; below</span>,
+    "tooltip": <Primitives.Tooltip content="Hello!"><Primitives.Badge>Hover me</Primitives.Badge></Primitives.Tooltip>,
+    "searchable-select": <Primitives.SearchableSelect options={[{value:"1",label:"Apple"},{value:"2",label:"Banana"},{value:"3",label:"Cherry"}]} placeholder="Pick a fruit..." />,
+    // Button variants
+    "gel-button": <Primitives.Button variant="gel" size="md">Gel Button</Primitives.Button>,
+    "glass-button": <Primitives.Button variant="glass" size="md">Glass Button</Primitives.Button>,
+    "ghost-button": <Primitives.Button variant="ghost" size="md">Ghost Button</Primitives.Button>,
+    "solid-button": <Primitives.Button variant="solid" size="md">Solid Button</Primitives.Button>,
+    "action-pair": (
+      <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+        <Primitives.Button variant="ghost" size="sm">Cancel</Primitives.Button>
+        <Primitives.Button variant="solid" size="sm">Apply</Primitives.Button>
+      </div>
+    ),
+    // Surface variants
+    "glass-surface": <Primitives.Surface level={1} style={{ padding: 16, minHeight: 50 }}><Primitives.Text size="sm">Glass surface</Primitives.Text></Primitives.Surface>,
+    "gel-surface": <div className="gel-glass" style={{ padding: 16, minHeight: 50, borderRadius: "var(--glass-radius-sm, 8px)" }}><Primitives.Text size="sm">Gel surface</Primitives.Text></div>,
+    "solid-surface": <div style={{ padding: 16, minHeight: 50, borderRadius: "var(--glass-radius-sm, 8px)", background: isDark ? "#1a1a1a" : "#fff" }}><Primitives.Text size="sm">Solid surface</Primitives.Text></div>,
+    "ds-card": <Primitives.Card variant="glass" style={{ padding: 12 }}><Primitives.Text size="sm">DSCard</Primitives.Text></Primitives.Card>,
+    "frost-zone": <div style={{ position: "relative", height: 60, borderRadius: 8, overflow: "hidden", border: `1px solid ${isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.06)"}` }}><div className="ds-card-frost" style={{ position: "absolute", inset: 0 }} /><div style={{ position: "relative", padding: 12 }}><Primitives.Text size="sm">Frost zone overlay</Primitives.Text></div></div>,
+    // Input variants
+    "text-input": <Primitives.Input placeholder="Enter your name..." />,
+    // Divider variants
+    "divider-horizontal": <Primitives.Divider />,
+    "divider-glass": <Primitives.Divider variant="etched" />,
+    // Control variants (gel)
+    "gel-toggle": <GelTogglePreview />,
+    "gel-checkbox": <GelCheckboxPreview />,
+    "gel-radio": <GelRadioPreview />,
+    "flat-slider": <SliderPreview />,
+    "liquid-glass-slider": <SliderPreview />,
+    // Data display
+    "body-text": <Primitives.Text>The quick brown fox jumps over the lazy dog.</Primitives.Text>,
+    "overline": <Primitives.Text size="xs" style={{ textTransform: "uppercase", letterSpacing: "0.08em", fontWeight: 650 }}>Overline Text</Primitives.Text>,
+    "code-block": <Primitives.Code block>{`const theme = 'glass';`}</Primitives.Code>,
+    "status-badge": (
+      <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
+        <Primitives.Badge variant="success">Active</Primitives.Badge>
+        <Primitives.Badge variant="warning">Pending</Primitives.Badge>
+        <Primitives.Badge variant="error">Failed</Primitives.Badge>
+      </div>
+    ),
+    "status-dot": (
+      <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
+        <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#34C759" }} />
+        <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#FF9500" }} />
+        <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#FF3B30" }} />
+      </div>
+    ),
+    "chip": <Primitives.Tag variant="default" size="sm">Chip</Primitives.Tag>,
+    "avatar-group": (
+      <div style={{ display: "flex", marginLeft: 8 }}>
+        {["A","B","C"].map((n, i) => (
+          <div key={n} style={{ marginLeft: i > 0 ? -8 : 0, zIndex: 3 - i }}><Primitives.Avatar name={n} size={32} /></div>
+        ))}
+      </div>
+    ),
+    "progress-bar": <Primitives.Progress value={65} />,
+    "skeleton-loader": <Primitives.Skeleton width="100%" height={40} />,
+    // Elevation
+    "elevation-flat": <div style={{ padding: 12, borderRadius: 8, background: isDark ? "#222" : "#fff", boxShadow: "none" }}><Primitives.Text size="sm">Flat</Primitives.Text></div>,
+    "elevation-raised": <div style={{ padding: 12, borderRadius: 8, background: isDark ? "#222" : "#fff", boxShadow: "0 2px 8px rgba(0,0,0,0.1)" }}><Primitives.Text size="sm">Raised</Primitives.Text></div>,
+    "elevation-floating": <div style={{ padding: 12, borderRadius: 8, background: isDark ? "#222" : "#fff", boxShadow: "0 8px 32px rgba(0,0,0,0.15)" }}><Primitives.Text size="sm">Floating</Primitives.Text></div>,
+    // Higher-level components (no inline preview)
+    "ds-nav": <span style={{ color: isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.4)", fontSize: 11 }}>Page-level component — see nav bar above</span>,
+    "ds-footer": <span style={{ color: isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.4)", fontSize: 11 }}>Page-level component — see footer below</span>,
+    "ds-shell": <span style={{ color: isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.4)", fontSize: 11 }}>Page-level shell — wraps all pages</span>,
+    "appearance-modal": <span style={{ color: isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.4)", fontSize: 11 }}>Right-click → Appearance</span>,
+    "context-menu": <span style={{ color: isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.4)", fontSize: 11 }}>Right-click anywhere to see</span>,
+    "background-picker": <span style={{ color: isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.4)", fontSize: 11 }}>Right-click → Background</span>,
+    "font-picker-modal": <span style={{ color: isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.4)", fontSize: 11 }}>Tokens → Font Families → ⚙</span>,
+    "preset-editor-modal": <span style={{ color: isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.4)", fontSize: 11 }}>Primitives → Type Presets → click row</span>,
+    "section-nav": <span style={{ color: isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.4)", fontSize: 11 }}>Side navigation — visible on right</span>,
+    "features-grid": <span style={{ color: isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.4)", fontSize: 11 }}>Overview → Features block</span>,
+    "type-presets-table": <span style={{ color: isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.4)", fontSize: 11 }}>Primitives → Type Presets block</span>,
+    "liquid-glass-filter": <span style={{ color: isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.4)", fontSize: 11 }}>SVG filter — applied globally</span>,
+    "drawer": <span style={{ color: isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.4)", fontSize: 11 }}>Planned — not yet implemented</span>,
+    "popover": <span style={{ color: isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.4)", fontSize: 11 }}>Planned — not yet implemented</span>,
+  };
+
+  return previews[id] || <span style={{ color: "rgba(128,128,128,0.5)", fontSize: 12 }}>No preview available</span>;
+}
+
 /* ── Component ── */
 
 export function RegistryViewer({ components }: Props) {
@@ -82,6 +314,7 @@ export function RegistryViewer({ components }: Props) {
   const [statusFilter, setStatusFilter] = useState<Status | "all">("all");
   const [categoryFilter, setCategoryFilter] = useState<Category | "all">("all");
   const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [fullPreviewId, setFullPreviewId] = useState<string | null>(null);
   const [isDark, setIsDark] = useState(false);
 
   // Dark mode observer
@@ -428,7 +661,7 @@ export function RegistryViewer({ components }: Props) {
                         borderBottom: `1px solid ${borderColor}`,
                         background: bgExpanded,
                         display: "grid",
-                        gridTemplateColumns: "1fr 1fr",
+                        gridTemplateColumns: "1fr 1fr 1.2fr",
                         gap: "16px",
                         fontSize: "12px",
                       }}
@@ -463,7 +696,7 @@ export function RegistryViewer({ components }: Props) {
                         )}
                       </div>
 
-                      {/* Right: Metadata */}
+                      {/* Middle: Metadata */}
                       <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
                         <div style={{ fontWeight: 700, fontSize: "10px", textTransform: "uppercase", letterSpacing: "0.08em", color: textMuted, marginBottom: "4px" }}>
                           Metadata
@@ -514,6 +747,43 @@ export function RegistryViewer({ components }: Props) {
                           <MetaRow label="Documented" value={comp.documentedOn + (comp.section ? ` #${comp.section}` : "")} isDark={isDark} />
                         )}
                       </div>
+
+                      {/* Right: Live Preview */}
+                      <div>
+                        <div style={{ fontWeight: 700, fontSize: "10px", textTransform: "uppercase", letterSpacing: "0.08em", color: textMuted, marginBottom: "8px" }}>
+                          Live Preview
+                        </div>
+                        <div style={{
+                          padding: "16px",
+                          borderRadius: "var(--glass-radius-sm, 8px)",
+                          border: `1px solid ${isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.06)"}`,
+                          background: isDark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.02)",
+                          minHeight: "80px",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}>
+                          <ComponentPreview id={comp.id} isDark={isDark} />
+                        </div>
+                        {["modal", "overlay", "card", "surface"].includes(comp.id) && (
+                          <button
+                            onClick={(e) => { e.stopPropagation(); setFullPreviewId(comp.id); }}
+                            style={{
+                              marginTop: 8,
+                              fontSize: 11,
+                              fontWeight: 550,
+                              padding: "6px 14px",
+                              borderRadius: "var(--glass-radius-pill, 100px)",
+                              border: `1px solid ${isDark ? "rgba(255,255,255,0.15)" : "rgba(0,0,0,0.12)"}`,
+                              background: "transparent",
+                              color: isDark ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.5)",
+                              cursor: "pointer",
+                            }}
+                          >
+                            Open Full Preview
+                          </button>
+                        )}
+                      </div>
                     </div>
                   )}
                 </div>
@@ -529,6 +799,82 @@ export function RegistryViewer({ components }: Props) {
           </div>
         )}
       </div>
+
+      {/* ── Full Preview Modal ── */}
+      {fullPreviewId && (
+        <div
+          onClick={() => setFullPreviewId(null)}
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 9999,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            background: isDark ? "rgba(0,0,0,0.7)" : "rgba(0,0,0,0.4)",
+            backdropFilter: "blur(12px)",
+            WebkitBackdropFilter: "blur(12px)",
+          }}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              position: "relative",
+              width: "min(90vw, 720px)",
+              maxHeight: "80vh",
+              overflow: "auto",
+              borderRadius: "var(--glass-radius, 16px)",
+              border: `1px solid ${isDark ? "rgba(255,255,255,0.12)" : "rgba(0,0,0,0.1)"}`,
+              background: isDark ? "rgba(30,30,30,0.95)" : "rgba(255,255,255,0.97)",
+              backdropFilter: "blur(24px)",
+              WebkitBackdropFilter: "blur(24px)",
+              padding: "32px",
+              boxShadow: isDark
+                ? "0 24px 80px rgba(0,0,0,0.6)"
+                : "0 24px 80px rgba(0,0,0,0.15)",
+            }}
+          >
+            {/* Close button */}
+            <button
+              onClick={() => setFullPreviewId(null)}
+              style={{
+                position: "absolute",
+                top: 12,
+                right: 12,
+                width: 28,
+                height: 28,
+                borderRadius: "50%",
+                border: `1px solid ${isDark ? "rgba(255,255,255,0.12)" : "rgba(0,0,0,0.1)"}`,
+                background: isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.05)",
+                color: isDark ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.5)",
+                fontSize: 16,
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                lineHeight: 1,
+              }}
+            >
+              &times;
+            </button>
+            <div style={{ fontWeight: 700, fontSize: "10px", textTransform: "uppercase", letterSpacing: "0.08em", color: textMuted, marginBottom: "16px" }}>
+              Full Preview &mdash; {fullPreviewId}
+            </div>
+            <div style={{
+              padding: "24px",
+              borderRadius: "var(--glass-radius-sm, 8px)",
+              border: `1px solid ${isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.06)"}`,
+              background: isDark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.02)",
+              minHeight: "120px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}>
+              <ComponentPreview id={fullPreviewId} isDark={isDark} />
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* ── Footer stats ── */}
       <div
