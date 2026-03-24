@@ -17,14 +17,9 @@ export function Overline({
 
   return (
     <span
-      className={className}
+      className={`type-overline ${className}`}
       style={{
         display: "block",
-        fontSize: `var(--type-overline-size, 10px)`,
-        fontWeight: `var(--type-overline-weight, 650)` as any,
-        textTransform: "uppercase" as const,
-        letterSpacing: `var(--type-overline-ls, 0.1em)`,
-        lineHeight: `var(--type-overline-lh, 1.2)`,
         fontFamily: "var(--font-ui)",
         color: muted
           ? isDark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.4)"

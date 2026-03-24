@@ -209,13 +209,20 @@ export function TypePresetsTable() {
   useEffect(() => {
     if (hydrated) return;
     setHydrated(true);
+    console.log("[TypePresets] Hydration restore starting...");
     try {
+      const raw = localStorage.getItem("gelui-type-presets");
+      console.log("[TypePresets] localStorage raw:", raw ? raw.substring(0, 100) + "..." : "EMPTY");
       const storedScale = localStorage.getItem("gelui-type-scale") as ScaleKey | null;
+      console.log("[TypePresets] stored scale:", storedScale);
       if (storedScale && storedScale !== scale) {
         setScale(storedScale);
       }
-      const stored = JSON.parse(localStorage.getItem("gelui-type-presets") || "");
+      const stored = JSON.parse(raw || "");
+      console.log("[TypePresets] parsed length:", stored?.length, "expected:", INITIAL_PRESETS.length);
       if (Array.isArray(stored) && stored.length === INITIAL_PRESETS.length) {
+        const overline = stored.find((s: any) => s.name === "Overline");
+        console.log("[TypePresets] Overline from localStorage:", overline);
         setPresets(INITIAL_PRESETS.map((p, i) => ({
           ...p,
           size: stored[i].size || p.size,
@@ -223,8 +230,13 @@ export function TypePresetsTable() {
           lh: stored[i].lh || p.lh,
           ls: stored[i].ls || p.ls,
         })));
+        console.log("[TypePresets] ✅ Presets restored from localStorage");
+      } else {
+        console.log("[TypePresets] ❌ Length mismatch or not array, using defaults");
       }
-    } catch {}
+    } catch (e) {
+      console.log("[TypePresets] ❌ Parse error:", (e as Error).message);
+    }
   }, []);
   const isModified = scale !== "medium" || JSON.stringify(presets) !== JSON.stringify(INITIAL_PRESETS);
 
@@ -245,7 +257,10 @@ export function TypePresetsTable() {
   // Inject CSS variables whenever presets change — propagates to all primitives
   // Skip until hydrated to avoid overwriting blocking script's correct values with defaults
   useEffect(() => {
-    if (!hydrated) return;
+    const overline = presets.find(p => p.name === "Overline");
+    console.log("[TypePresets] useEffect[presets,hydrated] - hydrated:", hydrated, "overline size:", overline?.size);
+    if (!hydrated) { console.log("[TypePresets] ⏭ SKIPPING CSS injection (not hydrated)"); return; }
+    console.log("[TypePresets] 💉 INJECTING CSS variables...");
     const rs = document.documentElement.style;
     const varMap: Record<string, string> = {
       "Display": "display",
