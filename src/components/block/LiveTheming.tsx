@@ -327,9 +327,9 @@ function LiveVariablesTable() {
   for (const v of CSS_VARS) { if (!grouped[v.category]) grouped[v.category] = []; grouped[v.category].push(v); }
 
   return (
-    <div className="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white/60 dark:bg-black/30">
+    <div className="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white dark:bg-[#1a1a1a]">
       {/* Header */}
-      <div className="grid grid-cols-[1fr_1.5fr_0.8fr] gap-3 px-3 py-2 bg-black/[0.04] dark:bg-white/[0.06] border-b border-black/[0.06] dark:border-white/[0.06]">
+      <div className="grid grid-cols-[1fr_1.5fr_0.8fr] gap-3 px-3 py-2 bg-gray-100/80 dark:bg-white/[0.06] border-b border-black/[0.06] dark:border-white/[0.06]">
         <span className="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/45 dark:text-white/40">Variable</span>
         <span className="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/45 dark:text-white/40">Current Value</span>
         <span className="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/45 dark:text-white/40">Set By</span>
@@ -362,17 +362,34 @@ function LiveVariablesTable() {
 /* ─── Main Export ─── */
 export function LiveTheming() {
   const isDark = useDarkMode();
+  const [showVars, setShowVars] = useState(false);
 
   return (
     <div>
-      {/* 3-column layout: How It Works | Appearance | Live Preview */}
+      {/* 3-column layout: Settings | Appearance | Live Preview */}
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "16px", marginBottom: "16px" }}>
         <SettingsPreview />
         <AppearanceControls isDark={isDark} />
         <LivePreview />
       </div>
-      {/* Full-width CSS Variables table */}
-      <LiveVariablesTable />
+      {/* Toggle button */}
+      <button
+        onClick={() => setShowVars(!showVars)}
+        className="flex items-center gap-2 px-3 py-2 mb-3 rounded-full text-[11px] font-[600] cursor-pointer transition-all duration-200 hover:scale-[1.02] border contrast-border contrast-muted"
+        style={{ background: "transparent" }}
+      >
+        <svg
+          width="12" height="12" viewBox="0 0 12 12" fill="none"
+          className="transition-transform duration-200"
+          style={{ transform: showVars ? "rotate(90deg)" : "rotate(0deg)" }}
+        >
+          <path d="M4.5 2.5L8 6L4.5 9.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+        {showVars ? "Hide" : "Show"} CSS Variables
+        <span className="text-[10px] font-mono contrast-muted">{CSS_VARS.length} vars</span>
+      </button>
+      {/* Collapsible CSS Variables table */}
+      {showVars && <LiveVariablesTable />}
     </div>
   );
 }
