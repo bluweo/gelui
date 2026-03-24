@@ -369,7 +369,7 @@ export function LiveTheming() {
       {/* Toggle button — top right, overlaps with card header area */}
       <button
         onClick={() => setShowVars(!showVars)}
-        className="absolute -top-[52px] right-0 max-[540px]:relative max-[540px]:top-0 max-[540px]:mb-3 flex items-center gap-2 px-3 py-1.5 rounded-full text-[11px] font-[600] cursor-pointer transition-all duration-200 hover:scale-[1.02] border contrast-border contrast-muted"
+        className="relative mb-3 ml-auto md:absolute md:-top-[52px] md:right-0 md:mb-0 flex items-center gap-2 px-3 py-1.5 rounded-full text-[11px] font-[600] cursor-pointer transition-all duration-200 hover:scale-[1.02] border contrast-border contrast-muted"
         style={{ background: "transparent" }}
       >
         <svg
