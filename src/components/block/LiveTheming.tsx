@@ -369,7 +369,7 @@ export function LiveTheming() {
       {/* Toggle button — top right, overlaps with card header area */}
       <button
         onClick={() => setShowVars(!showVars)}
-        className="absolute -top-[52px] right-0 flex items-center gap-2 px-3 py-1.5 rounded-full text-[11px] font-[600] cursor-pointer transition-all duration-200 hover:scale-[1.02] border contrast-border contrast-muted"
+        className="absolute -top-[52px] right-0 max-[540px]:relative max-[540px]:top-0 max-[540px]:mb-3 flex items-center gap-2 px-3 py-1.5 rounded-full text-[11px] font-[600] cursor-pointer transition-all duration-200 hover:scale-[1.02] border contrast-border contrast-muted"
         style={{ background: "transparent" }}
       >
         <svg
@@ -382,8 +382,8 @@ export function LiveTheming() {
         {showVars ? "Hide" : "Show"} Variables
         <span className="text-[10px] font-mono contrast-muted">{CSS_VARS.length}</span>
       </button>
-      {/* 3-column layout: Settings | Appearance | Live Preview */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "16px", marginBottom: "16px" }}>
+      {/* 3-column layout: Settings | Appearance | Live Preview — stacks on mobile */}
+      <div className="grid grid-cols-3 gap-4 mb-4 max-[860px]:grid-cols-1 max-[860px]:gap-3">
         <SettingsPreview />
         <AppearanceControls isDark={isDark} />
         <LivePreview />
