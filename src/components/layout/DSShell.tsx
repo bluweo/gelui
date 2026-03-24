@@ -19,6 +19,13 @@ interface DSShellProps {
 function BackgroundLayer() {
   const { currentBg, currentBgId, currentBgType, hydrated } = useBackground();
 
+  // Set data-bg-type on <html> so CSS can detect image/video/color backgrounds
+  useEffect(() => {
+    if (hydrated) {
+      document.documentElement.setAttribute("data-bg-type", currentBgType || "color");
+    }
+  }, [currentBgType, hydrated]);
+
   /* Until hydrated, render a neutral gradient to avoid hydration mismatch */
   if (!hydrated) {
     return (

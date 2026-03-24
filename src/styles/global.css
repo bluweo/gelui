@@ -1247,9 +1247,16 @@ html[data-navigated] * {
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
   }
 
-  /* When inside a transparent card (no frost), use contrast from parent */
-  .btn-transparent-context & {
-    color: inherit;
+  /* Force white text in transparent contexts when on image/video backgrounds */
+  [data-bg-type="image"] .gel-btn-force-contrast &,
+  [data-bg-type="video"] .gel-btn-force-contrast & {
+    color: rgba(255, 255, 255, 0.92) !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) !important;
+  }
+  /* Also force when contrast is explicitly dark */
+  .gel-btn-force-contrast[data-contrast="dark"] & {
+    color: rgba(255, 255, 255, 0.92) !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) !important;
   }
 
   /* Pre-computed volumetric shadow */
