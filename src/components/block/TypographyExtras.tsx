@@ -9,7 +9,7 @@ export function TypographyExtras() {
       {/* Blockquote */}
       <div className="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white/60 dark:bg-black/30">
         <div className="flex items-center px-3 py-2 bg-black/[0.04] dark:bg-white/[0.06] border-b border-black/[0.06] dark:border-white/[0.06]">
-          <Overline size="md" muted>Blockquote</Overline>
+          <Overline size="md">Blockquote</Overline>
         </div>
         <div className="p-4">
           <Blockquote author="Dieter Rams" source="Ten Principles of Good Design">
@@ -21,7 +21,7 @@ export function TypographyExtras() {
       {/* Lists */}
       <div className="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white/60 dark:bg-black/30">
         <div className="flex items-center px-3 py-2 bg-black/[0.04] dark:bg-white/[0.06] border-b border-black/[0.06] dark:border-white/[0.06]">
-          <Overline size="md" muted>Lists</Overline>
+          <Overline size="md">Lists</Overline>
         </div>
         <div className="flex max-[540px]:flex-col">
           <div className="flex-1 p-4 border-r border-black/[0.04] dark:border-white/[0.04] max-[540px]:border-r-0 max-[540px]:border-b">
@@ -53,7 +53,7 @@ export function TypographyExtras() {
       {/* Kbd */}
       <div className="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white/60 dark:bg-black/30">
         <div className="flex items-center px-3 py-2 bg-black/[0.04] dark:bg-white/[0.06] border-b border-black/[0.06] dark:border-white/[0.06]">
-          <Overline size="md" muted>Keyboard Shortcuts</Overline>
+          <Overline size="md">Keyboard Shortcuts</Overline>
         </div>
         {[
           { label: "Command Palette", keys: ["⌘", "K"] },
