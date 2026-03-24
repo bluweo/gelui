@@ -365,30 +365,28 @@ export function LiveTheming() {
   const [showVars, setShowVars] = useState(false);
 
   return (
-    <div>
+    <div className="relative">
+      {/* Toggle button — top right, overlaps with card header area */}
+      <button
+        onClick={() => setShowVars(!showVars)}
+        className="absolute -top-[52px] right-0 flex items-center gap-2 px-3 py-1.5 rounded-full text-[11px] font-[600] cursor-pointer transition-all duration-200 hover:scale-[1.02] border contrast-border contrast-muted"
+        style={{ background: "transparent" }}
+      >
+        <svg
+          width="10" height="10" viewBox="0 0 12 12" fill="none"
+          className="transition-transform duration-200"
+          style={{ transform: showVars ? "rotate(90deg)" : "rotate(0deg)" }}
+        >
+          <path d="M4.5 2.5L8 6L4.5 9.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+        {showVars ? "Hide" : "Show"} Variables
+        <span className="text-[10px] font-mono contrast-muted">{CSS_VARS.length}</span>
+      </button>
       {/* 3-column layout: Settings | Appearance | Live Preview */}
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "16px", marginBottom: "16px" }}>
         <SettingsPreview />
         <AppearanceControls isDark={isDark} />
         <LivePreview />
-      </div>
-      {/* Toggle button — right aligned */}
-      <div className="flex justify-end mb-3">
-        <button
-          onClick={() => setShowVars(!showVars)}
-          className="flex items-center gap-2 px-3 py-2 rounded-full text-[11px] font-[600] cursor-pointer transition-all duration-200 hover:scale-[1.02] border contrast-border contrast-muted"
-          style={{ background: "transparent" }}
-        >
-          <svg
-            width="12" height="12" viewBox="0 0 12 12" fill="none"
-            className="transition-transform duration-200"
-            style={{ transform: showVars ? "rotate(90deg)" : "rotate(0deg)" }}
-          >
-            <path d="M4.5 2.5L8 6L4.5 9.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-          {showVars ? "Hide" : "Show"} CSS Variables
-          <span className="text-[10px] font-mono contrast-muted">{CSS_VARS.length} vars</span>
-        </button>
       </div>
       {/* Collapsible CSS Variables table — smooth animation */}
       <div
