@@ -24,7 +24,7 @@ export function Blockquote({
       style={{
         margin: 0,
         padding: "12px 0 12px 20px",
-        borderLeft: "4px solid #007AFF",
+        borderLeft: `4px solid ${dark ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.7)"}`,
         ...style,
       }}
     >

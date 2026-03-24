@@ -38,7 +38,7 @@ export function List({
     width: "5px",
     height: "5px",
     borderRadius: "50%",
-    background: "#007AFF",
+    background: dark ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.7)",
     marginTop: "7px",
     alignSelf: "flex-start",
   };
@@ -48,7 +48,7 @@ export function List({
     minWidth: "18px",
     fontSize: "13px",
     fontWeight: 600,
-    color: "#007AFF",
+    color: dark ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.8)",
   };
 
   return (

@@ -24,7 +24,7 @@ export function TypographyExtras() {
           <Overline size="md">Lists</Overline>
         </div>
         <div className="flex max-[540px]:flex-col">
-          <div className="flex-1 p-4 border-r border-black/[0.04] dark:border-white/[0.04] max-[540px]:border-r-0 max-[540px]:border-b">
+          <div className="flex-1 p-4 border-r border-black/[0.12] dark:border-white/[0.12] max-[540px]:border-r-0 max-[540px]:border-b max-[540px]:border-black/[0.12] max-[540px]:dark:border-white/[0.12]">
             <Label className="type-label text-black/60 dark:text-white/55 block mb-3">Unordered</Label>
             <List
               items={[
@@ -64,7 +64,7 @@ export function TypographyExtras() {
         ].map((shortcut, i, arr) => (
           <div
             key={shortcut.label}
-            className={`flex items-center justify-between gap-3 px-3 py-2.5 ${i < arr.length - 1 ? "border-b border-black/[0.04] dark:border-white/[0.04]" : ""}`}
+            className={`flex items-center justify-between gap-3 px-3 py-2.5 ${i < arr.length - 1 ? "border-b border-black/[0.12] dark:border-white/[0.12]" : ""}`}
           >
             <span className="type-label text-black/75 dark:text-white/70">{shortcut.label}</span>
             <div className="flex items-center gap-1">
