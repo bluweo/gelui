@@ -276,43 +276,37 @@ function LivePreview() {
   );
 }
 
-/* ─── Live CSS Variables Table (Full width) ─── */
-function LiveVariablesTable({ isDark }: { isDark: boolean }) {
+/* ─── Live CSS Variables Table (Full width, Breakpoints-style) ─── */
+function LiveVariablesTable() {
   const values = useLiveCSSVars(CSS_VARS);
-
-  const tableBg = isDark ? "rgba(0,0,0,0.30)" : "rgba(255,255,255,0.60)";
-  const headerBg = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)";
-  const borderColor = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)";
-  const rowBorder = isDark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.04)";
-  const headerText = isDark ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.45)";
-  const labelText = isDark ? "rgba(255,255,255,0.65)" : "rgba(0,0,0,0.65)";
-  const monoText = isDark ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.4)";
-  const dimText = isDark ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.25)";
-  const catBg = isDark ? "rgba(255,255,255,0.03)" : "rgba(0,0,0,0.02)";
 
   const grouped: Record<string, VarDef[]> = {};
   for (const v of CSS_VARS) { if (!grouped[v.category]) grouped[v.category] = []; grouped[v.category].push(v); }
 
   return (
-    <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: tableBg, border: `1px solid ${borderColor}` }}>
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr 0.8fr", padding: "10px 16px", background: headerBg, borderBottom: `1px solid ${borderColor}`, gap: "12px" }}>
-        <span style={{ fontSize: "10px", fontWeight: 650, textTransform: "uppercase", letterSpacing: "0.06em", color: headerText }}>Variable</span>
-        <span style={{ fontSize: "10px", fontWeight: 650, textTransform: "uppercase", letterSpacing: "0.06em", color: headerText }}>Current Value</span>
-        <span style={{ fontSize: "10px", fontWeight: 650, textTransform: "uppercase", letterSpacing: "0.06em", color: headerText }}>Set By</span>
+    <div className="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white/60 dark:bg-black/30">
+      {/* Header */}
+      <div className="grid grid-cols-[1fr_1.5fr_0.8fr] gap-3 px-3 py-2 bg-black/[0.04] dark:bg-white/[0.06] border-b border-black/[0.06] dark:border-white/[0.06]">
+        <span className="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/45 dark:text-white/40">Variable</span>
+        <span className="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/45 dark:text-white/40">Current Value</span>
+        <span className="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/45 dark:text-white/40">Set By</span>
       </div>
+      {/* Grouped rows */}
       {Object.entries(grouped).map(([category, vars]) => (
         <div key={category}>
-          <div style={{ padding: "5px 16px", background: catBg, borderBottom: `1px solid ${rowBorder}` }}>
-            <span style={{ fontSize: "9px", fontWeight: 650, textTransform: "uppercase", letterSpacing: "0.08em", color: dimText }}>{category}</span>
+          {/* Category header */}
+          <div className="px-3 py-1 bg-black/[0.02] dark:bg-white/[0.03] border-b border-black/[0.04] dark:border-white/[0.04]">
+            <span className="text-[9px] font-[650] uppercase tracking-[0.08em] text-black/25 dark:text-white/20">{category}</span>
           </div>
+          {/* Variable rows */}
           {vars.map((v, idx) => {
             const rawVal = values[v.variable] || "(not set)";
-            const displayVal = rawVal.length > 45 ? rawVal.slice(0, 45) + "…" : rawVal;
+            const displayVal = rawVal.length > 40 ? rawVal.slice(0, 40) + "…" : rawVal;
             return (
-              <div key={v.variable} style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr 0.8fr", padding: "7px 16px", borderBottom: idx < vars.length - 1 ? `1px solid ${rowBorder}` : "none", gap: "12px", alignItems: "center" }}>
-                <span style={{ fontSize: "11px", fontFamily: "var(--font-mono)", color: monoText }}>{v.variable}</span>
-                <span style={{ fontSize: "11px", fontFamily: "var(--font-mono)", color: labelText, wordBreak: "break-all" }}>{displayVal}</span>
-                <span style={{ fontSize: "10px", color: dimText }}>{v.setBy}</span>
+              <div key={v.variable} className={`grid grid-cols-[1fr_1.5fr_0.8fr] gap-3 items-center px-3 py-2 ${idx < vars.length - 1 ? "border-b border-black/[0.04] dark:border-white/[0.04]" : ""}`}>
+                <span className="text-[11px] font-mono text-black/40 dark:text-white/35 tabular-nums">{v.variable}</span>
+                <span className="text-[11px] font-mono px-2 py-0.5 rounded-full bg-black/[0.05] dark:bg-white/[0.07] text-black/50 dark:text-white/40 tabular-nums w-fit break-all">{displayVal}</span>
+                <span className="text-[10px] text-black/25 dark:text-white/20">{v.setBy}</span>
               </div>
             );
           })}
@@ -335,7 +329,7 @@ export function LiveTheming() {
         <LivePreview />
       </div>
       {/* Full-width CSS Variables table */}
-      <LiveVariablesTable isDark={isDark} />
+      <LiveVariablesTable />
     </div>
   );
 }
