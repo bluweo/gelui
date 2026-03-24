@@ -7,6 +7,7 @@ import {
   Layer,
   SidebarLeft,
   Code1,
+  Data,
   Sun1,
   Moon,
   Login,
@@ -22,6 +23,7 @@ const DS_NAV = [
   { href: "/design-system/components", id: "Components", icon: Category, label: "Components" },
   { href: "/design-system/patterns", id: "Patterns", icon: Layer, label: "Patterns" },
   { href: "/design-system/layouts", id: "Layouts", icon: SidebarLeft, label: "Layouts" },
+  { href: "/design-system/registry", id: "Registry", icon: Data, label: "Registry" },
   { href: "/ui-dsl", id: "DSL", icon: Code1, label: "DSL" },
 ] as const;
 

@@ -6,7 +6,7 @@
       "id": "heading",
       "name": "Heading",
       "displayName": "Heading",
-      "description": "H1–H6 headings with font role and tracking",
+      "description": "H1\u2013H6 headings with font role and tracking",
       "layer": "primitive",
       "category": "typography",
       "status": "stable",
@@ -14,11 +14,30 @@
       "path": "inline",
       "isReact": false,
       "props": {
-        "level": { "type": "enum", "options": ["1","2","3","4","5","6"], "default": "2", "description": "Heading level" }
+        "level": {
+          "type": "enum",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6"
+          ],
+          "default": "2",
+          "description": "Heading level"
+        }
       },
       "documentedOn": "/design-system/primitives",
       "section": "Typography",
-      "tags": ["heading", "title", "h1", "h2", "h3", "text"]
+      "tags": [
+        "heading",
+        "title",
+        "h1",
+        "h2",
+        "h3",
+        "text"
+      ]
     },
     {
       "id": "body-text",
@@ -32,11 +51,23 @@
       "path": "inline",
       "isReact": false,
       "props": {
-        "size": { "type": "enum", "options": ["sm", "md"], "default": "md" }
+        "size": {
+          "type": "enum",
+          "options": [
+            "sm",
+            "md"
+          ],
+          "default": "md"
+        }
       },
       "documentedOn": "/design-system/primitives",
       "section": "Typography",
-      "tags": ["body", "paragraph", "text", "p"]
+      "tags": [
+        "body",
+        "paragraph",
+        "text",
+        "p"
+      ]
     },
     {
       "id": "caption",
@@ -52,7 +83,11 @@
       "props": {},
       "documentedOn": "/design-system/primitives",
       "section": "Typography",
-      "tags": ["caption", "small", "meta"]
+      "tags": [
+        "caption",
+        "small",
+        "meta"
+      ]
     },
     {
       "id": "overline",
@@ -68,7 +103,11 @@
       "props": {},
       "documentedOn": "/design-system/primitives",
       "section": "Typography",
-      "tags": ["overline", "label", "uppercase"]
+      "tags": [
+        "overline",
+        "label",
+        "uppercase"
+      ]
     },
     {
       "id": "label",
@@ -84,7 +123,11 @@
       "props": {},
       "documentedOn": "/design-system/primitives",
       "section": "Typography",
-      "tags": ["label", "form", "ui"]
+      "tags": [
+        "label",
+        "form",
+        "ui"
+      ]
     },
     {
       "id": "code-block",
@@ -98,11 +141,23 @@
       "path": "inline",
       "isReact": false,
       "props": {
-        "size": { "type": "enum", "options": ["sm", "md"], "default": "md" }
+        "size": {
+          "type": "enum",
+          "options": [
+            "sm",
+            "md"
+          ],
+          "default": "md"
+        }
       },
       "documentedOn": "/design-system/primitives",
       "section": "Typography",
-      "tags": ["code", "mono", "syntax", "pre"]
+      "tags": [
+        "code",
+        "mono",
+        "syntax",
+        "pre"
+      ]
     },
     {
       "id": "link",
@@ -116,11 +171,18 @@
       "path": "inline",
       "isReact": false,
       "props": {
-        "href": { "type": "string", "required": true }
+        "href": {
+          "type": "string",
+          "required": true
+        }
       },
       "documentedOn": "/design-system/primitives",
       "section": "Typography",
-      "tags": ["link", "anchor", "href"]
+      "tags": [
+        "link",
+        "anchor",
+        "href"
+      ]
     },
     {
       "id": "gel-button",
@@ -134,12 +196,33 @@
       "path": "src/styles/global.css",
       "isReact": false,
       "props": {
-        "size": { "type": "enum", "options": ["sm", "md", "lg"], "default": "md" },
-        "shape": { "type": "enum", "options": ["pill", "circle-sm", "circle"], "default": "pill" }
+        "size": {
+          "type": "enum",
+          "options": [
+            "sm",
+            "md",
+            "lg"
+          ],
+          "default": "md"
+        },
+        "shape": {
+          "type": "enum",
+          "options": [
+            "pill",
+            "circle-sm",
+            "circle"
+          ],
+          "default": "pill"
+        }
       },
       "documentedOn": "/design-system/primitives",
       "section": "Buttons",
-      "tags": ["button", "gel", "volumetric", "action"],
+      "tags": [
+        "button",
+        "gel",
+        "volumetric",
+        "action"
+      ],
       "nodeColor": "#354334"
     },
     {
@@ -154,11 +237,22 @@
       "path": "src/styles/global.css",
       "isReact": false,
       "props": {
-        "shape": { "type": "enum", "options": ["pill", "rounded"], "default": "pill" }
+        "shape": {
+          "type": "enum",
+          "options": [
+            "pill",
+            "rounded"
+          ],
+          "default": "pill"
+        }
       },
       "documentedOn": "/design-system/primitives",
       "section": "Buttons",
-      "tags": ["button", "glass", "transparent"]
+      "tags": [
+        "button",
+        "glass",
+        "transparent"
+      ]
     },
     {
       "id": "ghost-button",
@@ -172,11 +266,23 @@
       "path": "inline",
       "isReact": false,
       "props": {
-        "shape": { "type": "enum", "options": ["pill", "rounded"], "default": "pill" }
+        "shape": {
+          "type": "enum",
+          "options": [
+            "pill",
+            "rounded"
+          ],
+          "default": "pill"
+        }
       },
       "documentedOn": "/design-system/primitives",
       "section": "Buttons",
-      "tags": ["button", "ghost", "outline", "border"]
+      "tags": [
+        "button",
+        "ghost",
+        "outline",
+        "border"
+      ]
     },
     {
       "id": "solid-button",
@@ -190,11 +296,24 @@
       "path": "inline",
       "isReact": false,
       "props": {
-        "shape": { "type": "enum", "options": ["pill", "rounded", "sm"], "default": "pill" }
+        "shape": {
+          "type": "enum",
+          "options": [
+            "pill",
+            "rounded",
+            "sm"
+          ],
+          "default": "pill"
+        }
       },
       "documentedOn": "/design-system/primitives",
       "section": "Buttons",
-      "tags": ["button", "solid", "filled", "primary"]
+      "tags": [
+        "button",
+        "solid",
+        "filled",
+        "primary"
+      ]
     },
     {
       "id": "icon-button",
@@ -208,11 +327,22 @@
       "path": "src/styles/global.css",
       "isReact": false,
       "props": {
-        "size": { "type": "enum", "options": ["sm", "md"], "default": "md" }
+        "size": {
+          "type": "enum",
+          "options": [
+            "sm",
+            "md"
+          ],
+          "default": "md"
+        }
       },
       "documentedOn": "/design-system/primitives",
       "section": "Buttons",
-      "tags": ["button", "icon", "circle"]
+      "tags": [
+        "button",
+        "icon",
+        "circle"
+      ]
     },
     {
       "id": "link-button",
@@ -228,7 +358,11 @@
       "props": {},
       "documentedOn": "/design-system/primitives",
       "section": "Buttons",
-      "tags": ["button", "link", "text"]
+      "tags": [
+        "button",
+        "link",
+        "text"
+      ]
     },
     {
       "id": "action-pair",
@@ -242,10 +376,19 @@
       "path": "inline",
       "isReact": false,
       "props": {},
-      "composedOf": ["ghost-button", "solid-button"],
+      "composedOf": [
+        "ghost-button",
+        "solid-button"
+      ],
       "documentedOn": "/design-system/primitives",
       "section": "Buttons",
-      "tags": ["button", "cancel", "apply", "action", "pair"]
+      "tags": [
+        "button",
+        "cancel",
+        "apply",
+        "action",
+        "pair"
+      ]
     },
     {
       "id": "glass-surface",
@@ -259,11 +402,25 @@
       "path": "src/styles/global.css",
       "isReact": false,
       "props": {
-        "level": { "type": "enum", "options": ["0", "1", "2", "3"], "default": "1" }
+        "level": {
+          "type": "enum",
+          "options": [
+            "0",
+            "1",
+            "2",
+            "3"
+          ],
+          "default": "1"
+        }
       },
       "documentedOn": "/design-system/primitives",
       "section": "Surfaces",
-      "tags": ["glass", "surface", "blur", "transparent"]
+      "tags": [
+        "glass",
+        "surface",
+        "blur",
+        "transparent"
+      ]
     },
     {
       "id": "gel-surface",
@@ -279,7 +436,12 @@
       "props": {},
       "documentedOn": "/design-system/primitives",
       "section": "Surfaces",
-      "tags": ["gel", "surface", "volumetric", "shadow"]
+      "tags": [
+        "gel",
+        "surface",
+        "volumetric",
+        "shadow"
+      ]
     },
     {
       "id": "solid-surface",
@@ -295,7 +457,11 @@
       "props": {},
       "documentedOn": "/design-system/primitives",
       "section": "Surfaces",
-      "tags": ["solid", "surface", "opaque"]
+      "tags": [
+        "solid",
+        "surface",
+        "opaque"
+      ]
     },
     {
       "id": "ds-card",
@@ -309,16 +475,41 @@
       "path": "src/components/card/DSCard.astro",
       "isReact": false,
       "props": {
-        "frost": { "type": "boolean", "default": true },
-        "frostHeight": { "type": "string", "default": "200px" },
-        "title": { "type": "string" },
-        "description": { "type": "string" }
+        "frost": {
+          "type": "boolean",
+          "default": true
+        },
+        "frostHeight": {
+          "type": "string",
+          "default": "200px"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
       },
-      "slots": { "default": { "accepts": ["*"], "multiple": true } },
-      "composedOf": ["glass-surface", "frost-zone"],
+      "slots": {
+        "default": {
+          "accepts": [
+            "*"
+          ],
+          "multiple": true
+        }
+      },
+      "composedOf": [
+        "glass-surface",
+        "frost-zone"
+      ],
       "documentedOn": "/design-system/primitives",
       "section": "Card Panels",
-      "tags": ["card", "container", "glass", "frost"]
+      "tags": [
+        "card",
+        "container",
+        "glass",
+        "frost"
+      ]
     },
     {
       "id": "frost-zone",
@@ -332,12 +523,28 @@
       "path": "src/styles/global.css",
       "isReact": false,
       "props": {
-        "variant": { "type": "enum", "options": ["standard", "haze", "none"], "default": "standard" },
-        "height": { "type": "string", "default": "200px" }
+        "variant": {
+          "type": "enum",
+          "options": [
+            "standard",
+            "haze",
+            "none"
+          ],
+          "default": "standard"
+        },
+        "height": {
+          "type": "string",
+          "default": "200px"
+        }
       },
       "documentedOn": "/design-system/primitives",
       "section": "Card Panels",
-      "tags": ["frost", "gradient", "readability", "overlay"]
+      "tags": [
+        "frost",
+        "gradient",
+        "readability",
+        "overlay"
+      ]
     },
     {
       "id": "divider-horizontal",
@@ -351,11 +558,26 @@
       "path": "inline",
       "isReact": false,
       "props": {
-        "variant": { "type": "enum", "options": ["default", "bold", "dashed", "label", "icon"], "default": "default" }
+        "variant": {
+          "type": "enum",
+          "options": [
+            "default",
+            "bold",
+            "dashed",
+            "label",
+            "icon"
+          ],
+          "default": "default"
+        }
       },
       "documentedOn": "/design-system/primitives",
       "section": "Dividers",
-      "tags": ["divider", "separator", "line", "horizontal"]
+      "tags": [
+        "divider",
+        "separator",
+        "line",
+        "horizontal"
+      ]
     },
     {
       "id": "divider-glass",
@@ -369,11 +591,26 @@
       "path": "inline",
       "isReact": false,
       "props": {
-        "variant": { "type": "enum", "options": ["etched", "groove", "ridge", "frosted", "vertical"], "default": "groove" }
+        "variant": {
+          "type": "enum",
+          "options": [
+            "etched",
+            "groove",
+            "ridge",
+            "frosted",
+            "vertical"
+          ],
+          "default": "groove"
+        }
       },
       "documentedOn": "/design-system/primitives",
       "section": "Dividers",
-      "tags": ["divider", "glass", "slit", "groove"]
+      "tags": [
+        "divider",
+        "glass",
+        "slit",
+        "groove"
+      ]
     },
     {
       "id": "text-input",
@@ -388,13 +625,30 @@
       "exportName": "GlassInput",
       "isReact": true,
       "props": {
-        "placeholder": { "type": "string" },
-        "icon": { "type": "enum", "options": ["none", "search"], "default": "none" },
-        "disabled": { "type": "boolean", "default": false }
+        "placeholder": {
+          "type": "string"
+        },
+        "icon": {
+          "type": "enum",
+          "options": [
+            "none",
+            "search"
+          ],
+          "default": "none"
+        },
+        "disabled": {
+          "type": "boolean",
+          "default": false
+        }
       },
       "documentedOn": "/design-system/primitives",
       "section": "Inputs",
-      "tags": ["input", "text", "form", "field"]
+      "tags": [
+        "input",
+        "text",
+        "form",
+        "field"
+      ]
     },
     {
       "id": "search-input",
@@ -408,11 +662,19 @@
       "path": "src/components/block/InputFieldsDemo.tsx",
       "isReact": true,
       "props": {
-        "placeholder": { "type": "string", "default": "Search..." }
+        "placeholder": {
+          "type": "string",
+          "default": "Search..."
+        }
       },
       "documentedOn": "/design-system/primitives",
       "section": "Inputs",
-      "tags": ["search", "input", "find", "filter"]
+      "tags": [
+        "search",
+        "input",
+        "find",
+        "filter"
+      ]
     },
     {
       "id": "select",
@@ -427,12 +689,22 @@
       "exportName": "GlassSelect",
       "isReact": true,
       "props": {
-        "options": { "type": "string", "description": "Array of option strings" },
-        "placeholder": { "type": "string", "default": "Choose..." }
+        "options": {
+          "type": "string",
+          "description": "Array of option strings"
+        },
+        "placeholder": {
+          "type": "string",
+          "default": "Choose..."
+        }
       },
       "documentedOn": "/design-system/primitives",
       "section": "Inputs",
-      "tags": ["select", "dropdown", "picker"]
+      "tags": [
+        "select",
+        "dropdown",
+        "picker"
+      ]
     },
     {
       "id": "searchable-select",
@@ -447,12 +719,22 @@
       "exportName": "SearchableSelect",
       "isReact": true,
       "props": {
-        "options": { "type": "string" },
-        "placeholder": { "type": "string", "default": "Search..." }
+        "options": {
+          "type": "string"
+        },
+        "placeholder": {
+          "type": "string",
+          "default": "Search..."
+        }
       },
       "documentedOn": "/design-system/primitives",
       "section": "Inputs",
-      "tags": ["select", "search", "autocomplete", "select2"]
+      "tags": [
+        "select",
+        "search",
+        "autocomplete",
+        "select2"
+      ]
     },
     {
       "id": "textarea",
@@ -466,12 +748,21 @@
       "path": "src/components/block/InputFieldsDemo.tsx",
       "isReact": true,
       "props": {
-        "placeholder": { "type": "string" },
-        "rows": { "type": "number", "default": 3 }
+        "placeholder": {
+          "type": "string"
+        },
+        "rows": {
+          "type": "number",
+          "default": 3
+        }
       },
       "documentedOn": "/design-system/primitives",
       "section": "Inputs",
-      "tags": ["textarea", "multiline", "text"]
+      "tags": [
+        "textarea",
+        "multiline",
+        "text"
+      ]
     },
     {
       "id": "toggle",
@@ -485,11 +776,19 @@
       "path": "src/components/block/ControlsDemo.tsx",
       "isReact": true,
       "props": {
-        "on": { "type": "boolean", "default": false }
+        "on": {
+          "type": "boolean",
+          "default": false
+        }
       },
       "documentedOn": "/design-system/primitives",
       "section": "Controls",
-      "tags": ["toggle", "switch", "on", "off"]
+      "tags": [
+        "toggle",
+        "switch",
+        "on",
+        "off"
+      ]
     },
     {
       "id": "checkbox",
@@ -503,11 +802,18 @@
       "path": "src/components/block/ControlsDemo.tsx",
       "isReact": true,
       "props": {
-        "checked": { "type": "boolean", "default": false }
+        "checked": {
+          "type": "boolean",
+          "default": false
+        }
       },
       "documentedOn": "/design-system/primitives",
       "section": "Controls",
-      "tags": ["checkbox", "check", "tick"]
+      "tags": [
+        "checkbox",
+        "check",
+        "tick"
+      ]
     },
     {
       "id": "radio",
@@ -521,11 +827,18 @@
       "path": "src/components/block/ControlsDemo.tsx",
       "isReact": true,
       "props": {
-        "selected": { "type": "boolean", "default": false }
+        "selected": {
+          "type": "boolean",
+          "default": false
+        }
       },
       "documentedOn": "/design-system/primitives",
       "section": "Controls",
-      "tags": ["radio", "option", "select"]
+      "tags": [
+        "radio",
+        "option",
+        "select"
+      ]
     },
     {
       "id": "segmented-control",
@@ -539,12 +852,20 @@
       "path": "src/components/block/ControlsDemo.tsx",
       "isReact": true,
       "props": {
-        "options": { "type": "string" },
-        "value": { "type": "string" }
+        "options": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
       },
       "documentedOn": "/design-system/primitives",
       "section": "Controls",
-      "tags": ["segment", "tabs", "option"]
+      "tags": [
+        "segment",
+        "tabs",
+        "option"
+      ]
     },
     {
       "id": "flat-slider",
@@ -558,13 +879,26 @@
       "path": "src/components/block/ControlsDemo.tsx",
       "isReact": true,
       "props": {
-        "min": { "type": "number", "default": 0 },
-        "max": { "type": "number", "default": 100 },
-        "value": { "type": "number", "default": 50 }
+        "min": {
+          "type": "number",
+          "default": 0
+        },
+        "max": {
+          "type": "number",
+          "default": 100
+        },
+        "value": {
+          "type": "number",
+          "default": 50
+        }
       },
       "documentedOn": "/design-system/primitives",
       "section": "Controls",
-      "tags": ["slider", "range", "flat"]
+      "tags": [
+        "slider",
+        "range",
+        "flat"
+      ]
     },
     {
       "id": "liquid-glass-slider",
@@ -579,14 +913,31 @@
       "exportName": "LiquidGlassSlider",
       "isReact": true,
       "props": {
-        "min": { "type": "number", "required": true },
-        "max": { "type": "number", "required": true },
-        "step": { "type": "number", "default": 1 },
-        "value": { "type": "number", "required": true }
+        "min": {
+          "type": "number",
+          "required": true
+        },
+        "max": {
+          "type": "number",
+          "required": true
+        },
+        "step": {
+          "type": "number",
+          "default": 1
+        },
+        "value": {
+          "type": "number",
+          "required": true
+        }
       },
       "documentedOn": "/design-system/primitives",
       "section": "Glass Controls",
-      "tags": ["slider", "glass", "gel", "range"]
+      "tags": [
+        "slider",
+        "glass",
+        "gel",
+        "range"
+      ]
     },
     {
       "id": "gel-toggle",
@@ -600,11 +951,19 @@
       "path": "src/components/block/GlassControlsDemo.tsx",
       "isReact": true,
       "props": {
-        "on": { "type": "boolean", "default": false }
+        "on": {
+          "type": "boolean",
+          "default": false
+        }
       },
       "documentedOn": "/design-system/primitives",
       "section": "Glass Controls",
-      "tags": ["toggle", "gel", "glass", "switch"]
+      "tags": [
+        "toggle",
+        "gel",
+        "glass",
+        "switch"
+      ]
     },
     {
       "id": "gel-checkbox",
@@ -618,11 +977,18 @@
       "path": "src/components/block/GlassControlsDemo.tsx",
       "isReact": true,
       "props": {
-        "checked": { "type": "boolean", "default": false }
+        "checked": {
+          "type": "boolean",
+          "default": false
+        }
       },
       "documentedOn": "/design-system/primitives",
       "section": "Glass Controls",
-      "tags": ["checkbox", "gel", "glass"]
+      "tags": [
+        "checkbox",
+        "gel",
+        "glass"
+      ]
     },
     {
       "id": "gel-radio",
@@ -636,11 +1002,18 @@
       "path": "src/components/block/GlassControlsDemo.tsx",
       "isReact": true,
       "props": {
-        "selected": { "type": "boolean", "default": false }
+        "selected": {
+          "type": "boolean",
+          "default": false
+        }
       },
       "documentedOn": "/design-system/primitives",
       "section": "Glass Controls",
-      "tags": ["radio", "gel", "glass"]
+      "tags": [
+        "radio",
+        "gel",
+        "glass"
+      ]
     },
     {
       "id": "status-badge",
@@ -654,11 +1027,26 @@
       "path": "inline",
       "isReact": false,
       "props": {
-        "variant": { "type": "enum", "options": ["success", "warning", "error", "info", "neutral"], "default": "neutral" }
+        "variant": {
+          "type": "enum",
+          "options": [
+            "success",
+            "warning",
+            "error",
+            "info",
+            "neutral"
+          ],
+          "default": "neutral"
+        }
       },
       "documentedOn": "/design-system/primitives",
       "section": "Badges",
-      "tags": ["badge", "status", "pill", "indicator"]
+      "tags": [
+        "badge",
+        "status",
+        "pill",
+        "indicator"
+      ]
     },
     {
       "id": "status-dot",
@@ -672,11 +1060,25 @@
       "path": "inline",
       "isReact": false,
       "props": {
-        "variant": { "type": "enum", "options": ["online", "away", "busy", "offline"], "default": "online" }
+        "variant": {
+          "type": "enum",
+          "options": [
+            "online",
+            "away",
+            "busy",
+            "offline"
+          ],
+          "default": "online"
+        }
       },
       "documentedOn": "/design-system/primitives",
       "section": "Badges",
-      "tags": ["dot", "status", "online", "presence"]
+      "tags": [
+        "dot",
+        "status",
+        "online",
+        "presence"
+      ]
     },
     {
       "id": "tag",
@@ -690,11 +1092,18 @@
       "path": "inline",
       "isReact": false,
       "props": {
-        "removable": { "type": "boolean", "default": true }
+        "removable": {
+          "type": "boolean",
+          "default": true
+        }
       },
       "documentedOn": "/design-system/primitives",
       "section": "Badges",
-      "tags": ["tag", "removable", "label"]
+      "tags": [
+        "tag",
+        "removable",
+        "label"
+      ]
     },
     {
       "id": "chip",
@@ -708,11 +1117,18 @@
       "path": "inline",
       "isReact": false,
       "props": {
-        "active": { "type": "boolean", "default": false }
+        "active": {
+          "type": "boolean",
+          "default": false
+        }
       },
       "documentedOn": "/design-system/primitives",
       "section": "Badges",
-      "tags": ["chip", "filter", "select"]
+      "tags": [
+        "chip",
+        "filter",
+        "select"
+      ]
     },
     {
       "id": "avatar",
@@ -726,13 +1142,31 @@
       "path": "inline",
       "isReact": false,
       "props": {
-        "size": { "type": "enum", "options": ["xs", "sm", "md", "lg"], "default": "md" },
-        "src": { "type": "string" },
-        "initials": { "type": "string" }
+        "size": {
+          "type": "enum",
+          "options": [
+            "xs",
+            "sm",
+            "md",
+            "lg"
+          ],
+          "default": "md"
+        },
+        "src": {
+          "type": "string"
+        },
+        "initials": {
+          "type": "string"
+        }
       },
       "documentedOn": "/design-system/primitives",
       "section": "Badges",
-      "tags": ["avatar", "profile", "image", "user"]
+      "tags": [
+        "avatar",
+        "profile",
+        "image",
+        "user"
+      ]
     },
     {
       "id": "avatar-group",
@@ -746,12 +1180,21 @@
       "path": "inline",
       "isReact": false,
       "props": {
-        "max": { "type": "number", "default": 3 }
+        "max": {
+          "type": "number",
+          "default": 3
+        }
       },
-      "composedOf": ["avatar"],
+      "composedOf": [
+        "avatar"
+      ],
       "documentedOn": "/design-system/primitives",
       "section": "Badges",
-      "tags": ["avatar", "group", "stack"]
+      "tags": [
+        "avatar",
+        "group",
+        "stack"
+      ]
     },
     {
       "id": "spinner",
@@ -765,11 +1208,23 @@
       "path": "inline",
       "isReact": false,
       "props": {
-        "size": { "type": "enum", "options": ["sm", "md", "lg"], "default": "md" }
+        "size": {
+          "type": "enum",
+          "options": [
+            "sm",
+            "md",
+            "lg"
+          ],
+          "default": "md"
+        }
       },
       "documentedOn": "/design-system/primitives",
       "section": "Feedback",
-      "tags": ["spinner", "loading", "progress"]
+      "tags": [
+        "spinner",
+        "loading",
+        "progress"
+      ]
     },
     {
       "id": "progress-bar",
@@ -783,13 +1238,33 @@
       "path": "inline",
       "isReact": false,
       "props": {
-        "value": { "type": "number", "min": 0, "max": 100, "default": 0 },
-        "label": { "type": "string" },
-        "color": { "type": "enum", "options": ["primary", "warning", "success"], "default": "primary" }
+        "value": {
+          "type": "number",
+          "min": 0,
+          "max": 100,
+          "default": 0
+        },
+        "label": {
+          "type": "string"
+        },
+        "color": {
+          "type": "enum",
+          "options": [
+            "primary",
+            "warning",
+            "success"
+          ],
+          "default": "primary"
+        }
       },
       "documentedOn": "/design-system/primitives",
       "section": "Feedback",
-      "tags": ["progress", "bar", "loading", "percentage"]
+      "tags": [
+        "progress",
+        "bar",
+        "loading",
+        "percentage"
+      ]
     },
     {
       "id": "skeleton-loader",
@@ -803,11 +1278,24 @@
       "path": "inline",
       "isReact": false,
       "props": {
-        "variant": { "type": "enum", "options": ["card", "list", "media"], "default": "card" }
+        "variant": {
+          "type": "enum",
+          "options": [
+            "card",
+            "list",
+            "media"
+          ],
+          "default": "card"
+        }
       },
       "documentedOn": "/design-system/primitives",
       "section": "Elevation",
-      "tags": ["skeleton", "shimmer", "loading", "placeholder"]
+      "tags": [
+        "skeleton",
+        "shimmer",
+        "loading",
+        "placeholder"
+      ]
     },
     {
       "id": "tab-bar",
@@ -822,12 +1310,22 @@
       "exportName": "TabBar",
       "isReact": true,
       "props": {
-        "tabs": { "type": "string", "required": true, "description": "Array of tab labels" },
-        "defaultTab": { "type": "string" }
+        "tabs": {
+          "type": "string",
+          "required": true,
+          "description": "Array of tab labels"
+        },
+        "defaultTab": {
+          "type": "string"
+        }
       },
       "documentedOn": "/design-system/primitives",
       "section": "Navigation",
-      "tags": ["tabs", "navigation", "underline"]
+      "tags": [
+        "tabs",
+        "navigation",
+        "underline"
+      ]
     },
     {
       "id": "pill-tabs",
@@ -842,12 +1340,21 @@
       "exportName": "PillTabs",
       "isReact": true,
       "props": {
-        "tabs": { "type": "string", "required": true },
-        "defaultTab": { "type": "string" }
+        "tabs": {
+          "type": "string",
+          "required": true
+        },
+        "defaultTab": {
+          "type": "string"
+        }
       },
       "documentedOn": "/design-system/primitives",
       "section": "Navigation",
-      "tags": ["tabs", "pill", "selector"]
+      "tags": [
+        "tabs",
+        "pill",
+        "selector"
+      ]
     },
     {
       "id": "breadcrumb",
@@ -861,11 +1368,18 @@
       "path": "src/components/block/PrimitiveNavigation.tsx",
       "isReact": true,
       "props": {
-        "items": { "type": "string", "description": "Array of {label, href} objects" }
+        "items": {
+          "type": "string",
+          "description": "Array of {label, href} objects"
+        }
       },
       "documentedOn": "/design-system/primitives",
       "section": "Navigation",
-      "tags": ["breadcrumb", "path", "navigation"]
+      "tags": [
+        "breadcrumb",
+        "path",
+        "navigation"
+      ]
     },
     {
       "id": "nav-item",
@@ -879,12 +1393,23 @@
       "path": "src/components/block/PrimitiveNavigation.tsx",
       "isReact": true,
       "props": {
-        "label": { "type": "string", "required": true },
-        "active": { "type": "boolean", "default": false }
+        "label": {
+          "type": "string",
+          "required": true
+        },
+        "active": {
+          "type": "boolean",
+          "default": false
+        }
       },
       "documentedOn": "/design-system/primitives",
       "section": "Navigation",
-      "tags": ["nav", "sidebar", "menu", "item"]
+      "tags": [
+        "nav",
+        "sidebar",
+        "menu",
+        "item"
+      ]
     },
     {
       "id": "stack",
@@ -898,12 +1423,27 @@
       "path": "inline",
       "isReact": false,
       "props": {
-        "gap": { "type": "string", "default": "16px" }
+        "gap": {
+          "type": "string",
+          "default": "16px"
+        }
       },
-      "slots": { "default": { "accepts": ["*"], "multiple": true } },
+      "slots": {
+        "default": {
+          "accepts": [
+            "*"
+          ],
+          "multiple": true
+        }
+      },
       "documentedOn": "/design-system/primitives",
       "section": "Layout",
-      "tags": ["stack", "vertical", "flex", "column"]
+      "tags": [
+        "stack",
+        "vertical",
+        "flex",
+        "column"
+      ]
     },
     {
       "id": "inline",
@@ -917,13 +1457,37 @@
       "path": "inline",
       "isReact": false,
       "props": {
-        "gap": { "type": "string", "default": "16px" },
-        "justify": { "type": "enum", "options": ["start", "center", "end", "between"], "default": "start" }
+        "gap": {
+          "type": "string",
+          "default": "16px"
+        },
+        "justify": {
+          "type": "enum",
+          "options": [
+            "start",
+            "center",
+            "end",
+            "between"
+          ],
+          "default": "start"
+        }
       },
-      "slots": { "default": { "accepts": ["*"], "multiple": true } },
+      "slots": {
+        "default": {
+          "accepts": [
+            "*"
+          ],
+          "multiple": true
+        }
+      },
       "documentedOn": "/design-system/primitives",
       "section": "Layout",
-      "tags": ["inline", "horizontal", "flex", "row"]
+      "tags": [
+        "inline",
+        "horizontal",
+        "flex",
+        "row"
+      ]
     },
     {
       "id": "center",
@@ -937,10 +1501,21 @@
       "path": "inline",
       "isReact": false,
       "props": {},
-      "slots": { "default": { "accepts": ["*"], "multiple": false } },
+      "slots": {
+        "default": {
+          "accepts": [
+            "*"
+          ],
+          "multiple": false
+        }
+      },
       "documentedOn": "/design-system/primitives",
       "section": "Layout",
-      "tags": ["center", "align", "justify"]
+      "tags": [
+        "center",
+        "align",
+        "justify"
+      ]
     },
     {
       "id": "spacer",
@@ -956,7 +1531,11 @@
       "props": {},
       "documentedOn": "/design-system/primitives",
       "section": "Layout",
-      "tags": ["spacer", "gap", "flex"]
+      "tags": [
+        "spacer",
+        "gap",
+        "flex"
+      ]
     },
     {
       "id": "elevation-flat",
@@ -972,7 +1551,12 @@
       "props": {},
       "documentedOn": "/design-system/primitives",
       "section": "Elevation",
-      "tags": ["elevation", "flat", "shadow", "none"]
+      "tags": [
+        "elevation",
+        "flat",
+        "shadow",
+        "none"
+      ]
     },
     {
       "id": "elevation-raised",
@@ -988,7 +1572,11 @@
       "props": {},
       "documentedOn": "/design-system/primitives",
       "section": "Elevation",
-      "tags": ["elevation", "raised", "shadow"]
+      "tags": [
+        "elevation",
+        "raised",
+        "shadow"
+      ]
     },
     {
       "id": "elevation-floating",
@@ -1004,7 +1592,12 @@
       "props": {},
       "documentedOn": "/design-system/primitives",
       "section": "Elevation",
-      "tags": ["elevation", "floating", "shadow", "popover"]
+      "tags": [
+        "elevation",
+        "floating",
+        "shadow",
+        "popover"
+      ]
     },
     {
       "id": "ds-nav",
@@ -1019,12 +1612,24 @@
       "exportName": "DSNav",
       "isReact": true,
       "props": {
-        "currentPath": { "type": "string", "required": true }
+        "currentPath": {
+          "type": "string",
+          "required": true
+        }
       },
-      "composedOf": ["gel-button", "glass-surface", "icon-button"],
+      "composedOf": [
+        "gel-button",
+        "glass-surface",
+        "icon-button"
+      ],
       "documentedOn": "/design-system/components",
       "section": "Navigation",
-      "tags": ["nav", "header", "menu", "glass"],
+      "tags": [
+        "nav",
+        "header",
+        "menu",
+        "glass"
+      ],
       "nodeColor": "#4A5E48"
     },
     {
@@ -1040,12 +1645,26 @@
       "exportName": "DSFooter",
       "isReact": true,
       "props": {
-        "contrast": { "type": "enum", "options": ["dark", "light"], "required": true },
-        "version": { "type": "string", "default": "v0.8.2" }
+        "contrast": {
+          "type": "enum",
+          "options": [
+            "dark",
+            "light"
+          ],
+          "required": true
+        },
+        "version": {
+          "type": "string",
+          "default": "v0.8.2"
+        }
       },
       "documentedOn": "/design-system/components",
       "section": "Navigation",
-      "tags": ["footer", "copyright", "links"],
+      "tags": [
+        "footer",
+        "copyright",
+        "links"
+      ],
       "nodeColor": "#4A5E48"
     },
     {
@@ -1061,12 +1680,27 @@
       "exportName": "DSShell",
       "isReact": true,
       "props": {
-        "currentPath": { "type": "string", "required": true }
+        "currentPath": {
+          "type": "string",
+          "required": true
+        }
       },
-      "composedOf": ["ds-nav", "ds-footer", "liquid-glass-filter", "appearance-modal", "context-menu", "background-picker"],
+      "composedOf": [
+        "ds-nav",
+        "ds-footer",
+        "liquid-glass-filter",
+        "appearance-modal",
+        "context-menu",
+        "background-picker"
+      ],
       "documentedOn": "/design-system/components",
       "section": "Layout",
-      "tags": ["shell", "layout", "page", "wrapper"],
+      "tags": [
+        "shell",
+        "layout",
+        "page",
+        "wrapper"
+      ],
       "nodeColor": "#4A5E48"
     },
     {
@@ -1082,10 +1716,19 @@
       "exportName": "AppearanceModal",
       "isReact": true,
       "props": {},
-      "composedOf": ["liquid-glass-slider", "segmented-control", "glass-surface"],
+      "composedOf": [
+        "liquid-glass-slider",
+        "segmented-control",
+        "glass-surface"
+      ],
       "documentedOn": "/design-system/components",
       "section": "Overlay",
-      "tags": ["modal", "appearance", "settings", "theme"],
+      "tags": [
+        "modal",
+        "appearance",
+        "settings",
+        "theme"
+      ],
       "nodeColor": "#4A5E48"
     },
     {
@@ -1103,7 +1746,11 @@
       "props": {},
       "documentedOn": "/design-system/components",
       "section": "Overlay",
-      "tags": ["context", "menu", "right-click"],
+      "tags": [
+        "context",
+        "menu",
+        "right-click"
+      ],
       "nodeColor": "#4A5E48"
     },
     {
@@ -1121,7 +1768,11 @@
       "props": {},
       "documentedOn": "/design-system/components",
       "section": "Overlay",
-      "tags": ["background", "wallpaper", "picker"],
+      "tags": [
+        "background",
+        "wallpaper",
+        "picker"
+      ],
       "nodeColor": "#4A5E48"
     },
     {
@@ -1139,7 +1790,12 @@
       "props": {},
       "documentedOn": "/design-system/components",
       "section": "Overlay",
-      "tags": ["font", "picker", "google fonts", "typography"],
+      "tags": [
+        "font",
+        "picker",
+        "google fonts",
+        "typography"
+      ],
       "nodeColor": "#4A5E48"
     },
     {
@@ -1157,7 +1813,12 @@
       "props": {},
       "documentedOn": "/design-system/components",
       "section": "Overlay",
-      "tags": ["modal", "preset", "editor", "typography"],
+      "tags": [
+        "modal",
+        "preset",
+        "editor",
+        "typography"
+      ],
       "nodeColor": "#4A5E48"
     },
     {
@@ -1175,7 +1836,12 @@
       "props": {},
       "documentedOn": "/design-system/components",
       "section": "Navigation",
-      "tags": ["nav", "section", "scroll", "toc"],
+      "tags": [
+        "nav",
+        "section",
+        "scroll",
+        "toc"
+      ],
       "nodeColor": "#4A5E48"
     },
     {
@@ -1193,7 +1859,12 @@
       "props": {},
       "documentedOn": "/design-system/components",
       "section": "Data",
-      "tags": ["features", "grid", "filter", "tags"],
+      "tags": [
+        "features",
+        "grid",
+        "filter",
+        "tags"
+      ],
       "nodeColor": "#4A5E48"
     },
     {
@@ -1209,10 +1880,19 @@
       "exportName": "TypePresetsTable",
       "isReact": true,
       "props": {},
-      "composedOf": ["heading", "body-text", "code-block"],
+      "composedOf": [
+        "heading",
+        "body-text",
+        "code-block"
+      ],
       "documentedOn": "/design-system/components",
       "section": "Data",
-      "tags": ["table", "typography", "presets", "editable"],
+      "tags": [
+        "table",
+        "typography",
+        "presets",
+        "editable"
+      ],
       "nodeColor": "#4A5E48"
     },
     {
@@ -1229,7 +1909,262 @@
       "isReact": true,
       "props": {},
       "documentedOn": "/design-system",
-      "tags": ["svg", "filter", "glass", "noise", "specular"]
+      "tags": [
+        "svg",
+        "filter",
+        "glass",
+        "noise",
+        "specular"
+      ]
+    },
+    {
+      "id": "custom-select",
+      "name": "Select",
+      "displayName": "Custom Select",
+      "description": "Glass-styled dropdown select with keyboard navigation",
+      "layer": "primitive",
+      "category": "form",
+      "status": "planned",
+      "version": "0.12.0",
+      "path": "dsl/primitives.tsx",
+      "exportName": "Select",
+      "isReact": true,
+      "props": {
+        "options": {
+          "type": "string",
+          "description": "Array of {value, label} options"
+        },
+        "value": {
+          "type": "string",
+          "description": "Selected value"
+        },
+        "placeholder": {
+          "type": "string",
+          "default": "Select..."
+        }
+      },
+      "documentedOn": "/design-system/primitives",
+      "section": "Inputs",
+      "tags": [
+        "select",
+        "dropdown",
+        "form",
+        "input"
+      ]
+    },
+    {
+      "id": "slider",
+      "name": "Slider",
+      "displayName": "Slider",
+      "description": "Range slider with flat and glass variants",
+      "layer": "primitive",
+      "category": "interactive",
+      "status": "planned",
+      "version": "0.12.0",
+      "path": "dsl/primitives.tsx",
+      "exportName": "Slider",
+      "isReact": true,
+      "props": {
+        "min": {
+          "type": "number",
+          "default": 0
+        },
+        "max": {
+          "type": "number",
+          "default": 100
+        },
+        "value": {
+          "type": "number",
+          "default": 50
+        }
+      },
+      "documentedOn": "/design-system/primitives",
+      "section": "Controls",
+      "tags": [
+        "slider",
+        "range",
+        "input",
+        "control"
+      ]
+    },
+    {
+      "id": "modal",
+      "name": "Modal",
+      "displayName": "Modal",
+      "description": "Draggable glass modal with backdrop blur",
+      "layer": "primitive",
+      "category": "overlay",
+      "status": "planned",
+      "version": "0.12.0",
+      "path": "dsl/primitives.tsx",
+      "exportName": "Modal",
+      "isReact": true,
+      "props": {
+        "open": {
+          "type": "boolean",
+          "default": false
+        },
+        "title": {
+          "type": "string"
+        },
+        "size": {
+          "type": "enum",
+          "options": [
+            "sm",
+            "md",
+            "lg"
+          ],
+          "default": "md"
+        }
+      },
+      "documentedOn": "/design-system/components",
+      "section": "Overlay",
+      "tags": [
+        "modal",
+        "dialog",
+        "overlay",
+        "popup"
+      ]
+    },
+    {
+      "id": "tooltip",
+      "name": "Tooltip",
+      "displayName": "Tooltip",
+      "description": "Hover-triggered glass tooltip with arrow",
+      "layer": "primitive",
+      "category": "overlay",
+      "status": "planned",
+      "version": "0.12.0",
+      "path": "dsl/primitives.tsx",
+      "exportName": "Tooltip",
+      "isReact": true,
+      "props": {
+        "content": {
+          "type": "string",
+          "required": true
+        },
+        "position": {
+          "type": "enum",
+          "options": [
+            "top",
+            "bottom",
+            "left",
+            "right"
+          ],
+          "default": "top"
+        }
+      },
+      "documentedOn": "/design-system/primitives",
+      "section": "Feedback",
+      "tags": [
+        "tooltip",
+        "hover",
+        "popup",
+        "info"
+      ]
+    },
+    {
+      "id": "overlay",
+      "name": "Overlay",
+      "displayName": "Overlay",
+      "description": "Semi-transparent backdrop with blur option",
+      "layer": "primitive",
+      "category": "overlay",
+      "status": "planned",
+      "version": "0.12.0",
+      "path": "dsl/primitives.tsx",
+      "exportName": "Overlay",
+      "isReact": true,
+      "props": {
+        "open": {
+          "type": "boolean",
+          "default": false
+        },
+        "blur": {
+          "type": "boolean",
+          "default": true
+        }
+      },
+      "documentedOn": "/design-system/components",
+      "section": "Overlay",
+      "tags": [
+        "overlay",
+        "backdrop",
+        "modal",
+        "dim"
+      ]
+    },
+    {
+      "id": "drawer",
+      "name": "Drawer",
+      "displayName": "Drawer",
+      "description": "Slide-in panel from edge of screen",
+      "layer": "component",
+      "category": "overlay",
+      "status": "planned",
+      "version": "0.12.0",
+      "path": "dsl/primitives.tsx",
+      "exportName": "Drawer",
+      "isReact": true,
+      "props": {
+        "open": {
+          "type": "boolean",
+          "default": false
+        },
+        "side": {
+          "type": "enum",
+          "options": [
+            "left",
+            "right"
+          ],
+          "default": "right"
+        }
+      },
+      "documentedOn": "/design-system/components",
+      "section": "Overlay",
+      "tags": [
+        "drawer",
+        "panel",
+        "slide",
+        "sidebar"
+      ]
+    },
+    {
+      "id": "popover",
+      "name": "Popover",
+      "displayName": "Popover",
+      "description": "Click-triggered floating panel",
+      "layer": "component",
+      "category": "overlay",
+      "status": "planned",
+      "version": "0.12.0",
+      "path": "dsl/primitives.tsx",
+      "exportName": "Popover",
+      "isReact": true,
+      "props": {
+        "open": {
+          "type": "boolean",
+          "default": false
+        },
+        "position": {
+          "type": "enum",
+          "options": [
+            "top",
+            "bottom",
+            "left",
+            "right"
+          ],
+          "default": "bottom"
+        }
+      },
+      "documentedOn": "/design-system/components",
+      "section": "Overlay",
+      "tags": [
+        "popover",
+        "floating",
+        "dropdown",
+        "popup"
+      ]
     }
   ]
 }

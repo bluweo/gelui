@@ -1,0 +1,34 @@
+---
+import DSLayout from "@/components/layout/DSLayout.astro";
+import RegistryHero from "@/components/block/RegistryHero.astro";
+import { RegistryViewer } from "@/components/block/RegistryViewer";
+import registryData from "@/registry/registry.json";
+
+const components = registryData.components;
+---
+
+<DSLayout
+  title="Component Registry — Gel UI"
+  description="The single source of truth for every component in Gel UI. Search, filter, and explore 67+ registered components across 6 architecture layers."
+  keywords="component registry, gel ui, design system, primitives, tokens, components, patterns, layout, search, filter"
+>
+  <div class="w-full grid grid-cols-4 gap-5 max-[860px]:grid-cols-2 max-[860px]:gap-4 max-[540px]:grid-cols-1 max-[540px]:gap-3">
+
+    <RegistryHero />
+
+    <!-- ═══════════════════════════════════
+         Registry Viewer — Interactive Table
+         ═══════════════════════════════════ -->
+    <div data-section="Registry" class="col-span-full glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
+      <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 160px;" />
+      <div class="relative flex flex-col gap-1 mb-6 pt-1 pl-1">
+        <span class="text-[10px] font-[650] uppercase tracking-[0.1em] text-black/40 dark:text-white/40 mb-1">Developer Tools</span>
+        <h2 class="text-[24px] font-[750] tracking-[-0.03em] leading-[1.2] text-black dark:text-white mb-1" style="font-family: var(--font-heading)">Component Registry</h2>
+        <p class="text-[13px] leading-[1.6] text-black/60 dark:text-white/55">Search, filter, and explore all registered components</p>
+      </div>
+
+      <RegistryViewer client:load components={components} />
+    </div>
+
+  </div>
+</DSLayout>

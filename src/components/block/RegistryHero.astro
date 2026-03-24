@@ -1,0 +1,72 @@
+---
+/**
+ * RegistryHero — Hero banner for the Component Registry page.
+ * 2-column layout: left text+stats, right placeholder preview.
+ * Mobile: stacks vertically.
+ */
+---
+
+<div data-section="Overview" class="col-span-full glass-1 glass-specular rounded-[var(--glass-radius)] overflow-hidden relative">
+  <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 280px;" />
+
+  <div class="relative z-[1] grid grid-cols-2 max-[860px]:grid-cols-1">
+
+    <!-- Left: Title + Description + Stats -->
+    <div class="flex flex-col justify-between p-8 max-[540px]:p-5">
+      <div>
+        <h1 class="text-[36px] max-[860px]:text-[28px] max-[540px]:text-[24px] font-[750] tracking-[-0.035em] leading-[1.1] text-black dark:text-white mb-4" style="font-family: var(--font-heading)">
+          Component Registry
+        </h1>
+        <p class="text-[14px] leading-[1.7] text-black/60 dark:text-white/50 max-w-[420px] mb-3">
+          The single source of truth for every component in Gel UI. Search, filter, and explore 67+ registered components across 6 architecture layers.
+        </p>
+        <p class="text-[12px] leading-[1.6] text-black/40 dark:text-white/30 max-w-[380px] italic">
+          Design System — Developer Tools · Registry
+        </p>
+      </div>
+
+      <!-- Stats row -->
+      <div class="grid grid-cols-3 gap-3 mt-6 max-w-[520px]">
+        <div class="glass-1 rounded-[calc(var(--glass-radius)*0.65)] px-6 py-5 text-center">
+          <div class="flex items-baseline gap-2 justify-center">
+            <span class="text-[48px] font-[750] text-black dark:text-white leading-none tracking-[-0.02em]">67+</span>
+            <span class="text-[12px] text-green-500">&#x25CF;</span>
+          </div>
+          <p class="text-[14px] text-black/50 dark:text-white/45 mt-2">Components</p>
+        </div>
+        <div class="glass-1 rounded-[calc(var(--glass-radius)*0.65)] px-6 py-5 text-center">
+          <div class="flex items-baseline gap-2 justify-center">
+            <span class="text-[48px] font-[750] text-black dark:text-white leading-none tracking-[-0.02em]">6</span>
+            <span class="text-[12px] text-green-500">&#x25CF;</span>
+          </div>
+          <p class="text-[14px] text-black/50 dark:text-white/45 mt-2">Layers</p>
+        </div>
+        <div class="glass-1 rounded-[calc(var(--glass-radius)*0.65)] px-6 py-5 text-center">
+          <div class="flex items-baseline gap-2 justify-center">
+            <span class="text-[48px] font-[750] text-black dark:text-white leading-none tracking-[-0.02em]">14</span>
+            <span class="text-[12px] text-amber-500">&#x25CF;</span>
+          </div>
+          <p class="text-[14px] text-black/50 dark:text-white/45 mt-2">Categories</p>
+        </div>
+      </div>
+
+      <!-- CTA button -->
+      <div class="mt-4">
+        <a href="#registry-table" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-black/20 dark:border-white/20 text-[13px] font-[600] text-black/70 dark:text-white/60 hover:bg-black/5 dark:hover:bg-white/5 hover:text-black dark:hover:text-white transition-all duration-200 no-underline">
+          View all components
+          <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-black/80 dark:bg-white/85 text-white dark:text-black shrink-0">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M17 17V7.8H7.8"/></svg>
+          </span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Right: Placeholder preview -->
+    <div class="flex items-center justify-center p-2 max-[860px]:order-first max-[860px]:p-3">
+      <div class="w-full h-full rounded-[var(--glass-radius)] overflow-hidden bg-black/[0.03] dark:bg-white/[0.03] flex items-center justify-center" style="min-height: 240px;">
+        <span class="text-[14px] font-[550] text-black/25 dark:text-white/20 tracking-wide">Registry Preview</span>
+      </div>
+    </div>
+
+  </div>
+</div>
