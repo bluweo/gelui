@@ -51,7 +51,7 @@ function useLiveCSSVars(vars: VarDef[]) {
 /* ─── Arrow ─── */
 function Arrow({ isDark }: { isDark: boolean }) {
   return (
-    <svg width="20" height="10" viewBox="0 0 20 10" fill="none" style={{ flexShrink: 0, opacity: 0.2 }}>
+    <svg width="20" height="10" viewBox="0 0 20 10" fill="none" style={{ flexShrink: 0, opacity: 0.25 }}>
       <path d="M0 5h14m0 0l-3.5-3.5M14 5l-3.5 3.5" stroke={isDark ? "#fff" : "#000"} strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
@@ -65,6 +65,14 @@ function HowItWorks({ isDark }: { isDark: boolean }) {
     { variable: "--glass-shadow", label: "", setBy: "", category: "" },
   ]);
 
+  const tableBg = isDark ? "rgba(0,0,0,0.30)" : "rgba(255,255,255,0.60)";
+  const headerBg = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)";
+  const borderColor = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)";
+  const rowBorder = isDark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.04)";
+  const headerText = isDark ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.45)";
+  const labelText = isDark ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.7)";
+  const monoText = isDark ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.4)";
+
   const chains = [
     { setting: "Border Radius", variable: "--glass-radius", previewType: "radius" },
     { setting: "Blur Intensity", variable: "--glass-blur", previewType: "blur" },
@@ -72,20 +80,26 @@ function HowItWorks({ isDark }: { isDark: boolean }) {
   ];
 
   return (
-    <div className="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white/60 dark:bg-black/30 h-full">
-      <div className="flex items-center justify-between px-3 py-2 bg-black/[0.04] dark:bg-white/[0.06] border-b border-black/[0.06] dark:border-white/[0.06]">
-        <span className="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/45 dark:text-white/40">Setting</span>
-        <span className="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/45 dark:text-white/40">CSS Variable</span>
+    <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: tableBg, border: `1px solid ${borderColor}`, height: "100%" }}>
+      <div style={{ padding: "10px 14px", background: headerBg, borderBottom: `1px solid ${borderColor}` }}>
+        <span style={{ fontSize: "10px", fontWeight: 650, textTransform: "uppercase", letterSpacing: "0.06em", color: headerText }}>How It Works</span>
       </div>
       {chains.map((ch, idx) => {
         const liveVal = liveVars[ch.variable] || "";
-        const displayVal = liveVal.length > 20 ? liveVal.slice(0, 20) + "…" : liveVal;
+        const displayVal = liveVal.length > 18 ? liveVal.slice(0, 18) + "…" : liveVal;
         return (
-          <div key={ch.variable} className={`flex items-center justify-between gap-3 px-3 py-2.5 ${idx < chains.length - 1 ? "border-b border-black/[0.04] dark:border-white/[0.04]" : ""}`}>
-            <span className="text-[12px] font-[600] text-black/75 dark:text-white/70">{ch.setting}</span>
-            <div className="text-right">
-              <span className="text-[11px] font-mono px-2 py-0.5 rounded-full bg-black/[0.05] dark:bg-white/[0.07] text-black/50 dark:text-white/40 tabular-nums">{ch.variable}</span>
-              <span className="block text-[10px] font-mono text-black/30 dark:text-white/25 mt-0.5 tabular-nums">{displayVal}</span>
+          <div key={ch.variable} style={{ display: "flex", alignItems: "center", padding: "12px 14px", borderBottom: idx < chains.length - 1 ? `1px solid ${rowBorder}` : "none", gap: "8px" }}>
+            <span style={{ fontSize: "12px", fontWeight: 600, color: labelText, minWidth: 90, flexShrink: 0 }}>{ch.setting}</span>
+            <Arrow isDark={isDark} />
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <span style={{ fontSize: "10px", fontFamily: "var(--font-mono)", color: monoText, display: "block" }}>{ch.variable}</span>
+              <span style={{ fontSize: "9px", fontFamily: "var(--font-mono)", color: isDark ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.25)" }}>{displayVal}</span>
+            </div>
+            <Arrow isDark={isDark} />
+            <div style={{ width: 36, height: 36, flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
+              {ch.previewType === "radius" && <div style={{ width: 32, height: 32, borderRadius: "var(--glass-radius, 12px)", background: isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.05)", border: `2px solid ${isDark ? "rgba(255,255,255,0.12)" : "rgba(0,0,0,0.08)"}` }} />}
+              {ch.previewType === "blur" && <div style={{ width: 32, height: 32, borderRadius: 6, backdropFilter: "blur(var(--glass-blur, 12px))", WebkitBackdropFilter: "blur(var(--glass-blur, 12px))", background: isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.02)", border: `1px solid ${isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.05)"}` }} />}
+              {ch.previewType === "shadow" && <div style={{ width: 32, height: 32, borderRadius: 6, background: isDark ? "rgba(255,255,255,0.06)" : "#fff", boxShadow: "var(--glass-shadow, 0 2px 8px rgba(0,0,0,0.1))" }} />}
             </div>
           </div>
         );
@@ -94,7 +108,7 @@ function HowItWorks({ isDark }: { isDark: boolean }) {
   );
 }
 
-/* ─── Read/write appearance from localStorage (bypasses React context) ─── */
+/* ─── Read/write appearance from localStorage (bypasses React context for SSR safety) ─── */
 const STORAGE_KEY = "gelui-appearance";
 function readAppearance() {
   try {
@@ -112,9 +126,6 @@ function writeAppearance(key: string, value: any) {
     const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
     stored[key] = value;
     localStorage.setItem(STORAGE_KEY, JSON.stringify(stored));
-    // Dispatch event so AppearanceContext picks up the change
-    window.dispatchEvent(new StorageEvent("storage", { key: STORAGE_KEY }));
-    // Also force a re-render in AppearanceContext by dispatching custom event
     window.dispatchEvent(new CustomEvent("gelui-appearance-change", { detail: { [key]: value } }));
   } catch {}
 }
@@ -127,7 +138,6 @@ function AppearanceControls({ isDark }: { isDark: boolean }) {
   const [blurIntensity, setBlurLocal] = useState(24);
   const [shadowPreset, setShadowLocal] = useState("soft");
 
-  // Read from localStorage on mount
   useEffect(() => {
     const vals = readAppearance();
     setTransparencyLocal(vals.transparency);
@@ -135,8 +145,6 @@ function AppearanceControls({ isDark }: { isDark: boolean }) {
     setBlurLocal(vals.blurIntensity);
     setShadowLocal(vals.shadowPreset);
     setMounted(true);
-
-    // Poll for external changes (from the Appearance modal)
     const id = setInterval(() => {
       const v = readAppearance();
       setTransparencyLocal(v.transparency);
@@ -150,7 +158,7 @@ function AppearanceControls({ isDark }: { isDark: boolean }) {
   if (!mounted) {
     return (
       <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: isDark ? "rgba(0,0,0,0.30)" : "rgba(255,255,255,0.60)", border: `1px solid ${isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)"}`, height: "100%", display: "flex", alignItems: "center", justifyContent: "center", padding: 20 }}>
-        <span style={{ fontSize: 12, color: isDark ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.3)" }}>Loading...</span>
+        <span style={{ fontSize: 11, color: isDark ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.3)" }}>Loading...</span>
       </div>
     );
   }
@@ -167,10 +175,13 @@ function AppearanceControls({ isDark }: { isDark: boolean }) {
   const headerBg = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)";
   const borderColor = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)";
   const rowBorder = isDark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.04)";
-  const headerText = isDark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.45)";
-  const labelText = isDark ? "rgba(255,255,255,0.70)" : "rgba(0,0,0,0.75)";
-  // Colors now handled by Tailwind classes (text-text-secondary, text-text-tertiary)
-  // and glass-preset-btn/glass-preset-active CSS utilities
+  const headerText = isDark ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.45)";
+  const labelText = isDark ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.55)";
+  const valueText = isDark ? "rgba(255,255,255,0.8)" : "rgba(0,0,0,0.75)";
+  const segBg = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.05)";
+  const segActiveBg = isDark ? "rgba(255,255,255,0.95)" : "#fff";
+  const segActiveText = isDark ? "#000" : "#000";
+  const segInactiveText = isDark ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.4)";
 
   const radiusOptions: { label: string; value: RadiusPreset }[] = [
     { label: "Minimal", value: "minimal" },
@@ -184,50 +195,63 @@ function AppearanceControls({ isDark }: { isDark: boolean }) {
     { label: "Elevated", value: "elevated" },
   ];
 
-  // Use the same glass-preset classes as the Appearance modal
+  const segStyle = (active: boolean): React.CSSProperties => ({
+    flex: 1,
+    padding: "7px 0",
+    fontSize: "12px",
+    fontWeight: active ? 600 : 450,
+    textAlign: "center",
+    borderRadius: "var(--glass-radius-pill, 100px)",
+    background: active ? segActiveBg : "transparent",
+    color: active ? segActiveText : segInactiveText,
+    border: "none",
+    cursor: "pointer",
+    transition: "all 200ms ease",
+    boxShadow: active ? "0 1px 4px rgba(0,0,0,0.08)" : "none",
+  });
 
   return (
-    <div className="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white/60 dark:bg-black/30 h-full flex flex-col">
+    <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: tableBg, border: `1px solid ${borderColor}`, height: "100%", display: "flex", flexDirection: "column" }}>
       {/* Header */}
-      <div className="flex items-center justify-between px-3 py-2 bg-black/[0.04] dark:bg-white/[0.06] border-b border-black/[0.06] dark:border-white/[0.06]">
-        <span className="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/45 dark:text-white/40">Appearance</span>
-        <button onClick={resetToDefaults} className="text-[10px] font-[550] text-black/35 dark:text-white/35 bg-transparent border-none cursor-pointer hover:opacity-70">Reset</button>
+      <div style={{ padding: "10px 14px", background: headerBg, borderBottom: `1px solid ${borderColor}`, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+        <span style={{ fontSize: "10px", fontWeight: 650, textTransform: "uppercase", letterSpacing: "0.06em", color: headerText }}>Appearance</span>
+        <button onClick={resetToDefaults} style={{ fontSize: "10px", fontWeight: 550, color: isDark ? "rgba(255,255,255,0.35)" : "rgba(0,0,0,0.35)", background: "none", border: "none", cursor: "pointer" }}>Reset</button>
       </div>
 
       {/* Transparency */}
-      <div className="px-3 py-2.5 border-b border-black/[0.04] dark:border-white/[0.04]">
-        <div className="flex justify-between mb-2">
-          <span className="text-[11.5px] font-[600] uppercase tracking-[0.06em] text-text-secondary">Transparency</span>
-          <span className="text-[11.5px] font-[600] text-text-tertiary tabular-nums">{Math.round(transparency * 100)}%</span>
+      <div style={{ padding: "12px 14px", borderBottom: `1px solid ${rowBorder}` }}>
+        <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8 }}>
+          <span style={{ fontSize: "10px", fontWeight: 650, textTransform: "uppercase", letterSpacing: "0.04em", color: labelText }}>Transparency</span>
+          <span style={{ fontSize: "11px", fontFamily: "var(--font-mono)", color: valueText }}>{Math.round(transparency * 100)}%</span>
         </div>
-        <LiquidGlassSlider min={0.2} max={1.0} step={0.01} value={transparency} onChange={setTransparency} />
+        <LiquidGlassSlider min={0} max={100} step={1} value={Math.round(transparency * 100)} onChange={(v) => setTransparency(v / 100)} />
       </div>
 
       {/* Border Radius */}
-      <div className="px-3 py-2.5 border-b border-black/[0.04] dark:border-white/[0.04]">
-        <span className="text-[11.5px] font-[600] uppercase tracking-[0.06em] text-text-secondary block mb-2">Border Radius</span>
-        <div className="flex gap-1 p-[3px] bg-black/6 rounded-glass-sm dark:bg-white/6">
+      <div style={{ padding: "12px 14px", borderBottom: `1px solid ${rowBorder}` }}>
+        <span style={{ fontSize: "10px", fontWeight: 650, textTransform: "uppercase", letterSpacing: "0.04em", color: labelText, display: "block", marginBottom: 8 }}>Border Radius</span>
+        <div style={{ display: "flex", gap: 2, padding: 3, borderRadius: "var(--glass-radius-pill, 100px)", background: segBg }}>
           {radiusOptions.map(o => (
-            <button key={o.value} onClick={() => setRadiusPreset(o.value)} className={`glass-preset-btn ${radiusPreset === o.value ? "glass-preset-active" : ""}`}>{o.label}</button>
+            <button key={o.value} onClick={() => setRadiusPreset(o.value)} style={segStyle(radiusPreset === o.value)}>{o.label}</button>
           ))}
         </div>
       </div>
 
       {/* Blur Intensity */}
-      <div className="px-3 py-2.5 border-b border-black/[0.04] dark:border-white/[0.04]">
-        <div className="flex justify-between mb-2">
-          <span className="text-[11.5px] font-[600] uppercase tracking-[0.06em] text-text-secondary">Blur Intensity</span>
-          <span className="text-[11.5px] font-[600] text-text-tertiary tabular-nums">{blurIntensity}px</span>
+      <div style={{ padding: "12px 14px", borderBottom: `1px solid ${rowBorder}` }}>
+        <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8 }}>
+          <span style={{ fontSize: "10px", fontWeight: 650, textTransform: "uppercase", letterSpacing: "0.04em", color: labelText }}>Blur Intensity</span>
+          <span style={{ fontSize: "11px", fontFamily: "var(--font-mono)", color: valueText }}>{blurIntensity}px</span>
         </div>
         <LiquidGlassSlider min={0} max={60} step={1} value={blurIntensity} onChange={setBlurIntensity} />
       </div>
 
       {/* Shadow Depth */}
-      <div className="px-3 py-2.5">
-        <span className="text-[11.5px] font-[600] uppercase tracking-[0.06em] text-text-secondary block mb-2">Shadow Depth</span>
-        <div className="flex gap-1 p-[3px] bg-black/6 rounded-glass-sm dark:bg-white/6">
+      <div style={{ padding: "12px 14px" }}>
+        <span style={{ fontSize: "10px", fontWeight: 650, textTransform: "uppercase", letterSpacing: "0.04em", color: labelText, display: "block", marginBottom: 8 }}>Shadow Depth</span>
+        <div style={{ display: "flex", gap: 2, padding: 3, borderRadius: "var(--glass-radius-pill, 100px)", background: segBg }}>
           {shadowOptions.map(o => (
-            <button key={o.value} onClick={() => setShadowPreset(o.value)} className={`glass-preset-btn ${shadowPreset === o.value ? "glass-preset-active" : ""}`}>{o.label}</button>
+            <button key={o.value} onClick={() => setShadowPreset(o.value)} style={segStyle(shadowPreset === o.value)}>{o.label}</button>
           ))}
         </div>
       </div>
@@ -242,42 +266,42 @@ function LivePreview({ isDark }: { isDark: boolean }) {
   const tableBg = isDark ? "rgba(0,0,0,0.30)" : "rgba(255,255,255,0.60)";
   const borderColor = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)";
   const headerBg = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)";
-  const headerText = isDark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.45)";
+  const headerText = isDark ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.45)";
   const rowBorder = isDark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.04)";
-  const labelText = isDark ? "rgba(255,255,255,0.70)" : "rgba(0,0,0,0.75)";
+  const labelText = isDark ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.55)";
 
   return (
-    <div className="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white/60 dark:bg-black/30 h-full">
-      <div className="flex items-center px-3 py-2 bg-black/[0.04] dark:bg-white/[0.06] border-b border-black/[0.06] dark:border-white/[0.06]">
-        <span className="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/45 dark:text-white/40">Live Preview</span>
+    <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: tableBg, border: `1px solid ${borderColor}`, height: "100%" }}>
+      <div style={{ padding: "10px 14px", background: headerBg, borderBottom: `1px solid ${borderColor}` }}>
+        <span style={{ fontSize: "10px", fontWeight: 650, textTransform: "uppercase", letterSpacing: "0.06em", color: headerText }}>Live Preview</span>
       </div>
-      <div className="flex items-center justify-between gap-3 px-3 py-2.5 border-b border-black/[0.04] dark:border-white/[0.04]">
-        <span className="text-[12px] font-[600] text-black/75 dark:text-white/70">Gel Button</span>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "12px 14px", borderBottom: `1px solid ${rowBorder}` }}>
+        <span style={{ fontSize: "12px", fontWeight: 550, color: labelText }}>Gel Button</span>
         <Button variant="gel" size="sm">Button</Button>
       </div>
-      <div className="flex items-center justify-between gap-3 px-3 py-2.5 border-b border-black/[0.04] dark:border-white/[0.04]">
-        <span className="text-[12px] font-[600] text-black/75 dark:text-white/70">Glass Card</span>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "12px 14px", borderBottom: `1px solid ${rowBorder}` }}>
+        <span style={{ fontSize: "12px", fontWeight: 550, color: labelText }}>Glass Card</span>
         <Card glass={1} style={{ padding: "6px 14px" }}>
-          <span className="text-[11px] text-black/65 dark:text-white/65">Content</span>
+          <span style={{ fontSize: "11px", color: isDark ? "rgba(255,255,255,0.65)" : "rgba(0,0,0,0.65)" }}>Content</span>
         </Card>
       </div>
-      <div className="flex items-center justify-between gap-3 px-3 py-2.5 border-b border-black/[0.04] dark:border-white/[0.04]">
-        <span className="text-[12px] font-[600] text-black/75 dark:text-white/70 shrink-0">Input</span>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "12px 14px", borderBottom: `1px solid ${rowBorder}`, gap: 10 }}>
+        <span style={{ fontSize: "12px", fontWeight: 550, color: labelText, flexShrink: 0 }}>Input</span>
         <Input placeholder="Type here..." style={{ maxWidth: 140, fontSize: 12 }} />
       </div>
-      <div className="flex items-center justify-between gap-3 px-3 py-2.5 border-b border-black/[0.04] dark:border-white/[0.04]">
-        <span className="text-[12px] font-[600] text-black/75 dark:text-white/70">Toggle</span>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "12px 14px", borderBottom: `1px solid ${rowBorder}` }}>
+        <span style={{ fontSize: "12px", fontWeight: 550, color: labelText }}>Toggle</span>
         <Toggle checked={toggled} onChange={setToggled} />
       </div>
-      <div className="flex items-center justify-between gap-3 px-3 py-2.5 border-b border-black/[0.04] dark:border-white/[0.04]">
-        <span className="text-[12px] font-[600] text-black/75 dark:text-white/70">Badges</span>
-        <div className="flex gap-1.5 items-center">
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "12px 14px", borderBottom: `1px solid ${rowBorder}` }}>
+        <span style={{ fontSize: "12px", fontWeight: 550, color: labelText }}>Badges</span>
+        <div style={{ display: "flex", gap: 5, alignItems: "center" }}>
           <Badge variant="success">Live</Badge>
           <Tag variant="info">v0.20</Tag>
         </div>
       </div>
-      <div className="flex items-center justify-between gap-3 px-3 py-2.5">
-        <span className="text-[12px] font-[600] text-black/75 dark:text-white/70">Spinner</span>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "12px 14px" }}>
+        <span style={{ fontSize: "12px", fontWeight: 550, color: labelText }}>Spinner</span>
         <Spinner size={18} />
       </div>
     </div>
@@ -292,36 +316,34 @@ function LiveVariablesTable({ isDark }: { isDark: boolean }) {
   const headerBg = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)";
   const borderColor = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)";
   const rowBorder = isDark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.04)";
-  const headerText = isDark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.45)";
-  const labelText = isDark ? "rgba(255,255,255,0.35)" : "rgba(0,0,0,0.40)";
-  const monoText = isDark ? "rgba(255,255,255,0.35)" : "rgba(0,0,0,0.40)";
-  const dimText = isDark ? "rgba(255,255,255,0.25)" : "rgba(0,0,0,0.2)";
+  const headerText = isDark ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.45)";
+  const labelText = isDark ? "rgba(255,255,255,0.65)" : "rgba(0,0,0,0.65)";
+  const monoText = isDark ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.4)";
+  const dimText = isDark ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.25)";
   const catBg = isDark ? "rgba(255,255,255,0.03)" : "rgba(0,0,0,0.02)";
-  const pillBg = isDark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.05)";
-  const pillColor = isDark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.5)";
 
   const grouped: Record<string, VarDef[]> = {};
   for (const v of CSS_VARS) { if (!grouped[v.category]) grouped[v.category] = []; grouped[v.category].push(v); }
 
   return (
     <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: tableBg, border: `1px solid ${borderColor}` }}>
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr 0.8fr", padding: "10px 14px", background: headerBg, borderBottom: `1px solid ${borderColor}`, gap: "12px" }}>
-        <span className="text-[10px] font-[650] uppercase tracking-[0.06em]" style={{ color: headerText }}>Variable</span>
-        <span className="text-[10px] font-[650] uppercase tracking-[0.06em]" style={{ color: headerText }}>Current Value</span>
-        <span className="text-[10px] font-[650] uppercase tracking-[0.06em]" style={{ color: headerText }}>Set By</span>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr 0.8fr", padding: "10px 16px", background: headerBg, borderBottom: `1px solid ${borderColor}`, gap: "12px" }}>
+        <span style={{ fontSize: "10px", fontWeight: 650, textTransform: "uppercase", letterSpacing: "0.06em", color: headerText }}>Variable</span>
+        <span style={{ fontSize: "10px", fontWeight: 650, textTransform: "uppercase", letterSpacing: "0.06em", color: headerText }}>Current Value</span>
+        <span style={{ fontSize: "10px", fontWeight: 650, textTransform: "uppercase", letterSpacing: "0.06em", color: headerText }}>Set By</span>
       </div>
       {Object.entries(grouped).map(([category, vars]) => (
         <div key={category}>
-          <div style={{ padding: "5px 14px", background: catBg, borderBottom: `1px solid ${rowBorder}` }}>
-            <span className="text-[9px] font-[650] uppercase tracking-[0.08em]" style={{ color: dimText }}>{category}</span>
+          <div style={{ padding: "5px 16px", background: catBg, borderBottom: `1px solid ${rowBorder}` }}>
+            <span style={{ fontSize: "9px", fontWeight: 650, textTransform: "uppercase", letterSpacing: "0.08em", color: dimText }}>{category}</span>
           </div>
           {vars.map((v, idx) => {
             const rawVal = values[v.variable] || "(not set)";
             const displayVal = rawVal.length > 45 ? rawVal.slice(0, 45) + "…" : rawVal;
             return (
-              <div key={v.variable} style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr 0.8fr", padding: "6px 14px", borderBottom: idx < vars.length - 1 ? `1px solid ${rowBorder}` : "none", gap: "12px", alignItems: "center" }}>
-                <span style={{ fontSize: "11px", fontFamily: "var(--font-mono)", fontVariantNumeric: "tabular-nums", color: labelText }}>{v.variable}</span>
-                <span style={{ fontSize: "11px", fontFamily: "var(--font-mono)", fontVariantNumeric: "tabular-nums", padding: "2px 8px", borderRadius: "100px", background: pillBg, color: pillColor, wordBreak: "break-all", display: "inline-block", width: "fit-content" }}>{displayVal}</span>
+              <div key={v.variable} style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr 0.8fr", padding: "7px 16px", borderBottom: idx < vars.length - 1 ? `1px solid ${rowBorder}` : "none", gap: "12px", alignItems: "center" }}>
+                <span style={{ fontSize: "11px", fontFamily: "var(--font-mono)", color: monoText }}>{v.variable}</span>
+                <span style={{ fontSize: "11px", fontFamily: "var(--font-mono)", color: labelText, wordBreak: "break-all" }}>{displayVal}</span>
                 <span style={{ fontSize: "10px", color: dimText }}>{v.setBy}</span>
               </div>
             );
@@ -337,7 +359,7 @@ export function LiveTheming() {
   const isDark = useDarkMode();
 
   return (
-    <div className="font-sans">
+    <div>
       {/* 3-column layout: How It Works | Appearance | Live Preview */}
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "16px", marginBottom: "16px" }}>
         <HowItWorks isDark={isDark} />
