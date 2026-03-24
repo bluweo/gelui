@@ -243,7 +243,9 @@ export function TypePresetsTable() {
   }, [scale]);
 
   // Inject CSS variables whenever presets change — propagates to all primitives
+  // Skip until hydrated to avoid overwriting blocking script's correct values with defaults
   useEffect(() => {
+    if (!hydrated) return;
     const rs = document.documentElement.style;
     const varMap: Record<string, string> = {
       "Display": "display",
@@ -265,7 +267,7 @@ export function TypePresetsTable() {
       presets.map(p => ({ name: p.name, size: p.size, weight: p.weight, lh: p.lh, ls: p.ls }))
     ));
     window.dispatchEvent(new CustomEvent("gelui-type-presets-change"));
-  }, [presets]);
+  }, [presets, hydrated]);
 
   const getFontFamily = (role: string) => {
     switch (role) {
