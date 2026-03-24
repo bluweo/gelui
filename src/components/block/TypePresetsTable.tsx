@@ -200,19 +200,32 @@ export function TypePresetsTable() {
     }
     return "medium";
   });
-  const [presets, setPresets] = useState(() => {
-    if (typeof window !== "undefined") {
-      try {
-        const stored = JSON.parse(localStorage.getItem("gelui-type-presets") || "");
-        if (Array.isArray(stored) && stored.length === INITIAL_PRESETS.length) {
-          return INITIAL_PRESETS.map((p, i) => ({ ...p, size: stored[i].size, weight: stored[i].weight, lh: stored[i].lh, ls: stored[i].ls || p.ls }));
-        }
-      } catch {}
-    }
-    return scalePresets(scale);
-  });
+  const [presets, setPresets] = useState(() => scalePresets("medium"));
   const [isDark, setIsDark] = useState(false);
   const [editingIdx, setEditingIdx] = useState<number | null>(null);
+
+  // Restore presets from localStorage AFTER hydration (not during SSR)
+  const [hydrated, setHydrated] = useState(false);
+  useEffect(() => {
+    if (hydrated) return;
+    setHydrated(true);
+    try {
+      const storedScale = localStorage.getItem("gelui-type-scale") as ScaleKey | null;
+      if (storedScale && storedScale !== scale) {
+        setScale(storedScale);
+      }
+      const stored = JSON.parse(localStorage.getItem("gelui-type-presets") || "");
+      if (Array.isArray(stored) && stored.length === INITIAL_PRESETS.length) {
+        setPresets(INITIAL_PRESETS.map((p, i) => ({
+          ...p,
+          size: stored[i].size || p.size,
+          weight: stored[i].weight || p.weight,
+          lh: stored[i].lh || p.lh,
+          ls: stored[i].ls || p.ls,
+        })));
+      }
+    } catch {}
+  }, []);
   const isModified = scale !== "medium" || JSON.stringify(presets) !== JSON.stringify(INITIAL_PRESETS);
 
   useEffect(() => {
