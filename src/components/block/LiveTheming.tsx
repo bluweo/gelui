@@ -83,8 +83,8 @@ function HowItWorks({ isDark }: { isDark: boolean }) {
 
   return (
     <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: tableBg, border: `1px solid ${borderColor}`, height: "100%" }}>
-      <div style={{ padding: "10px 12px", background: headerBg, borderBottom: `1px solid ${borderColor}` }}>
-        <span className="text-[10px] font-[650] uppercase tracking-[0.06em]" style={{ color: headerText }}>How It Works</span>
+      <div className="px-3 py-2" style={{ background: headerBg, borderBottom: `1px solid ${borderColor}` }}>
+        <span className="text-[10px] font-[650] uppercase tracking-[0.06em] leading-none" style={{ color: headerText }}>How It Works</span>
       </div>
       {chains.map((ch, idx) => {
         const liveVal = liveVars[ch.variable] || "";
@@ -222,8 +222,8 @@ function AppearanceControls({ isDark }: { isDark: boolean }) {
   return (
     <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: tableBg, border: `1px solid ${borderColor}`, height: "100%", display: "flex", flexDirection: "column" }}>
       {/* Header */}
-      <div style={{ padding: "10px 12px", background: headerBg, borderBottom: `1px solid ${borderColor}`, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-        <span className="text-[10px] font-[650] uppercase tracking-[0.06em]" style={{ color: headerText }}>Appearance</span>
+      <div className="px-3 py-2 flex items-center justify-between" style={{ background: headerBg, borderBottom: `1px solid ${borderColor}` }}>
+        <span className="text-[10px] font-[650] uppercase tracking-[0.06em] leading-none" style={{ color: headerText }}>Appearance</span>
         <button onClick={resetToDefaults} style={{ fontSize: "10px", fontWeight: 550, color: isDark ? "rgba(255,255,255,0.35)" : "rgba(0,0,0,0.35)", background: "none", border: "none", cursor: "pointer" }}>Reset</button>
       </div>
 
@@ -281,8 +281,8 @@ function LivePreview({ isDark }: { isDark: boolean }) {
 
   return (
     <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: tableBg, border: `1px solid ${borderColor}`, height: "100%" }}>
-      <div style={{ padding: "10px 12px", background: headerBg, borderBottom: `1px solid ${borderColor}` }}>
-        <span className="text-[10px] font-[650] uppercase tracking-[0.06em]" style={{ color: headerText }}>Live Preview</span>
+      <div className="px-3 py-2" style={{ background: headerBg, borderBottom: `1px solid ${borderColor}` }}>
+        <span className="text-[10px] font-[650] uppercase tracking-[0.06em] leading-none" style={{ color: headerText }}>Live Preview</span>
       </div>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "10px 12px", borderBottom: `1px solid ${rowBorder}` }}>
         <span style={{ fontSize: "12px", fontWeight: 600, fontFamily: "inherit", color: labelText }}>Gel Button</span>
