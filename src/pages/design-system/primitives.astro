@@ -8,6 +8,9 @@ import { PrimitiveNavigation } from "@/components/block/PrimitiveNavigation";
 import { SliderDemo } from "@/components/block/SliderDemo";
 import { ControlsDemo } from "@/components/block/ControlsDemo";
 import { GlassControlsDemo } from "@/components/block/GlassControlsDemo";
+import { ButtonsShowcase } from "@/components/block/ButtonsShowcase";
+import { BadgesShowcase } from "@/components/block/BadgesShowcase";
+import { FeedbackShowcase } from "@/components/block/FeedbackShowcase";
 
 /* ─── Spacing ─── */
 const spacingComps = [
@@ -62,65 +65,8 @@ const elevations = [
       </div>
 
       <div class="grid grid-cols-2 gap-5 max-[860px]:grid-cols-1">
-        <!-- Left column: Table-based groups -->
-        <div class="flex flex-col gap-5">
-          <!-- Solid Buttons table -->
-          <div class="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white/60 dark:bg-black/30">
-            <div class="px-3 py-2 bg-black/[0.04] dark:bg-white/[0.06] border-b border-black/[0.06] dark:border-white/[0.06]">
-              <span class="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/45 dark:text-white/40">Solid</span>
-            </div>
-            <div class="flex items-center justify-between px-4 py-3.5 border-b border-black/[0.04] dark:border-white/[0.04]">
-              <span class="text-[12px] font-[550] text-black/60 dark:text-white/55">Pill</span>
-              <button class="rounded-[var(--glass-radius-pill)] px-5 py-2 text-[13px] font-[600] cursor-pointer border-none bg-black dark:bg-white text-white dark:text-black transition-all duration-200 hover:scale-105">Button</button>
-            </div>
-            <div class="flex items-center justify-between px-4 py-3.5 border-b border-black/[0.04] dark:border-white/[0.04]">
-              <span class="text-[12px] font-[550] text-black/60 dark:text-white/55">Rounded</span>
-              <button class="rounded-[var(--glass-radius)] px-5 py-2 text-[13px] font-[600] cursor-pointer border-none bg-black dark:bg-white text-white dark:text-black transition-all duration-200 hover:scale-105">Button</button>
-            </div>
-            <div class="flex items-center justify-between px-4 py-3.5">
-              <span class="text-[12px] font-[550] text-black/60 dark:text-white/55">Small</span>
-              <button class="rounded-[var(--glass-radius-sm)] px-4 py-1.5 text-[12px] font-[600] cursor-pointer border-none bg-black dark:bg-white text-white dark:text-black transition-all duration-200 hover:scale-105">Button</button>
-            </div>
-          </div>
-          <!-- Ghost Buttons table -->
-          <div class="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white/60 dark:bg-black/30">
-            <div class="px-3 py-2 bg-black/[0.04] dark:bg-white/[0.06] border-b border-black/[0.06] dark:border-white/[0.06]">
-              <span class="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/45 dark:text-white/40">Ghost</span>
-            </div>
-            <div class="flex items-center justify-between px-4 py-3.5 border-b border-black/[0.04] dark:border-white/[0.04]">
-              <span class="text-[12px] font-[550] text-black/60 dark:text-white/55">Pill</span>
-              <button class="bg-transparent rounded-[var(--glass-radius-pill)] px-5 py-2 text-[13px] font-[550] cursor-pointer border border-black/15 dark:border-white/15 transition-all duration-200 hover:bg-black/[0.04] dark:hover:bg-white/[0.06] text-black/70 dark:text-white/65">Button</button>
-            </div>
-            <div class="flex items-center justify-between px-4 py-3.5">
-              <span class="text-[12px] font-[550] text-black/60 dark:text-white/55">Rounded</span>
-              <button class="bg-transparent rounded-[var(--glass-radius-sm)] px-5 py-2 text-[13px] font-[550] cursor-pointer border border-black/15 dark:border-white/15 transition-all duration-200 hover:bg-black/[0.04] dark:hover:bg-white/[0.06] text-black/70 dark:text-white/65">Button</button>
-            </div>
-          </div>
-          <!-- Action Pair table -->
-          <div class="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white/60 dark:bg-black/30">
-            <div class="px-3 py-2 bg-black/[0.04] dark:bg-white/[0.06] border-b border-black/[0.06] dark:border-white/[0.06]">
-              <span class="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/45 dark:text-white/40">Action Pair</span>
-            </div>
-            <div class="flex items-center justify-center gap-3 px-4 py-4">
-              <button class="bg-transparent rounded-[var(--glass-radius-pill)] px-6 py-2.5 text-[13px] font-[550] cursor-pointer border border-black/12 dark:border-white/15 transition-all duration-200 hover:bg-black/[0.04] dark:hover:bg-white/[0.06] text-black/50 dark:text-white/60">Cancel</button>
-              <button class="rounded-[var(--glass-radius)] px-6 py-2.5 text-[13px] font-[600] cursor-pointer border-none bg-black dark:bg-white text-white dark:text-black transition-all duration-200 hover:scale-105">Apply</button>
-            </div>
-          </div>
-          <!-- Link table -->
-          <div class="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white/60 dark:bg-black/30">
-            <div class="px-3 py-2 bg-black/[0.04] dark:bg-white/[0.06] border-b border-black/[0.06] dark:border-white/[0.06]">
-              <span class="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/45 dark:text-white/40">Link</span>
-            </div>
-            <div class="flex items-center justify-between px-4 py-3.5 border-b border-black/[0.04] dark:border-white/[0.04]">
-              <span class="text-[12px] font-[550] text-black/60 dark:text-white/55">Underline</span>
-              <button class="bg-transparent border-none text-[14px] font-[550] text-[#354334] dark:text-[#97AD96] underline underline-offset-2 cursor-pointer hover:opacity-70 transition-opacity px-0 py-0">Learn more</button>
-            </div>
-            <div class="flex items-center justify-between px-4 py-3.5">
-              <span class="text-[12px] font-[550] text-black/60 dark:text-white/55">Arrow</span>
-              <button class="bg-transparent border-none text-[14px] font-[550] text-[#354334] dark:text-[#97AD96] cursor-pointer hover:opacity-70 transition-opacity px-0 py-0 flex items-center gap-1">Explore <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg></button>
-            </div>
-          </div>
-        </div>
+        <!-- Left column: Table-based groups (from @/primitives/buttons) -->
+        <ButtonsShowcase client:load />
 
         <!-- Right column: Gel, Glass, States — transparent, contrast-aware borders -->
         <div class="flex flex-col gap-5">
@@ -470,127 +416,7 @@ const elevations = [
         <h2 class="text-[24px] font-[750] tracking-[-0.03em] leading-[1.2] text-black dark:text-white mb-1" style="font-family: var(--font-heading)">Badges & Labels</h2>
         <p class="text-[13px] leading-[1.6] text-black/60 dark:text-white/55">Status indicators, tags, and label primitives</p>
       </div>
-      <div class="grid grid-cols-2 gap-4 max-[540px]:grid-cols-1">
-        <!-- Status group -->
-        <div class="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white dark:bg-[#1a1a1a]">
-          <div class="px-4 py-2.5 bg-black/[0.06] dark:bg-white/[0.08] border-b border-black/10 dark:border-white/10">
-            <span class="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/70 dark:text-white/70">Status Badges</span>
-          </div>
-          <div class="p-4 flex flex-col">
-            <div class="flex items-center justify-between py-2.5 border-b border-black/10 dark:border-white/10">
-              <span class="text-[12px] font-[500] text-black/60 dark:text-white/60">Success</span>
-              <span class="text-[11px] font-[600] px-2.5 py-1 rounded-full bg-green-500/15 text-green-500">Success</span>
-            </div>
-            <div class="flex items-center justify-between py-2.5 border-b border-black/10 dark:border-white/10">
-              <span class="text-[12px] font-[500] text-black/60 dark:text-white/60">Warning</span>
-              <span class="text-[11px] font-[600] px-2.5 py-1 rounded-full bg-amber-500/15 text-amber-500">Warning</span>
-            </div>
-            <div class="flex items-center justify-between py-2.5 border-b border-black/10 dark:border-white/10">
-              <span class="text-[12px] font-[500] text-black/60 dark:text-white/60">Error</span>
-              <span class="text-[11px] font-[600] px-2.5 py-1 rounded-full bg-red-400/15 text-red-400">Error</span>
-            </div>
-            <div class="flex items-center justify-between py-2.5 border-b border-black/10 dark:border-white/10">
-              <span class="text-[12px] font-[500] text-black/60 dark:text-white/60">Info</span>
-              <span class="text-[11px] font-[600] px-2.5 py-1 rounded-full bg-blue-400/15 text-blue-400">Info</span>
-            </div>
-            <div class="flex items-center justify-between py-2.5">
-              <span class="text-[12px] font-[500] text-black/60 dark:text-white/60">Neutral</span>
-              <span class="text-[11px] font-[600] px-2.5 py-1 rounded-full bg-black/[0.06] dark:bg-white/[0.08] text-black/50 dark:text-white/45">Neutral</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Status Dots group -->
-        <div class="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white dark:bg-[#1a1a1a]">
-          <div class="px-4 py-2.5 bg-black/[0.06] dark:bg-white/[0.08] border-b border-black/10 dark:border-white/10">
-            <span class="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/70 dark:text-white/70">Status Dots</span>
-          </div>
-          <div class="p-4 flex flex-col">
-            <div class="flex items-center justify-between py-2.5 border-b border-black/10 dark:border-white/10">
-              <span class="text-[12px] font-[500] text-black/60 dark:text-white/60">Online</span>
-              <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-green-500"></span></span>
-            </div>
-            <div class="flex items-center justify-between py-2.5 border-b border-black/10 dark:border-white/10">
-              <span class="text-[12px] font-[500] text-black/60 dark:text-white/60">Away</span>
-              <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span></span>
-            </div>
-            <div class="flex items-center justify-between py-2.5 border-b border-black/10 dark:border-white/10">
-              <span class="text-[12px] font-[500] text-black/60 dark:text-white/60">Busy</span>
-              <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-red-400"></span></span>
-            </div>
-            <div class="flex items-center justify-between py-2.5">
-              <span class="text-[12px] font-[500] text-black/60 dark:text-white/60">Offline</span>
-              <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-gray-400"></span></span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Tags & Chips group -->
-        <div class="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white dark:bg-[#1a1a1a]">
-          <div class="px-4 py-2.5 bg-black/[0.04] dark:bg-white/[0.06] border-b border-black/[0.06] dark:border-white/[0.06]">
-            <span class="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/70 dark:text-white/70">Tags & Chips</span>
-          </div>
-          <div class="p-4 flex flex-col gap-4">
-            <div>
-              <span class="text-[10px] font-[500] text-black/45 dark:text-white/40 mb-2 block">Removable Tags</span>
-              <div class="flex items-center gap-2 flex-wrap">
-                <span class="text-[12px] font-[550] px-3 py-1.5 rounded-full bg-black/[0.04] dark:bg-white/[0.06] border border-black/[0.08] dark:border-white/[0.08] text-black/70 dark:text-white/60 flex items-center gap-1.5">React <span class="text-[10px] cursor-pointer opacity-40 hover:opacity-80">&times;</span></span>
-                <span class="text-[12px] font-[550] px-3 py-1.5 rounded-full bg-black/[0.04] dark:bg-white/[0.06] border border-black/[0.08] dark:border-white/[0.08] text-black/70 dark:text-white/60 flex items-center gap-1.5">Tailwind <span class="text-[10px] cursor-pointer opacity-40 hover:opacity-80">&times;</span></span>
-                <span class="text-[12px] font-[550] px-3 py-1.5 rounded-full bg-black/[0.04] dark:bg-white/[0.06] border border-black/[0.08] dark:border-white/[0.08] text-black/70 dark:text-white/60 flex items-center gap-1.5">Astro <span class="text-[10px] cursor-pointer opacity-40 hover:opacity-80">&times;</span></span>
-              </div>
-            </div>
-            <div>
-              <span class="text-[10px] font-[500] text-black/45 dark:text-white/40 mb-2 block">Selectable Chips</span>
-              <div class="flex items-center gap-2 flex-wrap">
-                <span class="text-[11px] font-[600] uppercase tracking-[0.04em] px-3 py-1.5 rounded-full bg-black/80 dark:bg-white/80 text-white dark:text-black cursor-pointer">Active</span>
-                <span class="text-[11px] font-[600] uppercase tracking-[0.04em] px-3 py-1.5 rounded-full bg-black/[0.04] dark:bg-white/[0.06] text-black/50 dark:text-white/40 cursor-pointer hover:bg-black/[0.08] dark:hover:bg-white/[0.12] transition-colors">Inactive</span>
-                <span class="text-[11px] font-[600] uppercase tracking-[0.04em] px-3 py-1.5 rounded-full bg-black/[0.04] dark:bg-white/[0.06] text-black/50 dark:text-white/40 cursor-pointer hover:bg-black/[0.08] dark:hover:bg-white/[0.12] transition-colors">Another</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Avatar group -->
-        <div class="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white dark:bg-[#1a1a1a]">
-          <div class="px-4 py-2.5 bg-black/[0.04] dark:bg-white/[0.06] border-b border-black/[0.06] dark:border-white/[0.06]">
-            <span class="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/70 dark:text-white/70">Avatars</span>
-          </div>
-          <div class="p-4 flex flex-col gap-4">
-            <div>
-              <span class="text-[10px] font-[500] text-black/45 dark:text-white/40 mb-2 block">Sizes</span>
-              <div class="flex items-end gap-3">
-                <div class="flex flex-col items-center gap-1.5">
-                  <div class="w-8 h-8 rounded-full bg-[#354334] flex items-center justify-center"><span class="text-[10px] font-[650] text-white">A</span></div>
-                  <span class="text-[10px] text-black/50 dark:text-white/45">xs</span>
-                </div>
-                <div class="flex flex-col items-center gap-1.5">
-                  <div class="w-10 h-10 rounded-full bg-[#4A5E48] flex items-center justify-center"><span class="text-[12px] font-[650] text-white">BW</span></div>
-                  <span class="text-[10px] text-black/50 dark:text-white/45">sm</span>
-                </div>
-                <div class="flex flex-col items-center gap-1.5">
-                  <div class="w-12 h-12 rounded-full bg-[#FFC800] flex items-center justify-center"><span class="text-[14px] font-[650] text-black/70">UI</span></div>
-                  <span class="text-[10px] text-black/50 dark:text-white/45">md</span>
-                </div>
-                <div class="flex flex-col items-center gap-1.5">
-                  <div class="w-16 h-16 rounded-full bg-black/[0.06] dark:bg-white/[0.08] flex items-center justify-center overflow-hidden">
-                    <img src="/logos/uigel-logo.svg" alt="Avatar" class="w-10 h-10 object-contain" />
-                  </div>
-                  <span class="text-[10px] text-black/50 dark:text-white/45">lg</span>
-                </div>
-              </div>
-            </div>
-            <div>
-              <span class="text-[10px] font-[500] text-black/45 dark:text-white/40 mb-2 block">Group</span>
-              <div class="flex -space-x-2.5">
-                <div class="w-9 h-9 rounded-full bg-[#354334] flex items-center justify-center border-2 border-white dark:border-[#1a1a1a] z-[3]"><span class="text-[10px] font-[650] text-white">A</span></div>
-                <div class="w-9 h-9 rounded-full bg-[#4A5E48] flex items-center justify-center border-2 border-white dark:border-[#1a1a1a] z-[2]"><span class="text-[10px] font-[650] text-white">B</span></div>
-                <div class="w-9 h-9 rounded-full bg-[#FFC800] flex items-center justify-center border-2 border-white dark:border-[#1a1a1a] z-[1]"><span class="text-[10px] font-[650] text-black/70">C</span></div>
-                <div class="w-9 h-9 rounded-full bg-black/[0.06] dark:bg-white/[0.1] flex items-center justify-center border-2 border-white dark:border-[#1a1a1a] z-[0]"><span class="text-[9px] font-[600] text-black/40 dark:text-white/40">+3</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <BadgesShowcase client:load />
     </div>
 
     <!-- ═══════════════════════════════════
