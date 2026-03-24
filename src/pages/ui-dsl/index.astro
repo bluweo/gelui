@@ -1,5 +1,6 @@
 ---
 import DSLayout from "@/components/layout/DSLayout.astro";
+import { NodeEditorWrapper } from "@/dsl/NodeEditorWrapper";
 import { DSLPlayground } from "@/dsl/DSLPlayground";
 ---
 
@@ -28,19 +29,24 @@ import { DSLPlayground } from "@/dsl/DSLPlayground";
           </span>
           <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/[0.05] dark:bg-white/[0.08] text-[11px] font-mono text-black/50 dark:text-white/40">
             <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
-            3 example templates
+            Node Editor + JSON Playground
           </span>
           <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/[0.05] dark:bg-white/[0.08] text-[11px] font-mono text-black/50 dark:text-white/40">
-            <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
-            Phase 2
+            <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+            Phase 3
           </span>
         </div>
       </div>
     </div>
 
+    <!-- Node Editor -->
+    <div data-section="Node Editor" class="col-span-full">
+      <NodeEditorWrapper client:only="react" />
+    </div>
+
     <!-- DSL Playground -->
     <div data-section="Playground" class="col-span-full">
-      <DSLPlayground client:load />
+      <DSLPlayground client:only="react" />
     </div>
 
     <!-- Primitive Reference -->
