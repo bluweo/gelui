@@ -319,12 +319,16 @@ function LivePreview() {
   );
 }
 
-/* ─── Live CSS Variables Table (Full width, Breakpoints-style) ─── */
+/* ─── Live CSS Variables — Tabbed layout ─── */
 function LiveVariablesTable() {
+  const isDark = useDarkMode();
   const values = useLiveCSSVars(CSS_VARS);
+  const categories = Object.keys(
+    CSS_VARS.reduce((acc, v) => { acc[v.category] = true; return acc; }, {} as Record<string, boolean>)
+  );
+  const [activeTab, setActiveTab] = useState(categories[0] || "Radius");
 
-  const grouped: Record<string, VarDef[]> = {};
-  for (const v of CSS_VARS) { if (!grouped[v.category]) grouped[v.category] = []; grouped[v.category].push(v); }
+  const activeVars = CSS_VARS.filter((v) => v.category === activeTab);
 
   return (
     <div className="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white dark:bg-[#1a1a1a]">
@@ -333,29 +337,63 @@ function LiveVariablesTable() {
         <span className="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/50 dark:text-white/45">CSS Variables</span>
         <span className="text-[10px] font-mono text-black/30 dark:text-white/25">{CSS_VARS.length} variables</span>
       </div>
-      {/* Grouped rows */}
-      {Object.entries(grouped).map(([category, vars]) => (
-        <div key={category}>
-          {/* Category header */}
-          <div className="px-4 py-1.5 bg-gray-50 dark:bg-white/[0.04] border-b border-black/[0.06] dark:border-white/[0.06]">
-            <span className="text-[10px] font-[650] uppercase tracking-[0.08em] text-black/35 dark:text-white/25">{category}</span>
-          </div>
-          {/* Variable rows */}
-          {vars.map((v, idx) => {
+      {/* Body: tabs left + content right */}
+      <div className="flex min-h-[200px]">
+        {/* Left: vertical category tabs */}
+        <div className="w-[100px] shrink-0 border-r border-black/[0.06] dark:border-white/[0.06] bg-gray-50/50 dark:bg-white/[0.02] flex flex-col py-1">
+          {categories.map((cat) => {
+            const isActive = cat === activeTab;
+            return (
+              <button
+                key={cat}
+                onClick={() => setActiveTab(cat)}
+                className="flex items-center gap-2 px-3 py-2 text-left border-none cursor-pointer transition-all duration-150"
+                style={{
+                  background: isActive ? (isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)") : "transparent",
+                  borderRight: isActive ? `2px solid ${isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.4)"}` : "2px solid transparent",
+                }}
+              >
+                <span
+                  className="w-1.5 h-1.5 rounded-full shrink-0 transition-all duration-150"
+                  style={{
+                    background: isActive ? (isDark ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.5)") : (isDark ? "rgba(255,255,255,0.15)" : "rgba(0,0,0,0.12)"),
+                  }}
+                />
+                <span
+                  className="text-[11px] transition-all duration-150"
+                  style={{
+                    fontWeight: isActive ? 650 : 450,
+                    color: isActive ? (isDark ? "rgba(255,255,255,0.8)" : "rgba(0,0,0,0.75)") : (isDark ? "rgba(255,255,255,0.35)" : "rgba(0,0,0,0.35)"),
+                  }}
+                >
+                  {cat}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+        {/* Right: variable rows for active category */}
+        <div className="flex-1 min-w-0">
+          {activeVars.map((v, idx) => {
             const rawVal = values[v.variable] || "(not set)";
             const displayVal = rawVal.length > 35 ? rawVal.slice(0, 35) + "…" : rawVal;
             return (
-              <div key={v.variable} className={`flex items-center justify-between gap-4 px-4 py-2.5 ${idx < vars.length - 1 ? "border-b border-black/[0.05] dark:border-white/[0.05]" : ""}`}>
+              <div key={v.variable} className={`flex items-center justify-between gap-4 px-4 py-3 ${idx < activeVars.length - 1 ? "border-b border-black/[0.05] dark:border-white/[0.05]" : ""}`}>
                 <div className="flex flex-col gap-0.5 min-w-0">
                   <span className="text-[12px] font-mono font-[500] text-black/70 dark:text-white/65 tabular-nums">{v.variable}</span>
                   <span className="text-[10px] text-black/35 dark:text-white/25">{v.setBy}</span>
                 </div>
-                <span className="text-[11px] font-mono px-2.5 py-1 rounded-[var(--glass-radius-sm)] bg-black/[0.04] dark:bg-white/[0.06] text-black/60 dark:text-white/50 tabular-nums shrink-0 max-w-[200px] truncate" title={rawVal}>{displayVal}</span>
+                <span className="text-[11px] font-mono px-2.5 py-1 rounded-[var(--glass-radius-sm)] bg-black/[0.04] dark:bg-white/[0.06] text-black/60 dark:text-white/50 tabular-nums shrink-0 max-w-[220px] truncate" title={rawVal}>{displayVal}</span>
               </div>
             );
           })}
+          {activeVars.length === 0 && (
+            <div className="flex items-center justify-center h-full py-8">
+              <span className="text-[11px] text-black/25 dark:text-white/20">No variables</span>
+            </div>
+          )}
         </div>
-      ))}
+      </div>
     </div>
   );
 }
