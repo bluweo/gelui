@@ -6,6 +6,7 @@ import {
   Category,
   Layer,
   SidebarLeft,
+  Code1,
   Sun1,
   Moon,
   Login,
@@ -21,6 +22,7 @@ const DS_NAV = [
   { href: "/design-system/components", id: "Components", icon: Category, label: "Components" },
   { href: "/design-system/patterns", id: "Patterns", icon: Layer, label: "Patterns" },
   { href: "/design-system/layouts", id: "Layouts", icon: SidebarLeft, label: "Layouts" },
+  { href: "/ui-dsl", id: "DSL", icon: Code1, label: "DSL" },
 ] as const;
 
 /* ── Glass Tooltip ── */

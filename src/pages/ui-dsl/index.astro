@@ -1,0 +1,80 @@
+---
+import DSLayout from "@/components/layout/DSLayout.astro";
+import { DSLPlayground } from "@/dsl/DSLPlayground";
+---
+
+<DSLayout
+  title="UI DSL — Gel UI Design System"
+  description="Visual JSON-to-UI playground. Compose interfaces using Gel UI's domain-specific language with live preview."
+  keywords="UI DSL, JSON to UI, design system, visual editor, component composition, Gel UI"
+>
+  <div class="w-full grid grid-cols-4 gap-5 max-[860px]:grid-cols-2 max-[860px]:gap-4 max-[540px]:grid-cols-1 max-[540px]:gap-3">
+
+    <!-- Hero -->
+    <div data-section="Overview" class="col-span-full glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-8 max-[540px]:p-5">
+      <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 200px;" />
+      <div class="relative flex flex-col gap-3">
+        <span class="text-[10px] font-[650] uppercase tracking-[0.1em] text-black/40 dark:text-white/40">Visual Composer</span>
+        <h1 class="text-[38px] max-[540px]:text-[28px] font-[750] tracking-[-0.03em] leading-[1.1] text-black dark:text-white" style="font-family: var(--font-heading)">
+          UI DSL
+        </h1>
+        <p class="text-[15px] leading-[1.6] text-black/60 dark:text-white/55 max-w-[600px]">
+          Define interfaces with JSON, see them rendered in real-time. Compose primitives into components, components into patterns — all powered by the Gel UI registry.
+        </p>
+        <div class="flex items-center gap-3 mt-2 flex-wrap">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/[0.05] dark:bg-white/[0.08] text-[11px] font-mono text-black/50 dark:text-white/40">
+            <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+            30+ primitives
+          </span>
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/[0.05] dark:bg-white/[0.08] text-[11px] font-mono text-black/50 dark:text-white/40">
+            <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+            3 example templates
+          </span>
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/[0.05] dark:bg-white/[0.08] text-[11px] font-mono text-black/50 dark:text-white/40">
+            <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+            Phase 2
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- DSL Playground -->
+    <div data-section="Playground" class="col-span-full">
+      <DSLPlayground client:load />
+    </div>
+
+    <!-- Primitive Reference -->
+    <div data-section="Reference" class="col-span-full glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
+      <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 140px;" />
+      <div class="relative flex flex-col gap-1 mb-5">
+        <span class="text-[10px] font-[650] uppercase tracking-[0.1em] text-black/40 dark:text-white/40">Quick Reference</span>
+        <h2 class="text-[22px] font-[700] tracking-[-0.02em] text-black dark:text-white" style="font-family: var(--font-heading)">Available Primitives</h2>
+        <p class="text-[13px] text-black/50 dark:text-white/45">Use these type IDs in your JSON DSL</p>
+      </div>
+      <div class="grid grid-cols-4 gap-3 max-[860px]:grid-cols-2 max-[540px]:grid-cols-1">
+        {[
+          { group: "Typography", items: ["heading", "text", "label", "caption", "code", "link"] },
+          { group: "Interactive", items: ["button", "icon-button", "toggle", "checkbox", "radio"] },
+          { group: "Surface", items: ["card", "surface", "divider"] },
+          { group: "Form", items: ["input", "textarea"] },
+          { group: "Layout", items: ["box", "stack", "inline", "center", "spacer", "grid"] },
+          { group: "Feedback", items: ["spinner", "progress", "skeleton"] },
+          { group: "Data", items: ["badge", "avatar"] },
+          { group: "Navigation", items: ["tab-bar", "breadcrumb"] },
+        ].map((g) => (
+          <div class="rounded-[var(--glass-radius-sm)] bg-white/60 dark:bg-black/30 p-3">
+            <span class="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/40 dark:text-white/35 block mb-2">{g.group}</span>
+            <div class="flex flex-wrap gap-1.5">
+              {g.items.map((item) => (
+                <span class="text-[10px] font-mono px-2 py-1 rounded-[4px] bg-black/[0.05] dark:bg-white/[0.08] text-black/60 dark:text-white/50">
+                  {item}
+                </span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+  </div>
+</DSLayout>
