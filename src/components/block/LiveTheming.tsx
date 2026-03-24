@@ -230,7 +230,7 @@ function AppearanceControls({ isDark }: { isDark: boolean }) {
           <span style={{ fontSize: "10px", fontWeight: 650, textTransform: "uppercase", letterSpacing: "0.04em", color: labelText }}>Transparency</span>
           <span style={{ fontSize: "11px", fontFamily: "var(--font-mono)", color: valueText }}>{Math.round(transparency * 100)}%</span>
         </div>
-        <LiquidGlassSlider min={0} max={100} value={Math.round(transparency * 100)} onChange={(v) => setTransparency(v / 100)} />
+        <LiquidGlassSlider min={0} max={100} step={1} value={Math.round(transparency * 100)} onChange={(v) => setTransparency(v / 100)} />
       </div>
 
       {/* Border Radius */}
@@ -249,7 +249,7 @@ function AppearanceControls({ isDark }: { isDark: boolean }) {
           <span style={{ fontSize: "10px", fontWeight: 650, textTransform: "uppercase", letterSpacing: "0.04em", color: labelText }}>Blur Intensity</span>
           <span style={{ fontSize: "11px", fontFamily: "var(--font-mono)", color: valueText }}>{blurIntensity}px</span>
         </div>
-        <LiquidGlassSlider min={0} max={60} value={blurIntensity} onChange={setBlurIntensity} />
+        <LiquidGlassSlider min={0} max={60} step={1} value={blurIntensity} onChange={setBlurIntensity} />
       </div>
 
       {/* Shadow Depth */}
