@@ -365,7 +365,7 @@ export function LiveTheming() {
   const [showVars, setShowVars] = useState(false);
 
   return (
-    <div className="relative">
+    <div className="relative w-full">
       {/* Toggle button — top right, overlaps with card header area */}
       <button
         onClick={() => setShowVars(!showVars)}
