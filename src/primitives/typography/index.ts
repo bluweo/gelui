@@ -4,3 +4,6 @@ export { Label } from "./Label";
 export { Caption } from "./Caption";
 export { Code } from "./Code";
 export { Link } from "./Link";
+export { Blockquote } from "./Blockquote";
+export { List } from "./List";
+export { Kbd } from "./Kbd";

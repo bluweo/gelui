@@ -4,3 +4,6 @@ export { Skeleton } from "./Skeleton";
 export { Modal } from "./Modal";
 export { Overlay } from "./Overlay";
 export { Tooltip } from "./Tooltip";
+export { Alert } from "./Alert";
+export { Toast } from "./Toast";
+export { ConfirmDialog } from "./ConfirmDialog";

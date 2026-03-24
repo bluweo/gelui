@@ -2165,6 +2165,601 @@
         "dropdown",
         "popup"
       ]
+    },
+    {
+      "id": "alert",
+      "name": "Alert",
+      "displayName": "Alert",
+      "layer": "primitive",
+      "category": "feedback",
+      "status": "stable",
+      "path": "src/primitives/feedback/Alert.tsx",
+      "exportName": "Alert",
+      "description": "Inline alert box with variant colors and dismiss",
+      "version": "0.18.0",
+      "tags": [
+        "alert",
+        "notification",
+        "feedback"
+      ],
+      "props": {
+        "variant": {
+          "type": "enum",
+          "options": [
+            "info",
+            "success",
+            "warning",
+            "error"
+          ],
+          "default": "info"
+        },
+        "title": {
+          "type": "string"
+        },
+        "dismissible": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    {
+      "id": "toast",
+      "name": "Toast",
+      "displayName": "Toast Notification",
+      "layer": "primitive",
+      "category": "feedback",
+      "status": "stable",
+      "path": "src/primitives/feedback/Toast.tsx",
+      "exportName": "Toast",
+      "description": "Temporary popup notification",
+      "version": "0.18.0",
+      "tags": [
+        "toast",
+        "notification",
+        "popup"
+      ],
+      "props": {
+        "variant": {
+          "type": "enum",
+          "options": [
+            "info",
+            "success",
+            "warning",
+            "error"
+          ],
+          "default": "info"
+        },
+        "message": {
+          "type": "string",
+          "required": true
+        },
+        "duration": {
+          "type": "number",
+          "default": 3000
+        }
+      }
+    },
+    {
+      "id": "confirm-dialog",
+      "name": "ConfirmDialog",
+      "displayName": "Confirm Dialog",
+      "layer": "primitive",
+      "category": "feedback",
+      "status": "stable",
+      "path": "src/primitives/feedback/ConfirmDialog.tsx",
+      "exportName": "ConfirmDialog",
+      "description": "Confirmation modal with cancel/confirm",
+      "version": "0.18.0",
+      "tags": [
+        "dialog",
+        "confirm",
+        "modal"
+      ],
+      "props": {
+        "variant": {
+          "type": "enum",
+          "options": [
+            "default",
+            "danger"
+          ],
+          "default": "default"
+        },
+        "title": {
+          "type": "string",
+          "required": true
+        },
+        "message": {
+          "type": "string",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "table",
+      "name": "Table",
+      "displayName": "Data Table",
+      "layer": "primitive",
+      "category": "data",
+      "status": "stable",
+      "path": "src/primitives/data/Table.tsx",
+      "exportName": "Table",
+      "description": "Styled data table with headers and rows",
+      "version": "0.18.0",
+      "tags": [
+        "table",
+        "data",
+        "grid"
+      ],
+      "props": {
+        "striped": {
+          "type": "boolean",
+          "default": false
+        },
+        "compact": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    {
+      "id": "stat",
+      "name": "Stat",
+      "displayName": "Stat Card",
+      "layer": "primitive",
+      "category": "data",
+      "status": "stable",
+      "path": "src/primitives/data/Stat.tsx",
+      "exportName": "Stat",
+      "description": "Big number + label with trend indicator",
+      "version": "0.18.0",
+      "tags": [
+        "stat",
+        "number",
+        "metric",
+        "kpi"
+      ],
+      "props": {
+        "value": {
+          "type": "string",
+          "required": true
+        },
+        "label": {
+          "type": "string",
+          "required": true
+        },
+        "trend": {
+          "type": "enum",
+          "options": [
+            "up",
+            "down",
+            "neutral"
+          ]
+        }
+      }
+    },
+    {
+      "id": "empty-state",
+      "name": "EmptyState",
+      "displayName": "Empty State",
+      "layer": "primitive",
+      "category": "data",
+      "status": "stable",
+      "path": "src/primitives/data/EmptyState.tsx",
+      "exportName": "EmptyState",
+      "description": "Placeholder for no-data scenarios",
+      "version": "0.18.0",
+      "tags": [
+        "empty",
+        "placeholder",
+        "no-data"
+      ],
+      "props": {
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    {
+      "id": "color-swatch",
+      "name": "ColorSwatch",
+      "displayName": "Color Swatch",
+      "layer": "primitive",
+      "category": "data",
+      "status": "stable",
+      "path": "src/primitives/data/ColorSwatch.tsx",
+      "exportName": "ColorSwatch",
+      "description": "Color preview square with hex value",
+      "version": "0.18.0",
+      "tags": [
+        "color",
+        "swatch",
+        "preview"
+      ],
+      "props": {
+        "color": {
+          "type": "string",
+          "required": true
+        },
+        "size": {
+          "type": "enum",
+          "options": [
+            "sm",
+            "md",
+            "lg"
+          ],
+          "default": "md"
+        }
+      }
+    },
+    {
+      "id": "button-group",
+      "name": "ButtonGroup",
+      "displayName": "Button Group",
+      "layer": "primitive",
+      "category": "interactive",
+      "status": "stable",
+      "path": "src/primitives/buttons/ButtonGroup.tsx",
+      "exportName": "ButtonGroup",
+      "description": "Connected button row",
+      "version": "0.18.0",
+      "tags": [
+        "button",
+        "group",
+        "toolbar"
+      ],
+      "props": {
+        "attached": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    {
+      "id": "password-input",
+      "name": "PasswordInput",
+      "displayName": "Password Input",
+      "layer": "primitive",
+      "category": "form",
+      "status": "stable",
+      "path": "src/primitives/inputs/PasswordInput.tsx",
+      "exportName": "PasswordInput",
+      "description": "Input with show/hide password toggle",
+      "version": "0.18.0",
+      "tags": [
+        "input",
+        "password",
+        "form",
+        "security"
+      ],
+      "props": {
+        "showToggle": {
+          "type": "boolean",
+          "default": true
+        }
+      }
+    },
+    {
+      "id": "number-input",
+      "name": "NumberInput",
+      "displayName": "Number Input",
+      "layer": "primitive",
+      "category": "form",
+      "status": "stable",
+      "path": "src/primitives/inputs/NumberInput.tsx",
+      "exportName": "NumberInput",
+      "description": "Input with +/- stepper buttons",
+      "version": "0.18.0",
+      "tags": [
+        "input",
+        "number",
+        "stepper",
+        "form"
+      ],
+      "props": {
+        "min": {
+          "type": "number"
+        },
+        "max": {
+          "type": "number"
+        },
+        "step": {
+          "type": "number",
+          "default": 1
+        }
+      }
+    },
+    {
+      "id": "form-group",
+      "name": "FormGroup",
+      "displayName": "Form Group",
+      "layer": "primitive",
+      "category": "form",
+      "status": "stable",
+      "path": "src/primitives/inputs/FormGroup.tsx",
+      "exportName": "FormGroup",
+      "description": "Label + input + helper/error text wrapper",
+      "version": "0.18.0",
+      "tags": [
+        "form",
+        "label",
+        "group",
+        "validation"
+      ],
+      "props": {
+        "label": {
+          "type": "string",
+          "required": true
+        },
+        "error": {
+          "type": "string"
+        },
+        "required": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    {
+      "id": "pagination",
+      "name": "Pagination",
+      "displayName": "Pagination",
+      "layer": "primitive",
+      "category": "navigation",
+      "status": "stable",
+      "path": "src/primitives/navigation/Pagination.tsx",
+      "exportName": "Pagination",
+      "description": "Page numbers with prev/next",
+      "version": "0.18.0",
+      "tags": [
+        "pagination",
+        "pages",
+        "navigation"
+      ],
+      "props": {
+        "totalPages": {
+          "type": "number",
+          "required": true
+        },
+        "currentPage": {
+          "type": "number",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "stepper",
+      "name": "Stepper",
+      "displayName": "Stepper",
+      "layer": "primitive",
+      "category": "navigation",
+      "status": "stable",
+      "path": "src/primitives/navigation/Stepper.tsx",
+      "exportName": "Stepper",
+      "description": "Step progress indicator",
+      "version": "0.18.0",
+      "tags": [
+        "stepper",
+        "progress",
+        "steps",
+        "wizard"
+      ],
+      "props": {
+        "steps": {
+          "type": "array",
+          "required": true
+        },
+        "currentStep": {
+          "type": "number",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "back-to-top",
+      "name": "BackToTop",
+      "displayName": "Back To Top",
+      "layer": "primitive",
+      "category": "navigation",
+      "status": "stable",
+      "path": "src/primitives/navigation/BackToTop.tsx",
+      "exportName": "BackToTop",
+      "description": "Floating scroll-to-top button",
+      "version": "0.18.0",
+      "tags": [
+        "scroll",
+        "navigation",
+        "back-to-top"
+      ],
+      "props": {
+        "threshold": {
+          "type": "number",
+          "default": 400
+        }
+      }
+    },
+    {
+      "id": "accordion",
+      "name": "Accordion",
+      "displayName": "Accordion",
+      "layer": "primitive",
+      "category": "surface",
+      "status": "stable",
+      "path": "src/primitives/surfaces/Accordion.tsx",
+      "exportName": "Accordion",
+      "description": "Expandable/collapsible sections",
+      "version": "0.18.0",
+      "tags": [
+        "accordion",
+        "expand",
+        "collapse",
+        "faq"
+      ],
+      "props": {
+        "multiple": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    {
+      "id": "scroll-area",
+      "name": "ScrollArea",
+      "displayName": "Scroll Area",
+      "layer": "primitive",
+      "category": "surface",
+      "status": "stable",
+      "path": "src/primitives/surfaces/ScrollArea.tsx",
+      "exportName": "ScrollArea",
+      "description": "Custom styled scrollbar container",
+      "version": "0.18.0",
+      "tags": [
+        "scroll",
+        "overflow",
+        "container"
+      ],
+      "props": {
+        "maxHeight": {
+          "type": "string",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "image",
+      "name": "Image",
+      "displayName": "Image",
+      "layer": "primitive",
+      "category": "media",
+      "status": "stable",
+      "path": "src/primitives/media/Image.tsx",
+      "exportName": "Image",
+      "description": "Styled image with loading skeleton",
+      "version": "0.18.0",
+      "tags": [
+        "image",
+        "media",
+        "photo"
+      ],
+      "props": {
+        "src": {
+          "type": "string",
+          "required": true
+        },
+        "alt": {
+          "type": "string",
+          "required": true
+        },
+        "rounded": {
+          "type": "boolean",
+          "default": true
+        }
+      }
+    },
+    {
+      "id": "icon",
+      "name": "Icon",
+      "displayName": "Icon",
+      "layer": "primitive",
+      "category": "media",
+      "status": "stable",
+      "path": "src/primitives/media/Icon.tsx",
+      "exportName": "Icon",
+      "description": "SVG icon wrapper with size/color",
+      "version": "0.18.0",
+      "tags": [
+        "icon",
+        "svg",
+        "media"
+      ],
+      "props": {
+        "size": {
+          "type": "number",
+          "default": 24
+        },
+        "color": {
+          "type": "string"
+        }
+      }
+    },
+    {
+      "id": "blockquote",
+      "name": "Blockquote",
+      "displayName": "Blockquote",
+      "layer": "primitive",
+      "category": "typography",
+      "status": "stable",
+      "path": "src/primitives/typography/Blockquote.tsx",
+      "exportName": "Blockquote",
+      "description": "Pull quote with accent border",
+      "version": "0.18.0",
+      "tags": [
+        "quote",
+        "blockquote",
+        "citation"
+      ],
+      "props": {
+        "author": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        }
+      }
+    },
+    {
+      "id": "list",
+      "name": "List",
+      "displayName": "List",
+      "layer": "primitive",
+      "category": "typography",
+      "status": "stable",
+      "path": "src/primitives/typography/List.tsx",
+      "exportName": "List",
+      "description": "Styled ordered/unordered list",
+      "version": "0.18.0",
+      "tags": [
+        "list",
+        "ul",
+        "ol",
+        "bullets"
+      ],
+      "props": {
+        "ordered": {
+          "type": "boolean",
+          "default": false
+        },
+        "spacing": {
+          "type": "enum",
+          "options": [
+            "sm",
+            "md",
+            "lg"
+          ],
+          "default": "md"
+        }
+      }
+    },
+    {
+      "id": "kbd",
+      "name": "Kbd",
+      "displayName": "Keyboard Key",
+      "layer": "primitive",
+      "category": "typography",
+      "status": "stable",
+      "path": "src/primitives/typography/Kbd.tsx",
+      "exportName": "Kbd",
+      "description": "Keyboard shortcut key styling",
+      "version": "0.18.0",
+      "tags": [
+        "keyboard",
+        "shortcut",
+        "key",
+        "kbd"
+      ],
+      "props": {}
     }
   ]
 }
