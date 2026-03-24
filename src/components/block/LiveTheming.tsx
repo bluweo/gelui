@@ -217,7 +217,7 @@ function AppearanceControls({ isDark }: { isDark: boolean }) {
     fontSize: "12px",
     fontWeight: active ? 600 : 450,
     textAlign: "center",
-    borderRadius: "var(--glass-radius-pill, 100px)",
+    borderRadius: "var(--glass-radius-sm, 10px)",
     background: active ? segActiveBg : "transparent",
     color: active ? segActiveText : segInactiveText,
     border: "none",
@@ -246,7 +246,7 @@ function AppearanceControls({ isDark }: { isDark: boolean }) {
       {/* Border Radius */}
       <div style={{ padding: "12px 14px", borderBottom: `1px solid ${rowBorder}` }}>
         <span style={{ fontSize: "10px", fontWeight: 650, textTransform: "uppercase", letterSpacing: "0.04em", color: labelText, display: "block", marginBottom: 8 }}>Border Radius</span>
-        <div style={{ display: "flex", gap: 2, padding: 3, borderRadius: "var(--glass-radius-pill, 100px)", background: segBg }}>
+        <div style={{ display: "flex", gap: 2, padding: 3, borderRadius: "var(--glass-radius-sm, 10px)", background: segBg }}>
           {radiusOptions.map(o => (
             <button key={o.value} onClick={() => setRadiusPreset(o.value)} style={segStyle(radiusPreset === o.value)}>{o.label}</button>
           ))}
@@ -265,7 +265,7 @@ function AppearanceControls({ isDark }: { isDark: boolean }) {
       {/* Shadow Depth */}
       <div style={{ padding: "12px 14px" }}>
         <span style={{ fontSize: "10px", fontWeight: 650, textTransform: "uppercase", letterSpacing: "0.04em", color: labelText, display: "block", marginBottom: 8 }}>Shadow Depth</span>
-        <div style={{ display: "flex", gap: 2, padding: 3, borderRadius: "var(--glass-radius-pill, 100px)", background: segBg }}>
+        <div style={{ display: "flex", gap: 2, padding: 3, borderRadius: "var(--glass-radius-sm, 10px)", background: segBg }}>
           {shadowOptions.map(o => (
             <button key={o.value} onClick={() => setShadowPreset(o.value)} style={segStyle(shadowPreset === o.value)}>{o.label}</button>
           ))}
