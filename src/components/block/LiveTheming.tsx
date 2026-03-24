@@ -285,26 +285,26 @@ function LivePreview() {
       <div className="flex items-center px-3 py-2 bg-black/[0.04] dark:bg-white/[0.06] border-b border-black/[0.06] dark:border-white/[0.06]">
         <span className="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/45 dark:text-white/40">Live Preview</span>
       </div>
-      {/* Rows — identical structure to Breakpoints */}
-      <div className="flex items-center justify-between gap-3 px-3 py-2.5 border-b border-black/[0.04] dark:border-white/[0.04]">
+      {/* Rows — stronger border contrast */}
+      <div className="flex items-center justify-between gap-3 px-3 py-2.5 border-b border-black/[0.10] dark:border-white/[0.10]">
         <span className="text-[12px] font-[600] text-black/75 dark:text-white/70">Gel Button</span>
         <Button variant="gel" size="sm">Button</Button>
       </div>
-      <div className="flex items-center justify-between gap-3 px-3 py-2.5 border-b border-black/[0.04] dark:border-white/[0.04]">
+      <div className="flex items-center justify-between gap-3 px-3 py-2.5 border-b border-black/[0.10] dark:border-white/[0.10]">
         <span className="text-[12px] font-[600] text-black/75 dark:text-white/70">Glass Card</span>
         <Card glass={1} style={{ padding: "6px 14px" }}>
           <span className="text-[11px] text-black/65 dark:text-white/65">Content</span>
         </Card>
       </div>
-      <div className="flex items-center justify-between gap-3 px-3 py-2.5 border-b border-black/[0.04] dark:border-white/[0.04]">
+      <div className="flex items-center justify-between gap-3 px-3 py-2.5 border-b border-black/[0.10] dark:border-white/[0.10]">
         <span className="text-[12px] font-[600] text-black/75 dark:text-white/70 shrink-0">Input</span>
-        <Input placeholder="Type here..." style={{ maxWidth: 140, fontSize: 12 }} />
+        <Input placeholder="Type..." style={{ maxWidth: 100, fontSize: 11, padding: "6px 10px" }} />
       </div>
-      <div className="flex items-center justify-between gap-3 px-3 py-2.5 border-b border-black/[0.04] dark:border-white/[0.04]">
+      <div className="flex items-center justify-between gap-3 px-3 py-2.5 border-b border-black/[0.10] dark:border-white/[0.10]">
         <span className="text-[12px] font-[600] text-black/75 dark:text-white/70">Toggle</span>
         <Toggle checked={toggled} onChange={setToggled} />
       </div>
-      <div className="flex items-center justify-between gap-3 px-3 py-2.5 border-b border-black/[0.04] dark:border-white/[0.04]">
+      <div className="flex items-center justify-between gap-3 px-3 py-2.5 border-b border-black/[0.10] dark:border-white/[0.10]">
         <span className="text-[12px] font-[600] text-black/75 dark:text-white/70">Badges</span>
         <div className="flex gap-1.5 items-center">
           <Badge variant="success">Live</Badge>
