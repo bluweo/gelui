@@ -1236,9 +1236,13 @@ html[data-navigated] * {
   color: rgba(30, 30, 35, 0.75);
   text-shadow: 0 1px 2px rgba(255, 255, 255, 0.25);
 
-  /* Dark background → white text */
+  /* Dark background → white text (check both data-contrast on ancestors AND dark theme) */
   [data-contrast="dark"] & {
     color: rgba(255, 255, 255, 0.92);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  }
+  [data-theme="dark"] & {
+    color: rgba(255, 255, 255, 0.88);
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
   }
 
