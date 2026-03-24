@@ -148,6 +148,32 @@ function NavItemPreview() {
   );
 }
 
+function AlertPreview() {
+  const [show, setShow] = useState(true);
+  return show ? (
+    <Primitives.Alert variant="info" title="Info" dismissible onDismiss={() => setShow(false)}>
+      This is an alert message
+    </Primitives.Alert>
+  ) : (
+    <button onClick={() => setShow(true)} style={{ fontSize: 11, cursor: "pointer", border: "none", background: "none", textDecoration: "underline", color: "inherit" }}>Show alert again</button>
+  );
+}
+
+function PasswordPreview() {
+  const [val, setVal] = useState("secret123");
+  return <Primitives.PasswordInput value={val} onChange={(e: any) => setVal(e.target?.value ?? e)} placeholder="Password" />;
+}
+
+function NumberPreview() {
+  const [val, setVal] = useState(5);
+  return <Primitives.NumberInput value={val} onChange={setVal} min={0} max={10} />;
+}
+
+function PaginationPreview() {
+  const [page, setPage] = useState(3);
+  return <Primitives.Pagination totalPages={10} currentPage={page} onPageChange={setPage} />;
+}
+
 /* ── Component Preview ── */
 
 function ComponentPreview({ id, isDark }: { id: string; isDark: boolean }) {
@@ -327,6 +353,69 @@ function ComponentPreview({ id, isDark }: { id: string; isDark: boolean }) {
     "liquid-glass-filter": <span style={{ color: isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.4)", fontSize: 11 }}>SVG filter — applied globally</span>,
     "drawer": <span style={{ color: isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.4)", fontSize: 11 }}>Planned — not yet implemented</span>,
     "popover": <span style={{ color: isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.4)", fontSize: 11 }}>Planned — not yet implemented</span>,
+    // New Tier 1+2 primitives
+    "alert": <AlertPreview />,
+    "toast": <span style={{ color: isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.4)", fontSize: 11 }}>Click "Open Full Preview" to see Toast demo</span>,
+    "confirm-dialog": <span style={{ color: isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.4)", fontSize: 11 }}>Click "Open Full Preview" to see dialog</span>,
+    "table": (
+      <Primitives.Table
+        columns={[{ key: "name", label: "Name" }, { key: "role", label: "Role" }]}
+        data={[{ name: "Alice", role: "Designer" }, { name: "Bob", role: "Developer" }]}
+        compact
+      />
+    ),
+    "stat": (
+      <div style={{ display: "flex", gap: 12 }}>
+        <Primitives.Stat value="1,234" label="Users" trend="up" trendValue="+12%" />
+        <Primitives.Stat value="98.5%" label="Uptime" trend="neutral" />
+      </div>
+    ),
+    "empty-state": <Primitives.EmptyState title="No results" description="Try a different search" />,
+    "color-swatch": (
+      <div style={{ display: "flex", gap: 8 }}>
+        <Primitives.ColorSwatch color="#354334" label="Primary" size="sm" showHex />
+        <Primitives.ColorSwatch color="#FFC800" label="Accent" size="sm" showHex />
+      </div>
+    ),
+    "button-group": (
+      <Primitives.ButtonGroup attached>
+        <Primitives.Button variant="ghost" size="sm">Left</Primitives.Button>
+        <Primitives.Button variant="ghost" size="sm">Center</Primitives.Button>
+        <Primitives.Button variant="ghost" size="sm">Right</Primitives.Button>
+      </Primitives.ButtonGroup>
+    ),
+    "password-input": <PasswordPreview />,
+    "number-input": <NumberPreview />,
+    "form-group": (
+      <Primitives.FormGroup label="Email" required helperText="We'll never share your email">
+        <Primitives.Input placeholder="you@example.com" />
+      </Primitives.FormGroup>
+    ),
+    "pagination": <PaginationPreview />,
+    "stepper": <Primitives.Stepper steps={["Info", "Review", "Done"]} currentStep={1} />,
+    "back-to-top": <span style={{ color: isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.4)", fontSize: 11 }}>Floating button — visible when scrolling</span>,
+    "accordion": <Primitives.Accordion items={[{ title: "What is GelUI?", content: "A glassmorphism design system" }, { title: "How to install?", content: "npm install gelui" }]} />,
+    "scroll-area": (
+      <Primitives.ScrollArea maxHeight={80}>
+        <div style={{ padding: 8 }}>
+          {[1,2,3,4,5,6].map(i => <div key={i} style={{ padding: "6px 0", borderBottom: "1px solid rgba(128,128,128,0.1)", fontSize: 12 }}>Item {i}</div>)}
+        </div>
+      </Primitives.ScrollArea>
+    ),
+    "image": <Primitives.Image src="/logos/uigel-logo.svg" alt="Logo" width={60} height={60} />,
+    "icon": (
+      <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+        <Primitives.Icon size={16}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></Primitives.Icon>
+        <Primitives.Icon size={24}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></Primitives.Icon>
+      </div>
+    ),
+    "blockquote": <Primitives.Blockquote author="Dieter Rams">Less, but better.</Primitives.Blockquote>,
+    "list": <Primitives.List items={["Typography", "Buttons", "Surfaces"]} />,
+    "kbd": (
+      <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
+        <Primitives.Kbd>⌘</Primitives.Kbd><Primitives.Kbd>K</Primitives.Kbd>
+      </div>
+    ),
   };
 
   return previews[id] || <span style={{ color: "rgba(128,128,128,0.5)", fontSize: 12 }}>No preview available</span>;
@@ -791,7 +880,7 @@ export function RegistryViewer({ components }: Props) {
                         }}>
                           <ComponentPreview id={comp.id} isDark={isDark} />
                         </div>
-                        {["modal", "overlay", "card", "surface"].includes(comp.id) && (
+                        {["modal", "overlay", "card", "surface", "toast", "confirm-dialog"].includes(comp.id) && (
                           <button
                             onClick={(e) => { e.stopPropagation(); setFullPreviewId(comp.id); }}
                             style={{
