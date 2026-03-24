@@ -11,24 +11,18 @@ import { GlassControlsDemo } from "@/components/block/GlassControlsDemo";
 import { ButtonsShowcase } from "@/components/block/ButtonsShowcase";
 import { BadgesShowcase } from "@/components/block/BadgesShowcase";
 import { FeedbackShowcase } from "@/components/block/FeedbackShowcase";
+import { ButtonsRightColumn } from "@/components/block/ButtonsRightColumn";
+import { BadgesShowcaseV2 } from "@/components/block/BadgesShowcaseV2";
+import { FeedbackShowcaseV2 } from "@/components/block/FeedbackShowcaseV2";
+import { LayoutShowcase } from "@/components/block/LayoutShowcase";
+import { ElevationShowcase } from "@/components/block/ElevationShowcase";
+import { FormsShowcase } from "@/components/block/FormsShowcase";
+import { DataShowcase } from "@/components/block/DataShowcase";
+import { TypographyExtras } from "@/components/block/TypographyExtras";
+import { NavigationExtras } from "@/components/block/NavigationExtras";
+import { SurfacesExtras } from "@/components/block/SurfacesExtras";
 
-/* ─── Spacing ─── */
-const spacingComps = [
-  { name: "xs", value: "8px", desc: "Tight elements" },
-  { name: "sm", value: "12px", desc: "Compact UI" },
-  { name: "md", value: "16px", desc: "Standard" },
-  { name: "lg", value: "20px", desc: "Comfortable" },
-  { name: "xl", value: "24px", desc: "Generous" },
-];
-
-/* ─── Elevation ─── */
-const elevations = [
-  { name: "Flat", shadow: "none", z: "0", desc: "No elevation" },
-  { name: "Raised", shadow: "0 2px 8px rgba(0,0,0,0.06)", z: "100", desc: "Dropdowns" },
-  { name: "Floating", shadow: "0 8px 40px rgba(0,0,0,0.08), 0 2px 12px rgba(0,0,0,0.04)", z: "300", desc: "Popovers" },
-  { name: "Modal", shadow: "0 24px 80px rgba(0,0,0,0.12), 0 8px 32px rgba(0,0,0,0.06)", z: "400", desc: "Dialogs" },
-  { name: "Top", shadow: "0 32px 100px rgba(0,0,0,0.18), 0 12px 40px rgba(0,0,0,0.08)", z: "600", desc: "Tooltips" },
-];
+/* Data moved to React islands: LayoutShowcase, ElevationShowcase */
 ---
 
 <DSLayout
@@ -55,6 +49,19 @@ const elevations = [
     </div>
 
     <!-- ═══════════════════════════════════
+         1b. Typography Extras
+         ═══════════════════════════════════ -->
+    <div data-section="Typography Extras" class="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
+      <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 160px;" />
+      <div class="relative flex flex-col gap-1 mb-6 pt-1 pl-1">
+        <span class="text-[10px] font-[650] uppercase tracking-[0.1em] text-black/40 dark:text-white/40 mb-1">Typography</span>
+        <h2 class="text-[24px] font-[750] tracking-[-0.03em] leading-[1.2] text-black dark:text-white mb-1" style="font-family: var(--font-heading)">Typography Extras</h2>
+        <p class="text-[13px] leading-[1.6] text-black/60 dark:text-white/55">Blockquotes, lists, and keyboard shortcut indicators</p>
+      </div>
+      <TypographyExtras client:load />
+    </div>
+
+    <!-- ═══════════════════════════════════
          2. Buttons
          ═══════════════════════════════════ -->
     <div data-section="Buttons" class="col-span-2 relative overflow-hidden rounded-[var(--glass-radius)] p-5 border contrast-border">
@@ -68,62 +75,8 @@ const elevations = [
         <!-- Left column: Table-based groups (from @/primitives/buttons) -->
         <ButtonsShowcase client:load />
 
-        <!-- Right column: Gel, Glass, States — transparent, contrast-aware borders -->
-        <div class="flex flex-col gap-5">
-          <!-- Gel Buttons table -->
-          <div class="rounded-[var(--glass-radius-sm)] overflow-hidden border contrast-border">
-            <div class="px-3 py-2 border-b contrast-border">
-              <span class="text-[10px] font-[650] uppercase tracking-[0.06em] contrast-muted">Gel</span>
-            </div>
-            <div class="flex items-center justify-between px-4 py-3.5 border-b contrast-border-subtle">
-              <span class="text-[12px] font-[550] contrast-muted">Sizes</span>
-              <div class="flex items-center gap-2.5 flex-wrap justify-end">
-                <button class="gel-btn gel-btn-pill text-[13px] py-2 px-5">Small</button>
-                <button class="gel-btn gel-btn-pill">Medium</button>
-                <button class="gel-btn gel-btn-pill text-[17px] py-3 px-7">Large</button>
-              </div>
-            </div>
-            <div class="flex items-center justify-between px-4 py-3.5">
-              <span class="text-[12px] font-[550] contrast-muted">Icons</span>
-              <div class="flex items-center gap-2.5">
-                <button class="gel-btn gel-btn-circle-sm"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg></button>
-                <button class="gel-btn gel-btn-circle"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 12h16M12 4v16" /></svg></button>
-              </div>
-            </div>
-          </div>
-          <!-- Glass Buttons table -->
-          <div class="rounded-[var(--glass-radius-sm)] overflow-hidden border contrast-border">
-            <div class="px-3 py-2 border-b contrast-border">
-              <span class="text-[10px] font-[650] uppercase tracking-[0.06em] contrast-muted">Glass</span>
-            </div>
-            <div class="flex items-center justify-between px-4 py-3.5 border-b contrast-border-subtle">
-              <span class="text-[12px] font-[550] contrast-muted">Pill</span>
-              <button class="glass-1 glass-specular rounded-[var(--glass-radius-pill)] px-5 py-2.5 text-[14px] font-[550] cursor-pointer border-none transition-all duration-200 hover:scale-105">Glass Pill</button>
-            </div>
-            <div class="flex items-center justify-between px-4 py-3.5">
-              <span class="text-[12px] font-[550] contrast-muted">Rounded</span>
-              <button class="glass-1 glass-specular rounded-[var(--glass-radius-sm)] px-5 py-2.5 text-[14px] font-[550] cursor-pointer border-none transition-all duration-200 hover:scale-105">Glass Rounded</button>
-            </div>
-          </div>
-          <!-- States table -->
-          <div class="rounded-[var(--glass-radius-sm)] overflow-hidden border contrast-border">
-            <div class="px-3 py-2 border-b contrast-border">
-              <span class="text-[10px] font-[650] uppercase tracking-[0.06em] contrast-muted">States</span>
-            </div>
-            <div class="flex items-center justify-between px-4 py-3.5 border-b contrast-border-subtle">
-              <span class="text-[12px] font-[550] contrast-muted">Default</span>
-              <button class="gel-btn gel-btn-pill">Default</button>
-            </div>
-            <div class="flex items-center justify-between px-4 py-3.5 border-b contrast-border-subtle">
-              <span class="text-[12px] font-[550] contrast-muted">Hover</span>
-              <button class="gel-btn gel-btn-pill scale-105">Hover</button>
-            </div>
-            <div class="flex items-center justify-between px-4 py-3.5">
-              <span class="text-[12px] font-[550] contrast-muted">Disabled</span>
-              <button class="gel-btn gel-btn-pill opacity-50 cursor-not-allowed" disabled>Disabled</button>
-            </div>
-          </div>
-        </div>
+        <!-- Right column: Gel, Glass, States — using Button primitives -->
+        <ButtonsRightColumn client:load />
       </div>
     </div>
 
@@ -394,6 +347,19 @@ const elevations = [
     </div>
 
     <!-- ═══════════════════════════════════
+         3d. Surfaces Extras
+         ═══════════════════════════════════ -->
+    <div data-section="Surfaces Extras" class="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
+      <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 160px;" />
+      <div class="relative flex flex-col gap-1 mb-6 pt-1 pl-1">
+        <span class="text-[10px] font-[650] uppercase tracking-[0.1em] text-black/40 dark:text-white/40 mb-1">Material</span>
+        <h2 class="text-[24px] font-[750] tracking-[-0.03em] leading-[1.2] text-black dark:text-white mb-1" style="font-family: var(--font-heading)">Surfaces Extras</h2>
+        <p class="text-[13px] leading-[1.6] text-black/60 dark:text-white/55">Accordion panels and scrollable content areas</p>
+      </div>
+      <SurfacesExtras client:load />
+    </div>
+
+    <!-- ═══════════════════════════════════
          4. Input Fields
          ═══════════════════════════════════ -->
     <div data-section="Inputs" class="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
@@ -407,6 +373,19 @@ const elevations = [
     </div>
 
     <!-- ═══════════════════════════════════
+         4b. Advanced Inputs
+         ═══════════════════════════════════ -->
+    <div data-section="Advanced Inputs" class="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
+      <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 160px;" />
+      <div class="relative flex flex-col gap-1 mb-6 pt-1 pl-1">
+        <span class="text-[10px] font-[650] uppercase tracking-[0.1em] text-black/40 dark:text-white/40 mb-1">Form</span>
+        <h2 class="text-[24px] font-[750] tracking-[-0.03em] leading-[1.2] text-black dark:text-white mb-1" style="font-family: var(--font-heading)">Advanced Inputs</h2>
+        <p class="text-[13px] leading-[1.6] text-black/60 dark:text-white/55">FormGroup, password, and number input primitives with validation</p>
+      </div>
+      <FormsShowcase client:load />
+    </div>
+
+    <!-- ═══════════════════════════════════
          5. Badges & Labels
          ═══════════════════════════════════ -->
     <div data-section="Badges" class="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
@@ -416,7 +395,20 @@ const elevations = [
         <h2 class="text-[24px] font-[750] tracking-[-0.03em] leading-[1.2] text-black dark:text-white mb-1" style="font-family: var(--font-heading)">Badges & Labels</h2>
         <p class="text-[13px] leading-[1.6] text-black/60 dark:text-white/55">Status indicators, tags, and label primitives</p>
       </div>
-      <BadgesShowcase client:load />
+      <BadgesShowcaseV2 client:load />
+    </div>
+
+    <!-- ═══════════════════════════════════
+         5b. Data Display
+         ═══════════════════════════════════ -->
+    <div data-section="Data Display" class="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
+      <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 160px;" />
+      <div class="relative flex flex-col gap-1 mb-6 pt-1 pl-1">
+        <span class="text-[10px] font-[650] uppercase tracking-[0.1em] text-black/40 dark:text-white/40 mb-1">Data</span>
+        <h2 class="text-[24px] font-[750] tracking-[-0.03em] leading-[1.2] text-black dark:text-white mb-1" style="font-family: var(--font-heading)">Data Display</h2>
+        <p class="text-[13px] leading-[1.6] text-black/60 dark:text-white/55">Tables, stat cards, empty states, and color swatches</p>
+      </div>
+      <DataShowcase client:load />
     </div>
 
     <!-- ═══════════════════════════════════
@@ -452,100 +444,9 @@ const elevations = [
       <div class="relative flex flex-col gap-1 mb-6 pt-1 pl-1">
         <span class="text-[10px] font-[650] uppercase tracking-[0.1em] text-black/40 dark:text-white/40 mb-1">Spacing</span>
         <h2 class="text-[24px] font-[750] tracking-[-0.03em] leading-[1.2] text-black dark:text-white mb-1" style="font-family: var(--font-heading)">Layout Compositions</h2>
-        <p class="text-[13px] leading-[1.6] text-black/60 dark:text-white/55">Padding, gap, and alignment presets</p>
+        <p class="text-[13px] leading-[1.6] text-black/60 dark:text-white/55">Stack, inline, center, spacer, and grid primitives</p>
       </div>
-
-      <div class="flex flex-col gap-4">
-        <!-- Padding Presets -->
-        <div class="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white dark:bg-[#1a1a1a]">
-          <div class="px-4 py-2.5 bg-black/[0.06] dark:bg-white/[0.08] border-b border-black/10 dark:border-white/10">
-            <span class="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/70 dark:text-white/70">Padding Presets</span>
-          </div>
-          <div class="p-4">
-            <div class="grid grid-cols-5 gap-3 max-[860px]:grid-cols-3 max-[540px]:grid-cols-2">
-              {spacingComps.map((s) => (
-                <div class="flex flex-col items-center gap-2">
-                  <div class="relative rounded-[var(--glass-radius-sm)] border-2 border-dashed border-black/12 dark:border-white/10 bg-black/[0.02] dark:bg-white/[0.03]" style={`padding: ${s.value}`}>
-                    <div class="w-8 h-8 rounded-[4px] bg-black/8 dark:bg-white/8 flex items-center justify-center">
-                      <span class="text-[9px] font-mono text-black/35 dark:text-white/30">{s.value}</span>
-                    </div>
-                  </div>
-                  <div class="text-center">
-                    <span class="text-[11px] font-[650] text-black/70 dark:text-white/65 block">{s.name}</span>
-                    <span class="text-[9px] text-black/45 dark:text-white/40">{s.desc}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <!-- Stack & Inline -->
-        <div class="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white dark:bg-[#1a1a1a]">
-          <div class="px-4 py-2.5 bg-black/[0.06] dark:bg-white/[0.08] border-b border-black/10 dark:border-white/10">
-            <span class="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/70 dark:text-white/70">Stack & Inline</span>
-          </div>
-          <div class="p-4 flex flex-col gap-4">
-            <div class="flex items-center justify-between py-2 border-b border-black/[0.06] dark:border-white/[0.06]">
-              <span class="text-[12px] font-[500] text-black/60 dark:text-white/55">Vertical (gap: 8px)</span>
-              <div class="flex flex-col gap-2">
-                <div class="h-3 w-16 rounded bg-black/8 dark:bg-white/8"></div>
-                <div class="h-3 w-16 rounded bg-black/8 dark:bg-white/8"></div>
-                <div class="h-3 w-16 rounded bg-black/8 dark:bg-white/8"></div>
-              </div>
-            </div>
-            <div class="flex items-center justify-between py-2 border-b border-black/[0.06] dark:border-white/[0.06]">
-              <span class="text-[12px] font-[500] text-black/60 dark:text-white/55">Vertical (gap: 16px)</span>
-              <div class="flex flex-col gap-4">
-                <div class="h-3 w-16 rounded bg-black/8 dark:bg-white/8"></div>
-                <div class="h-3 w-16 rounded bg-black/8 dark:bg-white/8"></div>
-                <div class="h-3 w-16 rounded bg-black/8 dark:bg-white/8"></div>
-              </div>
-            </div>
-            <div class="flex items-center justify-between py-2 border-b border-black/[0.06] dark:border-white/[0.06]">
-              <span class="text-[12px] font-[500] text-black/60 dark:text-white/55">Horizontal (gap: 8px)</span>
-              <div class="flex gap-2">
-                <div class="w-8 h-6 rounded bg-black/8 dark:bg-white/8"></div>
-                <div class="w-8 h-6 rounded bg-black/8 dark:bg-white/8"></div>
-                <div class="w-8 h-6 rounded bg-black/8 dark:bg-white/8"></div>
-              </div>
-            </div>
-            <div class="flex items-center justify-between py-2">
-              <span class="text-[12px] font-[500] text-black/60 dark:text-white/55">Horizontal (gap: 16px)</span>
-              <div class="flex gap-4">
-                <div class="w-8 h-6 rounded bg-black/8 dark:bg-white/8"></div>
-                <div class="w-8 h-6 rounded bg-black/8 dark:bg-white/8"></div>
-                <div class="w-8 h-6 rounded bg-black/8 dark:bg-white/8"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Center & Spacer -->
-        <div class="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white dark:bg-[#1a1a1a]">
-          <div class="px-4 py-2.5 bg-black/[0.06] dark:bg-white/[0.08] border-b border-black/10 dark:border-white/10">
-            <span class="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/70 dark:text-white/70">Center & Spacer</span>
-          </div>
-          <div class="p-4 flex flex-col gap-4">
-            <div class="flex items-center justify-between py-2 border-b border-black/[0.06] dark:border-white/[0.06]">
-              <span class="text-[12px] font-[500] text-black/60 dark:text-white/55">Center</span>
-              <div class="w-28 h-12 rounded-[var(--glass-radius-sm)] border border-dashed border-black/12 dark:border-white/10 flex items-center justify-center">
-                <div class="w-6 h-6 rounded bg-black/10 dark:bg-white/10"></div>
-              </div>
-            </div>
-            <div class="flex items-center justify-between py-2">
-              <span class="text-[12px] font-[500] text-black/60 dark:text-white/55">Spacer</span>
-              <div class="w-28 h-8 rounded-[var(--glass-radius-sm)] border border-dashed border-black/12 dark:border-white/10 flex items-center px-1.5">
-                <div class="w-4 h-4 rounded bg-black/10 dark:bg-white/10"></div>
-                <div class="flex-1"></div>
-                <span class="text-[8px] font-mono text-black/25 dark:text-white/20">↔</span>
-                <div class="flex-1"></div>
-                <div class="w-4 h-4 rounded bg-black/10 dark:bg-white/10"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <LayoutShowcase client:load />
     </div>
 
     <!-- ═══════════════════════════════════
@@ -558,80 +459,7 @@ const elevations = [
         <h2 class="text-[24px] font-[750] tracking-[-0.03em] leading-[1.2] text-black dark:text-white mb-1" style="font-family: var(--font-heading)">Elevation</h2>
         <p class="text-[13px] leading-[1.6] text-black/60 dark:text-white/55">Shadow depth levels and skeleton loading states</p>
       </div>
-
-      <div class="grid grid-cols-2 gap-5 max-[860px]:grid-cols-1">
-        <!-- Left: Shadow Depths -->
-        <div class="rounded-[var(--glass-radius-sm)] overflow-hidden border contrast-border" style="background: transparent;">
-          <div class="px-4 py-2.5 border-b contrast-border" style="background: transparent;">
-            <span class="text-[10px] font-[650] uppercase tracking-[0.06em] contrast-text-muted">Shadow Depths</span>
-          </div>
-          <div class="p-4 flex flex-col gap-6">
-            {elevations.map((e) => (
-              <div
-                class="w-full rounded-[var(--glass-radius-sm)] bg-white dark:bg-[#222] p-4 flex items-center justify-between transition-shadow duration-300"
-                style={`box-shadow: ${e.shadow}`}
-              >
-                <div>
-                  <span class="text-[16px] font-[700] text-black/85 dark:text-white/80 block">{e.name}</span>
-                  <span class="text-[13px] text-black/55 dark:text-white/50">{e.desc}</span>
-                </div>
-                <span class="text-[12px] font-mono font-[500] text-black/35 dark:text-white/30">z-{e.z}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <!-- Right: Skeleton Loader -->
-        <div class="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white dark:bg-[#1a1a1a]">
-          <div class="px-4 py-2.5 bg-black/[0.06] dark:bg-white/[0.08] border-b border-black/10 dark:border-white/10">
-            <span class="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/70 dark:text-white/70">Skeleton Loader</span>
-          </div>
-          <div class="p-5 flex flex-col gap-5">
-            <!-- Card skeleton -->
-            <div>
-              <span class="text-[10px] font-[500] text-black/45 dark:text-white/40 mb-3 block">Card Loading</span>
-              <div class="flex flex-col gap-3 p-4 rounded-[var(--glass-radius-sm)] bg-black/[0.02] dark:bg-white/[0.03] border border-black/[0.04] dark:border-white/[0.04]">
-                <div class="flex items-center gap-3">
-                  <div class="w-10 h-10 rounded-full bg-black/[0.06] dark:bg-white/[0.06] skeleton-shimmer"></div>
-                  <div class="flex-1 flex flex-col gap-1.5">
-                    <div class="h-3 rounded bg-black/[0.06] dark:bg-white/[0.06] w-[40%] skeleton-shimmer"></div>
-                    <div class="h-2.5 rounded bg-black/[0.04] dark:bg-white/[0.04] w-[60%] skeleton-shimmer"></div>
-                  </div>
-                </div>
-                <div class="h-2.5 rounded bg-black/[0.05] dark:bg-white/[0.05] w-full skeleton-shimmer"></div>
-                <div class="h-2.5 rounded bg-black/[0.05] dark:bg-white/[0.05] w-[85%] skeleton-shimmer"></div>
-                <div class="h-2.5 rounded bg-black/[0.04] dark:bg-white/[0.04] w-[70%] skeleton-shimmer"></div>
-              </div>
-            </div>
-
-            <!-- List skeleton -->
-            <div>
-              <span class="text-[10px] font-[500] text-black/45 dark:text-white/40 mb-3 block">List Loading</span>
-              <div class="flex flex-col gap-3">
-                {[80, 65, 90, 55].map((w) => (
-                  <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 rounded-[6px] bg-black/[0.05] dark:bg-white/[0.05] skeleton-shimmer shrink-0"></div>
-                    <div class="flex-1 flex flex-col gap-1.5">
-                      <div class="h-2.5 rounded bg-black/[0.06] dark:bg-white/[0.06] skeleton-shimmer" style={`width: ${w}%`}></div>
-                      <div class="h-2 rounded bg-black/[0.03] dark:bg-white/[0.03] skeleton-shimmer" style={`width: ${w - 20}%`}></div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <!-- Image skeleton -->
-            <div>
-              <span class="text-[10px] font-[500] text-black/45 dark:text-white/40 mb-3 block">Media Loading</span>
-              <div class="grid grid-cols-3 gap-2">
-                <div class="aspect-square rounded-[var(--glass-radius-sm)] bg-black/[0.05] dark:bg-white/[0.05] skeleton-shimmer"></div>
-                <div class="aspect-square rounded-[var(--glass-radius-sm)] bg-black/[0.04] dark:bg-white/[0.04] skeleton-shimmer"></div>
-                <div class="aspect-square rounded-[var(--glass-radius-sm)] bg-black/[0.05] dark:bg-white/[0.05] skeleton-shimmer"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <ElevationShowcase client:load />
     </div>
 
     <!-- ═══════════════════════════════════
@@ -642,52 +470,9 @@ const elevations = [
       <div class="relative flex flex-col gap-1 mb-6 pt-1 pl-1">
         <span class="text-[10px] font-[650] uppercase tracking-[0.1em] text-black/40 dark:text-white/40 mb-1">Loading</span>
         <h2 class="text-[24px] font-[750] tracking-[-0.03em] leading-[1.2] text-black dark:text-white mb-1" style="font-family: var(--font-heading)">Feedback</h2>
-        <p class="text-[13px] leading-[1.6] text-black/60 dark:text-white/55">Spinner and progress bar indicators</p>
+        <p class="text-[13px] leading-[1.6] text-black/60 dark:text-white/55">Spinners, progress, skeletons, alerts, and toasts</p>
       </div>
-
-      <div class="flex flex-col gap-4">
-        <!-- Spinner -->
-        <div class="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white dark:bg-[#1a1a1a]">
-          <div class="px-4 py-2.5 bg-black/[0.06] dark:bg-white/[0.08] border-b border-black/10 dark:border-white/10">
-            <span class="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/70 dark:text-white/70">Spinner</span>
-          </div>
-          <div class="p-4 flex flex-col">
-            <div class="flex items-center justify-between py-2.5 border-b border-black/10 dark:border-white/10">
-              <span class="text-[12px] font-[500] text-black/60 dark:text-white/55">Small</span>
-              <div class="w-5 h-5 border-2 border-black/10 dark:border-white/10 border-t-[#354334] dark:border-t-[#97AD96] rounded-full animate-spin"></div>
-            </div>
-            <div class="flex items-center justify-between py-2.5 border-b border-black/10 dark:border-white/10">
-              <span class="text-[12px] font-[500] text-black/60 dark:text-white/55">Medium</span>
-              <div class="w-7 h-7 border-2 border-black/10 dark:border-white/10 border-t-[#354334] dark:border-t-[#97AD96] rounded-full animate-spin"></div>
-            </div>
-            <div class="flex items-center justify-between py-2.5">
-              <span class="text-[12px] font-[500] text-black/60 dark:text-white/55">Large</span>
-              <div class="w-10 h-10 border-[3px] border-black/10 dark:border-white/10 border-t-[#354334] dark:border-t-[#97AD96] rounded-full animate-spin"></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Progress Bar -->
-        <div class="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white dark:bg-[#1a1a1a]">
-          <div class="px-4 py-2.5 bg-black/[0.06] dark:bg-white/[0.08] border-b border-black/10 dark:border-white/10">
-            <span class="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/70 dark:text-white/70">Progress Bar</span>
-          </div>
-          <div class="p-4 flex flex-col">
-            <div class="py-3 border-b border-black/[0.06] dark:border-white/[0.06]">
-              <div class="flex justify-between mb-1.5"><span class="text-[11px] font-[500] text-black/55 dark:text-white/50">Loading...</span><span class="text-[11px] font-mono text-black/40 dark:text-white/35">25%</span></div>
-              <div class="w-full h-2 rounded-full bg-black/[0.06] dark:bg-white/[0.06] overflow-hidden"><div class="h-full rounded-full bg-[#354334] dark:bg-[#97AD96]" style="width: 25%"></div></div>
-            </div>
-            <div class="py-3 border-b border-black/[0.06] dark:border-white/[0.06]">
-              <div class="flex justify-between mb-1.5"><span class="text-[11px] font-[500] text-black/55 dark:text-white/50">Uploading...</span><span class="text-[11px] font-mono text-black/40 dark:text-white/35">68%</span></div>
-              <div class="w-full h-2 rounded-full bg-black/[0.06] dark:bg-white/[0.06] overflow-hidden"><div class="h-full rounded-full bg-[#FFC800]" style="width: 68%"></div></div>
-            </div>
-            <div class="py-3">
-              <div class="flex justify-between mb-1.5"><span class="text-[11px] font-[500] text-black/55 dark:text-white/50">Complete</span><span class="text-[11px] font-mono text-black/40 dark:text-white/35">100%</span></div>
-              <div class="w-full h-2 rounded-full bg-black/[0.06] dark:bg-white/[0.06] overflow-hidden"><div class="h-full rounded-full bg-green-500" style="width: 100%"></div></div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <FeedbackShowcaseV2 client:load />
     </div>
 
     <!-- ═══════════════════════════════════
@@ -701,6 +486,19 @@ const elevations = [
         <p class="text-[13px] leading-[1.6] text-black/60 dark:text-white/55">Interactive tab bars, breadcrumbs, and nav items</p>
       </div>
       <PrimitiveNavigation client:load />
+    </div>
+
+    <!-- ═══════════════════════════════════
+         10b. Navigation Extras
+         ═══════════════════════════════════ -->
+    <div data-section="Navigation Extras" class="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
+      <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 160px;" />
+      <div class="relative flex flex-col gap-1 mb-6 pt-1 pl-1">
+        <span class="text-[10px] font-[650] uppercase tracking-[0.1em] text-black/40 dark:text-white/40 mb-1">Wayfinding</span>
+        <h2 class="text-[24px] font-[750] tracking-[-0.03em] leading-[1.2] text-black dark:text-white mb-1" style="font-family: var(--font-heading)">Navigation Extras</h2>
+        <p class="text-[13px] leading-[1.6] text-black/60 dark:text-white/55">Pagination, stepper, and scroll-to-top primitives</p>
+      </div>
+      <NavigationExtras client:load />
     </div>
 
   </div>
