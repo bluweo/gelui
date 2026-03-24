@@ -69,16 +69,16 @@ function SettingsPreview() {
   ]);
 
   return (
-    <div className="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white dark:bg-[#1a1a1a] h-full">
+    <div className="rounded-[var(--glass-radius-sm)] overflow-hidden h-full border contrast-border">
       {/* Header */}
-      <div className="flex items-center px-3 py-2 bg-black/[0.04] dark:bg-white/[0.06] border-b border-black/[0.06] dark:border-white/[0.06]">
-        <span className="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/45 dark:text-white/40">Setting Preview</span>
+      <div className="flex items-center px-3 py-2 border-b contrast-border">
+        <span className="text-[10px] font-[650] uppercase tracking-[0.06em] contrast-muted">Setting Preview</span>
       </div>
 
       {/* Border Radius */}
-      <div className="px-4 py-4 border-b border-black/[0.04] dark:border-white/[0.04]">
+      <div className="px-4 py-4 border-b contrast-border">
         <div className="flex items-center justify-between mb-3">
-          <span className="text-[12px] font-[600] text-black/75 dark:text-white/70">Border Radius</span>
+          <span className="text-[12px] font-[600] contrast-text">Border Radius</span>
           <span className="text-[11px] font-mono px-2 py-0.5 rounded-full bg-black/[0.05] dark:bg-white/[0.07] text-black/50 dark:text-white/40 tabular-nums">{liveVars["--glass-radius"] || "14px"}</span>
         </div>
         <div className="flex items-center gap-3">
@@ -98,9 +98,9 @@ function SettingsPreview() {
       </div>
 
       {/* Blur Intensity */}
-      <div className="px-4 py-4 border-b border-black/[0.04] dark:border-white/[0.04]">
+      <div className="px-4 py-4 border-b contrast-border">
         <div className="flex items-center justify-between mb-3">
-          <span className="text-[12px] font-[600] text-black/75 dark:text-white/70">Blur Intensity</span>
+          <span className="text-[12px] font-[600] contrast-text">Blur Intensity</span>
           <span className="text-[11px] font-mono px-2 py-0.5 rounded-full bg-black/[0.05] dark:bg-white/[0.07] text-black/50 dark:text-white/40 tabular-nums">{liveVars["--glass-blur"] || "24px"}</span>
         </div>
         <div
@@ -120,20 +120,20 @@ function SettingsPreview() {
       {/* Shadow Depth */}
       <div className="px-4 py-4">
         <div className="flex items-center justify-between mb-3">
-          <span className="text-[12px] font-[600] text-black/75 dark:text-white/70">Shadow Depth</span>
+          <span className="text-[12px] font-[600] contrast-text">Shadow Depth</span>
           <span className="text-[11px] font-mono px-2 py-0.5 rounded-full bg-black/[0.05] dark:bg-white/[0.07] text-black/50 dark:text-white/40 tabular-nums truncate max-w-[120px]">{(liveVars["--glass-shadow"] || "none").slice(0, 16)}…</span>
         </div>
         <div className="flex items-center gap-3">
           <div
-            className="w-16 h-14 rounded-[var(--glass-radius-sm)] bg-white dark:bg-[#222] transition-all duration-300"
+            className="w-16 h-14 rounded-[var(--glass-radius-sm)] glass-1 transition-all duration-300"
             style={{ boxShadow: "var(--glass-shadow, none)" }}
           />
           <div
-            className="w-16 h-14 rounded-[var(--glass-radius-sm)] bg-white dark:bg-[#222] transition-all duration-300"
+            className="w-16 h-14 rounded-[var(--glass-radius-sm)] glass-1 transition-all duration-300"
             style={{ boxShadow: "var(--glass-shadow-hover, none)" }}
           />
           <div
-            className="flex-1 h-14 rounded-[var(--glass-radius-sm)] bg-white dark:bg-[#222] transition-all duration-300"
+            className="flex-1 h-14 rounded-[var(--glass-radius-sm)] glass-1 transition-all duration-300"
             style={{ boxShadow: "var(--glass-shadow-elevated, none)" }}
           />
         </div>
