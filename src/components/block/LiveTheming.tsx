@@ -5,6 +5,9 @@ import { Input } from "@/primitives/inputs";
 import { Badge, Tag } from "@/primitives/data";
 import { Toggle } from "@/primitives/controls";
 import { Spinner } from "@/primitives/feedback";
+import { Overline } from "@/primitives/typography/Overline";
+import { Label } from "@/primitives/typography/Label";
+import { Code } from "@/primitives/typography/Code";
 import { useDarkMode } from "@/primitives/hooks/useDarkMode";
 import type { RadiusPreset, ShadowPreset } from "@/components/context/AppearanceContext";
 import { LiquidGlassSlider } from "@/components/glass/LiquidGlassSlider";
@@ -57,49 +60,37 @@ function Arrow({ isDark }: { isDark: boolean }) {
   );
 }
 
-/* ─── Column 1: How It Works ─── */
-function HowItWorks({ isDark }: { isDark: boolean }) {
+/* ─── Column 1: How It Works (Breakpoints-style table) ─── */
+function HowItWorks() {
   const liveVars = useLiveCSSVars([
     { variable: "--glass-radius", label: "", setBy: "", category: "" },
     { variable: "--glass-blur", label: "", setBy: "", category: "" },
     { variable: "--glass-shadow", label: "", setBy: "", category: "" },
   ]);
 
-  const tableBg = isDark ? "rgba(0,0,0,0.30)" : "rgba(255,255,255,0.60)";
-  const headerBg = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)";
-  const borderColor = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)";
-  const rowBorder = isDark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.04)";
-  const headerText = isDark ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.45)";
-  const labelText = isDark ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.7)";
-  const monoText = isDark ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.4)";
-
   const chains = [
-    { setting: "Border Radius", variable: "--glass-radius", previewType: "radius" },
-    { setting: "Blur Intensity", variable: "--glass-blur", previewType: "blur" },
-    { setting: "Shadow Depth", variable: "--glass-shadow", previewType: "shadow" },
+    { setting: "Border Radius", variable: "--glass-radius" },
+    { setting: "Blur Intensity", variable: "--glass-blur" },
+    { setting: "Shadow Depth", variable: "--glass-shadow" },
   ];
 
   return (
-    <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: tableBg, border: `1px solid ${borderColor}`, height: "100%" }}>
-      <div style={{ padding: "10px 14px", background: headerBg, borderBottom: `1px solid ${borderColor}` }}>
-        <span style={{ fontSize: "10px", fontWeight: 650, textTransform: "uppercase", letterSpacing: "0.06em", color: headerText }}>How It Works</span>
+    <div className="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white/60 dark:bg-black/30 h-full">
+      {/* Header — identical to Breakpoints block */}
+      <div className="flex items-center justify-between px-3 py-2 bg-black/[0.04] dark:bg-white/[0.06] border-b border-black/[0.06] dark:border-white/[0.06]">
+        <span className="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/45 dark:text-white/40">Setting</span>
+        <span className="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/45 dark:text-white/40">CSS Variable → Value</span>
       </div>
+      {/* Rows — identical structure to Breakpoints */}
       {chains.map((ch, idx) => {
         const liveVal = liveVars[ch.variable] || "";
-        const displayVal = liveVal.length > 18 ? liveVal.slice(0, 18) + "…" : liveVal;
+        const displayVal = liveVal.length > 20 ? liveVal.slice(0, 20) + "…" : liveVal;
         return (
-          <div key={ch.variable} style={{ display: "flex", alignItems: "center", padding: "12px 14px", borderBottom: idx < chains.length - 1 ? `1px solid ${rowBorder}` : "none", gap: "8px" }}>
-            <span style={{ fontSize: "12px", fontWeight: 600, color: labelText, minWidth: 90, flexShrink: 0 }}>{ch.setting}</span>
-            <Arrow isDark={isDark} />
-            <div style={{ flex: 1, minWidth: 0 }}>
-              <span style={{ fontSize: "10px", fontFamily: "var(--font-mono)", color: monoText, display: "block" }}>{ch.variable}</span>
-              <span style={{ fontSize: "9px", fontFamily: "var(--font-mono)", color: isDark ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.25)" }}>{displayVal}</span>
-            </div>
-            <Arrow isDark={isDark} />
-            <div style={{ width: 36, height: 36, flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
-              {ch.previewType === "radius" && <div style={{ width: 32, height: 32, borderRadius: "var(--glass-radius, 12px)", background: isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.05)", border: `2px solid ${isDark ? "rgba(255,255,255,0.12)" : "rgba(0,0,0,0.08)"}` }} />}
-              {ch.previewType === "blur" && <div style={{ width: 32, height: 32, borderRadius: 6, backdropFilter: "blur(var(--glass-blur, 12px))", WebkitBackdropFilter: "blur(var(--glass-blur, 12px))", background: isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.02)", border: `1px solid ${isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.05)"}` }} />}
-              {ch.previewType === "shadow" && <div style={{ width: 32, height: 32, borderRadius: 6, background: isDark ? "rgba(255,255,255,0.06)" : "#fff", boxShadow: "var(--glass-shadow, 0 2px 8px rgba(0,0,0,0.1))" }} />}
+          <div key={ch.variable} className={`flex items-center justify-between gap-3 px-3 py-2.5 ${idx < chains.length - 1 ? "border-b border-black/[0.04] dark:border-white/[0.04]" : ""}`}>
+            <span className="text-[12px] font-[600] text-black/75 dark:text-white/70">{ch.setting}</span>
+            <div className="flex items-center gap-2">
+              <span className="text-[11px] font-mono px-2 py-0.5 rounded-full bg-black/[0.05] dark:bg-white/[0.07] text-black/50 dark:text-white/40 tabular-nums">{ch.variable}</span>
+              <span className="text-[10px] font-mono text-black/30 dark:text-white/25 tabular-nums">{displayVal}</span>
             </div>
           </div>
         );
@@ -241,49 +232,44 @@ function AppearanceControls({ isDark }: { isDark: boolean }) {
   );
 }
 
-/* ─── Column 3: Live Component Preview ─── */
-function LivePreview({ isDark }: { isDark: boolean }) {
+/* ─── Column 3: Live Component Preview (Breakpoints-style table) ─── */
+function LivePreview() {
   const [toggled, setToggled] = useState(false);
 
-  const tableBg = isDark ? "rgba(0,0,0,0.30)" : "rgba(255,255,255,0.60)";
-  const borderColor = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)";
-  const headerBg = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)";
-  const headerText = isDark ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.45)";
-  const rowBorder = isDark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.04)";
-  const labelText = isDark ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.55)";
-
   return (
-    <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: tableBg, border: `1px solid ${borderColor}`, height: "100%" }}>
-      <div style={{ padding: "10px 14px", background: headerBg, borderBottom: `1px solid ${borderColor}` }}>
-        <span style={{ fontSize: "10px", fontWeight: 650, textTransform: "uppercase", letterSpacing: "0.06em", color: headerText }}>Live Preview</span>
+    <div className="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white/60 dark:bg-black/30 h-full">
+      {/* Header — identical to Breakpoints block */}
+      <div className="flex items-center px-3 py-2 bg-black/[0.04] dark:bg-white/[0.06] border-b border-black/[0.06] dark:border-white/[0.06]">
+        <span className="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/45 dark:text-white/40">Live Preview</span>
       </div>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "12px 14px", borderBottom: `1px solid ${rowBorder}` }}>
-        <span style={{ fontSize: "12px", fontWeight: 550, color: labelText }}>Gel Button</span>
+      {/* Rows — identical structure to Breakpoints */}
+      <div className="flex items-center justify-between gap-3 px-3 py-2.5 border-b border-black/[0.04] dark:border-white/[0.04]">
+        <span className="text-[12px] font-[600] text-black/75 dark:text-white/70">Gel Button</span>
         <Button variant="gel" size="sm">Button</Button>
       </div>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "12px 14px", borderBottom: `1px solid ${rowBorder}` }}>
-        <span style={{ fontSize: "12px", fontWeight: 550, color: labelText }}>Glass Card</span>
+      <div className="flex items-center justify-between gap-3 px-3 py-2.5 border-b border-black/[0.04] dark:border-white/[0.04]">
+        <span className="text-[12px] font-[600] text-black/75 dark:text-white/70">Glass Card</span>
         <Card glass={1} style={{ padding: "6px 14px" }}>
-          <span style={{ fontSize: "11px", color: isDark ? "rgba(255,255,255,0.65)" : "rgba(0,0,0,0.65)" }}>Content</span>
+          <span className="text-[11px] text-black/65 dark:text-white/65">Content</span>
         </Card>
       </div>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "12px 14px", borderBottom: `1px solid ${rowBorder}`, gap: 10 }}>
-        <span style={{ fontSize: "12px", fontWeight: 550, color: labelText, flexShrink: 0 }}>Input</span>
+      <div className="flex items-center justify-between gap-3 px-3 py-2.5 border-b border-black/[0.04] dark:border-white/[0.04]">
+        <span className="text-[12px] font-[600] text-black/75 dark:text-white/70 shrink-0">Input</span>
         <Input placeholder="Type here..." style={{ maxWidth: 140, fontSize: 12 }} />
       </div>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "12px 14px", borderBottom: `1px solid ${rowBorder}` }}>
-        <span style={{ fontSize: "12px", fontWeight: 550, color: labelText }}>Toggle</span>
+      <div className="flex items-center justify-between gap-3 px-3 py-2.5 border-b border-black/[0.04] dark:border-white/[0.04]">
+        <span className="text-[12px] font-[600] text-black/75 dark:text-white/70">Toggle</span>
         <Toggle checked={toggled} onChange={setToggled} />
       </div>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "12px 14px", borderBottom: `1px solid ${rowBorder}` }}>
-        <span style={{ fontSize: "12px", fontWeight: 550, color: labelText }}>Badges</span>
-        <div style={{ display: "flex", gap: 5, alignItems: "center" }}>
+      <div className="flex items-center justify-between gap-3 px-3 py-2.5 border-b border-black/[0.04] dark:border-white/[0.04]">
+        <span className="text-[12px] font-[600] text-black/75 dark:text-white/70">Badges</span>
+        <div className="flex gap-1.5 items-center">
           <Badge variant="success">Live</Badge>
-          <Tag variant="info">v0.20</Tag>
+          <Tag variant="info">v0.21</Tag>
         </div>
       </div>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "12px 14px" }}>
-        <span style={{ fontSize: "12px", fontWeight: 550, color: labelText }}>Spinner</span>
+      <div className="flex items-center justify-between gap-3 px-3 py-2.5">
+        <span className="text-[12px] font-[600] text-black/75 dark:text-white/70">Spinner</span>
         <Spinner size={18} />
       </div>
     </div>
@@ -344,9 +330,9 @@ export function LiveTheming() {
     <div>
       {/* 3-column layout: How It Works | Appearance | Live Preview */}
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "16px", marginBottom: "16px" }}>
-        <HowItWorks isDark={isDark} />
+        <HowItWorks />
         <AppearanceControls isDark={isDark} />
-        <LivePreview isDark={isDark} />
+        <LivePreview />
       </div>
       {/* Full-width CSS Variables table */}
       <LiveVariablesTable isDark={isDark} />
