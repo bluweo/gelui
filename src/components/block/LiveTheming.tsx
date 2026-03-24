@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Button } from "@/primitives/buttons";
 import { Card } from "@/primitives/surfaces";
 import { Input } from "@/primitives/inputs";
@@ -329,27 +329,28 @@ function LiveVariablesTable() {
   return (
     <div className="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white dark:bg-[#1a1a1a]">
       {/* Header */}
-      <div className="grid grid-cols-[1fr_1.5fr_0.8fr] gap-3 px-3 py-2 bg-gray-100/80 dark:bg-white/[0.06] border-b border-black/[0.06] dark:border-white/[0.06]">
-        <span className="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/45 dark:text-white/40">Variable</span>
-        <span className="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/45 dark:text-white/40">Current Value</span>
-        <span className="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/45 dark:text-white/40">Set By</span>
+      <div className="flex items-center justify-between px-4 py-2.5 bg-gray-100/80 dark:bg-white/[0.06] border-b border-black/[0.08] dark:border-white/[0.08]">
+        <span className="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/50 dark:text-white/45">CSS Variables</span>
+        <span className="text-[10px] font-mono text-black/30 dark:text-white/25">{CSS_VARS.length} variables</span>
       </div>
       {/* Grouped rows */}
       {Object.entries(grouped).map(([category, vars]) => (
         <div key={category}>
           {/* Category header */}
-          <div className="px-3 py-1 bg-black/[0.02] dark:bg-white/[0.03] border-b border-black/[0.04] dark:border-white/[0.04]">
-            <span className="text-[9px] font-[650] uppercase tracking-[0.08em] text-black/25 dark:text-white/20">{category}</span>
+          <div className="px-4 py-1.5 bg-gray-50 dark:bg-white/[0.04] border-b border-black/[0.06] dark:border-white/[0.06]">
+            <span className="text-[10px] font-[650] uppercase tracking-[0.08em] text-black/35 dark:text-white/25">{category}</span>
           </div>
           {/* Variable rows */}
           {vars.map((v, idx) => {
             const rawVal = values[v.variable] || "(not set)";
-            const displayVal = rawVal.length > 40 ? rawVal.slice(0, 40) + "…" : rawVal;
+            const displayVal = rawVal.length > 35 ? rawVal.slice(0, 35) + "…" : rawVal;
             return (
-              <div key={v.variable} className={`grid grid-cols-[1fr_1.5fr_0.8fr] gap-3 items-center px-3 py-2 ${idx < vars.length - 1 ? "border-b border-black/[0.04] dark:border-white/[0.04]" : ""}`}>
-                <span className="text-[11px] font-mono text-black/40 dark:text-white/35 tabular-nums">{v.variable}</span>
-                <span className="text-[11px] font-mono px-2 py-0.5 rounded-full contrast-muted contrast-border tabular-nums w-fit break-all">{displayVal}</span>
-                <span className="text-[10px] text-black/25 dark:text-white/20">{v.setBy}</span>
+              <div key={v.variable} className={`flex items-center justify-between gap-4 px-4 py-2.5 ${idx < vars.length - 1 ? "border-b border-black/[0.05] dark:border-white/[0.05]" : ""}`}>
+                <div className="flex flex-col gap-0.5 min-w-0">
+                  <span className="text-[12px] font-mono font-[500] text-black/70 dark:text-white/65 tabular-nums">{v.variable}</span>
+                  <span className="text-[10px] text-black/35 dark:text-white/25">{v.setBy}</span>
+                </div>
+                <span className="text-[11px] font-mono px-2.5 py-1 rounded-[var(--glass-radius-sm)] bg-black/[0.04] dark:bg-white/[0.06] text-black/60 dark:text-white/50 tabular-nums shrink-0 max-w-[200px] truncate" title={rawVal}>{displayVal}</span>
               </div>
             );
           })}
@@ -363,12 +364,23 @@ function LiveVariablesTable() {
 export function LiveTheming() {
   const isDark = useDarkMode();
   const [showVars, setShowVars] = useState(false);
+  const varsRef = useRef<HTMLDivElement>(null);
+
+  const handleToggle = () => {
+    const next = !showVars;
+    setShowVars(next);
+    if (next) {
+      setTimeout(() => {
+        varsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 100);
+    }
+  };
 
   return (
     <div className="relative w-full">
       {/* Toggle button — top right, overlaps with card header area */}
       <button
-        onClick={() => setShowVars(!showVars)}
+        onClick={handleToggle}
         className="relative mb-3 ml-auto md:absolute md:-top-[52px] md:right-0 md:mb-0 flex items-center gap-2 px-3 py-1.5 rounded-full text-[11px] font-[600] cursor-pointer transition-all duration-200 hover:scale-[1.02] border contrast-border contrast-muted"
         style={{ background: "transparent" }}
       >
@@ -390,6 +402,7 @@ export function LiveTheming() {
       </div>
       {/* Collapsible CSS Variables table — smooth animation */}
       <div
+        ref={varsRef}
         className="transition-all duration-300 ease-in-out overflow-hidden"
         style={{
           maxHeight: showVars ? "2000px" : "0px",
