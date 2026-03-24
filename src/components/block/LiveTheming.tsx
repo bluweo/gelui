@@ -79,19 +79,19 @@ function SettingsPreview() {
       <div className="px-4 py-4 border-b contrast-border">
         <div className="flex items-center justify-between mb-3">
           <span className="text-[12px] font-[600] contrast-text">Border Radius</span>
-          <span className="text-[11px] font-mono px-2 py-0.5 rounded-full bg-black/[0.05] dark:bg-white/[0.07] text-black/50 dark:text-white/40 tabular-nums">{liveVars["--glass-radius"] || "14px"}</span>
+          <span className="text-[11px] font-mono px-2 py-0.5 rounded-full contrast-muted contrast-border tabular-nums">{liveVars["--glass-radius"] || "14px"}</span>
         </div>
         <div className="flex items-center gap-3">
           <div
-            className="w-16 h-16 bg-black/[0.06] dark:bg-white/[0.08] border-2 border-black/[0.1] dark:border-white/[0.12] transition-all duration-300"
+            className="w-16 h-16 glass-1 border-2 contrast-border transition-all duration-300"
             style={{ borderRadius: "var(--glass-radius, 14px)" }}
           />
           <div
-            className="w-10 h-10 bg-black/[0.06] dark:bg-white/[0.08] border-2 border-black/[0.1] dark:border-white/[0.12] transition-all duration-300"
+            className="w-10 h-10 glass-1 border-2 contrast-border transition-all duration-300"
             style={{ borderRadius: "var(--glass-radius-sm, 10px)" }}
           />
           <div
-            className="h-8 px-4 bg-black/[0.06] dark:bg-white/[0.08] border-2 border-black/[0.1] dark:border-white/[0.12] transition-all duration-300"
+            className="h-8 px-4 glass-1 border-2 contrast-border transition-all duration-300"
             style={{ borderRadius: "var(--glass-radius-pill, 40px)" }}
           />
         </div>
@@ -101,10 +101,10 @@ function SettingsPreview() {
       <div className="px-4 py-4 border-b contrast-border">
         <div className="flex items-center justify-between mb-3">
           <span className="text-[12px] font-[600] contrast-text">Blur Intensity</span>
-          <span className="text-[11px] font-mono px-2 py-0.5 rounded-full bg-black/[0.05] dark:bg-white/[0.07] text-black/50 dark:text-white/40 tabular-nums">{liveVars["--glass-blur"] || "24px"}</span>
+          <span className="text-[11px] font-mono px-2 py-0.5 rounded-full contrast-muted contrast-border tabular-nums">{liveVars["--glass-blur"] || "24px"}</span>
         </div>
         <div
-          className="w-full h-14 rounded-[var(--glass-radius-sm)] border border-black/[0.06] dark:border-white/[0.06] transition-all duration-300"
+          className="w-full h-14 rounded-[var(--glass-radius-sm)] border contrast-border transition-all duration-300"
           style={{
             backdropFilter: "blur(var(--glass-blur, 24px))",
             WebkitBackdropFilter: "blur(var(--glass-blur, 24px))",
@@ -112,7 +112,7 @@ function SettingsPreview() {
           }}
         >
           <div className="flex items-center justify-center h-full">
-            <span className="text-[10px] font-mono text-black/30 dark:text-white/25">backdrop-filter: blur({liveVars["--glass-blur"] || "24px"})</span>
+            <span className="text-[10px] font-mono contrast-muted">backdrop-filter: blur({liveVars["--glass-blur"] || "24px"})</span>
           </div>
         </div>
       </div>
@@ -121,7 +121,7 @@ function SettingsPreview() {
       <div className="px-4 py-4">
         <div className="flex items-center justify-between mb-3">
           <span className="text-[12px] font-[600] contrast-text">Shadow Depth</span>
-          <span className="text-[11px] font-mono px-2 py-0.5 rounded-full bg-black/[0.05] dark:bg-white/[0.07] text-black/50 dark:text-white/40 tabular-nums truncate max-w-[120px]">{(liveVars["--glass-shadow"] || "none").slice(0, 16)}…</span>
+          <span className="text-[11px] font-mono px-2 py-0.5 rounded-full contrast-muted contrast-border tabular-nums truncate max-w-[120px]">{(liveVars["--glass-shadow"] || "none").slice(0, 16)}…</span>
         </div>
         <div className="flex items-center gap-3">
           <div
@@ -348,7 +348,7 @@ function LiveVariablesTable() {
             return (
               <div key={v.variable} className={`grid grid-cols-[1fr_1.5fr_0.8fr] gap-3 items-center px-3 py-2 ${idx < vars.length - 1 ? "border-b border-black/[0.04] dark:border-white/[0.04]" : ""}`}>
                 <span className="text-[11px] font-mono text-black/40 dark:text-white/35 tabular-nums">{v.variable}</span>
-                <span className="text-[11px] font-mono px-2 py-0.5 rounded-full bg-black/[0.05] dark:bg-white/[0.07] text-black/50 dark:text-white/40 tabular-nums w-fit break-all">{displayVal}</span>
+                <span className="text-[11px] font-mono px-2 py-0.5 rounded-full contrast-muted contrast-border tabular-nums w-fit break-all">{displayVal}</span>
                 <span className="text-[10px] text-black/25 dark:text-white/20">{v.setBy}</span>
               </div>
             );
