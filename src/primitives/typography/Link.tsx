@@ -17,8 +17,9 @@ export function Link({
       href={href}
       className={className}
       style={{
-        fontSize: "15px",
-        fontWeight: 500,
+        fontSize: "var(--type-link-size, 15px)",
+        fontWeight: "var(--type-link-weight, 550)" as any,
+        lineHeight: "var(--type-link-lh, 1.5)",
         color: dark ? "#b0c4af" : "#354334",
         textDecoration: "underline",
         textDecorationColor: dark

@@ -5,10 +5,10 @@ export function Label({ children, className = "", style }: BaseProps) {
     <span
       className={className}
       style={{
-        fontSize: "12px",
-        fontWeight: 600,
-        letterSpacing: "0.04em",
-        textTransform: "uppercase" as const,
+        fontSize: `var(--type-label-size, 13px)`,
+        fontWeight: `var(--type-label-weight, 600)` as any,
+        lineHeight: `var(--type-label-lh, 1)`,
+        letterSpacing: `var(--type-label-ls, 0.02em)`,
         fontFamily: "var(--font-ui)",
         ...style,
       }}

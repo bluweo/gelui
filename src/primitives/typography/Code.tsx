@@ -20,7 +20,9 @@ export function Code({
       <code
         className={className}
         style={{
-          fontSize: "13px",
+          fontSize: "var(--type-code-size, 13px)",
+          fontWeight: "var(--type-code-weight, 500)" as any,
+          lineHeight: "var(--type-code-lh, 1.5)",
           fontFamily: "var(--font-mono)",
           background: dark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.06)",
           color: dark ? "#e0e0e0" : "inherit",

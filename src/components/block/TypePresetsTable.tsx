@@ -200,7 +200,17 @@ export function TypePresetsTable() {
     }
     return "medium";
   });
-  const [presets, setPresets] = useState(() => scalePresets(scale));
+  const [presets, setPresets] = useState(() => {
+    if (typeof window !== "undefined") {
+      try {
+        const stored = JSON.parse(localStorage.getItem("gelui-type-presets") || "");
+        if (Array.isArray(stored) && stored.length === INITIAL_PRESETS.length) {
+          return INITIAL_PRESETS.map((p, i) => ({ ...p, size: stored[i].size, weight: stored[i].weight, lh: stored[i].lh, ls: stored[i].ls || p.ls }));
+        }
+      } catch {}
+    }
+    return scalePresets(scale);
+  });
   const [isDark, setIsDark] = useState(false);
   const [editingIdx, setEditingIdx] = useState<number | null>(null);
   const isModified = scale !== "medium" || JSON.stringify(presets) !== JSON.stringify(INITIAL_PRESETS);
@@ -213,12 +223,36 @@ export function TypePresetsTable() {
     return () => obs.disconnect();
   }, []);
 
-  // Apply scale globally — adjust font-size on all text elements in main content
+  // Apply scale globally — save to localStorage + inject CSS variables
   useEffect(() => {
     localStorage.setItem("gelui-type-scale", scale);
-    // Dispatch custom event so DSShell applies it globally
     window.dispatchEvent(new CustomEvent("gelui-type-scale-change"));
   }, [scale]);
+
+  // Inject CSS variables whenever presets change — propagates to all primitives
+  useEffect(() => {
+    const rs = document.documentElement.style;
+    const varMap: Record<string, string> = {
+      "Display": "display",
+      "H1": "h1", "H2": "h2", "H3": "h3", "H4": "h4", "H5": "h5", "H6": "h6",
+      "Body": "body", "Body Sm": "body-sm",
+      "Caption": "caption", "Overline": "overline", "Label": "label",
+      "Code": "code", "Code Sm": "code-sm", "Link": "link",
+    };
+    for (const p of presets) {
+      const key = varMap[p.name];
+      if (!key) continue;
+      rs.setProperty(`--type-${key}-size`, p.size);
+      rs.setProperty(`--type-${key}-weight`, String(p.weight));
+      rs.setProperty(`--type-${key}-lh`, p.lh);
+      rs.setProperty(`--type-${key}-ls`, p.ls);
+    }
+    // Save to localStorage for persistence across pages
+    localStorage.setItem("gelui-type-presets", JSON.stringify(
+      presets.map(p => ({ name: p.name, size: p.size, weight: p.weight, lh: p.lh, ls: p.ls }))
+    ));
+    window.dispatchEvent(new CustomEvent("gelui-type-presets-change"));
+  }, [presets]);
 
   const getFontFamily = (role: string) => {
     switch (role) {

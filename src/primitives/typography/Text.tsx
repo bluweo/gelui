@@ -7,24 +7,24 @@ interface TextProps extends BaseProps {
 
 export function Text({
   size = "md",
-  weight = 400,
+  weight,
   children,
   className = "",
   style,
 }: TextProps) {
-  const sizeMap: Record<string, string> = {
-    xs: "12px",
-    sm: "13px",
-    md: "15px",
-    lg: "18px",
-  };
+  // sm maps to "body-sm" preset, md maps to "body" preset
+  const varKey = size === "sm" ? "body-sm" : "body";
+  const fallbackSize = size === "sm" ? "13px" : "15px";
+  const fallbackWeight = size === "sm" ? 450 : 450;
+
   return (
     <p
       className={className}
       style={{
-        fontSize: sizeMap[size],
-        fontWeight: weight,
-        lineHeight: 1.6,
+        fontSize: `var(--type-${varKey}-size, ${fallbackSize})`,
+        fontWeight: weight ?? `var(--type-${varKey}-weight, ${fallbackWeight})` as any,
+        lineHeight: `var(--type-${varKey}-lh, 1.6)`,
+        letterSpacing: `var(--type-${varKey}-ls, 0)`,
         fontFamily: "var(--font-body)",
         margin: 0,
         ...style,

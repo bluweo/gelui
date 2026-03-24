@@ -126,6 +126,21 @@ const ogImageUrl = ogImage.startsWith("http") ? ogImage : new URL(ogImage, siteU
           }
         });
       } catch(e) {}
+
+      // Restore type presets CSS variables
+      try {
+        var typePresets = JSON.parse(localStorage.getItem("gelui-type-presets") || "[]");
+        var varMap = {"Display":"display","H1":"h1","H2":"h2","H3":"h3","H4":"h4","H5":"h5","H6":"h6","Body":"body","Body Sm":"body-sm","Caption":"caption","Overline":"overline","Label":"label","Code":"code","Code Sm":"code-sm","Link":"link"};
+        var rs = document.documentElement.style;
+        typePresets.forEach(function(p) {
+          var key = varMap[p.name];
+          if (!key) return;
+          if (p.size) rs.setProperty("--type-" + key + "-size", p.size);
+          if (p.weight) rs.setProperty("--type-" + key + "-weight", String(p.weight));
+          if (p.lh) rs.setProperty("--type-" + key + "-lh", p.lh);
+          if (p.ls) rs.setProperty("--type-" + key + "-ls", p.ls);
+        });
+      } catch(e) {}
     })();
     </script>
   </head>
