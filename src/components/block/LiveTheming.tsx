@@ -292,8 +292,8 @@ function LivePreview() {
       </div>
       <div className="flex items-center justify-between gap-3 px-3 py-2.5 border-b border-black/[0.10] dark:border-white/[0.10]">
         <span className="text-[12px] font-[600] text-black/75 dark:text-white/70">Glass Card</span>
-        <Card glass={1} style={{ padding: "6px 14px" }}>
-          <span className="text-[11px] text-black/65 dark:text-white/65">Content</span>
+        <Card glass={1} style={{ padding: "10px 24px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <span className="text-[12px] font-[500] text-black/65 dark:text-white/65">Glass Card</span>
         </Card>
       </div>
       <div className="flex items-center justify-between gap-3 px-3 py-2.5 border-b border-black/[0.10] dark:border-white/[0.10]">
