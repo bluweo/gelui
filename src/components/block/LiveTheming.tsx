@@ -298,7 +298,7 @@ function LivePreview() {
       </div>
       <div className="flex items-center justify-between gap-3 px-3 py-2.5 border-b border-black/[0.10] dark:border-white/[0.10]">
         <span className="text-[12px] font-[600] text-black/75 dark:text-white/70 shrink-0">Input</span>
-        <Input placeholder="Type..." style={{ maxWidth: 100, fontSize: 11, padding: "6px 10px" }} />
+        <Input placeholder="Type..." style={{ maxWidth: 100, fontSize: 11, padding: "6px 10px", marginLeft: "auto" }} />
       </div>
       <div className="flex items-center justify-between gap-3 px-3 py-2.5 border-b border-black/[0.10] dark:border-white/[0.10]">
         <span className="text-[12px] font-[600] text-black/75 dark:text-white/70">Toggle</span>
