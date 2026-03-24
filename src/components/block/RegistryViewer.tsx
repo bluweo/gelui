@@ -281,7 +281,7 @@ export function RegistryViewer({ components }: Props) {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "40px 1fr 1.2fr 0.8fr 0.5fr",
+            gridTemplateColumns: "40px 1fr 0.9fr 1.2fr 0.6fr 0.4fr",
             padding: "10px 16px",
             borderBottom: `1px solid ${borderColor}`,
             background: bgCategoryHeader,
@@ -292,6 +292,7 @@ export function RegistryViewer({ components }: Props) {
           <span style={{ fontSize: "10px", fontWeight: 650, textTransform: "uppercase", letterSpacing: "0.06em", color: textMuted }}>#</span>
           <span style={{ fontSize: "10px", fontWeight: 650, textTransform: "uppercase", letterSpacing: "0.06em", color: textMuted }}>Component</span>
           <span style={{ fontSize: "10px", fontWeight: 650, textTransform: "uppercase", letterSpacing: "0.06em", color: textMuted }}>DSL ID</span>
+          <span style={{ fontSize: "10px", fontWeight: 650, textTransform: "uppercase", letterSpacing: "0.06em", color: textMuted }}>File</span>
           <span style={{ fontSize: "10px", fontWeight: 650, textTransform: "uppercase", letterSpacing: "0.06em", color: textMuted }}>Layer</span>
           <span style={{ fontSize: "10px", fontWeight: 650, textTransform: "uppercase", letterSpacing: "0.06em", color: textMuted }}>Status</span>
         </div>
@@ -326,7 +327,7 @@ export function RegistryViewer({ components }: Props) {
                     onClick={() => setExpandedId(isExpanded ? null : comp.id)}
                     style={{
                       display: "grid",
-                      gridTemplateColumns: "40px 1fr 1.2fr 0.8fr 0.5fr",
+                      gridTemplateColumns: "40px 1fr 0.9fr 1.2fr 0.6fr 0.4fr",
                       padding: "10px 16px",
                       borderBottom: `1px solid ${borderColor}`,
                       gap: "8px",
@@ -370,6 +371,28 @@ export function RegistryViewer({ components }: Props) {
                       >
                         {comp.id}
                       </code>
+                    </div>
+
+                    {/* File path */}
+                    <div style={{ overflow: "hidden" }}>
+                      {comp.path ? (
+                        <code
+                          style={{
+                            fontSize: "10px",
+                            fontFamily: "var(--font-mono, monospace)",
+                            color: textMuted,
+                            whiteSpace: "nowrap",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                            display: "block",
+                          }}
+                          title={comp.path}
+                        >
+                          {comp.path.replace(/^src\//, "").replace(/\.tsx?$/, "")}
+                        </code>
+                      ) : (
+                        <span style={{ fontSize: "10px", color: textMuted, opacity: 0.4 }}>—</span>
+                      )}
                     </div>
 
                     {/* Layer badge */}

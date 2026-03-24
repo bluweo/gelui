@@ -6,12 +6,12 @@
       "id": "heading",
       "name": "Heading",
       "displayName": "Heading",
-      "description": "H1\u2013H6 headings with font role and tracking",
+      "description": "H1–H6 headings with font role and tracking",
       "layer": "primitive",
       "category": "typography",
       "status": "stable",
       "version": "0.8.0",
-      "path": "inline",
+      "path": "src/primitives/typography/Heading.tsx",
       "isReact": false,
       "props": {
         "level": {
@@ -78,7 +78,7 @@
       "category": "typography",
       "status": "stable",
       "version": "0.8.0",
-      "path": "inline",
+      "path": "src/primitives/typography/Caption.tsx",
       "isReact": false,
       "props": {},
       "documentedOn": "/design-system/primitives",
@@ -118,7 +118,7 @@
       "category": "typography",
       "status": "stable",
       "version": "0.8.0",
-      "path": "inline",
+      "path": "src/primitives/typography/Label.tsx",
       "isReact": false,
       "props": {},
       "documentedOn": "/design-system/primitives",
@@ -168,7 +168,7 @@
       "category": "typography",
       "status": "stable",
       "version": "0.8.0",
-      "path": "inline",
+      "path": "src/primitives/typography/Link.tsx",
       "isReact": false,
       "props": {
         "href": {
@@ -324,7 +324,7 @@
       "category": "interactive",
       "status": "stable",
       "version": "0.1.0",
-      "path": "src/styles/global.css",
+      "path": "src/primitives/buttons/IconButton.tsx",
       "isReact": false,
       "props": {
         "size": {
@@ -353,7 +353,7 @@
       "category": "interactive",
       "status": "stable",
       "version": "0.8.0",
-      "path": "inline",
+      "path": "src/primitives/buttons/LinkButton.tsx",
       "isReact": false,
       "props": {},
       "documentedOn": "/design-system/primitives",
@@ -659,7 +659,7 @@
       "category": "form",
       "status": "stable",
       "version": "0.8.0",
-      "path": "src/components/block/InputFieldsDemo.tsx",
+      "path": "src/primitives/inputs/SearchInput.tsx",
       "isReact": true,
       "props": {
         "placeholder": {
@@ -715,7 +715,7 @@
       "category": "form",
       "status": "stable",
       "version": "0.8.0",
-      "path": "src/components/block/InputFieldsDemo.tsx",
+      "path": "src/primitives/inputs/SearchableSelect.tsx",
       "exportName": "SearchableSelect",
       "isReact": true,
       "props": {
@@ -745,7 +745,7 @@
       "category": "form",
       "status": "stable",
       "version": "0.8.0",
-      "path": "src/components/block/InputFieldsDemo.tsx",
+      "path": "src/primitives/inputs/Textarea.tsx",
       "isReact": true,
       "props": {
         "placeholder": {
@@ -773,7 +773,7 @@
       "category": "form",
       "status": "stable",
       "version": "0.8.0",
-      "path": "src/components/block/ControlsDemo.tsx",
+      "path": "src/primitives/controls/Toggle.tsx",
       "isReact": true,
       "props": {
         "on": {
@@ -799,7 +799,7 @@
       "category": "form",
       "status": "stable",
       "version": "0.8.0",
-      "path": "src/components/block/ControlsDemo.tsx",
+      "path": "src/primitives/controls/Checkbox.tsx",
       "isReact": true,
       "props": {
         "checked": {
@@ -824,7 +824,7 @@
       "category": "form",
       "status": "stable",
       "version": "0.8.0",
-      "path": "src/components/block/ControlsDemo.tsx",
+      "path": "src/primitives/controls/Radio.tsx",
       "isReact": true,
       "props": {
         "selected": {
@@ -849,7 +849,7 @@
       "category": "form",
       "status": "stable",
       "version": "0.8.0",
-      "path": "src/components/block/ControlsDemo.tsx",
+      "path": "src/primitives/controls/SegmentedControl.tsx",
       "isReact": true,
       "props": {
         "options": {
@@ -1089,7 +1089,7 @@
       "category": "feedback",
       "status": "stable",
       "version": "0.8.0",
-      "path": "inline",
+      "path": "src/primitives/data/Tag.tsx",
       "isReact": false,
       "props": {
         "removable": {
@@ -1139,7 +1139,7 @@
       "category": "media",
       "status": "stable",
       "version": "0.8.0",
-      "path": "inline",
+      "path": "src/primitives/data/Avatar.tsx",
       "isReact": false,
       "props": {
         "size": {
@@ -1205,7 +1205,7 @@
       "category": "feedback",
       "status": "stable",
       "version": "0.8.0",
-      "path": "inline",
+      "path": "src/primitives/feedback/Spinner.tsx",
       "isReact": false,
       "props": {
         "size": {
@@ -1306,7 +1306,7 @@
       "category": "navigation",
       "status": "stable",
       "version": "0.8.0",
-      "path": "src/components/block/PrimitiveNavigation.tsx",
+      "path": "src/primitives/navigation/TabBar.tsx",
       "exportName": "TabBar",
       "isReact": true,
       "props": {
@@ -1336,7 +1336,7 @@
       "category": "navigation",
       "status": "stable",
       "version": "0.8.0",
-      "path": "src/components/block/PrimitiveNavigation.tsx",
+      "path": "src/primitives/navigation/PillTabs.tsx",
       "exportName": "PillTabs",
       "isReact": true,
       "props": {
@@ -1365,7 +1365,7 @@
       "category": "navigation",
       "status": "stable",
       "version": "0.8.0",
-      "path": "src/components/block/PrimitiveNavigation.tsx",
+      "path": "src/primitives/navigation/Breadcrumb.tsx",
       "isReact": true,
       "props": {
         "items": {
@@ -1390,7 +1390,7 @@
       "category": "navigation",
       "status": "stable",
       "version": "0.8.0",
-      "path": "src/components/block/PrimitiveNavigation.tsx",
+      "path": "src/primitives/navigation/NavItem.tsx",
       "isReact": true,
       "props": {
         "label": {
@@ -1420,7 +1420,7 @@
       "category": "layout",
       "status": "stable",
       "version": "0.8.0",
-      "path": "inline",
+      "path": "src/primitives/layout/Stack.tsx",
       "isReact": false,
       "props": {
         "gap": {
@@ -1454,7 +1454,7 @@
       "category": "layout",
       "status": "stable",
       "version": "0.8.0",
-      "path": "inline",
+      "path": "src/primitives/layout/Inline.tsx",
       "isReact": false,
       "props": {
         "gap": {
@@ -1498,7 +1498,7 @@
       "category": "layout",
       "status": "stable",
       "version": "0.8.0",
-      "path": "inline",
+      "path": "src/primitives/layout/Center.tsx",
       "isReact": false,
       "props": {},
       "slots": {
@@ -1526,7 +1526,7 @@
       "category": "layout",
       "status": "stable",
       "version": "0.8.0",
-      "path": "inline",
+      "path": "src/primitives/layout/Spacer.tsx",
       "isReact": false,
       "props": {},
       "documentedOn": "/design-system/primitives",
@@ -1926,7 +1926,7 @@
       "category": "form",
       "status": "planned",
       "version": "0.12.0",
-      "path": "dsl/primitives.tsx",
+      "path": "src/primitives/inputs/Select.tsx",
       "exportName": "Select",
       "isReact": true,
       "props": {
@@ -1961,7 +1961,7 @@
       "category": "interactive",
       "status": "planned",
       "version": "0.12.0",
-      "path": "dsl/primitives.tsx",
+      "path": "src/primitives/controls/Slider.tsx",
       "exportName": "Slider",
       "isReact": true,
       "props": {
@@ -1996,7 +1996,7 @@
       "category": "overlay",
       "status": "planned",
       "version": "0.12.0",
-      "path": "dsl/primitives.tsx",
+      "path": "src/primitives/feedback/Modal.tsx",
       "exportName": "Modal",
       "isReact": true,
       "props": {
@@ -2035,7 +2035,7 @@
       "category": "overlay",
       "status": "planned",
       "version": "0.12.0",
-      "path": "dsl/primitives.tsx",
+      "path": "src/primitives/feedback/Tooltip.tsx",
       "exportName": "Tooltip",
       "isReact": true,
       "props": {
@@ -2072,7 +2072,7 @@
       "category": "overlay",
       "status": "planned",
       "version": "0.12.0",
-      "path": "dsl/primitives.tsx",
+      "path": "src/primitives/feedback/Overlay.tsx",
       "exportName": "Overlay",
       "isReact": true,
       "props": {
