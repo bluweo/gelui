@@ -122,6 +122,32 @@ function GelRadioPreview() {
   );
 }
 
+function TabBarPreview() {
+  const [active, setActive] = useState(1);
+  return <Primitives.TabBar tabs={["Overview","Settings","Activity"]} active={active} onChange={setActive} />;
+}
+
+function PillTabsPreview() {
+  const [active, setActive] = useState("All");
+  return <Primitives.PillTabs tabs={["All","Active","Archived"]} activeTab={active} onChange={setActive} />;
+}
+
+function SegmentedPreview() {
+  const [val, setVal] = useState("Week");
+  return <Primitives.SegmentedControl options={["Day","Week","Month"]} value={val} onChange={setVal} />;
+}
+
+function NavItemPreview() {
+  const [active, setActive] = useState(0);
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 4, width: 180 }}>
+      {["Overview","Settings","Team"].map((label, i) => (
+        <Primitives.NavItem key={label} label={label} active={active === i} onClick={() => setActive(i)} />
+      ))}
+    </div>
+  );
+}
+
 /* ── Component Preview ── */
 
 function ComponentPreview({ id, isDark }: { id: string; isDark: boolean }) {
@@ -163,9 +189,9 @@ function ComponentPreview({ id, isDark }: { id: string; isDark: boolean }) {
     ),
     "tag": (
       <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
-        <Primitives.Tag variant="default">Default</Primitives.Tag>
-        <Primitives.Tag variant="success">Success</Primitives.Tag>
-        <Primitives.Tag variant="info">Info</Primitives.Tag>
+        <Primitives.Tag label="Default" color="default" />
+        <Primitives.Tag label="Blue" color="blue" />
+        <Primitives.Tag label="Removable" color="green" onRemove={() => {}} />
       </div>
     ),
     "divider": <Primitives.Divider />,
@@ -183,14 +209,14 @@ function ComponentPreview({ id, isDark }: { id: string; isDark: boolean }) {
     "custom-select": <Primitives.Select options={[{value:"1",label:"Option A"},{value:"2",label:"Option B"},{value:"3",label:"Option C"}]} />,
     "select": <Primitives.Select options={[{value:"1",label:"Option A"},{value:"2",label:"Option B"},{value:"3",label:"Option C"}]} />,
     "radio": <RadioPreview />,
-    "segmented-control": <Primitives.SegmentedControl options={["Day","Week","Month"]} value="Week" onChange={() => {}} />,
+    "segmented-control": <SegmentedPreview />,
     "slider": <SliderPreview />,
     "icon-button": <Primitives.IconButton>+</Primitives.IconButton>,
     "link-button": <Primitives.LinkButton>Learn more &rarr;</Primitives.LinkButton>,
-    "tab-bar": <Primitives.TabBar tabs={["Overview","Settings","Activity"]} activeTab="Settings" onTabChange={() => {}} />,
-    "pill-tabs": <Primitives.PillTabs tabs={["All","Active","Archived"]} activeTab="All" onTabChange={() => {}} />,
-    "breadcrumb": <Primitives.Breadcrumb items={[{label:"Home"},{label:"Design System"},{label:"Registry"}]} />,
-    "nav-item": <Primitives.NavItem label="Settings" active={true} />,
+    "tab-bar": <TabBarPreview />,
+    "pill-tabs": <PillTabsPreview />,
+    "breadcrumb": <Primitives.Breadcrumb items={["Home","Design System","Registry"]} />,
+    "nav-item": <NavItemPreview />,
     "surface": <Primitives.Surface level={1} style={{ padding: 16, minHeight: 60 }}><Primitives.Text size="sm">Surface level 1</Primitives.Text></Primitives.Surface>,
     "box": <Primitives.Box style={{ padding: 12, border: "1px dashed rgba(128,128,128,0.3)" }}>Box content</Primitives.Box>,
     "stack": (
@@ -272,7 +298,7 @@ function ComponentPreview({ id, isDark }: { id: string; isDark: boolean }) {
         <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#FF3B30" }} />
       </div>
     ),
-    "chip": <Primitives.Tag variant="default" size="sm">Chip</Primitives.Tag>,
+    "chip": <Primitives.Tag label="Chip" color="blue" size="sm" />,
     "avatar-group": (
       <div style={{ display: "flex", marginLeft: 8 }}>
         {["A","B","C"].map((n, i) => (
