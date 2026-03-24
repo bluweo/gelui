@@ -5,6 +5,7 @@ import { useDarkMode } from "../hooks/useDarkMode";
 interface ButtonProps extends BaseProps {
   variant?: "solid" | "ghost" | "glass" | "gel" | "link";
   size?: "sm" | "md" | "lg";
+  shape?: "pill" | "rounded" | "circle";
   disabled?: boolean;
   fullWidth?: boolean;
   onClick?: () => void;
@@ -13,6 +14,7 @@ interface ButtonProps extends BaseProps {
 export function Button({
   variant = "solid",
   size = "md",
+  shape = "pill",
   disabled = false,
   fullWidth = false,
   children,
@@ -34,7 +36,7 @@ export function Button({
     fontWeight: 600,
     fontFamily: "var(--font-ui)",
     padding: `${s.py} ${s.px}`,
-    borderRadius: "var(--glass-radius-pill, 100px)",
+    borderRadius: shape === "circle" ? "50%" : shape === "rounded" ? "var(--glass-radius-sm, 8px)" : "var(--glass-radius-pill, 100px)",
     cursor: disabled ? "not-allowed" : "pointer",
     border: "none",
     transition: "all 200ms ease",
@@ -79,14 +81,12 @@ export function Button({
     },
     gel: {
       ...base,
-      background: dark
-        ? "rgba(255,255,255,0.12)"
-        : "rgba(255,255,255,0.25)",
-      backdropFilter: "blur(12px)",
-      WebkitBackdropFilter: "blur(12px)",
-      boxShadow:
-        "inset 0 2px 4px rgba(255,255,255,0.3), inset 0 -2px 4px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.06)",
+      // Gel buttons use CSS classes (gel-btn) for volumetric shadows
+      // Only set minimal inline styles — CSS handles the rest
       color: dark ? "rgba(255,255,255,0.85)" : "rgba(0,0,0,0.75)",
+      background: undefined,
+      padding: undefined,
+      border: undefined,
     },
     link: {
       ...base,
@@ -101,7 +101,7 @@ export function Button({
 
   return (
     <button
-      className={`${variant === "glass" ? "glass-1 glass-specular" : ""} ${variant === "gel" ? "gel-glass" : ""} ${className}`}
+      className={`${variant === "glass" ? "glass-1 glass-specular" : ""} ${variant === "gel" ? `gel-btn ${shape === "circle" ? "gel-btn-circle-sm" : "gel-btn-pill"}` : ""} ${className}`}
       style={{ ...variants[variant], ...style }}
       onClick={disabled ? undefined : onClick}
       disabled={disabled}
