@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "lastUpdated": "2026-03-24",
+  "lastUpdated": "2026-03-25",
   "components": [
     {
       "id": "heading",
@@ -2765,6 +2765,114 @@
         "kbd"
       ],
       "props": {}
+    },
+    {
+      "id": "view-source-modal",
+      "name": "ViewSourceModal",
+      "displayName": "View Source Modal",
+      "layer": "component",
+      "category": "overlay",
+      "status": "stable",
+      "path": "src/components/modal/ViewSourceModal.tsx",
+      "exportName": "ViewSourceModal",
+      "description": "Draggable code viewer modal with syntax highlighting, components list, and implementation tabs",
+      "version": "0.24.1",
+      "tags": [
+        "modal",
+        "code",
+        "source",
+        "syntax-highlighting",
+        "draggable"
+      ],
+      "props": {
+        "open": {
+          "type": "boolean",
+          "required": true
+        },
+        "onClose": {
+          "type": "function",
+          "required": true
+        },
+        "title": {
+          "type": "string",
+          "required": true
+        },
+        "code": {
+          "type": "string",
+          "required": true
+        },
+        "components": {
+          "type": "array",
+          "default": "[]"
+        },
+        "extraTabs": {
+          "type": "array",
+          "default": "[]"
+        }
+      }
+    },
+    {
+      "id": "view-source-button",
+      "name": "ViewSourceButton",
+      "displayName": "View Source Button",
+      "layer": "component",
+      "category": "interactive",
+      "status": "stable",
+      "path": "src/components/modal/ViewSourceModal.tsx",
+      "exportName": "ViewSourceButton",
+      "description": "Small </> icon button that triggers ViewSourceModal",
+      "version": "0.24.1",
+      "tags": [
+        "button",
+        "code",
+        "source",
+        "icon"
+      ],
+      "props": {
+        "title": {
+          "type": "string",
+          "required": true
+        },
+        "code": {
+          "type": "string",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "tag-input",
+      "name": "TagInput",
+      "displayName": "Tag Input",
+      "layer": "primitive",
+      "category": "form",
+      "status": "stable",
+      "path": "src/primitives/inputs/TagInput.tsx",
+      "exportName": "TagInput",
+      "description": "Type and press Enter to add tag pills with X to remove",
+      "version": "0.24.2",
+      "tags": [
+        "input",
+        "tag",
+        "pill",
+        "multi-select",
+        "form"
+      ],
+      "props": {
+        "value": {
+          "type": "array"
+        },
+        "placeholder": {
+          "type": "string",
+          "default": "Type and press Enter..."
+        },
+        "maxTags": {
+          "type": "number"
+        },
+        "disabled": {
+          "type": "boolean",
+          "default": false
+        }
+      }
     }
   ]
 }

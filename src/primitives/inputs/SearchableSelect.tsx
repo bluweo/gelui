@@ -144,11 +144,11 @@ export function SearchableSelect({
             WebkitBackdropFilter: "blur(20px)",
             border: `1px solid ${dark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)"}`,
             boxShadow: "0 8px 32px rgba(0,0,0,0.12)",
-            padding: "4px",
+            padding: "8px",
             overflow: "hidden",
           }}
         >
-          <div style={{ padding: "4px 4px 0" }}>
+          <div style={{ padding: "0 0 6px" }}>
             <input
               ref={inputRef}
               type="text"
@@ -163,14 +163,14 @@ export function SearchableSelect({
                 padding: "8px 12px",
                 fontSize: "13px",
                 fontFamily: "var(--font-body)",
-                border: `1px solid ${dark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)"}`,
+                border: "none",
                 borderRadius: "var(--glass-radius-sm, 8px)",
                 background: dark
                   ? "rgba(255,255,255,0.05)"
                   : "rgba(0,0,0,0.03)",
                 color: dark ? "#fff" : "#000",
                 outline: "none",
-                marginBottom: "4px",
+                marginBottom: "0",
               }}
             />
           </div>

@@ -137,6 +137,11 @@ function SegmentedPreview() {
   return <Primitives.SegmentedControl options={["Day","Week","Month"]} value={val} onChange={setVal} />;
 }
 
+function TagInputPreview() {
+  const [tags, setTags] = useState(["React", "Astro"]);
+  return <Primitives.TagInput value={tags} onChange={setTags} placeholder="Add tag..." />;
+}
+
 function NavItemPreview() {
   const [active, setActive] = useState(0);
   return (
@@ -353,6 +358,37 @@ function ComponentPreview({ id, isDark }: { id: string; isDark: boolean }) {
     "liquid-glass-filter": <span style={{ color: isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.4)", fontSize: 11 }}>SVG filter — applied globally</span>,
     "drawer": <span style={{ color: isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.4)", fontSize: 11 }}>Planned — not yet implemented</span>,
     "popover": <span style={{ color: isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.4)", fontSize: 11 }}>Planned — not yet implemented</span>,
+    // Components
+    "view-source-modal": (
+      <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+        <div style={{ display: "flex", gap: 6, fontSize: 11, fontFamily: "var(--font-mono)", color: isDark ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.5)" }}>
+          <span style={{ padding: "2px 8px", borderRadius: 6, background: isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.04)" }}>Source</span>
+          <span style={{ padding: "2px 8px", borderRadius: 6, background: isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.04)" }}>Components</span>
+          <span style={{ padding: "2px 8px", borderRadius: 6, background: isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.04)" }}>Impl</span>
+        </div>
+        <div style={{ height: 36, borderRadius: 6, background: "#1a1a1a", display: "flex", alignItems: "center", padding: "0 12px" }}>
+          <span style={{ fontFamily: "var(--font-mono)", fontSize: 10, color: "#ce93d8" }}>import</span>
+          <span style={{ fontFamily: "var(--font-mono)", fontSize: 10, color: "#d4d4d4" }}>&nbsp;{"{ "}</span>
+          <span style={{ fontFamily: "var(--font-mono)", fontSize: 10, color: "#7cc4fa" }}>Button</span>
+          <span style={{ fontFamily: "var(--font-mono)", fontSize: 10, color: "#d4d4d4" }}>{" }"}&nbsp;</span>
+          <span style={{ fontFamily: "var(--font-mono)", fontSize: 10, color: "#ce93d8" }}>from</span>
+          <span style={{ fontFamily: "var(--font-mono)", fontSize: 10, color: "#a5d6a7" }}>&nbsp;"@/primitives"</span>
+        </div>
+      </div>
+    ),
+    "view-source-button": (
+      <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+        <div style={{
+          width: 28, height: 28, borderRadius: "50%",
+          display: "flex", alignItems: "center", justifyContent: "center",
+          background: isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)",
+          border: `1px solid ${isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.06)"}`,
+        }}>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.4)"} strokeWidth="1.5" strokeLinecap="round"><polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" /></svg>
+        </div>
+        <span style={{ fontSize: 11, color: isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.4)" }}>Click to view source</span>
+      </div>
+    ),
     // New Tier 1+2 primitives
     "alert": <AlertPreview />,
     "toast": <span style={{ color: isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.4)", fontSize: 11 }}>Click "Open Full Preview" to see Toast demo</span>,
@@ -391,6 +427,7 @@ function ComponentPreview({ id, isDark }: { id: string; isDark: boolean }) {
         <Primitives.Input placeholder="you@example.com" />
       </Primitives.FormGroup>
     ),
+    "tag-input": <TagInputPreview />,
     "pagination": <PaginationPreview />,
     "stepper": <Primitives.Stepper steps={["Info", "Review", "Done"]} currentStep={1} />,
     "back-to-top": <span style={{ color: isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.4)", fontSize: 11 }}>Floating button — visible when scrolling</span>,

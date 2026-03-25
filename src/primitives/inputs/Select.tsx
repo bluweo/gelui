@@ -123,7 +123,7 @@ export function Select({
             WebkitBackdropFilter: "blur(20px)",
             border: `1px solid ${dark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)"}`,
             boxShadow: "0 8px 32px rgba(0,0,0,0.12)",
-            padding: "4px",
+            padding: "6px 8px",
             maxHeight: "200px",
             overflowY: "auto",
           }}

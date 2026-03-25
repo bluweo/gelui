@@ -209,20 +209,14 @@ export function TypePresetsTable() {
   useEffect(() => {
     if (hydrated) return;
     setHydrated(true);
-    console.log("[TypePresets] Hydration restore starting...");
     try {
       const raw = localStorage.getItem("gelui-type-presets");
-      console.log("[TypePresets] localStorage raw:", raw ? raw.substring(0, 100) + "..." : "EMPTY");
       const storedScale = localStorage.getItem("gelui-type-scale") as ScaleKey | null;
-      console.log("[TypePresets] stored scale:", storedScale);
       if (storedScale && storedScale !== scale) {
         setScale(storedScale);
       }
       const stored = JSON.parse(raw || "");
-      console.log("[TypePresets] parsed length:", stored?.length, "expected:", INITIAL_PRESETS.length);
       if (Array.isArray(stored) && stored.length === INITIAL_PRESETS.length) {
-        const overline = stored.find((s: any) => s.name === "Overline");
-        console.log("[TypePresets] Overline from localStorage:", overline);
         setPresets(INITIAL_PRESETS.map((p, i) => ({
           ...p,
           size: stored[i].size || p.size,
@@ -230,12 +224,9 @@ export function TypePresetsTable() {
           lh: stored[i].lh || p.lh,
           ls: stored[i].ls || p.ls,
         })));
-        console.log("[TypePresets] ✅ Presets restored from localStorage");
-      } else {
-        console.log("[TypePresets] ❌ Length mismatch or not array, using defaults");
       }
-    } catch (e) {
-      console.log("[TypePresets] ❌ Parse error:", (e as Error).message);
+    } catch {
+      // No stored presets or parse error — use defaults
     }
   }, []);
   const isModified = scale !== "medium" || JSON.stringify(presets) !== JSON.stringify(INITIAL_PRESETS);
@@ -257,10 +248,7 @@ export function TypePresetsTable() {
   // Inject CSS variables whenever presets change — propagates to all primitives
   // Skip until hydrated to avoid overwriting blocking script's correct values with defaults
   useEffect(() => {
-    const overline = presets.find(p => p.name === "Overline");
-    console.log("[TypePresets] useEffect[presets,hydrated] - hydrated:", hydrated, "overline size:", overline?.size);
-    if (!hydrated) { console.log("[TypePresets] ⏭ SKIPPING CSS injection (not hydrated)"); return; }
-    console.log("[TypePresets] 💉 INJECTING CSS variables...");
+    if (!hydrated) return;
     const rs = document.documentElement.style;
     const varMap: Record<string, string> = {
       "Display": "display",
@@ -341,16 +329,17 @@ export function TypePresetsTable() {
                 key={s}
                 onClick={() => { setScale(s); setPresets(scalePresets(s)); }}
                 className="flex items-center justify-center cursor-pointer border-none transition-all duration-200"
+                suppressHydrationWarning
                 style={{
-                  width: "30px",
-                  height: "30px",
-                  borderRadius: "100px",
+                  width: 30,
+                  height: 30,
+                  borderRadius: 100,
                   background: isActive ? (isDark ? "rgba(255,255,255,0.9)" : "rgba(0,0,0,0.85)") : "transparent",
                   color: isActive ? (isDark ? "#000" : "#fff") : (isDark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.35)"),
                   fontSize,
                   fontWeight: isActive ? 700 : 600,
                   fontFamily: "var(--font-heading)",
-                  lineHeight: "1",
+                  lineHeight: 1,
                 }}
                 title={`${s.charAt(0).toUpperCase() + s.slice(1)} type scale`}
               >

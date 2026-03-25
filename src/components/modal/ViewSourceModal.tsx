@@ -281,9 +281,10 @@ export function ViewSourceModal({ open, onClose, title, code, components = [], e
         ) : activeTab === "components" ? (
           /* Components tab */
           <div
-            className="overflow-auto flex-1"
+            className="overflow-auto"
             style={{
               maxHeight: "min(520px, 70vh)",
+              minHeight: "120px",
               scrollbarWidth: "thin",
             }}
             onMouseDown={(e) => e.stopPropagation()}

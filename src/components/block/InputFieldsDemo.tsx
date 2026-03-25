@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Input, SearchInput, Textarea, Select, SearchableSelect } from "@/primitives/inputs";
+import { Input, SearchInput, Textarea, Select, SearchableSelect, TagInput } from "@/primitives/inputs";
 import { useDarkMode } from "@/primitives/hooks/useDarkMode";
 
 /* ─── Main Demo Export ─── */
@@ -73,6 +73,37 @@ export function InputFieldsDemo() {
       <div className="flex flex-col gap-1.5">
         <label className="text-[12px] font-semibold" style={labelStyle}>Textarea</label>
         <Textarea placeholder="Write a description..." />
+      </div>
+
+      <div className="flex flex-col gap-1.5">
+        <label className="text-[12px] font-semibold" style={labelStyle}>Tag Input</label>
+        <TagInput placeholder="Type and press Enter..." />
+      </div>
+
+      <div className="flex flex-col gap-1.5">
+        <label className="text-[12px] font-semibold" style={labelStyle}>URL Input</label>
+        <div style={{ display: "flex", alignItems: "center", gap: 0 }}>
+          <div style={{
+            padding: "10px 12px",
+            fontSize: "14px",
+            fontFamily: "var(--font-mono)",
+            background: isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)",
+            borderRadius: "var(--glass-radius-sm, 10px) 0 0 var(--glass-radius-sm, 10px)",
+            border: `1px solid ${isDark ? "rgba(255,255,255,0.12)" : "rgba(0,0,0,0.1)"}`,
+            borderRight: "none",
+            color: isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.45)",
+            whiteSpace: "nowrap",
+          }}>
+            https://
+          </div>
+          <Input
+            placeholder="example.com"
+            style={{
+              borderRadius: "0 var(--glass-radius-sm, 10px) var(--glass-radius-sm, 10px) 0",
+              borderLeft: "none",
+            }}
+          />
+        </div>
       </div>
 
       <div className="flex flex-col gap-1.5">

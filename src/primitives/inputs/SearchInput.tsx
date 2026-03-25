@@ -71,7 +71,7 @@ export function SearchInput({
           paddingRight: val ? "36px" : "16px",
           fontSize: "14px",
           fontFamily: "var(--font-body)",
-          borderRadius: "var(--glass-radius-pill, 100px)",
+          borderRadius: "var(--glass-radius-sm, 10px)",
           border: `2px solid ${focused ? (dark ? "#fff" : "#000") : "transparent"}`,
           background: dark
             ? "rgba(255,255,255,0.08)"
