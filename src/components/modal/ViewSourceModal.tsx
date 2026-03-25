@@ -80,15 +80,38 @@ function escapeHtml(str: string): string {
 /*  ViewSourceModal                                                     */
 /* ------------------------------------------------------------------ */
 
+interface ComponentInfo {
+  name: string;
+  path: string;
+  description?: string;
+}
+
 interface ViewSourceModalProps {
   open: boolean;
   onClose: () => void;
   title: string;
   code: string;
+  components?: ComponentInfo[];
 }
 
-export function ViewSourceModal({ open, onClose, title, code }: ViewSourceModalProps) {
+type TabKey = "source" | "components";
+
+const TABS: { key: TabKey; label: string; icon: JSX.Element }[] = [
+  {
+    key: "source",
+    label: "Source",
+    icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"><polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" /></svg>,
+  },
+  {
+    key: "components",
+    label: "Components",
+    icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 10h2c2 0 3-1 3-3V5c0-2-1-3-3-3H5C3 2 2 3 2 5v2c0 2 1 3 3 3ZM17 10h2c2 0 3-1 3-3V5c0-2-1-3-3-3h-2c-2 0-3 1-3 3v2c0 2 1 3 3 3ZM17 22h2c2 0 3-1 3-3v-2c0-2-1-3-3-3h-2c-2 0-3 1-3 3v2c0 2 1 3 3 3ZM5 22h2c2 0 3-1 3-3v-2c0-2-1-3-3-3H5c-2 0-3 1-3 3v2c0 2 1 3 3 3Z" /></svg>,
+  },
+];
+
+export function ViewSourceModal({ open, onClose, title, code, components = [] }: ViewSourceModalProps) {
   const [mounted, setMounted] = useState(false);
+  const [activeTab, setActiveTab] = useState<TabKey>("source");
   const isDark = useDarkMode();
 
   const { panelRef, panelStyle, backdropDragged, onDragStart } = useDraggableModal({
@@ -106,11 +129,13 @@ export function ViewSourceModal({ open, onClose, title, code }: ViewSourceModalP
     return () => { document.body.style.overflow = prev; };
   }, [open]);
 
+  // Reset to source tab when opened
+  useEffect(() => { if (open) setActiveTab("source"); }, [open]);
+
   if (!mounted || !open) return null;
 
   const lines = code.split("\n");
   const lineNumberWidth = String(lines.length).length;
-
   const highlighted = lines.map((line) => highlightCode(line));
 
   return createPortal(
@@ -124,14 +149,14 @@ export function ViewSourceModal({ open, onClose, title, code }: ViewSourceModalP
       <div
         ref={panelRef}
         className="glass-panel max-w-[92vw] max-h-[calc(100vh-40px)] select-none cursor-grab active:cursor-grabbing flex flex-col"
-        style={{ ...panelStyle, width: "min(600px, 90vw)" }}
+        style={{ ...panelStyle, width: "min(640px, 92vw)" }}
         onClick={(e) => e.stopPropagation()}
         onMouseDown={onDragStart}
       >
         {/* Header */}
         <div className="flex items-center justify-between px-5 pt-5 pb-3 relative z-1">
           <span className="text-[14px] font-[650] text-text-primary tracking-[-0.01em]">
-            {title} — Source
+            {title}
           </span>
           <button
             className="w-7 h-7 flex items-center justify-center border-none bg-black/6 rounded-full cursor-pointer text-text-secondary transition-all duration-200 ease-default hover:bg-black/10 hover:text-text-primary dark:bg-white/8 dark:hover:bg-white/14"
@@ -146,52 +171,143 @@ export function ViewSourceModal({ open, onClose, title, code }: ViewSourceModalP
           </button>
         </div>
 
-        {/* Code area */}
+        {/* Tabs */}
         <div
-          className="mx-4 mb-4 rounded-[var(--glass-radius-sm)] overflow-auto"
-          style={{
-            background: "#1a1a1a",
-            maxHeight: "min(520px, 70vh)",
-            scrollbarWidth: "thin",
-          }}
+          className="flex gap-1 mx-5 mb-4 relative z-1 p-0.5 rounded-[10px] bg-black/[0.04] dark:bg-white/[0.06]"
+          role="tablist"
           onMouseDown={(e) => e.stopPropagation()}
         >
-          <pre
-            style={{
-              margin: 0,
-              padding: "16px 0",
-              fontFamily: "var(--font-mono)",
-              fontSize: "12px",
-              lineHeight: "1.7",
-              color: "#d4d4d4",
-              tabSize: 2,
-            }}
-          >
-            {highlighted.map((html, i) => (
-              <div key={i} style={{ display: "flex", paddingRight: "16px" }}>
-                <span
-                  style={{
-                    display: "inline-block",
-                    width: `${lineNumberWidth + 2}ch`,
-                    minWidth: "3ch",
-                    paddingLeft: "16px",
-                    textAlign: "right",
-                    paddingRight: "16px",
-                    color: "#555",
-                    userSelect: "none",
-                    flexShrink: 0,
-                  }}
-                >
-                  {i + 1}
-                </span>
-                <span
-                  style={{ flex: 1, minWidth: 0 }}
-                  dangerouslySetInnerHTML={{ __html: html || "&nbsp;" }}
-                />
-              </div>
-            ))}
-          </pre>
+          {TABS.map((tab) => {
+            const isActive = activeTab === tab.key;
+            return (
+              <button
+                key={tab.key}
+                role="tab"
+                aria-selected={isActive}
+                onClick={() => setActiveTab(tab.key)}
+                className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-[7px] rounded-[8px] text-[13px] font-[590] tracking-[-0.01em] cursor-pointer border-none transition-all duration-200 ease-[var(--transition-apple)] ${
+                  isActive
+                    ? "bg-white/80 text-text-primary shadow-[0_1px_3px_rgba(0,0,0,0.08),0_0_0_0.5px_rgba(0,0,0,0.04)] dark:bg-white/[0.12] dark:shadow-[0_1px_3px_rgba(0,0,0,0.2),0_0_0_0.5px_rgba(255,255,255,0.06)]"
+                    : "bg-transparent text-text-tertiary hover:text-text-secondary"
+                }`}
+              >
+                {tab.icon}
+                {tab.label}
+              </button>
+            );
+          })}
         </div>
+
+        {/* Tab content */}
+        {activeTab === "source" ? (
+          /* Source Code tab */
+          <div
+            className="mx-4 mb-4 rounded-[var(--glass-radius-sm)] overflow-auto"
+            style={{
+              background: "#1a1a1a",
+              maxHeight: "min(520px, 70vh)",
+              scrollbarWidth: "thin",
+            }}
+            onMouseDown={(e) => e.stopPropagation()}
+          >
+            <pre
+              style={{
+                margin: 0,
+                padding: "16px 0",
+                fontFamily: "var(--font-mono)",
+                fontSize: "12px",
+                lineHeight: "1.7",
+                color: "#d4d4d4",
+                tabSize: 2,
+              }}
+            >
+              {highlighted.map((html, i) => (
+                <div key={i} style={{ display: "flex", paddingRight: "16px" }}>
+                  <span
+                    style={{
+                      display: "inline-block",
+                      width: `${lineNumberWidth + 2}ch`,
+                      minWidth: "3ch",
+                      paddingLeft: "16px",
+                      textAlign: "right",
+                      paddingRight: "16px",
+                      color: "#555",
+                      userSelect: "none",
+                      flexShrink: 0,
+                    }}
+                  >
+                    {i + 1}
+                  </span>
+                  <span
+                    style={{ flex: 1, minWidth: 0 }}
+                    dangerouslySetInnerHTML={{ __html: html || "&nbsp;" }}
+                  />
+                </div>
+              ))}
+            </pre>
+          </div>
+        ) : (
+          /* Components tab */
+          <div
+            className="mx-4 mb-4 rounded-[var(--glass-radius-sm)] overflow-auto"
+            style={{
+              maxHeight: "min(520px, 70vh)",
+              scrollbarWidth: "thin",
+            }}
+            onMouseDown={(e) => e.stopPropagation()}
+          >
+            {components.length > 0 ? (
+              <div className="flex flex-col">
+                {components.map((comp, i) => (
+                  <div
+                    key={comp.name}
+                    className={`flex items-start gap-3 px-4 py-3 ${i < components.length - 1 ? "border-b border-black/[0.04] dark:border-white/[0.04]" : ""}`}
+                  >
+                    <div
+                      className="w-8 h-8 rounded-[6px] flex items-center justify-center shrink-0 mt-0.5"
+                      style={{
+                        background: isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)",
+                        border: `1px solid ${isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.06)"}`,
+                      }}
+                    >
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" style={{ color: isDark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.35)" }}>
+                        <polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" />
+                      </svg>
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2">
+                        <span className="text-[13px] font-[600]" style={{ color: isDark ? "rgba(255,255,255,0.85)" : "rgba(0,0,0,0.8)" }}>{comp.name}</span>
+                        <span
+                          className="text-[10px] font-mono px-1.5 py-0.5 rounded-[4px]"
+                          style={{
+                            background: isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)",
+                            color: isDark ? "rgba(255,255,255,0.35)" : "rgba(0,0,0,0.35)",
+                          }}
+                        >
+                          {comp.path}
+                        </span>
+                      </div>
+                      {comp.description && (
+                        <p className="text-[11px] mt-0.5" style={{ color: isDark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.4)" }}>
+                          {comp.description}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="flex flex-col items-center justify-center py-12 px-4">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" style={{ color: isDark ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.15)", marginBottom: 12 }}>
+                  <path d="M5 10h2c2 0 3-1 3-3V5c0-2-1-3-3-3H5C3 2 2 3 2 5v2c0 2 1 3 3 3ZM17 10h2c2 0 3-1 3-3V5c0-2-1-3-3-3h-2c-2 0-3 1-3 3v2c0 2 1 3 3 3ZM17 22h2c2 0 3-1 3-3v-2c0-2-1-3-3-3h-2c-2 0-3 1-3 3v2c0 2 1 3 3 3ZM5 22h2c2 0 3-1 3-3v-2c0-2-1-3-3-3H5c-2 0-3 1-3 3v2c0 2 1 3 3 3Z" />
+                </svg>
+                <span className="text-[12px]" style={{ color: isDark ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.3)" }}>
+                  Component list coming soon
+                </span>
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </div>,
     document.body
@@ -209,7 +325,6 @@ interface ViewSourceButtonProps {
 
 export function ViewSourceButton({ code, title }: ViewSourceButtonProps) {
   const [open, setOpen] = useState(false);
-  const isDark = useDarkMode();
 
   return (
     <>
@@ -217,37 +332,13 @@ export function ViewSourceButton({ code, title }: ViewSourceButtonProps) {
         onClick={() => setOpen(true)}
         title="View Source Code"
         aria-label="View Source Code"
-        style={{
-          position: "absolute",
-          top: 8,
-          right: 8,
-          zIndex: 5,
-          width: 28,
-          height: 28,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          borderRadius: "50%",
-          border: "none",
-          background: isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.06)",
-          color: isDark ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.4)",
-          cursor: "pointer",
-          transition: "background 0.15s, color 0.15s",
-          fontSize: "12px",
-          fontWeight: 700,
-          fontFamily: "var(--font-mono)",
-          lineHeight: 1,
-        }}
-        onMouseEnter={(e) => {
-          (e.currentTarget as HTMLButtonElement).style.background = isDark ? "rgba(255,255,255,0.14)" : "rgba(0,0,0,0.10)";
-          (e.currentTarget as HTMLButtonElement).style.color = isDark ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.65)";
-        }}
-        onMouseLeave={(e) => {
-          (e.currentTarget as HTMLButtonElement).style.background = isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.06)";
-          (e.currentTarget as HTMLButtonElement).style.color = isDark ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.4)";
-        }}
+        className="w-9 h-9 flex items-center justify-center rounded-full bg-black/[0.04] dark:bg-white/[0.06] hover:bg-black/[0.08] dark:hover:bg-white/[0.12] border border-black/[0.06] dark:border-white/[0.08] transition-all duration-150 cursor-pointer shrink-0 relative z-20 float-right"
+        style={{ marginTop: -38 }}
       >
-        {"</>"}
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-black/50 dark:text-white/40">
+          <polyline points="16 18 22 12 16 6" />
+          <polyline points="8 6 2 12 8 18" />
+        </svg>
       </button>
       <ViewSourceModal open={open} onClose={() => setOpen(false)} title={title} code={code} />
     </>

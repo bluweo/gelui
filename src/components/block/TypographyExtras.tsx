@@ -1,6 +1,5 @@
 import { Blockquote, List, Kbd, Overline, Label } from "@/primitives/typography";
 import { useDarkMode } from "@/primitives/hooks/useDarkMode";
-
 export function TypographyExtras() {
   const isDark = useDarkMode();
 
