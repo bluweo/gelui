@@ -25,8 +25,8 @@ export function Button({
   const dark = useDarkMode();
   const [hovered, setHovered] = useState(false);
   const sizeMap = {
-    sm: { px: "14px", py: "8px", fs: "12px" },
-    md: { px: "20px", py: "10px", fs: "13px" },
+    sm: { px: "14px", py: "6px", fs: "11px" },
+    md: { px: "20px", py: "10px", fs: "14px" },
     lg: { px: "28px", py: "14px", fs: "15px" },
   };
   const s = sizeMap[size];

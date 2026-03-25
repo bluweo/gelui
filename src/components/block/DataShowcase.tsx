@@ -26,11 +26,11 @@ export function DataShowcase() {
   ];
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+    <div suppressHydrationWarning style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
       {/* Table */}
       <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: tableBg, border: `1px solid ${borderColor}` }}>
         <div style={{ padding: "8px 12px", background: headerBg, borderBottom: `1px solid ${borderColor}` }}>
-          <span style={{ fontSize: "10px", fontWeight: 650, letterSpacing: "0.06em", textTransform: "uppercase", color: headerColor }}>Table (Striped)</span>
+          <span className="type-overline" style={{ color: headerColor }}>Table (Striped)</span>
         </div>
         <div style={{ padding: "16px" }}>
           <Table columns={tableColumns} data={tableData} striped />
@@ -40,7 +40,7 @@ export function DataShowcase() {
       {/* Stat Cards */}
       <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: tableBg, border: `1px solid ${borderColor}` }}>
         <div style={{ padding: "8px 12px", background: headerBg, borderBottom: `1px solid ${borderColor}` }}>
-          <span style={{ fontSize: "10px", fontWeight: 650, letterSpacing: "0.06em", textTransform: "uppercase", color: headerColor }}>Stat Cards</span>
+          <span className="type-overline" style={{ color: headerColor }}>Stat Cards</span>
         </div>
         <div style={{ padding: "16px", display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "12px" }}>
           <Stat
@@ -85,7 +85,7 @@ export function DataShowcase() {
       {/* EmptyState */}
       <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: tableBg, border: `1px solid ${borderColor}` }}>
         <div style={{ padding: "8px 12px", background: headerBg, borderBottom: `1px solid ${borderColor}` }}>
-          <span style={{ fontSize: "10px", fontWeight: 650, letterSpacing: "0.06em", textTransform: "uppercase", color: headerColor }}>Empty State</span>
+          <span className="type-overline" style={{ color: headerColor }}>Empty State</span>
         </div>
         <EmptyState
           title="No results found"
@@ -120,7 +120,7 @@ export function DataShowcase() {
       {/* ColorSwatch */}
       <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: tableBg, border: `1px solid ${borderColor}` }}>
         <div style={{ padding: "8px 12px", background: headerBg, borderBottom: `1px solid ${borderColor}` }}>
-          <span style={{ fontSize: "10px", fontWeight: 650, letterSpacing: "0.06em", textTransform: "uppercase", color: headerColor }}>Color Swatches</span>
+          <span className="type-overline" style={{ color: headerColor }}>Color Swatches</span>
         </div>
         <div style={{ padding: "16px", display: "flex", gap: "16px", flexWrap: "wrap", justifyContent: "center" }}>
           <ColorSwatch color="#007AFF" label="Primary" showHex />

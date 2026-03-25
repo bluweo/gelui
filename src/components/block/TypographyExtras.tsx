@@ -4,7 +4,7 @@ export function TypographyExtras() {
   const isDark = useDarkMode();
 
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-5" suppressHydrationWarning>
       {/* Blockquote */}
       <div className="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white/60 dark:bg-black/30">
         <div className="flex items-center px-3 py-2 bg-black/[0.04] dark:bg-white/[0.06] border-b border-black/[0.06] dark:border-white/[0.06]">

@@ -14,11 +14,11 @@ export function NavigationExtras() {
   const labelColor = isDark ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.6)";
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+    <div suppressHydrationWarning style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
       {/* Pagination */}
       <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: tableBg, border: `1px solid ${borderColor}` }}>
         <div style={{ padding: "8px 12px", background: headerBg, borderBottom: `1px solid ${borderColor}` }}>
-          <span style={{ fontSize: "10px", fontWeight: 650, letterSpacing: "0.06em", textTransform: "uppercase", color: headerColor }}>Pagination</span>
+          <span className="type-overline" style={{ color: headerColor }}>Pagination</span>
         </div>
         <div style={{ padding: "20px 16px", display: "flex", flexDirection: "column", alignItems: "center", gap: "12px" }}>
           <Pagination
@@ -35,7 +35,7 @@ export function NavigationExtras() {
       {/* Stepper */}
       <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: tableBg, border: `1px solid ${borderColor}` }}>
         <div style={{ padding: "8px 12px", background: headerBg, borderBottom: `1px solid ${borderColor}` }}>
-          <span style={{ fontSize: "10px", fontWeight: 650, letterSpacing: "0.06em", textTransform: "uppercase", color: headerColor }}>Stepper</span>
+          <span className="type-overline" style={{ color: headerColor }}>Stepper</span>
         </div>
         <div style={{ padding: "20px 16px", display: "flex", flexDirection: "column", gap: "16px" }}>
           <Stepper

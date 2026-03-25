@@ -415,7 +415,7 @@ export function LiveTheming() {
   };
 
   return (
-    <div className="relative w-full">
+    <div className="relative w-full" suppressHydrationWarning>
       {/* Toggle button — top right, overlaps with card header area */}
       <button
         onClick={handleToggle}

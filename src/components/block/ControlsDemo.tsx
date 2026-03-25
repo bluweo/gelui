@@ -14,7 +14,7 @@ export function ControlsDemo() {
   const labelClass = "text-[12px] font-[500] text-black/60 dark:text-white/60";
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4" suppressHydrationWarning>
       {/* Toggle & Checkbox */}
       <div className="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white dark:bg-[#1a1a1a]">
         <div className="px-4 py-2.5 bg-black/[0.06] dark:bg-white/[0.08] border-b border-black/10 dark:border-white/10">

@@ -28,7 +28,7 @@ export function ElevationShowcase() {
   };
 
   return (
-    <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "20px" }}>
+    <div suppressHydrationWarning style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "20px" }}>
       {/* Left: Shadow Depths — transparent background */}
       <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", border: `1px solid ${borderColor}`, background: "transparent" }}>
         <div style={{ padding: "10px 16px", borderBottom: `1px solid ${borderColor}`, background: "transparent" }}>

@@ -50,7 +50,7 @@ export function FeedbackShowcaseV2() {
   };
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+    <div suppressHydrationWarning style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
       {/* Spinners */}
       <div style={tableStyle}>
         <div style={{ padding: "8px 12px", background: headerBg, borderBottom: `1px solid ${borderColor}` }}>

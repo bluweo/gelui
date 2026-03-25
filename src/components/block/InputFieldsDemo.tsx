@@ -39,7 +39,7 @@ export function InputFieldsDemo() {
   const labelStyle = { color: isDark ? "rgba(255,255,255,0.55)" : "rgba(0,0,0,0.6)" };
 
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-5" suppressHydrationWarning>
       <div className="flex flex-col gap-1.5">
         <label className="text-[12px] font-semibold" style={labelStyle}>Text Input</label>
         <Input placeholder="Enter your name..." />

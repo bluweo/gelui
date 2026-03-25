@@ -29,7 +29,7 @@ export function GlassControlsDemo() {
   const labelClass = "text-[12px] font-[500] contrast-text-muted";
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4" suppressHydrationWarning>
       {/* Toggle & Checkbox */}
       <div className="rounded-[var(--glass-radius-sm)] overflow-hidden border contrast-border" style={{ background: "transparent" }}>
         <div className="px-4 py-2.5 border-b contrast-border">

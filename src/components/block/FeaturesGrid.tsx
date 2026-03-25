@@ -163,7 +163,7 @@ export function FeaturesGrid() {
     : FEATURES;
 
   return (
-    <div>
+    <div suppressHydrationWarning>
       {/* Header row: title left, tags right */}
       <div className="flex items-start justify-between gap-6 mb-8 pt-3 pl-2 max-[640px]:flex-col max-[640px]:gap-4">
         {/* Left: Title & subtitle */}

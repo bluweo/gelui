@@ -311,7 +311,7 @@ export function TypePresetsTable() {
   return (
     <>
       {/* Scale toggle + Reset — absolute top right */}
-      <div style={{ position: "absolute", top: "20px", right: "20px", zIndex: 2, display: "flex", alignItems: "center", gap: "8px" }}>
+      <div suppressHydrationWarning style={{ position: "absolute", top: "20px", right: "20px", zIndex: 2, display: "flex", alignItems: "center", gap: "8px" }}>
         {/* [A|A|A] scale toggle */}
         <div
           className="flex items-end rounded-full overflow-hidden"

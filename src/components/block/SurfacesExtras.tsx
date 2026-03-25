@@ -26,7 +26,7 @@ export function SurfacesExtras() {
   ];
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+    <div suppressHydrationWarning style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
       {/* Accordion */}
       <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: tableBg, border: `1px solid ${borderColor}` }}>
         <div style={{ padding: "8px 12px", background: headerBg, borderBottom: `1px solid ${borderColor}` }}>

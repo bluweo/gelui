@@ -13,7 +13,7 @@ export function ButtonsShowcase() {
   const rowBorder = isDark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.04)";
 
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-5" suppressHydrationWarning>
       {/* Solid Buttons */}
       <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: tableBg }}>
         <div style={{ padding: "8px 12px", background: headerBg, borderBottom: `1px solid ${borderColor}` }}>

@@ -41,7 +41,7 @@ export function LayoutShowcase() {
   );
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+    <div suppressHydrationWarning style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
       {/* Stack (Vertical) */}
       <div style={tableStyle}>
         <div style={{ padding: "10px 16px", background: headerBg, borderBottom: `1px solid ${borderColor}` }}>

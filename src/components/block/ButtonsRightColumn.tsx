@@ -7,7 +7,7 @@ export function ButtonsRightColumn() {
   const contrast = useContrastColor(ref);
 
   return (
-    <div ref={ref} data-contrast={contrast} className="gel-btn-force-contrast" style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+    <div ref={ref} data-contrast={contrast} className="gel-btn-force-contrast" suppressHydrationWarning style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
       {/* Gel Buttons table */}
       <div className="rounded-[var(--glass-radius-sm)] overflow-hidden border contrast-border">
         <div className="px-3 py-2 border-b contrast-border">
