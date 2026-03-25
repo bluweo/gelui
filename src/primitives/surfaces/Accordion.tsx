@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect, type ReactNode, type CSSProperties } from "react";
+import { ArrowDown2 } from "iconsax-react";
 import { useDarkMode } from "../hooks/useDarkMode";
 
 interface AccordionItem {
@@ -29,6 +30,7 @@ function AccordionSection({
 }) {
   const contentRef = useRef<HTMLDivElement>(null);
   const [height, setHeight] = useState<number>(0);
+  const [hovered, setHovered] = useState(false);
 
   useEffect(() => {
     if (contentRef.current) {
@@ -36,15 +38,18 @@ function AccordionSection({
     }
   }, [isOpen, content]);
 
+  const normalBg = dark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.03)";
+  const hoverBg = dark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.06)";
+
   return (
     <div
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
       style={{
-        background: dark ? "rgba(255,255,255,0.06)" : "rgba(255,255,255,0.6)",
-        backdropFilter: "blur(12px)",
-        WebkitBackdropFilter: "blur(12px)",
-        border: `1px solid ${dark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)"}`,
+        background: hovered ? hoverBg : normalBg,
         borderRadius: "var(--glass-radius-sm, 10px)",
         overflow: "hidden",
+        transition: "background 0.15s ease",
       }}
     >
       <button
@@ -63,18 +68,19 @@ function AccordionSection({
           fontFamily: "var(--font-ui)",
           color: dark ? "rgba(255,255,255,0.9)" : "rgba(0,0,0,0.85)",
           textAlign: "left",
+          transition: "background 0.15s ease",
         }}
       >
         {title}
         <span
           style={{
-            fontSize: "12px",
+            display: "flex",
+            alignItems: "center",
             transition: "transform 0.25s ease",
             transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
-            color: dark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.4)",
           }}
         >
-          &#9660;
+          <ArrowDown2 size={18} color={dark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.4)"} variant="Linear" />
         </span>
       </button>
       <div

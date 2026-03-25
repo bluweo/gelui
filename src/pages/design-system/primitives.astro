@@ -139,6 +139,19 @@ import { SurfacesExtras } from "@/components/block/SurfacesExtras";
     </div>
 
     <!-- ═══════════════════════════════════
+         3a. Surfaces Extras (Accordion + ScrollArea)
+         ═══════════════════════════════════ -->
+    <div data-section="Surfaces Extras" class="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
+      <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 160px;" />
+      <div class="relative flex flex-col gap-1 mb-6 pt-1 pl-1">
+        <span class="type-overline text-black/40 dark:text-white/40 mb-1">Containers</span>
+        <h2 class="type-h2 text-black dark:text-white mb-1">Surfaces Extras</h2>
+        <p class="type-body-sm text-black/60 dark:text-white/55">Expandable sections and scrollable content areas</p>
+      </div>
+      <SurfacesExtras client:load />
+    </div>
+
+    <!-- ═══════════════════════════════════
          3b. Card Panels
          ═══════════════════════════════════ -->
     <div data-section="Card Panels" class="col-span-full">
@@ -365,18 +378,6 @@ import { SurfacesExtras } from "@/components/block/SurfacesExtras";
       </div>
     </div>
 
-    <!-- ═══════════════════════════════════
-         3d. Surfaces Extras
-         ═══════════════════════════════════ -->
-    <div data-section="Surfaces Extras" class="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
-      <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 160px;" />
-      <div class="relative flex flex-col gap-1 mb-6 pt-1 pl-1">
-        <span class="text-[10px] font-[650] uppercase tracking-[0.1em] text-black/40 dark:text-white/40 mb-1">Material</span>
-        <h2 class="text-[24px] font-[750] tracking-[-0.03em] leading-[1.2] text-black dark:text-white mb-1" style="font-family: var(--font-heading)">Surfaces Extras</h2>
-        <p class="text-[13px] leading-[1.6] text-black/60 dark:text-white/55">Accordion panels and scrollable content areas</p>
-      </div>
-      <SurfacesExtras client:load />
-    </div>
 
     <!-- ═══════════════════════════════════
          4. Input Fields
