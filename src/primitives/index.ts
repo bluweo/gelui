@@ -9,7 +9,7 @@ export { useClickOutside } from "./hooks/useClickOutside";
 export { Heading, Text, Label, Caption, Code, Link, Blockquote, List, Kbd, Overline } from "./typography";
 export { Button, IconButton, LinkButton, ButtonGroup } from "./buttons";
 export { Card, Surface, Divider, Accordion, ScrollArea } from "./surfaces";
-export { Input, SearchInput, Textarea, Select, SearchableSelect, PasswordInput, NumberInput, FormGroup, TagInput } from "./inputs";
+export { Input, SearchInput, Textarea, Select, SearchableSelect, PasswordInput, NumberInput, FormGroup, TagInput, OtpInput } from "./inputs";
 export { Toggle, Checkbox, Radio, SegmentedControl, Slider } from "./controls";
 export { Box, Stack, Inline, Center, Spacer, Grid } from "./layout";
 export { Spinner, Progress, Skeleton, Modal, Overlay, Tooltip, Alert, Toast, ConfirmDialog } from "./feedback";
@@ -82,6 +82,7 @@ import { PasswordInput } from "./inputs/PasswordInput";
 import { NumberInput } from "./inputs/NumberInput";
 import { FormGroup } from "./inputs/FormGroup";
 import { TagInput } from "./inputs/TagInput";
+import { OtpInput } from "./inputs/OtpInput";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const PRIMITIVE_MAP: Record<string, React.ComponentType<any>> = {
@@ -166,4 +167,5 @@ export const PRIMITIVE_MAP: Record<string, React.ComponentType<any>> = {
   "number-input": NumberInput,
   "form-group": FormGroup,
   "tag-input": TagInput,
+  "otp-input": OtpInput,
 };

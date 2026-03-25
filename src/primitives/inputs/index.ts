@@ -7,3 +7,4 @@ export { PasswordInput } from "./PasswordInput";
 export { NumberInput } from "./NumberInput";
 export { FormGroup } from "./FormGroup";
 export { TagInput } from "./TagInput";
+export { OtpInput } from "./OtpInput";

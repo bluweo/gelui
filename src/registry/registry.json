@@ -2873,6 +2873,49 @@
           "default": false
         }
       }
+    },
+    {
+      "id": "otp-input",
+      "name": "OtpInput",
+      "displayName": "OTP / Pin Input",
+      "layer": "primitive",
+      "category": "form",
+      "status": "stable",
+      "path": "src/primitives/inputs/OtpInput.tsx",
+      "exportName": "OtpInput",
+      "description": "Multi-digit OTP/PIN input with auto-focus, paste support, and keyboard navigation",
+      "version": "0.25.4",
+      "tags": [
+        "otp",
+        "pin",
+        "input",
+        "verification",
+        "code",
+        "auth"
+      ],
+      "props": {
+        "length": {
+          "type": "number",
+          "default": 6
+        },
+        "size": {
+          "type": "enum",
+          "options": [
+            "sm",
+            "md",
+            "lg"
+          ],
+          "default": "md"
+        },
+        "error": {
+          "type": "boolean",
+          "default": false
+        },
+        "disabled": {
+          "type": "boolean",
+          "default": false
+        }
+      }
     }
   ]
 }

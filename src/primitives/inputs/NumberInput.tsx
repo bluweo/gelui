@@ -47,38 +47,12 @@ export function NumberInput({
     }
   };
 
-  const borderColor = focused
-    ? dark
-      ? "#fff"
-      : "#000"
-    : "transparent";
+  const btnBg = dark ? "rgba(255,255,255,0.10)" : "rgba(0,0,0,0.06)";
+  const btnHoverBg = dark ? "rgba(255,255,255,0.16)" : "rgba(0,0,0,0.10)";
+  const btnColor = dark ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.5)";
 
-  const bg = focused
-    ? dark
-      ? "rgba(30,30,30,1)"
-      : "rgba(255,255,255,1)"
-    : dark
-      ? "rgba(255,255,255,0.08)"
-      : "rgba(255,255,255,0.6)";
-
-  const stepBtnStyle: CSSProperties = {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    width: "36px",
-    height: "100%",
-    border: "none",
-    background: "transparent",
-    color: dark ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.5)",
-    cursor: disabled ? "not-allowed" : "pointer",
-    fontSize: "18px",
-    fontWeight: 500,
-    fontFamily: "var(--font-mono)",
-    padding: 0,
-    transition: "color 150ms ease",
-    opacity: disabled ? 0.5 : 1,
-    flexShrink: 0,
-  };
+  const [hoverMinus, setHoverMinus] = useState(false);
+  const [hoverPlus, setHoverPlus] = useState(false);
 
   return (
     <div
@@ -86,27 +60,41 @@ export function NumberInput({
       style={{
         display: "inline-flex",
         alignItems: "center",
-        borderRadius: "var(--glass-radius-sm, 10px)",
-        border: `2px solid ${borderColor}`,
-        background: bg,
-        transition: "all 200ms ease",
-        overflow: "hidden",
+        gap: 10,
         opacity: disabled ? 0.5 : 1,
         ...style,
       }}
     >
+      {/* Minus button — circle */}
       <button
         type="button"
         onClick={decrement}
         disabled={disabled || (min !== undefined && value <= min)}
+        onMouseEnter={() => setHoverMinus(true)}
+        onMouseLeave={() => setHoverMinus(false)}
         style={{
-          ...stepBtnStyle,
-          borderRight: `1px solid ${dark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.08)"}`,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          width: 36,
+          height: 36,
+          borderRadius: "50%",
+          border: "none",
+          background: hoverMinus && !disabled ? btnHoverBg : btnBg,
+          color: btnColor,
+          cursor: disabled ? "not-allowed" : "pointer",
+          fontSize: 18,
+          fontWeight: 500,
+          fontFamily: "var(--font-mono)",
+          transition: "all 0.15s ease",
+          flexShrink: 0,
         }}
         aria-label="Decrease"
       >
-        &minus;
+        −
       </button>
+
+      {/* Number display */}
       <input
         type="text"
         inputMode="numeric"
@@ -116,26 +104,45 @@ export function NumberInput({
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
         style={{
-          width: "60px",
+          width: 50,
           textAlign: "center",
-          border: "none",
-          background: "transparent",
+          border: focused ? `2px solid ${dark ? "#fff" : "#000"}` : `2px solid transparent`,
+          borderRadius: "var(--glass-radius-sm, 8px)",
+          background: focused ? (dark ? "rgba(30,30,30,1)" : "#fff") : "transparent",
           outline: "none",
-          fontSize: "14px",
+          fontSize: 20,
           fontFamily: "var(--font-mono)",
-          fontWeight: 500,
+          fontWeight: 700,
           color: dark ? "#fff" : "#000",
-          padding: "10px 4px",
+          padding: "6px 4px",
           fontVariantNumeric: "tabular-nums",
+          transition: "all 0.15s ease",
         }}
       />
+
+      {/* Plus button — circle */}
       <button
         type="button"
         onClick={increment}
         disabled={disabled || (max !== undefined && value >= max)}
+        onMouseEnter={() => setHoverPlus(true)}
+        onMouseLeave={() => setHoverPlus(false)}
         style={{
-          ...stepBtnStyle,
-          borderLeft: `1px solid ${dark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.08)"}`,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          width: 36,
+          height: 36,
+          borderRadius: "50%",
+          border: "none",
+          background: hoverPlus && !disabled ? btnHoverBg : btnBg,
+          color: btnColor,
+          cursor: disabled ? "not-allowed" : "pointer",
+          fontSize: 18,
+          fontWeight: 500,
+          fontFamily: "var(--font-mono)",
+          transition: "all 0.15s ease",
+          flexShrink: 0,
         }}
         aria-label="Increase"
       >
