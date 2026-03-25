@@ -1,4 +1,4 @@
-import { Blockquote, List, Kbd, Overline, Label } from "@/primitives/typography";
+import { Blockquote, List, Kbd, Code, Overline, Label } from "@/primitives/typography";
 import { useDarkMode } from "@/primitives/hooks/useDarkMode";
 export function TypographyExtras() {
   const isDark = useDarkMode();
@@ -78,6 +78,25 @@ export function TypographyExtras() {
             </div>
           </div>
         ))}
+      </div>
+
+      {/* Inline Code */}
+      <div className="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white/60 dark:bg-black/30">
+        <div className="flex items-center px-3 py-2 bg-black/[0.04] dark:bg-white/[0.06] border-b border-black/[0.06] dark:border-white/[0.06]">
+          <Overline size="md">Inline Code</Overline>
+        </div>
+        <div className="p-4 flex flex-col gap-4">
+          <p className="type-body text-black/75 dark:text-white/70" style={{ lineHeight: 1.8, margin: 0 }}>
+            Use the <Code inline>{"<Button>"}</Code> component with <Code inline>variant="solid"</Code> for primary actions
+            and <Code inline>variant="ghost"</Code> for secondary actions. Set the <Code inline>size</Code> prop
+            to <Code inline>"sm"</Code>, <Code inline>"md"</Code>, or <Code inline>"lg"</Code> to control dimensions.
+          </p>
+          <p className="type-body text-black/75 dark:text-white/70" style={{ lineHeight: 1.8, margin: 0 }}>
+            Import primitives from <Code inline>@/primitives/buttons</Code> and configure the glass
+            effect with CSS variables like <Code inline>--glass-radius</Code> and <Code inline>--glass-blur</Code>.
+            The <Code inline>useDarkMode()</Code> hook detects theme changes automatically.
+          </p>
+        </div>
       </div>
     </div>
   );

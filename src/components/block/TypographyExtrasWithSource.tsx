@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { TypographyExtras } from "./TypographyExtras";
 import { ViewSourceModal } from "@/components/modal/ViewSourceModal";
 
-const SOURCE_CODE = `import { Blockquote, List, Kbd, Overline, Label } from "@/primitives/typography";
+const SOURCE_CODE = `import { Blockquote, List, Kbd, Code, Overline, Label } from "@/primitives/typography";
 import { useDarkMode } from "@/primitives/hooks/useDarkMode";
 
 export function TypographyExtras() {
@@ -58,6 +58,21 @@ export function TypographyExtras() {
             </div>
           </div>
         ))}
+      </div>
+
+      {/* Inline Code */}
+      <div className="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white/60 dark:bg-black/30">
+        <div className="flex items-center px-3 py-2 bg-black/[0.04] border-b">
+          <Overline size="md">Inline Code</Overline>
+        </div>
+        <div className="p-4">
+          <p className="type-body" style={{ lineHeight: 1.8 }}>
+            Use the <Code inline>{"<Button>"}</Code> component with
+            <Code inline>variant="solid"</Code> for primary actions.
+            Import from <Code inline>@/primitives/buttons</Code> and
+            configure with <Code inline>--glass-radius</Code>.
+          </p>
+        </div>
       </div>
     </div>
   );
@@ -145,10 +160,54 @@ const IMPL_KBD = [
   '}',
 ].join("\n");
 
+const IMPL_CODE = [
+  'import { useDarkMode } from "../hooks/useDarkMode";',
+  '',
+  'interface CodeProps {',
+  '  children: React.ReactNode;',
+  '  inline?: boolean;',
+  '  highlightedChildren?: React.ReactNode;',
+  '}',
+  '',
+  'export function Code({ children, inline = false, highlightedChildren }: CodeProps) {',
+  '  const isDark = useDarkMode();',
+  '  ',
+  '  if (inline) {',
+  '    return (',
+  '      <code style={{',
+  '        fontFamily: "var(--font-mono)",',
+  '        fontSize: "0.9em",',
+  '        padding: "2px 6px",',
+  '        borderRadius: "4px",',
+  '        background: isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.06)",',
+  '        color: isDark ? "#e0e0e0" : "#d63384",',
+  '      }}>',
+  '        {children}',
+  '      </code>',
+  '    );',
+  '  }',
+  '  ',
+  '  return (',
+  '    <pre style={{',
+  '      fontFamily: "var(--font-mono)",',
+  '      fontSize: "13px",',
+  '      padding: "16px",',
+  '      borderRadius: "var(--glass-radius-sm, 8px)",',
+  '      background: isDark ? "#0d0d0d" : "#1a1a1a",',
+  '      color: "#d4d4d4",',
+  '      overflow: "auto",',
+  '    }}>',
+  '      {highlightedChildren || children}',
+  '    </pre>',
+  '  );',
+  '}',
+].join("\n");
+
 const COMPONENTS = [
   { name: "Blockquote", path: "@/primitives/typography", description: "Pull quote with accent border and author citation", implementation: IMPL_BLOCKQUOTE },
   { name: "List", path: "@/primitives/typography", description: "Styled ordered/unordered list with configurable spacing", implementation: IMPL_LIST },
   { name: "Kbd", path: "@/primitives/typography", description: "Keyboard shortcut key indicator", implementation: IMPL_KBD },
+  { name: "Code", path: "@/primitives/typography", description: "Inline code snippet or block code with syntax highlighting", implementation: IMPL_CODE },
   { name: "Overline", path: "@/primitives/typography", description: "Uppercase label text for section headers" },
   { name: "Label", path: "@/primitives/typography", description: "Form label with required indicator support" },
 ];

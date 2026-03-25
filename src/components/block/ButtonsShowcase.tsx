@@ -53,9 +53,19 @@ export function ButtonsShowcase() {
         <div style={{ padding: "8px 12px", background: headerBg, borderBottom: `1px solid ${borderColor}` }}>
           <span className="type-overline" style={{ color: headerColor }}>Action Pair</span>
         </div>
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "12px", padding: "16px" }}>
-          <Button variant="ghost" size="md">Cancel</Button>
-          <Button variant="solid" size="md" style={{ borderRadius: "var(--glass-radius, 16px)" }}>Apply</Button>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 16px", borderBottom: `1px solid ${rowBorder}` }}>
+          <span className="type-label" style={{ color: labelColor }}>Medium</span>
+          <div style={{ display: "flex", gap: "10px" }}>
+            <Button variant="ghost" size="md" shape="rounded">Cancel</Button>
+            <Button variant="solid" size="md" shape="rounded">Apply</Button>
+          </div>
+        </div>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 16px" }}>
+          <span className="type-label" style={{ color: labelColor }}>Compact</span>
+          <div style={{ display: "flex", gap: "8px" }}>
+            <Button variant="ghost" size="sm" shape="rounded">Cancel</Button>
+            <Button variant="solid" size="sm" shape="rounded">Apply</Button>
+          </div>
         </div>
       </div>
 

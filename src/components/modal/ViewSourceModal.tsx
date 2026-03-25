@@ -87,15 +87,21 @@ interface ComponentInfo {
   implementation?: string;
 }
 
+interface ExtraTab {
+  label: string;
+  code: string;
+}
+
 interface ViewSourceModalProps {
   open: boolean;
   onClose: () => void;
   title: string;
   code: string;
   components?: ComponentInfo[];
+  extraTabs?: ExtraTab[];
 }
 
-type TabKey = "source" | "components" | "implementation";
+type TabKey = "source" | "components" | "implementation" | string;
 
 const TABS: { key: TabKey; label: string; icon: JSX.Element }[] = [
   {
@@ -115,7 +121,7 @@ const TABS: { key: TabKey; label: string; icon: JSX.Element }[] = [
   },
 ];
 
-export function ViewSourceModal({ open, onClose, title, code, components = [] }: ViewSourceModalProps) {
+export function ViewSourceModal({ open, onClose, title, code, components = [], extraTabs = [] }: ViewSourceModalProps) {
   const [mounted, setMounted] = useState(false);
   const [activeTab, setActiveTab] = useState<TabKey>("source");
   const [selectedImpl, setSelectedImpl] = useState(0);
@@ -200,6 +206,26 @@ export function ViewSourceModal({ open, onClose, title, code, components = [] }:
               >
                 {tab.icon}
                 {tab.label}
+              </button>
+            );
+          })}
+          {extraTabs.map((et, i) => {
+            const key = `extra-${i}`;
+            const isActive = activeTab === key;
+            return (
+              <button
+                key={key}
+                role="tab"
+                aria-selected={isActive}
+                onClick={() => setActiveTab(key)}
+                className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-[7px] rounded-[8px] text-[13px] font-[590] tracking-[-0.01em] cursor-pointer border-none transition-all duration-200 ease-[var(--transition-apple)] ${
+                  isActive
+                    ? "bg-white/80 text-text-primary shadow-[0_1px_3px_rgba(0,0,0,0.08),0_0_0_0.5px_rgba(0,0,0,0.04)] dark:bg-white/[0.12] dark:shadow-[0_1px_3px_rgba(0,0,0,0.2),0_0_0_0.5px_rgba(255,255,255,0.06)]"
+                    : "bg-transparent text-text-tertiary hover:text-text-secondary"
+                }`}
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"><path d="M12 2v20M2 12h20" /></svg>
+                {et.label}
               </button>
             );
           })}
@@ -313,6 +339,34 @@ export function ViewSourceModal({ open, onClose, title, code, components = [] }:
               </div>
             )}
           </div>
+        ) : activeTab.startsWith("extra-") ? (
+          /* Extra tab content */
+          (() => {
+            const idx = parseInt(activeTab.split("-")[1], 10);
+            const et = extraTabs[idx];
+            if (!et) return null;
+            const etLines = et.code.split("\n");
+            const etLineWidth = String(etLines.length).length;
+            const etHighlighted = etLines.map((line: string) => highlightCode(line));
+            return (
+              <div
+                className="overflow-auto flex-1"
+                style={{ background: "#1a1a1a", scrollbarWidth: "thin" }}
+                onMouseDown={(e: React.MouseEvent) => e.stopPropagation()}
+              >
+                <pre style={{ margin: 0, padding: "12px 0", fontFamily: "var(--font-mono)", fontSize: "12px", lineHeight: "1.7", color: "#d4d4d4", tabSize: 2 }}>
+                  {etHighlighted.map((html: string, i: number) => (
+                    <div key={i} style={{ display: "flex", paddingRight: "16px" }}>
+                      <span style={{ display: "inline-block", width: `${etLineWidth + 2}ch`, minWidth: "3ch", paddingLeft: "16px", textAlign: "right", paddingRight: "16px", color: "#555", userSelect: "none", flexShrink: 0 }}>
+                        {i + 1}
+                      </span>
+                      <span style={{ flex: 1, minWidth: 0 }} dangerouslySetInnerHTML={{ __html: html || "&nbsp;" }} />
+                    </div>
+                  ))}
+                </pre>
+              </div>
+            );
+          })()
         ) : (
           /* Implementation tab */
           <div className="flex flex-col flex-1 overflow-hidden">
