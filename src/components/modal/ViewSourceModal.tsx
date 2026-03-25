@@ -209,7 +209,8 @@ export function ViewSourceModal({ open, onClose, title, code, components = [], e
               </button>
             );
           })}
-          {extraTabs.map((et, i) => {
+          {/* Extra tabs hidden — implementation uses extraTabs[0] content */}
+          {false && extraTabs.map((et, i) => {
             const key = `extra-${i}`;
             const isActive = activeTab === key;
             return (
@@ -426,6 +427,32 @@ export function ViewSourceModal({ open, onClose, title, code, components = [], e
                   );
                 })()}
               </>
+            ) : extraTabs.length > 0 && extraTabs[0].code ? (
+              /* Fallback: use extraTabs[0] for implementation */
+              (() => {
+                const etCode = extraTabs[0].code;
+                const etLines = etCode.split("\n");
+                const etLineWidth = String(etLines.length).length;
+                const etHighlighted = etLines.map((line: string) => highlightCode(line));
+                return (
+                  <div
+                    className="overflow-auto flex-1"
+                    style={{ background: "#1a1a1a", scrollbarWidth: "thin" }}
+                    onMouseDown={(e: React.MouseEvent) => e.stopPropagation()}
+                  >
+                    <pre style={{ margin: 0, padding: "12px 0", fontFamily: "var(--font-mono)", fontSize: "12px", lineHeight: "1.7", color: "#d4d4d4", tabSize: 2 }}>
+                      {etHighlighted.map((html: string, i: number) => (
+                        <div key={i} style={{ display: "flex", paddingRight: "16px" }}>
+                          <span style={{ display: "inline-block", width: `${etLineWidth + 2}ch`, minWidth: "3ch", paddingLeft: "16px", textAlign: "right", paddingRight: "16px", color: "#555", userSelect: "none", flexShrink: 0 }}>
+                            {i + 1}
+                          </span>
+                          <span style={{ flex: 1, minWidth: 0 }} dangerouslySetInnerHTML={{ __html: html || "&nbsp;" }} />
+                        </div>
+                      ))}
+                    </pre>
+                  </div>
+                );
+              })()
             ) : (
               <div className="flex flex-col items-center justify-center py-12 px-4">
                 <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" style={{ color: isDark ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.15)", marginBottom: 12 }}>

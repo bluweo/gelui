@@ -20,12 +20,10 @@ export function Badge({
   const c = colors[variant] ?? colors.default;
   return (
     <span
-      className={className}
+      className={`type-caption ${className}`}
       style={{
         display: "inline-flex",
         alignItems: "center",
-        fontSize: "11px",
-        fontWeight: 600,
         padding: "3px 8px",
         borderRadius: "100px",
         background: c.bg,

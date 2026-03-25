@@ -35,14 +35,11 @@ export function Tag({
 
   return (
     <span
-      className={className}
+      className={`type-caption ${className}`}
       style={{
         display: "inline-flex",
         alignItems: "center",
         gap: "4px",
-        fontSize: isSm ? "11px" : "12px",
-        fontWeight: 600,
-        fontFamily: "var(--font-ui)",
         padding: isSm ? "2px 8px" : "4px 10px",
         borderRadius: "var(--glass-radius-pill, 100px)",
         background: c.bg,

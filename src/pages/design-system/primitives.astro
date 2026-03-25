@@ -13,6 +13,7 @@ import { BadgesShowcase } from "@/components/block/BadgesShowcase";
 import { FeedbackShowcase } from "@/components/block/FeedbackShowcase";
 import { ButtonsRightColumn } from "@/components/block/ButtonsRightColumn";
 import { BadgesShowcaseV2 } from "@/components/block/BadgesShowcaseV2";
+import { BadgesShowcaseWithSource } from "@/components/block/BadgesShowcaseWithSource";
 import { FeedbackShowcaseV2 } from "@/components/block/FeedbackShowcaseV2";
 import { LayoutShowcase } from "@/components/block/LayoutShowcase";
 import { ElevationShowcase } from "@/components/block/ElevationShowcase";
@@ -463,12 +464,21 @@ import { InputFieldsSource } from "@/components/block/InputFieldsSource";
          ═══════════════════════════════════ -->
     <div data-section="Badges" class="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
       <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 160px;" />
-      <div class="relative flex flex-col gap-1 mb-6 pt-1 pl-1">
-        <span class="text-[10px] font-[650] uppercase tracking-[0.1em] text-black/40 dark:text-white/40 mb-1">Indicators</span>
-        <h2 class="text-[24px] font-[750] tracking-[-0.03em] leading-[1.2] text-black dark:text-white mb-1" style="font-family: var(--font-heading)">Badges & Labels</h2>
-        <p class="text-[13px] leading-[1.6] text-black/60 dark:text-white/55">Status indicators, tags, and label primitives</p>
+      <div class="relative flex items-start justify-between mb-6 pt-1 pl-1">
+        <div class="flex flex-col gap-1">
+          <span class="type-overline text-black/40 dark:text-white/40 mb-1">Indicators</span>
+          <h2 class="type-h2 text-black dark:text-white mb-1">Badges & Labels</h2>
+          <p class="type-body-sm text-black/60 dark:text-white/55">Status indicators, tags, and label primitives</p>
+        </div>
+        <button
+          class="w-9 h-9 flex items-center justify-center rounded-full bg-black/[0.04] dark:bg-white/[0.06] hover:bg-black/[0.08] dark:hover:bg-white/[0.12] border border-black/[0.06] dark:border-white/[0.08] transition-all duration-150 cursor-pointer shrink-0 z-10 hover:scale-110"
+          title="View Source Code"
+          data-view-source="badges"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-black/50 dark:text-white/40"><polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" /></svg>
+        </button>
       </div>
-      <BadgesShowcaseV2 client:load />
+      <BadgesShowcaseWithSource client:load />
     </div>
 
     <!-- ═══════════════════════════════════

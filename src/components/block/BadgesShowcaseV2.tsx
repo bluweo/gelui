@@ -1,132 +1,218 @@
-import { Badge, Tag, Avatar, Stat, ColorSwatch } from "@/primitives/data";
+import { Badge, Tag, Avatar } from "@/primitives/data";
 import { useDarkMode } from "@/primitives/hooks/useDarkMode";
 import { useState } from "react";
 
 export function BadgesShowcaseV2() {
   const isDark = useDarkMode();
-  const [tags, setTags] = useState(["React", "Astro", "Tailwind", "TypeScript"]);
+  const [tags, setTags] = useState(["React", "Tailwind", "Astro"]);
+  const [activeChip, setActiveChip] = useState("Active");
 
   const tableBg = isDark ? "#1a1a1a" : "#ffffff";
   const headerBg = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)";
   const borderColor = isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.06)";
-  const rowBorder = isDark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.04)";
-  const labelColor = isDark ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.6)";
-  const headerColor = isDark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.45)";
+  const rowBorder = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)";
+  const labelColor = isDark ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.65)";
+  const subColor = isDark ? "rgba(255,255,255,0.35)" : "rgba(0,0,0,0.35)";
 
-  const headerStyle: React.CSSProperties = {
-    fontSize: "10px",
-    fontWeight: 650,
-    letterSpacing: "0.06em",
-    textTransform: "uppercase",
-    color: headerColor,
-  };
-
-  const tableStyle: React.CSSProperties = {
+  const card: React.CSSProperties = {
     borderRadius: "var(--glass-radius-sm, 10px)",
     overflow: "hidden",
     background: tableBg,
     border: `1px solid ${borderColor}`,
   };
 
-  const rowStyle = (last = false): React.CSSProperties => ({
+  const header: React.CSSProperties = {
+    padding: "10px 14px",
+    background: headerBg,
+    borderBottom: `1px solid ${borderColor}`,
+  };
+
+  const row = (last = false): React.CSSProperties => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
-    padding: "12px 16px",
+    padding: "10px 14px",
     borderBottom: last ? undefined : `1px solid ${rowBorder}`,
   });
 
-  const labelStyle: React.CSSProperties = {
-    fontSize: "12px",
-    fontWeight: 550,
-    color: labelColor,
-  };
-
   return (
-    <div suppressHydrationWarning style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-      {/* Status Badges */}
-      <div style={tableStyle}>
-        <div style={{ padding: "8px 12px", background: headerBg, borderBottom: `1px solid ${borderColor}` }}>
-          <span style={headerStyle}>Status Badges</span>
+    <div suppressHydrationWarning style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
+      {/* Top-left: Status Badges */}
+      <div style={card}>
+        <div style={header}>
+          <span className="type-overline" style={{ color: subColor }}>Status Badges</span>
         </div>
-        {(["default", "success", "warning", "error", "info"] as const).map((variant, i) => (
-          <div key={variant} style={rowStyle(i === 4)}>
-            <span style={{ ...labelStyle, textTransform: "capitalize" }}>{variant}</span>
-            <Badge variant={variant}>{variant === "default" ? "Default" : variant.charAt(0).toUpperCase() + variant.slice(1)}</Badge>
+        {(["success", "warning", "error", "info", "default"] as const).map((v, i) => (
+          <div key={v} style={row(i === 4)}>
+            <span className="type-label" style={{ color: labelColor, textTransform: "capitalize" }}>{v === "default" ? "Neutral" : v}</span>
+            <Badge variant={v}>{v === "default" ? "Neutral" : v.charAt(0).toUpperCase() + v.slice(1)}</Badge>
           </div>
         ))}
       </div>
 
-      {/* Removable Tags */}
-      <div style={tableStyle}>
-        <div style={{ padding: "8px 12px", background: headerBg, borderBottom: `1px solid ${borderColor}` }}>
-          <span style={headerStyle}>Removable Tags</span>
+      {/* Top-right: Status Dots */}
+      <div style={card}>
+        <div style={header}>
+          <span className="type-overline" style={{ color: subColor }}>Status Dots</span>
         </div>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", padding: "14px 16px" }}>
-          {tags.map((tag) => (
-            <Tag
-              key={tag}
-              label={tag}
-              color={tag === "React" ? "blue" : tag === "Astro" ? "purple" : tag === "Tailwind" ? "green" : "amber"}
-              onRemove={() => setTags(tags.filter(t => t !== tag))}
-            />
-          ))}
-          {tags.length === 0 && (
-            <span style={{ fontSize: "12px", opacity: 0.4 }}>All tags removed — refresh to reset</span>
-          )}
-        </div>
+        {([
+          { label: "Online", color: "#34C759" },
+          { label: "Away", color: "#FFC800" },
+          { label: "Busy", color: "#FF3B30" },
+          { label: "Offline", color: isDark ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.25)" },
+        ]).map((dot, i) => (
+          <div key={dot.label} style={row(i === 3)}>
+            <span className="type-label" style={{ color: labelColor }}>{dot.label}</span>
+            <span style={{ width: 12, height: 12, borderRadius: "50%", background: dot.color, flexShrink: 0 }} />
+          </div>
+        ))}
       </div>
 
-      {/* Avatars */}
-      <div style={tableStyle}>
-        <div style={{ padding: "8px 12px", background: headerBg, borderBottom: `1px solid ${borderColor}` }}>
-          <span style={headerStyle}>Avatars</span>
+      {/* Bottom-left: Tags & Chips */}
+      <div style={card}>
+        <div style={header}>
+          <span className="type-overline" style={{ color: subColor }}>Tags & Chips</span>
         </div>
-        <div style={rowStyle()}>
-          <span style={labelStyle}>With Status</span>
-          <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
-            <Avatar name="John Doe" size="36px" status="online" />
-            <Avatar name="Jane Smith" size="36px" status="busy" />
-            <Avatar name="Bob" size="36px" status="away" />
-            <Avatar name="AI" size="36px" status="offline" />
+        {/* Removable Tags */}
+        <div style={{ padding: "12px 14px", borderBottom: `1px solid ${rowBorder}` }}>
+          <span className="type-caption" style={{ color: subColor, display: "block", marginBottom: 8 }}>Removable Tags</span>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
+            {tags.map((tag) => (
+              <Tag
+                key={tag}
+                label={tag}
+                color={tag === "React" ? "blue" : tag === "Tailwind" ? "green" : "purple"}
+                onRemove={() => setTags(tags.filter(t => t !== tag))}
+              />
+            ))}
+            {tags.length === 0 && (
+              <span style={{ fontSize: "11px", color: subColor }}>All removed — refresh to reset</span>
+            )}
           </div>
         </div>
-        <div style={rowStyle(true)}>
-          <span style={labelStyle}>Sizes</span>
-          <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
-            <Avatar name="XS" size="24px" />
-            <Avatar name="SM" size="32px" />
-            <Avatar name="MD" size="40px" />
-            <Avatar name="LG" size="52px" />
+        {/* Selectable Chips */}
+        <div style={{ padding: "12px 14px" }}>
+          <span className="type-caption" style={{ color: subColor, display: "block", marginBottom: 8 }}>Selectable Chips</span>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
+            {["Active", "Inactive", "Another"].map((chip) => (
+              <button
+                key={chip}
+                className="type-overline"
+                onClick={() => setActiveChip(chip)}
+                style={{
+                  padding: "5px 14px",
+                  borderRadius: "var(--glass-radius-pill, 100px)",
+                  border: `1px solid ${isDark ? "rgba(255,255,255,0.12)" : "rgba(0,0,0,0.1)"}`,
+                  background: activeChip === chip ? (isDark ? "#fff" : "#000") : "transparent",
+                  color: activeChip === chip ? (isDark ? "#000" : "#fff") : labelColor,
+                  cursor: "pointer",
+                  transition: "all 0.15s ease",
+                }}
+              >
+                {chip}
+              </button>
+            ))}
           </div>
         </div>
       </div>
 
-      {/* Stat Cards */}
-      <div style={tableStyle}>
-        <div style={{ padding: "8px 12px", background: headerBg, borderBottom: `1px solid ${borderColor}` }}>
-          <span style={headerStyle}>Stat Cards</span>
+      {/* Bottom-right: Avatars */}
+      <div style={card}>
+        <div style={header}>
+          <span className="type-overline" style={{ color: subColor }}>Avatars</span>
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "12px", padding: "14px 16px" }}>
-          <Stat value="1,284" label="Users" trend="up" trendValue="+12%" />
-          <Stat value="$48K" label="Revenue" trend="up" trendValue="+8.5%" />
-          <Stat value="326" label="Orders" trend="down" trendValue="-3.2%" />
-          <Stat value="99.9%" label="Uptime" trend="neutral" trendValue="0.0%" />
+        {/* Sizes */}
+        <div style={{ padding: "14px", borderBottom: `1px solid ${rowBorder}` }}>
+          <span className="type-caption" style={{ color: subColor, display: "block", marginBottom: 10 }}>Sizes</span>
+          <div style={{ display: "flex", gap: "16px", alignItems: "flex-end" }}>
+            {([
+              { initials: "A", size: 28, bg: "#5856D6", label: "xs" },
+              { initials: "B", size: 36, bg: "#FF9500", label: "sm" },
+              { initials: "U", size: 44, bg: "#007AFF", label: "md" },
+              { initials: "D", size: 56, bg: "#34C759", label: "lg" },
+            ]).map((a) => (
+              <div key={a.label} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 4 }}>
+                <div style={{
+                  width: a.size,
+                  height: a.size,
+                  borderRadius: "50%",
+                  background: a.image ? "transparent" : a.bg,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontSize: `${Math.max(a.size * 0.38, 11)}px`,
+                  fontWeight: 600,
+                  color: "#fff",
+                  overflow: "hidden",
+                }}>
+                  {a.image ? <img src={a.image} alt="logo" style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: "50%" }} /> : a.initials}
+                </div>
+                <span className="type-caption" style={{ color: subColor }}>{a.label}</span>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-
-      {/* Color Swatches */}
-      <div style={tableStyle}>
-        <div style={{ padding: "8px 12px", background: headerBg, borderBottom: `1px solid ${borderColor}` }}>
-          <span style={headerStyle}>Color Swatches</span>
-        </div>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "16px", padding: "14px 16px", justifyContent: "center" }}>
-          <ColorSwatch color="#354334" label="Primary" showHex />
-          <ColorSwatch color="#97AD96" label="Accent" showHex />
-          <ColorSwatch color="#FFC800" label="Warning" showHex />
-          <ColorSwatch color="#FF3B30" label="Error" showHex />
-          <ColorSwatch color="#5AC8FA" label="Info" showHex />
-          <ColorSwatch color="#34C759" label="Success" showHex />
+        {/* Group */}
+        <div style={{ padding: "14px" }}>
+          <span className="type-caption" style={{ color: subColor, display: "block", marginBottom: 10 }}>Group</span>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            {([
+              { initials: "A", bg: "#5856D6", status: "online" as const },
+              { initials: "B", bg: "#FF9500", status: "away" as const },
+              { initials: "C", bg: "#FF2D55", status: "busy" as const },
+            ]).map((u, i) => (
+              <div
+                key={u.initials}
+                style={{
+                  marginLeft: i > 0 ? -10 : 0,
+                  zIndex: 4 - i,
+                  width: 36,
+                  height: 36,
+                  borderRadius: "50%",
+                  background: u.bg,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontSize: "13px",
+                  fontWeight: 600,
+                  color: "#fff",
+                  border: `2.5px solid ${tableBg}`,
+                  position: "relative",
+                }}
+              >
+                {u.initials}
+                <span style={{
+                  position: "absolute",
+                  bottom: -1,
+                  right: -1,
+                  width: 10,
+                  height: 10,
+                  borderRadius: "50%",
+                  background: u.status === "online" ? "#34C759" : u.status === "away" ? "#FFC800" : "#FF3B30",
+                  border: `2px solid ${tableBg}`,
+                }} />
+              </div>
+            ))}
+            <div
+              style={{
+                marginLeft: -10,
+                width: 36,
+                height: 36,
+                borderRadius: "50%",
+                background: isDark ? "#ffffff" : "#1a1a1a",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: "11px",
+                fontWeight: 650,
+                color: isDark ? "#000" : "#fff",
+                border: `2.5px solid ${tableBg}`,
+                zIndex: 0,
+              }}
+            >
+              +3
+            </div>
+          </div>
         </div>
       </div>
     </div>
