@@ -17,6 +17,7 @@ export function Overline({
 
   return (
     <span
+      suppressHydrationWarning
       className={`type-overline ${className}`}
       style={{
         display: "block",

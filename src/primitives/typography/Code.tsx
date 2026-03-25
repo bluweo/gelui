@@ -67,6 +67,7 @@ export function Code({
   if (inline) {
     return (
       <code
+        suppressHydrationWarning
         className={className}
         style={{
           fontSize: "var(--type-code-size, 13px)",
@@ -85,6 +86,7 @@ export function Code({
   }
   return (
     <pre
+      suppressHydrationWarning
       className={className}
       style={{
         fontSize: "13px",

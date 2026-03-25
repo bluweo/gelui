@@ -3,6 +3,7 @@ import type { BaseProps } from "../types";
 export function Caption({ children, className = "", style }: BaseProps) {
   return (
     <span
+      suppressHydrationWarning
       className={className}
       style={{
         fontSize: `var(--type-caption-size, 11.5px)`,

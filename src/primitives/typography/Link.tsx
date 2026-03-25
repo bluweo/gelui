@@ -14,6 +14,7 @@ export function Link({
   const dark = useDarkMode();
   return (
     <a
+      suppressHydrationWarning
       href={href}
       className={className}
       style={{

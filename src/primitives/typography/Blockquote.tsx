@@ -20,6 +20,7 @@ export function Blockquote({
 
   return (
     <blockquote
+      suppressHydrationWarning
       className={className}
       style={{
         margin: 0,

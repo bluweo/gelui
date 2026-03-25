@@ -38,6 +38,7 @@ export function Heading({
 
   return (
     <Tag
+      suppressHydrationWarning
       className={className}
       style={{
         ...displayStyle,

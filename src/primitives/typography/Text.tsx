@@ -19,6 +19,7 @@ export function Text({
 
   return (
     <p
+      suppressHydrationWarning
       className={className}
       style={{
         fontSize: `var(--type-${varKey}-size, ${fallbackSize})`,

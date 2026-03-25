@@ -16,6 +16,7 @@ export function Kbd({
 
   return (
     <kbd
+      suppressHydrationWarning
       className={className}
       style={{
         display: "inline-block",

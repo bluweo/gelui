@@ -53,6 +53,7 @@ export function List({
 
   return (
     <div
+      suppressHydrationWarning
       className={className}
       role="list"
       style={{
