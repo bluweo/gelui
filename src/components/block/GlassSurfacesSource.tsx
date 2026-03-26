@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { ViewSourceModal } from "@/components/modal/ViewSourceModal";
 
 const SOURCE_CODE = `/* ═══════════════════════════════════════
-   Glass Surfaces — CSS Classes (primary approach)
-   No component import needed — just add classes to any element
+   Glass Surfaces — CSS Classes
+   No component import needed — add classes to any element
    ═══════════════════════════════════════ */
 
 /* Transparent — border only, fully see-through */
@@ -40,81 +40,64 @@ const SOURCE_CODE = `/* ══════════════════�
 /* Solid — 100% opaque, no transparency */
 <div class="bg-white dark:bg-[#1a1a1a] rounded-[var(--glass-radius)] p-4">
   Content on solid surface
-</div>`;
+</div>
 
-const CSS_CONFIG = `/* ═══════════════════════════════════════
-   CSS Configuration — defined in global.css
-   These classes are available globally
+/* ═══════════════════════════════════════
+   React Components — Surface & Card
    ═══════════════════════════════════════ */
 
-/* Glass levels use backdrop-filter for blur */
-.glass-0 {
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(8px) saturate(1.2);
+import { Surface, Card } from "@/primitives/surfaces";
+
+// Surface — simple glass level wrapper
+<Surface level={1}>Card content</Surface>
+<Surface level={2}>Modal content</Surface>
+
+// Card — with variant + frost options
+<Card variant="glass" frost="standard">Standard card</Card>
+<Card variant="gel">Gel card</Card>
+<Card variant="solid">Opaque card</Card>
+<Card variant="transparent">Border-only card</Card>`;
+
+const IMPL_SURFACE = `import type { BaseProps } from "../types";
+
+interface SurfaceProps extends BaseProps {
+  level?: 0 | 1 | 2 | 3;
 }
 
-.glass-1 {
-  background: rgba(255, 255, 255, 0.23);
-  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation));
-}
-
-.glass-2 {
-  background: rgba(255, 255, 255, 0.32);
-  backdrop-filter: blur(calc(var(--glass-blur) * 1.5)) saturate(var(--glass-saturation));
-}
-
-.glass-3 {
-  background: rgba(255, 255, 255, 0.45);
-  backdrop-filter: blur(var(--glass-blur-strong)) saturate(var(--glass-saturation));
-}
-
-/* Specular adds noise + lighting filter */
-.glass-specular {
-  filter: url(#liquid-glass-panel);
-}
-
-/* Gel adds volumetric inset shadows */
-.gel-glass {
-  background: rgba(255, 255, 255, 0.18);
-  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation));
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.35),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.08),
-    var(--glass-shadow);
-}
-
-/* Dark mode overrides */
-[data-theme="dark"] .glass-1 {
-  background: rgba(0, 0, 0, 0.35);
+export function Surface({ level = 1, children, className = "", style }: SurfaceProps) {
+  return (
+    <div className={\`glass-\${level} rounded-[var(--glass-radius,16px)] p-4 \${className}\`} style={style}>
+      {children}
+    </div>
+  );
 }`;
 
-const IMPL_SURFACE = `/* ═══════════════════════════════════════
-   React Alternative — Surface component
-   Use this in React islands when you need
-   programmatic level changes or dark mode hooks
-   ═══════════════════════════════════════ */
+const IMPL_CARD = `import type { BaseProps } from "../types";
 
-import { Surface } from "@/primitives/surfaces";
+interface CardProps extends BaseProps {
+  variant?: "glass" | "gel" | "solid" | "transparent";
+  frost?: "standard" | "haze" | "directional" | "none";
+}
 
-// Basic usage
-<Surface level={1}>Card content</Surface>
+export function Card({ variant = "glass", frost = "standard", children, className = "", style }: CardProps) {
+  const variantClasses: Record<string, string> = {
+    glass: "glass-1 glass-specular",
+    gel: "gel-glass glass-specular",
+    solid: "",
+    transparent: "",
+  };
+  const frostClass = frost === "standard" ? "ds-card-frost"
+    : frost === "haze" ? "ds-card-frost-haze"
+    : frost === "directional" ? "token-hero-frost" : "";
 
-// With custom styles
-<Surface level={2} style={{ padding: 24 }}>
-  Modal content with stronger blur
-</Surface>
-
-// Gel variant
-<Surface level={1} variant="gel">
-  Volumetric gel surface
-</Surface>
-
-/* The Surface component maps to CSS classes internally:
-   level 0 → glass-0
-   level 1 → glass-1 glass-specular
-   level 2 → glass-2 glass-specular
-   level 3 → glass-3 glass-specular
-*/`;
+  return (
+    <div className={\`relative overflow-hidden rounded-[var(--glass-radius,16px)] p-5 \${variantClasses[variant]} \${className}\`}
+      style={{ ...(variant === "solid" ? { background: "var(--theme-table-bg)", border: "1px solid var(--theme-divider)" } : variant === "transparent" ? { border: "1px solid var(--theme-divider)" } : {}), ...style }}>
+      {frostClass && <div className={\`absolute inset-x-0 top-0 pointer-events-none \${frostClass}\`} style={{ height: frost === "directional" ? "100%" : "160px" }} />}
+      <div className="relative z-[1]">{children}</div>
+    </div>
+  );
+}`;
 
 const COMPONENTS = [
   { name: "glass-transparent", path: "CSS class", description: "Border only, fully see-through — no blur, no tint" },
@@ -124,8 +107,29 @@ const COMPONENTS = [
   { name: "glass-3", path: "CSS class", description: "Maximum blur — for overlays and heavy backdrops" },
   { name: "gel-glass", path: "CSS class", description: "Volumetric inset shadows + specular — premium feel" },
   { name: "glass-specular", path: "CSS class", description: "Adds noise texture + specular lighting filter (combine with glass-1/2/3)" },
-  { name: "Surface", path: "@/primitives/surfaces", description: "React component wrapper — programmatic level control", implementation: IMPL_SURFACE },
-  { name: "Card", path: "@/primitives/surfaces", description: "Glass card with frost zone support" },
+  {
+    name: "Surface",
+    path: "@/primitives/surfaces",
+    description: "React wrapper — maps level prop to glass-0 through glass-3 CSS classes",
+    implementation: IMPL_SURFACE,
+    props: [
+      { name: "level", type: "enum", options: ["0", "1", "2", "3"], default: "1" },
+      { name: "className", type: "string" },
+      { name: "style", type: "CSSProperties" },
+    ],
+  },
+  {
+    name: "Card",
+    path: "@/primitives/surfaces",
+    description: "Glass card with variant styling and optional frost overlay zone",
+    implementation: IMPL_CARD,
+    props: [
+      { name: "variant", type: "enum", options: ["glass", "gel", "solid", "transparent"], default: '"glass"' },
+      { name: "frost", type: "enum", options: ["standard", "haze", "directional", "none"], default: '"standard"' },
+      { name: "className", type: "string" },
+      { name: "style", type: "CSSProperties" },
+    ],
+  },
 ];
 
 export function GlassSurfacesSource() {
@@ -145,9 +149,6 @@ export function GlassSurfacesSource() {
       title="Glass Surfaces"
       code={SOURCE_CODE}
       components={COMPONENTS}
-      extraTabs={[
-        { label: "CSS Config", code: CSS_CONFIG },
-      ]}
     />
   );
 }

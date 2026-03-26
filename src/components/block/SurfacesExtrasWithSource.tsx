@@ -4,126 +4,148 @@ import { ViewSourceModal } from "@/components/modal/ViewSourceModal";
 
 const SOURCE_CODE = `import { Accordion, ScrollArea } from "@/primitives/surfaces";
 import { Overline } from "@/primitives/typography";
-import { useDarkMode } from "@/primitives/hooks/useDarkMode";
 
 export function SurfacesExtras() {
-  const isDark = useDarkMode();
-
   const faqItems = [
-    {
-      title: "What are design tokens?",
-      content: "Design tokens are the visual design atoms...",
-    },
-    {
-      title: "How do glass surfaces work?",
-      content: "Glass surfaces combine backdrop-filter blur...",
-    },
-    {
-      title: "Can I customize the primitives?",
-      content: "Yes — all primitives accept className and style props...",
-    },
+    { title: "What are design tokens?", content: "Design tokens are the visual design atoms..." },
+    { title: "How do glass surfaces work?", content: "Glass surfaces combine backdrop-filter blur..." },
+    { title: "Can I customize the primitives?", content: "Yes — all primitives accept className and style props..." },
   ];
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+    <div className="flex flex-col gap-5">
       {/* Accordion */}
-      <div className="rounded-[var(--glass-radius-sm)] overflow-hidden">
-        <div className="flex items-center px-3 py-2">
+      <div className="rounded-[var(--glass-radius-sm)] overflow-hidden bg-[var(--theme-table-bg)] border border-[var(--theme-divider)]">
+        <div className="py-2 px-3 bg-[var(--theme-header-bg)] border-b border-[var(--theme-divider)]">
           <Overline size="md" muted>Accordion</Overline>
         </div>
-        <Accordion items={faqItems} defaultOpen={[0]} />
+        <div className="p-4">
+          <Accordion items={faqItems} defaultOpen={[0]} />
+        </div>
       </div>
 
       {/* ScrollArea */}
-      <div className="rounded-[var(--glass-radius-sm)] overflow-hidden">
-        <div className="flex items-center px-3 py-2">
+      <div className="rounded-[var(--glass-radius-sm)] overflow-hidden bg-[var(--theme-table-bg)] border border-[var(--theme-divider)]">
+        <div className="py-2 px-3 bg-[var(--theme-header-bg)] border-b border-[var(--theme-divider)]">
           <Overline size="md" muted>Scroll Area</Overline>
         </div>
-        <ScrollArea maxHeight={200}>
-          <p className="type-body">
-            Every surface in Gel UI is built on a foundation
-            of translucent layers...
-          </p>
-        </ScrollArea>
+        <div className="p-4">
+          <ScrollArea maxHeight={200}>
+            <p className="type-body text-[var(--theme-fg)]">
+              Every surface in Gel UI is built on a foundation of translucent layers...
+            </p>
+          </ScrollArea>
+        </div>
       </div>
     </div>
   );
 }`;
 
-const IMPL_ACCORDION = `import { useState, useRef, useEffect, type ReactNode } from "react";
+const IMPL_ACCORDION = `import { useState, type ReactNode, type CSSProperties } from "react";
 import { ArrowDown2 } from "iconsax-react";
-import { useDarkMode } from "../hooks/useDarkMode";
 
-interface AccordionItem {
-  title: string;
-  content: ReactNode;
-}
-
+interface AccordionItem { title: string; content: ReactNode; }
 interface AccordionProps {
   items: AccordionItem[];
   multiple?: boolean;
   defaultOpen?: number[];
+  className?: string;
+  style?: CSSProperties;
 }
 
-export function Accordion({ items, multiple = false, defaultOpen = [] }: AccordionProps) {
-  const [openIndexes, setOpenIndexes] = useState<Set<number>>(new Set(defaultOpen));
-  const dark = useDarkMode();
+function AccordionSection({ title, content, isOpen, onToggle }: {
+  title: string; content: ReactNode; isOpen: boolean; onToggle: () => void;
+}) {
+  return (
+    <div className="prim-accordion-item">
+      <button type="button" onClick={(e) => { e.stopPropagation(); onToggle(); }}
+        className="prim-accordion-trigger">
+        {title}
+        <span className={\`flex items-center transition-transform duration-[250ms] \${isOpen ? "rotate-180" : "rotate-0"}\`}>
+          <ArrowDown2 size={18} color="var(--theme-fg-muted)" variant="Linear" />
+        </span>
+      </button>
+      <div className="prim-accordion-content" data-open={isOpen || undefined}>
+        <div className="prim-accordion-body">{content}</div>
+      </div>
+    </div>
+  );
+}
 
-  const toggle = (index: number) => {
+export function Accordion({ items, multiple = false, defaultOpen = [], className = "", style }: AccordionProps) {
+  const [openIndexes, setOpenIndexes] = useState<Set<number>>(new Set(defaultOpen));
+  const toggle = (i: number) => {
     setOpenIndexes(prev => {
       const next = new Set(multiple ? prev : []);
-      if (prev.has(index)) next.delete(index);
-      else next.add(index);
+      prev.has(i) ? next.delete(i) : next.add(i);
       return next;
     });
   };
-
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+    <div className={\`flex flex-col gap-1.5 \${className}\`} style={style}>
       {items.map((item, i) => (
-        <AccordionSection
-          key={i}
-          title={item.title}
-          content={item.content}
-          isOpen={openIndexes.has(i)}
-          onToggle={() => toggle(i)}
-          dark={dark}
-        />
+        <AccordionSection key={i} title={item.title} content={item.content}
+          isOpen={openIndexes.has(i)} onToggle={() => toggle(i)} />
       ))}
     </div>
   );
 }`;
 
 const IMPL_SCROLLAREA = `import { type ReactNode, type CSSProperties } from "react";
-import { useDarkMode } from "../hooks/useDarkMode";
 
 interface ScrollAreaProps {
   maxHeight: number | string;
   children: ReactNode;
+  className?: string;
+  style?: CSSProperties;
 }
 
-export function ScrollArea({ maxHeight, children }: ScrollAreaProps) {
-  const isDark = useDarkMode();
-
+export function ScrollArea({ maxHeight, children, className = "", style }: ScrollAreaProps) {
+  const mh = typeof maxHeight === "number" ? \`\${maxHeight}px\` : maxHeight;
   return (
-    <div style={{
-      maxHeight,
-      overflowY: "auto",
-      position: "relative",
-      scrollbarWidth: "thin",
-      scrollbarColor: isDark
-        ? "rgba(255,255,255,0.15) transparent"
-        : "rgba(0,0,0,0.12) transparent",
-    }}>
-      {children}
+    <div className={\`prim-scroll-area \${className}\`}
+      style={{ "--scroll-mh": mh, ...style } as CSSProperties}>
+      <div className="prim-scroll-fade-top" />
+      <div className="prim-scroll-inner">{children}</div>
+      <div className="prim-scroll-fade-bottom" />
     </div>
   );
 }`;
 
 const COMPONENTS = [
-  { name: "Accordion", path: "@/primitives/surfaces", description: "Expandable/collapsible sections with smooth animation", implementation: IMPL_ACCORDION },
-  { name: "ScrollArea", path: "@/primitives/surfaces", description: "Custom scrollbar container with styled overflow", implementation: IMPL_SCROLLAREA },
-  { name: "Overline", path: "@/primitives/typography", description: "Uppercase label text for section headers" },
+  {
+    name: "Accordion",
+    path: "@/primitives/surfaces",
+    description: "Expandable/collapsible sections with CSS grid animation. SSR-safe — no scrollHeight measurement.",
+    implementation: IMPL_ACCORDION,
+    props: [
+      { name: "items", type: "AccordionItem[]" },
+      { name: "multiple", type: "boolean", default: "false" },
+      { name: "defaultOpen", type: "number[]", default: "[]" },
+      { name: "className", type: "string" },
+      { name: "style", type: "CSSProperties" },
+    ],
+  },
+  {
+    name: "ScrollArea",
+    path: "@/primitives/surfaces",
+    description: "Constrained scrollable container with top/bottom fade gradients and styled scrollbar.",
+    implementation: IMPL_SCROLLAREA,
+    props: [
+      { name: "maxHeight", type: "number | string" },
+      { name: "className", type: "string" },
+      { name: "style", type: "CSSProperties" },
+    ],
+  },
+  {
+    name: "Overline",
+    path: "@/primitives/typography",
+    description: "Uppercase label text for section headers",
+    props: [
+      { name: "size", type: "enum", options: ["sm", "md", "lg"], default: '"md"' },
+      { name: "muted", type: "boolean", default: "true" },
+    ],
+  },
 ];
 
 export function SurfacesExtrasWithSource() {
