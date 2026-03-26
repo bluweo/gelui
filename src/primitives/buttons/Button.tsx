@@ -26,9 +26,7 @@ export function Button({
   const variantClasses =
     variant === "gel"
       ? `gel-btn ${shape === "circle" ? "gel-btn-circle-sm" : "gel-btn-pill"}`
-      : variant === "glass"
-        ? `prim-btn-${variant} glass-1 glass-specular`
-        : `prim-btn-${variant}`;
+      : `prim-btn-${variant}`;
 
   const fullClass = fullWidth ? "prim-btn-full" : "";
 

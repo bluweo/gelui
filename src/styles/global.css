@@ -2206,12 +2206,30 @@ code:not([data-font-preview]), pre:not([data-font-preview]), kbd, samp { font-fa
 }
 
 @utility prim-btn-glass {
-  background: var(--theme-header-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--theme-ghost-border);
+  position: relative;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation));
+  border: 1px solid var(--glass-border);
   color: var(--theme-bg-solid);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.2), 0 1px 3px rgba(0,0,0,0.06);
+  box-shadow: var(--glass-shadow), inset 0 1px 0 rgba(255,255,255,0.25);
+
+  /* Specular highlight — same as glass-specular but respects button border-radius */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 55%;
+    background: linear-gradient(180deg,
+      var(--liquid-specular-top) 0%,
+      var(--liquid-specular-mid) 45%,
+      transparent 100%
+    );
+    border-radius: inherit;
+    pointer-events: none;
+  }
 
   &:hover:not(:disabled):not([data-disabled="true"]) {
     transform: scale(1.05);
