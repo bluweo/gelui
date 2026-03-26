@@ -51,9 +51,8 @@ export function SectionNav() {
     els.forEach((el, i) => {
       const label = el.getAttribute("data-section") || "";
       if (label) {
-        const id = `section-${i}`;
-        if (!el.id) el.id = id;
-        found.push({ id: el.id || id, label, el });
+        const id = el.id || `section-${i}`;
+        found.push({ id, label, el });
       }
     });
     setSections(found);

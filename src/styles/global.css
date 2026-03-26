@@ -3166,6 +3166,13 @@ code:not([data-font-preview]), pre:not([data-font-preview]), kbd, samp { font-fa
   -webkit-backdrop-filter: blur(8px);
 }
 
+/* ── Font preview span (FontSizeWeightTable) ── */
+.font-preview-span {
+  font-size: var(--fp-size, 15px);
+  font-weight: var(--fp-weight, 500);
+  line-height: 1.3;
+}
+
 /* ── ScrollArea ── */
 @utility prim-scroll-area {
   position: relative;

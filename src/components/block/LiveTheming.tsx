@@ -175,8 +175,8 @@ function AppearanceControls() {
   }, []);
 
   if (!mounted) return (
-    <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: "var(--theme-table-bg)", border: "1px solid var(--theme-divider)", height: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
-      <span style={{ fontSize: 11, color: "var(--theme-fg-subtle)" }}>Loading...</span>
+    <div className="rounded-[var(--glass-radius-sm,10px)] overflow-hidden bg-[var(--theme-table-bg)] border border-[var(--theme-divider)] h-full flex items-center justify-center">
+      <span className="text-[11px] text-[var(--theme-fg-subtle)]">Loading...</span>
     </div>
   );
 
@@ -212,9 +212,9 @@ function AppearanceControls() {
 
   const segStyle = (active: boolean): React.CSSProperties => ({
     flex: 1,
-    paddingTop: 7, paddingBottom: 7, paddingLeft: 0, paddingRight: 0,
+    paddingTop: "7px", paddingBottom: "7px", paddingLeft: "0px", paddingRight: "0px",
     fontSize: "12px",
-    fontWeight: active ? 600 : 450,
+    fontWeight: active ? "600" : "450",
     textAlign: "center",
     borderRadius: "var(--glass-radius-sm, 10px)",
     background: active ? segActiveBg : "transparent",
@@ -226,26 +226,26 @@ function AppearanceControls() {
   });
 
   return (
-    <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: tableBg, border: `1px solid ${borderColor}`, height: "100%", display: "flex", flexDirection: "column" }}>
+    <div className="rounded-[var(--glass-radius-sm,10px)] overflow-hidden h-full flex flex-col" style={{ background: tableBg, border: `1px solid ${borderColor}` }}>
       {/* Header */}
-      <div style={{ paddingTop: 10, paddingBottom: 10, paddingLeft: 14, paddingRight: 14, background: headerBg, borderBottom: `1px solid ${borderColor}`, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-        <span style={{ fontSize: "10px", fontWeight: 650, textTransform: "uppercase", letterSpacing: "0.06em", color: headerText }}>Appearance</span>
-        <button onClick={resetToDefaults} style={{ fontSize: "10px", fontWeight: 550, color: "var(--theme-fg-subtle)", background: "none", border: "none", cursor: "pointer" }}>Reset</button>
+      <div className="flex items-center justify-between" style={{ padding: "10px 14px", background: headerBg, borderBottom: `1px solid ${borderColor}` }}>
+        <span className="text-[10px] font-[650] uppercase tracking-[0.06em]" style={{ color: headerText }}>Appearance</span>
+        <button onClick={resetToDefaults} className="text-[10px] font-[550] bg-none border-none cursor-pointer" style={{ color: "var(--theme-fg-subtle)" }}>Reset</button>
       </div>
 
       {/* Transparency */}
-      <div style={{ paddingTop: 12, paddingBottom: 12, paddingLeft: 14, paddingRight: 14, borderBottom: `1px solid ${rowBorder}` }}>
-        <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8 }}>
-          <span style={{ fontSize: "10px", fontWeight: 650, textTransform: "uppercase", letterSpacing: "0.04em", color: labelText }}>Transparency</span>
-          <span style={{ fontSize: "11px", fontFamily: "var(--font-mono)", color: valueText }}>{Math.round(transparency * 100)}%</span>
+      <div className="py-3 px-3.5" style={{ borderBottom: `1px solid ${rowBorder}` }}>
+        <div className="flex justify-between mb-2">
+          <span className="text-[10px] font-[650] uppercase tracking-[0.04em]" style={{ color: labelText }}>Transparency</span>
+          <span className="text-[11px] font-[family-name:var(--font-mono)]" style={{ color: valueText }}>{Math.round(transparency * 100)}%</span>
         </div>
         <LiquidGlassSlider min={0} max={100} step={1} value={Math.round(transparency * 100)} onChange={(v) => setTransparency(v / 100)} />
       </div>
 
       {/* Border Radius */}
-      <div style={{ paddingTop: 12, paddingBottom: 12, paddingLeft: 14, paddingRight: 14, borderBottom: `1px solid ${rowBorder}` }}>
-        <span style={{ fontSize: "10px", fontWeight: 650, textTransform: "uppercase", letterSpacing: "0.04em", color: labelText, display: "block", marginBottom: 8 }}>Border Radius</span>
-        <div style={{ display: "flex", gap: 2, padding: 3, borderRadius: "var(--glass-radius-sm, 10px)", background: segBg }}>
+      <div className="py-3 px-3.5" style={{ borderBottom: `1px solid ${rowBorder}` }}>
+        <span className="text-[10px] font-[650] uppercase tracking-[0.04em] block mb-2" style={{ color: labelText }}>Border Radius</span>
+        <div className="flex gap-0.5 p-[3px] rounded-[var(--glass-radius-sm,10px)]" style={{ background: segBg }}>
           {radiusOptions.map(o => (
             <button key={o.value} onClick={() => setRadiusPreset(o.value)} style={segStyle(radiusPreset === o.value)}>{o.label}</button>
           ))}
@@ -253,18 +253,18 @@ function AppearanceControls() {
       </div>
 
       {/* Blur Intensity */}
-      <div style={{ paddingTop: 12, paddingBottom: 12, paddingLeft: 14, paddingRight: 14, borderBottom: `1px solid ${rowBorder}` }}>
-        <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8 }}>
-          <span style={{ fontSize: "10px", fontWeight: 650, textTransform: "uppercase", letterSpacing: "0.04em", color: labelText }}>Blur Intensity</span>
-          <span style={{ fontSize: "11px", fontFamily: "var(--font-mono)", color: valueText }}>{blurIntensity}px</span>
+      <div className="py-3 px-3.5" style={{ borderBottom: `1px solid ${rowBorder}` }}>
+        <div className="flex justify-between mb-2">
+          <span className="text-[10px] font-[650] uppercase tracking-[0.04em]" style={{ color: labelText }}>Blur Intensity</span>
+          <span className="text-[11px] font-[family-name:var(--font-mono)]" style={{ color: valueText }}>{blurIntensity}px</span>
         </div>
         <LiquidGlassSlider min={0} max={60} step={1} value={blurIntensity} onChange={setBlurIntensity} />
       </div>
 
       {/* Shadow Depth */}
-      <div style={{ paddingTop: 12, paddingBottom: 12, paddingLeft: 14, paddingRight: 14 }}>
-        <span style={{ fontSize: "10px", fontWeight: 650, textTransform: "uppercase", letterSpacing: "0.04em", color: labelText, display: "block", marginBottom: 8 }}>Shadow Depth</span>
-        <div style={{ display: "flex", gap: 2, padding: 3, borderRadius: "var(--glass-radius-sm, 10px)", background: segBg }}>
+      <div className="py-3 px-3.5">
+        <span className="text-[10px] font-[650] uppercase tracking-[0.04em] block mb-2" style={{ color: labelText }}>Shadow Depth</span>
+        <div className="flex gap-0.5 p-[3px] rounded-[var(--glass-radius-sm,10px)]" style={{ background: segBg }}>
           {shadowOptions.map(o => (
             <button key={o.value} onClick={() => setShadowPreset(o.value)} style={segStyle(shadowPreset === o.value)}>{o.label}</button>
           ))}
@@ -291,13 +291,13 @@ function LivePreview() {
       </div>
       <div className="flex items-center justify-between gap-3 px-3 py-2.5 border-b border-black/[0.10] dark:border-white/[0.10]">
         <span className="text-[12px] font-[600] text-black/75 dark:text-white/70">Glass Card</span>
-        <Card glass={1} style={{ paddingTop: 10, paddingBottom: 10, paddingLeft: 24, paddingRight: 24, display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <Card glass={1} style={{ paddingTop: "10px", paddingBottom: "10px", paddingLeft: "24px", paddingRight: "24px", display: "flex", alignItems: "center", justifyContent: "center" }}>
           <span className="text-[12px] font-[500] text-black/65 dark:text-white/65">Glass Card</span>
         </Card>
       </div>
       <div className="flex items-center justify-between gap-3 px-3 py-2.5 border-b border-black/[0.10] dark:border-white/[0.10]">
         <span className="text-[12px] font-[600] text-black/75 dark:text-white/70 shrink-0">Input</span>
-        <Input placeholder="Type..." style={{ maxWidth: 100, fontSize: 11, paddingTop: 6, paddingBottom: 6, paddingLeft: 10, paddingRight: 10, marginLeft: "auto" }} />
+        <Input placeholder="Type..." className="max-w-[100px] text-[11px] py-1.5 px-2.5 ml-auto" />
       </div>
       <div className="flex items-center justify-between gap-3 px-3 py-2.5 border-b border-black/[0.10] dark:border-white/[0.10]">
         <span className="text-[12px] font-[600] text-black/75 dark:text-white/70">Toggle</span>
@@ -312,7 +312,7 @@ function LivePreview() {
       </div>
       <div className="flex items-center justify-between gap-3 px-3 py-2.5">
         <span className="text-[12px] font-[600] text-black/75 dark:text-white/70">Spinner</span>
-        <Spinner size={18} />
+        <Spinner size="18px" />
       </div>
     </div>
   );
@@ -360,7 +360,7 @@ function LiveVariablesTable() {
                 <span
                   className="text-[11px] transition-all duration-150"
                   style={{
-                    fontWeight: isActive ? 650 : 450,
+                    fontWeight: isActive ? "650" : "450",
                     color: isActive ? "var(--theme-fg)" : "var(--theme-fg-subtle)",
                   }}
                 >

@@ -89,7 +89,8 @@ export function FontSizeWeightTable({ fontSizes, fontWeights }: Props) {
                 <span
                   className="text-black/80 dark:text-white/80 whitespace-nowrap"
                   data-font-preview
-                  style={{ "--font-preview": cssVar, fontSize: size, fontWeight: 500, lineHeight: 1.3 } as React.CSSProperties}
+                  className="font-preview-span"
+                  style={{ "--font-preview": cssVar, "--fp-size": size } as React.CSSProperties}
                 >
                   {isMono ? 'const token = "ds";' : sampleText}
                 </span>
@@ -134,7 +135,8 @@ export function FontSizeWeightTable({ fontSizes, fontWeights }: Props) {
                 <span
                   className="text-[17px] text-black/80 dark:text-white/80 whitespace-nowrap"
                   data-font-preview
-                  style={{ "--font-preview": cssVar, fontWeight: weight, lineHeight: 1.3 } as React.CSSProperties}
+                  className="font-preview-span"
+                  style={{ "--font-preview": cssVar, "--fp-weight": String(weight) } as React.CSSProperties}
                 >
                   {isMono ? 'const token = "design-system";' : sampleTextWeight}
                 </span>
