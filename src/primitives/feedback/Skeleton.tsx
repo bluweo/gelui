@@ -17,14 +17,8 @@ export function Skeleton({
 }: SkeletonProps) {
   return (
     <div
-      className={`skeleton-shimmer ${className}`}
-      style={{
-        width,
-        height,
-        borderRadius: rounded,
-        background: "rgba(0,0,0,0.06)",
-        ...style,
-      }}
+      className={`skeleton-shimmer bg-black/[0.06] ${className}`}
+      style={{ width, height, borderRadius: rounded, ...style }}
     />
   );
 }

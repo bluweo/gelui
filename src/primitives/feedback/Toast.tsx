@@ -10,11 +10,11 @@ interface ToastProps {
   style?: CSSProperties;
 }
 
-const variantColors = {
-  info: { accent: "#5AC8FA", bg: "rgba(90,200,250,0.1)" },
-  success: { accent: "#34C759", bg: "rgba(52,199,89,0.1)" },
-  warning: { accent: "#FF9500", bg: "rgba(255,149,0,0.1)" },
-  error: { accent: "#FF3B30", bg: "rgba(255,59,48,0.1)" },
+const variantAccentColors: Record<string, string> = {
+  info: "bg-[#5AC8FA]",
+  success: "bg-[#34C759]",
+  warning: "bg-[#FF9500]",
+  error: "bg-[#FF3B30]",
 };
 
 export function Toast({
@@ -27,7 +27,6 @@ export function Toast({
   style,
 }: ToastProps) {
   const [show, setShow] = useState(false);
-  const colors = variantColors[variant];
 
   useEffect(() => {
     if (visible) {
@@ -53,66 +52,18 @@ export function Toast({
 
   return (
     <div
-      className={className}
-      style={{
-        position: "fixed",
-        bottom: "24px",
-        right: "24px",
-        zIndex: 9999,
-        display: "flex",
-        alignItems: "center",
-        gap: "12px",
-        paddingTop: 14, paddingBottom: 14, paddingLeft: 18, paddingRight: 18,
-        borderRadius: "var(--glass-radius-sm, 10px)",
-        background: "var(--theme-table-bg)",
-        backdropFilter: "blur(40px)",
-        WebkitBackdropFilter: "blur(40px)",
-        border: "1px solid var(--theme-ghost-border)",
-        boxShadow: "0 8px 32px rgba(0,0,0,0.18)",
-        fontFamily: "var(--font-body)",
-        fontSize: "13px",
-        color: "var(--theme-fg)",
-        transform: show ? "translateX(0)" : "translateX(calc(100% + 32px))",
-        opacity: show ? 1 : 0,
-        transition: "transform 250ms ease, opacity 250ms ease",
-        maxWidth: "380px",
-        pointerEvents: "auto",
-        ...style,
-      }}
+      className={`fixed bottom-6 right-6 z-[9999] flex items-center gap-3 py-3.5 px-[18px] rounded-[var(--glass-radius-sm,10px)] bg-[var(--theme-table-bg)] backdrop-blur-[40px] border border-[var(--theme-ghost-border)] shadow-[0_8px_32px_rgba(0,0,0,0.18)] font-[var(--font-body)] text-[13px] text-[var(--theme-fg)] max-w-sm pointer-events-auto transition-all duration-250 ease-in-out ${show ? "translate-x-0 opacity-100" : "translate-x-[calc(100%+32px)] opacity-0"} ${className}`}
+      style={style}
     >
       {/* Variant accent dot */}
-      <span
-        style={{
-          width: "8px",
-          height: "8px",
-          borderRadius: "50%",
-          background: colors.accent,
-          flexShrink: 0,
-        }}
-      />
-      <span style={{ flex: 1 }}>{message}</span>
+      <span className={`w-2 h-2 rounded-full shrink-0 ${variantAccentColors[variant]}`} />
+      <span className="flex-1">{message}</span>
       <button
         onClick={() => {
           setShow(false);
           setTimeout(() => onClose?.(), 250);
         }}
-        style={{
-          flexShrink: 0,
-          width: "24px",
-          height: "24px",
-          borderRadius: "50%",
-          border: "none",
-          background: "var(--theme-header-bg)",
-          color: "var(--theme-fg-muted)",
-          cursor: "pointer",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          fontSize: "14px",
-          fontWeight: 400,
-          transition: "background 150ms ease",
-          padding: 0,
-        }}
+        className="shrink-0 w-6 h-6 rounded-full border-none bg-[var(--theme-header-bg)] text-[var(--theme-fg-muted)] cursor-pointer flex items-center justify-center text-sm font-normal transition-[background] duration-150 ease-in-out p-0"
       >
         &times;
       </button>

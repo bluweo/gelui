@@ -1,10 +1,10 @@
 import { type ReactNode, type CSSProperties, useState } from "react";
 
-const variantColors = {
-  info: { border: "#5AC8FA", bg: "rgba(90,200,250,0.08)", bgDark: "rgba(90,200,250,0.12)" },
-  success: { border: "#34C759", bg: "rgba(52,199,89,0.08)", bgDark: "rgba(52,199,89,0.12)" },
-  warning: { border: "#FF9500", bg: "rgba(255,149,0,0.08)", bgDark: "rgba(255,149,0,0.12)" },
-  error: { border: "#FF3B30", bg: "rgba(255,59,48,0.08)", bgDark: "rgba(255,59,48,0.12)" },
+const variantClasses: Record<string, string> = {
+  info: "border-l-[#5AC8FA] bg-[color-mix(in_srgb,#5AC8FA_8%,transparent)]",
+  success: "border-l-[#34C759] bg-[color-mix(in_srgb,#34C759_8%,transparent)]",
+  warning: "border-l-[#FF9500] bg-[color-mix(in_srgb,#FF9500_8%,transparent)]",
+  error: "border-l-[#FF3B30] bg-[color-mix(in_srgb,#FF3B30_8%,transparent)]",
 };
 
 interface AlertProps {
@@ -60,7 +60,6 @@ export function Alert({
   style,
 }: AlertProps) {
   const [dismissed, setDismissed] = useState(false);
-  const colors = variantColors[variant];
 
   if (dismissed) return null;
 
@@ -71,62 +70,24 @@ export function Alert({
 
   return (
     <div
-      className={className}
-      style={{
-        display: "flex",
-        alignItems: "flex-start",
-        gap: "12px",
-        paddingTop: 14, paddingBottom: 14, paddingLeft: 16, paddingRight: 16,
-        borderRadius: "var(--glass-radius-sm, 10px)",
-        borderLeft: `4px solid ${colors.border}`,
-        background: `color-mix(in srgb, ${colors.border} 8%, transparent)`,
-        backdropFilter: "blur(12px)",
-        WebkitBackdropFilter: "blur(12px)",
-        fontFamily: "var(--font-body)",
-        color: "var(--theme-fg)",
-        position: "relative",
-        ...style,
-      }}
+      className={`flex items-start gap-3 py-3.5 px-4 rounded-[var(--glass-radius-sm,10px)] backdrop-blur-[12px] font-[var(--font-body)] text-[var(--theme-fg)] relative border-l-4 ${variantClasses[variant]} ${className}`}
+      style={style}
     >
-      <span style={{ flexShrink: 0, display: "flex", marginTop: "1px" }}>
+      <span className="shrink-0 flex mt-px">
         <AlertIcon variant={variant} />
       </span>
-      <div style={{ flex: 1, minWidth: 0 }}>
+      <div className="flex-1 min-w-0">
         {title && (
-          <div
-            style={{
-              fontWeight: 600,
-              fontSize: "14px",
-              fontFamily: "var(--font-ui)",
-              marginBottom: "4px",
-              color: "var(--theme-fg)",
-            }}
-          >
+          <div className="font-semibold text-sm font-[var(--font-ui)] mb-1 text-[var(--theme-fg)]">
             {title}
           </div>
         )}
-        <div style={{ fontSize: "13px", lineHeight: 1.5 }}>{children}</div>
+        <div className="text-[13px] leading-normal">{children}</div>
       </div>
       {dismissible && (
         <button
           onClick={handleDismiss}
-          style={{
-            flexShrink: 0,
-            width: "24px",
-            height: "24px",
-            borderRadius: "50%",
-            border: "none",
-            background: "var(--theme-header-bg)",
-            color: "var(--theme-fg-muted)",
-            cursor: "pointer",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            fontSize: "14px",
-            fontWeight: 400,
-            transition: "background 150ms ease",
-            padding: 0,
-          }}
+          className="shrink-0 w-6 h-6 rounded-full border-none bg-[var(--theme-header-bg)] text-[var(--theme-fg-muted)] cursor-pointer flex items-center justify-center text-sm font-normal transition-[background] duration-150 ease-in-out p-0"
         >
           &times;
         </button>

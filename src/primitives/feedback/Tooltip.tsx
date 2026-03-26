@@ -8,6 +8,20 @@ interface TooltipProps {
   style?: CSSProperties;
 }
 
+const tooltipPositionClasses: Record<string, string> = {
+  top: "bottom-[calc(100%+8px)] left-1/2 -translate-x-1/2",
+  bottom: "top-[calc(100%+8px)] left-1/2 -translate-x-1/2",
+  left: "right-[calc(100%+8px)] top-1/2 -translate-y-1/2",
+  right: "left-[calc(100%+8px)] top-1/2 -translate-y-1/2",
+};
+
+const arrowPositionClasses: Record<string, string> = {
+  top: "-bottom-1 left-1/2 -translate-x-1/2 rotate-45",
+  bottom: "-top-1 left-1/2 -translate-x-1/2 rotate-45",
+  left: "-right-1 top-1/2 -translate-y-1/2 rotate-45",
+  right: "-left-1 top-1/2 -translate-y-1/2 rotate-45",
+};
+
 export function Tooltip({
   content,
   position = "top",
@@ -26,98 +40,22 @@ export function Tooltip({
     setVisible(false);
   };
 
-  const positionStyles: Record<string, CSSProperties> = {
-    top: {
-      bottom: "calc(100% + 8px)",
-      left: "50%",
-      transform: "translateX(-50%)",
-    },
-    bottom: {
-      top: "calc(100% + 8px)",
-      left: "50%",
-      transform: "translateX(-50%)",
-    },
-    left: {
-      right: "calc(100% + 8px)",
-      top: "50%",
-      transform: "translateY(-50%)",
-    },
-    right: {
-      left: "calc(100% + 8px)",
-      top: "50%",
-      transform: "translateY(-50%)",
-    },
-  };
-
-  const arrowPositions: Record<string, CSSProperties> = {
-    top: {
-      bottom: "-4px",
-      left: "50%",
-      transform: "translateX(-50%) rotate(45deg)",
-    },
-    bottom: {
-      top: "-4px",
-      left: "50%",
-      transform: "translateX(-50%) rotate(45deg)",
-    },
-    left: {
-      right: "-4px",
-      top: "50%",
-      transform: "translateY(-50%) rotate(45deg)",
-    },
-    right: {
-      left: "-4px",
-      top: "50%",
-      transform: "translateY(-50%) rotate(45deg)",
-    },
-  };
-
   return (
     <div
-      className={className}
+      className={`relative inline-flex ${className}`}
       onMouseEnter={show}
       onMouseLeave={hide}
-      style={{
-        position: "relative",
-        display: "inline-flex",
-        ...style,
-      }}
+      style={style}
     >
       {children}
       {visible && (
         <div
-          style={{
-            position: "absolute",
-            ...positionStyles[position],
-            zIndex: 1000,
-            pointerEvents: "none",
-            whiteSpace: "nowrap",
-          }}
+          className={`absolute z-[1000] pointer-events-none whitespace-nowrap ${tooltipPositionClasses[position]}`}
         >
-          <div
-            style={{
-              position: "relative",
-              paddingTop: 6, paddingBottom: 6, paddingLeft: 10, paddingRight: 10,
-              fontSize: "12px",
-              fontWeight: 500,
-              fontFamily: "var(--font-ui)",
-              borderRadius: "var(--glass-radius-sm, 8px)",
-              background: "var(--theme-bg-solid)",
-              backdropFilter: "blur(12px)",
-              WebkitBackdropFilter: "blur(12px)",
-              color: "var(--theme-fg-on-solid)",
-              boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
-            }}
-          >
+          <div className="relative py-1.5 px-2.5 text-xs font-medium font-[var(--font-ui)] rounded-[var(--glass-radius-sm,8px)] bg-[var(--theme-bg-solid)] backdrop-blur-[12px] text-[var(--theme-fg-on-solid)] shadow-[0_4px_12px_rgba(0,0,0,0.15)]">
             {content}
             <div
-              style={{
-                position: "absolute",
-                width: "8px",
-                height: "8px",
-                background: "var(--theme-bg-solid)",
-                ...arrowPositions[position],
-              }}
+              className={`absolute w-2 h-2 bg-[var(--theme-bg-solid)] ${arrowPositionClasses[position]}`}
             />
           </div>
         </div>

@@ -12,6 +12,12 @@ interface ModalProps {
   style?: CSSProperties;
 }
 
+const sizeClasses: Record<string, string> = {
+  sm: "max-w-[380px]",
+  md: "max-w-[520px]",
+  lg: "max-w-[700px]",
+};
+
 export function Modal({
   open,
   onClose,
@@ -46,109 +52,36 @@ export function Modal({
 
   if (!open) return null;
 
-  const widths = { sm: "380px", md: "520px", lg: "700px" };
-
   return (
     <>
       <Overlay open={open} onClick={onClose} blur />
-      <div
-        style={{
-          position: "fixed",
-          inset: 0,
-          zIndex: 999,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          padding: "24px",
-          pointerEvents: "none",
-        }}
-      >
+      <div className="fixed inset-0 z-[999] flex items-center justify-center p-6 pointer-events-none">
         <div
-          className={`glass-1 ${className}`}
+          className={`glass-1 pointer-events-auto w-full ${sizeClasses[size]} max-h-[80vh] flex flex-col rounded-[var(--glass-radius,16px)] bg-[var(--theme-table-bg)] backdrop-blur-[40px] border border-[var(--theme-ghost-border)] shadow-[0_24px_80px_rgba(0,0,0,0.18)] animate-[modalIn_200ms_ease] overflow-hidden ${className}`}
           onClick={(e) => e.stopPropagation()}
-          style={{
-            pointerEvents: "auto",
-            width: "100%",
-            maxWidth: widths[size],
-            maxHeight: "80vh",
-            display: "flex",
-            flexDirection: "column",
-            borderRadius: "var(--glass-radius, 16px)",
-            background: "var(--theme-table-bg)",
-            backdropFilter: "blur(40px)",
-            WebkitBackdropFilter: "blur(40px)",
-            border: "1px solid var(--theme-ghost-border)",
-            boxShadow: "0 24px 80px rgba(0,0,0,0.18)",
-            animation: "modalIn 200ms ease",
-            overflow: "hidden",
-            ...style,
-          }}
+          style={style}
         >
           {/* Header */}
           {title && (
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                paddingTop: 16, paddingBottom: 16, paddingLeft: 20, paddingRight: 20,
-                borderBottom: "1px solid var(--theme-divider)",
-              }}
-            >
-              <span
-                style={{
-                  fontSize: "16px",
-                  fontWeight: 650,
-                  fontFamily: "var(--font-heading)",
-                  color: "var(--theme-fg)",
-                }}
-              >
+            <div className="flex items-center justify-between py-4 px-5 border-b border-[var(--theme-divider)]">
+              <span className="text-base font-[650] font-[var(--font-heading)] text-[var(--theme-fg)]">
                 {title}
               </span>
               <button
                 onClick={onClose}
-                style={{
-                  width: "28px",
-                  height: "28px",
-                  borderRadius: "50%",
-                  border: "none",
-                  background: "var(--theme-header-bg)",
-                  color: "var(--theme-fg)",
-                  cursor: "pointer",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  fontSize: "16px",
-                  fontWeight: 400,
-                  transition: "background 150ms ease",
-                }}
+                className="w-7 h-7 rounded-full border-none bg-[var(--theme-header-bg)] text-[var(--theme-fg)] cursor-pointer flex items-center justify-center text-base font-normal transition-[background] duration-150 ease-in-out"
               >
                 &times;
               </button>
             </div>
           )}
           {/* Body */}
-          <div
-            style={{
-              padding: "20px",
-              overflowY: "auto",
-              flex: 1,
-              color: "var(--theme-fg-muted)",
-            }}
-          >
+          <div className="p-5 overflow-y-auto flex-1 text-[var(--theme-fg-muted)]">
             {children}
           </div>
           {/* Footer */}
           {footer && (
-            <div
-              style={{
-                paddingTop: 12, paddingBottom: 12, paddingLeft: 20, paddingRight: 20,
-                borderTop: "1px solid var(--theme-divider)",
-                display: "flex",
-                justifyContent: "flex-end",
-                gap: "8px",
-              }}
-            >
+            <div className="py-3 px-5 border-t border-[var(--theme-divider)] flex justify-end gap-2">
               {footer}
             </div>
           )}
