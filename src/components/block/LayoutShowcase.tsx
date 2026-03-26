@@ -36,7 +36,7 @@ export function LayoutShowcase() {
     <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
       {/* Stack (Vertical) */}
       <div style={tableStyle}>
-        <div style={{ padding: "10px 16px", background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
+        <div style={{ paddingTop: 10, paddingBottom: 10, paddingLeft: 16, paddingRight: 16, background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
           <span style={headerStyle}>Stack (Vertical)</span>
         </div>
         <div style={{ padding: "16px", display: "flex", flexDirection: "column", gap: "16px" }}>
@@ -61,7 +61,7 @@ export function LayoutShowcase() {
 
       {/* Inline (Horizontal) */}
       <div style={tableStyle}>
-        <div style={{ padding: "10px 16px", background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
+        <div style={{ paddingTop: 10, paddingBottom: 10, paddingLeft: 16, paddingRight: 16, background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
           <span style={headerStyle}>Inline (Horizontal)</span>
         </div>
         <div style={{ padding: "16px", display: "flex", flexDirection: "column", gap: "16px" }}>
@@ -86,7 +86,7 @@ export function LayoutShowcase() {
 
       {/* Center & Spacer */}
       <div style={tableStyle}>
-        <div style={{ padding: "10px 16px", background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
+        <div style={{ paddingTop: 10, paddingBottom: 10, paddingLeft: 16, paddingRight: 16, background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
           <span style={headerStyle}>Center & Spacer</span>
         </div>
         <div style={{ padding: "16px", display: "flex", flexDirection: "column", gap: "16px" }}>
@@ -98,7 +98,7 @@ export function LayoutShowcase() {
           </div>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
             <span style={labelStyle}>Spacer</span>
-            <Inline gap="0px" style={{ width: "112px", height: "32px", borderRadius: "var(--glass-radius-sm, 10px)", border: `1px dashed ${dashedBorder}`, padding: "0 6px" }}>
+            <Inline gap="0px" style={{ width: "112px", height: "32px", borderRadius: "var(--glass-radius-sm, 10px)", border: `1px dashed ${dashedBorder}`, paddingTop: 0, paddingBottom: 0, paddingLeft: 6, paddingRight: 6 }}>
               <Placeholder w="16px" h="16px" />
               <Spacer style={{ height: "auto", flex: 1 }} />
               <span style={{ fontSize: "8px", fontFamily: "var(--font-mono)", color: "var(--theme-fg-faint)" }}>
@@ -113,7 +113,7 @@ export function LayoutShowcase() {
 
       {/* Grid */}
       <div style={tableStyle}>
-        <div style={{ padding: "10px 16px", background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+        <div style={{ paddingTop: 10, paddingBottom: 10, paddingLeft: 16, paddingRight: 16, background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <span style={headerStyle}>Grid</span>
           <div style={{ display: "flex", gap: "4px" }}>
             {(["8px", "16px"] as const).map((g) => (
@@ -123,7 +123,7 @@ export function LayoutShowcase() {
                 style={{
                   fontSize: "9px",
                   fontWeight: 600,
-                  padding: "3px 8px",
+                  paddingTop: 3, paddingBottom: 3, paddingLeft: 8, paddingRight: 8,
                   borderRadius: "var(--glass-radius-pill, 100px)",
                   border: `1px solid ${activeGap === g ? "var(--theme-fg-faint)" : "var(--theme-divider)"}`,
                   background: activeGap === g ? "var(--theme-header-bg)" : "transparent",

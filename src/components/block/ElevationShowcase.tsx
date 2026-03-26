@@ -14,7 +14,7 @@ export function ElevationShowcase() {
     <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "20px" }}>
       {/* Left: Shadow Depths — transparent background */}
       <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", border: "1px solid var(--theme-divider)", background: "transparent" }}>
-        <div style={{ padding: "10px 16px", borderBottom: "1px solid var(--theme-divider)", background: "transparent" }}>
+        <div style={{ paddingTop: 10, paddingBottom: 10, paddingLeft: 16, paddingRight: 16, borderBottom: "1px solid var(--theme-divider)", background: "transparent" }}>
           <span style={{ fontSize: "10px", fontWeight: 650, letterSpacing: "0.06em", textTransform: "uppercase" as const, color: "var(--theme-fg-muted)" }}>Shadow Depths</span>
         </div>
         <div style={{ padding: "16px", display: "flex", flexDirection: "column", gap: "24px" }}>
@@ -43,7 +43,7 @@ export function ElevationShowcase() {
 
       {/* Right: Skeleton Loader */}
       <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: "var(--theme-table-bg)", border: "1px solid var(--theme-divider)" }}>
-        <div style={{ padding: "10px 16px", background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
+        <div style={{ paddingTop: 10, paddingBottom: 10, paddingLeft: 16, paddingRight: 16, background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
           <span style={{ fontSize: "10px", fontWeight: 650, letterSpacing: "0.06em", textTransform: "uppercase" as const, color: "var(--theme-fg)" }}>Skeleton Loader</span>
         </div>
         <div style={{ padding: "20px", display: "flex", flexDirection: "column", gap: "20px" }}>

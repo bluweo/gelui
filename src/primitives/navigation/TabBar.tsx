@@ -30,7 +30,7 @@ export function TabBar({
           key={tab}
           onClick={() => onChange?.(i)}
           style={{
-            padding: "10px 16px",
+            paddingTop: 10, paddingBottom: 10, paddingLeft: 16, paddingRight: 16,
             fontSize: "13px",
             fontWeight: i === active ? 600 : 400,
             color:

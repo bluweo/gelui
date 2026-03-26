@@ -22,7 +22,7 @@ export function Blockquote({
       className={className}
       style={{
         margin: 0,
-        padding: "12px 0 12px 20px",
+        paddingTop: 12, paddingRight: 0, paddingBottom: 12, paddingLeft: 20,
         borderLeft: "4px solid var(--theme-fg-muted)",
         ...style,
       }}

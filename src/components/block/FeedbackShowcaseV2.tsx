@@ -44,10 +44,10 @@ export function FeedbackShowcaseV2() {
     <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
       {/* Spinners */}
       <div style={tableStyle}>
-        <div style={{ padding: "8px 12px", background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
+        <div style={{ paddingTop: 8, paddingBottom: 8, paddingLeft: 12, paddingRight: 12, background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
           <span style={headerStyle}>Spinners</span>
         </div>
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 16px", borderBottom: "1px solid var(--theme-header-bg)" }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", paddingTop: 14, paddingBottom: 14, paddingLeft: 16, paddingRight: 16, borderBottom: "1px solid var(--theme-header-bg)" }}>
           <span style={labelStyle}>Sizes</span>
           <div style={{ display: "flex", gap: "16px", alignItems: "center" }}>
             <Spinner size="16px" />
@@ -55,7 +55,7 @@ export function FeedbackShowcaseV2() {
             <Spinner size="32px" />
           </div>
         </div>
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 16px" }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", paddingTop: 14, paddingBottom: 14, paddingLeft: 16, paddingRight: 16 }}>
           <span style={labelStyle}>Progress ({progress}%)</span>
           <div style={{ width: "60%" }}>
             <Progress value={progress} />
@@ -65,7 +65,7 @@ export function FeedbackShowcaseV2() {
 
       {/* Skeleton Loaders */}
       <div style={tableStyle}>
-        <div style={{ padding: "8px 12px", background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
+        <div style={{ paddingTop: 8, paddingBottom: 8, paddingLeft: 12, paddingRight: 12, background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
           <span style={headerStyle}>Skeleton Loaders</span>
         </div>
         <div style={{ padding: "16px" }}>
@@ -99,10 +99,10 @@ export function FeedbackShowcaseV2() {
 
       {/* Alerts */}
       <div style={tableStyle}>
-        <div style={{ padding: "8px 12px", background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
+        <div style={{ paddingTop: 8, paddingBottom: 8, paddingLeft: 12, paddingRight: 12, background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
           <span style={headerStyle}>Alerts</span>
         </div>
-        <div style={{ padding: "12px 16px", display: "flex", flexDirection: "column", gap: "10px" }}>
+        <div style={{ paddingTop: 12, paddingBottom: 12, paddingLeft: 16, paddingRight: 16, display: "flex", flexDirection: "column", gap: "10px" }}>
           <Alert variant="info" title="Information">This is an informational message.</Alert>
           <Alert variant="success" title="Success">Operation completed successfully.</Alert>
           <Alert variant="warning" title="Warning" dismissible>This warning can be dismissed.</Alert>
@@ -112,10 +112,10 @@ export function FeedbackShowcaseV2() {
 
       {/* Toast Demo */}
       <div style={tableStyle}>
-        <div style={{ padding: "8px 12px", background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
+        <div style={{ paddingTop: 8, paddingBottom: 8, paddingLeft: 12, paddingRight: 12, background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
           <span style={headerStyle}>Toast Notifications</span>
         </div>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", padding: "14px 16px" }}>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", paddingTop: 14, paddingBottom: 14, paddingLeft: 16, paddingRight: 16 }}>
           {(["info", "success", "warning", "error"] as const).map((v) => (
             <button
               key={v}
@@ -123,7 +123,7 @@ export function FeedbackShowcaseV2() {
               style={{
                 fontSize: "12px",
                 fontWeight: 600,
-                padding: "8px 14px",
+                paddingTop: 8, paddingBottom: 8, paddingLeft: 14, paddingRight: 14,
                 borderRadius: "var(--glass-radius-pill, 100px)",
                 border: "1px solid var(--theme-divider)",
                 background: "var(--theme-header-bg)",

@@ -22,7 +22,7 @@ export function Kbd({
         fontFamily: "var(--font-mono)",
         fontWeight: 500,
         lineHeight: 1,
-        padding: "3px 6px",
+        paddingTop: 3, paddingBottom: 3, paddingLeft: 6, paddingRight: 6,
         borderRadius: "4px",
         border: "1px solid var(--theme-fg-faint)",
         borderBottom: "2px solid var(--theme-fg-faint)",

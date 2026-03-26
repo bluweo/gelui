@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { PresetEditorModal } from "@/components/modal/PresetEditorModal";
+import { useAppearance } from "@/components/context/AppearanceContext";
 
 interface TypePreset {
   name: string;
@@ -194,14 +195,10 @@ function scalePresets(scale: ScaleKey): TypePreset[] {
 
 export function TypePresetsTable() {
   // Restore scale from localStorage
-  const [scale, setScale] = useState<ScaleKey>(() => {
-    if (typeof window !== "undefined") {
-      return (localStorage.getItem("gelui-type-scale") as ScaleKey) || "medium";
-    }
-    return "medium";
-  });
+  const [scale, setScale] = useState<ScaleKey>("medium");
   const [presets, setPresets] = useState(() => scalePresets("medium"));
-  const [isDark, setIsDark] = useState(false);
+  const { theme } = useAppearance();
+  const isDark = theme === "dark";
   const [editingIdx, setEditingIdx] = useState<number | null>(null);
 
   // Restore presets from localStorage AFTER hydration (not during SSR)
@@ -230,14 +227,6 @@ export function TypePresetsTable() {
     }
   }, []);
   const isModified = scale !== "medium" || JSON.stringify(presets) !== JSON.stringify(INITIAL_PRESETS);
-
-  useEffect(() => {
-    const check = () => setIsDark(document.documentElement.getAttribute("data-theme") === "dark");
-    check();
-    const obs = new MutationObserver(check);
-    obs.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
-    return () => obs.disconnect();
-  }, []);
 
   // Apply scale globally — save to localStorage + inject CSS variables
   useEffect(() => {

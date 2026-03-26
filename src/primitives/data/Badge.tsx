@@ -24,7 +24,7 @@ export function Badge({
       style={{
         display: "inline-flex",
         alignItems: "center",
-        padding: "3px 8px",
+        paddingTop: 3, paddingBottom: 3, paddingLeft: 8, paddingRight: 8,
         borderRadius: "100px",
         background: c.bg,
         color: c.text,

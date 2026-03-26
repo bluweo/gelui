@@ -60,7 +60,7 @@ export function ConfirmDialog({
       : "var(--theme-fg-on-solid)";
 
   const btnBase: CSSProperties = {
-    padding: "10px 20px",
+    paddingTop: 10, paddingBottom: 10, paddingLeft: 20, paddingRight: 20,
     fontSize: "13px",
     fontWeight: 600,
     fontFamily: "var(--font-ui)",
@@ -107,7 +107,7 @@ export function ConfirmDialog({
           {/* Title */}
           <div
             style={{
-              padding: "20px 20px 0",
+              paddingTop: 20, paddingRight: 20, paddingBottom: 0, paddingLeft: 20,
               fontSize: "16px",
               fontWeight: 650,
               fontFamily: "var(--font-ui)",
@@ -119,7 +119,7 @@ export function ConfirmDialog({
           {/* Message */}
           <div
             style={{
-              padding: "12px 20px 20px",
+              paddingTop: 12, paddingRight: 20, paddingBottom: 20, paddingLeft: 20,
               fontSize: "14px",
               fontFamily: "var(--font-body)",
               color: "var(--theme-fg-muted)",
@@ -131,7 +131,7 @@ export function ConfirmDialog({
           {/* Actions */}
           <div
             style={{
-              padding: "12px 20px 16px",
+              paddingTop: 12, paddingRight: 20, paddingBottom: 16, paddingLeft: 20,
               display: "flex",
               justifyContent: "flex-end",
               gap: "8px",

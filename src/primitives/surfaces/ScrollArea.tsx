@@ -38,7 +38,7 @@ export function ScrollArea({
           background: "linear-gradient(to bottom, var(--theme-table-bg) 0%, transparent 100%)",
           pointerEvents: "none",
           zIndex: 1,
-          borderRadius: "var(--glass-radius-sm, 10px) var(--glass-radius-sm, 10px) 0 0",
+          borderTopLeftRadius: "var(--glass-radius-sm, 10px)", borderTopRightRadius: "var(--glass-radius-sm, 10px)", borderBottomLeftRadius: 0, borderBottomRightRadius: 0,
         }}
       />
 
@@ -80,7 +80,7 @@ export function ScrollArea({
           background: "linear-gradient(to top, var(--theme-table-bg) 0%, transparent 100%)",
           pointerEvents: "none",
           zIndex: 1,
-          borderRadius: "0 0 var(--glass-radius-sm, 10px) var(--glass-radius-sm, 10px)",
+          borderTopLeftRadius: 0, borderTopRightRadius: 0, borderBottomRightRadius: "var(--glass-radius-sm, 10px)", borderBottomLeftRadius: "var(--glass-radius-sm, 10px)",
         }}
       />
     </div>

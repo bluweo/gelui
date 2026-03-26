@@ -86,7 +86,7 @@ export function SearchableSelect({
         onClick={() => setOpen(!open)}
         style={{
           width: "100%",
-          padding: "12px 16px",
+          paddingTop: 12, paddingBottom: 12, paddingLeft: 16, paddingRight: 16,
           fontSize: "14px",
           fontFamily: "var(--font-body)",
           borderRadius: "var(--glass-radius-sm, 10px)",
@@ -140,7 +140,7 @@ export function SearchableSelect({
             overflow: "hidden",
           }}
         >
-          <div style={{ padding: "0 0 6px" }}>
+          <div style={{ paddingTop: 0, paddingRight: 0, paddingBottom: 6, paddingLeft: 0 }}>
             <input
               ref={inputRef}
               type="text"
@@ -152,7 +152,7 @@ export function SearchableSelect({
               placeholder="Type to filter..."
               style={{
                 width: "100%",
-                padding: "8px 12px",
+                paddingTop: 8, paddingBottom: 8, paddingLeft: 12, paddingRight: 12,
                 fontSize: "13px",
                 fontFamily: "var(--font-body)",
                 border: "none",
@@ -168,7 +168,7 @@ export function SearchableSelect({
             {filtered.length === 0 ? (
               <div
                 style={{
-                  padding: "10px 12px",
+                  paddingTop: 10, paddingBottom: 10, paddingLeft: 12, paddingRight: 12,
                   fontSize: "13px",
                   opacity: 0.4,
                   textAlign: "center",
@@ -187,7 +187,7 @@ export function SearchableSelect({
                   onMouseEnter={() => setHighlightIdx(i)}
                   style={{
                     width: "100%",
-                    padding: "10px 12px",
+                    paddingTop: 10, paddingBottom: 10, paddingLeft: 12, paddingRight: 12,
                     fontSize: "14px",
                     fontFamily: "var(--font-body)",
                     border: "none",

@@ -64,7 +64,7 @@ export function SearchInput({
         className={className}
         style={{
           width: "100%",
-          padding: "12px 16px",
+          paddingTop: 12, paddingBottom: 12, paddingLeft: 16, paddingRight: 16,
           paddingLeft: "40px",
           paddingRight: val ? "36px" : "16px",
           fontSize: "14px",

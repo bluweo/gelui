@@ -91,7 +91,7 @@ export function Modal({
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "space-between",
-                padding: "16px 20px",
+                paddingTop: 16, paddingBottom: 16, paddingLeft: 20, paddingRight: 20,
                 borderBottom: "1px solid var(--theme-divider)",
               }}
             >
@@ -142,7 +142,7 @@ export function Modal({
           {footer && (
             <div
               style={{
-                padding: "12px 20px",
+                paddingTop: 12, paddingBottom: 12, paddingLeft: 20, paddingRight: 20,
                 borderTop: "1px solid var(--theme-divider)",
                 display: "flex",
                 justifyContent: "flex-end",

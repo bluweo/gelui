@@ -112,7 +112,7 @@ export function NumberInput({
           fontFamily: "var(--font-mono)",
           fontWeight: 700,
           color: "var(--theme-fg)",
-          padding: "6px 4px",
+          paddingTop: 6, paddingBottom: 6, paddingLeft: 4, paddingRight: 4,
           fontVariantNumeric: "tabular-nums",
           transition: "all 0.15s ease",
         }}

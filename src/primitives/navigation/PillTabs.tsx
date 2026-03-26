@@ -34,7 +34,7 @@ export function PillTabs({
             key={tab}
             onClick={() => onChange?.(tab)}
             style={{
-              padding: "6px 14px",
+              paddingTop: 6, paddingBottom: 6, paddingLeft: 14, paddingRight: 14,
               fontSize: "13px",
               fontWeight: 600,
               fontFamily: "var(--font-ui)",

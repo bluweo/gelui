@@ -76,7 +76,7 @@ export function Alert({
         display: "flex",
         alignItems: "flex-start",
         gap: "12px",
-        padding: "14px 16px",
+        paddingTop: 14, paddingBottom: 14, paddingLeft: 16, paddingRight: 16,
         borderRadius: "var(--glass-radius-sm, 10px)",
         borderLeft: `4px solid ${colors.border}`,
         background: `color-mix(in srgb, ${colors.border} 8%, transparent)`,

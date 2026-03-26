@@ -23,7 +23,7 @@ export function Code({
           lineHeight: "var(--type-code-lh, 1.5)",
           fontFamily: "var(--font-mono)",
           background: "var(--theme-divider)",
-          padding: "2px 6px",
+          paddingTop: 2, paddingBottom: 2, paddingLeft: 6, paddingRight: 6,
           borderRadius: "4px",
           ...style,
         }}

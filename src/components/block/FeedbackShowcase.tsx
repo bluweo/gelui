@@ -16,10 +16,10 @@ export function FeedbackShowcase() {
     <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
       {/* Spinners + Progress */}
       <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: "var(--theme-table-bg)", border: "1px solid var(--theme-divider)" }}>
-        <div style={{ padding: "8px 12px", background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
+        <div style={{ paddingTop: 8, paddingBottom: 8, paddingLeft: 12, paddingRight: 12, background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
           <span style={{ fontSize: "10px", fontWeight: 650, letterSpacing: "0.06em", textTransform: "uppercase", color: "var(--theme-fg-faint)" }}>Spinners</span>
         </div>
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 16px", borderBottom: "1px solid var(--theme-divider)" }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", paddingTop: 14, paddingBottom: 14, paddingLeft: 16, paddingRight: 16, borderBottom: "1px solid var(--theme-divider)" }}>
           <span style={{ fontSize: "12px", fontWeight: 550, color: "var(--theme-fg-muted)" }}>Sizes</span>
           <div style={{ display: "flex", gap: "16px", alignItems: "center" }}>
             <Spinner size="16px" />
@@ -27,7 +27,7 @@ export function FeedbackShowcase() {
             <Spinner size="32px" />
           </div>
         </div>
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 16px" }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", paddingTop: 14, paddingBottom: 14, paddingLeft: 16, paddingRight: 16 }}>
           <span style={{ fontSize: "12px", fontWeight: 550, color: "var(--theme-fg-muted)" }}>Progress ({progress}%)</span>
           <div style={{ width: "60%" }}>
             <Progress value={progress} />
@@ -37,7 +37,7 @@ export function FeedbackShowcase() {
 
       {/* Skeleton Loaders */}
       <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: "var(--theme-table-bg)", border: "1px solid var(--theme-divider)" }}>
-        <div style={{ padding: "8px 12px", background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
+        <div style={{ paddingTop: 8, paddingBottom: 8, paddingLeft: 12, paddingRight: 12, background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
           <span style={{ fontSize: "10px", fontWeight: 650, letterSpacing: "0.06em", textTransform: "uppercase", color: "var(--theme-fg-faint)" }}>Skeleton Loaders</span>
         </div>
         <div style={{ padding: "16px" }}>

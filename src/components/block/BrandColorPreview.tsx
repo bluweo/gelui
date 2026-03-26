@@ -437,7 +437,7 @@ export function BrandColorPreview() {
           <div
             ref={panelRef}
             className="glass-panel max-h-[calc(100vh-40px)] animate-picker-enter select-none cursor-grab active:cursor-grabbing"
-            style={{ ...panelStyle, width: 380, maxWidth: "90vw", padding: "24px 24px 20px" }}
+            style={{ ...panelStyle, width: 380, maxWidth: "90vw", paddingTop: 24, paddingRight: 24, paddingBottom: 20, paddingLeft: 24 }}
             onClick={(e) => e.stopPropagation()}
             onMouseDown={onDragStart}
           >

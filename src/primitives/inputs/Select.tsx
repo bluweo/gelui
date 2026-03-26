@@ -65,7 +65,7 @@ export function Select({
         onClick={() => setOpen(!open)}
         style={{
           width: "100%",
-          padding: "12px 16px",
+          paddingTop: 12, paddingBottom: 12, paddingLeft: 16, paddingRight: 16,
           fontSize: "14px",
           fontFamily: "var(--font-body)",
           borderRadius: "var(--glass-radius-sm, 10px)",
@@ -115,7 +115,7 @@ export function Select({
             WebkitBackdropFilter: "blur(20px)",
             border: "1px solid var(--theme-divider)",
             boxShadow: "0 8px 32px rgba(0,0,0,0.12)",
-            padding: "6px 8px",
+            paddingTop: 6, paddingBottom: 6, paddingLeft: 8, paddingRight: 8,
             maxHeight: "200px",
             overflowY: "auto",
           }}
@@ -130,7 +130,7 @@ export function Select({
               onMouseEnter={() => setHighlightIdx(i)}
               style={{
                 width: "100%",
-                padding: "10px 12px",
+                paddingTop: 10, paddingBottom: 10, paddingLeft: 12, paddingRight: 12,
                 fontSize: "14px",
                 fontFamily: "var(--font-body)",
                 border: "none",

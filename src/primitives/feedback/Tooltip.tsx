@@ -97,7 +97,7 @@ export function Tooltip({
           <div
             style={{
               position: "relative",
-              padding: "6px 10px",
+              paddingTop: 6, paddingBottom: 6, paddingLeft: 10, paddingRight: 10,
               fontSize: "12px",
               fontWeight: 500,
               fontFamily: "var(--font-ui)",

@@ -82,11 +82,11 @@ export function InputFieldsDemo() {
         <label className="text-[12px] font-semibold" style={labelStyle}>URL Input</label>
         <div style={{ display: "flex", alignItems: "center", gap: 0 }}>
           <div style={{
-            padding: "10px 12px",
+            paddingTop: 10, paddingBottom: 10, paddingLeft: 12, paddingRight: 12,
             fontSize: "14px",
             fontFamily: "var(--font-mono)",
             background: "var(--theme-header-bg)",
-            borderRadius: "var(--glass-radius-sm, 10px) 0 0 var(--glass-radius-sm, 10px)",
+            borderTopLeftRadius: "var(--glass-radius-sm, 10px)", borderTopRightRadius: 0, borderBottomRightRadius: 0, borderBottomLeftRadius: "var(--glass-radius-sm, 10px)",
             border: "1px solid var(--theme-ghost-border)",
             borderRight: "none",
             color: "var(--theme-fg-muted)",
@@ -97,7 +97,7 @@ export function InputFieldsDemo() {
           <Input
             placeholder="example.com"
             style={{
-              borderRadius: "0 var(--glass-radius-sm, 10px) var(--glass-radius-sm, 10px) 0",
+              borderTopLeftRadius: 0, borderTopRightRadius: "var(--glass-radius-sm, 10px)", borderBottomRightRadius: "var(--glass-radius-sm, 10px)", borderBottomLeftRadius: 0,
               borderLeft: "none",
             }}
           />

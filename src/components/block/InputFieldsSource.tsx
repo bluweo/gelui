@@ -41,10 +41,10 @@ export function InputFieldsDemo() {
 
       {/* URL Input with prefix */}
       <div style={{ display: "flex" }}>
-        <div style={{ padding: "10px 12px", background: "rgba(0,0,0,0.04)" }}>
+        <div style={{ paddingTop: 10, paddingBottom: 10, paddingLeft: 12, paddingRight: 12, background: "rgba(0,0,0,0.04)" }}>
           https://
         </div>
-        <Input placeholder="example.com" style={{ borderRadius: "0 10px 10px 0" }} />
+        <Input placeholder="example.com" style={{ borderTopLeftRadius: 0, borderTopRightRadius: 10, borderBottomRightRadius: 10, borderBottomLeftRadius: 0 }} />
       </div>
 
       {/* Textarea */}

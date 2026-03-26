@@ -44,7 +44,7 @@ export function SegmentedControl({
               style={{
                 fontSize: "12px",
                 fontWeight: 600,
-                padding: "6px 16px",
+                paddingTop: 6, paddingBottom: 6, paddingLeft: 16, paddingRight: 16,
                 borderRadius: "9999px",
                 cursor: "pointer",
                 border: "none",
@@ -106,7 +106,7 @@ export function SegmentedControl({
             style={{
               position: "relative",
               zIndex: 1,
-              padding: "8px 16px",
+              paddingTop: 8, paddingBottom: 8, paddingLeft: 16, paddingRight: 16,
               fontSize: "13px",
               fontWeight: 600,
               fontFamily: "var(--font-ui)",

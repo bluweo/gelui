@@ -29,7 +29,7 @@ export function Textarea({
       className={className}
       style={{
         width: "100%",
-        padding: "12px 16px",
+        paddingTop: 12, paddingBottom: 12, paddingLeft: 16, paddingRight: 16,
         fontSize: "14px",
         fontFamily: "var(--font-body)",
         borderRadius: "var(--glass-radius-sm, 10px)",

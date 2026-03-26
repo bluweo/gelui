@@ -16,7 +16,7 @@ export function FormsShowcase() {
   };
 
   const header: React.CSSProperties = {
-    padding: "10px 14px",
+    paddingTop: 10, paddingBottom: 10, paddingLeft: 14, paddingRight: 14,
     background: "var(--theme-header-bg)",
     borderBottom: "1px solid var(--theme-divider)",
   };
@@ -25,7 +25,7 @@ export function FormsShowcase() {
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
-    padding: "14px 16px",
+    paddingTop: 14, paddingBottom: 14, paddingLeft: 16, paddingRight: 16,
     borderBottom: last ? undefined : "1px solid var(--theme-divider)",
   });
 
@@ -69,7 +69,7 @@ export function FormsShowcase() {
           <span className="type-overline" style={{ color: "var(--theme-fg-muted)" }}>Login Form</span>
         </div>
         {/* Username */}
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 16px", borderBottom: "1px solid var(--theme-divider)" }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", paddingTop: 14, paddingBottom: 14, paddingLeft: 16, paddingRight: 16, borderBottom: "1px solid var(--theme-divider)" }}>
           <span className="type-label" style={{ color: "var(--theme-fg)" }}>Username</span>
           <div style={{ width: "70%", position: "relative" }}>
             <div style={{ position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)", display: "flex", zIndex: 1 }}>
@@ -87,7 +87,7 @@ export function FormsShowcase() {
           </div>
         </div>
         {/* Password */}
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 16px", borderBottom: "1px solid var(--theme-divider)" }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", paddingTop: 14, paddingBottom: 14, paddingLeft: 16, paddingRight: 16, borderBottom: "1px solid var(--theme-divider)" }}>
           <span className="type-label" style={{ color: "var(--theme-fg)" }}>Password</span>
           <div style={{ width: "70%", position: "relative" }}>
             <div style={{ position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)", display: "flex", zIndex: 1 }}>
@@ -104,7 +104,7 @@ export function FormsShowcase() {
           </div>
         </div>
         {/* Disabled */}
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 16px" }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", paddingTop: 14, paddingBottom: 14, paddingLeft: 16, paddingRight: 16 }}>
           <span className="type-label" style={{ color: "var(--theme-fg-subtle)" }}>Disabled</span>
           <div style={{ width: "70%", position: "relative" }}>
             <div style={{ position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)", display: "flex", zIndex: 1 }}>

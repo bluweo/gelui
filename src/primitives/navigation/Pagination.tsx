@@ -49,7 +49,7 @@ export function Pagination({
     justifyContent: "center",
     minWidth: "32px",
     height: "32px",
-    padding: "0 8px",
+    paddingTop: 0, paddingBottom: 0, paddingLeft: 8, paddingRight: 8,
     border: "none",
     borderRadius: "var(--glass-radius-pill, 100px)",
     cursor: "pointer",

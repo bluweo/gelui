@@ -13,7 +13,7 @@ export function BadgesShowcaseV2() {
   };
 
   const header: React.CSSProperties = {
-    padding: "10px 14px",
+    paddingTop: 10, paddingBottom: 10, paddingLeft: 14, paddingRight: 14,
     background: "var(--theme-header-bg)",
     borderBottom: "1px solid var(--theme-divider)",
   };
@@ -22,7 +22,7 @@ export function BadgesShowcaseV2() {
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
-    padding: "10px 14px",
+    paddingTop: 10, paddingBottom: 10, paddingLeft: 14, paddingRight: 14,
     borderBottom: last ? undefined : "1px solid var(--theme-divider)",
   });
 
@@ -65,7 +65,7 @@ export function BadgesShowcaseV2() {
           <span className="type-overline" style={{ color: "var(--theme-fg-subtle)" }}>Tags & Chips</span>
         </div>
         {/* Removable Tags */}
-        <div style={{ padding: "12px 14px", borderBottom: "1px solid var(--theme-divider)" }}>
+        <div style={{ paddingTop: 12, paddingBottom: 12, paddingLeft: 14, paddingRight: 14, borderBottom: "1px solid var(--theme-divider)" }}>
           <span className="type-caption" style={{ color: "var(--theme-fg-subtle)", display: "block", marginBottom: 8 }}>Removable Tags</span>
           <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
             {tags.map((tag) => (
@@ -82,7 +82,7 @@ export function BadgesShowcaseV2() {
           </div>
         </div>
         {/* Selectable Chips */}
-        <div style={{ padding: "12px 14px" }}>
+        <div style={{ paddingTop: 12, paddingBottom: 12, paddingLeft: 14, paddingRight: 14 }}>
           <span className="type-caption" style={{ color: "var(--theme-fg-subtle)", display: "block", marginBottom: 8 }}>Selectable Chips</span>
           <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
             {["Active", "Inactive", "Another"].map((chip) => (
@@ -91,7 +91,7 @@ export function BadgesShowcaseV2() {
                 className="type-overline"
                 onClick={() => setActiveChip(chip)}
                 style={{
-                  padding: "5px 14px",
+                  paddingTop: 5, paddingBottom: 5, paddingLeft: 14, paddingRight: 14,
                   borderRadius: "var(--glass-radius-pill, 100px)",
                   border: "1px solid var(--theme-ghost-border)",
                   background: activeChip === chip ? "var(--theme-bg-solid)" : "transparent",

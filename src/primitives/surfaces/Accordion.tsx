@@ -54,7 +54,7 @@ function AccordionSection({
           alignItems: "center",
           justifyContent: "space-between",
           width: "100%",
-          padding: "12px 16px",
+          paddingTop: 12, paddingBottom: 12, paddingLeft: 16, paddingRight: 16,
           border: "none",
           background: "none",
           cursor: "pointer",
@@ -88,7 +88,7 @@ function AccordionSection({
         <div
           ref={contentRef}
           style={{
-            padding: "0 16px 12px",
+            paddingTop: 0, paddingRight: 16, paddingBottom: 12, paddingLeft: 16,
             fontSize: "13px",
             color: "var(--theme-fg-muted)",
             lineHeight: 1.5,

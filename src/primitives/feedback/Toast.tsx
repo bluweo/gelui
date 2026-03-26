@@ -62,7 +62,7 @@ export function Toast({
         display: "flex",
         alignItems: "center",
         gap: "12px",
-        padding: "14px 18px",
+        paddingTop: 14, paddingBottom: 14, paddingLeft: 18, paddingRight: 18,
         borderRadius: "var(--glass-radius-sm, 10px)",
         background: "var(--theme-table-bg)",
         backdropFilter: "blur(40px)",

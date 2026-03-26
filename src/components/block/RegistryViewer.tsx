@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useMemo } from "react";
 import type { ComponentRegistryEntry, Layer, Status, Category } from "@/registry/types";
 import * as Primitives from "@/primitives";
 
@@ -181,7 +181,7 @@ function PaginationPreview() {
 
 /* ── Component Preview ── */
 
-function ComponentPreview({ id, isDark }: { id: string; isDark: boolean }) {
+function ComponentPreview({ id }: { id: string }) {
   const previews: Record<string, React.ReactNode> = {
     "button": (
       <div style={{ display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center" }}>
@@ -362,11 +362,11 @@ function ComponentPreview({ id, isDark }: { id: string; isDark: boolean }) {
     "view-source-modal": (
       <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
         <div style={{ display: "flex", gap: 6, fontSize: 11, fontFamily: "var(--font-mono)", color: "var(--theme-fg-muted)" }}>
-          <span style={{ padding: "2px 8px", borderRadius: 6, background: "var(--theme-header-bg)" }}>Source</span>
-          <span style={{ padding: "2px 8px", borderRadius: 6, background: "var(--theme-header-bg)" }}>Components</span>
-          <span style={{ padding: "2px 8px", borderRadius: 6, background: "var(--theme-header-bg)" }}>Impl</span>
+          <span style={{ paddingTop: 2, paddingBottom: 2, paddingLeft: 8, paddingRight: 8, borderRadius: 6, background: "var(--theme-header-bg)" }}>Source</span>
+          <span style={{ paddingTop: 2, paddingBottom: 2, paddingLeft: 8, paddingRight: 8, borderRadius: 6, background: "var(--theme-header-bg)" }}>Components</span>
+          <span style={{ paddingTop: 2, paddingBottom: 2, paddingLeft: 8, paddingRight: 8, borderRadius: 6, background: "var(--theme-header-bg)" }}>Impl</span>
         </div>
-        <div style={{ height: 36, borderRadius: 6, background: "#1a1a1a", display: "flex", alignItems: "center", padding: "0 12px" }}>
+        <div style={{ height: 36, borderRadius: 6, background: "#1a1a1a", display: "flex", alignItems: "center", paddingTop: 0, paddingBottom: 0, paddingLeft: 12, paddingRight: 12 }}>
           <span style={{ fontFamily: "var(--font-mono)", fontSize: 10, color: "#ce93d8" }}>import</span>
           <span style={{ fontFamily: "var(--font-mono)", fontSize: 10, color: "#d4d4d4" }}>&nbsp;{"{ "}</span>
           <span style={{ fontFamily: "var(--font-mono)", fontSize: 10, color: "#7cc4fa" }}>Button</span>
@@ -435,7 +435,7 @@ function ComponentPreview({ id, isDark }: { id: string; isDark: boolean }) {
     "scroll-area": (
       <Primitives.ScrollArea maxHeight={80}>
         <div style={{ padding: 8 }}>
-          {[1,2,3,4,5,6].map(i => <div key={i} style={{ padding: "6px 0", borderBottom: "1px solid rgba(128,128,128,0.1)", fontSize: 12 }}>Item {i}</div>)}
+          {[1,2,3,4,5,6].map(i => <div key={i} style={{ paddingTop: 6, paddingBottom: 6, paddingLeft: 0, paddingRight: 0, borderBottom: "1px solid rgba(128,128,128,0.1)", fontSize: 12 }}>Item {i}</div>)}
         </div>
       </Primitives.ScrollArea>
     ),
@@ -468,19 +468,6 @@ export function RegistryViewer({ components }: Props) {
   const [categoryFilter, setCategoryFilter] = useState<Category | "all">("all");
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [fullPreviewId, setFullPreviewId] = useState<string | null>(null);
-  const [isDark, setIsDark] = useState(false);
-
-  // Dark mode observer
-  useEffect(() => {
-    const root = document.documentElement;
-    setIsDark(root.getAttribute("data-theme") === "dark");
-
-    const observer = new MutationObserver(() => {
-      setIsDark(root.getAttribute("data-theme") === "dark");
-    });
-    observer.observe(root, { attributes: true, attributeFilter: ["data-theme"] });
-    return () => observer.disconnect();
-  }, []);
 
   // Filtered components
   const filtered = useMemo(() => {
@@ -575,7 +562,7 @@ export function RegistryViewer({ components }: Props) {
             onChange={(e) => setSearch(e.target.value)}
             style={{
               width: "100%",
-              padding: "10px 12px 10px 38px",
+              paddingTop: 10, paddingRight: 12, paddingBottom: 10, paddingLeft: 38,
               borderRadius: "var(--glass-radius-sm, 10px)",
               border: `1px solid ${borderColor}`,
               background: bgInput,
@@ -634,7 +621,7 @@ export function RegistryViewer({ components }: Props) {
               value={categoryFilter}
               onChange={(e) => setCategoryFilter(e.target.value as Category | "all")}
               style={{
-                padding: "5px 8px",
+                paddingTop: 5, paddingBottom: 5, paddingLeft: 8, paddingRight: 8,
                 borderRadius: "var(--glass-radius-sm, 10px)",
                 border: `1px solid ${borderColor}`,
                 background: bgInput,
@@ -668,7 +655,7 @@ export function RegistryViewer({ components }: Props) {
           style={{
             display: "grid",
             gridTemplateColumns: "40px 1fr 0.9fr 1.2fr 0.6fr 0.4fr",
-            padding: "10px 16px",
+            paddingTop: 10, paddingBottom: 10, paddingLeft: 16, paddingRight: 16,
             borderBottom: `1px solid ${borderColor}`,
             background: bgCategoryHeader,
             gap: "8px",
@@ -689,7 +676,7 @@ export function RegistryViewer({ components }: Props) {
             {/* Category header */}
             <div
               style={{
-                padding: "8px 16px",
+                paddingTop: 8, paddingBottom: 8, paddingLeft: 16, paddingRight: 16,
                 background: bgCategoryHeader,
                 borderBottom: `1px solid ${borderColor}`,
                 borderTop: `1px solid ${borderColor}`,
@@ -714,7 +701,7 @@ export function RegistryViewer({ components }: Props) {
                     style={{
                       display: "grid",
                       gridTemplateColumns: "40px 1fr 0.9fr 1.2fr 0.6fr 0.4fr",
-                      padding: "10px 16px",
+                      paddingTop: 10, paddingBottom: 10, paddingLeft: 16, paddingRight: 16,
                       borderBottom: `1px solid ${borderColor}`,
                       gap: "8px",
                       alignItems: "center",
@@ -738,7 +725,7 @@ export function RegistryViewer({ components }: Props) {
                     <div>
                       <span style={{ fontSize: "13px", fontWeight: 600, color: textPrimary }}>{comp.displayName}</span>
                       {comp.description && (
-                        <p style={{ fontSize: "11px", color: textMuted, margin: "2px 0 0", lineHeight: 1.4 }}>{comp.description}</p>
+                        <p style={{ fontSize: "11px", color: textMuted, marginTop: 2, marginRight: 0, marginBottom: 0, marginLeft: 0, lineHeight: 1.4 }}>{comp.description}</p>
                       )}
                     </div>
 
@@ -749,7 +736,7 @@ export function RegistryViewer({ components }: Props) {
                           fontSize: "11px",
                           fontWeight: 550,
                           fontFamily: "var(--font-mono, monospace)",
-                          padding: "3px 8px",
+                          paddingTop: 3, paddingBottom: 3, paddingLeft: 8, paddingRight: 8,
                           borderRadius: "6px",
                           background: "var(--theme-header-bg)",
                           color: "var(--theme-fg-muted)",
@@ -790,7 +777,7 @@ export function RegistryViewer({ components }: Props) {
                           fontWeight: 650,
                           textTransform: "uppercase",
                           letterSpacing: "0.04em",
-                          padding: "3px 8px",
+                          paddingTop: 3, paddingBottom: 3, paddingLeft: 8, paddingRight: 8,
                           borderRadius: "6px",
                           background: LAYER_COLORS[comp.layer],
                           color: getLayerTextColor(comp.layer),
@@ -810,7 +797,7 @@ export function RegistryViewer({ components }: Props) {
                   {isExpanded && (
                     <div
                       style={{
-                        padding: "16px 16px 16px 56px",
+                        paddingTop: 16, paddingRight: 16, paddingBottom: 16, paddingLeft: 56,
                         borderBottom: `1px solid ${borderColor}`,
                         background: bgExpanded,
                         display: "grid",
@@ -867,7 +854,7 @@ export function RegistryViewer({ components }: Props) {
                                   style={{
                                     fontSize: "10px",
                                     fontWeight: 550,
-                                    padding: "2px 6px",
+                                    paddingTop: 2, paddingBottom: 2, paddingLeft: 6, paddingRight: 6,
                                     borderRadius: "4px",
                                     background: "var(--theme-header-bg)",
                                     color: textSecondary,
@@ -925,7 +912,7 @@ export function RegistryViewer({ components }: Props) {
                               marginTop: 8,
                               fontSize: 11,
                               fontWeight: 550,
-                              padding: "6px 14px",
+                              paddingTop: 6, paddingBottom: 6, paddingLeft: 14, paddingRight: 14,
                               borderRadius: "var(--glass-radius-pill, 100px)",
                               border: "1px solid var(--theme-ghost-border)",
                               background: "transparent",
@@ -947,7 +934,7 @@ export function RegistryViewer({ components }: Props) {
 
         {/* Empty state */}
         {filtered.length === 0 && (
-          <div style={{ padding: "40px 16px", textAlign: "center" }}>
+          <div style={{ paddingTop: 40, paddingBottom: 40, paddingLeft: 16, paddingRight: 16, textAlign: "center" }}>
             <p style={{ fontSize: "14px", color: textMuted }}>No components match your filters.</p>
           </div>
         )}
@@ -1034,7 +1021,7 @@ export function RegistryViewer({ components }: Props) {
           flexWrap: "wrap",
           justifyContent: "center",
           gap: "6px 16px",
-          padding: "12px 0 4px",
+          paddingTop: 12, paddingRight: 0, paddingBottom: 4, paddingLeft: 0,
           fontSize: "12px",
           fontWeight: 550,
           color: textMuted,
@@ -1066,7 +1053,6 @@ function FilterPill({
   label: string;
   active: boolean;
   onClick: () => void;
-  isDark?: boolean;
   dotColor?: string;
   icon?: string;
 }) {
@@ -1077,7 +1063,7 @@ function FilterPill({
         display: "inline-flex",
         alignItems: "center",
         gap: "5px",
-        padding: "5px 10px",
+        paddingTop: 5, paddingBottom: 5, paddingLeft: 10, paddingRight: 10,
         borderRadius: "999px",
         border: active ? "1px solid var(--theme-ghost-border)" : "1px solid transparent",
         background: active ? "var(--theme-header-bg)" : "var(--theme-header-bg)",
@@ -1106,7 +1092,7 @@ function FilterPill({
   );
 }
 
-function MetaRow({ label, value }: { label: string; value: string; isDark?: boolean }) {
+function MetaRow({ label, value }: { label: string; value: string }) {
   return (
     <div style={{ display: "flex", gap: "8px", alignItems: "baseline" }}>
       <span style={{ fontSize: "10px", fontWeight: 600, color: "var(--theme-fg-subtle)" }}>{label}:</span>

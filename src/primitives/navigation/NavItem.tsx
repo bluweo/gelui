@@ -28,7 +28,7 @@ export function NavItem({
         display: "flex",
         alignItems: "center",
         gap: "10px",
-        padding: "10px 14px",
+        paddingTop: 10, paddingBottom: 10, paddingLeft: 14, paddingRight: 14,
         borderRadius: "var(--glass-radius-sm, 10px)",
         border: "none",
         width: "100%",

@@ -21,7 +21,7 @@ export function DataShowcase() {
     <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
       {/* Table */}
       <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: "var(--theme-table-bg)", border: "1px solid var(--theme-divider)" }}>
-        <div style={{ padding: "8px 12px", background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
+        <div style={{ paddingTop: 8, paddingBottom: 8, paddingLeft: 12, paddingRight: 12, background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
           <span className="type-overline" style={{ color: "var(--theme-fg-muted)" }}>Table (Striped)</span>
         </div>
         <div style={{ padding: "16px" }}>
@@ -31,7 +31,7 @@ export function DataShowcase() {
 
       {/* Stat Cards */}
       <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: "var(--theme-table-bg)", border: "1px solid var(--theme-divider)" }}>
-        <div style={{ padding: "8px 12px", background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
+        <div style={{ paddingTop: 8, paddingBottom: 8, paddingLeft: 12, paddingRight: 12, background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
           <span className="type-overline" style={{ color: "var(--theme-fg-muted)" }}>Stat Cards</span>
         </div>
         <div style={{ padding: "16px", display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "12px" }}>
@@ -76,7 +76,7 @@ export function DataShowcase() {
 
       {/* EmptyState */}
       <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: "var(--theme-table-bg)", border: "1px solid var(--theme-divider)" }}>
-        <div style={{ padding: "8px 12px", background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
+        <div style={{ paddingTop: 8, paddingBottom: 8, paddingLeft: 12, paddingRight: 12, background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
           <span className="type-overline" style={{ color: "var(--theme-fg-muted)" }}>Empty State</span>
         </div>
         <EmptyState
@@ -92,7 +92,7 @@ export function DataShowcase() {
             <button
               onClick={() => setShowEmpty(!showEmpty)}
               style={{
-                padding: "8px 20px",
+                paddingTop: 8, paddingBottom: 8, paddingLeft: 20, paddingRight: 20,
                 borderRadius: "var(--glass-radius-pill, 100px)",
                 border: "none",
                 background: "var(--theme-bg-solid)",
@@ -111,7 +111,7 @@ export function DataShowcase() {
 
       {/* ColorSwatch */}
       <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: "var(--theme-table-bg)", border: "1px solid var(--theme-divider)" }}>
-        <div style={{ padding: "8px 12px", background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
+        <div style={{ paddingTop: 8, paddingBottom: 8, paddingLeft: 12, paddingRight: 12, background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
           <span className="type-overline" style={{ color: "var(--theme-fg-muted)" }}>Color Swatches</span>
         </div>
         <div style={{ padding: "16px", display: "flex", gap: "16px", flexWrap: "wrap", justifyContent: "center" }}>

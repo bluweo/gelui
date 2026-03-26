@@ -21,7 +21,7 @@ export function SurfacesExtras() {
     <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
       {/* Accordion */}
       <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: "var(--theme-table-bg)", border: "1px solid var(--theme-divider)" }}>
-        <div style={{ padding: "8px 12px", background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
+        <div style={{ paddingTop: 8, paddingBottom: 8, paddingLeft: 12, paddingRight: 12, background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
           <Overline size="md" muted>Accordion</Overline>
         </div>
         <div style={{ padding: "16px" }}>
@@ -31,12 +31,12 @@ export function SurfacesExtras() {
 
       {/* ScrollArea */}
       <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: "var(--theme-table-bg)", border: "1px solid var(--theme-divider)" }}>
-        <div style={{ padding: "8px 12px", background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
+        <div style={{ paddingTop: 8, paddingBottom: 8, paddingLeft: 12, paddingRight: 12, background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
           <Overline size="md" muted>Scroll Area</Overline>
         </div>
         <div style={{ padding: "16px" }}>
           <ScrollArea maxHeight={200}>
-            <div style={{ display: "flex", flexDirection: "column", gap: "16px", padding: "4px 8px" }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: "16px", paddingTop: 4, paddingBottom: 4, paddingLeft: 8, paddingRight: 8 }}>
               <p className="type-body" style={{ color: "var(--theme-fg)", margin: 0, lineHeight: 1.7 }}>
                 Every surface in Gel UI is built on a foundation of translucent layers. The backdrop-filter property creates the signature frosted glass effect, while carefully tuned opacity values ensure text remains readable across any background. This approach allows interfaces to feel lightweight and contextual — the background becomes part of the design, not hidden behind it.
               </p>

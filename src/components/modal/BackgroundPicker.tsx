@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { useBackground, type BgOption, type BgType, COLOR_BACKGROUNDS } from "@/components/context/BackgroundContext";
+import { useAppearance } from "@/components/context/AppearanceContext";
 import { useDraggableModal } from "@/components/hooks/useDraggableModal";
 import { Gallery, Video, Colorfilter, TickCircle, VideoPlay } from "iconsax-react";
 
@@ -21,15 +22,7 @@ export function BackgroundPicker() {
   const [loading, setLoading] = useState(false);
 
   /* Detect current theme to filter backgrounds */
-  const [theme, setTheme] = useState<"light" | "dark">("light");
-  useEffect(() => {
-    const check = () =>
-      setTheme(document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light");
-    check();
-    const obs = new MutationObserver(check);
-    obs.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme", "class"] });
-    return () => obs.disconnect();
-  }, []);
+  const { theme } = useAppearance();
 
   useEffect(() => { setMounted(true); }, []);
 

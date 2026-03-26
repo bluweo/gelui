@@ -9,10 +9,10 @@ export function NavigationExtras() {
     <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
       {/* Pagination */}
       <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: "var(--theme-table-bg)", border: "1px solid var(--theme-divider)" }}>
-        <div style={{ padding: "8px 12px", background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
+        <div style={{ paddingTop: 8, paddingBottom: 8, paddingLeft: 12, paddingRight: 12, background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
           <span className="type-overline" style={{ color: "var(--theme-fg-muted)" }}>Pagination</span>
         </div>
-        <div style={{ padding: "20px 16px", display: "flex", flexDirection: "column", alignItems: "center", gap: "12px" }}>
+        <div style={{ paddingTop: 20, paddingBottom: 20, paddingLeft: 16, paddingRight: 16, display: "flex", flexDirection: "column", alignItems: "center", gap: "12px" }}>
           <Pagination
             totalPages={10}
             currentPage={page}
@@ -26,10 +26,10 @@ export function NavigationExtras() {
 
       {/* Stepper */}
       <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: "var(--theme-table-bg)", border: "1px solid var(--theme-divider)" }}>
-        <div style={{ padding: "8px 12px", background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
+        <div style={{ paddingTop: 8, paddingBottom: 8, paddingLeft: 12, paddingRight: 12, background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
           <span className="type-overline" style={{ color: "var(--theme-fg-muted)" }}>Stepper</span>
         </div>
-        <div style={{ padding: "20px 16px", display: "flex", flexDirection: "column", gap: "16px" }}>
+        <div style={{ paddingTop: 20, paddingBottom: 20, paddingLeft: 16, paddingRight: 16, display: "flex", flexDirection: "column", gap: "16px" }}>
           <Stepper
             steps={["Account", "Profile", "Settings", "Review"]}
             currentStep={step}
@@ -40,7 +40,7 @@ export function NavigationExtras() {
               onClick={() => setStep(Math.max(0, step - 1))}
               disabled={step <= 0}
               style={{
-                padding: "6px 16px",
+                paddingTop: 6, paddingBottom: 6, paddingLeft: 16, paddingRight: 16,
                 borderRadius: "var(--glass-radius-pill, 100px)",
                 border: "1px solid var(--theme-divider)",
                 background: "transparent",
@@ -58,7 +58,7 @@ export function NavigationExtras() {
               onClick={() => setStep(Math.min(3, step + 1))}
               disabled={step >= 3}
               style={{
-                padding: "6px 16px",
+                paddingTop: 6, paddingBottom: 6, paddingLeft: 16, paddingRight: 16,
                 borderRadius: "var(--glass-radius-pill, 100px)",
                 border: "none",
                 background: "var(--theme-bg-solid)",
@@ -82,7 +82,7 @@ export function NavigationExtras() {
         overflow: "hidden",
         background: "var(--theme-table-bg)",
         border: "1px solid var(--theme-divider)",
-        padding: "14px 16px",
+        paddingTop: 14, paddingBottom: 14, paddingLeft: 16, paddingRight: 16,
         display: "flex",
         alignItems: "center",
         gap: "10px",
@@ -93,7 +93,7 @@ export function NavigationExtras() {
           <polyline points="8 12 12 8 16 12" />
         </svg>
         <span style={{ fontSize: "12px", color: "var(--theme-fg)", lineHeight: 1.5 }}>
-          <strong style={{ fontWeight: 600 }}>BackToTop</strong> is a floating button primitive that appears on scroll. It is available via <code style={{ fontSize: "11px", fontFamily: "var(--font-mono)", padding: "1px 4px", borderRadius: "3px", background: "var(--theme-divider)" }}>@/primitives/navigation</code> and can be placed at the page level.
+          <strong style={{ fontWeight: 600 }}>BackToTop</strong> is a floating button primitive that appears on scroll. It is available via <code style={{ fontSize: "11px", fontFamily: "var(--font-mono)", paddingTop: 1, paddingBottom: 1, paddingLeft: 4, paddingRight: 4, borderRadius: "3px", background: "var(--theme-divider)" }}>@/primitives/navigation</code> and can be placed at the page level.
         </span>
       </div>
     </div>

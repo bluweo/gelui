@@ -61,7 +61,7 @@ export function BadgesShowcase() {
               className="type-overline"
               onClick={() => setActiveChip(chip)}
               style={{
-                padding: "5px 14px",
+                paddingTop: 5, paddingBottom: 5, paddingLeft: 14, paddingRight: 14,
                 borderRadius: "var(--glass-radius-pill)",
                 background: activeChip === chip ? "#000" : "transparent",
                 color: activeChip === chip ? "#fff" : "inherit",
@@ -136,7 +136,7 @@ export function Badge({ variant = "default", children }) {
   return (
     <span className="type-caption" style={{
       display: "inline-flex", alignItems: "center",
-      padding: "3px 8px", borderRadius: "100px",
+      paddingTop: 3, paddingBottom: 3, paddingLeft: 8, paddingRight: 8, borderRadius: "100px",
       background: c.bg, color: c.text,
     }}>
       {children}
@@ -155,7 +155,7 @@ export function Tag({ label, color, onRemove }) {
   return (
     <span className="type-caption" style={{
       display: "inline-flex", alignItems: "center", gap: 4,
-      padding: "4px 10px", borderRadius: "var(--glass-radius-pill)",
+      paddingTop: 4, paddingBottom: 4, paddingLeft: 10, paddingRight: 10, borderRadius: "var(--glass-radius-pill)",
       background: c.bg, color: c.text,
     }}>
       {label}

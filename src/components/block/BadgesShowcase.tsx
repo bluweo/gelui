@@ -8,11 +8,11 @@ export function BadgesShowcase() {
     <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
       {/* Status Badges */}
       <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: "var(--theme-table-bg)", border: "1px solid var(--theme-divider)" }}>
-        <div style={{ padding: "8px 12px", background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
+        <div style={{ paddingTop: 8, paddingBottom: 8, paddingLeft: 12, paddingRight: 12, background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
           <span style={{ fontSize: "10px", fontWeight: 650, letterSpacing: "0.06em", textTransform: "uppercase", color: "var(--theme-fg-faint)" }}>Status Badges</span>
         </div>
         {(["default", "success", "warning", "error", "info"] as const).map((variant, i) => (
-          <div key={variant} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "12px 16px", borderBottom: i < 4 ? "1px solid var(--theme-divider)" : undefined }}>
+          <div key={variant} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", paddingTop: 12, paddingBottom: 12, paddingLeft: 16, paddingRight: 16, borderBottom: i < 4 ? "1px solid var(--theme-divider)" : undefined }}>
             <span style={{ fontSize: "12px", fontWeight: 550, color: "var(--theme-fg-muted)", textTransform: "capitalize" }}>{variant}</span>
             <Badge variant={variant}>{variant === "default" ? "Default" : variant.charAt(0).toUpperCase() + variant.slice(1)}</Badge>
           </div>
@@ -21,10 +21,10 @@ export function BadgesShowcase() {
 
       {/* Tags */}
       <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: "var(--theme-table-bg)", border: "1px solid var(--theme-divider)" }}>
-        <div style={{ padding: "8px 12px", background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
+        <div style={{ paddingTop: 8, paddingBottom: 8, paddingLeft: 12, paddingRight: 12, background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
           <span style={{ fontSize: "10px", fontWeight: 650, letterSpacing: "0.06em", textTransform: "uppercase", color: "var(--theme-fg-faint)" }}>Removable Tags</span>
         </div>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", padding: "14px 16px" }}>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", paddingTop: 14, paddingBottom: 14, paddingLeft: 16, paddingRight: 16 }}>
           {tags.map((tag) => (
             <Tag key={tag} label={tag} color={tag === "React" ? "blue" : tag === "Astro" ? "purple" : tag === "Tailwind" ? "green" : "amber"} onRemove={() => setTags(tags.filter(t => t !== tag))} />
           ))}
@@ -34,10 +34,10 @@ export function BadgesShowcase() {
 
       {/* Avatars */}
       <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: "var(--theme-table-bg)", border: "1px solid var(--theme-divider)" }}>
-        <div style={{ padding: "8px 12px", background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
+        <div style={{ paddingTop: 8, paddingBottom: 8, paddingLeft: 12, paddingRight: 12, background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
           <span style={{ fontSize: "10px", fontWeight: 650, letterSpacing: "0.06em", textTransform: "uppercase", color: "var(--theme-fg-faint)" }}>Avatars</span>
         </div>
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 16px", borderBottom: "1px solid var(--theme-divider)" }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", paddingTop: 14, paddingBottom: 14, paddingLeft: 16, paddingRight: 16, borderBottom: "1px solid var(--theme-divider)" }}>
           <span style={{ fontSize: "12px", fontWeight: 550, color: "var(--theme-fg-muted)" }}>With Status</span>
           <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
             <Avatar name="John Doe" size="36px" status="online" />
@@ -46,7 +46,7 @@ export function BadgesShowcase() {
             <Avatar name="AI" size="36px" status="offline" />
           </div>
         </div>
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 16px" }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", paddingTop: 14, paddingBottom: 14, paddingLeft: 16, paddingRight: 16 }}>
           <span style={{ fontSize: "12px", fontWeight: 550, color: "var(--theme-fg-muted)" }}>Sizes</span>
           <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
             <Avatar name="XS" size="24px" />

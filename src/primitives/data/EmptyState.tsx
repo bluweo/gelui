@@ -26,7 +26,7 @@ export function EmptyState({
         alignItems: "center",
         justifyContent: "center",
         textAlign: "center",
-        padding: "48px 24px",
+        paddingTop: 48, paddingBottom: 48, paddingLeft: 24, paddingRight: 24,
         gap: "12px",
         fontFamily: "var(--font-body)",
         ...style,
