@@ -15,48 +15,16 @@ export function Radio({
   className = "",
   style,
 }: RadioProps) {
-  const accent = "#354334";
-
   if (variant === "gel") {
     return (
       <button
-        className={`gel-glass ${className}`}
+        className={`prim-radio-gel gel-glass ${className}`}
         onClick={() => onChange?.(!selected)}
-        style={{
-          width: "24px",
-          height: "24px",
-          borderRadius: "50%",
-          border: selected ? "2px solid #354334" : "1px solid rgba(255,255,255,0.6)",
-          cursor: "pointer",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          transition: "all 200ms",
-          padding: 0,
-          background:
-            "linear-gradient(165deg, rgba(255,255,255,0.7) 0%, rgba(240,240,244,0.5) 100%)",
-          boxShadow: `
-            0 2px 6px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06),
-            inset 0 2px 3px rgba(255,255,255,0.8),
-            inset 0 -2px 3px rgba(0,0,0,0.04),
-            inset 2px 0 3px rgba(255,255,255,0.4),
-            inset -2px 0 3px rgba(0,0,0,0.03)
-          `,
-          ...style,
-        }}
+        data-selected={selected}
+        style={style}
       >
         {selected && (
-          <div
-            style={{
-              width: "12px",
-              height: "12px",
-              borderRadius: "50%",
-              background:
-                "linear-gradient(165deg, rgba(53,67,52,0.95) 0%, rgba(53,67,52,0.75) 100%)",
-              boxShadow:
-                "inset 0 1px 2px rgba(0,0,0,0.2), 0 1px 1px rgba(255,255,255,0.3)",
-            }}
-          />
+          <div className="prim-radio-gel-dot" />
         )}
       </button>
     );
@@ -65,32 +33,13 @@ export function Radio({
   // flat (default)
   return (
     <button
-      className={className}
+      className={`prim-radio-flat ${className}`}
       onClick={() => onChange?.(!selected)}
-      style={{
-        width: "20px",
-        height: "20px",
-        borderRadius: "50%",
-        border: `2px solid ${selected ? accent : "var(--theme-fg-faint)"}`,
-        background: "transparent",
-        cursor: "pointer",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        transition: "all 200ms",
-        padding: 0,
-        ...style,
-      }}
+      data-selected={selected}
+      style={style}
     >
       {selected && (
-        <div
-          style={{
-            width: "10px",
-            height: "10px",
-            borderRadius: "50%",
-            background: accent,
-          }}
-        />
+        <div className="prim-radio-flat-dot" />
       )}
     </button>
   );

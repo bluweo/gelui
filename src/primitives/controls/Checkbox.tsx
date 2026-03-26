@@ -18,31 +18,10 @@ export function Checkbox({
   if (variant === "gel") {
     return (
       <button
-        className={`gel-glass ${className}`}
+        className={`prim-checkbox-gel gel-glass ${className}`}
         onClick={() => onChange?.(!checked)}
-        style={{
-          width: "24px",
-          height: "24px",
-          borderRadius: "6px",
-          border: checked ? "none" : "1px solid rgba(255,255,255,0.6)",
-          cursor: "pointer",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          transition: "all 200ms",
-          padding: 0,
-          background: checked
-            ? "linear-gradient(165deg, rgba(53,67,52,0.9) 0%, rgba(53,67,52,0.7) 100%)"
-            : "linear-gradient(165deg, rgba(255,255,255,0.7) 0%, rgba(240,240,244,0.5) 100%)",
-          boxShadow: checked
-            ? "inset 0 2px 4px rgba(0,0,0,0.25), inset 0 -1px 2px rgba(255,255,255,0.08), 0 1px 3px rgba(0,0,0,0.1)"
-            : `0 2px 6px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06),
-               inset 0 2px 3px rgba(255,255,255,0.8),
-               inset 0 -2px 3px rgba(0,0,0,0.04),
-               inset 2px 0 3px rgba(255,255,255,0.4),
-               inset -2px 0 3px rgba(0,0,0,0.03)`,
-          ...style,
-        }}
+        data-checked={checked}
+        style={style}
       >
         {checked && (
           <svg
@@ -66,24 +45,10 @@ export function Checkbox({
   // flat (default)
   return (
     <button
-      className={className}
+      className={`prim-checkbox-flat ${className}`}
       onClick={() => onChange?.(!checked)}
-      style={{
-        width: "20px",
-        height: "20px",
-        borderRadius: "4px",
-        border: checked
-          ? "none"
-          : "2px solid var(--theme-fg-faint)",
-        background: checked ? "#354334" : "transparent",
-        cursor: "pointer",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        transition: "all 200ms",
-        padding: 0,
-        ...style,
-      }}
+      data-checked={checked}
+      style={style}
     >
       {checked && (
         <svg

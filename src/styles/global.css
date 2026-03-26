@@ -2151,3 +2151,654 @@ code:not([data-font-preview]), pre:not([data-font-preview]), kbd, samp { font-fa
   );
 }
 
+/* ═══════════════════════════════════════════════
+   PRIMITIVE COMPONENT STYLES
+   Deterministic CSS for hydration-safe primitives.
+   State via data-attributes + CSS pseudo-classes.
+   Zero inline styles = zero hydration mismatch.
+   ═══════════════════════════════════════════════ */
+
+/* ── 1. Button base ─────────────────────────── */
+
+@utility prim-btn-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-weight: 600;
+  font-family: var(--font-ui);
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: all 200ms ease;
+
+  &:disabled, &[data-disabled="true"] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+@utility prim-btn-solid {
+  background: var(--theme-bg-solid);
+  color: var(--theme-fg-on-solid);
+  box-shadow: none;
+
+  &:hover:not(:disabled):not([data-disabled="true"]) {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transform: scale(1.05);
+  }
+}
+
+@utility prim-btn-ghost {
+  background: transparent;
+  border: 1px solid var(--theme-ghost-border);
+  color: var(--theme-fg);
+
+  &:hover:not(:disabled):not([data-disabled="true"]) {
+    background: var(--theme-header-bg);
+    transform: scale(1.05);
+  }
+}
+
+@utility prim-btn-glass {
+  background: var(--theme-header-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--theme-ghost-border);
+  color: var(--theme-bg-solid);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.2), 0 1px 3px rgba(0,0,0,0.06);
+
+  &:hover:not(:disabled):not([data-disabled="true"]) {
+    transform: scale(1.05);
+  }
+}
+
+@utility prim-btn-link {
+  background: transparent;
+  padding: 0;
+  color: var(--theme-fg);
+  text-decoration: underline;
+  transform: none;
+
+  &:hover:not(:disabled):not([data-disabled="true"]) {
+    opacity: 0.7;
+  }
+
+  &:disabled, &[data-disabled="true"] {
+    opacity: 0.5;
+  }
+}
+
+/* ── 2. Button sizes ────────────────────────── */
+
+@utility prim-btn-sm {
+  padding: 6px 14px;
+  font-size: 11px;
+}
+
+@utility prim-btn-md {
+  padding: 10px 20px;
+  font-size: 14px;
+}
+
+@utility prim-btn-lg {
+  padding: 14px 28px;
+  font-size: 15px;
+}
+
+/* ── 3. Button shapes ───────────────────────── */
+
+@utility prim-btn-pill {
+  border-radius: var(--glass-radius-pill, 100px);
+}
+
+@utility prim-btn-rounded {
+  border-radius: var(--glass-radius-sm, 8px);
+}
+
+@utility prim-btn-circle {
+  border-radius: 50%;
+}
+
+@utility prim-btn-full {
+  width: 100%;
+}
+
+/* ── 4. Toggle ──────────────────────────────── */
+
+@utility prim-toggle-flat {
+  width: 44px;
+  height: 24px;
+  border-radius: 12px;
+  border: none;
+  padding: 2px;
+  cursor: pointer;
+  transition: all 200ms;
+  display: flex;
+  align-items: center;
+  background: var(--theme-ghost-border);
+  justify-content: flex-start;
+
+  &[data-checked="true"] {
+    background: #354334;
+    justify-content: flex-end;
+  }
+
+  &:disabled, &[data-disabled="true"] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+@utility prim-toggle-flat-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+  transition: all 200ms;
+}
+
+@utility prim-toggle-gel {
+  position: relative;
+  width: 48px;
+  height: 28px;
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+  transition: all 300ms;
+  padding: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.12) 100%);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.08), inset 0 -1px 2px rgba(255,255,255,0.3), 0 1px 2px rgba(0,0,0,0.05);
+
+  &[data-checked="true"] {
+    background: linear-gradient(180deg, rgba(53,67,52,0.9) 0%, rgba(53,67,52,0.7) 100%);
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.3), inset 0 -1px 2px rgba(255,255,255,0.1), 0 1px 2px rgba(0,0,0,0.1);
+  }
+
+  &:disabled, &[data-disabled="true"] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+@utility prim-toggle-gel-thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  transition: all 300ms;
+  background: linear-gradient(165deg, rgba(255,255,255,0.95) 0%, rgba(240,240,244,0.85) 40%, rgba(220,220,228,0.75) 100%);
+  border: 1.5px solid rgba(255,255,255,0.9);
+  box-shadow:
+    0 2px 8px rgba(0,0,0,0.15),
+    0 1px 3px rgba(0,0,0,0.1),
+    inset 0 2px 3px rgba(255,255,255,1),
+    inset 0 -2px 4px rgba(0,0,0,0.06),
+    inset 2px 0 3px rgba(255,255,255,0.5),
+    inset -2px 0 3px rgba(0,0,0,0.04);
+
+  [data-checked="true"] > & {
+    left: calc(100% - 25px);
+  }
+}
+
+/* ── 5. Checkbox ────────────────────────────── */
+
+@utility prim-checkbox-flat {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  border: 2px solid var(--theme-fg-faint);
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 200ms;
+  padding: 0;
+
+  &[data-checked="true"] {
+    border: none;
+    background: #354334;
+  }
+
+  &:disabled, &[data-disabled="true"] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+@utility prim-checkbox-gel {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.6);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 200ms;
+  padding: 0;
+  background: linear-gradient(165deg, rgba(255,255,255,0.7) 0%, rgba(240,240,244,0.5) 100%);
+  box-shadow:
+    0 2px 6px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06),
+    inset 0 2px 3px rgba(255,255,255,0.8),
+    inset 0 -2px 3px rgba(0,0,0,0.04),
+    inset 2px 0 3px rgba(255,255,255,0.4),
+    inset -2px 0 3px rgba(0,0,0,0.03);
+
+  &[data-checked="true"] {
+    border: none;
+    background: linear-gradient(165deg, rgba(53,67,52,0.9) 0%, rgba(53,67,52,0.7) 100%);
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.25), inset 0 -1px 2px rgba(255,255,255,0.08), 0 1px 3px rgba(0,0,0,0.1);
+  }
+
+  &:disabled, &[data-disabled="true"] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+/* ── 6. Radio ───────────────────────────────── */
+
+@utility prim-radio-flat {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--theme-fg-faint);
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 200ms;
+  padding: 0;
+
+  &[data-selected="true"] {
+    border-color: #354334;
+  }
+
+  &:disabled, &[data-disabled="true"] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+@utility prim-radio-flat-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #354334;
+}
+
+@utility prim-radio-gel {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.6);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 200ms;
+  padding: 0;
+  background: linear-gradient(165deg, rgba(255,255,255,0.7) 0%, rgba(240,240,244,0.5) 100%);
+  box-shadow:
+    0 2px 6px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06),
+    inset 0 2px 3px rgba(255,255,255,0.8),
+    inset 0 -2px 3px rgba(0,0,0,0.04),
+    inset 2px 0 3px rgba(255,255,255,0.4),
+    inset -2px 0 3px rgba(0,0,0,0.03);
+
+  &[data-selected="true"] {
+    border: 2px solid #354334;
+  }
+
+  &:disabled, &[data-disabled="true"] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+@utility prim-radio-gel-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: linear-gradient(165deg, rgba(53,67,52,0.95) 0%, rgba(53,67,52,0.75) 100%);
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.2), 0 1px 1px rgba(255,255,255,0.3);
+}
+
+/* ── 7. Slider (flat) ───────────────────────── */
+
+@utility prim-slider-flat-track {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+@utility prim-slider-flat-rail {
+  position: relative;
+  flex: 1;
+  height: 20px;
+  display: flex;
+  align-items: center;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--theme-divider);
+  }
+}
+
+@utility prim-slider-flat-fill {
+  position: absolute;
+  left: 0;
+  width: var(--prim-slider-pct);
+  height: 4px;
+  border-radius: 2px;
+  background: var(--theme-fg);
+}
+
+@utility prim-slider-flat-thumb {
+  width: 100%;
+  height: 20px;
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  margin: 0;
+}
+
+@utility prim-slider-value {
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--font-mono);
+  min-width: 36px;
+  text-align: right;
+  color: var(--theme-fg);
+}
+
+/* ── 8. Segmented Control ───────────────────── */
+
+@utility prim-seg-flat {
+  display: inline-flex;
+  position: relative;
+  border-radius: var(--glass-radius-pill, 100px);
+  background: var(--theme-header-bg);
+  padding: 3px;
+}
+
+@utility prim-seg-flat-pill {
+  position: absolute;
+  top: 3px;
+  bottom: 3px;
+  left: var(--prim-seg-offset);
+  width: var(--prim-seg-width);
+  border-radius: var(--glass-radius-pill, 100px);
+  background: var(--theme-bg-solid);
+  transition: left 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 0;
+}
+
+@utility prim-seg-flat-btn {
+  position: relative;
+  z-index: 1;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--font-ui);
+  border: none;
+  border-radius: var(--glass-radius-pill, 100px);
+  background: transparent;
+  color: var(--theme-fg-muted);
+  cursor: pointer;
+  transition: color 200ms ease;
+  outline: none;
+  flex: 1;
+  white-space: nowrap;
+
+  &[data-active="true"] {
+    color: var(--theme-fg-on-solid);
+  }
+}
+
+@utility prim-seg-gel {
+  display: inline-flex;
+  border-radius: 9999px;
+  padding: 4px;
+  gap: 4px;
+  align-self: flex-start;
+  background: var(--theme-header-bg);
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.06), 0 1px 0 rgba(255,255,255,0.4);
+}
+
+@utility prim-seg-gel-btn {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 16px;
+  border-radius: 9999px;
+  cursor: pointer;
+  border: none;
+  transition: all 200ms;
+  background: transparent;
+  color: var(--theme-fg-subtle);
+  box-shadow: none;
+
+  &[data-active="true"] {
+    background: var(--theme-table-bg);
+    color: var(--theme-fg);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
+  }
+}
+
+/* ── 9. Input ───────────────────────────────── */
+
+@utility prim-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+@utility prim-input-field {
+  width: 100%;
+  font-family: var(--font-body);
+  border-radius: var(--glass-radius-sm, 10px);
+  border: 2px solid transparent;
+  background: var(--theme-divider);
+  color: var(--theme-bg-solid);
+  outline: none;
+  transition: all 200ms ease;
+
+  &:focus {
+    border-color: var(--theme-bg-solid);
+  }
+
+  &[data-error="true"] {
+    border-color: rgba(255,59,48,0.7);
+  }
+
+  &[data-success="true"] {
+    border-color: rgba(52,199,89,0.7);
+  }
+
+  &:disabled, &[data-disabled="true"] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+@utility prim-input-sm {
+  padding: 8px 12px;
+  font-size: 12px;
+}
+
+@utility prim-input-md {
+  padding: 12px 16px;
+  font-size: 14px;
+}
+
+@utility prim-input-lg {
+  padding: 16px 20px;
+  font-size: 16px;
+}
+
+@utility prim-input-icon {
+  position: absolute;
+  left: 16px;
+  display: flex;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+/* ── 10. Search Input ───────────────────────── */
+
+@utility prim-search-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  --prim-search-stroke: 1.5;
+
+  &:focus-within {
+    --prim-search-stroke: 2.5;
+  }
+}
+
+@utility prim-search-icon {
+  position: absolute;
+  left: 14px;
+  pointer-events: none;
+  transition: stroke-width 200ms ease;
+}
+
+@utility prim-search-input {
+  width: 100%;
+  padding: 12px 16px 12px 40px;
+  font-size: 14px;
+  font-family: var(--font-body);
+  border-radius: var(--glass-radius-sm, 10px);
+  border: 2px solid transparent;
+  background: var(--theme-divider);
+  color: var(--theme-bg-solid);
+  outline: none;
+  transition: all 200ms ease;
+
+  &:focus {
+    border-color: var(--theme-bg-solid);
+  }
+}
+
+/* ── 11. Icon Button ────────────────────────── */
+
+@utility prim-icon-btn {
+  border-radius: 50%;
+  border: 1px solid var(--theme-divider);
+  background: var(--theme-header-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+  color: var(--theme-fg);
+  transition: all 200ms ease;
+
+  &[data-size="sm"] {
+    width: 32px;
+    height: 32px;
+  }
+
+  &[data-size="md"], &:not([data-size]) {
+    width: 40px;
+    height: 40px;
+  }
+
+  &[data-size="lg"] {
+    width: 48px;
+    height: 48px;
+  }
+
+  &:hover:not(:disabled):not([data-disabled="true"]) {
+    transform: scale(1.05);
+  }
+}
+
+/* ── 12. Link Button ────────────────────────── */
+
+@utility prim-link-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: var(--font-ui);
+  color: var(--theme-fg);
+  text-decoration: none;
+  text-underline-offset: 3px;
+  transition: opacity 200ms ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+
+  &[data-underline="true"] {
+    text-decoration: underline;
+  }
+
+  &:hover:not(:disabled):not([data-disabled="true"]) {
+    opacity: 0.7;
+  }
+}
+
+@utility prim-link-btn-arrow {
+  display: inline-block;
+  transition: transform 200ms ease;
+
+  .prim-link-btn:hover > & {
+    transform: translateX(3px);
+  }
+}
+
+/* ── 13. Nav Item ───────────────────────────── */
+
+@utility prim-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: var(--glass-radius-sm, 10px);
+  border: none;
+  width: 100%;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 400;
+  font-family: var(--font-ui);
+  background: transparent;
+  color: var(--theme-fg-muted);
+  cursor: pointer;
+  transition: all 150ms ease;
+  outline: none;
+
+  &:hover {
+    background: var(--theme-header-bg);
+  }
+
+  &[data-active="true"] {
+    font-weight: 600;
+    background: var(--theme-header-bg);
+    color: var(--theme-fg);
+  }
+}
+
