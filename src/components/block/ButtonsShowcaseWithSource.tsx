@@ -190,8 +190,36 @@ export function LinkButton({
 }`;
 
 const COMPONENTS = [
-  { name: "Button", path: "@/primitives/buttons", description: "Multi-variant button: solid, ghost, glass, gel, link. Contrast-aware via --btn-* CSS vars.", implementation: IMPL_BUTTON },
-  { name: "LinkButton", path: "@/primitives/buttons", description: "Button styled as a text link with optional underline or arrow", implementation: IMPL_LINKBUTTON },
+  {
+    name: "Button",
+    path: "@/primitives/buttons",
+    description: "Multi-variant button: solid, ghost, glass, gel, link. Contrast-aware via --btn-* CSS vars.",
+    implementation: IMPL_BUTTON,
+    props: [
+      { name: "variant", type: "enum", options: ["solid", "ghost", "glass", "gel", "link"], default: '"solid"' },
+      { name: "size", type: "enum", options: ["sm", "md", "lg"], default: '"md"' },
+      { name: "shape", type: "enum", options: ["pill", "rounded", "circle"], default: '"pill"' },
+      { name: "disabled", type: "boolean", default: "false" },
+      { name: "fullWidth", type: "boolean", default: "false" },
+      { name: "onClick", type: "() => void" },
+      { name: "className", type: "string" },
+      { name: "style", type: "CSSProperties" },
+    ],
+  },
+  {
+    name: "LinkButton",
+    path: "@/primitives/buttons",
+    description: "Button styled as a text link with optional underline or arrow",
+    implementation: IMPL_LINKBUTTON,
+    props: [
+      { name: "href", type: "string" },
+      { name: "underline", type: "boolean", default: "false" },
+      { name: "arrow", type: "boolean", default: "false" },
+      { name: "onClick", type: "() => void" },
+      { name: "className", type: "string" },
+      { name: "style", type: "CSSProperties" },
+    ],
+  },
   { name: "IconButton", path: "@/primitives/buttons", description: "Circle icon button with size variants" },
   { name: "ButtonGroup", path: "@/primitives/buttons", description: "Connected button row for toolbars" },
 ];

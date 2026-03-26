@@ -79,11 +79,19 @@ function escapeHtml(str: string): string {
 /*  ViewSourceModal                                                     */
 /* ------------------------------------------------------------------ */
 
+interface PropInfo {
+  name: string;
+  type: string;
+  options?: string[];
+  default?: string;
+}
+
 interface ComponentInfo {
   name: string;
   path: string;
   description?: string;
   implementation?: string;
+  props?: PropInfo[];
 }
 
 interface ExtraTab {
@@ -124,6 +132,7 @@ export function ViewSourceModal({ open, onClose, title, code, components = [], e
   const [mounted, setMounted] = useState(false);
   const [activeTab, setActiveTab] = useState<TabKey>("source");
   const [selectedImpl, setSelectedImpl] = useState(0);
+  const [expandedComp, setExpandedComp] = useState<string | null>(null);
 
   const { panelRef, panelStyle, backdropDragged, onDragStart } = useDraggableModal({
     isOpen: open,
@@ -278,7 +287,7 @@ export function ViewSourceModal({ open, onClose, title, code, components = [], e
             </pre>
           </div>
         ) : activeTab === "components" ? (
-          /* Components tab */
+          /* Components tab — accordion style */
           <div
             className="overflow-auto"
             style={{
@@ -290,35 +299,113 @@ export function ViewSourceModal({ open, onClose, title, code, components = [], e
           >
             {components.length > 0 ? (
               <div className="flex flex-col">
-                {components.map((comp, i) => (
-                  <div
-                    key={comp.name}
-                    className={`flex items-start gap-3 px-4 py-3 ${i < components.length - 1 ? "border-b border-black/[0.04] dark:border-white/[0.04]" : ""}`}
-                  >
+                {components.map((comp, i) => {
+                  const isExpanded = expandedComp === comp.name;
+                  const hasDetail = (comp.props && comp.props.length > 0) || comp.implementation;
+                  return (
                     <div
-                      className="w-8 h-8 rounded-[6px] flex items-center justify-center shrink-0 mt-0.5 bg-black/[0.04] dark:bg-white/[0.06] border border-black/[0.06] dark:border-white/[0.08]"
+                      key={comp.name}
+                      className={i < components.length - 1 ? "border-b border-black/[0.04] dark:border-white/[0.04]" : ""}
                     >
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" className="text-black/35 dark:text-white/40">
-                        <polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" />
-                      </svg>
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2">
-                        <span className="text-[13px] font-[600] text-black/80 dark:text-white/85">{comp.name}</span>
-                        <span
-                          className="text-[10px] font-mono px-1.5 py-0.5 rounded-[4px] bg-black/[0.04] dark:bg-white/[0.06] text-black/35 dark:text-white/35"
-                        >
-                          {comp.path}
-                        </span>
+                      {/* Component header row */}
+                      <div
+                        className={`flex items-start gap-3 px-4 py-3 ${hasDetail ? "cursor-pointer hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors duration-150" : ""}`}
+                        onClick={hasDetail ? () => setExpandedComp(isExpanded ? null : comp.name) : undefined}
+                      >
+                        <div className="w-8 h-8 rounded-[6px] flex items-center justify-center shrink-0 mt-0.5 bg-black/[0.04] dark:bg-white/[0.06] border border-black/[0.06] dark:border-white/[0.08]">
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" className="text-black/35 dark:text-white/40">
+                            <polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" />
+                          </svg>
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2">
+                            <span className="text-[13px] font-[600] text-black/80 dark:text-white/85">{comp.name}</span>
+                            <span className="text-[10px] font-mono px-1.5 py-0.5 rounded-[4px] bg-black/[0.04] dark:bg-white/[0.06] text-black/35 dark:text-white/35">
+                              {comp.path}
+                            </span>
+                          </div>
+                          {comp.description && (
+                            <p className="text-[11px] mt-0.5 text-black/40 dark:text-white/40">
+                              {comp.description}
+                            </p>
+                          )}
+                        </div>
+                        {hasDetail && (
+                          <svg
+                            width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+                            className={`shrink-0 mt-2 text-black/25 dark:text-white/25 transition-transform duration-200 ${isExpanded ? "rotate-180" : ""}`}
+                          >
+                            <polyline points="6 9 12 15 18 9" />
+                          </svg>
+                        )}
                       </div>
-                      {comp.description && (
-                        <p className="text-[11px] mt-0.5 text-black/40 dark:text-white/40">
-                          {comp.description}
-                        </p>
+
+                      {/* Expanded detail: props table + implementation */}
+                      {isExpanded && (
+                        <div className="px-4 pb-4">
+                          {/* Props table */}
+                          {comp.props && comp.props.length > 0 && (
+                            <div className="rounded-[8px] overflow-hidden border border-black/[0.06] dark:border-white/[0.08] mb-3">
+                              <table className="w-full text-[11px]" style={{ borderCollapse: "collapse" }}>
+                                <thead>
+                                  <tr className="bg-black/[0.03] dark:bg-white/[0.04]">
+                                    <th className="text-left px-3 py-2 font-[600] text-black/50 dark:text-white/45 border-b border-black/[0.06] dark:border-white/[0.06]">Prop</th>
+                                    <th className="text-left px-3 py-2 font-[600] text-black/50 dark:text-white/45 border-b border-black/[0.06] dark:border-white/[0.06]">Options</th>
+                                    <th className="text-right px-3 py-2 font-[600] text-black/50 dark:text-white/45 border-b border-black/[0.06] dark:border-white/[0.06]">Default</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {comp.props.map((prop, pi) => (
+                                    <tr key={prop.name} className={pi < comp.props!.length - 1 ? "border-b border-black/[0.04] dark:border-white/[0.04]" : ""}>
+                                      <td className="px-3 py-1.5">
+                                        <code className="text-[11px] font-mono px-1 py-0.5 rounded bg-[#fff0f0] dark:bg-[#3a2020] text-[#d4726a] dark:text-[#f0a8a0]">{prop.name}</code>
+                                      </td>
+                                      <td className="px-3 py-1.5">
+                                        {prop.options ? (
+                                          <div className="flex flex-wrap gap-1">
+                                            {prop.options.map(o => (
+                                              <code key={o} className="text-[10px] font-mono px-1 py-0.5 rounded bg-[#fff0f0] dark:bg-[#3a2020] text-[#d4726a] dark:text-[#f0a8a0]">{`"${o}"`}</code>
+                                            ))}
+                                          </div>
+                                        ) : (
+                                          <span className="text-black/40 dark:text-white/35 font-mono">{prop.type}</span>
+                                        )}
+                                      </td>
+                                      <td className="px-3 py-1.5 text-right">
+                                        {prop.default ? (
+                                          <code className="text-[11px] font-mono px-1 py-0.5 rounded bg-[#fff0f0] dark:bg-[#3a2020] text-[#d4726a] dark:text-[#f0a8a0]">{prop.default}</code>
+                                        ) : (
+                                          <span className="text-black/20 dark:text-white/20">&mdash;</span>
+                                        )}
+                                      </td>
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </table>
+                            </div>
+                          )}
+
+                          {/* Implementation code */}
+                          {comp.implementation && (
+                            <div className="rounded-[8px] overflow-hidden" style={{ background: "#1a1a1a" }}>
+                              <div className="flex items-center px-3 py-1.5" style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
+                                <span className="text-[10px] font-mono" style={{ color: "#666" }}>{comp.path}/{comp.name}.tsx</span>
+                              </div>
+                              <pre className="overflow-auto" style={{ margin: 0, padding: "8px 0", fontFamily: "var(--font-mono)", fontSize: "11px", lineHeight: "1.6", color: "#d4d4d4", tabSize: 2, maxHeight: "240px", scrollbarWidth: "thin" }}>
+                                {comp.implementation.split("\n").map((line, li) => (
+                                  <div key={li} style={{ display: "flex", paddingRight: "12px" }}>
+                                    <span style={{ display: "inline-block", width: "4ch", minWidth: "3ch", paddingLeft: "12px", textAlign: "right", paddingRight: "12px", color: "#444", userSelect: "none", flexShrink: 0, fontSize: "10px" }}>{li + 1}</span>
+                                    <span style={{ flex: 1, minWidth: 0 }} dangerouslySetInnerHTML={{ __html: highlightCode(line) || "&nbsp;" }} />
+                                  </div>
+                                ))}
+                              </pre>
+                            </div>
+                          )}
+                        </div>
                       )}
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             ) : (
               <div className="flex flex-col items-center justify-center py-12 px-4">
