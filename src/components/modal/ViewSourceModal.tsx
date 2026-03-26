@@ -108,7 +108,7 @@ interface ViewSourceModalProps {
   extraTabs?: ExtraTab[];
 }
 
-type TabKey = "source" | "components" | "implementation" | string;
+type TabKey = "source" | "components" | string;
 
 const TABS: { key: TabKey; label: string; icon: JSX.Element }[] = [
   {
@@ -121,17 +121,11 @@ const TABS: { key: TabKey; label: string; icon: JSX.Element }[] = [
     label: "Components",
     icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 10h2c2 0 3-1 3-3V5c0-2-1-3-3-3H5C3 2 2 3 2 5v2c0 2 1 3 3 3ZM17 10h2c2 0 3-1 3-3V5c0-2-1-3-3-3h-2c-2 0-3 1-3 3v2c0 2 1 3 3 3ZM17 22h2c2 0 3-1 3-3v-2c0-2-1-3-3-3h-2c-2 0-3 1-3 3v2c0 2 1 3 3 3ZM5 22h2c2 0 3-1 3-3v-2c0-2-1-3-3-3H5c-2 0-3 1-3 3v2c0 2 1 3 3 3Z" /></svg>,
   },
-  {
-    key: "implementation",
-    label: "Implementation",
-    icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M16 22.75H8c-3.65 0-5.75-2.1-5.75-5.75V7c0-3.65 2.1-5.75 5.75-5.75h8c3.65 0 5.75 2.1 5.75 5.75v10c0 3.65-2.1 5.75-5.75 5.75Z" /><path d="M9.25 2v20M9 11l2 2-2 2M15 11l-2 2 2 2" /></svg>,
-  },
 ];
 
 export function ViewSourceModal({ open, onClose, title, code, components = [], extraTabs = [] }: ViewSourceModalProps) {
   const [mounted, setMounted] = useState(false);
   const [activeTab, setActiveTab] = useState<TabKey>("source");
-  const [selectedImpl, setSelectedImpl] = useState(0);
   const [expandedComp, setExpandedComp] = useState<string | null>(null);
 
   const { panelRef, panelStyle, backdropDragged, onDragStart } = useDraggableModal({
@@ -446,102 +440,7 @@ export function ViewSourceModal({ open, onClose, title, code, components = [], e
               </div>
             );
           })()
-        ) : (
-          /* Implementation tab */
-          <div className="flex flex-col flex-1 overflow-hidden">
-            {/* Component selector */}
-            {components.filter(c => c.implementation).length > 0 ? (
-              <>
-                <div
-                  className="flex gap-2 px-5 pb-3 overflow-x-auto"
-                  style={{ scrollbarWidth: "none" }}
-                  onMouseDown={(e) => e.stopPropagation()}
-                >
-                  {components.filter(c => c.implementation).map((comp, i) => (
-                    <button
-                      key={comp.name}
-                      onClick={() => setSelectedImpl(i)}
-                      className={`px-3 py-1.5 rounded-full text-[12px] font-[550] border-none cursor-pointer transition-all duration-150 whitespace-nowrap ${
-                        selectedImpl === i
-                          ? "bg-black/80 text-white dark:bg-white/80 dark:text-black"
-                          : "bg-black/[0.04] text-black/50 hover:bg-black/[0.08] hover:text-black/70 dark:bg-white/[0.06] dark:text-white/40 dark:hover:bg-white/[0.12] dark:hover:text-white/60"
-                      }`}
-                    >
-                      {comp.name}
-                    </button>
-                  ))}
-                </div>
-                {/* Implementation code */}
-                {(() => {
-                  const implComponents = components.filter(c => c.implementation);
-                  const comp = implComponents[selectedImpl];
-                  if (!comp?.implementation) return null;
-                  const implLines = comp.implementation.split("\n");
-                  const implLineWidth = String(implLines.length).length;
-                  const implHighlighted = implLines.map((line) => highlightCode(line));
-                  return (
-                    <div
-                      className="overflow-auto flex-1"
-                      style={{ background: "#1a1a1a", scrollbarWidth: "thin" }}
-                      onMouseDown={(e) => e.stopPropagation()}
-                    >
-                      <div className="flex items-center justify-between px-4 py-2" style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
-                        <span style={{ fontSize: 11, fontFamily: "var(--font-mono)", color: "#888" }}>
-                          {comp.path}/{comp.name}.tsx
-                        </span>
-                      </div>
-                      <pre style={{ margin: 0, padding: "12px 0", fontFamily: "var(--font-mono)", fontSize: "12px", lineHeight: "1.7", color: "#d4d4d4", tabSize: 2 }}>
-                        {implHighlighted.map((html, i) => (
-                          <div key={i} style={{ display: "flex", paddingRight: "16px" }}>
-                            <span style={{ display: "inline-block", width: `${implLineWidth + 2}ch`, minWidth: "3ch", paddingLeft: "16px", textAlign: "right", paddingRight: "16px", color: "#555", userSelect: "none", flexShrink: 0 }}>
-                              {i + 1}
-                            </span>
-                            <span style={{ flex: 1, minWidth: 0 }} dangerouslySetInnerHTML={{ __html: html || "&nbsp;" }} />
-                          </div>
-                        ))}
-                      </pre>
-                    </div>
-                  );
-                })()}
-              </>
-            ) : extraTabs.length > 0 && extraTabs[0].code ? (
-              /* Fallback: use extraTabs[0] for implementation */
-              (() => {
-                const etCode = extraTabs[0].code;
-                const etLines = etCode.split("\n");
-                const etLineWidth = String(etLines.length).length;
-                const etHighlighted = etLines.map((line: string) => highlightCode(line));
-                return (
-                  <div
-                    className="overflow-auto flex-1"
-                    style={{ background: "#1a1a1a", scrollbarWidth: "thin" }}
-                    onMouseDown={(e: React.MouseEvent) => e.stopPropagation()}
-                  >
-                    <pre style={{ margin: 0, padding: "12px 0", fontFamily: "var(--font-mono)", fontSize: "12px", lineHeight: "1.7", color: "#d4d4d4", tabSize: 2 }}>
-                      {etHighlighted.map((html: string, i: number) => (
-                        <div key={i} style={{ display: "flex", paddingRight: "16px" }}>
-                          <span style={{ display: "inline-block", width: `${etLineWidth + 2}ch`, minWidth: "3ch", paddingLeft: "16px", textAlign: "right", paddingRight: "16px", color: "#555", userSelect: "none", flexShrink: 0 }}>
-                            {i + 1}
-                          </span>
-                          <span style={{ flex: 1, minWidth: 0 }} dangerouslySetInnerHTML={{ __html: html || "&nbsp;" }} />
-                        </div>
-                      ))}
-                    </pre>
-                  </div>
-                );
-              })()
-            ) : (
-              <div className="flex flex-col items-center justify-center py-12 px-4">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" className="text-black/15 dark:text-white/20 mb-3">
-                  <polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" />
-                </svg>
-                <span className="text-[12px] text-black/30 dark:text-white/30">
-                  Implementation code coming soon
-                </span>
-              </div>
-            )}
-          </div>
-        )}
+        ) : null}
       </div>
     </div>,
     document.body
