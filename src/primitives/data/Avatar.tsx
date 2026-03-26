@@ -1,5 +1,4 @@
 import { type CSSProperties } from "react";
-import { useDarkMode } from "../hooks/useDarkMode";
 
 interface AvatarProps {
   src?: string;
@@ -18,7 +17,6 @@ export function Avatar({
   className = "",
   style,
 }: AvatarProps) {
-  const dark = useDarkMode();
   const initials = name
     .split(" ")
     .map((w) => w[0])
@@ -52,7 +50,7 @@ export function Avatar({
           width: size,
           height: size,
           borderRadius: "50%",
-          background: src ? undefined : dark ? "#4a5a49" : "#354334",
+          background: src ? undefined : "var(--theme-fg-muted, #354334)",
           backgroundImage: src ? `url(${src})` : undefined,
           backgroundSize: "cover",
           display: "flex",
@@ -76,7 +74,7 @@ export function Avatar({
             height: `${dotSize}px`,
             borderRadius: "50%",
             background: statusColors[status],
-            border: `2px solid ${dark ? "#1a1a1a" : "#fff"}`,
+            border: "2px solid var(--theme-table-bg, #fff)",
           }}
         />
       )}
