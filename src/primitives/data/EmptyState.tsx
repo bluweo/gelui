@@ -1,5 +1,4 @@
 import { type ReactNode, type CSSProperties } from "react";
-import { useDarkMode } from "../hooks/useDarkMode";
 
 interface EmptyStateProps {
   title?: string;
@@ -18,8 +17,6 @@ export function EmptyState({
   className = "",
   style,
 }: EmptyStateProps) {
-  const dark = useDarkMode();
-
   return (
     <div
       className={className}
@@ -39,7 +36,7 @@ export function EmptyState({
         <span
           style={{
             display: "flex",
-            color: dark ? "rgba(255,255,255,0.25)" : "rgba(0,0,0,0.2)",
+            color: "var(--theme-fg-faint)",
             marginBottom: "4px",
             fontSize: "40px",
           }}
@@ -53,7 +50,7 @@ export function EmptyState({
             fontSize: "16px",
             fontWeight: 600,
             fontFamily: "var(--font-ui)",
-            color: dark ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.5)",
+            color: "var(--theme-fg-muted)",
           }}
         >
           {title}
@@ -63,7 +60,7 @@ export function EmptyState({
         <div
           style={{
             fontSize: "13px",
-            color: dark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.35)",
+            color: "var(--theme-fg-subtle)",
             maxWidth: "320px",
             lineHeight: 1.5,
           }}

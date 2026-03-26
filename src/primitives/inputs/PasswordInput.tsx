@@ -1,5 +1,4 @@
 import { type CSSProperties, useState } from "react";
-import { useDarkMode } from "../hooks/useDarkMode";
 import { Input } from "./Input";
 
 interface PasswordInputProps {
@@ -55,7 +54,6 @@ export function PasswordInput({
   className = "",
   style,
 }: PasswordInputProps) {
-  const dark = useDarkMode();
   const [visible, setVisible] = useState(false);
 
   return (
@@ -98,7 +96,7 @@ export function PasswordInput({
             borderRadius: "var(--glass-radius-sm, 6px)",
             border: "none",
             background: "transparent",
-            color: dark ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.35)",
+            color: "var(--theme-fg-subtle)",
             cursor: disabled ? "not-allowed" : "pointer",
             padding: 0,
             transition: "color 150ms ease",

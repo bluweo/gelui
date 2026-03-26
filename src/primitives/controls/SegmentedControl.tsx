@@ -1,5 +1,4 @@
 import { type CSSProperties } from "react";
-import { useDarkMode } from "../hooks/useDarkMode";
 
 interface SegmentedControlProps {
   options: string[];
@@ -18,7 +17,6 @@ export function SegmentedControl({
   className = "",
   style,
 }: SegmentedControlProps) {
-  const dark = useDarkMode();
   const activeIdx = options.indexOf(value ?? "");
   const count = options.length || 1;
 
@@ -32,12 +30,8 @@ export function SegmentedControl({
           padding: "4px",
           gap: "4px",
           alignSelf: "flex-start",
-          background: dark
-            ? "linear-gradient(180deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.04) 100%)"
-            : "linear-gradient(180deg, rgba(0,0,0,0.06) 0%, rgba(0,0,0,0.03) 100%)",
-          boxShadow: dark
-            ? "inset 0 1px 3px rgba(0,0,0,0.2), 0 1px 0 rgba(255,255,255,0.05)"
-            : "inset 0 1px 3px rgba(0,0,0,0.06), 0 1px 0 rgba(255,255,255,0.4)",
+          background: "var(--theme-header-bg)",
+          boxShadow: "inset 0 1px 3px rgba(0,0,0,0.06), 0 1px 0 rgba(255,255,255,0.4)",
           ...style,
         }}
       >
@@ -56,21 +50,13 @@ export function SegmentedControl({
                 border: "none",
                 transition: "all 200ms",
                 background: isActive
-                  ? dark
-                    ? "linear-gradient(165deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.10) 100%)"
-                    : "linear-gradient(165deg, rgba(255,255,255,0.95) 0%, rgba(240,240,244,0.85) 100%)"
+                  ? "var(--theme-table-bg)"
                   : "transparent",
                 color: isActive
-                  ? dark
-                    ? "rgba(255,255,255,0.9)"
-                    : "rgba(0,0,0,0.85)"
-                  : dark
-                    ? "rgba(255,255,255,0.4)"
-                    : "rgba(0,0,0,0.4)",
+                  ? "var(--theme-fg)"
+                  : "var(--theme-fg-subtle)",
                 boxShadow: isActive
-                  ? dark
-                    ? "0 2px 6px rgba(0,0,0,0.2), inset 0 1px 2px rgba(255,255,255,0.1)"
-                    : "0 2px 6px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06), inset 0 1px 2px rgba(255,255,255,0.8)"
+                  ? "0 2px 6px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06)"
                   : "none",
               }}
             >
@@ -90,9 +76,7 @@ export function SegmentedControl({
         display: "inline-flex",
         position: "relative",
         borderRadius: "var(--glass-radius-pill, 100px)",
-        background: dark
-          ? "rgba(255,255,255,0.08)"
-          : "rgba(0,0,0,0.06)",
+        background: "var(--theme-header-bg)",
         padding: "3px",
         ...style,
       }}
@@ -107,7 +91,7 @@ export function SegmentedControl({
             left: `calc(3px + ${(activeIdx / count) * 100}%)`,
             width: `calc(${100 / count}% - 3px)`,
             borderRadius: "var(--glass-radius-pill, 100px)",
-            background: dark ? "#fff" : "#000",
+            background: "var(--theme-bg-solid)",
             transition: "left 250ms cubic-bezier(0.4, 0, 0.2, 1)",
             zIndex: 0,
           }}
@@ -130,12 +114,8 @@ export function SegmentedControl({
               borderRadius: "var(--glass-radius-pill, 100px)",
               background: "transparent",
               color: isActive
-                ? dark
-                  ? "#000"
-                  : "#fff"
-                : dark
-                  ? "rgba(255,255,255,0.5)"
-                  : "rgba(0,0,0,0.5)",
+                ? "var(--theme-fg-on-solid)"
+                : "var(--theme-fg-muted)",
               cursor: "pointer",
               transition: "color 200ms ease",
               outline: "none",

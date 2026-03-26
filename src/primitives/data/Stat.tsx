@@ -1,5 +1,4 @@
 import { type ReactNode, type CSSProperties } from "react";
-import { useDarkMode } from "../hooks/useDarkMode";
 
 interface StatProps {
   value: string | number;
@@ -48,18 +47,16 @@ export function Stat({
   className = "",
   style,
 }: StatProps) {
-  const dark = useDarkMode();
-
   return (
     <div
       className={className}
       style={{
         padding: "20px",
         borderRadius: "var(--glass-radius-sm, 10px)",
-        background: dark ? "rgba(255,255,255,0.06)" : "rgba(255,255,255,0.6)",
+        background: "var(--theme-header-bg)",
         backdropFilter: "blur(12px)",
         WebkitBackdropFilter: "blur(12px)",
-        border: `1px solid ${dark ? "rgba(255,255,255,0.08)" : "rgba(255,255,255,0.2)"}`,
+        border: `1px solid var(--theme-divider)`,
         fontFamily: "var(--font-body)",
         display: "flex",
         flexDirection: "column",
@@ -71,7 +68,7 @@ export function Stat({
         <span
           style={{
             display: "flex",
-            color: dark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.4)",
+            color: "var(--theme-fg-subtle)",
             marginBottom: "4px",
           }}
         >
@@ -84,7 +81,7 @@ export function Stat({
             fontSize: "32px",
             fontWeight: 700,
             fontFamily: "var(--font-ui)",
-            color: dark ? "#fff" : "#000",
+            color: "var(--theme-fg)",
             lineHeight: 1,
             fontVariantNumeric: "tabular-nums",
           }}
@@ -115,7 +112,7 @@ export function Stat({
           fontFamily: "var(--font-ui)",
           textTransform: "uppercase",
           letterSpacing: "0.04em",
-          color: dark ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.45)",
+          color: "var(--theme-fg-subtle)",
         }}
       >
         {label}

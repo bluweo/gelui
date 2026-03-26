@@ -1,5 +1,4 @@
 import { type CSSProperties, useState } from "react";
-import { useDarkMode } from "../hooks/useDarkMode";
 
 interface NumberInputProps {
   value: number;
@@ -22,7 +21,6 @@ export function NumberInput({
   className = "",
   style,
 }: NumberInputProps) {
-  const dark = useDarkMode();
   const [focused, setFocused] = useState(false);
 
   const clamp = (v: number) => {
@@ -47,9 +45,8 @@ export function NumberInput({
     }
   };
 
-  const btnBg = dark ? "rgba(255,255,255,0.10)" : "rgba(0,0,0,0.06)";
-  const btnHoverBg = dark ? "rgba(255,255,255,0.16)" : "rgba(0,0,0,0.10)";
-  const btnColor = dark ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.5)";
+  const btnBg = "var(--theme-header-bg)";
+  const btnColor = "var(--theme-fg-muted)";
 
   const [hoverMinus, setHoverMinus] = useState(false);
   const [hoverPlus, setHoverPlus] = useState(false);
@@ -80,7 +77,7 @@ export function NumberInput({
           height: 36,
           borderRadius: "50%",
           border: "none",
-          background: hoverMinus && !disabled ? btnHoverBg : btnBg,
+          background: btnBg,
           color: btnColor,
           cursor: disabled ? "not-allowed" : "pointer",
           fontSize: 18,
@@ -88,6 +85,7 @@ export function NumberInput({
           fontFamily: "var(--font-mono)",
           transition: "all 0.15s ease",
           flexShrink: 0,
+          filter: hoverMinus && !disabled ? "brightness(0.9)" : "none",
         }}
         aria-label="Decrease"
       >
@@ -106,14 +104,14 @@ export function NumberInput({
         style={{
           width: 50,
           textAlign: "center",
-          border: focused ? `2px solid ${dark ? "#fff" : "#000"}` : `2px solid transparent`,
+          border: focused ? `2px solid var(--theme-fg)` : `2px solid transparent`,
           borderRadius: "var(--glass-radius-sm, 8px)",
-          background: focused ? (dark ? "rgba(30,30,30,1)" : "#fff") : "transparent",
+          background: focused ? "var(--theme-table-bg)" : "transparent",
           outline: "none",
           fontSize: 20,
           fontFamily: "var(--font-mono)",
           fontWeight: 700,
-          color: dark ? "#fff" : "#000",
+          color: "var(--theme-fg)",
           padding: "6px 4px",
           fontVariantNumeric: "tabular-nums",
           transition: "all 0.15s ease",
@@ -135,7 +133,7 @@ export function NumberInput({
           height: 36,
           borderRadius: "50%",
           border: "none",
-          background: hoverPlus && !disabled ? btnHoverBg : btnBg,
+          background: btnBg,
           color: btnColor,
           cursor: disabled ? "not-allowed" : "pointer",
           fontSize: 18,
@@ -143,6 +141,7 @@ export function NumberInput({
           fontFamily: "var(--font-mono)",
           transition: "all 0.15s ease",
           flexShrink: 0,
+          filter: hoverPlus && !disabled ? "brightness(0.9)" : "none",
         }}
         aria-label="Increase"
       >

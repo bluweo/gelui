@@ -1,5 +1,4 @@
 import { useState, useRef, type CSSProperties } from "react";
-import { useDarkMode } from "../hooks/useDarkMode";
 
 interface TagInputProps {
   value?: string[];
@@ -24,7 +23,6 @@ export function TagInput({
   const [input, setInput] = useState("");
   const [focused, setFocused] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
-  const dark = useDarkMode();
 
   const tags = controlledValue ?? internalTags;
   const setTags = (newTags: string[]) => {
@@ -66,10 +64,10 @@ export function TagInput({
         padding: "8px 12px",
         minHeight: 44,
         borderRadius: "var(--glass-radius-sm, 10px)",
-        border: `2px solid ${focused ? (dark ? "#fff" : "#000") : "transparent"}`,
+        border: `2px solid ${focused ? "var(--theme-fg)" : "transparent"}`,
         background: focused
-          ? (dark ? "rgba(0,0,0,0.8)" : "rgba(255,255,255,0.95)")
-          : (dark ? "rgba(255,255,255,0.08)" : "rgba(255,255,255,0.6)"),
+          ? "var(--theme-table-bg)"
+          : "var(--theme-header-bg)",
         cursor: disabled ? "not-allowed" : "text",
         opacity: disabled ? 0.5 : 1,
         transition: "border-color 0.15s ease, background 0.15s ease",
@@ -88,8 +86,8 @@ export function TagInput({
             fontSize: "12px",
             fontWeight: 550,
             fontFamily: "var(--font-ui)",
-            background: dark ? "rgba(255,255,255,0.12)" : "rgba(0,0,0,0.08)",
-            color: dark ? "rgba(255,255,255,0.8)" : "rgba(0,0,0,0.7)",
+            background: "var(--theme-divider)",
+            color: "var(--theme-fg)",
           }}
         >
           {tag}
@@ -104,8 +102,8 @@ export function TagInput({
                 height: 14,
                 borderRadius: "50%",
                 border: "none",
-                background: dark ? "rgba(255,255,255,0.15)" : "rgba(0,0,0,0.1)",
-                color: dark ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.5)",
+                background: "var(--theme-divider)",
+                color: "var(--theme-fg-muted)",
                 cursor: "pointer",
                 fontSize: "10px",
                 lineHeight: 1,
@@ -135,7 +133,7 @@ export function TagInput({
           background: "transparent",
           fontSize: "14px",
           fontFamily: "var(--font-body)",
-          color: dark ? "#fff" : "#000",
+          color: "var(--theme-fg)",
           padding: 0,
         }}
       />

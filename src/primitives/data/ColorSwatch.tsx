@@ -1,5 +1,4 @@
 import { type CSSProperties } from "react";
-import { useDarkMode } from "../hooks/useDarkMode";
 
 interface ColorSwatchProps {
   color: string;
@@ -18,8 +17,6 @@ export function ColorSwatch({
   className = "",
   style,
 }: ColorSwatchProps) {
-  const dark = useDarkMode();
-
   const sizeMap: Record<string, number> = {
     sm: 32,
     md: 48,
@@ -44,7 +41,7 @@ export function ColorSwatch({
           height: `${dim}px`,
           borderRadius: "var(--glass-radius-sm, 10px)",
           background: color,
-          border: `1px solid ${dark ? "rgba(255,255,255,0.15)" : "rgba(0,0,0,0.1)"}`,
+          border: `1px solid var(--theme-divider)`,
           boxShadow: "0 1px 3px rgba(0,0,0,0.08)",
         }}
       />
@@ -63,7 +60,7 @@ export function ColorSwatch({
                 fontSize: "11px",
                 fontWeight: 600,
                 fontFamily: "var(--font-ui)",
-                color: dark ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.65)",
+                color: "var(--theme-fg-muted)",
               }}
             >
               {label}
@@ -74,7 +71,7 @@ export function ColorSwatch({
               style={{
                 fontSize: "10px",
                 fontFamily: "var(--font-mono)",
-                color: dark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.4)",
+                color: "var(--theme-fg-subtle)",
               }}
             >
               {color}

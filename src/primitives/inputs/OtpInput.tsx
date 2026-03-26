@@ -1,5 +1,4 @@
 import { useState, useRef, useCallback, type CSSProperties } from "react";
-import { useDarkMode } from "../hooks/useDarkMode";
 
 interface OtpInputProps {
   length?: number;
@@ -24,7 +23,6 @@ export function OtpInput({
   className = "",
   style,
 }: OtpInputProps) {
-  const isDark = useDarkMode();
   const [internalValue, setInternalValue] = useState("");
   const [focusedIndex, setFocusedIndex] = useState(-1);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
@@ -89,13 +87,13 @@ export function OtpInput({
     inputRefs.current[targetIdx]?.focus();
   }, [length, disabled, onChange]);
 
-  const borderDefault = isDark ? "rgba(255,255,255,0.12)" : "rgba(0,0,0,0.1)";
-  const borderFocus = isDark ? "#fff" : "#000";
+  const borderDefault = "var(--theme-divider)";
+  const borderFocus = "var(--theme-fg)";
   const borderError = "#FF3B30";
   const borderSuccess = "#34C759";
-  const bgDefault = isDark ? "rgba(255,255,255,0.06)" : "rgba(255,255,255,0.7)";
-  const bgFocus = isDark ? "rgba(255,255,255,0.1)" : "#ffffff";
-  const textColor = isDark ? "#fff" : "#000";
+  const bgDefault = "var(--theme-header-bg)";
+  const bgFocus = "var(--theme-table-bg)";
+  const textColor = "var(--theme-fg)";
 
   const isComplete = value.replace(/\s/g, "").length >= length;
   const showSuccess = success || (isComplete && !error && !disabled);
@@ -135,7 +133,7 @@ export function OtpInput({
                 fontSize: s.font,
                 fontWeight: 650,
                 fontFamily: "var(--font-mono)",
-                color: disabled ? (isDark ? "rgba(255,255,255,0.25)" : "rgba(0,0,0,0.25)") : textColor,
+                color: disabled ? "var(--theme-fg-faint)" : textColor,
                 background: isFocused ? bgFocus : bgDefault,
                 border: `2px solid ${error ? borderError : showSuccess ? borderSuccess : isFocused ? borderFocus : borderDefault}`,
                 borderRadius: `var(--glass-radius-sm, ${s.radius}px)`,
@@ -151,7 +149,7 @@ export function OtpInput({
               <span style={{
                 width: 12,
                 height: 2,
-                background: isDark ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.15)",
+                background: "var(--theme-divider)",
                 borderRadius: 1,
                 flexShrink: 0,
               }} />

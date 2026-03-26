@@ -1,5 +1,4 @@
 import { type CSSProperties } from "react";
-import { useDarkMode } from "../hooks/useDarkMode";
 
 interface DividerProps {
   variant?:
@@ -23,7 +22,6 @@ export function Divider({
   className = "",
   style,
 }: DividerProps) {
-  const dark = useDarkMode();
   if (label) {
     return (
       <div
@@ -34,9 +32,7 @@ export function Divider({
           style={{
             flex: 1,
             height: "1px",
-            background: dark
-              ? "rgba(255,255,255,0.1)"
-              : "rgba(0,0,0,0.1)",
+            background: "var(--theme-divider)",
           }}
         />
         <span
@@ -53,50 +49,45 @@ export function Divider({
           style={{
             flex: 1,
             height: "1px",
-            background: dark
-              ? "rgba(255,255,255,0.1)"
-              : "rgba(0,0,0,0.1)",
+            background: "var(--theme-divider)",
           }}
         />
       </div>
     );
   }
 
-  const w = dark ? "255,255,255" : "0,0,0";
-  const wInv = dark ? "0,0,0" : "255,255,255";
-
   const styles: Record<string, CSSProperties> = {
-    default: { height: "1px", background: `rgba(${w},0.08)` },
-    bold: { height: "2px", background: `rgba(${w},0.15)` },
+    default: { height: "1px", background: "var(--theme-divider)" },
+    bold: { height: "2px", background: "var(--theme-divider)" },
     dashed: {
       height: "1px",
-      borderBottom: `1px dashed rgba(${w},0.15)`,
+      borderBottom: "1px dashed var(--theme-divider)",
       background: "transparent",
     },
     gradient: {
       height: "1px",
-      background: `linear-gradient(90deg, transparent, rgba(${w},0.12), transparent)`,
+      background: "linear-gradient(90deg, transparent, var(--theme-divider), transparent)",
     },
     glass: {
       height: "2px",
-      background: `linear-gradient(to bottom, rgba(${wInv},0.4), rgba(${w},0.08))`,
+      background: "linear-gradient(to bottom, var(--theme-divider), transparent)",
     },
     etched: {
       height: "0px",
-      boxShadow: `0 -1px 0 rgba(${w},0.08), 0 1px 0 rgba(${wInv},0.15)`,
+      boxShadow: "0 -1px 0 var(--theme-divider), 0 1px 0 var(--theme-divider)",
     },
     groove: {
       height: "0px",
-      boxShadow: `0 -1px 0 rgba(${w},0.12), 0 1px 0 rgba(${wInv},0.2), 0 -2px 0 rgba(${wInv},0.08), 0 2px 0 rgba(${w},0.05)`,
+      boxShadow: "0 -1px 0 var(--theme-divider), 0 1px 0 var(--theme-divider), 0 -2px 0 var(--theme-divider), 0 2px 0 var(--theme-divider)",
     },
     ridge: {
       height: "0px",
-      boxShadow: `0 -1px 0 rgba(${wInv},0.2), 0 1px 0 rgba(${w},0.12), 0 -2px 0 rgba(${w},0.05), 0 2px 0 rgba(${wInv},0.08)`,
+      boxShadow: "0 -1px 0 var(--theme-divider), 0 1px 0 var(--theme-divider), 0 -2px 0 var(--theme-divider), 0 2px 0 var(--theme-divider)",
     },
     frostedSlit: {
       height: "1px",
-      background: `linear-gradient(90deg, transparent 5%, rgba(${wInv},0.25) 30%, rgba(${wInv},0.35) 50%, rgba(${wInv},0.25) 70%, transparent 95%)`,
-      boxShadow: `0 1px 2px rgba(${w},0.1)`,
+      background: "linear-gradient(90deg, transparent 5%, var(--theme-divider) 30%, var(--theme-divider) 70%, transparent 95%)",
+      boxShadow: "0 1px 2px var(--theme-divider)",
     },
   };
 

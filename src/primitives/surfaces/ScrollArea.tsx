@@ -1,5 +1,4 @@
 import { type ReactNode, type CSSProperties } from "react";
-import { useDarkMode } from "../hooks/useDarkMode";
 
 interface ScrollAreaProps {
   maxHeight: number | string;
@@ -14,20 +13,8 @@ export function ScrollArea({
   className = "",
   style,
 }: ScrollAreaProps) {
-  const dark = useDarkMode();
-
-  const scrollbarColor = dark
-    ? "rgba(255,255,255,0.2)"
-    : "rgba(0,0,0,0.15)";
-  const scrollbarHover = dark
-    ? "rgba(255,255,255,0.35)"
-    : "rgba(0,0,0,0.25)";
-  const fadeTop = dark
-    ? "linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, transparent 24px)"
-    : "linear-gradient(to bottom, rgba(255,255,255,0.8) 0%, transparent 24px)";
-  const fadeBottom = dark
-    ? "linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 24px)"
-    : "linear-gradient(to top, rgba(255,255,255,0.8) 0%, transparent 24px)";
+  const scrollbarColor = "var(--theme-fg-faint)";
+  const scrollbarHover = "var(--theme-fg-subtle)";
 
   const scrollbarId = `scroll-area-${Math.random().toString(36).slice(2, 8)}`;
 
@@ -48,7 +35,7 @@ export function ScrollArea({
           left: 0,
           right: 0,
           height: "24px",
-          background: fadeTop,
+          background: "linear-gradient(to bottom, var(--theme-table-bg) 0%, transparent 100%)",
           pointerEvents: "none",
           zIndex: 1,
           borderRadius: "var(--glass-radius-sm, 10px) var(--glass-radius-sm, 10px) 0 0",
@@ -90,7 +77,7 @@ export function ScrollArea({
           left: 0,
           right: 0,
           height: "24px",
-          background: fadeBottom,
+          background: "linear-gradient(to top, var(--theme-table-bg) 0%, transparent 100%)",
           pointerEvents: "none",
           zIndex: 1,
           borderRadius: "0 0 var(--glass-radius-sm, 10px) var(--glass-radius-sm, 10px)",

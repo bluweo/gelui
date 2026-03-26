@@ -1,5 +1,4 @@
 import { type ReactNode, type CSSProperties } from "react";
-import { useDarkMode } from "../hooks/useDarkMode";
 
 interface FormGroupProps {
   label: string;
@@ -22,8 +21,6 @@ export function FormGroup({
   className = "",
   style,
 }: FormGroupProps) {
-  const dark = useDarkMode();
-
   return (
     <div
       className={className}
@@ -41,7 +38,7 @@ export function FormGroup({
           fontSize: "13px",
           fontWeight: 600,
           fontFamily: "var(--font-ui)",
-          color: dark ? "rgba(255,255,255,0.8)" : "rgba(0,0,0,0.75)",
+          color: "var(--theme-fg)",
           display: "flex",
           alignItems: "center",
           gap: "2px",
@@ -77,7 +74,7 @@ export function FormGroup({
         <span
           style={{
             fontSize: "12px",
-            color: dark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.4)",
+            color: "var(--theme-fg-subtle)",
             fontFamily: "var(--font-body)",
             lineHeight: 1.4,
           }}

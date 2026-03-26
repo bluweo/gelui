@@ -1,5 +1,4 @@
 import { type CSSProperties, useState, useRef, useCallback } from "react";
-import { useDarkMode } from "../hooks/useDarkMode";
 
 interface SliderProps {
   min?: number;
@@ -22,7 +21,6 @@ export function Slider({
   className = "",
   style,
 }: SliderProps) {
-  const dark = useDarkMode();
   const [internal, setInternal] = useState(50);
   const val = controlledValue ?? internal;
   const pct = ((val - min) / (max - min)) * 100;
@@ -33,7 +31,7 @@ export function Slider({
   };
 
   if (variant === "gel") {
-    return <GelSlider min={min} max={max} value={val} onChange={handleChange} showValue={showValue} dark={dark} className={className} style={style} />;
+    return <GelSlider min={min} max={max} value={val} onChange={handleChange} showValue={showValue} className={className} style={style} />;
   }
 
   // flat (default)
@@ -57,9 +55,7 @@ export function Slider({
             right: 0,
             height: "4px",
             borderRadius: "2px",
-            background: dark
-              ? "rgba(255,255,255,0.12)"
-              : "rgba(0,0,0,0.1)",
+            background: "var(--theme-divider)",
           }}
         />
         {/* Track fill */}
@@ -70,9 +66,7 @@ export function Slider({
             width: `${pct}%`,
             height: "4px",
             borderRadius: "2px",
-            background: dark
-              ? "linear-gradient(90deg, rgba(255,255,255,0.4), #fff)"
-              : "linear-gradient(90deg, rgba(0,0,0,0.3), #000)",
+            background: "var(--theme-fg)",
           }}
         />
         <input
@@ -102,7 +96,7 @@ export function Slider({
             fontFamily: "var(--font-mono)",
             minWidth: "36px",
             textAlign: "right",
-            color: dark ? "#fff" : "#000",
+            color: "var(--theme-fg)",
           }}
         >
           {val}
@@ -112,7 +106,7 @@ export function Slider({
   );
 }
 
-/* ─── Gel Slider (LiquidGlassSlider-style) ─── */
+/* --- Gel Slider (LiquidGlassSlider-style) --- */
 
 function GelSlider({
   min,
@@ -120,7 +114,6 @@ function GelSlider({
   value,
   onChange,
   showValue,
-  dark,
   className,
   style,
 }: {
@@ -129,7 +122,6 @@ function GelSlider({
   value: number;
   onChange: (v: number) => void;
   showValue: boolean;
-  dark: boolean;
   className: string;
   style?: CSSProperties;
 }) {
@@ -203,9 +195,7 @@ function GelSlider({
             right: 0,
             height: "6px",
             borderRadius: "3px",
-            background: dark
-              ? "rgba(255,255,255,0.10)"
-              : "rgba(0,0,0,0.08)",
+            background: "var(--theme-divider)",
             boxShadow: "inset 0 1px 2px rgba(0,0,0,0.1)",
           }}
         />
@@ -217,9 +207,7 @@ function GelSlider({
             width: `${pct}%`,
             height: "6px",
             borderRadius: "3px",
-            background: dark
-              ? "linear-gradient(90deg, rgba(176,196,175,0.5), rgba(176,196,175,0.8))"
-              : "linear-gradient(90deg, rgba(53,67,52,0.4), rgba(53,67,52,0.7))",
+            background: "var(--theme-fg-muted)",
           }}
         />
         {/* Glass thumb */}
@@ -279,7 +267,7 @@ function GelSlider({
             fontFamily: "var(--font-mono)",
             minWidth: "36px",
             textAlign: "right",
-            color: dark ? "#fff" : "#000",
+            color: "var(--theme-fg)",
           }}
         >
           {value}

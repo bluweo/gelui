@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect, type ReactNode, type CSSProperties } from "react";
 import { ArrowDown2 } from "iconsax-react";
-import { useDarkMode } from "../hooks/useDarkMode";
 
 interface AccordionItem {
   title: string;
@@ -20,13 +19,11 @@ function AccordionSection({
   content,
   isOpen,
   onToggle,
-  dark,
 }: {
   title: string;
   content: ReactNode;
   isOpen: boolean;
   onToggle: () => void;
-  dark: boolean;
 }) {
   const contentRef = useRef<HTMLDivElement>(null);
   const [height, setHeight] = useState<number>(0);
@@ -38,18 +35,16 @@ function AccordionSection({
     }
   }, [isOpen, content]);
 
-  const normalBg = dark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.03)";
-  const hoverBg = dark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.06)";
-
   return (
     <div
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
-        background: hovered ? hoverBg : normalBg,
+        background: "var(--theme-header-bg)",
         borderRadius: "var(--glass-radius-sm, 10px)",
         overflow: "hidden",
         transition: "background 0.15s ease",
+        filter: hovered ? "brightness(0.97)" : "none",
       }}
     >
       <button
@@ -66,7 +61,7 @@ function AccordionSection({
           fontSize: "14px",
           fontWeight: 600,
           fontFamily: "var(--font-ui)",
-          color: dark ? "rgba(255,255,255,0.9)" : "rgba(0,0,0,0.85)",
+          color: "var(--theme-fg)",
           textAlign: "left",
           transition: "background 0.15s ease",
         }}
@@ -80,7 +75,7 @@ function AccordionSection({
             transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
           }}
         >
-          <ArrowDown2 size={18} color={dark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.4)"} variant="Linear" />
+          <ArrowDown2 size={18} color="var(--theme-fg-muted)" variant="Linear" />
         </span>
       </button>
       <div
@@ -95,7 +90,7 @@ function AccordionSection({
           style={{
             padding: "0 16px 12px",
             fontSize: "13px",
-            color: dark ? "rgba(255,255,255,0.65)" : "rgba(0,0,0,0.6)",
+            color: "var(--theme-fg-muted)",
             lineHeight: 1.5,
           }}
         >
@@ -113,7 +108,6 @@ export function Accordion({
   className = "",
   style,
 }: AccordionProps) {
-  const dark = useDarkMode();
   const [openIndexes, setOpenIndexes] = useState<Set<number>>(
     new Set(defaultOpen),
   );
@@ -147,7 +141,6 @@ export function Accordion({
           content={item.content}
           isOpen={openIndexes.has(i)}
           onToggle={() => toggle(i)}
-          dark={dark}
         />
       ))}
     </div>

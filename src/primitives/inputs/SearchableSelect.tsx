@@ -1,5 +1,4 @@
 import { type CSSProperties, useState, useRef, useEffect } from "react";
-import { useDarkMode } from "../hooks/useDarkMode";
 import { useClickOutside } from "../hooks/useClickOutside";
 
 interface SelectOption {
@@ -24,7 +23,6 @@ export function SearchableSelect({
   className = "",
   style,
 }: SearchableSelectProps) {
-  const dark = useDarkMode();
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState("");
   const [highlightIdx, setHighlightIdx] = useState(0);
@@ -92,17 +90,11 @@ export function SearchableSelect({
           fontSize: "14px",
           fontFamily: "var(--font-body)",
           borderRadius: "var(--glass-radius-sm, 10px)",
-          border: `2px solid ${open ? (dark ? "#fff" : "#000") : "transparent"}`,
-          background: dark
-            ? "rgba(255,255,255,0.08)"
-            : "rgba(255,255,255,0.6)",
+          border: `2px solid ${open ? "var(--theme-fg)" : "transparent"}`,
+          background: "var(--theme-header-bg)",
           color: selected
-            ? dark
-              ? "#fff"
-              : "#000"
-            : dark
-              ? "rgba(255,255,255,0.4)"
-              : "rgba(0,0,0,0.4)",
+            ? "var(--theme-fg)"
+            : "var(--theme-fg-subtle)",
           cursor: "pointer",
           textAlign: "left",
           display: "flex",
@@ -139,10 +131,10 @@ export function SearchableSelect({
             right: 0,
             zIndex: 50,
             borderRadius: "var(--glass-radius-sm, 10px)",
-            background: dark ? "rgba(30,30,30,0.95)" : "rgba(255,255,255,0.95)",
+            background: "var(--theme-table-bg)",
             backdropFilter: "blur(20px)",
             WebkitBackdropFilter: "blur(20px)",
-            border: `1px solid ${dark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)"}`,
+            border: `1px solid var(--theme-divider)`,
             boxShadow: "0 8px 32px rgba(0,0,0,0.12)",
             padding: "8px",
             overflow: "hidden",
@@ -165,10 +157,8 @@ export function SearchableSelect({
                 fontFamily: "var(--font-body)",
                 border: "none",
                 borderRadius: "var(--glass-radius-sm, 8px)",
-                background: dark
-                  ? "rgba(255,255,255,0.05)"
-                  : "rgba(0,0,0,0.03)",
-                color: dark ? "#fff" : "#000",
+                background: "var(--theme-header-bg)",
+                color: "var(--theme-fg)",
                 outline: "none",
                 marginBottom: "0",
               }}
@@ -204,11 +194,9 @@ export function SearchableSelect({
                     borderRadius: "var(--glass-radius-sm, 8px)",
                     background:
                       i === highlightIdx
-                        ? dark
-                          ? "rgba(255,255,255,0.08)"
-                          : "rgba(0,0,0,0.04)"
+                        ? "var(--theme-header-bg)"
                         : "transparent",
-                    color: dark ? "rgba(255,255,255,0.8)" : "rgba(0,0,0,0.8)",
+                    color: "var(--theme-fg)",
                     fontWeight: opt.value === value ? 600 : 400,
                     cursor: "pointer",
                     textAlign: "left",
