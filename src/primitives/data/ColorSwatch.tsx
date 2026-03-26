@@ -9,6 +9,12 @@ interface ColorSwatchProps {
   style?: CSSProperties;
 }
 
+const sizeMap: Record<string, string> = {
+  sm: "32px",
+  md: "48px",
+  lg: "64px",
+};
+
 export function ColorSwatch({
   color,
   label,
@@ -17,66 +23,16 @@ export function ColorSwatch({
   className = "",
   style,
 }: ColorSwatchProps) {
-  const sizeMap: Record<string, number> = {
-    sm: 32,
-    md: 48,
-    lg: 64,
-  };
-  const dim = sizeMap[size];
-
   return (
     <div
-      className={className}
-      style={{
-        display: "inline-flex",
-        flexDirection: "column",
-        alignItems: "center",
-        gap: "6px",
-        ...style,
-      }}
+      className={`prim-swatch ${className}`}
+      style={{ "--swatch-size": sizeMap[size], ...style } as CSSProperties}
     >
-      <div
-        style={{
-          width: `${dim}px`,
-          height: `${dim}px`,
-          borderRadius: "var(--glass-radius-sm, 10px)",
-          background: color,
-          border: `1px solid var(--theme-divider)`,
-          boxShadow: "0 1px 3px rgba(0,0,0,0.08)",
-        }}
-      />
+      <div className="prim-swatch-color" style={{ background: color }} />
       {(label || showHex) && (
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: "1px",
-          }}
-        >
-          {label && (
-            <span
-              style={{
-                fontSize: "11px",
-                fontWeight: 600,
-                fontFamily: "var(--font-ui)",
-                color: "var(--theme-fg-muted)",
-              }}
-            >
-              {label}
-            </span>
-          )}
-          {showHex && (
-            <span
-              style={{
-                fontSize: "10px",
-                fontFamily: "var(--font-mono)",
-                color: "var(--theme-fg-subtle)",
-              }}
-            >
-              {color}
-            </span>
-          )}
+        <div className="prim-swatch-meta">
+          {label && <span className="prim-swatch-label">{label}</span>}
+          {showHex && <span className="prim-swatch-hex">{color}</span>}
         </div>
       )}
     </div>

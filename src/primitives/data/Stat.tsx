@@ -32,7 +32,7 @@ function TrendArrow({ direction }: { direction: "up" | "down" | "neutral" }) {
   );
 }
 
-const trendColors = {
+const trendColors: Record<string, string> = {
   up: "#34C759",
   down: "#FF3B30",
   neutral: "#8E8E93",
@@ -48,75 +48,21 @@ export function Stat({
   style,
 }: StatProps) {
   return (
-    <div
-      className={className}
-      style={{
-        padding: "20px",
-        borderRadius: "var(--glass-radius-sm, 10px)",
-        background: "var(--theme-header-bg)",
-        backdropFilter: "blur(12px)",
-        WebkitBackdropFilter: "blur(12px)",
-        border: `1px solid var(--theme-divider)`,
-        fontFamily: "var(--font-body)",
-        display: "flex",
-        flexDirection: "column",
-        gap: "8px",
-        ...style,
-      }}
-    >
-      {icon && (
-        <span
-          style={{
-            display: "flex",
-            color: "var(--theme-fg-subtle)",
-            marginBottom: "4px",
-          }}
-        >
-          {icon}
-        </span>
-      )}
-      <div style={{ display: "flex", alignItems: "baseline", gap: "8px" }}>
-        <span
-          style={{
-            fontSize: "32px",
-            fontWeight: 700,
-            fontFamily: "var(--font-ui)",
-            color: "var(--theme-fg)",
-            lineHeight: 1,
-            fontVariantNumeric: "tabular-nums",
-          }}
-        >
-          {value}
-        </span>
+    <div className={`prim-stat ${className}`} style={style}>
+      {icon && <span className="prim-stat-icon">{icon}</span>}
+      <div className="flex items-baseline gap-2">
+        <span className="prim-stat-value">{value}</span>
         {trend && (
           <span
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "2px",
-              fontSize: "13px",
-              fontWeight: 600,
-              fontFamily: "var(--font-mono)",
-              color: trendColors[trend],
-            }}
+            className="prim-stat-trend"
+            style={{ color: trendColors[trend] }}
           >
             <TrendArrow direction={trend} />
             {trendValue}
           </span>
         )}
       </div>
-      <span
-        style={{
-          fontSize: "12px",
-          fontWeight: 500,
-          fontFamily: "var(--font-ui)",
-          textTransform: "uppercase",
-          letterSpacing: "0.04em",
-          color: "var(--theme-fg-subtle)",
-        }}
-      >
-        {label}
-      </span>
+      <span className="prim-stat-label">{label}</span>
     </div>
   );
 }

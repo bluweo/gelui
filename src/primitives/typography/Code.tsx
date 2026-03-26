@@ -15,38 +15,13 @@ export function Code({
 }: CodeProps) {
   if (inline) {
     return (
-      <code
-        className={className}
-        style={{
-          fontSize: "var(--type-code-size, 13px)",
-          fontWeight: "var(--type-code-weight, 500)" as any,
-          lineHeight: "var(--type-code-lh, 1.5)",
-          fontFamily: "var(--font-mono)",
-          background: "var(--theme-divider)",
-          paddingTop: 2, paddingBottom: 2, paddingLeft: 6, paddingRight: 6,
-          borderRadius: "4px",
-          ...style,
-        }}
-      >
+      <code className={`prim-code-inline ${className}`} style={style}>
         {children}
       </code>
     );
   }
   return (
-    <pre
-      className={className}
-      style={{
-        fontSize: "13px",
-        fontFamily: "var(--font-mono)",
-        background: "#1a1a1a",
-        color: "#e0e0e0",
-        padding: "16px",
-        borderRadius: "var(--glass-radius-sm, 10px)",
-        overflow: "auto",
-        margin: 0,
-        ...style,
-      }}
-    >
+    <pre className={`prim-code-block ${className}`} style={style}>
       <code>{highlightedChildren ?? children}</code>
     </pre>
   );

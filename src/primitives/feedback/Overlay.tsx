@@ -18,18 +18,9 @@ export function Overlay({
   if (!open) return null;
   return (
     <div
-      className={className}
+      className={`prim-overlay ${blur ? "prim-overlay-blur" : ""} ${className}`}
       onClick={onClick}
-      style={{
-        position: "fixed",
-        inset: 0,
-        zIndex: 998,
-        background: "rgba(0,0,0,0.4)",
-        backdropFilter: blur ? "blur(8px)" : undefined,
-        WebkitBackdropFilter: blur ? "blur(8px)" : undefined,
-        transition: "opacity 200ms ease",
-        ...style,
-      }}
+      style={style}
     />
   );
 }

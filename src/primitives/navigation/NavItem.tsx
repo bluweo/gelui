@@ -24,11 +24,7 @@ export function NavItem({
       data-active={active}
       style={style}
     >
-      {icon && (
-        <span style={{ display: "flex", flexShrink: 0, opacity: active ? 1 : 0.6 }}>
-          {icon}
-        </span>
-      )}
+      {icon && <span className="prim-nav-icon">{icon}</span>}
       {label}
     </button>
   );

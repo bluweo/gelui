@@ -15,38 +15,13 @@ export function Blockquote({
   className = "",
   style,
 }: BlockquoteProps) {
-
   return (
-    <blockquote
-      suppressHydrationWarning
-      className={className}
-      style={{
-        margin: 0,
-        paddingTop: 12, paddingRight: 0, paddingBottom: 12, paddingLeft: 20,
-        borderLeft: "4px solid var(--theme-fg-muted)",
-        ...style,
-      }}
-    >
-      <div
-        className="type-body"
-        style={{
-          fontStyle: "italic",
-          color: "var(--theme-fg-muted)",
-          fontFamily: "var(--font-body)",
-        }}
-      >
+    <blockquote className={`prim-blockquote ${className}`} style={style}>
+      <div className="prim-blockquote-body type-body">
         {children}
       </div>
       {(author || source) && (
-        <footer
-          className="type-caption"
-          style={{
-            marginTop: "8px",
-            color: "var(--theme-fg-subtle)",
-            fontFamily: "var(--font-ui)",
-            fontStyle: "normal",
-          }}
-        >
+        <footer className="prim-blockquote-footer type-caption">
           {author && <span>&mdash; {author}</span>}
           {author && source && <span>, </span>}
           {source && (

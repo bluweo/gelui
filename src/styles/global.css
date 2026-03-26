@@ -2807,3 +2807,373 @@ code:not([data-font-preview]), pre:not([data-font-preview]), kbd, samp { font-fa
   }
 }
 
+/* ═══════════════════════════════════════════════
+   v0.33.0 — DATA PRIMITIVES SSR-safe migration
+   Table, Tag, Badge, Stat, Avatar, ColorSwatch,
+   EmptyState, List, Code, Blockquote, Overlay, NavItem
+   ═══════════════════════════════════════════════ */
+
+/* ── Table ── */
+@utility prim-table-wrap {
+  border-radius: var(--glass-radius-sm, 10px);
+  overflow: hidden;
+  border: 1px solid var(--theme-divider);
+  background: var(--theme-table-bg);
+}
+
+@utility prim-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-body);
+  font-size: 13px;
+
+  &[data-compact] {
+    font-size: 12px;
+  }
+}
+
+@utility prim-table-th {
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 600;
+  font-family: var(--font-ui);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--theme-fg-subtle);
+  border-bottom: 1px solid var(--theme-divider);
+  background: var(--theme-header-bg);
+
+  [data-compact] > thead > tr > & {
+    padding: 8px 12px;
+  }
+}
+
+@utility prim-table-td {
+  padding: 12px 16px;
+  color: var(--theme-fg);
+  border-bottom: 1px solid var(--theme-divider);
+
+  tr:last-child > & {
+    border-bottom: none;
+  }
+
+  [data-compact] > tbody > tr > & {
+    padding: 8px 12px;
+  }
+}
+
+@utility prim-table-tr {
+  transition: background 120ms ease;
+
+  &:hover {
+    background: var(--theme-header-bg);
+  }
+
+  &[data-striped]:nth-child(even) {
+    background: var(--theme-header-bg);
+  }
+}
+
+/* ── Tag ── */
+@utility prim-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: var(--glass-radius-pill, 100px);
+  background: var(--tag-bg, var(--theme-divider));
+  color: var(--tag-text, var(--theme-fg));
+
+  &[data-size="sm"] {
+    padding: 2px 8px;
+  }
+}
+
+@utility prim-tag-remove {
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+  font-size: 14px;
+  line-height: 1;
+  color: inherit;
+  opacity: 0.6;
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  [data-size="sm"] > & {
+    font-size: 12px;
+  }
+}
+
+/* ── Badge ── */
+@utility prim-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 8px;
+  border-radius: 100px;
+  background: var(--badge-bg, var(--theme-badge-bg));
+  color: var(--badge-text, var(--theme-badge-text));
+}
+
+/* ── Stat ── */
+@utility prim-stat {
+  padding: 20px;
+  border-radius: var(--glass-radius-sm, 10px);
+  background: var(--theme-header-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--theme-divider);
+  font-family: var(--font-body);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+@utility prim-stat-icon {
+  display: flex;
+  color: var(--theme-fg-subtle);
+  margin-bottom: 4px;
+}
+
+@utility prim-stat-value {
+  font-size: 32px;
+  font-weight: 700;
+  font-family: var(--font-ui);
+  color: var(--theme-fg);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+@utility prim-stat-trend {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--font-mono);
+}
+
+@utility prim-stat-label {
+  font-size: 12px;
+  font-weight: 500;
+  font-family: var(--font-ui);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--theme-fg-subtle);
+}
+
+/* ── Avatar ── */
+@utility prim-avatar {
+  position: relative;
+  width: var(--avatar-size, 40px);
+  height: var(--avatar-size, 40px);
+  flex-shrink: 0;
+}
+
+@utility prim-avatar-img {
+  width: var(--avatar-size, 40px);
+  height: var(--avatar-size, 40px);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: calc(var(--avatar-size, 40px) * 0.35);
+  font-weight: 600;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+}
+
+@utility prim-avatar-dot {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border-radius: 50%;
+  border: 2px solid var(--theme-table-bg, #fff);
+  width: var(--avatar-dot, 10px);
+  height: var(--avatar-dot, 10px);
+}
+
+/* ── ColorSwatch ── */
+@utility prim-swatch {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+@utility prim-swatch-color {
+  border-radius: var(--glass-radius-sm, 10px);
+  border: 1px solid var(--theme-divider);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  width: var(--swatch-size, 48px);
+  height: var(--swatch-size, 48px);
+}
+
+@utility prim-swatch-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+}
+
+@utility prim-swatch-label {
+  font-size: 11px;
+  font-weight: 600;
+  font-family: var(--font-ui);
+  color: var(--theme-fg-muted);
+}
+
+@utility prim-swatch-hex {
+  font-size: 10px;
+  font-family: var(--font-mono);
+  color: var(--theme-fg-subtle);
+}
+
+/* ── EmptyState ── */
+@utility prim-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 48px 24px;
+  gap: 12px;
+  font-family: var(--font-body);
+}
+
+@utility prim-empty-icon {
+  display: flex;
+  color: var(--theme-fg-faint);
+  margin-bottom: 4px;
+  font-size: 40px;
+}
+
+@utility prim-empty-title {
+  font-size: 16px;
+  font-weight: 600;
+  font-family: var(--font-ui);
+  color: var(--theme-fg-muted);
+}
+
+@utility prim-empty-desc {
+  font-size: 13px;
+  color: var(--theme-fg-subtle);
+  max-width: 320px;
+  line-height: 1.5;
+}
+
+@utility prim-empty-action {
+  margin-top: 8px;
+}
+
+/* ── List ── */
+@utility prim-list {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  gap: var(--list-gap, 8px);
+}
+
+@utility prim-list-item {
+  color: var(--theme-fg-muted);
+  font-family: var(--font-body);
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+@utility prim-list-bullet {
+  flex-shrink: 0;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--theme-fg-muted);
+  margin-top: 7px;
+  align-self: flex-start;
+}
+
+@utility prim-list-number {
+  flex-shrink: 0;
+  min-width: 18px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--theme-fg-muted);
+}
+
+/* ── Code ── */
+@utility prim-code-inline {
+  font-size: var(--type-code-size, 13px);
+  font-weight: var(--type-code-weight, 500);
+  line-height: var(--type-code-lh, 1.5);
+  font-family: var(--font-mono);
+  background: var(--theme-divider);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+@utility prim-code-block {
+  font-size: 13px;
+  font-family: var(--font-mono);
+  background: var(--theme-code-bg);
+  color: var(--theme-code-text);
+  padding: 16px;
+  border-radius: var(--glass-radius-sm, 10px);
+  overflow: auto;
+  margin: 0;
+}
+
+/* ── Blockquote ── */
+@utility prim-blockquote {
+  margin: 0;
+  padding: 12px 0 12px 20px;
+  border-left: 4px solid var(--theme-fg-muted);
+}
+
+@utility prim-blockquote-body {
+  font-style: italic;
+  color: var(--theme-fg-muted);
+  font-family: var(--font-body);
+}
+
+@utility prim-blockquote-footer {
+  margin-top: 8px;
+  color: var(--theme-fg-subtle);
+  font-family: var(--font-ui);
+  font-style: normal;
+}
+
+/* ── Overlay ── */
+@utility prim-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 998;
+  background: var(--theme-overlay-bg);
+  transition: opacity 200ms ease;
+}
+
+@utility prim-overlay-blur {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* ── NavItem icon ── */
+@utility prim-nav-icon {
+  display: flex;
+  flex-shrink: 0;
+  opacity: 0.6;
+
+  [data-active="true"] > & {
+    opacity: 1;
+  }
+}
+
