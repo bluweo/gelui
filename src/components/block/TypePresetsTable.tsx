@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { PresetEditorModal } from "@/components/modal/PresetEditorModal";
-import { useAppearance } from "@/components/context/AppearanceContext";
+// No useAppearance — this island renders outside AppearanceProvider during SSR
 
 interface TypePreset {
   name: string;
@@ -197,8 +197,15 @@ export function TypePresetsTable() {
   // Restore scale from localStorage
   const [scale, setScale] = useState<ScaleKey>("medium");
   const [presets, setPresets] = useState(() => scalePresets("medium"));
-  const { theme } = useAppearance();
-  const isDark = theme === "dark";
+  // Detect dark mode safely (no context needed, works during SSR)
+  const [isDark, setIsDark] = useState(false);
+  useEffect(() => {
+    const check = () => setIsDark(document.documentElement.getAttribute("data-theme") === "dark");
+    check();
+    const obs = new MutationObserver(check);
+    obs.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+    return () => obs.disconnect();
+  }, []);
   const [editingIdx, setEditingIdx] = useState<number | null>(null);
 
   // Restore presets from localStorage AFTER hydration (not during SSR)
