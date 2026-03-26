@@ -41,8 +41,8 @@ function CodePreview({ sample, size, weight, lh, isDark }: { sample: string; siz
     <div
       className="rounded-[8px] px-3.5 py-2.5 overflow-hidden"
       style={{
-        background: isDark ? "#1a1a1a" : "#ffffff",
-        border: `1px solid ${isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.08)"}`,
+        background: "var(--theme-table-bg)",
+        border: "1px solid var(--theme-divider)",
       }}
     >
       <code
@@ -284,8 +284,8 @@ export function TypePresetsTable() {
   const getTagStyle = (tag: string) => {
     const tc = TAG_COLORS[tag] ?? { bg: "#ececec", darkBg: "#3a3a3a", text: "#505050", darkText: "#d0d0d0" };
     return {
-      background: isDark ? tc.darkBg : tc.bg,
-      color: isDark ? tc.darkText : tc.text,
+      background: tc.bg,
+      color: tc.text,
     };
   };
 
@@ -303,9 +303,8 @@ export function TypePresetsTable() {
   // Get a visible tint of the tag color for hover
   const getRowHoverBg = (tag: string) => {
     const tc = TAG_COLORS[tag];
-    if (!tc) return isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.05)";
-    // Use the tag color directly — it's already a light/dark tint
-    return isDark ? tc.darkBg : tc.bg;
+    if (!tc) return "var(--theme-header-bg)";
+    return tc.bg;
   };
 
   return (
@@ -316,8 +315,8 @@ export function TypePresetsTable() {
         <div
           className="flex items-end rounded-full overflow-hidden"
           style={{
-            background: isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.05)",
-            border: `1px solid ${isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)"}`,
+            background: "var(--theme-header-bg)",
+            border: "1px solid var(--theme-divider)",
             padding: "2px",
           }}
         >
@@ -334,8 +333,8 @@ export function TypePresetsTable() {
                   width: 30,
                   height: 30,
                   borderRadius: 100,
-                  background: isActive ? (isDark ? "rgba(255,255,255,0.9)" : "rgba(0,0,0,0.85)") : "transparent",
-                  color: isActive ? (isDark ? "#000" : "#fff") : (isDark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.35)"),
+                  background: isActive ? "var(--theme-bg-solid)" : "transparent",
+                  color: isActive ? "var(--theme-fg-on-solid)" : "var(--theme-fg-faint)",
                   fontSize,
                   fontWeight: isActive ? 700 : 600,
                   fontFamily: "var(--font-heading)",
@@ -354,9 +353,9 @@ export function TypePresetsTable() {
           onClick={() => { setScale("medium"); setPresets(scalePresets("medium")); }}
           className="flex items-center gap-1.5 px-3.5 py-2 rounded-full text-[11px] font-[550] transition-all duration-200 cursor-pointer hover:scale-105"
           style={{
-            background: isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.05)",
-            color: isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.45)",
-            border: `1px solid ${isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)"}`,
+            background: "var(--theme-header-bg)",
+            color: "var(--theme-fg-muted)",
+            border: "1px solid var(--theme-divider)",
             opacity: isModified ? 1 : 0.4,
           }}
           disabled={!isModified}
@@ -365,22 +364,22 @@ export function TypePresetsTable() {
         </button>
       </div>
 
-      <div data-type-presets-table className="flex flex-col rounded-[var(--glass-radius-sm)] overflow-hidden" style={{ background: isDark ? "rgba(0,0,0,0.6)" : "rgba(255,255,255,0.95)" }}>
+      <div data-type-presets-table className="flex flex-col rounded-[var(--glass-radius-sm)] overflow-hidden" style={{ background: "var(--theme-table-bg)" }}>
         {/* Header */}
         <div
           className="flex items-center px-4 py-2.5 gap-4"
           style={{
-            background: isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)",
-            borderBottom: `1px solid ${isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.06)"}`,
+            background: "var(--theme-header-bg)",
+            borderBottom: "1px solid var(--theme-divider)",
           }}
         >
-          <span className="w-[70px] shrink-0 text-[10px] font-semibold uppercase tracking-widest" style={{ color: isDark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.45)" }}>Preset</span>
-          <span className="w-[55px] shrink-0 text-[10px] font-semibold uppercase tracking-widest hidden md:block" style={{ color: isDark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.45)" }}>Tag</span>
-          <span className="flex-1 text-[10px] font-semibold uppercase tracking-widest" style={{ color: isDark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.45)" }}>Preview</span>
-          <span className="w-[50px] text-[10px] font-semibold uppercase tracking-widest text-right hidden sm:block" style={{ color: isDark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.45)" }}>Size</span>
-          <span className="w-[50px] text-[10px] font-semibold uppercase tracking-widest text-right hidden sm:block" style={{ color: isDark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.45)" }}>Weight</span>
-          <span className="w-[65px] text-[10px] font-semibold uppercase tracking-widest text-right hidden md:block" style={{ color: isDark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.45)" }}>Line Height</span>
-          <span className="w-[60px] text-[10px] font-semibold uppercase tracking-widest text-right hidden md:block" style={{ color: isDark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.45)" }}>Role</span>
+          <span className="w-[70px] shrink-0 text-[10px] font-semibold uppercase tracking-widest" style={{ color: "var(--theme-fg-faint)" }}>Preset</span>
+          <span className="w-[55px] shrink-0 text-[10px] font-semibold uppercase tracking-widest hidden md:block" style={{ color: "var(--theme-fg-faint)" }}>Tag</span>
+          <span className="flex-1 text-[10px] font-semibold uppercase tracking-widest" style={{ color: "var(--theme-fg-faint)" }}>Preview</span>
+          <span className="w-[50px] text-[10px] font-semibold uppercase tracking-widest text-right hidden sm:block" style={{ color: "var(--theme-fg-faint)" }}>Size</span>
+          <span className="w-[50px] text-[10px] font-semibold uppercase tracking-widest text-right hidden sm:block" style={{ color: "var(--theme-fg-faint)" }}>Weight</span>
+          <span className="w-[65px] text-[10px] font-semibold uppercase tracking-widest text-right hidden md:block" style={{ color: "var(--theme-fg-faint)" }}>Line Height</span>
+          <span className="w-[60px] text-[10px] font-semibold uppercase tracking-widest text-right hidden md:block" style={{ color: "var(--theme-fg-faint)" }}>Role</span>
           <span className="w-[24px] shrink-0" />
         </div>
 
@@ -388,26 +387,18 @@ export function TypePresetsTable() {
         {presets.map((t, idx) => (
           <div
             key={t.name}
-            className="type-preset-row group flex items-center px-4 lg:px-6 py-3 gap-4 transition-all duration-200 ease-out cursor-pointer"
+            className="type-preset-row group flex items-center px-4 lg:px-6 py-3 gap-4 transition-all duration-200 ease-out cursor-pointer hover:!bg-[var(--theme-header-bg)]"
             onClick={() => setEditingIdx(idx)}
             style={{
-              background: idx % 2 === 0 ? (isDark ? "rgba(0,0,0,0.3)" : "rgba(255,255,255,0.7)") : "transparent",
-              borderBottom: `1px solid ${isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.08)"}`,
+              background: idx % 2 === 0 ? "var(--theme-header-bg)" : "transparent",
+              borderBottom: "1px solid var(--theme-divider)",
               ...(idx === 0 ? { paddingTop: "1.25rem" } : {}),
               ...(idx === presets.length - 1 ? { paddingBottom: "1.25rem" } : {}),
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.06)";
-              e.currentTarget.style.borderBottom = `2px solid ${isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.4)"}`;
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = idx % 2 === 0 ? (isDark ? "rgba(0,0,0,0.3)" : "rgba(255,255,255,0.7)") : "transparent";
-              e.currentTarget.style.borderBottom = `1px solid ${isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.08)"}`;
             }}
           >
             {/* Name */}
             <div className="w-[70px] shrink-0">
-              <span className="text-[11px] font-semibold transition-colors duration-200" style={{ color: isDark ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.75)" }}>{t.name}</span>
+              <span className="text-[11px] font-semibold transition-colors duration-200" style={{ color: "var(--theme-fg-muted)" }}>{t.name}</span>
             </div>
 
             {/* Tag */}
@@ -439,7 +430,7 @@ export function TypePresetsTable() {
                     lineHeight: t.lh,
                     letterSpacing: t.ls,
                     fontFamily: getFontFamily(t.role),
-                    color: t.isLink ? (isDark ? "#97AD96" : "#354334") : (isDark ? "rgba(255,255,255,0.8)" : "rgba(0,0,0,0.8)"),
+                    color: t.isLink ? "var(--theme-fg-muted)" : "var(--theme-fg)",
                   }}
                 >
                   {t.sample}
@@ -449,17 +440,17 @@ export function TypePresetsTable() {
 
             {/* Size (plain text) */}
             <div className="w-[50px] text-right hidden sm:block">
-              <span className="text-[11px] font-mono" style={{ color: isDark ? "rgba(255,255,255,0.35)" : "rgba(0,0,0,0.4)" }}>{t.size}</span>
+              <span className="text-[11px] font-mono" style={{ color: "var(--theme-fg-subtle)" }}>{t.size}</span>
             </div>
 
             {/* Weight (plain text) */}
             <div className="w-[50px] text-right hidden sm:block">
-              <span className="text-[11px] font-mono" style={{ color: isDark ? "rgba(255,255,255,0.35)" : "rgba(0,0,0,0.4)" }}>{t.weight}</span>
+              <span className="text-[11px] font-mono" style={{ color: "var(--theme-fg-subtle)" }}>{t.weight}</span>
             </div>
 
             {/* Line Height (plain text) */}
             <div className="w-[65px] text-right hidden md:block">
-              <span className="text-[11px] font-mono" style={{ color: isDark ? "rgba(255,255,255,0.35)" : "rgba(0,0,0,0.4)" }}>{t.lh}</span>
+              <span className="text-[11px] font-mono" style={{ color: "var(--theme-fg-subtle)" }}>{t.lh}</span>
             </div>
 
             {/* Role */}
@@ -467,8 +458,8 @@ export function TypePresetsTable() {
               <span
                 className="text-[10px] font-semibold uppercase tracking-wide px-2 py-0.5 rounded-full"
                 style={{
-                  background: isDark ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.8)",
-                  color: isDark ? "rgba(255,255,255,0.8)" : "#fff",
+                  background: "var(--theme-bg-solid)",
+                  color: "var(--theme-fg-on-solid)",
                 }}
               >
                 {t.role}

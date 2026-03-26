@@ -128,10 +128,10 @@ export function SectionNav() {
   if (!visible || sections.length === 0) return null;
 
   const isDark = contrast === "dark";
-  const textColor = isDark ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.4)";
-  const activeTextColor = isDark ? "rgba(255,255,255,0.88)" : "rgba(0,0,0,0.75)";
-  const lineColor = isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)";
-  const dotActiveColor = isDark ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.55)";
+  const textColor = "var(--theme-fg-faint)";
+  const activeTextColor = "var(--theme-fg)";
+  const lineColor = "var(--theme-divider)";
+  const dotActiveColor = "var(--theme-fg-muted)";
 
   return (
     <nav

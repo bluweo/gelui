@@ -265,7 +265,6 @@ export function FontPickerModal() {
 
   if (!mounted || !fontPickerOpen) return null;
 
-  const isDark = theme === "dark";
   const isMono = activeFontRole === "mono";
   const activeFonts = isMono
     ? MONO_FONTS
@@ -277,7 +276,7 @@ export function FontPickerModal() {
       className={`fixed inset-0 z-[900] flex ${backdropDragged ? "items-start justify-start p-0" : "items-center justify-center"}`}
       onClick={(e) => { if (e.target === e.currentTarget) closeFontPicker(); }}
       style={{
-        background: isDark ? "rgba(0,0,0,0.4)" : "rgba(0,0,0,0.2)",
+        background: "rgba(0,0,0,0.2)",
         backdropFilter: "blur(var(--glass-blur-overlay, 12px))",
         WebkitBackdropFilter: "blur(var(--glass-blur-overlay, 12px))",
         animation: "backdrop-fade-in 0.2s ease-out",

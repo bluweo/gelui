@@ -279,8 +279,8 @@ function ComponentPreview({ id, isDark }: { id: string; isDark: boolean }) {
         <Primitives.Badge>After (32px gap)</Primitives.Badge>
       </div>
     ),
-    "modal": <span style={{ color: isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.5)", fontSize: 12 }}>Use &quot;Open Full Preview&quot; below</span>,
-    "overlay": <span style={{ color: isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.5)", fontSize: 12 }}>Use &quot;Open Full Preview&quot; below</span>,
+    "modal": <span style={{ color: "var(--theme-fg-muted)", fontSize: 12 }}>Use &quot;Open Full Preview&quot; below</span>,
+    "overlay": <span style={{ color: "var(--theme-fg-muted)", fontSize: 12 }}>Use &quot;Open Full Preview&quot; below</span>,
     "tooltip": <Primitives.Tooltip content="Hello!"><Primitives.Badge>Hover me</Primitives.Badge></Primitives.Tooltip>,
     "searchable-select": <Primitives.SearchableSelect options={[{value:"1",label:"Apple"},{value:"2",label:"Banana"},{value:"3",label:"Cherry"}]} placeholder="Pick a fruit..." />,
     // Button variants
@@ -297,9 +297,9 @@ function ComponentPreview({ id, isDark }: { id: string; isDark: boolean }) {
     // Surface variants
     "glass-surface": <Primitives.Surface level={1} style={{ padding: 16, minHeight: 50 }}><Primitives.Text size="sm">Glass surface</Primitives.Text></Primitives.Surface>,
     "gel-surface": <div className="gel-glass" style={{ padding: 16, minHeight: 50, borderRadius: "var(--glass-radius-sm, 8px)" }}><Primitives.Text size="sm">Gel surface</Primitives.Text></div>,
-    "solid-surface": <div style={{ padding: 16, minHeight: 50, borderRadius: "var(--glass-radius-sm, 8px)", background: isDark ? "#1a1a1a" : "#fff" }}><Primitives.Text size="sm">Solid surface</Primitives.Text></div>,
+    "solid-surface": <div style={{ padding: 16, minHeight: 50, borderRadius: "var(--glass-radius-sm, 8px)", background: "var(--theme-table-bg)" }}><Primitives.Text size="sm">Solid surface</Primitives.Text></div>,
     "ds-card": <Primitives.Card variant="glass" style={{ padding: 12 }}><Primitives.Text size="sm">DSCard</Primitives.Text></Primitives.Card>,
-    "frost-zone": <div style={{ position: "relative", height: 60, borderRadius: 8, overflow: "hidden", border: `1px solid ${isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.06)"}` }}><div className="ds-card-frost" style={{ position: "absolute", inset: 0 }} /><div style={{ position: "relative", padding: 12 }}><Primitives.Text size="sm">Frost zone overlay</Primitives.Text></div></div>,
+    "frost-zone": <div style={{ position: "relative", height: 60, borderRadius: 8, overflow: "hidden", border: "1px solid var(--theme-divider)" }}><div className="ds-card-frost" style={{ position: "absolute", inset: 0 }} /><div style={{ position: "relative", padding: 12 }}><Primitives.Text size="sm">Frost zone overlay</Primitives.Text></div></div>,
     // Input variants
     "text-input": <Primitives.Input placeholder="Enter your name..." />,
     // Divider variants
@@ -340,31 +340,31 @@ function ComponentPreview({ id, isDark }: { id: string; isDark: boolean }) {
     "progress-bar": <Primitives.Progress value={65} />,
     "skeleton-loader": <Primitives.Skeleton width="100%" height={40} />,
     // Elevation
-    "elevation-flat": <div style={{ padding: 12, borderRadius: 8, background: isDark ? "#222" : "#fff", boxShadow: "none" }}><Primitives.Text size="sm">Flat</Primitives.Text></div>,
-    "elevation-raised": <div style={{ padding: 12, borderRadius: 8, background: isDark ? "#222" : "#fff", boxShadow: "0 2px 8px rgba(0,0,0,0.1)" }}><Primitives.Text size="sm">Raised</Primitives.Text></div>,
-    "elevation-floating": <div style={{ padding: 12, borderRadius: 8, background: isDark ? "#222" : "#fff", boxShadow: "0 8px 32px rgba(0,0,0,0.15)" }}><Primitives.Text size="sm">Floating</Primitives.Text></div>,
+    "elevation-flat": <div style={{ padding: 12, borderRadius: 8, background: "var(--theme-table-bg)", boxShadow: "none" }}><Primitives.Text size="sm">Flat</Primitives.Text></div>,
+    "elevation-raised": <div style={{ padding: 12, borderRadius: 8, background: "var(--theme-table-bg)", boxShadow: "0 2px 8px rgba(0,0,0,0.1)" }}><Primitives.Text size="sm">Raised</Primitives.Text></div>,
+    "elevation-floating": <div style={{ padding: 12, borderRadius: 8, background: "var(--theme-table-bg)", boxShadow: "0 8px 32px rgba(0,0,0,0.15)" }}><Primitives.Text size="sm">Floating</Primitives.Text></div>,
     // Higher-level components (no inline preview)
-    "ds-nav": <span style={{ color: isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.4)", fontSize: 11 }}>Page-level component — see nav bar above</span>,
-    "ds-footer": <span style={{ color: isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.4)", fontSize: 11 }}>Page-level component — see footer below</span>,
-    "ds-shell": <span style={{ color: isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.4)", fontSize: 11 }}>Page-level shell — wraps all pages</span>,
-    "appearance-modal": <span style={{ color: isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.4)", fontSize: 11 }}>Right-click → Appearance</span>,
-    "context-menu": <span style={{ color: isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.4)", fontSize: 11 }}>Right-click anywhere to see</span>,
-    "background-picker": <span style={{ color: isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.4)", fontSize: 11 }}>Right-click → Background</span>,
-    "font-picker-modal": <span style={{ color: isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.4)", fontSize: 11 }}>Tokens → Font Families → ⚙</span>,
-    "preset-editor-modal": <span style={{ color: isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.4)", fontSize: 11 }}>Primitives → Type Presets → click row</span>,
-    "section-nav": <span style={{ color: isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.4)", fontSize: 11 }}>Side navigation — visible on right</span>,
-    "features-grid": <span style={{ color: isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.4)", fontSize: 11 }}>Overview → Features block</span>,
-    "type-presets-table": <span style={{ color: isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.4)", fontSize: 11 }}>Primitives → Type Presets block</span>,
-    "liquid-glass-filter": <span style={{ color: isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.4)", fontSize: 11 }}>SVG filter — applied globally</span>,
-    "drawer": <span style={{ color: isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.4)", fontSize: 11 }}>Planned — not yet implemented</span>,
-    "popover": <span style={{ color: isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.4)", fontSize: 11 }}>Planned — not yet implemented</span>,
+    "ds-nav": <span style={{ color: "var(--theme-fg-muted)", fontSize: 11 }}>Page-level component — see nav bar above</span>,
+    "ds-footer": <span style={{ color: "var(--theme-fg-muted)", fontSize: 11 }}>Page-level component — see footer below</span>,
+    "ds-shell": <span style={{ color: "var(--theme-fg-muted)", fontSize: 11 }}>Page-level shell — wraps all pages</span>,
+    "appearance-modal": <span style={{ color: "var(--theme-fg-muted)", fontSize: 11 }}>Right-click → Appearance</span>,
+    "context-menu": <span style={{ color: "var(--theme-fg-muted)", fontSize: 11 }}>Right-click anywhere to see</span>,
+    "background-picker": <span style={{ color: "var(--theme-fg-muted)", fontSize: 11 }}>Right-click → Background</span>,
+    "font-picker-modal": <span style={{ color: "var(--theme-fg-muted)", fontSize: 11 }}>Tokens → Font Families → ⚙</span>,
+    "preset-editor-modal": <span style={{ color: "var(--theme-fg-muted)", fontSize: 11 }}>Primitives → Type Presets → click row</span>,
+    "section-nav": <span style={{ color: "var(--theme-fg-muted)", fontSize: 11 }}>Side navigation — visible on right</span>,
+    "features-grid": <span style={{ color: "var(--theme-fg-muted)", fontSize: 11 }}>Overview → Features block</span>,
+    "type-presets-table": <span style={{ color: "var(--theme-fg-muted)", fontSize: 11 }}>Primitives → Type Presets block</span>,
+    "liquid-glass-filter": <span style={{ color: "var(--theme-fg-muted)", fontSize: 11 }}>SVG filter — applied globally</span>,
+    "drawer": <span style={{ color: "var(--theme-fg-muted)", fontSize: 11 }}>Planned — not yet implemented</span>,
+    "popover": <span style={{ color: "var(--theme-fg-muted)", fontSize: 11 }}>Planned — not yet implemented</span>,
     // Components
     "view-source-modal": (
       <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-        <div style={{ display: "flex", gap: 6, fontSize: 11, fontFamily: "var(--font-mono)", color: isDark ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.5)" }}>
-          <span style={{ padding: "2px 8px", borderRadius: 6, background: isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.04)" }}>Source</span>
-          <span style={{ padding: "2px 8px", borderRadius: 6, background: isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.04)" }}>Components</span>
-          <span style={{ padding: "2px 8px", borderRadius: 6, background: isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.04)" }}>Impl</span>
+        <div style={{ display: "flex", gap: 6, fontSize: 11, fontFamily: "var(--font-mono)", color: "var(--theme-fg-muted)" }}>
+          <span style={{ padding: "2px 8px", borderRadius: 6, background: "var(--theme-header-bg)" }}>Source</span>
+          <span style={{ padding: "2px 8px", borderRadius: 6, background: "var(--theme-header-bg)" }}>Components</span>
+          <span style={{ padding: "2px 8px", borderRadius: 6, background: "var(--theme-header-bg)" }}>Impl</span>
         </div>
         <div style={{ height: 36, borderRadius: 6, background: "#1a1a1a", display: "flex", alignItems: "center", padding: "0 12px" }}>
           <span style={{ fontFamily: "var(--font-mono)", fontSize: 10, color: "#ce93d8" }}>import</span>
@@ -381,18 +381,18 @@ function ComponentPreview({ id, isDark }: { id: string; isDark: boolean }) {
         <div style={{
           width: 28, height: 28, borderRadius: "50%",
           display: "flex", alignItems: "center", justifyContent: "center",
-          background: isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)",
-          border: `1px solid ${isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.06)"}`,
+          background: "var(--theme-header-bg)",
+          border: "1px solid var(--theme-divider)",
         }}>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.4)"} strokeWidth="1.5" strokeLinecap="round"><polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" /></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--theme-fg-muted)" strokeWidth="1.5" strokeLinecap="round"><polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" /></svg>
         </div>
-        <span style={{ fontSize: 11, color: isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.4)" }}>Click to view source</span>
+        <span style={{ fontSize: 11, color: "var(--theme-fg-muted)" }}>Click to view source</span>
       </div>
     ),
     // New Tier 1+2 primitives
     "alert": <AlertPreview />,
-    "toast": <span style={{ color: isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.4)", fontSize: 11 }}>Click "Open Full Preview" to see Toast demo</span>,
-    "confirm-dialog": <span style={{ color: isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.4)", fontSize: 11 }}>Click "Open Full Preview" to see dialog</span>,
+    "toast": <span style={{ color: "var(--theme-fg-muted)", fontSize: 11 }}>Click "Open Full Preview" to see Toast demo</span>,
+    "confirm-dialog": <span style={{ color: "var(--theme-fg-muted)", fontSize: 11 }}>Click "Open Full Preview" to see dialog</span>,
     "table": (
       <Primitives.Table
         columns={[{ key: "name", label: "Name" }, { key: "role", label: "Role" }]}
@@ -430,7 +430,7 @@ function ComponentPreview({ id, isDark }: { id: string; isDark: boolean }) {
     "tag-input": <TagInputPreview />,
     "pagination": <PaginationPreview />,
     "stepper": <Primitives.Stepper steps={["Info", "Review", "Done"]} currentStep={1} />,
-    "back-to-top": <span style={{ color: isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.4)", fontSize: 11 }}>Floating button — visible when scrolling</span>,
+    "back-to-top": <span style={{ color: "var(--theme-fg-muted)", fontSize: 11 }}>Floating button — visible when scrolling</span>,
     "accordion": <Primitives.Accordion items={[{ title: "What is GelUI?", content: "A glassmorphism design system" }, { title: "How to install?", content: "npm install gelui" }]} />,
     "scroll-area": (
       <Primitives.ScrollArea maxHeight={80}>
@@ -531,15 +531,15 @@ export function RegistryViewer({ components }: Props) {
   // Row numbering
   let rowIndex = 0;
 
-  const textPrimary = isDark ? "#ffffff" : "#000000";
-  const textSecondary = isDark ? "rgba(255,255,255,0.55)" : "rgba(0,0,0,0.55)";
-  const textMuted = isDark ? "rgba(255,255,255,0.35)" : "rgba(0,0,0,0.35)";
-  const borderColor = isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.08)";
-  const bgCard = isDark ? "#1a1a1a" : "#ffffff";
-  const bgHover = isDark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.03)";
-  const bgCategoryHeader = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)";
-  const bgExpanded = isDark ? "rgba(255,255,255,0.03)" : "rgba(0,0,0,0.02)";
-  const bgInput = isDark ? "rgba(255,255,255,0.06)" : "rgba(255,255,255,0.7)";
+  const textPrimary = "var(--theme-fg)";
+  const textSecondary = "var(--theme-fg-muted)";
+  const textMuted = "var(--theme-fg-subtle)";
+  const borderColor = "var(--theme-divider)";
+  const bgCard = "var(--theme-table-bg)";
+  const bgHover = "var(--theme-header-bg)";
+  const bgCategoryHeader = "var(--theme-header-bg)";
+  const bgExpanded = "var(--theme-header-bg)";
+  const bgInput = "var(--theme-header-bg)";
 
   return (
     <div id="registry-table" style={{ fontFamily: "var(--font-body, system-ui, sans-serif)" }}>
@@ -595,7 +595,7 @@ export function RegistryViewer({ components }: Props) {
             label="All"
             active={layerFilter === "all"}
             onClick={() => setLayerFilter("all")}
-            isDark={isDark}
+
           />
           {ALL_LAYERS.map((l) => (
             <FilterPill
@@ -603,7 +603,7 @@ export function RegistryViewer({ components }: Props) {
               label={LAYER_LABELS[l]}
               active={layerFilter === l}
               onClick={() => setLayerFilter(l)}
-              isDark={isDark}
+  
               dotColor={LAYER_COLORS[l]}
             />
           ))}
@@ -614,14 +614,14 @@ export function RegistryViewer({ components }: Props) {
           {/* Status filter */}
           <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", alignItems: "center" }}>
             <span style={{ fontSize: "10px", fontWeight: 650, textTransform: "uppercase", letterSpacing: "0.08em", color: textMuted, marginRight: "4px" }}>Status</span>
-            <FilterPill label="All" active={statusFilter === "all"} onClick={() => setStatusFilter("all")} isDark={isDark} />
+            <FilterPill label="All" active={statusFilter === "all"} onClick={() => setStatusFilter("all")} />
             {ALL_STATUSES.map((s) => (
               <FilterPill
                 key={s}
                 label={STATUS_LABELS[s]}
                 active={statusFilter === s}
                 onClick={() => setStatusFilter(s)}
-                isDark={isDark}
+    
                 icon={STATUS_ICONS[s]}
               />
             ))}
@@ -751,8 +751,8 @@ export function RegistryViewer({ components }: Props) {
                           fontFamily: "var(--font-mono, monospace)",
                           padding: "3px 8px",
                           borderRadius: "6px",
-                          background: isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.06)",
-                          color: isDark ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.65)",
+                          background: "var(--theme-header-bg)",
+                          color: "var(--theme-fg-muted)",
                         }}
                       >
                         {comp.id}
@@ -828,7 +828,7 @@ export function RegistryViewer({ components }: Props) {
                           <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
                             {Object.entries(comp.props).map(([name, schema]) => (
                               <div key={name} style={{ display: "flex", gap: "8px", alignItems: "baseline" }}>
-                                <code style={{ fontSize: "11px", fontWeight: 600, fontFamily: "var(--font-mono, monospace)", color: isDark ? "#97AD96" : "#4A5E48" }}>
+                                <code style={{ fontSize: "11px", fontWeight: 600, fontFamily: "var(--font-mono, monospace)", color: "var(--theme-fg-muted)" }}>
                                   {name}
                                 </code>
                                 <span style={{ fontSize: "10px", color: textMuted }}>
@@ -854,9 +854,9 @@ export function RegistryViewer({ components }: Props) {
                         <div style={{ fontWeight: 700, fontSize: "10px", textTransform: "uppercase", letterSpacing: "0.08em", color: textMuted, marginBottom: "4px" }}>
                           Metadata
                         </div>
-                        <MetaRow label="Path" value={comp.path} isDark={isDark} />
-                        <MetaRow label="Version" value={comp.version} isDark={isDark} />
-                        <MetaRow label="React" value={comp.isReact ? "Yes" : "No"} isDark={isDark} />
+                        <MetaRow label="Path" value={comp.path} />
+                        <MetaRow label="Version" value={comp.version} />
+                        <MetaRow label="React" value={comp.isReact ? "Yes" : "No"} />
                         {comp.tags.length > 0 && (
                           <div>
                             <span style={{ fontSize: "10px", fontWeight: 600, color: textMuted }}>Tags: </span>
@@ -869,7 +869,7 @@ export function RegistryViewer({ components }: Props) {
                                     fontWeight: 550,
                                     padding: "2px 6px",
                                     borderRadius: "4px",
-                                    background: isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.05)",
+                                    background: "var(--theme-header-bg)",
                                     color: textSecondary,
                                   }}
                                 >
@@ -884,7 +884,7 @@ export function RegistryViewer({ components }: Props) {
                             <span style={{ fontSize: "10px", fontWeight: 600, color: textMuted }}>Slots: </span>
                             {Object.entries(comp.slots).map(([slotName, slotSchema]) => (
                               <div key={slotName} style={{ marginTop: "2px", marginLeft: "8px" }}>
-                                <code style={{ fontSize: "10px", fontFamily: "var(--font-mono, monospace)", fontWeight: 600, color: isDark ? "#97AD96" : "#4A5E48" }}>
+                                <code style={{ fontSize: "10px", fontFamily: "var(--font-mono, monospace)", fontWeight: 600, color: "var(--theme-fg-muted)" }}>
                                   {slotName}
                                 </code>
                                 <span style={{ fontSize: "10px", color: textMuted, marginLeft: "4px" }}>
@@ -897,7 +897,7 @@ export function RegistryViewer({ components }: Props) {
                           </div>
                         )}
                         {comp.documentedOn && (
-                          <MetaRow label="Documented" value={comp.documentedOn + (comp.section ? ` #${comp.section}` : "")} isDark={isDark} />
+                          <MetaRow label="Documented" value={comp.documentedOn + (comp.section ? ` #${comp.section}` : "")} />
                         )}
                       </div>
 
@@ -909,14 +909,14 @@ export function RegistryViewer({ components }: Props) {
                         <div style={{
                           padding: "16px",
                           borderRadius: "var(--glass-radius-sm, 8px)",
-                          border: `1px solid ${isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.06)"}`,
-                          background: isDark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.02)",
+                          border: "1px solid var(--theme-divider)",
+                          background: "var(--theme-header-bg)",
                           minHeight: "80px",
                           display: "flex",
                           alignItems: "center",
                           justifyContent: "center",
                         }}>
-                          <ComponentPreview id={comp.id} isDark={isDark} />
+                          <ComponentPreview id={comp.id} />
                         </div>
                         {["modal", "overlay", "card", "surface", "toast", "confirm-dialog"].includes(comp.id) && (
                           <button
@@ -927,9 +927,9 @@ export function RegistryViewer({ components }: Props) {
                               fontWeight: 550,
                               padding: "6px 14px",
                               borderRadius: "var(--glass-radius-pill, 100px)",
-                              border: `1px solid ${isDark ? "rgba(255,255,255,0.15)" : "rgba(0,0,0,0.12)"}`,
+                              border: "1px solid var(--theme-ghost-border)",
                               background: "transparent",
-                              color: isDark ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.5)",
+                              color: "var(--theme-fg-muted)",
                               cursor: "pointer",
                             }}
                           >
@@ -964,7 +964,7 @@ export function RegistryViewer({ components }: Props) {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            background: isDark ? "rgba(0,0,0,0.7)" : "rgba(0,0,0,0.4)",
+            background: "rgba(0,0,0,0.4)",
             backdropFilter: "blur(12px)",
             WebkitBackdropFilter: "blur(12px)",
           }}
@@ -977,14 +977,12 @@ export function RegistryViewer({ components }: Props) {
               maxHeight: "80vh",
               overflow: "auto",
               borderRadius: "var(--glass-radius, 16px)",
-              border: `1px solid ${isDark ? "rgba(255,255,255,0.12)" : "rgba(0,0,0,0.1)"}`,
-              background: isDark ? "rgba(30,30,30,0.95)" : "rgba(255,255,255,0.97)",
+              border: "1px solid var(--theme-ghost-border)",
+              background: "var(--theme-table-bg)",
               backdropFilter: "blur(24px)",
               WebkitBackdropFilter: "blur(24px)",
               padding: "32px",
-              boxShadow: isDark
-                ? "0 24px 80px rgba(0,0,0,0.6)"
-                : "0 24px 80px rgba(0,0,0,0.15)",
+              boxShadow: "0 24px 80px rgba(0,0,0,0.15)",
             }}
           >
             {/* Close button */}
@@ -997,9 +995,9 @@ export function RegistryViewer({ components }: Props) {
                 width: 28,
                 height: 28,
                 borderRadius: "50%",
-                border: `1px solid ${isDark ? "rgba(255,255,255,0.12)" : "rgba(0,0,0,0.1)"}`,
-                background: isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.05)",
-                color: isDark ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.5)",
+                border: "1px solid var(--theme-ghost-border)",
+                background: "var(--theme-header-bg)",
+                color: "var(--theme-fg-muted)",
                 fontSize: 16,
                 cursor: "pointer",
                 display: "flex",
@@ -1016,14 +1014,14 @@ export function RegistryViewer({ components }: Props) {
             <div style={{
               padding: "24px",
               borderRadius: "var(--glass-radius-sm, 8px)",
-              border: `1px solid ${isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.06)"}`,
-              background: isDark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.02)",
+              border: "1px solid var(--theme-divider)",
+              background: "var(--theme-header-bg)",
               minHeight: "120px",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
             }}>
-              <ComponentPreview id={fullPreviewId} isDark={isDark} />
+              <ComponentPreview id={fullPreviewId} />
             </div>
           </div>
         </div>
@@ -1062,32 +1060,16 @@ function FilterPill({
   label,
   active,
   onClick,
-  isDark,
   dotColor,
   icon,
 }: {
   label: string;
   active: boolean;
   onClick: () => void;
-  isDark: boolean;
+  isDark?: boolean;
   dotColor?: string;
   icon?: string;
 }) {
-  const bg = active
-    ? isDark
-      ? "rgba(255,255,255,0.14)"
-      : "rgba(0,0,0,0.1)"
-    : isDark
-      ? "rgba(255,255,255,0.05)"
-      : "rgba(0,0,0,0.04)";
-  const color = active
-    ? isDark
-      ? "#ffffff"
-      : "#000000"
-    : isDark
-      ? "rgba(255,255,255,0.55)"
-      : "rgba(0,0,0,0.55)";
-
   return (
     <button
       onClick={onClick}
@@ -1097,9 +1079,9 @@ function FilterPill({
         gap: "5px",
         padding: "5px 10px",
         borderRadius: "999px",
-        border: `1px solid ${active ? (isDark ? "rgba(255,255,255,0.18)" : "rgba(0,0,0,0.15)") : "transparent"}`,
-        background: bg,
-        color,
+        border: active ? "1px solid var(--theme-ghost-border)" : "1px solid transparent",
+        background: active ? "var(--theme-header-bg)" : "var(--theme-header-bg)",
+        color: active ? "var(--theme-fg)" : "var(--theme-fg-muted)",
         fontSize: "11px",
         fontWeight: 600,
         cursor: "pointer",
@@ -1124,15 +1106,15 @@ function FilterPill({
   );
 }
 
-function MetaRow({ label, value, isDark }: { label: string; value: string; isDark: boolean }) {
+function MetaRow({ label, value }: { label: string; value: string; isDark?: boolean }) {
   return (
     <div style={{ display: "flex", gap: "8px", alignItems: "baseline" }}>
-      <span style={{ fontSize: "10px", fontWeight: 600, color: isDark ? "rgba(255,255,255,0.35)" : "rgba(0,0,0,0.35)" }}>{label}:</span>
+      <span style={{ fontSize: "10px", fontWeight: 600, color: "var(--theme-fg-subtle)" }}>{label}:</span>
       <code
         style={{
           fontSize: "11px",
           fontFamily: "var(--font-mono, monospace)",
-          color: isDark ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.6)",
+          color: "var(--theme-fg-muted)",
         }}
       >
         {value}

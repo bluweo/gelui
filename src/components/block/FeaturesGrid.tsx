@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 interface Feature {
   title: string;
@@ -148,15 +148,6 @@ const TAGS = ["Styling", "Interaction", "System"];
 
 export function FeaturesGrid() {
   const [activeTag, setActiveTag] = useState<string | null>(null);
-  const [isDark, setIsDark] = useState(false);
-
-  useEffect(() => {
-    const check = () => setIsDark(document.documentElement.getAttribute("data-theme") === "dark");
-    check();
-    const observer = new MutationObserver(check);
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
-    return () => observer.disconnect();
-  }, []);
 
   const filtered = activeTag
     ? FEATURES.filter((f) => f.tag === activeTag)
@@ -181,7 +172,7 @@ export function FeaturesGrid() {
 
         {/* Right: Tag filters */}
         <div className="flex items-center gap-2 flex-wrap justify-end max-[640px]:justify-start" style={{ isolation: "isolate" }}>
-          {[{ tag: "All", color: isDark ? "#e0e0e0" : "#1a1a1a" }, ...TAGS.map((t) => ({ tag: t, color: TAG_COLORS[t] || "#888" }))].map(({ tag, color }) => {
+          {[{ tag: "All", color: "" }, ...TAGS.map((t) => ({ tag: t, color: TAG_COLORS[t] || "#888" }))].map(({ tag, color }) => {
             const isActive = tag === "All" ? activeTag === null : activeTag === tag;
             const count = tag === "All" ? FEATURES.length : FEATURES.filter((f) => f.tag === tag).length;
             const isAllTag = tag === "All";
@@ -189,18 +180,18 @@ export function FeaturesGrid() {
               <button
                 key={tag}
                 onClick={() => setActiveTag(tag === "All" ? null : (activeTag === tag ? null : tag))}
-                className="px-4 py-2 rounded-[var(--glass-radius-sm)] text-[12px] font-[600] transition-all duration-200 cursor-pointer"
+                className={`px-4 py-2 rounded-[var(--glass-radius-sm)] text-[12px] font-[600] transition-all duration-200 cursor-pointer border border-black/[0.06] dark:border-white/[0.08] ${
+                  isActive
+                    ? "text-white shadow-[0_2px_10px_rgba(0,0,0,0.2)] dark:shadow-[0_2px_10px_rgba(255,255,255,0.1)]"
+                    : "bg-white dark:bg-white/[0.08] text-[#888] dark:text-white/50 shadow-[0_1px_3px_rgba(0,0,0,0.08)] dark:shadow-[0_1px_3px_rgba(0,0,0,0.2)]"
+                }`}
                 style={{
-                  backgroundColor: isActive
-                    ? (isAllTag ? (isDark ? "rgba(255,255,255,0.15)" : "#1a1a1a") : color)
-                    : (isDark ? "rgba(255,255,255,0.08)" : "#ffffff"),
-                  color: isActive
-                    ? "#ffffff"
-                    : (isDark ? "rgba(255,255,255,0.5)" : "#888888"),
-                  boxShadow: isActive
-                    ? `0 2px 10px ${isAllTag ? (isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.2)") : color + "35"}`
-                    : (isDark ? "0 1px 3px rgba(0,0,0,0.2)" : "0 1px 3px rgba(0,0,0,0.08)"),
-                  border: isDark ? "1px solid rgba(255,255,255,0.08)" : "1px solid rgba(0,0,0,0.06)",
+                  ...(isActive
+                    ? {
+                        backgroundColor: isAllTag ? "var(--theme-bg-solid)" : color,
+                        ...(isAllTag ? {} : { boxShadow: `0 2px 10px ${color}35` }),
+                      }
+                    : {}),
                 }}
               >
                 {tag}

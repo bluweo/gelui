@@ -24,14 +24,12 @@ function OptionColumn({
   value,
   original,
   onChange,
-  isDark,
 }: {
   label: string;
   options: string[];
   value: string;
   original: string;
   onChange: (v: string) => void;
-  isDark: boolean;
 }) {
   const listRef = useRef<HTMLDivElement>(null);
 
@@ -46,7 +44,7 @@ function OptionColumn({
     <div className="flex-1 min-w-0 flex flex-col" onMouseDown={(e) => e.stopPropagation()}>
       <span
         className="text-[10px] font-[650] uppercase tracking-[0.06em] mb-2 px-1"
-        style={{ color: isDark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.4)" }}
+        style={{ color: "var(--theme-fg-faint)" }}
       >
         {label}
       </span>
@@ -54,8 +52,8 @@ function OptionColumn({
         ref={listRef}
         className="rounded-[var(--glass-radius-sm)] overflow-hidden"
         style={{
-          background: isDark ? "rgba(0,0,0,0.3)" : "rgba(255,255,255,0.95)",
-          border: `1px solid ${isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.06)"}`,
+          background: "var(--theme-table-bg)",
+          border: "1px solid var(--theme-divider)",
           maxHeight: "240px",
           overflowY: "auto",
           scrollbarWidth: "thin",
@@ -71,6 +69,7 @@ function OptionColumn({
               onClick={() => onChange(opt)}
               role="button"
               tabIndex={0}
+              className="preset-option-row"
               style={{
                 display: "flex",
                 alignItems: "center",
@@ -78,22 +77,22 @@ function OptionColumn({
                 padding: "9px 14px",
                 fontSize: "12px",
                 fontFamily: "var(--font-mono)",
-                background: isActive ? (isDark ? "#fff" : "#000") : "transparent",
-                color: isActive ? (isDark ? "#000" : "#fff") : (isDark ? "#ccc" : "#333"),
+                background: isActive ? "var(--theme-bg-solid)" : "transparent",
+                color: isActive ? "var(--theme-fg-on-solid)" : "var(--theme-fg-muted)",
                 fontWeight: isActive ? 600 : 400,
-                borderBottom: `1px solid ${isDark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.04)"}`,
+                borderBottom: "1px solid var(--theme-divider)",
                 cursor: "pointer",
                 transition: "background 0.1s",
               }}
-              onMouseEnter={(e) => { if (!isActive) (e.currentTarget as HTMLElement).style.background = isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.04)"; }}
+              onMouseEnter={(e) => { if (!isActive) (e.currentTarget as HTMLElement).style.background = "var(--theme-header-bg)"; }}
               onMouseLeave={(e) => { if (!isActive) (e.currentTarget as HTMLElement).style.background = "transparent"; }}
             >
-              <span style={{ color: isActive ? (isDark ? "#000" : "#fff") : (isDark ? "#ccc" : "#333") }}>{opt}</span>
+              <span style={{ color: isActive ? "var(--theme-fg-on-solid)" : "var(--theme-fg-muted)" }}>{opt}</span>
               {isOriginal && (
                 <span style={{
                   fontSize: "9px", padding: "2px 6px", borderRadius: "999px",
-                  background: isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.06)",
-                  color: isDark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.35)",
+                  background: "var(--theme-header-bg)",
+                  color: "var(--theme-fg-faint)",
                 }}>
                   current
                 </span>
@@ -118,7 +117,6 @@ export function PresetEditorModal({
   onApply,
 }: PresetEditorModalProps) {
   const [mounted, setMounted] = useState(false);
-  const [isDark, setIsDark] = useState(false);
   const [tempSize, setTempSize] = useState(size);
   const [tempWeight, setTempWeight] = useState(weight);
   const [tempLh, setTempLh] = useState(lh);
@@ -138,14 +136,6 @@ export function PresetEditorModal({
     return () => { document.body.style.overflow = prev; };
   }, [isOpen]);
 
-  useEffect(() => {
-    const check = () => setIsDark(document.documentElement.getAttribute("data-theme") === "dark");
-    check();
-    const obs = new MutationObserver(check);
-    obs.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
-    return () => obs.disconnect();
-  }, []);
-
   // Sync temp values when modal opens or preset changes
   useEffect(() => {
     if (isOpen) {
@@ -162,7 +152,7 @@ export function PresetEditorModal({
     onClose();
   };
 
-  const previewText = sample.length > 80 ? sample.slice(0, 80) + "…" : sample;
+  const previewText = sample.length > 80 ? sample.slice(0, 80) + "\u2026" : sample;
 
   return createPortal(
     <div
@@ -202,8 +192,8 @@ export function PresetEditorModal({
         <div
           className="mb-5 p-4 rounded-[var(--glass-radius-sm)] overflow-hidden"
           style={{
-            background: isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.03)",
-            border: `1px solid ${isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.06)"}`,
+            background: "var(--theme-header-bg)",
+            border: "1px solid var(--theme-divider)",
             minHeight: "70px",
           }}
           onMouseDown={(e) => e.stopPropagation()}
@@ -215,7 +205,7 @@ export function PresetEditorModal({
               fontWeight: Number(tempWeight),
               lineHeight: tempLh,
               fontFamily,
-              color: isDark ? "rgba(255,255,255,0.85)" : "rgba(0,0,0,0.85)",
+              color: "var(--theme-fg)",
               wordBreak: "break-word",
             }}
           >
@@ -223,7 +213,7 @@ export function PresetEditorModal({
           </p>
           <span
             className="block mt-2 text-[10px] font-mono"
-            style={{ color: isDark ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.3)" }}
+            style={{ color: "var(--theme-fg-subtle)" }}
           >
             {tempSize} · {tempWeight} · {tempLh}
           </span>
@@ -231,9 +221,9 @@ export function PresetEditorModal({
 
         {/* 3-column settings */}
         <div className="flex gap-3 mb-5 max-[540px]:flex-col">
-          <OptionColumn label="Font Size" options={SIZE_OPTIONS} value={tempSize} original={size} onChange={setTempSize} isDark={isDark} />
-          <OptionColumn label="Weight" options={WEIGHT_OPTIONS} value={tempWeight} original={weight} onChange={setTempWeight} isDark={isDark} />
-          <OptionColumn label="Line Height" options={LH_OPTIONS} value={tempLh} original={lh} onChange={setTempLh} isDark={isDark} />
+          <OptionColumn label="Font Size" options={SIZE_OPTIONS} value={tempSize} original={size} onChange={setTempSize} />
+          <OptionColumn label="Weight" options={WEIGHT_OPTIONS} value={tempWeight} original={weight} onChange={setTempWeight} />
+          <OptionColumn label="Line Height" options={LH_OPTIONS} value={tempLh} original={lh} onChange={setTempLh} />
         </div>
 
         {/* Footer */}
@@ -243,8 +233,8 @@ export function PresetEditorModal({
             className="px-6 py-2.5 rounded-[var(--glass-radius-sm)] text-[13px] font-[550] transition-colors duration-150 cursor-pointer"
             style={{
               background: "transparent",
-              border: `1px solid ${isDark ? "rgba(255,255,255,0.15)" : "rgba(0,0,0,0.12)"}`,
-              color: isDark ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.5)",
+              border: "1px solid var(--theme-ghost-border)",
+              color: "var(--theme-fg-muted)",
             }}
           >
             Cancel
@@ -253,8 +243,8 @@ export function PresetEditorModal({
             onClick={handleApply}
             className="px-6 py-2.5 rounded-[var(--glass-radius-sm)] text-[13px] font-[600] transition-colors duration-150 border-none cursor-pointer"
             style={{
-              background: isDark ? "#fff" : "#000",
-              color: isDark ? "#000" : "#fff",
+              background: "var(--theme-bg-solid)",
+              color: "var(--theme-fg-on-solid)",
             }}
           >
             Apply

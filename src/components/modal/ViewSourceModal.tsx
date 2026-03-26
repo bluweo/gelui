@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { useDraggableModal } from "@/components/hooks/useDraggableModal";
-import { useDarkMode } from "@/primitives/hooks/useDarkMode";
 
 /* ------------------------------------------------------------------ */
 /*  Simple regex-based syntax highlighting for JSX/TSX code            */
@@ -125,7 +124,6 @@ export function ViewSourceModal({ open, onClose, title, code, components = [], e
   const [mounted, setMounted] = useState(false);
   const [activeTab, setActiveTab] = useState<TabKey>("source");
   const [selectedImpl, setSelectedImpl] = useState(0);
-  const isDark = useDarkMode();
 
   const { panelRef, panelStyle, backdropDragged, onDragStart } = useDraggableModal({
     isOpen: open,
@@ -298,31 +296,23 @@ export function ViewSourceModal({ open, onClose, title, code, components = [], e
                     className={`flex items-start gap-3 px-4 py-3 ${i < components.length - 1 ? "border-b border-black/[0.04] dark:border-white/[0.04]" : ""}`}
                   >
                     <div
-                      className="w-8 h-8 rounded-[6px] flex items-center justify-center shrink-0 mt-0.5"
-                      style={{
-                        background: isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)",
-                        border: `1px solid ${isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.06)"}`,
-                      }}
+                      className="w-8 h-8 rounded-[6px] flex items-center justify-center shrink-0 mt-0.5 bg-black/[0.04] dark:bg-white/[0.06] border border-black/[0.06] dark:border-white/[0.08]"
                     >
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" style={{ color: isDark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.35)" }}>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" className="text-black/35 dark:text-white/40">
                         <polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" />
                       </svg>
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2">
-                        <span className="text-[13px] font-[600]" style={{ color: isDark ? "rgba(255,255,255,0.85)" : "rgba(0,0,0,0.8)" }}>{comp.name}</span>
+                        <span className="text-[13px] font-[600] text-black/80 dark:text-white/85">{comp.name}</span>
                         <span
-                          className="text-[10px] font-mono px-1.5 py-0.5 rounded-[4px]"
-                          style={{
-                            background: isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)",
-                            color: isDark ? "rgba(255,255,255,0.35)" : "rgba(0,0,0,0.35)",
-                          }}
+                          className="text-[10px] font-mono px-1.5 py-0.5 rounded-[4px] bg-black/[0.04] dark:bg-white/[0.06] text-black/35 dark:text-white/35"
                         >
                           {comp.path}
                         </span>
                       </div>
                       {comp.description && (
-                        <p className="text-[11px] mt-0.5" style={{ color: isDark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.4)" }}>
+                        <p className="text-[11px] mt-0.5 text-black/40 dark:text-white/40">
                           {comp.description}
                         </p>
                       )}
@@ -332,10 +322,10 @@ export function ViewSourceModal({ open, onClose, title, code, components = [], e
               </div>
             ) : (
               <div className="flex flex-col items-center justify-center py-12 px-4">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" style={{ color: isDark ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.15)", marginBottom: 12 }}>
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" className="text-black/15 dark:text-white/20 mb-3">
                   <path d="M5 10h2c2 0 3-1 3-3V5c0-2-1-3-3-3H5C3 2 2 3 2 5v2c0 2 1 3 3 3ZM17 10h2c2 0 3-1 3-3V5c0-2-1-3-3-3h-2c-2 0-3 1-3 3v2c0 2 1 3 3 3ZM17 22h2c2 0 3-1 3-3v-2c0-2-1-3-3-3h-2c-2 0-3 1-3 3v2c0 2 1 3 3 3ZM5 22h2c2 0 3-1 3-3v-2c0-2-1-3-3-3H5c-2 0-3 1-3 3v2c0 2 1 3 3 3Z" />
                 </svg>
-                <span className="text-[12px]" style={{ color: isDark ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.3)" }}>
+                <span className="text-[12px] text-black/30 dark:text-white/30">
                   Component list coming soon
                 </span>
               </div>
@@ -455,10 +445,10 @@ export function ViewSourceModal({ open, onClose, title, code, components = [], e
               })()
             ) : (
               <div className="flex flex-col items-center justify-center py-12 px-4">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" style={{ color: isDark ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.15)", marginBottom: 12 }}>
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" className="text-black/15 dark:text-white/20 mb-3">
                   <polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" />
                 </svg>
-                <span className="text-[12px]" style={{ color: isDark ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.3)" }}>
+                <span className="text-[12px] text-black/30 dark:text-white/30">
                   Implementation code coming soon
                 </span>
               </div>
