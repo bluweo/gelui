@@ -31,6 +31,14 @@ export function FontSizeWeightTable({ fontSizes, fontWeights }: Props) {
     return () => window.removeEventListener("gelui:font-preview-text", handler);
   }, []);
 
+  // Force re-render when font families change (so preview text uses new font)
+  const [, setFontVersion] = useState(0);
+  useEffect(() => {
+    const handler = () => setFontVersion((v) => v + 1);
+    window.addEventListener("gelui-appearance-change", handler);
+    return () => window.removeEventListener("gelui-appearance-change", handler);
+  }, []);
+
   const role = FONT_ROLES.find((r) => r.key === selectedRole) ?? FONT_ROLES[1];
   const cssVar = `var(${role.cssVar})`;
   const isMono = selectedRole === "mono";
@@ -87,9 +95,8 @@ export function FontSizeWeightTable({ fontSizes, fontWeights }: Props) {
               </div>
               <div className="flex-1 px-3 py-3 min-w-0 overflow-hidden">
                 <span
-                  className="text-black/80 dark:text-white/80 whitespace-nowrap"
+                  className="font-preview-span text-black/80 dark:text-white/80 whitespace-nowrap"
                   data-font-preview
-                  className="font-preview-span"
                   style={{ "--font-preview": cssVar, "--fp-size": size } as React.CSSProperties}
                 >
                   {isMono ? 'const token = "ds";' : sampleText}
@@ -133,9 +140,8 @@ export function FontSizeWeightTable({ fontSizes, fontWeights }: Props) {
               </div>
               <div className="flex-1 px-3 py-3 min-w-0 overflow-hidden">
                 <span
-                  className="text-[17px] text-black/80 dark:text-white/80 whitespace-nowrap"
+                  className="font-preview-span text-[17px] text-black/80 dark:text-white/80 whitespace-nowrap"
                   data-font-preview
-                  className="font-preview-span"
                   style={{ "--font-preview": cssVar, "--fp-weight": String(weight) } as React.CSSProperties}
                 >
                   {isMono ? 'const token = "design-system";' : sampleTextWeight}

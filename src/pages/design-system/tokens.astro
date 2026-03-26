@@ -99,6 +99,35 @@ const radiiRawEntries = Object.entries(radii.raw) as Array<[string, string]>;
               });
             }
           });
+
+          // Reactive font family name labels
+          function updateFontNames() {
+            try {
+              const stored = JSON.parse(localStorage.getItem('gelui-appearance') || '{}');
+              const fonts = stored.fonts;
+              if (!fonts) return;
+              const SAME = 'SAME_AS_BODY';
+              const bodyFont = fonts.body || 'Google Sans';
+
+              const nameMap: Record<string, string> = {
+                heading: fonts.heading === SAME ? bodyFont + ' (same as Body)' : (fonts.heading || bodyFont) + ', system-ui, sans-serif',
+                body: bodyFont + ', system-ui, sans-serif',
+                ui: fonts.ui === SAME ? 'Linked to Body font' : (fonts.ui || bodyFont) + ', system-ui, sans-serif',
+                mono: (fonts.mono && fonts.mono !== 'System Default') ? fonts.mono + ', ui-monospace, monospace' : 'SF Mono, SFMono-Regular, ui-monospace, Menlo, monospace',
+              };
+
+              document.querySelectorAll('[data-font-name]').forEach((el) => {
+                const role = (el as HTMLElement).dataset.fontName;
+                if (role && nameMap[role]) {
+                  el.textContent = nameMap[role];
+                }
+              });
+            } catch(e) {}
+          }
+
+          updateFontNames();
+          window.addEventListener('storage', (e) => { if (e.key === 'gelui-appearance') updateFontNames(); });
+          window.addEventListener('gelui-appearance-change', updateFontNames);
         }
         // Run on initial load
         initFontFamiliesBlock();
@@ -119,7 +148,7 @@ const radiiRawEntries = Object.entries(radii.raw) as Array<[string, string]>;
             </button>
           </div>
           <p class="text-[11px] font-mono text-black/40 dark:text-white/35 mb-1">H1–H6, hero text, banners, titles</p>
-          <p class="text-[11px] font-mono text-black/30 dark:text-white/25 mb-4">Google Sans, system-ui, sans-serif</p>
+          <p class="text-[11px] font-mono text-black/30 dark:text-white/25 mb-4" data-font-name="heading">Google Sans, system-ui, sans-serif</p>
           <div class="flex flex-col gap-2">
             <p data-font-preview style="--font-preview: var(--font-heading); font-weight: 400;" class="text-[20px] text-black dark:text-white leading-tight font-sample-text">
               The quick brown fox jumps over the lazy dog
@@ -147,7 +176,7 @@ const radiiRawEntries = Object.entries(radii.raw) as Array<[string, string]>;
             </button>
           </div>
           <p class="text-[11px] font-mono text-black/40 dark:text-white/35 mb-1">Paragraphs, descriptions, content</p>
-          <p class="text-[11px] font-mono text-black/30 dark:text-white/25 mb-4">Google Sans, system-ui, sans-serif</p>
+          <p class="text-[11px] font-mono text-black/30 dark:text-white/25 mb-4" data-font-name="body">Google Sans, system-ui, sans-serif</p>
           <div class="flex flex-col gap-2">
             <p data-font-preview style="--font-preview: var(--font-body); font-weight: 400;" class="text-[20px] text-black dark:text-white leading-tight font-sample-text">
               The quick brown fox jumps over the lazy dog
@@ -175,7 +204,7 @@ const radiiRawEntries = Object.entries(radii.raw) as Array<[string, string]>;
             </button>
           </div>
           <p class="text-[11px] font-mono text-black/40 dark:text-white/35 mb-1">Buttons, nav, labels, badges, forms</p>
-          <p class="text-[11px] font-mono text-black/30 dark:text-white/25 mb-4">Linked to Body font</p>
+          <p class="text-[11px] font-mono text-black/30 dark:text-white/25 mb-4" data-font-name="ui">Linked to Body font</p>
           <div class="flex flex-col gap-2">
             <p data-font-preview style="--font-preview: var(--font-ui); font-weight: 400;" class="text-[20px] text-black dark:text-white leading-tight font-sample-text">
               The quick brown fox jumps over the lazy dog
@@ -203,7 +232,7 @@ const radiiRawEntries = Object.entries(radii.raw) as Array<[string, string]>;
             </button>
           </div>
           <p class="text-[11px] font-mono text-black/40 dark:text-white/35 mb-1">Code, tokens, technical data</p>
-          <p class="text-[11px] font-mono text-black/30 dark:text-white/25 mb-4">SF Mono, SFMono-Regular, ui-monospace, Menlo, monospace</p>
+          <p class="text-[11px] font-mono text-black/30 dark:text-white/25 mb-4" data-font-name="mono">SF Mono, SFMono-Regular, ui-monospace, Menlo, monospace</p>
           <div class="flex flex-col gap-2">
             <p data-font-preview style="--font-preview: var(--font-mono); font-weight: 400;" class="text-[18px] text-black dark:text-white leading-tight font-sample-text">
               const token = "design-system";

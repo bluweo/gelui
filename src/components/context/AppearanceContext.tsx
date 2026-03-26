@@ -174,6 +174,8 @@ export function AppearanceProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (!hydratedRef.current) return;
     saveStored({ transparency, radiusPreset, blurIntensity, shadowPreset, theme, fonts });
+    // Notify other components (e.g. tokens page font labels) about appearance changes
+    window.dispatchEvent(new CustomEvent("gelui-appearance-change"));
   }, [transparency, radiusPreset, blurIntensity, shadowPreset, theme, fonts]);
 
   /* Listen for external changes (e.g. from LiveTheming island writing to localStorage) */
