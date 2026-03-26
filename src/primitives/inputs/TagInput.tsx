@@ -21,7 +21,6 @@ export function TagInput({
 }: TagInputProps) {
   const [internalTags, setInternalTags] = useState<string[]>([]);
   const [input, setInput] = useState("");
-  const [focused, setFocused] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const tags = controlledValue ?? internalTags;
@@ -54,61 +53,28 @@ export function TagInput({
 
   return (
     <div
-      className={className}
+      className={[
+        "flex flex-wrap items-center gap-1.5 py-2 px-3 min-h-[44px]",
+        "rounded-[var(--glass-radius-sm,10px)]",
+        "border-2 border-transparent bg-[var(--theme-header-bg)]",
+        "transition-[border-color,background] duration-150",
+        "focus-within:border-[var(--theme-fg)] focus-within:bg-[var(--theme-table-bg)]",
+        disabled ? "cursor-not-allowed opacity-50" : "cursor-text",
+        className,
+      ].join(" ")}
       onClick={() => inputRef.current?.focus()}
-      style={{
-        display: "flex",
-        flexWrap: "wrap",
-        alignItems: "center",
-        gap: 6,
-        paddingTop: 8, paddingBottom: 8, paddingLeft: 12, paddingRight: 12,
-        minHeight: 44,
-        borderRadius: "var(--glass-radius-sm, 10px)",
-        border: `2px solid ${focused ? "var(--theme-fg)" : "transparent"}`,
-        background: focused
-          ? "var(--theme-table-bg)"
-          : "var(--theme-header-bg)",
-        cursor: disabled ? "not-allowed" : "text",
-        opacity: disabled ? 0.5 : 1,
-        transition: "border-color 0.15s ease, background 0.15s ease",
-        ...style,
-      }}
+      style={style}
     >
       {tags.map((tag, i) => (
         <span
           key={`${tag}-${i}`}
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: 4,
-            paddingTop: 3, paddingBottom: 3, paddingLeft: 8, paddingRight: 8,
-            borderRadius: "var(--glass-radius-pill, 100px)",
-            fontSize: "12px",
-            fontWeight: 550,
-            fontFamily: "var(--font-ui)",
-            background: "var(--theme-divider)",
-            color: "var(--theme-fg)",
-          }}
+          className="inline-flex items-center gap-1 py-[3px] px-2 rounded-[var(--glass-radius-pill,100px)] text-xs font-[550] font-[family-name:var(--font-ui)] bg-[var(--theme-divider)] text-[var(--theme-fg)]"
         >
           {tag}
           {!disabled && (
             <button
               onClick={(e) => { e.stopPropagation(); removeTag(i); }}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                width: 14,
-                height: 14,
-                borderRadius: "50%",
-                border: "none",
-                background: "var(--theme-divider)",
-                color: "var(--theme-fg-muted)",
-                cursor: "pointer",
-                fontSize: "10px",
-                lineHeight: 1,
-                padding: 0,
-              }}
+              className="flex items-center justify-center w-3.5 h-3.5 rounded-full border-none bg-[var(--theme-divider)] text-[var(--theme-fg-muted)] cursor-pointer text-[10px] leading-none p-0"
             >
               ×
             </button>
@@ -121,21 +87,10 @@ export function TagInput({
         value={input}
         onChange={(e) => setInput(e.target.value)}
         onKeyDown={handleKeyDown}
-        onFocus={() => setFocused(true)}
-        onBlur={() => { setFocused(false); addTag(); }}
+        onBlur={() => addTag()}
         placeholder={tags.length === 0 ? placeholder : ""}
         disabled={disabled}
-        style={{
-          flex: 1,
-          minWidth: 80,
-          border: "none",
-          outline: "none",
-          background: "transparent",
-          fontSize: "14px",
-          fontFamily: "var(--font-body)",
-          color: "var(--theme-fg)",
-          padding: 0,
-        }}
+        className="flex-1 min-w-[80px] border-none outline-none bg-transparent text-sm font-[family-name:var(--font-body)] text-[var(--theme-fg)] p-0"
       />
     </div>
   );

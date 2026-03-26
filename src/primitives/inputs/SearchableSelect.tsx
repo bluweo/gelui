@@ -67,7 +67,7 @@ export function SearchableSelect({
     return (
       <>
         {text.slice(0, idx)}
-        <strong style={{ fontWeight: 700 }}>
+        <strong className="font-bold">
           {text.slice(idx, idx + search.length)}
         </strong>
         {text.slice(idx + search.length)}
@@ -78,31 +78,21 @@ export function SearchableSelect({
   return (
     <div
       ref={ref}
-      className={className}
-      style={{ position: "relative", width: "100%", ...style }}
+      className={`relative w-full ${className}`}
+      style={style}
       onKeyDown={handleKeyDown}
     >
       <button
         onClick={() => setOpen(!open)}
-        style={{
-          width: "100%",
-          paddingTop: 12, paddingBottom: 12, paddingLeft: 16, paddingRight: 16,
-          fontSize: "14px",
-          fontFamily: "var(--font-body)",
-          borderRadius: "var(--glass-radius-sm, 10px)",
-          border: `2px solid ${open ? "var(--theme-fg)" : "transparent"}`,
-          background: "var(--theme-header-bg)",
-          color: selected
-            ? "var(--theme-fg)"
-            : "var(--theme-fg-subtle)",
-          cursor: "pointer",
-          textAlign: "left",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          outline: "none",
-          transition: "all 200ms ease",
-        }}
+        className={[
+          "w-full py-3 px-4 text-sm font-[family-name:var(--font-body)]",
+          "rounded-[var(--glass-radius-sm,10px)]",
+          "border-2 bg-[var(--theme-header-bg)]",
+          "cursor-pointer text-left flex items-center justify-between",
+          "outline-none transition-all duration-200",
+          open ? "border-[var(--theme-fg)]" : "border-transparent",
+          selected ? "text-[var(--theme-fg)]" : "text-[var(--theme-fg-subtle)]",
+        ].join(" ")}
       >
         <span>{selected?.label ?? placeholder}</span>
         <svg
@@ -113,34 +103,15 @@ export function SearchableSelect({
           stroke="currentColor"
           strokeWidth="2"
           strokeLinecap="round"
-          style={{
-            transition: "transform 200ms ease",
-            transform: open ? "rotate(180deg)" : "rotate(0deg)",
-          }}
+          className={`transition-transform duration-200 ${open ? "rotate-180" : "rotate-0"}`}
         >
           <polyline points="6 9 12 15 18 9" />
         </svg>
       </button>
 
       {open && (
-        <div
-          style={{
-            position: "absolute",
-            top: "calc(100% + 4px)",
-            left: 0,
-            right: 0,
-            zIndex: 50,
-            borderRadius: "var(--glass-radius-sm, 10px)",
-            background: "var(--theme-table-bg)",
-            backdropFilter: "blur(20px)",
-            WebkitBackdropFilter: "blur(20px)",
-            border: `1px solid var(--theme-divider)`,
-            boxShadow: "0 8px 32px rgba(0,0,0,0.12)",
-            padding: "8px",
-            overflow: "hidden",
-          }}
-        >
-          <div style={{ paddingTop: 0, paddingRight: 0, paddingBottom: 6, paddingLeft: 0 }}>
+        <div className="absolute top-[calc(100%+4px)] left-0 right-0 z-50 rounded-[var(--glass-radius-sm,10px)] bg-[var(--theme-table-bg)] backdrop-blur-[20px] border border-[var(--theme-divider)] shadow-[0_8px_32px_rgba(0,0,0,0.12)] p-2 overflow-hidden">
+          <div className="pb-1.5">
             <input
               ref={inputRef}
               type="text"
@@ -150,30 +121,12 @@ export function SearchableSelect({
                 setHighlightIdx(0);
               }}
               placeholder="Type to filter..."
-              style={{
-                width: "100%",
-                paddingTop: 8, paddingBottom: 8, paddingLeft: 12, paddingRight: 12,
-                fontSize: "13px",
-                fontFamily: "var(--font-body)",
-                border: "none",
-                borderRadius: "var(--glass-radius-sm, 8px)",
-                background: "var(--theme-header-bg)",
-                color: "var(--theme-fg)",
-                outline: "none",
-                marginBottom: "0",
-              }}
+              className="w-full py-2 px-3 text-[13px] font-[family-name:var(--font-body)] border-none rounded-[var(--glass-radius-sm,8px)] bg-[var(--theme-header-bg)] text-[var(--theme-fg)] outline-none"
             />
           </div>
-          <div style={{ maxHeight: "180px", overflowY: "auto" }}>
+          <div className="max-h-[180px] overflow-y-auto">
             {filtered.length === 0 ? (
-              <div
-                style={{
-                  paddingTop: 10, paddingBottom: 10, paddingLeft: 12, paddingRight: 12,
-                  fontSize: "13px",
-                  opacity: 0.4,
-                  textAlign: "center",
-                }}
-              >
+              <div className="py-2.5 px-3 text-[13px] opacity-40 text-center">
                 No results
               </div>
             ) : (
@@ -185,24 +138,14 @@ export function SearchableSelect({
                     setOpen(false);
                   }}
                   onMouseEnter={() => setHighlightIdx(i)}
-                  style={{
-                    width: "100%",
-                    paddingTop: 10, paddingBottom: 10, paddingLeft: 12, paddingRight: 12,
-                    fontSize: "14px",
-                    fontFamily: "var(--font-body)",
-                    border: "none",
-                    borderRadius: "var(--glass-radius-sm, 8px)",
-                    background:
-                      i === highlightIdx
-                        ? "var(--theme-header-bg)"
-                        : "transparent",
-                    color: "var(--theme-fg)",
-                    fontWeight: opt.value === value ? 600 : 400,
-                    cursor: "pointer",
-                    textAlign: "left",
-                    outline: "none",
-                    transition: "background 100ms ease",
-                  }}
+                  className={[
+                    "w-full py-2.5 px-3 text-sm font-[family-name:var(--font-body)]",
+                    "border-none rounded-[var(--glass-radius-sm,8px)]",
+                    "cursor-pointer text-left outline-none transition-colors duration-100",
+                    "text-[var(--theme-fg)]",
+                    i === highlightIdx ? "bg-[var(--theme-header-bg)]" : "bg-transparent",
+                    opt.value === value ? "font-semibold" : "font-normal",
+                  ].join(" ")}
                 >
                   {highlightMatch(opt.label)}
                 </button>

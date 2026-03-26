@@ -26,30 +26,25 @@ export function Image({
   const [loaded, setLoaded] = useState(false);
   const showSkeleton = skeleton && !loaded;
 
-  const borderRadius = rounded ? "var(--glass-radius, 16px)" : "0px";
-
   return (
     <div
-      className={className}
+      className={[
+        "relative inline-block overflow-hidden border border-[var(--theme-divider)]",
+        rounded ? "rounded-[var(--glass-radius,16px)]" : "rounded-none",
+        className,
+      ].join(" ")}
       style={{
-        position: "relative",
-        display: "inline-block",
         width: typeof width === "number" ? `${width}px` : width,
         height: typeof height === "number" ? `${height}px` : height,
-        borderRadius,
-        overflow: "hidden",
-        border: "1px solid var(--theme-divider)",
         ...style,
       }}
     >
       {showSkeleton && (
         <div
+          className="absolute inset-0 animate-[shimmer_1.5s_infinite]"
           style={{
-            position: "absolute",
-            inset: 0,
             background: "linear-gradient(90deg, var(--theme-header-bg) 25%, var(--theme-fg-faint) 50%, var(--theme-header-bg) 75%)",
             backgroundSize: "200% 100%",
-            animation: "shimmer 1.5s infinite",
           }}
         />
       )}
@@ -57,14 +52,11 @@ export function Image({
         src={src}
         alt={alt}
         onLoad={() => setLoaded(true)}
-        style={{
-          display: "block",
-          width: "100%",
-          height: "100%",
-          objectFit,
-          opacity: showSkeleton ? 0 : 1,
-          transition: "opacity 0.3s ease",
-        }}
+        className={[
+          "block w-full h-full transition-opacity duration-300",
+          showSkeleton ? "opacity-0" : "opacity-100",
+        ].join(" ")}
+        style={{ objectFit }}
       />
       <style>{`
         @keyframes shimmer {

@@ -27,7 +27,6 @@ function AccordionSection({
 }) {
   const contentRef = useRef<HTMLDivElement>(null);
   const [height, setHeight] = useState<number>(0);
-  const [hovered, setHovered] = useState(false);
 
   useEffect(() => {
     if (contentRef.current) {
@@ -37,62 +36,29 @@ function AccordionSection({
 
   return (
     <div
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      style={{
-        background: "var(--theme-header-bg)",
-        borderRadius: "var(--glass-radius-sm, 10px)",
-        overflow: "hidden",
-        transition: "background 0.15s ease",
-        filter: hovered ? "brightness(0.97)" : "none",
-      }}
+      className="bg-[var(--theme-header-bg)] rounded-[var(--glass-radius-sm,10px)] overflow-hidden transition-[filter] duration-150 hover:brightness-[0.97]"
     >
       <button
         onClick={onToggle}
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          width: "100%",
-          paddingTop: 12, paddingBottom: 12, paddingLeft: 16, paddingRight: 16,
-          border: "none",
-          background: "none",
-          cursor: "pointer",
-          fontSize: "14px",
-          fontWeight: 600,
-          fontFamily: "var(--font-ui)",
-          color: "var(--theme-fg)",
-          textAlign: "left",
-          transition: "background 0.15s ease",
-        }}
+        className="flex items-center justify-between w-full py-3 px-4 border-none bg-none cursor-pointer text-sm font-semibold font-[family-name:var(--font-ui)] text-[var(--theme-fg)] text-left transition-colors duration-150"
       >
         {title}
         <span
-          style={{
-            display: "flex",
-            alignItems: "center",
-            transition: "transform 0.25s ease",
-            transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
-          }}
+          className={[
+            "flex items-center transition-transform duration-[250ms]",
+            isOpen ? "rotate-180" : "rotate-0",
+          ].join(" ")}
         >
           <ArrowDown2 size={18} color="var(--theme-fg-muted)" variant="Linear" />
         </span>
       </button>
       <div
-        style={{
-          overflow: "hidden",
-          transition: "height 0.25s ease",
-          height: isOpen ? `${height}px` : "0px",
-        }}
+        className="overflow-hidden transition-[height] duration-[250ms]"
+        style={{ height: isOpen ? `${height}px` : "0px" }}
       >
         <div
           ref={contentRef}
-          style={{
-            paddingTop: 0, paddingRight: 16, paddingBottom: 12, paddingLeft: 16,
-            fontSize: "13px",
-            color: "var(--theme-fg-muted)",
-            lineHeight: 1.5,
-          }}
+          className="pt-0 pr-4 pb-3 pl-4 text-[13px] text-[var(--theme-fg-muted)] leading-relaxed"
         >
           {content}
         </div>
@@ -126,13 +92,8 @@ export function Accordion({
 
   return (
     <div
-      className={className}
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: "6px",
-        ...style,
-      }}
+      className={`flex flex-col gap-1.5 ${className}`}
+      style={style}
     >
       {items.map((item, i) => (
         <AccordionSection

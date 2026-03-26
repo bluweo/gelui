@@ -43,60 +43,24 @@ export function Pagination({
     return pages;
   };
 
-  const buttonBase: CSSProperties = {
-    display: "inline-flex",
-    alignItems: "center",
-    justifyContent: "center",
-    minWidth: "32px",
-    height: "32px",
-    paddingTop: 0, paddingBottom: 0, paddingLeft: 8, paddingRight: 8,
-    border: "none",
-    borderRadius: "var(--glass-radius-pill, 100px)",
-    cursor: "pointer",
-    fontSize: "13px",
-    fontWeight: 500,
-    fontFamily: "var(--font-ui)",
-    transition: "background 0.15s, opacity 0.15s",
-  };
-
-  const navButton: CSSProperties = {
-    ...buttonBase,
-    background: "var(--theme-header-bg)",
-    color: "var(--theme-fg-muted)",
-    backdropFilter: "blur(12px)",
-    WebkitBackdropFilter: "blur(12px)",
-  };
-
-  const pageButton = (active: boolean): CSSProperties => ({
-    ...buttonBase,
-    background: active
-      ? "var(--theme-bg-solid)"
-      : "var(--theme-header-bg)",
-    color: active
-      ? "var(--theme-fg-on-solid)"
-      : "var(--theme-fg-muted)",
-    backdropFilter: "blur(12px)",
-    WebkitBackdropFilter: "blur(12px)",
-  });
+  const navBtnClass = [
+    "inline-flex items-center justify-center min-w-8 h-8 px-2",
+    "border-none rounded-[var(--glass-radius-pill,100px)]",
+    "cursor-pointer text-[13px] font-medium font-[family-name:var(--font-ui)]",
+    "transition-[background,opacity] duration-150",
+    "bg-[var(--theme-header-bg)] text-[var(--theme-fg-muted)]",
+    "backdrop-blur-[12px]",
+  ].join(" ");
 
   const pages = getVisiblePages();
 
   return (
     <nav
-      className={className}
-      style={{
-        display: "flex",
-        alignItems: "center",
-        gap: "4px",
-        ...style,
-      }}
+      className={`flex items-center gap-1 ${className}`}
+      style={style}
     >
       <button
-        style={{
-          ...navButton,
-          opacity: currentPage <= 1 ? 0.4 : 1,
-          cursor: currentPage <= 1 ? "default" : "pointer",
-        }}
+        className={`${navBtnClass} ${currentPage <= 1 ? "opacity-40 cursor-default" : ""}`}
         disabled={currentPage <= 1}
         onClick={() => onPageChange(currentPage - 1)}
       >
@@ -107,19 +71,24 @@ export function Pagination({
         page === "ellipsis" ? (
           <span
             key={`ellipsis-${i}`}
-            style={{
-              minWidth: "32px",
-              textAlign: "center",
-              fontSize: "13px",
-              color: "var(--theme-fg-subtle)",
-            }}
+            className="min-w-8 text-center text-[13px] text-[var(--theme-fg-subtle)]"
           >
             &hellip;
           </span>
         ) : (
           <button
             key={page}
-            style={pageButton(page === currentPage)}
+            data-active={page === currentPage || undefined}
+            className={[
+              "inline-flex items-center justify-center min-w-8 h-8 px-2",
+              "border-none rounded-[var(--glass-radius-pill,100px)]",
+              "cursor-pointer text-[13px] font-medium font-[family-name:var(--font-ui)]",
+              "transition-[background,opacity] duration-150",
+              "backdrop-blur-[12px]",
+              page === currentPage
+                ? "bg-[var(--theme-bg-solid)] text-[var(--theme-fg-on-solid)]"
+                : "bg-[var(--theme-header-bg)] text-[var(--theme-fg-muted)]",
+            ].join(" ")}
             onClick={() => onPageChange(page)}
           >
             {page}
@@ -128,11 +97,7 @@ export function Pagination({
       )}
 
       <button
-        style={{
-          ...navButton,
-          opacity: currentPage >= totalPages ? 0.4 : 1,
-          cursor: currentPage >= totalPages ? "default" : "pointer",
-        }}
+        className={`${navBtnClass} ${currentPage >= totalPages ? "opacity-40 cursor-default" : ""}`}
         disabled={currentPage >= totalPages}
         onClick={() => onPageChange(currentPage + 1)}
       >

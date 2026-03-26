@@ -18,23 +18,23 @@ export function DataShowcase() {
   ];
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+    <div className="flex flex-col gap-5">
       {/* Table */}
-      <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: "var(--theme-table-bg)", border: "1px solid var(--theme-divider)" }}>
-        <div style={{ paddingTop: 8, paddingBottom: 8, paddingLeft: 12, paddingRight: 12, background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
-          <span className="type-overline" style={{ color: "var(--theme-fg-muted)" }}>Table (Striped)</span>
+      <div className="rounded-[var(--glass-radius-sm)] overflow-hidden bg-[var(--theme-table-bg)] border border-[var(--theme-divider)]">
+        <div className="py-2 px-3 bg-[var(--theme-header-bg)] border-b border-[var(--theme-divider)]">
+          <span className="type-overline text-[var(--theme-fg-muted)]">Table (Striped)</span>
         </div>
-        <div style={{ padding: "16px" }}>
+        <div className="p-4">
           <Table columns={tableColumns} data={tableData} striped />
         </div>
       </div>
 
       {/* Stat Cards */}
-      <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: "var(--theme-table-bg)", border: "1px solid var(--theme-divider)" }}>
-        <div style={{ paddingTop: 8, paddingBottom: 8, paddingLeft: 12, paddingRight: 12, background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
-          <span className="type-overline" style={{ color: "var(--theme-fg-muted)" }}>Stat Cards</span>
+      <div className="rounded-[var(--glass-radius-sm)] overflow-hidden bg-[var(--theme-table-bg)] border border-[var(--theme-divider)]">
+        <div className="py-2 px-3 bg-[var(--theme-header-bg)] border-b border-[var(--theme-divider)]">
+          <span className="type-overline text-[var(--theme-fg-muted)]">Stat Cards</span>
         </div>
-        <div style={{ padding: "16px", display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "12px" }}>
+        <div className="p-4 grid grid-cols-3 gap-3">
           <Stat
             value="1,234"
             label="Users"
@@ -75,9 +75,9 @@ export function DataShowcase() {
       </div>
 
       {/* EmptyState */}
-      <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: "var(--theme-table-bg)", border: "1px solid var(--theme-divider)" }}>
-        <div style={{ paddingTop: 8, paddingBottom: 8, paddingLeft: 12, paddingRight: 12, background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
-          <span className="type-overline" style={{ color: "var(--theme-fg-muted)" }}>Empty State</span>
+      <div className="rounded-[var(--glass-radius-sm)] overflow-hidden bg-[var(--theme-table-bg)] border border-[var(--theme-divider)]">
+        <div className="py-2 px-3 bg-[var(--theme-header-bg)] border-b border-[var(--theme-divider)]">
+          <span className="type-overline text-[var(--theme-fg-muted)]">Empty State</span>
         </div>
         <EmptyState
           title="No results found"
@@ -91,17 +91,7 @@ export function DataShowcase() {
           action={
             <button
               onClick={() => setShowEmpty(!showEmpty)}
-              style={{
-                paddingTop: 8, paddingBottom: 8, paddingLeft: 20, paddingRight: 20,
-                borderRadius: "var(--glass-radius-pill, 100px)",
-                border: "none",
-                background: "var(--theme-bg-solid)",
-                color: "var(--theme-fg-on-solid)",
-                fontSize: "13px",
-                fontWeight: 600,
-                fontFamily: "var(--font-ui)",
-                cursor: "pointer",
-              }}
+              className="py-2 px-5 rounded-[var(--glass-radius-pill)] border-none bg-[var(--theme-bg-solid)] text-[var(--theme-fg-on-solid)] text-[13px] font-semibold font-[var(--font-ui)] cursor-pointer"
             >
               Clear Filters
             </button>
@@ -110,11 +100,11 @@ export function DataShowcase() {
       </div>
 
       {/* ColorSwatch */}
-      <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: "var(--theme-table-bg)", border: "1px solid var(--theme-divider)" }}>
-        <div style={{ paddingTop: 8, paddingBottom: 8, paddingLeft: 12, paddingRight: 12, background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
-          <span className="type-overline" style={{ color: "var(--theme-fg-muted)" }}>Color Swatches</span>
+      <div className="rounded-[var(--glass-radius-sm)] overflow-hidden bg-[var(--theme-table-bg)] border border-[var(--theme-divider)]">
+        <div className="py-2 px-3 bg-[var(--theme-header-bg)] border-b border-[var(--theme-divider)]">
+          <span className="type-overline text-[var(--theme-fg-muted)]">Color Swatches</span>
         </div>
-        <div style={{ padding: "16px", display: "flex", gap: "16px", flexWrap: "wrap", justifyContent: "center" }}>
+        <div className="p-4 flex gap-4 flex-wrap justify-center">
           <ColorSwatch color="#007AFF" label="Primary" showHex />
           <ColorSwatch color="#34C759" label="Success" showHex />
           <ColorSwatch color="#FF9500" label="Warning" showHex />

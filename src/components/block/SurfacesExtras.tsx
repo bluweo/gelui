@@ -18,32 +18,32 @@ export function SurfacesExtras() {
   ];
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+    <div className="flex flex-col gap-5">
       {/* Accordion */}
-      <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: "var(--theme-table-bg)", border: "1px solid var(--theme-divider)" }}>
-        <div style={{ paddingTop: 8, paddingBottom: 8, paddingLeft: 12, paddingRight: 12, background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
+      <div className="rounded-[var(--glass-radius-sm)] overflow-hidden bg-[var(--theme-table-bg)] border border-[var(--theme-divider)]">
+        <div className="py-2 px-3 bg-[var(--theme-header-bg)] border-b border-[var(--theme-divider)]">
           <Overline size="md" muted>Accordion</Overline>
         </div>
-        <div style={{ padding: "16px" }}>
+        <div className="p-4">
           <Accordion items={faqItems} defaultOpen={[0]} />
         </div>
       </div>
 
       {/* ScrollArea */}
-      <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: "var(--theme-table-bg)", border: "1px solid var(--theme-divider)" }}>
-        <div style={{ paddingTop: 8, paddingBottom: 8, paddingLeft: 12, paddingRight: 12, background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
+      <div className="rounded-[var(--glass-radius-sm)] overflow-hidden bg-[var(--theme-table-bg)] border border-[var(--theme-divider)]">
+        <div className="py-2 px-3 bg-[var(--theme-header-bg)] border-b border-[var(--theme-divider)]">
           <Overline size="md" muted>Scroll Area</Overline>
         </div>
-        <div style={{ padding: "16px" }}>
+        <div className="p-4">
           <ScrollArea maxHeight={200}>
-            <div style={{ display: "flex", flexDirection: "column", gap: "16px", paddingTop: 4, paddingBottom: 4, paddingLeft: 8, paddingRight: 8 }}>
-              <p className="type-body" style={{ color: "var(--theme-fg)", margin: 0, lineHeight: 1.7 }}>
+            <div className="flex flex-col gap-4 py-1 px-2">
+              <p className="type-body text-[var(--theme-fg)] m-0 leading-[1.7]">
                 Every surface in Gel UI is built on a foundation of translucent layers. The backdrop-filter property creates the signature frosted glass effect, while carefully tuned opacity values ensure text remains readable across any background. This approach allows interfaces to feel lightweight and contextual — the background becomes part of the design, not hidden behind it.
               </p>
-              <p className="type-body" style={{ color: "var(--theme-fg)", margin: 0, lineHeight: 1.7 }}>
+              <p className="type-body text-[var(--theme-fg)] m-0 leading-[1.7]">
                 The token system underpinning these surfaces provides granular control over blur intensity, saturation, transparency, and shadow depth. Each parameter can be adjusted independently through the Appearance settings, allowing users to find their preferred balance between translucency and readability. Dark mode automatically inverts the appropriate values while preserving the visual hierarchy.
               </p>
-              <p className="type-body" style={{ color: "var(--theme-fg)", margin: 0, lineHeight: 1.7 }}>
+              <p className="type-body text-[var(--theme-fg)] m-0 leading-[1.7]">
                 Primitives like Accordion and ScrollArea extend the surface concept by adding interactive behavior to contained areas. An accordion manages vertical space by revealing content on demand, while a scroll area constrains tall content within a fixed viewport with styled scrollbars. Both components inherit the design system's border radius, font settings, and dark mode tokens — ensuring visual consistency with every other primitive in the library.
               </p>
             </div>

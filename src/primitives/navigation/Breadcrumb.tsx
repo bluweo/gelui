@@ -13,32 +13,25 @@ export function Breadcrumb({
 }: BreadcrumbProps) {
   return (
     <nav
-      className={className}
-      style={{
-        display: "flex",
-        alignItems: "center",
-        gap: "8px",
-        fontSize: "13px",
-        ...style,
-      }}
+      className={`flex items-center gap-2 text-[13px] ${className}`}
+      style={style}
     >
       {items.map((item, i) => (
         <span
           key={i}
-          style={{ display: "flex", alignItems: "center", gap: "8px" }}
+          className="flex items-center gap-2"
         >
           {i > 0 && (
-            <span style={{ opacity: 0.3, color: "var(--theme-fg)" }}>
+            <span className="opacity-30 text-[var(--theme-fg)]">
               /
             </span>
           )}
           <span
-            style={{
-              fontWeight: i === items.length - 1 ? 600 : 400,
-              opacity: i === items.length - 1 ? 1 : 0.5,
-              cursor: i < items.length - 1 ? "pointer" : "default",
-              color: "var(--theme-fg)",
-            }}
+            className={[
+              "text-[var(--theme-fg)]",
+              i === items.length - 1 ? "font-semibold opacity-100" : "font-normal opacity-50",
+              i < items.length - 1 ? "cursor-pointer" : "cursor-default",
+            ].join(" ")}
           >
             {item}
           </span>

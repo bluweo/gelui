@@ -11,49 +11,44 @@ const elevations = [
 
 export function ElevationShowcase() {
   return (
-    <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "20px" }}>
+    <div className="grid grid-cols-2 gap-5">
       {/* Left: Shadow Depths — transparent background */}
-      <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", border: "1px solid var(--theme-divider)", background: "transparent" }}>
-        <div style={{ paddingTop: 10, paddingBottom: 10, paddingLeft: 16, paddingRight: 16, borderBottom: "1px solid var(--theme-divider)", background: "transparent" }}>
-          <span style={{ fontSize: "10px", fontWeight: 650, letterSpacing: "0.06em", textTransform: "uppercase" as const, color: "var(--theme-fg-muted)" }}>Shadow Depths</span>
+      <div className="rounded-[var(--glass-radius-sm)] overflow-hidden border border-[var(--theme-divider)] bg-transparent">
+        <div className="py-2.5 px-4 border-b border-[var(--theme-divider)] bg-transparent">
+          <span className="text-[10px] font-[650] tracking-[0.06em] uppercase text-[var(--theme-fg-muted)]">Shadow Depths</span>
         </div>
-        <div style={{ padding: "16px", display: "flex", flexDirection: "column", gap: "24px" }}>
+        <div className="p-4 flex flex-col gap-6">
           {elevations.map((e) => (
             <Card
               key={e.name}
               variant="solid"
               frost="none"
-              style={{
-                boxShadow: e.shadow,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                transition: "box-shadow 300ms ease",
-              }}
+              className="flex items-center justify-between transition-shadow duration-300 ease-in-out"
+              style={{ boxShadow: e.shadow }}
             >
               <div>
-                <span style={{ fontSize: "16px", fontWeight: 700, color: "var(--theme-fg)", display: "block" }}>{e.name}</span>
-                <span style={{ fontSize: "13px", color: "var(--theme-fg-muted)" }}>{e.desc}</span>
+                <span className="text-base font-bold text-[var(--theme-fg)] block">{e.name}</span>
+                <span className="text-[13px] text-[var(--theme-fg-muted)]">{e.desc}</span>
               </div>
-              <span style={{ fontSize: "12px", fontFamily: "var(--font-mono)", fontWeight: 500, color: "var(--theme-fg-subtle)" }}>z-{e.z}</span>
+              <span className="text-xs font-mono font-medium text-[var(--theme-fg-subtle)]">z-{e.z}</span>
             </Card>
           ))}
         </div>
       </div>
 
       {/* Right: Skeleton Loader */}
-      <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: "var(--theme-table-bg)", border: "1px solid var(--theme-divider)" }}>
-        <div style={{ paddingTop: 10, paddingBottom: 10, paddingLeft: 16, paddingRight: 16, background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
-          <span style={{ fontSize: "10px", fontWeight: 650, letterSpacing: "0.06em", textTransform: "uppercase" as const, color: "var(--theme-fg)" }}>Skeleton Loader</span>
+      <div className="rounded-[var(--glass-radius-sm)] overflow-hidden bg-[var(--theme-table-bg)] border border-[var(--theme-divider)]">
+        <div className="py-2.5 px-4 bg-[var(--theme-header-bg)] border-b border-[var(--theme-divider)]">
+          <span className="text-[10px] font-[650] tracking-[0.06em] uppercase text-[var(--theme-fg)]">Skeleton Loader</span>
         </div>
-        <div style={{ padding: "20px", display: "flex", flexDirection: "column", gap: "20px" }}>
+        <div className="p-5 flex flex-col gap-5">
           {/* Card skeleton */}
           <div>
-            <span style={{ fontSize: "10px", fontWeight: 500, color: "var(--theme-fg-muted)", display: "block", marginBottom: "12px" }}>Card Loading</span>
-            <div style={{ display: "flex", flexDirection: "column", gap: "12px", padding: "16px", borderRadius: "var(--glass-radius-sm, 10px)", background: "var(--theme-header-bg)", border: "1px solid var(--theme-header-bg)" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+            <span className="text-[10px] font-medium text-[var(--theme-fg-muted)] block mb-3">Card Loading</span>
+            <div className="flex flex-col gap-3 p-4 rounded-[var(--glass-radius-sm)] bg-[var(--theme-header-bg)] border border-[var(--theme-header-bg)]">
+              <div className="flex items-center gap-3">
                 <Skeleton width="40px" height="40px" rounded="50%" />
-                <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "6px" }}>
+                <div className="flex-1 flex flex-col gap-1.5">
                   <Skeleton width="40%" height="12px" />
                   <Skeleton width="60%" height="10px" />
                 </div>
@@ -66,12 +61,12 @@ export function ElevationShowcase() {
 
           {/* List skeleton */}
           <div>
-            <span style={{ fontSize: "10px", fontWeight: 500, color: "var(--theme-fg-muted)", display: "block", marginBottom: "12px" }}>List Loading</span>
-            <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+            <span className="text-[10px] font-medium text-[var(--theme-fg-muted)] block mb-3">List Loading</span>
+            <div className="flex flex-col gap-3">
               {[80, 65, 90, 55].map((w, i) => (
-                <div key={i} style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                <div key={i} className="flex items-center gap-3">
                   <Skeleton width="32px" height="32px" rounded="6px" />
-                  <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "6px" }}>
+                  <div className="flex-1 flex flex-col gap-1.5">
                     <Skeleton width={`${w}%`} height="10px" />
                     <Skeleton width={`${w - 20}%`} height="8px" />
                   </div>
@@ -82,8 +77,8 @@ export function ElevationShowcase() {
 
           {/* Media skeleton */}
           <div>
-            <span style={{ fontSize: "10px", fontWeight: 500, color: "var(--theme-fg-muted)", display: "block", marginBottom: "12px" }}>Media Loading</span>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "8px" }}>
+            <span className="text-[10px] font-medium text-[var(--theme-fg-muted)] block mb-3">Media Loading</span>
+            <div className="grid grid-cols-3 gap-2">
               <Skeleton width="100%" height="0" style={{ paddingBottom: "100%", borderRadius: "var(--glass-radius-sm, 10px)" }} />
               <Skeleton width="100%" height="0" style={{ paddingBottom: "100%", borderRadius: "var(--glass-radius-sm, 10px)" }} />
               <Skeleton width="100%" height="0" style={{ paddingBottom: "100%", borderRadius: "var(--glass-radius-sm, 10px)" }} />

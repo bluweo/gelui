@@ -15,128 +15,64 @@ export function Stepper({
   className = "",
   style,
 }: StepperProps) {
-
-  const circleSize = 28;
-  const lineHeight = 2;
-
-  const getCircleStyle = (index: number): CSSProperties => {
-    const isCompleted = index < currentStep;
-    const isCurrent = index === currentStep;
-
-    return {
-      width: `${circleSize}px`,
-      height: `${circleSize}px`,
-      borderRadius: "50%",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      fontSize: "12px",
-      fontWeight: 600,
-      fontFamily: "var(--font-ui)",
-      flexShrink: 0,
-      cursor: onChange ? "pointer" : "default",
-      transition: "background 0.2s, border-color 0.2s",
-      ...(isCompleted
-        ? {
-            background: "#007AFF",
-            color: "#fff",
-            border: "2px solid #007AFF",
-          }
-        : isCurrent
-          ? {
-              background: "transparent",
-              color: "#007AFF",
-              border: "2px solid #007AFF",
-            }
-          : {
-              background: "transparent",
-              color: "var(--theme-fg-subtle)",
-              border: "2px solid var(--theme-fg-faint)",
-            }),
-    };
-  };
-
-  const getLineStyle = (index: number): CSSProperties => {
-    const isCompleted = index < currentStep;
-    return {
-      flex: 1,
-      height: `${lineHeight}px`,
-      background: isCompleted
-        ? "#007AFF"
-        : "var(--theme-fg-faint)",
-      transition: "background 0.2s",
-    };
-  };
-
   return (
     <div
-      className={className}
-      style={{
-        display: "flex",
-        alignItems: "flex-start",
-        width: "100%",
-        ...style,
-      }}
+      className={`flex items-start w-full ${className}`}
+      style={style}
     >
-      {steps.map((label, i) => (
-        <div
-          key={i}
-          style={{
-            display: "flex",
-            alignItems: "center",
-            flex: i < steps.length - 1 ? 1 : "none",
-          }}
-        >
+      {steps.map((label, i) => {
+        const isCompleted = i < currentStep;
+        const isCurrent = i === currentStep;
+
+        return (
           <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              gap: "6px",
-            }}
+            key={i}
+            className={`flex items-center ${i < steps.length - 1 ? "flex-1" : ""}`}
           >
-            <div
-              style={getCircleStyle(i)}
-              onClick={() => onChange?.(i)}
-            >
-              {i < currentStep ? (
-                <span style={{ fontSize: "14px", lineHeight: 1 }}>&#10003;</span>
-              ) : (
-                i + 1
-              )}
+            <div className="flex flex-col items-center gap-1.5">
+              <div
+                data-completed={isCompleted || undefined}
+                data-current={isCurrent || undefined}
+                onClick={() => onChange?.(i)}
+                className={[
+                  "w-7 h-7 rounded-full flex items-center justify-center",
+                  "text-xs font-semibold font-[family-name:var(--font-ui)] shrink-0",
+                  "transition-[background,border-color] duration-200 border-2",
+                  onChange ? "cursor-pointer" : "cursor-default",
+                  isCompleted
+                    ? "bg-[#007AFF] text-white border-[#007AFF]"
+                    : isCurrent
+                      ? "bg-transparent text-[#007AFF] border-[#007AFF]"
+                      : "bg-transparent text-[var(--theme-fg-subtle)] border-[var(--theme-fg-faint)]",
+                ].join(" ")}
+              >
+                {isCompleted ? (
+                  <span className="text-sm leading-none">&#10003;</span>
+                ) : (
+                  i + 1
+                )}
+              </div>
+              <span
+                className={[
+                  "text-[11px] font-[family-name:var(--font-ui)] text-center max-w-[80px] whitespace-nowrap overflow-hidden text-ellipsis",
+                  isCurrent ? "font-semibold" : "font-normal",
+                  i <= currentStep ? "text-[var(--theme-fg)]" : "text-[var(--theme-fg-subtle)]",
+                ].join(" ")}
+              >
+                {label}
+              </span>
             </div>
-            <span
-              style={{
-                fontSize: "11px",
-                fontFamily: "var(--font-ui)",
-                fontWeight: i === currentStep ? 600 : 400,
-                color:
-                  i <= currentStep
-                    ? "var(--theme-fg)"
-                    : "var(--theme-fg-subtle)",
-                textAlign: "center",
-                maxWidth: "80px",
-                whiteSpace: "nowrap",
-                overflow: "hidden",
-                textOverflow: "ellipsis",
-              }}
-            >
-              {label}
-            </span>
+            {i < steps.length - 1 && (
+              <div
+                className={[
+                  "flex-1 h-0.5 self-start mt-3.5 mx-2 transition-colors duration-200",
+                  isCompleted ? "bg-[#007AFF]" : "bg-[var(--theme-fg-faint)]",
+                ].join(" ")}
+              />
+            )}
           </div>
-          {i < steps.length - 1 && (
-            <div
-              style={{
-                ...getLineStyle(i),
-                marginTop: `${circleSize / 2}px`,
-                marginLeft: "8px",
-                marginRight: "8px",
-                alignSelf: "flex-start",
-              }}
-            />
-          )}
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 }

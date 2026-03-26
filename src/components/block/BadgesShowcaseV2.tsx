@@ -5,46 +5,25 @@ export function BadgesShowcaseV2() {
   const [tags, setTags] = useState(["React", "Tailwind", "Astro"]);
   const [activeChip, setActiveChip] = useState("Active");
 
-  const card: React.CSSProperties = {
-    borderRadius: "var(--glass-radius-sm, 10px)",
-    overflow: "hidden",
-    background: "var(--theme-table-bg)",
-    border: "1px solid var(--theme-divider)",
-  };
-
-  const header: React.CSSProperties = {
-    paddingTop: 10, paddingBottom: 10, paddingLeft: 14, paddingRight: 14,
-    background: "var(--theme-header-bg)",
-    borderBottom: "1px solid var(--theme-divider)",
-  };
-
-  const row = (last = false): React.CSSProperties => ({
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    paddingTop: 10, paddingBottom: 10, paddingLeft: 14, paddingRight: 14,
-    borderBottom: last ? undefined : "1px solid var(--theme-divider)",
-  });
-
   return (
-    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
+    <div className="grid grid-cols-2 gap-4">
       {/* Top-left: Status Badges */}
-      <div style={card}>
-        <div style={header}>
-          <span className="type-overline" style={{ color: "var(--theme-fg-subtle)" }}>Status Badges</span>
+      <div className="rounded-[var(--glass-radius-sm)] overflow-hidden bg-[var(--theme-table-bg)] border border-[var(--theme-divider)]">
+        <div className="py-2.5 px-3.5 bg-[var(--theme-header-bg)] border-b border-[var(--theme-divider)]">
+          <span className="type-overline text-[var(--theme-fg-subtle)]">Status Badges</span>
         </div>
         {(["success", "warning", "error", "info", "default"] as const).map((v, i) => (
-          <div key={v} style={row(i === 4)}>
-            <span className="type-label" style={{ color: "var(--theme-fg)", textTransform: "capitalize" }}>{v === "default" ? "Neutral" : v}</span>
+          <div key={v} className={`flex items-center justify-between py-2.5 px-3.5 ${i < 4 ? "border-b border-[var(--theme-divider)]" : ""}`}>
+            <span className="type-label text-[var(--theme-fg)] capitalize">{v === "default" ? "Neutral" : v}</span>
             <Badge variant={v}>{v === "default" ? "Neutral" : v.charAt(0).toUpperCase() + v.slice(1)}</Badge>
           </div>
         ))}
       </div>
 
       {/* Top-right: Status Dots */}
-      <div style={card}>
-        <div style={header}>
-          <span className="type-overline" style={{ color: "var(--theme-fg-subtle)" }}>Status Dots</span>
+      <div className="rounded-[var(--glass-radius-sm)] overflow-hidden bg-[var(--theme-table-bg)] border border-[var(--theme-divider)]">
+        <div className="py-2.5 px-3.5 bg-[var(--theme-header-bg)] border-b border-[var(--theme-divider)]">
+          <span className="type-overline text-[var(--theme-fg-subtle)]">Status Dots</span>
         </div>
         {([
           { label: "Online", color: "#34C759" },
@@ -52,22 +31,22 @@ export function BadgesShowcaseV2() {
           { label: "Busy", color: "#FF3B30" },
           { label: "Offline", color: "var(--theme-fg-faint)" },
         ]).map((dot, i) => (
-          <div key={dot.label} style={row(i === 3)}>
-            <span className="type-label" style={{ color: "var(--theme-fg)" }}>{dot.label}</span>
-            <span style={{ width: 12, height: 12, borderRadius: "50%", background: dot.color, flexShrink: 0 }} />
+          <div key={dot.label} className={`flex items-center justify-between py-2.5 px-3.5 ${i < 3 ? "border-b border-[var(--theme-divider)]" : ""}`}>
+            <span className="type-label text-[var(--theme-fg)]">{dot.label}</span>
+            <span className="w-3 h-3 rounded-full shrink-0" style={{ background: dot.color }} />
           </div>
         ))}
       </div>
 
       {/* Bottom-left: Tags & Chips */}
-      <div style={card}>
-        <div style={header}>
-          <span className="type-overline" style={{ color: "var(--theme-fg-subtle)" }}>Tags & Chips</span>
+      <div className="rounded-[var(--glass-radius-sm)] overflow-hidden bg-[var(--theme-table-bg)] border border-[var(--theme-divider)]">
+        <div className="py-2.5 px-3.5 bg-[var(--theme-header-bg)] border-b border-[var(--theme-divider)]">
+          <span className="type-overline text-[var(--theme-fg-subtle)]">Tags & Chips</span>
         </div>
         {/* Removable Tags */}
-        <div style={{ paddingTop: 12, paddingBottom: 12, paddingLeft: 14, paddingRight: 14, borderBottom: "1px solid var(--theme-divider)" }}>
-          <span className="type-caption" style={{ color: "var(--theme-fg-subtle)", display: "block", marginBottom: 8 }}>Removable Tags</span>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
+        <div className="py-3 px-3.5 border-b border-[var(--theme-divider)]">
+          <span className="type-caption text-[var(--theme-fg-subtle)] block mb-2">Removable Tags</span>
+          <div className="flex flex-wrap gap-2">
             {tags.map((tag) => (
               <Tag
                 key={tag}
@@ -77,28 +56,19 @@ export function BadgesShowcaseV2() {
               />
             ))}
             {tags.length === 0 && (
-              <span style={{ fontSize: "11px", color: "var(--theme-fg-subtle)" }}>All removed — refresh to reset</span>
+              <span className="text-[11px] text-[var(--theme-fg-subtle)]">All removed — refresh to reset</span>
             )}
           </div>
         </div>
         {/* Selectable Chips */}
-        <div style={{ paddingTop: 12, paddingBottom: 12, paddingLeft: 14, paddingRight: 14 }}>
-          <span className="type-caption" style={{ color: "var(--theme-fg-subtle)", display: "block", marginBottom: 8 }}>Selectable Chips</span>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
+        <div className="py-3 px-3.5">
+          <span className="type-caption text-[var(--theme-fg-subtle)] block mb-2">Selectable Chips</span>
+          <div className="flex flex-wrap gap-2">
             {["Active", "Inactive", "Another"].map((chip) => (
               <button
                 key={chip}
-                className="type-overline"
+                className={`type-overline py-[5px] px-3.5 rounded-[var(--glass-radius-pill)] border border-[var(--theme-ghost-border)] cursor-pointer transition-all duration-150 ease-in-out ${activeChip === chip ? "bg-[var(--theme-bg-solid)] text-[var(--theme-fg-on-solid)]" : "bg-transparent text-[var(--theme-fg)]"}`}
                 onClick={() => setActiveChip(chip)}
-                style={{
-                  paddingTop: 5, paddingBottom: 5, paddingLeft: 14, paddingRight: 14,
-                  borderRadius: "var(--glass-radius-pill, 100px)",
-                  border: "1px solid var(--theme-ghost-border)",
-                  background: activeChip === chip ? "var(--theme-bg-solid)" : "transparent",
-                  color: activeChip === chip ? "var(--theme-fg-on-solid)" : "var(--theme-fg)",
-                  cursor: "pointer",
-                  transition: "all 0.15s ease",
-                }}
               >
                 {chip}
               </button>
@@ -108,45 +78,41 @@ export function BadgesShowcaseV2() {
       </div>
 
       {/* Bottom-right: Avatars */}
-      <div style={card}>
-        <div style={header}>
-          <span className="type-overline" style={{ color: "var(--theme-fg-subtle)" }}>Avatars</span>
+      <div className="rounded-[var(--glass-radius-sm)] overflow-hidden bg-[var(--theme-table-bg)] border border-[var(--theme-divider)]">
+        <div className="py-2.5 px-3.5 bg-[var(--theme-header-bg)] border-b border-[var(--theme-divider)]">
+          <span className="type-overline text-[var(--theme-fg-subtle)]">Avatars</span>
         </div>
         {/* Sizes */}
-        <div style={{ padding: "14px", borderBottom: "1px solid var(--theme-divider)" }}>
-          <span className="type-caption" style={{ color: "var(--theme-fg-subtle)", display: "block", marginBottom: 10 }}>Sizes</span>
-          <div style={{ display: "flex", gap: "16px", alignItems: "flex-end" }}>
+        <div className="p-3.5 border-b border-[var(--theme-divider)]">
+          <span className="type-caption text-[var(--theme-fg-subtle)] block mb-2.5">Sizes</span>
+          <div className="flex gap-4 items-end">
             {([
               { initials: "A", size: 28, bg: "#5856D6", label: "xs" },
               { initials: "B", size: 36, bg: "#FF9500", label: "sm" },
               { initials: "U", size: 44, bg: "#007AFF", label: "md" },
               { initials: "D", size: 56, bg: "#34C759", label: "lg" },
             ]).map((a) => (
-              <div key={a.label} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 4 }}>
-                <div style={{
-                  width: a.size,
-                  height: a.size,
-                  borderRadius: "50%",
-                  background: a.bg,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  fontSize: `${Math.max(a.size * 0.38, 11)}px`,
-                  fontWeight: 600,
-                  color: "#fff",
-                  overflow: "hidden",
-                }}>
+              <div key={a.label} className="flex flex-col items-center gap-1">
+                <div
+                  className="rounded-full flex items-center justify-center font-semibold text-white overflow-hidden"
+                  style={{
+                    width: a.size,
+                    height: a.size,
+                    background: a.bg,
+                    fontSize: `${Math.max(a.size * 0.38, 11)}px`,
+                  }}
+                >
                   {a.initials}
                 </div>
-                <span className="type-caption" style={{ color: "var(--theme-fg-subtle)" }}>{a.label}</span>
+                <span className="type-caption text-[var(--theme-fg-subtle)]">{a.label}</span>
               </div>
             ))}
           </div>
         </div>
         {/* Group */}
-        <div style={{ padding: "14px" }}>
-          <span className="type-caption" style={{ color: "var(--theme-fg-subtle)", display: "block", marginBottom: 10 }}>Group</span>
-          <div style={{ display: "flex", alignItems: "center" }}>
+        <div className="p-3.5">
+          <span className="type-caption text-[var(--theme-fg-subtle)] block mb-2.5">Group</span>
+          <div className="flex items-center">
             {([
               { initials: "A", bg: "#5856D6", status: "online" as const },
               { initials: "B", bg: "#FF9500", status: "away" as const },
@@ -154,52 +120,25 @@ export function BadgesShowcaseV2() {
             ]).map((u, i) => (
               <div
                 key={u.initials}
+                className="w-9 h-9 rounded-full flex items-center justify-center text-[13px] font-semibold text-white border-[2.5px] border-[var(--theme-table-bg)] relative"
                 style={{
                   marginLeft: i > 0 ? -10 : 0,
                   zIndex: 4 - i,
-                  width: 36,
-                  height: 36,
-                  borderRadius: "50%",
                   background: u.bg,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  fontSize: "13px",
-                  fontWeight: 600,
-                  color: "#fff",
-                  border: "2.5px solid var(--theme-table-bg)",
-                  position: "relative",
                 }}
               >
                 {u.initials}
-                <span style={{
-                  position: "absolute",
-                  bottom: -1,
-                  right: -1,
-                  width: 10,
-                  height: 10,
-                  borderRadius: "50%",
-                  background: u.status === "online" ? "#34C759" : u.status === "away" ? "#FFC800" : "#FF3B30",
-                  border: "2px solid var(--theme-table-bg)",
-                }} />
+                <span
+                  className="absolute -bottom-px -right-px w-2.5 h-2.5 rounded-full border-2 border-[var(--theme-table-bg)]"
+                  style={{
+                    background: u.status === "online" ? "#34C759" : u.status === "away" ? "#FFC800" : "#FF3B30",
+                  }}
+                />
               </div>
             ))}
             <div
-              style={{
-                marginLeft: -10,
-                width: 36,
-                height: 36,
-                borderRadius: "50%",
-                background: "var(--theme-bg-solid)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontSize: "11px",
-                fontWeight: 650,
-                color: "var(--theme-fg-on-solid)",
-                border: "2.5px solid var(--theme-table-bg)",
-                zIndex: 0,
-              }}
+              className="w-9 h-9 rounded-full bg-[var(--theme-bg-solid)] flex items-center justify-center text-[11px] font-[650] text-[var(--theme-fg-on-solid)] border-[2.5px] border-[var(--theme-table-bg)] z-0"
+              style={{ marginLeft: -10 }}
             >
               +3
             </div>

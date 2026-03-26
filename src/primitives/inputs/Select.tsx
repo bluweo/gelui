@@ -57,31 +57,21 @@ export function Select({
   return (
     <div
       ref={ref}
-      className={className}
-      style={{ position: "relative", width: "100%", ...style }}
+      className={`relative w-full ${className}`}
+      style={style}
       onKeyDown={handleKeyDown}
     >
       <button
         onClick={() => setOpen(!open)}
-        style={{
-          width: "100%",
-          paddingTop: 12, paddingBottom: 12, paddingLeft: 16, paddingRight: 16,
-          fontSize: "14px",
-          fontFamily: "var(--font-body)",
-          borderRadius: "var(--glass-radius-sm, 10px)",
-          border: `2px solid ${open ? "var(--theme-bg-solid)" : "transparent"}`,
-          background: "var(--theme-divider)",
-          color: selected
-            ? "var(--theme-bg-solid)"
-            : "var(--theme-fg-muted)",
-          cursor: "pointer",
-          textAlign: "left",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          outline: "none",
-          transition: "all 200ms ease",
-        }}
+        className={[
+          "w-full py-3 px-4 text-sm font-[family-name:var(--font-body)]",
+          "rounded-[var(--glass-radius-sm,10px)]",
+          "border-2 bg-[var(--theme-divider)]",
+          "cursor-pointer text-left flex items-center justify-between",
+          "outline-none transition-all duration-200",
+          open ? "border-[var(--theme-bg-solid)]" : "border-transparent",
+          selected ? "text-[var(--theme-bg-solid)]" : "text-[var(--theme-fg-muted)]",
+        ].join(" ")}
       >
         <span>{selected?.label ?? placeholder}</span>
         <svg
@@ -92,34 +82,14 @@ export function Select({
           stroke="currentColor"
           strokeWidth="2"
           strokeLinecap="round"
-          style={{
-            transition: "transform 200ms ease",
-            transform: open ? "rotate(180deg)" : "rotate(0deg)",
-          }}
+          className={`transition-transform duration-200 ${open ? "rotate-180" : "rotate-0"}`}
         >
           <polyline points="6 9 12 15 18 9" />
         </svg>
       </button>
 
       {open && (
-        <div
-          style={{
-            position: "absolute",
-            top: "calc(100% + 4px)",
-            left: 0,
-            right: 0,
-            zIndex: 50,
-            borderRadius: "var(--glass-radius-sm, 10px)",
-            background: "var(--theme-table-bg)",
-            backdropFilter: "blur(20px)",
-            WebkitBackdropFilter: "blur(20px)",
-            border: "1px solid var(--theme-divider)",
-            boxShadow: "0 8px 32px rgba(0,0,0,0.12)",
-            paddingTop: 6, paddingBottom: 6, paddingLeft: 8, paddingRight: 8,
-            maxHeight: "200px",
-            overflowY: "auto",
-          }}
-        >
+        <div className="absolute top-[calc(100%+4px)] left-0 right-0 z-50 rounded-[var(--glass-radius-sm,10px)] bg-[var(--theme-table-bg)] backdrop-blur-[20px] border border-[var(--theme-divider)] shadow-[0_8px_32px_rgba(0,0,0,0.12)] py-1.5 px-2 max-h-[200px] overflow-y-auto">
           {options.map((opt, i) => (
             <button
               key={opt.value}
@@ -128,27 +98,13 @@ export function Select({
                 setOpen(false);
               }}
               onMouseEnter={() => setHighlightIdx(i)}
-              style={{
-                width: "100%",
-                paddingTop: 10, paddingBottom: 10, paddingLeft: 12, paddingRight: 12,
-                fontSize: "14px",
-                fontFamily: "var(--font-body)",
-                border: "none",
-                borderRadius: "var(--glass-radius-sm, 8px)",
-                background:
-                  i === highlightIdx
-                    ? "var(--theme-header-bg)"
-                    : "transparent",
-                color:
-                  opt.value === value
-                    ? "var(--theme-bg-solid)"
-                    : "var(--theme-fg)",
-                fontWeight: opt.value === value ? 600 : 400,
-                cursor: "pointer",
-                textAlign: "left",
-                outline: "none",
-                transition: "background 100ms ease",
-              }}
+              className={[
+                "w-full py-2.5 px-3 text-sm font-[family-name:var(--font-body)]",
+                "border-none rounded-[var(--glass-radius-sm,8px)]",
+                "cursor-pointer text-left outline-none transition-colors duration-100",
+                i === highlightIdx ? "bg-[var(--theme-header-bg)]" : "bg-transparent",
+                opt.value === value ? "text-[var(--theme-bg-solid)] font-semibold" : "text-[var(--theme-fg)] font-normal",
+              ].join(" ")}
             >
               {opt.label}
             </button>

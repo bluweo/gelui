@@ -19,62 +19,41 @@ export function FeedbackShowcaseV2() {
     setShowToast(true);
   }, []);
 
-  const headerStyle: React.CSSProperties = {
-    fontSize: "10px",
-    fontWeight: 650,
-    letterSpacing: "0.06em",
-    textTransform: "uppercase",
-    color: "var(--theme-fg-muted)",
-  };
-
-  const tableStyle: React.CSSProperties = {
-    borderRadius: "var(--glass-radius-sm, 10px)",
-    overflow: "hidden",
-    background: "var(--theme-table-bg)",
-    border: "1px solid var(--theme-divider)",
-  };
-
-  const labelStyle: React.CSSProperties = {
-    fontSize: "12px",
-    fontWeight: 550,
-    color: "var(--theme-fg)",
-  };
-
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+    <div className="flex flex-col gap-5">
       {/* Spinners */}
-      <div style={tableStyle}>
-        <div style={{ paddingTop: 8, paddingBottom: 8, paddingLeft: 12, paddingRight: 12, background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
-          <span style={headerStyle}>Spinners</span>
+      <div className="rounded-[var(--glass-radius-sm)] overflow-hidden bg-[var(--theme-table-bg)] border border-[var(--theme-divider)]">
+        <div className="py-2 px-3 bg-[var(--theme-header-bg)] border-b border-[var(--theme-divider)]">
+          <span className="text-[10px] font-[650] tracking-[0.06em] uppercase text-[var(--theme-fg-muted)]">Spinners</span>
         </div>
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", paddingTop: 14, paddingBottom: 14, paddingLeft: 16, paddingRight: 16, borderBottom: "1px solid var(--theme-header-bg)" }}>
-          <span style={labelStyle}>Sizes</span>
-          <div style={{ display: "flex", gap: "16px", alignItems: "center" }}>
+        <div className="flex items-center justify-between py-3.5 px-4 border-b border-[var(--theme-header-bg)]">
+          <span className="text-xs font-[550] text-[var(--theme-fg)]">Sizes</span>
+          <div className="flex gap-4 items-center">
             <Spinner size="16px" />
             <Spinner size="24px" />
             <Spinner size="32px" />
           </div>
         </div>
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", paddingTop: 14, paddingBottom: 14, paddingLeft: 16, paddingRight: 16 }}>
-          <span style={labelStyle}>Progress ({progress}%)</span>
-          <div style={{ width: "60%" }}>
+        <div className="flex items-center justify-between py-3.5 px-4">
+          <span className="text-xs font-[550] text-[var(--theme-fg)]">Progress ({progress}%)</span>
+          <div className="w-[60%]">
             <Progress value={progress} />
           </div>
         </div>
       </div>
 
       {/* Skeleton Loaders */}
-      <div style={tableStyle}>
-        <div style={{ paddingTop: 8, paddingBottom: 8, paddingLeft: 12, paddingRight: 12, background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
-          <span style={headerStyle}>Skeleton Loaders</span>
+      <div className="rounded-[var(--glass-radius-sm)] overflow-hidden bg-[var(--theme-table-bg)] border border-[var(--theme-divider)]">
+        <div className="py-2 px-3 bg-[var(--theme-header-bg)] border-b border-[var(--theme-divider)]">
+          <span className="text-[10px] font-[650] tracking-[0.06em] uppercase text-[var(--theme-fg-muted)]">Skeleton Loaders</span>
         </div>
-        <div style={{ padding: "16px" }}>
+        <div className="p-4">
           {/* Card skeleton */}
-          <div style={{ marginBottom: "16px" }}>
-            <span style={{ fontSize: "11px", fontWeight: 550, color: "var(--theme-fg)", display: "block", marginBottom: "8px" }}>Card Loading</span>
-            <div style={{ display: "flex", gap: "12px", alignItems: "start" }}>
+          <div className="mb-4">
+            <span className="text-[11px] font-[550] text-[var(--theme-fg)] block mb-2">Card Loading</span>
+            <div className="flex gap-3 items-start">
               <Skeleton width="48px" height="48px" rounded="50%" />
-              <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "8px" }}>
+              <div className="flex-1 flex flex-col gap-2">
                 <Skeleton width="60%" height="14px" />
                 <Skeleton width="100%" height="10px" />
                 <Skeleton width="80%" height="10px" />
@@ -83,11 +62,11 @@ export function FeedbackShowcaseV2() {
           </div>
           {/* List skeleton */}
           <div>
-            <span style={{ fontSize: "11px", fontWeight: 550, color: "var(--theme-fg)", display: "block", marginBottom: "8px" }}>List Loading</span>
+            <span className="text-[11px] font-[550] text-[var(--theme-fg)] block mb-2">List Loading</span>
             {[1, 2, 3].map((i) => (
-              <div key={i} style={{ display: "flex", gap: "10px", alignItems: "center", marginBottom: "8px" }}>
+              <div key={i} className="flex gap-2.5 items-center mb-2">
                 <Skeleton width="32px" height="32px" rounded="8px" />
-                <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "4px" }}>
+                <div className="flex-1 flex flex-col gap-1">
                   <Skeleton width={`${70 - i * 10}%`} height="12px" />
                   <Skeleton width={`${50 - i * 5}%`} height="9px" />
                 </div>
@@ -98,11 +77,11 @@ export function FeedbackShowcaseV2() {
       </div>
 
       {/* Alerts */}
-      <div style={tableStyle}>
-        <div style={{ paddingTop: 8, paddingBottom: 8, paddingLeft: 12, paddingRight: 12, background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
-          <span style={headerStyle}>Alerts</span>
+      <div className="rounded-[var(--glass-radius-sm)] overflow-hidden bg-[var(--theme-table-bg)] border border-[var(--theme-divider)]">
+        <div className="py-2 px-3 bg-[var(--theme-header-bg)] border-b border-[var(--theme-divider)]">
+          <span className="text-[10px] font-[650] tracking-[0.06em] uppercase text-[var(--theme-fg-muted)]">Alerts</span>
         </div>
-        <div style={{ paddingTop: 12, paddingBottom: 12, paddingLeft: 16, paddingRight: 16, display: "flex", flexDirection: "column", gap: "10px" }}>
+        <div className="py-3 px-4 flex flex-col gap-2.5">
           <Alert variant="info" title="Information">This is an informational message.</Alert>
           <Alert variant="success" title="Success">Operation completed successfully.</Alert>
           <Alert variant="warning" title="Warning" dismissible>This warning can be dismissed.</Alert>
@@ -111,27 +90,16 @@ export function FeedbackShowcaseV2() {
       </div>
 
       {/* Toast Demo */}
-      <div style={tableStyle}>
-        <div style={{ paddingTop: 8, paddingBottom: 8, paddingLeft: 12, paddingRight: 12, background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
-          <span style={headerStyle}>Toast Notifications</span>
+      <div className="rounded-[var(--glass-radius-sm)] overflow-hidden bg-[var(--theme-table-bg)] border border-[var(--theme-divider)]">
+        <div className="py-2 px-3 bg-[var(--theme-header-bg)] border-b border-[var(--theme-divider)]">
+          <span className="text-[10px] font-[650] tracking-[0.06em] uppercase text-[var(--theme-fg-muted)]">Toast Notifications</span>
         </div>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", paddingTop: 14, paddingBottom: 14, paddingLeft: 16, paddingRight: 16 }}>
+        <div className="flex flex-wrap gap-2 py-3.5 px-4">
           {(["info", "success", "warning", "error"] as const).map((v) => (
             <button
               key={v}
               onClick={() => triggerToast(v)}
-              style={{
-                fontSize: "12px",
-                fontWeight: 600,
-                paddingTop: 8, paddingBottom: 8, paddingLeft: 14, paddingRight: 14,
-                borderRadius: "var(--glass-radius-pill, 100px)",
-                border: "1px solid var(--theme-divider)",
-                background: "var(--theme-header-bg)",
-                color: "var(--theme-fg)",
-                cursor: "pointer",
-                textTransform: "capitalize",
-                transition: "all 150ms ease",
-              }}
+              className="text-xs font-semibold py-2 px-3.5 rounded-[var(--glass-radius-pill)] border border-[var(--theme-divider)] bg-[var(--theme-header-bg)] text-[var(--theme-fg)] cursor-pointer capitalize transition-all duration-150 ease-in-out"
             >
               {v} Toast
             </button>

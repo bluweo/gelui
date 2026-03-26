@@ -50,111 +50,51 @@ export function ConfirmDialog({
 
   if (!open) return null;
 
-  const confirmBg =
-    variant === "danger"
-      ? "#FF3B30"
-      : "var(--theme-bg-solid)";
-  const confirmColor =
-    variant === "danger"
-      ? "#fff"
-      : "var(--theme-fg-on-solid)";
-
-  const btnBase: CSSProperties = {
-    paddingTop: 10, paddingBottom: 10, paddingLeft: 20, paddingRight: 20,
-    fontSize: "13px",
-    fontWeight: 600,
-    fontFamily: "var(--font-ui)",
-    borderRadius: "var(--glass-radius-pill, 100px)",
-    border: "none",
-    cursor: "pointer",
-    transition: "all 200ms ease",
-    outline: "none",
-  };
+  const isDanger = variant === "danger";
 
   return (
     <>
       <Overlay open={open} onClick={onCancel} blur />
-      <div
-        style={{
-          position: "fixed",
-          inset: 0,
-          zIndex: 999,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          padding: "24px",
-          pointerEvents: "none",
-        }}
-      >
+      <div className="fixed inset-0 z-[999] flex items-center justify-center p-6 pointer-events-none">
         <div
-          className={`glass-1 ${className}`}
+          className={[
+            "glass-1 pointer-events-auto w-full max-w-[420px]",
+            "rounded-[var(--glass-radius,16px)]",
+            "bg-[var(--theme-table-bg)] backdrop-blur-[40px]",
+            "border border-[var(--theme-ghost-border)]",
+            "shadow-[0_24px_80px_rgba(0,0,0,0.18)]",
+            "animate-[modalIn_200ms_ease] overflow-hidden",
+            className,
+          ].join(" ")}
           onClick={(e) => e.stopPropagation()}
-          style={{
-            pointerEvents: "auto",
-            width: "100%",
-            maxWidth: "420px",
-            borderRadius: "var(--glass-radius, 16px)",
-            background: "var(--theme-table-bg)",
-            backdropFilter: "blur(40px)",
-            WebkitBackdropFilter: "blur(40px)",
-            border: "1px solid var(--theme-ghost-border)",
-            boxShadow: "0 24px 80px rgba(0,0,0,0.18)",
-            animation: "modalIn 200ms ease",
-            overflow: "hidden",
-            ...style,
-          }}
+          style={style}
         >
           {/* Title */}
-          <div
-            style={{
-              paddingTop: 20, paddingRight: 20, paddingBottom: 0, paddingLeft: 20,
-              fontSize: "16px",
-              fontWeight: 650,
-              fontFamily: "var(--font-ui)",
-              color: "var(--theme-fg)",
-            }}
-          >
+          <div className="pt-5 px-5 pb-0 text-base font-[650] font-[family-name:var(--font-ui)] text-[var(--theme-fg)]">
             {title}
           </div>
           {/* Message */}
-          <div
-            style={{
-              paddingTop: 12, paddingRight: 20, paddingBottom: 20, paddingLeft: 20,
-              fontSize: "14px",
-              fontFamily: "var(--font-body)",
-              color: "var(--theme-fg-muted)",
-              lineHeight: 1.5,
-            }}
-          >
+          <div className="pt-3 px-5 pb-5 text-sm font-[family-name:var(--font-body)] text-[var(--theme-fg-muted)] leading-relaxed">
             {message}
           </div>
           {/* Actions */}
-          <div
-            style={{
-              paddingTop: 12, paddingRight: 20, paddingBottom: 16, paddingLeft: 20,
-              display: "flex",
-              justifyContent: "flex-end",
-              gap: "8px",
-              borderTop: "1px solid var(--theme-divider)",
-            }}
-          >
+          <div className="pt-3 px-5 pb-4 flex justify-end gap-2 border-t border-[var(--theme-divider)]">
             <button
               onClick={onCancel}
-              style={{
-                ...btnBase,
-                background: "var(--theme-header-bg)",
-                color: "var(--theme-fg-muted)",
-              }}
+              className="py-2.5 px-5 text-[13px] font-semibold font-[family-name:var(--font-ui)] rounded-[var(--glass-radius-pill,100px)] border-none cursor-pointer transition-all duration-200 outline-none bg-[var(--theme-header-bg)] text-[var(--theme-fg-muted)]"
             >
               {cancelLabel}
             </button>
             <button
               onClick={onConfirm}
-              style={{
-                ...btnBase,
-                background: confirmBg,
-                color: confirmColor,
-              }}
+              className={[
+                "py-2.5 px-5 text-[13px] font-semibold font-[family-name:var(--font-ui)]",
+                "rounded-[var(--glass-radius-pill,100px)] border-none cursor-pointer",
+                "transition-all duration-200 outline-none",
+                isDanger
+                  ? "bg-[#FF3B30] text-white"
+                  : "bg-[var(--theme-bg-solid)] text-[var(--theme-fg-on-solid)]",
+              ].join(" ")}
             >
               {confirmLabel}
             </button>

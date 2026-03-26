@@ -1,4 +1,4 @@
-import { type CSSProperties, useState } from "react";
+import { type CSSProperties } from "react";
 
 interface NumberInputProps {
   value: number;
@@ -21,8 +21,6 @@ export function NumberInput({
   className = "",
   style,
 }: NumberInputProps) {
-  const [focused, setFocused] = useState(false);
-
   const clamp = (v: number) => {
     let n = v;
     if (min !== undefined && n < min) n = min;
@@ -45,48 +43,27 @@ export function NumberInput({
     }
   };
 
-  const btnBg = "var(--theme-header-bg)";
-  const btnColor = "var(--theme-fg-muted)";
-
-  const [hoverMinus, setHoverMinus] = useState(false);
-  const [hoverPlus, setHoverPlus] = useState(false);
-
   return (
     <div
-      className={className}
-      style={{
-        display: "inline-flex",
-        alignItems: "center",
-        gap: 10,
-        opacity: disabled ? 0.5 : 1,
-        ...style,
-      }}
+      className={[
+        "inline-flex items-center gap-2.5",
+        disabled ? "opacity-50" : "",
+        className,
+      ].join(" ")}
+      style={style}
     >
-      {/* Minus button — circle */}
+      {/* Minus button */}
       <button
         type="button"
         onClick={decrement}
         disabled={disabled || (min !== undefined && value <= min)}
-        onMouseEnter={() => setHoverMinus(true)}
-        onMouseLeave={() => setHoverMinus(false)}
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          width: 36,
-          height: 36,
-          borderRadius: "50%",
-          border: "none",
-          background: btnBg,
-          color: btnColor,
-          cursor: disabled ? "not-allowed" : "pointer",
-          fontSize: 18,
-          fontWeight: 500,
-          fontFamily: "var(--font-mono)",
-          transition: "all 0.15s ease",
-          flexShrink: 0,
-          filter: hoverMinus && !disabled ? "brightness(0.9)" : "none",
-        }}
+        className={[
+          "flex items-center justify-center w-9 h-9 rounded-full border-none shrink-0",
+          "bg-[var(--theme-header-bg)] text-[var(--theme-fg-muted)]",
+          "text-lg font-medium font-[family-name:var(--font-mono)]",
+          "transition-all duration-150",
+          disabled ? "cursor-not-allowed" : "cursor-pointer hover:brightness-90",
+        ].join(" ")}
         aria-label="Decrease"
       >
         −
@@ -99,50 +76,28 @@ export function NumberInput({
         value={value}
         onChange={handleInputChange}
         disabled={disabled}
-        onFocus={() => setFocused(true)}
-        onBlur={() => setFocused(false)}
-        style={{
-          width: 50,
-          textAlign: "center",
-          border: focused ? `2px solid var(--theme-fg)` : `2px solid transparent`,
-          borderRadius: "var(--glass-radius-sm, 8px)",
-          background: focused ? "var(--theme-table-bg)" : "transparent",
-          outline: "none",
-          fontSize: 20,
-          fontFamily: "var(--font-mono)",
-          fontWeight: 700,
-          color: "var(--theme-fg)",
-          paddingTop: 6, paddingBottom: 6, paddingLeft: 4, paddingRight: 4,
-          fontVariantNumeric: "tabular-nums",
-          transition: "all 0.15s ease",
-        }}
+        className={[
+          "w-[50px] text-center text-xl font-bold py-1.5 px-1",
+          "font-[family-name:var(--font-mono)] text-[var(--theme-fg)]",
+          "border-2 border-transparent rounded-[var(--glass-radius-sm,8px)]",
+          "bg-transparent outline-none transition-all duration-150",
+          "focus:border-[var(--theme-fg)] focus:bg-[var(--theme-table-bg)]",
+          "[font-variant-numeric:tabular-nums]",
+        ].join(" ")}
       />
 
-      {/* Plus button — circle */}
+      {/* Plus button */}
       <button
         type="button"
         onClick={increment}
         disabled={disabled || (max !== undefined && value >= max)}
-        onMouseEnter={() => setHoverPlus(true)}
-        onMouseLeave={() => setHoverPlus(false)}
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          width: 36,
-          height: 36,
-          borderRadius: "50%",
-          border: "none",
-          background: btnBg,
-          color: btnColor,
-          cursor: disabled ? "not-allowed" : "pointer",
-          fontSize: 18,
-          fontWeight: 500,
-          fontFamily: "var(--font-mono)",
-          transition: "all 0.15s ease",
-          flexShrink: 0,
-          filter: hoverPlus && !disabled ? "brightness(0.9)" : "none",
-        }}
+        className={[
+          "flex items-center justify-center w-9 h-9 rounded-full border-none shrink-0",
+          "bg-[var(--theme-header-bg)] text-[var(--theme-fg-muted)]",
+          "text-lg font-medium font-[family-name:var(--font-mono)]",
+          "transition-all duration-150",
+          disabled ? "cursor-not-allowed" : "cursor-pointer hover:brightness-90",
+        ].join(" ")}
         aria-label="Increase"
       >
         +

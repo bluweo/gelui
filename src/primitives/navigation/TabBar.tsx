@@ -17,36 +17,21 @@ export function TabBar({
 }: TabBarProps) {
   return (
     <div
-      className={className}
-      style={{
-        display: "flex",
-        gap: "0",
-        borderBottom: "1px solid var(--theme-divider)",
-        ...style,
-      }}
+      className={`flex gap-0 border-b border-[var(--theme-divider)] ${className}`}
+      style={style}
     >
       {tabs.map((tab, i) => (
         <button
           key={tab}
           onClick={() => onChange?.(i)}
-          style={{
-            paddingTop: 10, paddingBottom: 10, paddingLeft: 16, paddingRight: 16,
-            fontSize: "13px",
-            fontWeight: i === active ? 600 : 400,
-            color:
-              i === active
-                ? "var(--theme-fg)"
-                : "var(--theme-fg-subtle)",
-            border: "none",
-            borderBottom:
-              i === active
-                ? "2px solid var(--theme-fg)"
-                : "2px solid transparent",
-            background: "transparent",
-            cursor: "pointer",
-            transition: "all 200ms",
-            marginBottom: "-1px",
-          }}
+          data-active={i === active || undefined}
+          className={[
+            "py-2.5 px-4 text-[13px] border-none bg-transparent cursor-pointer",
+            "transition-all duration-200 -mb-px border-b-2",
+            i === active
+              ? "font-semibold text-[var(--theme-fg)] border-b-[var(--theme-fg)]"
+              : "font-normal text-[var(--theme-fg-subtle)] border-b-transparent",
+          ].join(" ")}
         >
           {tab}
         </button>

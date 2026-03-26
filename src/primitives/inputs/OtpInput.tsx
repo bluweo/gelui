@@ -12,6 +12,18 @@ interface OtpInputProps {
   style?: CSSProperties;
 }
 
+const sizeClasses = {
+  sm: "w-9 h-10 text-base",
+  md: "w-11 h-[50px] text-xl",
+  lg: "w-[52px] h-[58px] text-2xl",
+} as const;
+
+const sizeGaps = {
+  sm: "gap-1.5",
+  md: "gap-2",
+  lg: "gap-2.5",
+} as const;
+
 export function OtpInput({
   length = 6,
   value: controlledValue,
@@ -24,29 +36,19 @@ export function OtpInput({
   style,
 }: OtpInputProps) {
   const [internalValue, setInternalValue] = useState("");
-  const [focusedIndex, setFocusedIndex] = useState(-1);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   const value = controlledValue ?? internalValue;
   const digits = value.split("").concat(Array(length).fill("")).slice(0, length);
 
-  const sizes = {
-    sm: { w: 36, h: 40, font: 16, gap: 6, radius: 8 },
-    md: { w: 44, h: 50, font: 20, gap: 8, radius: 10 },
-    lg: { w: 52, h: 58, font: 24, gap: 10, radius: 12 },
-  };
-  const s = sizes[size];
-
   const handleChange = useCallback((index: number, digit: string) => {
     if (disabled) return;
-    // Only allow single digit
     const d = digit.replace(/[^0-9]/g, "").slice(-1);
     const arr = value.split("").concat(Array(length).fill("")).slice(0, length);
     arr[index] = d;
     const newVal = arr.join("").replace(/\s/g, "");
     if (onChange) onChange(newVal);
     else setInternalValue(newVal);
-    // Auto-focus next
     if (d && index < length - 1) {
       inputRefs.current[index + 1]?.focus();
     }
@@ -82,38 +84,23 @@ export function OtpInput({
     const pasted = e.clipboardData.getData("text").replace(/[^0-9]/g, "").slice(0, length);
     if (onChange) onChange(pasted);
     else setInternalValue(pasted);
-    // Focus last filled or next empty
     const targetIdx = Math.min(pasted.length, length - 1);
     inputRefs.current[targetIdx]?.focus();
   }, [length, disabled, onChange]);
-
-  const borderDefault = "var(--theme-divider)";
-  const borderFocus = "var(--theme-fg)";
-  const borderError = "#FF3B30";
-  const borderSuccess = "#34C759";
-  const bgDefault = "var(--theme-header-bg)";
-  const bgFocus = "var(--theme-table-bg)";
-  const textColor = "var(--theme-fg)";
 
   const isComplete = value.replace(/\s/g, "").length >= length;
   const showSuccess = success || (isComplete && !error && !disabled);
 
   return (
     <div
-      className={className}
-      style={{
-        display: "flex",
-        gap: s.gap,
-        alignItems: "center",
-        ...style,
-      }}
+      className={`flex items-center ${sizeGaps[size]} ${className}`}
+      style={style}
       onPaste={handlePaste}
     >
       {digits.map((digit, i) => {
-        const isFocused = focusedIndex === i;
         const hasDash = length > 4 && i === Math.floor(length / 2) - 1;
         return (
-          <div key={i} style={{ display: "flex", alignItems: "center", gap: s.gap }}>
+          <div key={i} className={`flex items-center ${sizeGaps[size]}`}>
             <input
               ref={(el) => { inputRefs.current[i] = el; }}
               type="text"
@@ -121,57 +108,48 @@ export function OtpInput({
               maxLength={1}
               value={digit || ""}
               disabled={disabled}
-              onFocus={() => setFocusedIndex(i)}
-              onBlur={() => setFocusedIndex(-1)}
               onChange={(e) => handleChange(i, e.target.value)}
               onKeyDown={(e) => handleKeyDown(i, e)}
               aria-label={`Digit ${i + 1}`}
-              style={{
-                width: s.w,
-                height: s.h,
-                textAlign: "center",
-                fontSize: s.font,
-                fontWeight: 650,
-                fontFamily: "var(--font-mono)",
-                color: disabled ? "var(--theme-fg-faint)" : textColor,
-                background: isFocused ? bgFocus : bgDefault,
-                border: `2px solid ${error ? borderError : showSuccess ? borderSuccess : isFocused ? borderFocus : borderDefault}`,
-                borderRadius: `var(--glass-radius-sm, ${s.radius}px)`,
-                outline: "none",
-                transition: "all 0.15s ease",
-                opacity: disabled ? 0.5 : 1,
-                cursor: disabled ? "not-allowed" : "text",
-                caretColor: "transparent",
-              }}
+              data-error={error || undefined}
+              data-success={showSuccess || undefined}
+              className={[
+                sizeClasses[size],
+                "text-center font-semibold font-[family-name:var(--font-mono)]",
+                "rounded-[var(--glass-radius-sm,10px)]",
+                "border-2 outline-none transition-all duration-150",
+                "caret-transparent placeholder:text-[var(--theme-fg-faint)]",
+                // Default state
+                "border-[var(--theme-divider)] bg-[var(--theme-header-bg)] text-[var(--theme-fg)]",
+                // Focus state
+                "focus:border-[var(--theme-fg)] focus:bg-[var(--theme-table-bg)]",
+                // Error overrides focus
+                "data-[error=true]:border-[#FF3B30]",
+                // Success overrides focus
+                "data-[success=true]:border-[#34C759]",
+                // Disabled
+                disabled ? "opacity-50 cursor-not-allowed text-[var(--theme-fg-faint)]" : "cursor-text",
+              ].join(" ")}
               placeholder="·"
             />
             {hasDash && (
-              <span style={{
-                width: 12,
-                height: 2,
-                background: "var(--theme-divider)",
-                borderRadius: 1,
-                flexShrink: 0,
-              }} />
+              <span className="w-3 h-0.5 bg-[var(--theme-divider)] rounded-sm shrink-0" />
             )}
           </div>
         );
       })}
-      {/* Success checkmark */}
       {showSuccess && (
-        <span style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          width: s.h * 0.7,
-          height: s.h * 0.7,
-          borderRadius: "50%",
-          background: "#34C759",
-          flexShrink: 0,
-          marginLeft: s.gap,
-          transition: "all 0.2s ease",
-        }}>
-          <svg width={s.font * 0.6} height={s.font * 0.6} viewBox="0 0 16 16" fill="none">
+        <span
+          className={[
+            "flex items-center justify-center rounded-full bg-[#34C759] shrink-0 transition-all duration-200",
+            size === "sm" ? "w-7 h-7 ml-1.5" : size === "md" ? "w-[35px] h-[35px] ml-2" : "w-10 h-10 ml-2.5",
+          ].join(" ")}
+        >
+          <svg
+            className={size === "sm" ? "w-2.5 h-2.5" : size === "md" ? "w-3 h-3" : "w-3.5 h-3.5"}
+            viewBox="0 0 16 16"
+            fill="none"
+          >
             <path d="M3 8.5L6.5 12L13 4" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </span>

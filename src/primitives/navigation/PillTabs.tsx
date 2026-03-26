@@ -17,15 +17,8 @@ export function PillTabs({
 }: PillTabsProps) {
   return (
     <div
-      className={className}
-      style={{
-        display: "inline-flex",
-        gap: "4px",
-        padding: "4px",
-        borderRadius: "var(--glass-radius-pill, 100px)",
-        background: "var(--theme-header-bg)",
-        ...style,
-      }}
+      className={`inline-flex gap-1 p-1 rounded-[var(--glass-radius-pill,100px)] bg-[var(--theme-header-bg)] ${className}`}
+      style={style}
     >
       {tabs.map((tab) => {
         const isActive = tab === activeTab;
@@ -33,24 +26,15 @@ export function PillTabs({
           <button
             key={tab}
             onClick={() => onChange?.(tab)}
-            style={{
-              paddingTop: 6, paddingBottom: 6, paddingLeft: 14, paddingRight: 14,
-              fontSize: "13px",
-              fontWeight: 600,
-              fontFamily: "var(--font-ui)",
-              border: "none",
-              borderRadius: "var(--glass-radius-pill, 100px)",
-              background: isActive
-                ? "var(--theme-bg-solid)"
-                : "transparent",
-              color: isActive
-                ? "var(--theme-fg-on-solid)"
-                : "var(--theme-fg-muted)",
-              cursor: "pointer",
-              transition: "all 200ms ease",
-              outline: "none",
-              whiteSpace: "nowrap",
-            }}
+            data-active={isActive || undefined}
+            className={[
+              "py-1.5 px-3.5 text-[13px] font-semibold font-[family-name:var(--font-ui)]",
+              "border-none rounded-[var(--glass-radius-pill,100px)]",
+              "cursor-pointer transition-all duration-200 outline-none whitespace-nowrap",
+              isActive
+                ? "bg-[var(--theme-bg-solid)] text-[var(--theme-fg-on-solid)]"
+                : "bg-transparent text-[var(--theme-fg-muted)]",
+            ].join(" ")}
           >
             {tab}
           </button>
