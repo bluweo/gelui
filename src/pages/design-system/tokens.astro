@@ -38,7 +38,7 @@ const radiiRawEntries = Object.entries(radii.raw) as Array<[string, string]>;
 
     <TokenHero />
 
-    <BrandColorPreview client:load />
+    <BrandColorPreview client:only="react" />
 
     <!-- ════════════════════════════════════════
          Typography: Font Families
@@ -234,7 +234,7 @@ const radiiRawEntries = Object.entries(radii.raw) as Array<[string, string]>;
 
       <div class="relative z-[1]">
         <FontSizeWeightTable
-          client:load
+          client:only="react"
           fontSizes={fontSizeEntries}
           fontWeights={fontWeightEntries}
         />
@@ -709,7 +709,7 @@ const radiiRawEntries = Object.entries(radii.raw) as Array<[string, string]>;
         <h2 class="text-[24px] font-[750] tracking-[-0.03em] leading-[1.2] contrast-text mb-1" style="font-family: var(--font-heading)">Live Theming</h2>
         <p class="text-[13px] leading-[1.6] contrast-muted">How Appearance settings cascade to every component via CSS variables</p>
       </div>
-      <LiveTheming client:load />
+      <LiveTheming client:only="react" />
     </div>
 
   </div>

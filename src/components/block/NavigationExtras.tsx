@@ -18,7 +18,7 @@ export function NavigationExtras() {
       {/* Pagination */}
       <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: tableBg, border: `1px solid ${borderColor}` }}>
         <div style={{ padding: "8px 12px", background: headerBg, borderBottom: `1px solid ${borderColor}` }}>
-          <span className="type-overline" style={{ color: headerColor }}>Pagination</span>
+          <span suppressHydrationWarning className="type-overline" style={{ color: headerColor }}>Pagination</span>
         </div>
         <div style={{ padding: "20px 16px", display: "flex", flexDirection: "column", alignItems: "center", gap: "12px" }}>
           <Pagination
@@ -26,7 +26,7 @@ export function NavigationExtras() {
             currentPage={page}
             onPageChange={setPage}
           />
-          <span style={{ fontSize: "11px", color: labelColor }}>
+          <span suppressHydrationWarning style={{ fontSize: "11px", color: labelColor }}>
             Page {page} of 10
           </span>
         </div>
@@ -35,7 +35,7 @@ export function NavigationExtras() {
       {/* Stepper */}
       <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: tableBg, border: `1px solid ${borderColor}` }}>
         <div style={{ padding: "8px 12px", background: headerBg, borderBottom: `1px solid ${borderColor}` }}>
-          <span className="type-overline" style={{ color: headerColor }}>Stepper</span>
+          <span suppressHydrationWarning className="type-overline" style={{ color: headerColor }}>Stepper</span>
         </div>
         <div style={{ padding: "20px 16px", display: "flex", flexDirection: "column", gap: "16px" }}>
           <Stepper
@@ -100,7 +100,7 @@ export function NavigationExtras() {
           <line x1="12" y1="16" x2="12" y2="8" />
           <polyline points="8 12 12 8 16 12" />
         </svg>
-        <span style={{ fontSize: "12px", color: labelColor, lineHeight: 1.5 }}>
+        <span suppressHydrationWarning style={{ fontSize: "12px", color: labelColor, lineHeight: 1.5 }}>
           <strong style={{ fontWeight: 600 }}>BackToTop</strong> is a floating button primitive that appears on scroll. It is available via <code style={{ fontSize: "11px", fontFamily: "var(--font-mono)", padding: "1px 4px", borderRadius: "3px", background: isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.05)" }}>@/primitives/navigation</code> and can be placed at the page level.
         </span>
       </div>

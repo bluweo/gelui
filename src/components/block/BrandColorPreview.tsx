@@ -191,7 +191,7 @@ export function BrandColorPreview() {
   return (
     <>
       {/* ═══ Brand Colour Scheme ═══ */}
-      <div data-section="Brand Colors" className="col-span-2 row-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
+      <div suppressHydrationWarning data-section="Brand Colors" className="col-span-2 row-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
         <div className="absolute inset-0 pointer-events-none ds-card-frost" style={{ height: 200 }} />
 
         {/* Header with logo */}

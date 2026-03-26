@@ -87,6 +87,7 @@ function DSShellInner({ currentPath, children }: DSShellProps) {
 
   // Global type scale — reads from localStorage, applies to all text in <main>
   useEffect(() => {
+    const origFontSizes = new WeakMap<HTMLElement, string>();
     const applyScale = () => {
       const scale = localStorage.getItem("gelui-type-scale") || "medium";
       const factors: Record<string, number> = { small: 0.82, medium: 1.0, large: 1.22 };
@@ -101,11 +102,11 @@ function DSShellInner({ currentPath, children }: DSShellProps) {
         const htmlEl = el as HTMLElement;
         if (htmlEl.closest("[data-type-presets-table]") || htmlEl.closest("nav")) return;
 
-        if (!htmlEl.dataset.origFontSize) {
-          htmlEl.dataset.origFontSize = window.getComputedStyle(htmlEl).fontSize;
+        if (!origFontSizes.has(htmlEl)) {
+          origFontSizes.set(htmlEl, window.getComputedStyle(htmlEl).fontSize);
         }
 
-        const origSize = parseFloat(htmlEl.dataset.origFontSize);
+        const origSize = parseFloat(origFontSizes.get(htmlEl) || "0");
         if (origSize && factor !== 1) {
           htmlEl.style.fontSize = `${Math.round(origSize * factor * 10) / 10}px`;
         } else if (factor === 1) {

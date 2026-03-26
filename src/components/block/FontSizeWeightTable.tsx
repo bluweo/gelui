@@ -45,7 +45,7 @@ export function FontSizeWeightTable({ fontSizes, fontWeights }: Props) {
   const isMono = selectedRole === "mono";
 
   return (
-    <div className="flex flex-col gap-6">
+    <div suppressHydrationWarning className="flex flex-col gap-6">
       {/* Font role selector — aligned with title row on desktop+, below subtitle on laptop and smaller */}
       <div className="flex gap-1.5 justify-end -mt-[90px] mb-8 relative z-[2] max-[1024px]:mt-0 max-[1024px]:mb-3 max-[1024px]:justify-start">
         {FONT_ROLES.map((r) => (

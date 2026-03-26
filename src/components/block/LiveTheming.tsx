@@ -176,8 +176,8 @@ function AppearanceControls({ isDark }: { isDark: boolean }) {
   }, []);
 
   if (!mounted) return (
-    <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: isDark ? "rgba(0,0,0,0.30)" : "rgba(255,255,255,0.60)", border: `1px solid ${isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)"}`, height: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
-      <span style={{ fontSize: 11, color: isDark ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.3)" }}>Loading...</span>
+    <div suppressHydrationWarning style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: "rgba(255,255,255,0.60)", border: "1px solid rgba(0,0,0,0.06)", height: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <span style={{ fontSize: 11, color: "rgba(0,0,0,0.3)" }}>Loading...</span>
     </div>
   );
 
