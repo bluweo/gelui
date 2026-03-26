@@ -1,13 +1,37 @@
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Button } from "@/primitives/buttons";
-import { useContrastColor } from "@/components/hooks/useContrastColor";
+
+/** Read contrast from nearest ancestor with data-contrast, or main element */
+function useInheritedContrast(ref: React.RefObject<HTMLElement | null>) {
+  const [contrast, setContrast] = useState<"light" | "dark">("light");
+
+  useEffect(() => {
+    if (!ref.current) return;
+    const check = () => {
+      // Look for parent (not self) with data-contrast, fall back to main
+      const parent = ref.current?.parentElement?.closest("[data-contrast]") as HTMLElement | null;
+      const main = document.querySelector("main[data-contrast]") as HTMLElement | null;
+      const value = parent?.getAttribute("data-contrast") || main?.getAttribute("data-contrast") || "light";
+      setContrast(value as "light" | "dark");
+    };
+    check();
+    const main = document.querySelector("main[data-contrast]");
+    if (main) {
+      const obs = new MutationObserver(check);
+      obs.observe(main, { attributes: true, attributeFilter: ["data-contrast"] });
+      return () => obs.disconnect();
+    }
+  }, [ref]);
+
+  return contrast;
+}
 
 export function ButtonsRightColumn() {
   const ref = useRef<HTMLDivElement>(null);
-  const contrast = useContrastColor(ref);
+  const contrast = useInheritedContrast(ref);
 
   return (
-    <div ref={ref} data-contrast={contrast} className="gel-btn-force-contrast" style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+    <div ref={ref} data-contrast={contrast} className="flex flex-col gap-5">
       {/* Gel Buttons table */}
       <div className="rounded-[var(--glass-radius-sm)] overflow-hidden border contrast-border">
         <div className="px-3 py-2 border-b contrast-border">

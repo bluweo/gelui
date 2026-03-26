@@ -1,10 +1,35 @@
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Button, LinkButton } from "@/primitives/buttons";
-import { useContrastColor } from "@/components/hooks/useContrastColor";
+
+/** Read contrast from nearest ancestor with data-contrast, or main element */
+function useInheritedContrast(ref: React.RefObject<HTMLElement | null>) {
+  const [contrast, setContrast] = useState<"light" | "dark">("light");
+
+  useEffect(() => {
+    if (!ref.current) return;
+    const check = () => {
+      // Look for parent (not self) with data-contrast, fall back to main
+      const parent = ref.current?.parentElement?.closest("[data-contrast]") as HTMLElement | null;
+      const main = document.querySelector("main[data-contrast]") as HTMLElement | null;
+      const value = parent?.getAttribute("data-contrast") || main?.getAttribute("data-contrast") || "light";
+      setContrast(value as "light" | "dark");
+    };
+    check();
+    // Re-check when main contrast changes
+    const main = document.querySelector("main[data-contrast]");
+    if (main) {
+      const obs = new MutationObserver(check);
+      obs.observe(main, { attributes: true, attributeFilter: ["data-contrast"] });
+      return () => obs.disconnect();
+    }
+  }, [ref]);
+
+  return contrast;
+}
 
 export function ButtonsShowcase() {
   const ref = useRef<HTMLDivElement>(null);
-  const contrast = useContrastColor(ref);
+  const contrast = useInheritedContrast(ref);
 
   return (
     <div ref={ref} data-contrast={contrast} className="flex flex-col gap-5">
