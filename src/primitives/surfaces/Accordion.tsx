@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, type ReactNode, type CSSProperties } from "react";
+import { useState, type ReactNode, type CSSProperties } from "react";
 import { ArrowDown2 } from "iconsax-react";
 
 interface AccordionItem {
@@ -25,22 +25,11 @@ function AccordionSection({
   isOpen: boolean;
   onToggle: () => void;
 }) {
-  const contentRef = useRef<HTMLDivElement>(null);
-  const [height, setHeight] = useState<number>(0);
-
-  useEffect(() => {
-    if (contentRef.current) {
-      setHeight(contentRef.current.scrollHeight);
-    }
-  }, [isOpen, content]);
-
   return (
-    <div
-      className="bg-[var(--theme-header-bg)] rounded-[var(--glass-radius-sm,10px)] overflow-hidden transition-[filter] duration-150 hover:brightness-[0.97]"
-    >
+    <div className="prim-accordion-item">
       <button
         onClick={onToggle}
-        className="flex items-center justify-between w-full py-3 px-4 border-none bg-none cursor-pointer text-sm font-semibold font-[family-name:var(--font-ui)] text-[var(--theme-fg)] text-left transition-colors duration-150"
+        className="prim-accordion-trigger"
       >
         {title}
         <span
@@ -53,13 +42,10 @@ function AccordionSection({
         </span>
       </button>
       <div
-        className="overflow-hidden transition-[height] duration-[250ms]"
-        style={{ height: isOpen ? `${height}px` : "0px" }}
+        className="prim-accordion-content"
+        data-open={isOpen || undefined}
       >
-        <div
-          ref={contentRef}
-          className="pt-0 pr-4 pb-3 pl-4 text-[13px] text-[var(--theme-fg-muted)] leading-relaxed"
-        >
+        <div className="prim-accordion-body">
           {content}
         </div>
       </div>

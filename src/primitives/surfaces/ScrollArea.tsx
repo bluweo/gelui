@@ -13,76 +13,22 @@ export function ScrollArea({
   className = "",
   style,
 }: ScrollAreaProps) {
-  const scrollbarColor = "var(--theme-fg-faint)";
-  const scrollbarHover = "var(--theme-fg-subtle)";
-
-  const scrollbarId = `scroll-area-${Math.random().toString(36).slice(2, 8)}`;
+  const mh = typeof maxHeight === "number" ? `${maxHeight}px` : maxHeight;
 
   return (
     <div
-      className={className}
-      style={{
-        position: "relative",
-        maxHeight: typeof maxHeight === "number" ? `${maxHeight}px` : maxHeight,
-        ...style,
-      }}
+      className={`prim-scroll-area ${className}`}
+      style={{ "--scroll-mh": mh, ...style } as CSSProperties}
     >
       {/* Top fade */}
-      <div
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
-          height: "24px",
-          background: "linear-gradient(to bottom, var(--theme-table-bg) 0%, transparent 100%)",
-          pointerEvents: "none",
-          zIndex: 1,
-          borderTopLeftRadius: "var(--glass-radius-sm, 10px)", borderTopRightRadius: "var(--glass-radius-sm, 10px)", borderBottomLeftRadius: 0, borderBottomRightRadius: 0,
-        }}
-      />
+      <div className="prim-scroll-fade-top" />
 
-      <div
-        data-scroll-area={scrollbarId}
-        style={{
-          maxHeight: typeof maxHeight === "number" ? `${maxHeight}px` : maxHeight,
-          overflowY: "auto",
-          scrollbarWidth: "thin",
-          scrollbarColor: `${scrollbarColor} transparent`,
-        }}
-      >
-        <style>{`
-          [data-scroll-area="${scrollbarId}"]::-webkit-scrollbar {
-            width: 6px;
-          }
-          [data-scroll-area="${scrollbarId}"]::-webkit-scrollbar-track {
-            background: transparent;
-          }
-          [data-scroll-area="${scrollbarId}"]::-webkit-scrollbar-thumb {
-            background: ${scrollbarColor};
-            border-radius: 3px;
-          }
-          [data-scroll-area="${scrollbarId}"]::-webkit-scrollbar-thumb:hover {
-            background: ${scrollbarHover};
-          }
-        `}</style>
+      <div className="prim-scroll-inner">
         {children}
       </div>
 
       {/* Bottom fade */}
-      <div
-        style={{
-          position: "absolute",
-          bottom: 0,
-          left: 0,
-          right: 0,
-          height: "24px",
-          background: "linear-gradient(to top, var(--theme-table-bg) 0%, transparent 100%)",
-          pointerEvents: "none",
-          zIndex: 1,
-          borderTopLeftRadius: 0, borderTopRightRadius: 0, borderBottomRightRadius: "var(--glass-radius-sm, 10px)", borderBottomLeftRadius: "var(--glass-radius-sm, 10px)",
-        }}
-      />
+      <div className="prim-scroll-fade-bottom" />
     </div>
   );
 }
