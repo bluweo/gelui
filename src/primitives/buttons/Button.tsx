@@ -40,7 +40,8 @@ export function Button({
   style,
   onClick,
 }: ButtonProps) {
-  const sizeClass = SIZE_CLASSES[size] || SIZE_CLASSES.md;
+  // Circle shapes define their own size — skip size padding class
+  const sizeClass = shape === "circle" ? "" : (SIZE_CLASSES[size] || SIZE_CLASSES.md);
   const shapeClass = SHAPE_CLASSES[shape] || SHAPE_CLASSES.pill;
 
   const variantClasses =
