@@ -187,9 +187,9 @@ export function BrandColorPreview() {
         {/* Header with logo */}
         <div className="relative flex items-start justify-between mb-6 pt-1 pl-1">
           <div className="flex flex-col gap-1">
-            <span className="text-[10px] font-[650] uppercase tracking-[0.1em] text-black/40 dark:text-white/40 mb-1">Colour System</span>
-            <h2 className="text-[24px] font-[750] tracking-[-0.03em] leading-[1.2] text-black dark:text-white mb-1" style={{ fontFamily: "var(--font-heading)" }}>Brand Colour Scheme</h2>
-            <p className="text-[13px] leading-[1.6] text-black/60 dark:text-white/55">
+            <span className="type-overline text-black/40 dark:text-white/40 mb-1">Colour System</span>
+            <h2 className="type-h2 text-black dark:text-white mb-1">Brand Colour Scheme</h2>
+            <p className="type-body-sm text-black/60 dark:text-white/55">
               {brands.length} brand colour{brands.length !== 1 ? "s" : ""} derived from logo &middot; auto-generated scales
             </p>
           </div>
@@ -326,9 +326,9 @@ export function BrandColorPreview() {
       <div data-section="Semantic Colors" className="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
         <div className="absolute inset-0 pointer-events-none ds-card-frost" style={{ height: 180 }} />
         <div className="relative flex flex-col gap-1 mb-6 pt-1 pl-1">
-          <span className="text-[10px] font-[650] uppercase tracking-[0.1em] text-black/40 dark:text-white/40 mb-1">Design Decisions</span>
-          <h2 className="text-[24px] font-[750] tracking-[-0.03em] leading-[1.2] text-black dark:text-white mb-1" style={{ fontFamily: "var(--font-heading)" }}>Semantic Colors</h2>
-          <p className="text-[13px] leading-[1.6] text-black/60 dark:text-white/55">Remappable intent-based tokens with light and dark variants</p>
+          <span className="type-overline text-black/40 dark:text-white/40 mb-1">Design Decisions</span>
+          <h2 className="type-h2 text-black dark:text-white mb-1">Semantic Colors</h2>
+          <p className="type-body-sm text-black/60 dark:text-white/55">Remappable intent-based tokens with light and dark variants</p>
         </div>
 
         {/* Table header */}
@@ -378,9 +378,9 @@ export function BrandColorPreview() {
       <div data-section="Text Colors" className="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
         <div className="absolute inset-0 pointer-events-none ds-card-frost" style={{ height: 160 }} />
         <div className="relative flex flex-col gap-1 mb-6 pt-1 pl-1">
-          <span className="text-[10px] font-[650] uppercase tracking-[0.1em] text-black/40 dark:text-white/40 mb-1">Hierarchy</span>
-          <h2 className="text-[24px] font-[750] tracking-[-0.03em] leading-[1.2] text-black dark:text-white mb-1" style={{ fontFamily: "var(--font-heading)" }}>Text Colors</h2>
-          <p className="text-[13px] leading-[1.6] text-black/60 dark:text-white/55">Opacity-based text hierarchy for consistent readability</p>
+          <span className="type-overline text-black/40 dark:text-white/40 mb-1">Hierarchy</span>
+          <h2 className="type-h2 text-black dark:text-white mb-1">Text Colors</h2>
+          <p className="type-body-sm text-black/60 dark:text-white/55">Opacity-based text hierarchy for consistent readability</p>
         </div>
 
         {/* Table header */}
@@ -456,7 +456,7 @@ export function BrandColorPreview() {
 
             {/* Description */}
             <div className="pb-4">
-              <p className="text-[13px] leading-[1.6] text-black/55 dark:text-white/50">
+              <p className="type-body-sm text-black/55 dark:text-white/50">
                 Upload your brand logo to automatically extract dominant colors. These colors will define your brand palette, semantic tokens, and text hierarchy across the entire design system.
               </p>
             </div>

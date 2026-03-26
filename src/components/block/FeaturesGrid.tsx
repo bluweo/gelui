@@ -159,13 +159,13 @@ export function FeaturesGrid() {
       <div className="flex items-start justify-between gap-6 mb-8 pt-3 pl-2 max-[640px]:flex-col max-[640px]:gap-4">
         {/* Left: Title & subtitle */}
         <div className="flex flex-col shrink-0">
-          <span className="text-[10px] font-[650] uppercase tracking-[0.1em] text-black/40 dark:text-white/40 mb-2">
+          <span className="type-overline text-black/40 dark:text-white/40 mb-2">
             What's inside
           </span>
-          <h2 className="text-[28px] max-[540px]:text-[22px] font-[750] tracking-[-0.03em] leading-[1.2] text-black dark:text-white mb-2">
+          <h2 className="type-h2 text-black dark:text-white mb-2">
             Powerful Features
           </h2>
-          <p className="text-[14px] max-[540px]:text-[13px] leading-[1.6] text-black/60 dark:text-white/60 max-w-[560px]">
+          <p className="type-body-sm text-black/60 dark:text-white/60 max-w-[560px]">
             Power your UI with {FEATURES.length} advanced capabilities across visual, interactive, and architectural layers.
           </p>
         </div>
