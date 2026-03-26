@@ -1,5 +1,4 @@
 import { type CSSProperties, useState } from "react";
-import { useDarkMode } from "../hooks/useDarkMode";
 
 interface TextareaProps {
   placeholder?: string;
@@ -18,7 +17,6 @@ export function Textarea({
   className = "",
   style,
 }: TextareaProps) {
-  const dark = useDarkMode();
   const [focused, setFocused] = useState(false);
   return (
     <textarea
@@ -35,11 +33,9 @@ export function Textarea({
         fontSize: "14px",
         fontFamily: "var(--font-body)",
         borderRadius: "var(--glass-radius-sm, 10px)",
-        border: `2px solid ${focused ? (dark ? "#fff" : "#000") : "transparent"}`,
-        background: dark
-          ? "rgba(255,255,255,0.08)"
-          : "rgba(255,255,255,0.6)",
-        color: dark ? "#fff" : "#000",
+        border: `2px solid ${focused ? "var(--theme-bg-solid)" : "transparent"}`,
+        background: "var(--theme-divider)",
+        color: "var(--theme-bg-solid)",
         outline: "none",
         resize: "vertical",
         transition: "all 200ms ease",

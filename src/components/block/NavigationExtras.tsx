@@ -1,24 +1,16 @@
 import { Pagination, Stepper } from "@/primitives/navigation";
-import { useDarkMode } from "@/primitives/hooks/useDarkMode";
 import { useState } from "react";
 
 export function NavigationExtras() {
-  const isDark = useDarkMode();
   const [page, setPage] = useState(1);
   const [step, setStep] = useState(1);
 
-  const tableBg = isDark ? "#1a1a1a" : "#ffffff";
-  const headerBg = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)";
-  const borderColor = isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.06)";
-  const headerColor = isDark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.45)";
-  const labelColor = isDark ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.6)";
-
   return (
-    <div suppressHydrationWarning style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
       {/* Pagination */}
-      <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: tableBg, border: `1px solid ${borderColor}` }}>
-        <div style={{ padding: "8px 12px", background: headerBg, borderBottom: `1px solid ${borderColor}` }}>
-          <span suppressHydrationWarning className="type-overline" style={{ color: headerColor }}>Pagination</span>
+      <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: "var(--theme-table-bg)", border: "1px solid var(--theme-divider)" }}>
+        <div style={{ padding: "8px 12px", background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
+          <span className="type-overline" style={{ color: "var(--theme-fg-muted)" }}>Pagination</span>
         </div>
         <div style={{ padding: "20px 16px", display: "flex", flexDirection: "column", alignItems: "center", gap: "12px" }}>
           <Pagination
@@ -26,16 +18,16 @@ export function NavigationExtras() {
             currentPage={page}
             onPageChange={setPage}
           />
-          <span suppressHydrationWarning style={{ fontSize: "11px", color: labelColor }}>
+          <span style={{ fontSize: "11px", color: "var(--theme-fg)" }}>
             Page {page} of 10
           </span>
         </div>
       </div>
 
       {/* Stepper */}
-      <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: tableBg, border: `1px solid ${borderColor}` }}>
-        <div style={{ padding: "8px 12px", background: headerBg, borderBottom: `1px solid ${borderColor}` }}>
-          <span suppressHydrationWarning className="type-overline" style={{ color: headerColor }}>Stepper</span>
+      <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: "var(--theme-table-bg)", border: "1px solid var(--theme-divider)" }}>
+        <div style={{ padding: "8px 12px", background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
+          <span className="type-overline" style={{ color: "var(--theme-fg-muted)" }}>Stepper</span>
         </div>
         <div style={{ padding: "20px 16px", display: "flex", flexDirection: "column", gap: "16px" }}>
           <Stepper
@@ -50,9 +42,9 @@ export function NavigationExtras() {
               style={{
                 padding: "6px 16px",
                 borderRadius: "var(--glass-radius-pill, 100px)",
-                border: `1px solid ${borderColor}`,
+                border: "1px solid var(--theme-divider)",
                 background: "transparent",
-                color: labelColor,
+                color: "var(--theme-fg)",
                 fontSize: "12px",
                 fontWeight: 550,
                 fontFamily: "var(--font-ui)",
@@ -69,8 +61,8 @@ export function NavigationExtras() {
                 padding: "6px 16px",
                 borderRadius: "var(--glass-radius-pill, 100px)",
                 border: "none",
-                background: isDark ? "rgba(255,255,255,0.9)" : "rgba(0,0,0,0.85)",
-                color: isDark ? "#000" : "#fff",
+                background: "var(--theme-bg-solid)",
+                color: "var(--theme-fg-on-solid)",
                 fontSize: "12px",
                 fontWeight: 600,
                 fontFamily: "var(--font-ui)",
@@ -88,8 +80,8 @@ export function NavigationExtras() {
       <div style={{
         borderRadius: "var(--glass-radius-sm, 10px)",
         overflow: "hidden",
-        background: tableBg,
-        border: `1px solid ${borderColor}`,
+        background: "var(--theme-table-bg)",
+        border: "1px solid var(--theme-divider)",
         padding: "14px 16px",
         display: "flex",
         alignItems: "center",
@@ -100,8 +92,8 @@ export function NavigationExtras() {
           <line x1="12" y1="16" x2="12" y2="8" />
           <polyline points="8 12 12 8 16 12" />
         </svg>
-        <span suppressHydrationWarning style={{ fontSize: "12px", color: labelColor, lineHeight: 1.5 }}>
-          <strong style={{ fontWeight: 600 }}>BackToTop</strong> is a floating button primitive that appears on scroll. It is available via <code style={{ fontSize: "11px", fontFamily: "var(--font-mono)", padding: "1px 4px", borderRadius: "3px", background: isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.05)" }}>@/primitives/navigation</code> and can be placed at the page level.
+        <span style={{ fontSize: "12px", color: "var(--theme-fg)", lineHeight: 1.5 }}>
+          <strong style={{ fontWeight: 600 }}>BackToTop</strong> is a floating button primitive that appears on scroll. It is available via <code style={{ fontSize: "11px", fontFamily: "var(--font-mono)", padding: "1px 4px", borderRadius: "3px", background: "var(--theme-divider)" }}>@/primitives/navigation</code> and can be placed at the page level.
         </span>
       </div>
     </div>

@@ -1,5 +1,4 @@
 import { type CSSProperties, useState, useRef } from "react";
-import { useDarkMode } from "../hooks/useDarkMode";
 import { useClickOutside } from "../hooks/useClickOutside";
 
 interface SelectOption {
@@ -24,7 +23,6 @@ export function Select({
   className = "",
   style,
 }: SelectProps) {
-  const dark = useDarkMode();
   const [open, setOpen] = useState(false);
   const [highlightIdx, setHighlightIdx] = useState(-1);
   const ref = useRef<HTMLDivElement>(null);
@@ -71,17 +69,11 @@ export function Select({
           fontSize: "14px",
           fontFamily: "var(--font-body)",
           borderRadius: "var(--glass-radius-sm, 10px)",
-          border: `2px solid ${open ? (dark ? "#fff" : "#000") : "transparent"}`,
-          background: dark
-            ? "rgba(255,255,255,0.08)"
-            : "rgba(255,255,255,0.6)",
+          border: `2px solid ${open ? "var(--theme-bg-solid)" : "transparent"}`,
+          background: "var(--theme-divider)",
           color: selected
-            ? dark
-              ? "#fff"
-              : "#000"
-            : dark
-              ? "rgba(255,255,255,0.4)"
-              : "rgba(0,0,0,0.4)",
+            ? "var(--theme-bg-solid)"
+            : "var(--theme-fg-muted)",
           cursor: "pointer",
           textAlign: "left",
           display: "flex",
@@ -118,10 +110,10 @@ export function Select({
             right: 0,
             zIndex: 50,
             borderRadius: "var(--glass-radius-sm, 10px)",
-            background: dark ? "rgba(30,30,30,0.95)" : "rgba(255,255,255,0.95)",
+            background: "var(--theme-table-bg)",
             backdropFilter: "blur(20px)",
             WebkitBackdropFilter: "blur(20px)",
-            border: `1px solid ${dark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)"}`,
+            border: "1px solid var(--theme-divider)",
             boxShadow: "0 8px 32px rgba(0,0,0,0.12)",
             padding: "6px 8px",
             maxHeight: "200px",
@@ -145,18 +137,12 @@ export function Select({
                 borderRadius: "var(--glass-radius-sm, 8px)",
                 background:
                   i === highlightIdx
-                    ? dark
-                      ? "rgba(255,255,255,0.08)"
-                      : "rgba(0,0,0,0.04)"
+                    ? "var(--theme-header-bg)"
                     : "transparent",
                 color:
                   opt.value === value
-                    ? dark
-                      ? "#fff"
-                      : "#000"
-                    : dark
-                      ? "rgba(255,255,255,0.7)"
-                      : "rgba(0,0,0,0.7)",
+                    ? "var(--theme-bg-solid)"
+                    : "var(--theme-fg)",
                 fontWeight: opt.value === value ? 600 : 400,
                 cursor: "pointer",
                 textAlign: "left",

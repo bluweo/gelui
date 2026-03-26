@@ -15,17 +15,8 @@ interface Props {
 
 export function FontSizeWeightTable({ fontSizes, fontWeights }: Props) {
   const [selectedRole, setSelectedRole] = useState<string>("body");
-  const [isDark, setIsDark] = useState(false);
   const [sampleText, setSampleText] = useState("The quick brown fox");
   const [sampleTextWeight, setSampleTextWeight] = useState("The quick brown fox jumps");
-
-  useEffect(() => {
-    const check = () => setIsDark(document.documentElement.getAttribute("data-theme") === "dark");
-    check();
-    const observer = new MutationObserver(check);
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
-    return () => observer.disconnect();
-  }, []);
 
   // Listen for preview text changes from FontPickerModal
   useEffect(() => {
@@ -45,7 +36,7 @@ export function FontSizeWeightTable({ fontSizes, fontWeights }: Props) {
   const isMono = selectedRole === "mono";
 
   return (
-    <div suppressHydrationWarning className="flex flex-col gap-6">
+    <div className="flex flex-col gap-6">
       {/* Font role selector — aligned with title row on desktop+, below subtitle on laptop and smaller */}
       <div className="flex gap-1.5 justify-end -mt-[90px] mb-8 relative z-[2] max-[1024px]:mt-0 max-[1024px]:mb-3 max-[1024px]:justify-start">
         {FONT_ROLES.map((r) => (

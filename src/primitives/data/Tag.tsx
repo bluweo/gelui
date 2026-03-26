@@ -1,5 +1,4 @@
 import { type CSSProperties } from "react";
-import { useDarkMode } from "../hooks/useDarkMode";
 
 interface TagProps {
   label: string;
@@ -18,11 +17,10 @@ export function Tag({
   className = "",
   style,
 }: TagProps) {
-  const dark = useDarkMode();
   const colorMap: Record<string, { bg: string; text: string }> = {
     default: {
-      bg: dark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.06)",
-      text: dark ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.6)",
+      bg: "var(--theme-divider)",
+      text: "var(--theme-fg)",
     },
     blue: { bg: "rgba(0,122,255,0.12)", text: "#007AFF" },
     green: { bg: "rgba(52,199,89,0.12)", text: "#34C759" },

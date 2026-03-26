@@ -1,5 +1,4 @@
 import { type ReactNode, type CSSProperties, useState } from "react";
-import { useDarkMode } from "../hooks/useDarkMode";
 
 interface InputProps {
   type?: string;
@@ -28,7 +27,6 @@ export function Input({
   className = "",
   style,
 }: InputProps) {
-  const dark = useDarkMode();
   const [focused, setFocused] = useState(false);
 
   const sizeMap = {
@@ -43,18 +41,8 @@ export function Input({
     : success
       ? "rgba(52,199,89,0.7)"
       : focused
-        ? dark
-          ? "#fff"
-          : "#000"
+        ? "var(--theme-bg-solid)"
         : "transparent";
-
-  const bg = focused
-    ? dark
-      ? "rgba(30,30,30,1)"
-      : "rgba(255,255,255,1)"
-    : dark
-      ? "rgba(255,255,255,0.08)"
-      : "rgba(255,255,255,0.6)";
 
   return (
     <div
@@ -96,8 +84,8 @@ export function Input({
           fontFamily: "var(--font-body)",
           borderRadius: "var(--glass-radius-sm, 10px)",
           border: `2px solid ${borderColor}`,
-          background: bg,
-          color: dark ? "#fff" : "#000",
+          background: "var(--theme-divider)",
+          color: "var(--theme-bg-solid)",
           outline: "none",
           transition: "all 200ms ease",
           opacity: disabled ? 0.5 : 1,

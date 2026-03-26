@@ -1,5 +1,4 @@
 import { type CSSProperties } from "react";
-import { useDarkMode } from "../hooks/useDarkMode";
 
 interface RadioProps {
   selected?: boolean;
@@ -16,8 +15,7 @@ export function Radio({
   className = "",
   style,
 }: RadioProps) {
-  const dark = useDarkMode();
-  const accent = dark ? "#b0c4af" : "#354334";
+  const accent = "#354334";
 
   if (variant === "gel") {
     return (
@@ -73,7 +71,7 @@ export function Radio({
         width: "20px",
         height: "20px",
         borderRadius: "50%",
-        border: `2px solid ${selected ? accent : dark ? "rgba(255,255,255,0.25)" : "rgba(0,0,0,0.2)"}`,
+        border: `2px solid ${selected ? accent : "var(--theme-fg-faint)"}`,
         background: "transparent",
         cursor: "pointer",
         display: "flex",

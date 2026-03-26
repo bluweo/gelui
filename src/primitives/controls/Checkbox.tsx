@@ -1,5 +1,4 @@
 import { type CSSProperties } from "react";
-import { useDarkMode } from "../hooks/useDarkMode";
 
 interface CheckboxProps {
   checked?: boolean;
@@ -16,8 +15,6 @@ export function Checkbox({
   className = "",
   style,
 }: CheckboxProps) {
-  const dark = useDarkMode();
-
   if (variant === "gel") {
     return (
       <button
@@ -77,8 +74,8 @@ export function Checkbox({
         borderRadius: "4px",
         border: checked
           ? "none"
-          : `2px solid ${dark ? "rgba(255,255,255,0.25)" : "rgba(0,0,0,0.2)"}`,
-        background: checked ? (dark ? "#b0c4af" : "#354334") : "transparent",
+          : "2px solid var(--theme-fg-faint)",
+        background: checked ? "#354334" : "transparent",
         cursor: "pointer",
         display: "flex",
         alignItems: "center",
@@ -94,7 +91,7 @@ export function Checkbox({
           height="12"
           viewBox="0 0 24 24"
           fill="none"
-          stroke={dark ? "#000" : "#fff"}
+          stroke="var(--theme-fg-on-solid)"
           strokeWidth="3"
           strokeLinecap="round"
         >

@@ -1,6 +1,5 @@
 import { type CSSProperties, useState } from "react";
 import type { BaseProps } from "../types";
-import { useDarkMode } from "../hooks/useDarkMode";
 
 interface ButtonProps extends BaseProps {
   variant?: "solid" | "ghost" | "glass" | "gel" | "link";
@@ -22,7 +21,6 @@ export function Button({
   style,
   onClick,
 }: ButtonProps) {
-  const dark = useDarkMode();
   const [hovered, setHovered] = useState(false);
   const sizeMap = {
     sm: { px: "14px", py: "6px", fs: "11px" },
@@ -53,29 +51,25 @@ export function Button({
   const variants: Record<string, CSSProperties> = {
     solid: {
       ...base,
-      background: dark ? "#fff" : "#000",
-      color: dark ? "#000" : "#fff",
+      background: "var(--theme-bg-solid)",
+      color: "var(--theme-fg-on-solid)",
       boxShadow: hovered && !disabled ? "0 4px 12px rgba(0,0,0,0.15)" : "none",
     },
     ghost: {
       ...base,
       background: hovered && !disabled
-        ? dark
-          ? "rgba(255,255,255,0.08)"
-          : "rgba(0,0,0,0.04)"
+        ? "var(--theme-header-bg)"
         : "transparent",
-      border: `1px solid ${dark ? "rgba(255,255,255,0.15)" : "rgba(0,0,0,0.15)"}`,
-      color: dark ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.7)",
+      border: "1px solid var(--theme-ghost-border)",
+      color: "var(--theme-fg)",
     },
     glass: {
       ...base,
-      background: dark
-        ? "rgba(255,255,255,0.1)"
-        : "rgba(255,255,255,0.6)",
+      background: "var(--theme-header-bg)",
       backdropFilter: "blur(12px)",
       WebkitBackdropFilter: "blur(12px)",
-      border: `1px solid ${dark ? "rgba(255,255,255,0.12)" : "rgba(255,255,255,0.2)"}`,
-      color: dark ? "#fff" : "#000",
+      border: "1px solid var(--theme-ghost-border)",
+      color: "var(--theme-bg-solid)",
       boxShadow:
         "inset 0 1px 0 rgba(255,255,255,0.2), 0 1px 3px rgba(0,0,0,0.06)",
     },
@@ -83,7 +77,7 @@ export function Button({
       ...base,
       // Gel buttons use CSS classes (gel-btn) for volumetric shadows
       // Only set minimal inline styles — CSS handles the rest
-      color: dark ? "rgba(255,255,255,0.85)" : "rgba(0,0,0,0.75)",
+      color: "var(--theme-fg)",
       background: undefined,
       padding: undefined,
       border: undefined,
@@ -92,7 +86,7 @@ export function Button({
       ...base,
       background: "transparent",
       padding: "0",
-      color: dark ? "#b0c4af" : "#354334",
+      color: "var(--theme-fg)",
       textDecoration: "underline",
       transform: "none",
       opacity: hovered && !disabled ? 0.7 : disabled ? 0.5 : 1,

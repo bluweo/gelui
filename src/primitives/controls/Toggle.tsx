@@ -1,5 +1,4 @@
 import { type CSSProperties } from "react";
-import { useDarkMode } from "../hooks/useDarkMode";
 
 interface ToggleProps {
   checked?: boolean;
@@ -16,8 +15,6 @@ export function Toggle({
   className = "",
   style,
 }: ToggleProps) {
-  const dark = useDarkMode();
-
   if (variant === "gel") {
     return (
       <button
@@ -81,12 +78,8 @@ export function Toggle({
         cursor: "pointer",
         transition: "all 200ms",
         background: checked
-          ? dark
-            ? "#b0c4af"
-            : "#354334"
-          : dark
-            ? "rgba(255,255,255,0.15)"
-            : "rgba(0,0,0,0.12)",
+          ? "#354334"
+          : "var(--theme-ghost-border)",
         display: "flex",
         alignItems: "center",
         justifyContent: checked ? "flex-end" : "flex-start",

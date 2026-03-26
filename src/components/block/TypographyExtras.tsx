@@ -1,10 +1,8 @@
 import { Blockquote, List, Kbd, Code, Overline, Label } from "@/primitives/typography";
-import { useDarkMode } from "@/primitives/hooks/useDarkMode";
-export function TypographyExtras() {
-  const isDark = useDarkMode();
 
+export function TypographyExtras() {
   return (
-    <div className="flex flex-col gap-5" suppressHydrationWarning>
+    <div className="flex flex-col gap-5">
       {/* Blockquote */}
       <div className="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white/60 dark:bg-black/30">
         <div className="flex items-center px-3 py-2 bg-black/[0.04] dark:bg-white/[0.06] border-b border-black/[0.06] dark:border-white/[0.06]">

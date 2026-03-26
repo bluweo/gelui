@@ -1,9 +1,7 @@
 import { Spinner, Progress, Skeleton, Alert, Toast } from "@/primitives/feedback";
-import { useDarkMode } from "@/primitives/hooks/useDarkMode";
 import { useState, useEffect, useCallback } from "react";
 
 export function FeedbackShowcaseV2() {
-  const isDark = useDarkMode();
   const [progress, setProgress] = useState(35);
   const [showToast, setShowToast] = useState(false);
   const [toastVariant, setToastVariant] = useState<"info" | "success" | "warning" | "error">("success");
@@ -21,42 +19,35 @@ export function FeedbackShowcaseV2() {
     setShowToast(true);
   }, []);
 
-  const tableBg = isDark ? "#1a1a1a" : "#ffffff";
-  const headerBg = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)";
-  const borderColor = isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.06)";
-  const rowBorder = isDark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.04)";
-  const labelColor = isDark ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.6)";
-  const headerColor = isDark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.45)";
-
   const headerStyle: React.CSSProperties = {
     fontSize: "10px",
     fontWeight: 650,
     letterSpacing: "0.06em",
     textTransform: "uppercase",
-    color: headerColor,
+    color: "var(--theme-fg-muted)",
   };
 
   const tableStyle: React.CSSProperties = {
     borderRadius: "var(--glass-radius-sm, 10px)",
     overflow: "hidden",
-    background: tableBg,
-    border: `1px solid ${borderColor}`,
+    background: "var(--theme-table-bg)",
+    border: "1px solid var(--theme-divider)",
   };
 
   const labelStyle: React.CSSProperties = {
     fontSize: "12px",
     fontWeight: 550,
-    color: labelColor,
+    color: "var(--theme-fg)",
   };
 
   return (
-    <div suppressHydrationWarning style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
       {/* Spinners */}
       <div style={tableStyle}>
-        <div style={{ padding: "8px 12px", background: headerBg, borderBottom: `1px solid ${borderColor}` }}>
+        <div style={{ padding: "8px 12px", background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
           <span style={headerStyle}>Spinners</span>
         </div>
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 16px", borderBottom: `1px solid ${rowBorder}` }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 16px", borderBottom: "1px solid var(--theme-header-bg)" }}>
           <span style={labelStyle}>Sizes</span>
           <div style={{ display: "flex", gap: "16px", alignItems: "center" }}>
             <Spinner size="16px" />
@@ -74,13 +65,13 @@ export function FeedbackShowcaseV2() {
 
       {/* Skeleton Loaders */}
       <div style={tableStyle}>
-        <div style={{ padding: "8px 12px", background: headerBg, borderBottom: `1px solid ${borderColor}` }}>
+        <div style={{ padding: "8px 12px", background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
           <span style={headerStyle}>Skeleton Loaders</span>
         </div>
         <div style={{ padding: "16px" }}>
           {/* Card skeleton */}
           <div style={{ marginBottom: "16px" }}>
-            <span style={{ fontSize: "11px", fontWeight: 550, color: labelColor, display: "block", marginBottom: "8px" }}>Card Loading</span>
+            <span style={{ fontSize: "11px", fontWeight: 550, color: "var(--theme-fg)", display: "block", marginBottom: "8px" }}>Card Loading</span>
             <div style={{ display: "flex", gap: "12px", alignItems: "start" }}>
               <Skeleton width="48px" height="48px" rounded="50%" />
               <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "8px" }}>
@@ -92,7 +83,7 @@ export function FeedbackShowcaseV2() {
           </div>
           {/* List skeleton */}
           <div>
-            <span style={{ fontSize: "11px", fontWeight: 550, color: labelColor, display: "block", marginBottom: "8px" }}>List Loading</span>
+            <span style={{ fontSize: "11px", fontWeight: 550, color: "var(--theme-fg)", display: "block", marginBottom: "8px" }}>List Loading</span>
             {[1, 2, 3].map((i) => (
               <div key={i} style={{ display: "flex", gap: "10px", alignItems: "center", marginBottom: "8px" }}>
                 <Skeleton width="32px" height="32px" rounded="8px" />
@@ -108,7 +99,7 @@ export function FeedbackShowcaseV2() {
 
       {/* Alerts */}
       <div style={tableStyle}>
-        <div style={{ padding: "8px 12px", background: headerBg, borderBottom: `1px solid ${borderColor}` }}>
+        <div style={{ padding: "8px 12px", background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
           <span style={headerStyle}>Alerts</span>
         </div>
         <div style={{ padding: "12px 16px", display: "flex", flexDirection: "column", gap: "10px" }}>
@@ -121,7 +112,7 @@ export function FeedbackShowcaseV2() {
 
       {/* Toast Demo */}
       <div style={tableStyle}>
-        <div style={{ padding: "8px 12px", background: headerBg, borderBottom: `1px solid ${borderColor}` }}>
+        <div style={{ padding: "8px 12px", background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
           <span style={headerStyle}>Toast Notifications</span>
         </div>
         <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", padding: "14px 16px" }}>
@@ -134,9 +125,9 @@ export function FeedbackShowcaseV2() {
                 fontWeight: 600,
                 padding: "8px 14px",
                 borderRadius: "var(--glass-radius-pill, 100px)",
-                border: `1px solid ${borderColor}`,
-                background: isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)",
-                color: isDark ? "rgba(255,255,255,0.75)" : "rgba(0,0,0,0.7)",
+                border: "1px solid var(--theme-divider)",
+                background: "var(--theme-header-bg)",
+                color: "var(--theme-fg)",
                 cursor: "pointer",
                 textTransform: "capitalize",
                 transition: "all 150ms ease",

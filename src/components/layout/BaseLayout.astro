@@ -85,9 +85,18 @@ const ogImageUrl = ogImage.startsWith("http") ? ogImage : new URL(ogImage, siteU
     <!-- View Transitions -->
     <ClientRouter />
 
-    <!-- Blocking script: restore fonts from localStorage before paint to prevent FOUC -->
+    <!-- Blocking script: restore theme + fonts from localStorage before paint to prevent FOUC -->
     <script is:inline>
     (function() {
+      // Restore theme FIRST (enables CSS [data-theme="dark"] variables before React hydrates)
+      try {
+        var appearance = JSON.parse(localStorage.getItem("gelui-appearance") || "{}");
+        if (appearance.theme === "dark") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch(e) {}
+
+      // Restore fonts
       try {
         var stored = JSON.parse(localStorage.getItem("gelui-appearance") || "{}");
         var fonts = stored.fonts;

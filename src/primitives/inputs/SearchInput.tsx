@@ -1,5 +1,4 @@
 import { type CSSProperties, useState } from "react";
-import { useDarkMode } from "../hooks/useDarkMode";
 
 interface SearchInputProps {
   placeholder?: string;
@@ -16,7 +15,6 @@ export function SearchInput({
   className = "",
   style,
 }: SearchInputProps) {
-  const dark = useDarkMode();
   const [internal, setInternal] = useState("");
   const val = controlledValue ?? internal;
   const [focused, setFocused] = useState(false);
@@ -42,7 +40,7 @@ export function SearchInput({
         height="16"
         viewBox="0 0 24 24"
         fill="none"
-        stroke={dark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.4)"}
+        stroke="var(--theme-fg-muted)"
         strokeWidth={strokeWidth}
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -72,11 +70,9 @@ export function SearchInput({
           fontSize: "14px",
           fontFamily: "var(--font-body)",
           borderRadius: "var(--glass-radius-sm, 10px)",
-          border: `2px solid ${focused ? (dark ? "#fff" : "#000") : "transparent"}`,
-          background: dark
-            ? "rgba(255,255,255,0.08)"
-            : "rgba(255,255,255,0.6)",
-          color: dark ? "#fff" : "#000",
+          border: `2px solid ${focused ? "var(--theme-bg-solid)" : "transparent"}`,
+          background: "var(--theme-divider)",
+          color: "var(--theme-bg-solid)",
           outline: "none",
           transition: "all 200ms ease",
           ...style,
@@ -92,10 +88,8 @@ export function SearchInput({
             height: "20px",
             borderRadius: "50%",
             border: "none",
-            background: dark
-              ? "rgba(255,255,255,0.12)"
-              : "rgba(0,0,0,0.08)",
-            color: dark ? "#fff" : "#000",
+            background: "var(--theme-ghost-border)",
+            color: "var(--theme-bg-solid)",
             cursor: "pointer",
             display: "flex",
             alignItems: "center",

@@ -1,30 +1,21 @@
 import { Badge, Tag, Avatar } from "@/primitives/data";
-import { useDarkMode } from "@/primitives/hooks/useDarkMode";
 import { useState } from "react";
 
 export function BadgesShowcaseV2() {
-  const isDark = useDarkMode();
   const [tags, setTags] = useState(["React", "Tailwind", "Astro"]);
   const [activeChip, setActiveChip] = useState("Active");
-
-  const tableBg = isDark ? "#1a1a1a" : "#ffffff";
-  const headerBg = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)";
-  const borderColor = isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.06)";
-  const rowBorder = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)";
-  const labelColor = isDark ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.65)";
-  const subColor = isDark ? "rgba(255,255,255,0.35)" : "rgba(0,0,0,0.35)";
 
   const card: React.CSSProperties = {
     borderRadius: "var(--glass-radius-sm, 10px)",
     overflow: "hidden",
-    background: tableBg,
-    border: `1px solid ${borderColor}`,
+    background: "var(--theme-table-bg)",
+    border: "1px solid var(--theme-divider)",
   };
 
   const header: React.CSSProperties = {
     padding: "10px 14px",
-    background: headerBg,
-    borderBottom: `1px solid ${borderColor}`,
+    background: "var(--theme-header-bg)",
+    borderBottom: "1px solid var(--theme-divider)",
   };
 
   const row = (last = false): React.CSSProperties => ({
@@ -32,19 +23,19 @@ export function BadgesShowcaseV2() {
     alignItems: "center",
     justifyContent: "space-between",
     padding: "10px 14px",
-    borderBottom: last ? undefined : `1px solid ${rowBorder}`,
+    borderBottom: last ? undefined : "1px solid var(--theme-divider)",
   });
 
   return (
-    <div suppressHydrationWarning style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
+    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
       {/* Top-left: Status Badges */}
       <div style={card}>
         <div style={header}>
-          <span className="type-overline" style={{ color: subColor }}>Status Badges</span>
+          <span className="type-overline" style={{ color: "var(--theme-fg-subtle)" }}>Status Badges</span>
         </div>
         {(["success", "warning", "error", "info", "default"] as const).map((v, i) => (
           <div key={v} style={row(i === 4)}>
-            <span className="type-label" style={{ color: labelColor, textTransform: "capitalize" }}>{v === "default" ? "Neutral" : v}</span>
+            <span className="type-label" style={{ color: "var(--theme-fg)", textTransform: "capitalize" }}>{v === "default" ? "Neutral" : v}</span>
             <Badge variant={v}>{v === "default" ? "Neutral" : v.charAt(0).toUpperCase() + v.slice(1)}</Badge>
           </div>
         ))}
@@ -53,16 +44,16 @@ export function BadgesShowcaseV2() {
       {/* Top-right: Status Dots */}
       <div style={card}>
         <div style={header}>
-          <span className="type-overline" style={{ color: subColor }}>Status Dots</span>
+          <span className="type-overline" style={{ color: "var(--theme-fg-subtle)" }}>Status Dots</span>
         </div>
         {([
           { label: "Online", color: "#34C759" },
           { label: "Away", color: "#FFC800" },
           { label: "Busy", color: "#FF3B30" },
-          { label: "Offline", color: isDark ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.25)" },
+          { label: "Offline", color: "var(--theme-fg-faint)" },
         ]).map((dot, i) => (
           <div key={dot.label} style={row(i === 3)}>
-            <span className="type-label" style={{ color: labelColor }}>{dot.label}</span>
+            <span className="type-label" style={{ color: "var(--theme-fg)" }}>{dot.label}</span>
             <span style={{ width: 12, height: 12, borderRadius: "50%", background: dot.color, flexShrink: 0 }} />
           </div>
         ))}
@@ -71,11 +62,11 @@ export function BadgesShowcaseV2() {
       {/* Bottom-left: Tags & Chips */}
       <div style={card}>
         <div style={header}>
-          <span className="type-overline" style={{ color: subColor }}>Tags & Chips</span>
+          <span className="type-overline" style={{ color: "var(--theme-fg-subtle)" }}>Tags & Chips</span>
         </div>
         {/* Removable Tags */}
-        <div style={{ padding: "12px 14px", borderBottom: `1px solid ${rowBorder}` }}>
-          <span className="type-caption" style={{ color: subColor, display: "block", marginBottom: 8 }}>Removable Tags</span>
+        <div style={{ padding: "12px 14px", borderBottom: "1px solid var(--theme-divider)" }}>
+          <span className="type-caption" style={{ color: "var(--theme-fg-subtle)", display: "block", marginBottom: 8 }}>Removable Tags</span>
           <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
             {tags.map((tag) => (
               <Tag
@@ -86,13 +77,13 @@ export function BadgesShowcaseV2() {
               />
             ))}
             {tags.length === 0 && (
-              <span style={{ fontSize: "11px", color: subColor }}>All removed — refresh to reset</span>
+              <span style={{ fontSize: "11px", color: "var(--theme-fg-subtle)" }}>All removed — refresh to reset</span>
             )}
           </div>
         </div>
         {/* Selectable Chips */}
         <div style={{ padding: "12px 14px" }}>
-          <span className="type-caption" style={{ color: subColor, display: "block", marginBottom: 8 }}>Selectable Chips</span>
+          <span className="type-caption" style={{ color: "var(--theme-fg-subtle)", display: "block", marginBottom: 8 }}>Selectable Chips</span>
           <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
             {["Active", "Inactive", "Another"].map((chip) => (
               <button
@@ -102,9 +93,9 @@ export function BadgesShowcaseV2() {
                 style={{
                   padding: "5px 14px",
                   borderRadius: "var(--glass-radius-pill, 100px)",
-                  border: `1px solid ${isDark ? "rgba(255,255,255,0.12)" : "rgba(0,0,0,0.1)"}`,
-                  background: activeChip === chip ? (isDark ? "#fff" : "#000") : "transparent",
-                  color: activeChip === chip ? (isDark ? "#000" : "#fff") : labelColor,
+                  border: "1px solid var(--theme-ghost-border)",
+                  background: activeChip === chip ? "var(--theme-bg-solid)" : "transparent",
+                  color: activeChip === chip ? "var(--theme-fg-on-solid)" : "var(--theme-fg)",
                   cursor: "pointer",
                   transition: "all 0.15s ease",
                 }}
@@ -119,11 +110,11 @@ export function BadgesShowcaseV2() {
       {/* Bottom-right: Avatars */}
       <div style={card}>
         <div style={header}>
-          <span className="type-overline" style={{ color: subColor }}>Avatars</span>
+          <span className="type-overline" style={{ color: "var(--theme-fg-subtle)" }}>Avatars</span>
         </div>
         {/* Sizes */}
-        <div style={{ padding: "14px", borderBottom: `1px solid ${rowBorder}` }}>
-          <span className="type-caption" style={{ color: subColor, display: "block", marginBottom: 10 }}>Sizes</span>
+        <div style={{ padding: "14px", borderBottom: "1px solid var(--theme-divider)" }}>
+          <span className="type-caption" style={{ color: "var(--theme-fg-subtle)", display: "block", marginBottom: 10 }}>Sizes</span>
           <div style={{ display: "flex", gap: "16px", alignItems: "flex-end" }}>
             {([
               { initials: "A", size: 28, bg: "#5856D6", label: "xs" },
@@ -136,7 +127,7 @@ export function BadgesShowcaseV2() {
                   width: a.size,
                   height: a.size,
                   borderRadius: "50%",
-                  background: a.image ? "transparent" : a.bg,
+                  background: a.bg,
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
@@ -145,16 +136,16 @@ export function BadgesShowcaseV2() {
                   color: "#fff",
                   overflow: "hidden",
                 }}>
-                  {a.image ? <img src={a.image} alt="logo" style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: "50%" }} /> : a.initials}
+                  {a.initials}
                 </div>
-                <span className="type-caption" style={{ color: subColor }}>{a.label}</span>
+                <span className="type-caption" style={{ color: "var(--theme-fg-subtle)" }}>{a.label}</span>
               </div>
             ))}
           </div>
         </div>
         {/* Group */}
         <div style={{ padding: "14px" }}>
-          <span className="type-caption" style={{ color: subColor, display: "block", marginBottom: 10 }}>Group</span>
+          <span className="type-caption" style={{ color: "var(--theme-fg-subtle)", display: "block", marginBottom: 10 }}>Group</span>
           <div style={{ display: "flex", alignItems: "center" }}>
             {([
               { initials: "A", bg: "#5856D6", status: "online" as const },
@@ -176,7 +167,7 @@ export function BadgesShowcaseV2() {
                   fontSize: "13px",
                   fontWeight: 600,
                   color: "#fff",
-                  border: `2.5px solid ${tableBg}`,
+                  border: "2.5px solid var(--theme-table-bg)",
                   position: "relative",
                 }}
               >
@@ -189,7 +180,7 @@ export function BadgesShowcaseV2() {
                   height: 10,
                   borderRadius: "50%",
                   background: u.status === "online" ? "#34C759" : u.status === "away" ? "#FFC800" : "#FF3B30",
-                  border: `2px solid ${tableBg}`,
+                  border: "2px solid var(--theme-table-bg)",
                 }} />
               </div>
             ))}
@@ -199,14 +190,14 @@ export function BadgesShowcaseV2() {
                 width: 36,
                 height: 36,
                 borderRadius: "50%",
-                background: isDark ? "#ffffff" : "#1a1a1a",
+                background: "var(--theme-bg-solid)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 fontSize: "11px",
                 fontWeight: 650,
-                color: isDark ? "#000" : "#fff",
-                border: `2.5px solid ${tableBg}`,
+                color: "var(--theme-fg-on-solid)",
+                border: "2.5px solid var(--theme-table-bg)",
                 zIndex: 0,
               }}
             >

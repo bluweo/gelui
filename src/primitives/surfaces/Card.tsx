@@ -1,5 +1,4 @@
 import type { BaseProps } from "../types";
-import { useDarkMode } from "../hooks/useDarkMode";
 
 interface CardProps extends BaseProps {
   variant?: "glass" | "gel" | "solid" | "transparent";
@@ -13,8 +12,6 @@ export function Card({
   className = "",
   style,
 }: CardProps) {
-  const isDark = useDarkMode();
-
   const variantClasses: Record<string, string> = {
     glass: "glass-1 glass-specular",
     gel: "gel-glass glass-specular",
@@ -35,9 +32,9 @@ export function Card({
       className={`relative overflow-hidden rounded-[var(--glass-radius,16px)] p-5 ${variantClasses[variant]} ${className}`}
       style={{
         ...(variant === "solid"
-          ? { background: isDark ? "#1a1a1a" : "rgba(255,255,255,0.95)", border: `1px solid ${isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.06)"}` }
+          ? { background: "var(--theme-table-bg)", border: "1px solid var(--theme-divider)" }
           : variant === "transparent"
-            ? { border: `1px solid ${isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)"}` }
+            ? { border: "1px solid var(--theme-divider)" }
             : {}),
         ...style,
       }}

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Toggle, Checkbox, Radio, SegmentedControl, Slider } from "@/primitives/controls";
 
 export function GlassControlsDemo() {
@@ -9,27 +9,12 @@ export function GlassControlsDemo() {
   const [radio, setRadio] = useState<"a" | "b">("b");
   const [segment, setSegment] = useState("Day");
   const [slider, setSlider] = useState(60);
-  const [isDarkBg, setIsDarkBg] = useState(false);
-
-  // Detect contrast from nearest data-contrast attribute
-  useEffect(() => {
-    const check = () => {
-      const main = document.querySelector("main");
-      const contrast = main?.getAttribute("data-contrast");
-      setIsDarkBg(contrast === "dark");
-    };
-    check();
-    const obs = new MutationObserver(check);
-    const main = document.querySelector("main");
-    if (main) obs.observe(main, { attributes: true, attributeFilter: ["data-contrast"] });
-    return () => obs.disconnect();
-  }, []);
 
   const rowClass = "flex items-center justify-between py-3 border-b contrast-border";
   const labelClass = "text-[12px] font-[500] contrast-text-muted";
 
   return (
-    <div className="flex flex-col gap-4" suppressHydrationWarning>
+    <div className="flex flex-col gap-4">
       {/* Toggle & Checkbox */}
       <div className="rounded-[var(--glass-radius-sm)] overflow-hidden border contrast-border" style={{ background: "transparent" }}>
         <div className="px-4 py-2.5 border-b contrast-border">

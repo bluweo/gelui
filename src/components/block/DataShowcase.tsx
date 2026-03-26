@@ -1,16 +1,8 @@
 import { Table, Stat, EmptyState, ColorSwatch } from "@/primitives/data";
-import { useDarkMode } from "@/primitives/hooks/useDarkMode";
 import { useState } from "react";
 
 export function DataShowcase() {
-  const isDark = useDarkMode();
   const [showEmpty, setShowEmpty] = useState(true);
-
-  const tableBg = isDark ? "#1a1a1a" : "#ffffff";
-  const headerBg = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)";
-  const borderColor = isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.06)";
-  const headerColor = isDark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.45)";
-  const labelColor = isDark ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.6)";
 
   const tableColumns = [
     { key: "name", label: "Name" },
@@ -26,11 +18,11 @@ export function DataShowcase() {
   ];
 
   return (
-    <div suppressHydrationWarning style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
       {/* Table */}
-      <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: tableBg, border: `1px solid ${borderColor}` }}>
-        <div style={{ padding: "8px 12px", background: headerBg, borderBottom: `1px solid ${borderColor}` }}>
-          <span className="type-overline" style={{ color: headerColor }}>Table (Striped)</span>
+      <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: "var(--theme-table-bg)", border: "1px solid var(--theme-divider)" }}>
+        <div style={{ padding: "8px 12px", background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
+          <span className="type-overline" style={{ color: "var(--theme-fg-muted)" }}>Table (Striped)</span>
         </div>
         <div style={{ padding: "16px" }}>
           <Table columns={tableColumns} data={tableData} striped />
@@ -38,9 +30,9 @@ export function DataShowcase() {
       </div>
 
       {/* Stat Cards */}
-      <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: tableBg, border: `1px solid ${borderColor}` }}>
-        <div style={{ padding: "8px 12px", background: headerBg, borderBottom: `1px solid ${borderColor}` }}>
-          <span className="type-overline" style={{ color: headerColor }}>Stat Cards</span>
+      <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: "var(--theme-table-bg)", border: "1px solid var(--theme-divider)" }}>
+        <div style={{ padding: "8px 12px", background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
+          <span className="type-overline" style={{ color: "var(--theme-fg-muted)" }}>Stat Cards</span>
         </div>
         <div style={{ padding: "16px", display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "12px" }}>
           <Stat
@@ -83,9 +75,9 @@ export function DataShowcase() {
       </div>
 
       {/* EmptyState */}
-      <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: tableBg, border: `1px solid ${borderColor}` }}>
-        <div style={{ padding: "8px 12px", background: headerBg, borderBottom: `1px solid ${borderColor}` }}>
-          <span className="type-overline" style={{ color: headerColor }}>Empty State</span>
+      <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: "var(--theme-table-bg)", border: "1px solid var(--theme-divider)" }}>
+        <div style={{ padding: "8px 12px", background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
+          <span className="type-overline" style={{ color: "var(--theme-fg-muted)" }}>Empty State</span>
         </div>
         <EmptyState
           title="No results found"
@@ -103,8 +95,8 @@ export function DataShowcase() {
                 padding: "8px 20px",
                 borderRadius: "var(--glass-radius-pill, 100px)",
                 border: "none",
-                background: isDark ? "rgba(255,255,255,0.9)" : "rgba(0,0,0,0.85)",
-                color: isDark ? "#000" : "#fff",
+                background: "var(--theme-bg-solid)",
+                color: "var(--theme-fg-on-solid)",
                 fontSize: "13px",
                 fontWeight: 600,
                 fontFamily: "var(--font-ui)",
@@ -118,9 +110,9 @@ export function DataShowcase() {
       </div>
 
       {/* ColorSwatch */}
-      <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: tableBg, border: `1px solid ${borderColor}` }}>
-        <div style={{ padding: "8px 12px", background: headerBg, borderBottom: `1px solid ${borderColor}` }}>
-          <span className="type-overline" style={{ color: headerColor }}>Color Swatches</span>
+      <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: "var(--theme-table-bg)", border: "1px solid var(--theme-divider)" }}>
+        <div style={{ padding: "8px 12px", background: "var(--theme-header-bg)", borderBottom: "1px solid var(--theme-divider)" }}>
+          <span className="type-overline" style={{ color: "var(--theme-fg-muted)" }}>Color Swatches</span>
         </div>
         <div style={{ padding: "16px", display: "flex", gap: "16px", flexWrap: "wrap", justifyContent: "center" }}>
           <ColorSwatch color="#007AFF" label="Primary" showHex />

@@ -91,7 +91,6 @@ function darken(hex: string, amount: number): string {
 export function BrandColorPreview() {
   const [logoUrl, setLogoUrl] = useState<string | null>(null);
   const [brands, setBrands] = useState<BrandEntry[]>(getDefaultBrands);
-  const [isDark, setIsDark] = useState(false);
   const [isExtracting, setIsExtracting] = useState(false);
   const [showUploadModal, setShowUploadModal] = useState(false);
   const [dragOver, setDragOver] = useState(false);
@@ -102,14 +101,6 @@ export function BrandColorPreview() {
   const { panelRef, panelStyle, backdropDragged, onDragStart } =
     useDraggableModal({ isOpen: showUploadModal, onClose: closeUploadModal });
 
-  // Theme detection
-  useEffect(() => {
-    const check = () => setIsDark(document.documentElement.getAttribute("data-theme") === "dark");
-    check();
-    const obs = new MutationObserver(check);
-    obs.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
-    return () => obs.disconnect();
-  }, []);
 
   // Load from localStorage
   useEffect(() => {
@@ -186,12 +177,11 @@ export function BrandColorPreview() {
       ]
     : [];
 
-  const currentLogo = logoUrl || (isDark ? DEFAULT_LOGO_WHITE : DEFAULT_LOGO);
 
   return (
     <>
       {/* ═══ Brand Colour Scheme ═══ */}
-      <div suppressHydrationWarning data-section="Brand Colors" className="col-span-2 row-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
+      <div data-section="Brand Colors" className="col-span-2 row-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
         <div className="absolute inset-0 pointer-events-none ds-card-frost" style={{ height: 200 }} />
 
         {/* Header with logo */}
@@ -227,7 +217,14 @@ export function BrandColorPreview() {
               </svg>
             </button>
             <div className="w-16 h-16 rounded-[var(--glass-radius-sm)] border border-black/15 dark:border-white/15 p-1.5 flex items-center justify-center bg-white/40 dark:bg-black/20">
-              <img src={currentLogo} alt="Brand Logo" className="w-full h-full object-contain" />
+              {logoUrl ? (
+                <img src={logoUrl} alt="Brand Logo" className="w-full h-full object-contain" />
+              ) : (
+                <>
+                  <img src={DEFAULT_LOGO} alt="Brand Logo" className="w-full h-full object-contain block dark:hidden" />
+                  <img src={DEFAULT_LOGO_WHITE} alt="Brand Logo" className="w-full h-full object-contain hidden dark:block" />
+                </>
+              )}
             </div>
           </div>
         </div>

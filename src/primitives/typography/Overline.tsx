@@ -1,5 +1,4 @@
 import type { BaseProps } from "../types";
-import { useDarkMode } from "../hooks/useDarkMode";
 
 interface OverlineProps extends BaseProps {
   size?: "sm" | "md" | "lg";
@@ -13,18 +12,15 @@ export function Overline({
   className = "",
   style,
 }: OverlineProps) {
-  const isDark = useDarkMode();
-
   return (
     <span
-      suppressHydrationWarning
       className={`type-overline ${className}`}
       style={{
         display: "block",
         fontFamily: "var(--font-ui)",
         color: muted
-          ? isDark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.4)"
-          : isDark ? "rgba(255,255,255,0.85)" : "rgba(0,0,0,0.85)",
+          ? "var(--theme-fg-muted)"
+          : "var(--theme-fg)",
         margin: 0,
         ...style,
       }}

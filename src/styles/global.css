@@ -2020,6 +2020,71 @@ code:not([data-font-preview]), pre:not([data-font-preview]), kbd, samp { font-fa
 .type-link { font-size: var(--type-link-size, 15px) !important; font-weight: var(--type-link-weight, 500) !important; line-height: var(--type-link-lh, 1.5) !important; letter-spacing: var(--type-link-ls, 0em) !important; }
 
 /* ═══════════════════════════════════════════════
+   THEME CSS VARIABLES — SSR-safe theming
+   Components use var(--theme-*) instead of isDark ternaries.
+   CSS resolves the correct value based on data-theme attribute.
+   ═══════════════════════════════════════════════ */
+:root {
+  --theme-fg: rgba(0,0,0,0.85);
+  --theme-fg-muted: rgba(0,0,0,0.55);
+  --theme-fg-subtle: rgba(0,0,0,0.35);
+  --theme-fg-faint: rgba(0,0,0,0.2);
+  --theme-bg-solid: #000;
+  --theme-fg-on-solid: #fff;
+  --theme-bg-input: rgba(255,255,255,0.6);
+  --theme-bg-input-focus: #ffffff;
+  --theme-border-input: transparent;
+  --theme-border-focus: #000;
+  --theme-bg-hover: rgba(0,0,0,0.04);
+  --theme-bg-active: rgba(0,0,0,0.08);
+  --theme-badge-bg: rgba(0,0,0,0.06);
+  --theme-badge-text: rgba(0,0,0,0.6);
+  --theme-divider: rgba(0,0,0,0.06);
+  --theme-divider-strong: rgba(0,0,0,0.10);
+  --theme-ghost-border: rgba(0,0,0,0.15);
+  --theme-ghost-text: rgba(0,0,0,0.7);
+  --theme-link: #354334;
+  --theme-card-bg: rgba(255,255,255,0.5);
+  --theme-table-bg: #ffffff;
+  --theme-header-bg: rgba(0,0,0,0.04);
+  --theme-code-bg: #1a1a1a;
+  --theme-code-text: #e0e0e0;
+  --theme-overlay-bg: rgba(0,0,0,0.4);
+  --theme-tooltip-bg: rgba(30,30,30,0.95);
+  --theme-tooltip-text: rgba(255,255,255,0.9);
+}
+
+[data-theme="dark"] {
+  --theme-fg: rgba(255,255,255,0.85);
+  --theme-fg-muted: rgba(255,255,255,0.55);
+  --theme-fg-subtle: rgba(255,255,255,0.35);
+  --theme-fg-faint: rgba(255,255,255,0.2);
+  --theme-bg-solid: #fff;
+  --theme-fg-on-solid: #000;
+  --theme-bg-input: rgba(255,255,255,0.08);
+  --theme-bg-input-focus: #1a1a1a;
+  --theme-border-input: transparent;
+  --theme-border-focus: #fff;
+  --theme-bg-hover: rgba(255,255,255,0.08);
+  --theme-bg-active: rgba(255,255,255,0.12);
+  --theme-badge-bg: rgba(255,255,255,0.10);
+  --theme-badge-text: rgba(255,255,255,0.7);
+  --theme-divider: rgba(255,255,255,0.08);
+  --theme-divider-strong: rgba(255,255,255,0.12);
+  --theme-ghost-border: rgba(255,255,255,0.15);
+  --theme-ghost-text: rgba(255,255,255,0.7);
+  --theme-link: #b0c4af;
+  --theme-card-bg: rgba(255,255,255,0.06);
+  --theme-table-bg: #1a1a1a;
+  --theme-header-bg: rgba(255,255,255,0.06);
+  --theme-code-bg: #0d0d0d;
+  --theme-code-text: #d4d4d4;
+  --theme-overlay-bg: rgba(0,0,0,0.6);
+  --theme-tooltip-bg: rgba(50,50,50,0.95);
+  --theme-tooltip-text: rgba(255,255,255,0.9);
+}
+
+/* ═══════════════════════════════════════════════
    CARD FROST ZONE (top-to-bottom)
    ═══════════════════════════════════════════════ */
 .ds-card-frost {

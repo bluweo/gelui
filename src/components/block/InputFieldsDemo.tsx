@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Input, SearchInput, Textarea, Select, SearchableSelect, TagInput } from "@/primitives/inputs";
-import { useDarkMode } from "@/primitives/hooks/useDarkMode";
 
 /* ─── Main Demo Export ─── */
 const SELECT_OPTIONS = [
@@ -32,14 +31,13 @@ const SEARCH_OPTIONS = [
 ];
 
 export function InputFieldsDemo() {
-  const isDark = useDarkMode();
   const [selectVal, setSelectVal] = useState("");
   const [searchSelectVal, setSearchSelectVal] = useState("");
 
-  const labelStyle = { color: isDark ? "rgba(255,255,255,0.55)" : "rgba(0,0,0,0.6)" };
+  const labelStyle = { color: "var(--theme-fg-muted)" };
 
   return (
-    <div className="flex flex-col gap-5" suppressHydrationWarning>
+    <div className="flex flex-col gap-5">
       <div className="flex flex-col gap-1.5">
         <label className="text-[12px] font-semibold" style={labelStyle}>Text Input</label>
         <Input placeholder="Enter your name..." />
@@ -87,11 +85,11 @@ export function InputFieldsDemo() {
             padding: "10px 12px",
             fontSize: "14px",
             fontFamily: "var(--font-mono)",
-            background: isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)",
+            background: "var(--theme-header-bg)",
             borderRadius: "var(--glass-radius-sm, 10px) 0 0 var(--glass-radius-sm, 10px)",
-            border: `1px solid ${isDark ? "rgba(255,255,255,0.12)" : "rgba(0,0,0,0.1)"}`,
+            border: "1px solid var(--theme-ghost-border)",
             borderRight: "none",
-            color: isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.45)",
+            color: "var(--theme-fg-muted)",
             whiteSpace: "nowrap",
           }}>
             https://

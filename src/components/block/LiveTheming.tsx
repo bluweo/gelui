@@ -8,7 +8,6 @@ import { Spinner } from "@/primitives/feedback";
 import { Overline } from "@/primitives/typography/Overline";
 import { Label } from "@/primitives/typography/Label";
 import { Code } from "@/primitives/typography/Code";
-import { useDarkMode } from "@/primitives/hooks/useDarkMode";
 import type { RadiusPreset, ShadowPreset } from "@/components/context/AppearanceContext";
 import { LiquidGlassSlider } from "@/components/glass/LiquidGlassSlider";
 
@@ -52,10 +51,10 @@ function useLiveCSSVars(vars: VarDef[]) {
 }
 
 /* ─── Arrow ─── */
-function Arrow({ isDark }: { isDark: boolean }) {
+function Arrow() {
   return (
     <svg width="20" height="10" viewBox="0 0 20 10" fill="none" style={{ flexShrink: 0, opacity: 0.25 }}>
-      <path d="M0 5h14m0 0l-3.5-3.5M14 5l-3.5 3.5" stroke={isDark ? "#fff" : "#000"} strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M0 5h14m0 0l-3.5-3.5M14 5l-3.5 3.5" stroke="var(--theme-bg-solid)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
@@ -160,7 +159,7 @@ function writeAppearance(key: string, value: any) {
 }
 
 /* ─── Column 2: Embedded Appearance Controls ─── */
-function AppearanceControls({ isDark }: { isDark: boolean }) {
+function AppearanceControls() {
   const [mounted, setMounted] = useState(false);
   const [transparency, setTL] = useState(0.64);
   const [radiusPreset, setRL] = useState("medium");
@@ -176,8 +175,8 @@ function AppearanceControls({ isDark }: { isDark: boolean }) {
   }, []);
 
   if (!mounted) return (
-    <div suppressHydrationWarning style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: "rgba(255,255,255,0.60)", border: "1px solid rgba(0,0,0,0.06)", height: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
-      <span style={{ fontSize: 11, color: "rgba(0,0,0,0.3)" }}>Loading...</span>
+    <div style={{ borderRadius: "var(--glass-radius-sm, 10px)", overflow: "hidden", background: "var(--theme-table-bg)", border: "1px solid var(--theme-divider)", height: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <span style={{ fontSize: 11, color: "var(--theme-fg-subtle)" }}>Loading...</span>
     </div>
   );
 
@@ -187,17 +186,17 @@ function AppearanceControls({ isDark }: { isDark: boolean }) {
   const setShadowPreset = (v: string) => { setSL(v); writeAppearance("shadowPreset", v); };
   const resetToDefaults = () => { setTransparency(0.64); setRadiusPreset("medium"); setBlurIntensity(24); setShadowPreset("soft"); };
 
-  const tableBg = isDark ? "rgba(0,0,0,0.30)" : "rgba(255,255,255,0.60)";
-  const headerBg = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)";
-  const borderColor = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)";
-  const rowBorder = isDark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.04)";
-  const headerText = isDark ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.45)";
-  const labelText = isDark ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.55)";
-  const valueText = isDark ? "rgba(255,255,255,0.8)" : "rgba(0,0,0,0.75)";
-  const segBg = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.05)";
-  const segActiveBg = isDark ? "rgba(255,255,255,0.95)" : "#fff";
-  const segActiveText = isDark ? "#000" : "#000";
-  const segInactiveText = isDark ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.4)";
+  const tableBg = "var(--theme-table-bg)";
+  const headerBg = "var(--theme-header-bg)";
+  const borderColor = "var(--theme-divider)";
+  const rowBorder = "var(--theme-divider)";
+  const headerText = "var(--theme-fg-muted)";
+  const labelText = "var(--theme-fg-muted)";
+  const valueText = "var(--theme-fg)";
+  const segBg = "var(--theme-header-bg)";
+  const segActiveBg = "var(--theme-bg-solid)";
+  const segActiveText = "var(--theme-fg-on-solid)";
+  const segInactiveText = "var(--theme-fg-subtle)";
 
   const radiusOptions: { label: string; value: RadiusPreset }[] = [
     { label: "Minimal", value: "minimal" },
@@ -231,7 +230,7 @@ function AppearanceControls({ isDark }: { isDark: boolean }) {
       {/* Header */}
       <div style={{ padding: "10px 14px", background: headerBg, borderBottom: `1px solid ${borderColor}`, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
         <span style={{ fontSize: "10px", fontWeight: 650, textTransform: "uppercase", letterSpacing: "0.06em", color: headerText }}>Appearance</span>
-        <button onClick={resetToDefaults} style={{ fontSize: "10px", fontWeight: 550, color: isDark ? "rgba(255,255,255,0.35)" : "rgba(0,0,0,0.35)", background: "none", border: "none", cursor: "pointer" }}>Reset</button>
+        <button onClick={resetToDefaults} style={{ fontSize: "10px", fontWeight: 550, color: "var(--theme-fg-subtle)", background: "none", border: "none", cursor: "pointer" }}>Reset</button>
       </div>
 
       {/* Transparency */}
@@ -321,7 +320,6 @@ function LivePreview() {
 
 /* ─── Live CSS Variables — Tabbed layout ─── */
 function LiveVariablesTable() {
-  const isDark = useDarkMode();
   const values = useLiveCSSVars(CSS_VARS);
   const categories = Object.keys(
     CSS_VARS.reduce((acc, v) => { acc[v.category] = true; return acc; }, {} as Record<string, boolean>)
@@ -349,21 +347,21 @@ function LiveVariablesTable() {
                 onClick={() => setActiveTab(cat)}
                 className="flex items-center gap-2 px-3 py-2 text-left border-none cursor-pointer transition-all duration-150"
                 style={{
-                  background: isActive ? (isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)") : "transparent",
-                  borderRight: isActive ? `2px solid ${isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.4)"}` : "2px solid transparent",
+                  background: isActive ? "var(--theme-header-bg)" : "transparent",
+                  borderRight: isActive ? "2px solid var(--theme-fg-muted)" : "2px solid transparent",
                 }}
               >
                 <span
                   className="w-1.5 h-1.5 rounded-full shrink-0 transition-all duration-150"
                   style={{
-                    background: isActive ? (isDark ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.5)") : (isDark ? "rgba(255,255,255,0.15)" : "rgba(0,0,0,0.12)"),
+                    background: isActive ? "var(--theme-fg-muted)" : "var(--theme-divider)",
                   }}
                 />
                 <span
                   className="text-[11px] transition-all duration-150"
                   style={{
                     fontWeight: isActive ? 650 : 450,
-                    color: isActive ? (isDark ? "rgba(255,255,255,0.8)" : "rgba(0,0,0,0.75)") : (isDark ? "rgba(255,255,255,0.35)" : "rgba(0,0,0,0.35)"),
+                    color: isActive ? "var(--theme-fg)" : "var(--theme-fg-subtle)",
                   }}
                 >
                   {cat}
@@ -400,7 +398,6 @@ function LiveVariablesTable() {
 
 /* ─── Main Export ─── */
 export function LiveTheming() {
-  const isDark = useDarkMode();
   const [showVars, setShowVars] = useState(false);
   const varsRef = useRef<HTMLDivElement>(null);
 
@@ -415,7 +412,7 @@ export function LiveTheming() {
   };
 
   return (
-    <div className="relative w-full" suppressHydrationWarning>
+    <div className="relative w-full">
       {/* Toggle button — top right, overlaps with card header area */}
       <button
         onClick={handleToggle}
@@ -435,7 +432,7 @@ export function LiveTheming() {
       {/* 3-column layout: Settings | Appearance | Live Preview — stacks on smaller screens */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 mb-4">
         <SettingsPreview />
-        <AppearanceControls isDark={isDark} />
+        <AppearanceControls />
         <LivePreview />
       </div>
       {/* Collapsible CSS Variables table — smooth animation */}
