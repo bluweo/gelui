@@ -28,7 +28,8 @@ function AccordionSection({
   return (
     <div className="prim-accordion-item">
       <button
-        onClick={onToggle}
+        type="button"
+        onClick={(e) => { e.stopPropagation(); onToggle(); }}
         className="prim-accordion-trigger"
       >
         {title}
