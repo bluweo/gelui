@@ -208,8 +208,52 @@ const COMPONENTS = [
   { name: "List", path: "@/primitives/typography", description: "Styled ordered/unordered list with configurable spacing", implementation: IMPL_LIST },
   { name: "Kbd", path: "@/primitives/typography", description: "Keyboard shortcut key indicator", implementation: IMPL_KBD },
   { name: "Code", path: "@/primitives/typography", description: "Inline code snippet or block code with syntax highlighting", implementation: IMPL_CODE },
-  { name: "Overline", path: "@/primitives/typography", description: "Uppercase label text for section headers" },
-  { name: "Label", path: "@/primitives/typography", description: "Form label with required indicator support" },
+  {
+    name: "Overline",
+    path: "@/primitives/typography",
+    description: "Uppercase label text for section headers",
+    implementation: `import type { BaseProps } from "../types";
+
+interface OverlineProps extends BaseProps {
+  size?: "sm" | "md" | "lg";
+  muted?: boolean;
+}
+
+export function Overline({ size = "md", muted = true, children, className = "", style }: OverlineProps) {
+  return (
+    <span className={\`type-overline \${className}\`}
+      style={{ display: "block", fontFamily: "var(--font-ui)",
+        color: muted ? "var(--theme-fg-muted)" : "var(--theme-fg)", ...style }}>
+      {children}
+    </span>
+  );
+}`,
+    props: [
+      { name: "size", type: "enum", options: ["sm", "md", "lg"], default: '"md"' },
+      { name: "muted", type: "boolean", default: "true" },
+      { name: "className", type: "string" },
+      { name: "style", type: "CSSProperties" },
+    ],
+  },
+  {
+    name: "Label",
+    path: "@/primitives/typography",
+    description: "Form label with UI font role styling",
+    implementation: `import type { BaseProps } from "../types";
+
+export function Label({ children, className = "", style }: BaseProps) {
+  return (
+    <span className={\`type-label \${className}\`}
+      style={{ fontFamily: "var(--font-ui)", ...style }}>
+      {children}
+    </span>
+  );
+}`,
+    props: [
+      { name: "className", type: "string" },
+      { name: "style", type: "CSSProperties" },
+    ],
+  },
 ];
 
 export function TypographyExtrasWithSource() {

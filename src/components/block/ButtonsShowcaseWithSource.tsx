@@ -220,8 +220,84 @@ const COMPONENTS = [
       { name: "style", type: "CSSProperties" },
     ],
   },
-  { name: "IconButton", path: "@/primitives/buttons", description: "Circle icon button with size variants" },
-  { name: "ButtonGroup", path: "@/primitives/buttons", description: "Connected button row for toolbars" },
+  {
+    name: "IconButton",
+    path: "@/primitives/buttons",
+    description: "Circle icon button with size variants",
+    implementation: `import type { BaseProps } from "../types";
+
+interface IconButtonProps extends BaseProps {
+  icon?: string;
+  size?: "sm" | "md" | "lg";
+  onClick?: () => void;
+}
+
+export function IconButton({
+  icon = "+",
+  size = "md",
+  children,
+  className = "",
+  style,
+  onClick,
+}: IconButtonProps) {
+  return (
+    <button
+      className={\`prim-icon-btn \${className}\`}
+      data-size={size}
+      style={style}
+      onClick={onClick}
+    >
+      {children || icon}
+    </button>
+  );
+}`,
+    props: [
+      { name: "icon", type: "string", default: '"+"' },
+      { name: "size", type: "enum", options: ["sm", "md", "lg"], default: '"md"' },
+      { name: "onClick", type: "() => void" },
+      { name: "className", type: "string" },
+      { name: "style", type: "CSSProperties" },
+    ],
+  },
+  {
+    name: "ButtonGroup",
+    path: "@/primitives/buttons",
+    description: "Connected button row for toolbars. Use attached mode for joined buttons.",
+    implementation: `import { type ReactNode, type CSSProperties, Children, cloneElement, isValidElement } from "react";
+
+interface ButtonGroupProps {
+  children: ReactNode;
+  attached?: boolean;
+  className?: string;
+  style?: CSSProperties;
+}
+
+export function ButtonGroup({
+  children,
+  attached = false,
+  className = "",
+  style,
+}: ButtonGroupProps) {
+  const items = Children.toArray(children).filter(isValidElement);
+
+  return (
+    <div className={className} style={{ display: "inline-flex", alignItems: "center", gap: attached ? "0px" : "4px", ...style }}>
+      {items.map((child, i) => {
+        if (!attached) return child;
+        // Adjust border-radius for attached mode
+        return cloneElement(child, { key: i, shape: "rounded",
+          style: { borderRadius: i === 0 ? "8px 0 0 8px" : i === items.length - 1 ? "0 8px 8px 0" : "0" }
+        });
+      })}
+    </div>
+  );
+}`,
+    props: [
+      { name: "attached", type: "boolean", default: "false" },
+      { name: "className", type: "string" },
+      { name: "style", type: "CSSProperties" },
+    ],
+  },
 ];
 
 export function ButtonsShowcaseWithSource() {
