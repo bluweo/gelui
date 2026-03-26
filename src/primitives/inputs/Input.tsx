@@ -51,28 +51,12 @@ export function Input({
         style={style}
       />
       {error && (
-        <span
-          style={{
-            position: "absolute",
-            right: "14px",
-            color: "rgba(255,59,48,0.8)",
-            fontSize: "16px",
-            fontWeight: 700,
-          }}
-        >
+        <span className="prim-input-status prim-input-status-error">
           &#x2717;
         </span>
       )}
       {success && !error && (
-        <span
-          style={{
-            position: "absolute",
-            right: "14px",
-            color: "rgba(52,199,89,0.8)",
-            fontSize: "16px",
-            fontWeight: 700,
-          }}
-        >
+        <span className="prim-input-status prim-input-status-success">
           &#x2713;
         </span>
       )}

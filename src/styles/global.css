@@ -3166,6 +3166,22 @@ code:not([data-font-preview]), pre:not([data-font-preview]), kbd, samp { font-fa
   -webkit-backdrop-filter: blur(8px);
 }
 
+/* ── Input validation icon ── */
+@utility prim-input-status {
+  position: absolute;
+  right: 14px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+@utility prim-input-status-error {
+  color: rgba(255, 59, 48, 0.8);
+}
+
+@utility prim-input-status-success {
+  color: rgba(52, 199, 89, 0.8);
+}
+
 /* ── NavItem icon ── */
 @utility prim-nav-icon {
   display: flex;
