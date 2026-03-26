@@ -46,9 +46,9 @@ import { InputFieldsSource } from "@/components/block/InputFieldsSource";
     <div data-section="Typography" class="col-span-full glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
       <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 160px;" />
       <div class="relative flex flex-col gap-1 mb-6 pt-1 pl-1">
-        <span class="text-[10px] font-[650] uppercase tracking-[0.1em] text-black/40 dark:text-white/40 mb-1">Typography</span>
-        <h2 class="text-[24px] font-[750] tracking-[-0.03em] leading-[1.2] text-black dark:text-white mb-1" style="font-family: var(--font-heading)">Type Presets</h2>
-        <p class="text-[13px] leading-[1.6] text-black/60 dark:text-white/55">14 typography compositions — headings, body, UI labels, and code</p>
+        <span class="type-overline text-black/40 dark:text-white/40 mb-1">Typography</span>
+        <h2 class="type-h2 text-black dark:text-white mb-1">Type Presets</h2>
+        <p class="type-body-sm text-black/60 dark:text-white/55">14 typography compositions — headings, body, UI labels, and code</p>
       </div>
 
       <TypePresetsTable client:load />
@@ -112,9 +112,9 @@ import { InputFieldsSource } from "@/components/block/InputFieldsSource";
       <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 160px;" />
       <div class="relative flex items-start justify-between mb-5 pt-1 pl-1 shrink-0">
         <div class="flex flex-col gap-1">
-          <span class="text-[10px] font-[650] uppercase tracking-[0.1em] text-black/40 dark:text-white/40 mb-1">Material</span>
-          <h2 class="text-[24px] font-[750] tracking-[-0.03em] leading-[1.2] text-black dark:text-white mb-1" style="font-family: var(--font-heading)">Glass Surfaces</h2>
-          <p class="text-[13px] leading-[1.6] text-black/60 dark:text-white/55">7 surface primitives for cards, panels, and overlays</p>
+          <span class="type-overline text-black/40 dark:text-white/40 mb-1">Material</span>
+          <h2 class="type-h2 text-black dark:text-white mb-1">Glass Surfaces</h2>
+          <p class="type-body-sm text-black/60 dark:text-white/55">7 surface primitives for cards, panels, and overlays</p>
         </div>
         <button
           class="w-9 h-9 flex items-center justify-center rounded-full bg-black/[0.04] dark:bg-white/[0.06] hover:bg-black/[0.08] dark:hover:bg-white/[0.12] border border-black/[0.06] dark:border-white/[0.08] transition-all duration-150 cursor-pointer shrink-0 z-10 hover:scale-110"
@@ -497,9 +497,9 @@ import { InputFieldsSource } from "@/components/block/InputFieldsSource";
     <div data-section="Data Display" class="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
       <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 160px;" />
       <div class="relative flex flex-col gap-1 mb-6 pt-1 pl-1">
-        <span class="text-[10px] font-[650] uppercase tracking-[0.1em] text-black/40 dark:text-white/40 mb-1">Data</span>
-        <h2 class="text-[24px] font-[750] tracking-[-0.03em] leading-[1.2] text-black dark:text-white mb-1" style="font-family: var(--font-heading)">Data Display</h2>
-        <p class="text-[13px] leading-[1.6] text-black/60 dark:text-white/55">Tables, stat cards, empty states, and color swatches</p>
+        <span class="type-overline text-black/40 dark:text-white/40 mb-1">Data</span>
+        <h2 class="type-h2 text-black dark:text-white mb-1">Data Display</h2>
+        <p class="type-body-sm text-black/60 dark:text-white/55">Tables, stat cards, empty states, and color swatches</p>
       </div>
       <DataShowcase client:load />
     </div>
@@ -510,9 +510,9 @@ import { InputFieldsSource } from "@/components/block/InputFieldsSource";
     <div data-section="Controls" class="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
       <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 160px;" />
       <div class="relative flex flex-col gap-1 mb-6 pt-1 pl-1">
-        <span class="text-[10px] font-[650] uppercase tracking-[0.1em] text-black/40 dark:text-white/40 mb-1">Selection</span>
-        <h2 class="text-[24px] font-[750] tracking-[-0.03em] leading-[1.2] text-black dark:text-white mb-1" style="font-family: var(--font-heading)">Controls</h2>
-        <p class="text-[13px] leading-[1.6] text-black/60 dark:text-white/55">Toggle, checkbox, radio, and segmented controls</p>
+        <span class="type-overline text-black/40 dark:text-white/40 mb-1">Selection</span>
+        <h2 class="type-h2 text-black dark:text-white mb-1">Controls</h2>
+        <p class="type-body-sm text-black/60 dark:text-white/55">Toggle, checkbox, radio, and segmented controls</p>
       </div>
       <ControlsDemo client:load />
     </div>
@@ -522,8 +522,8 @@ import { InputFieldsSource } from "@/components/block/InputFieldsSource";
          ═══════════════════════════════════ -->
     <div data-section="Glass Controls" class="col-span-2 relative overflow-hidden rounded-[var(--glass-radius)] p-5 border contrast-border" style="background: transparent;">
       <div class="relative flex flex-col gap-1 mb-6 pt-1 pl-1">
-        <span class="text-[10px] font-[650] uppercase tracking-[0.1em] contrast-text-muted mb-1">Gel Style</span>
-        <h2 class="text-[24px] font-[750] tracking-[-0.03em] leading-[1.2] text-black dark:text-white mb-1 contrast-text" style="font-family: var(--font-heading)">Glass Controls</h2>
+        <span class="type-overline contrast-text-muted mb-1">Gel Style</span>
+        <h2 class="type-h2 contrast-text mb-1">Glass Controls</h2>
         <p class="text-[13px] leading-[1.6] contrast-text-muted">Volumetric gel-styled toggles, checkboxes, radios, and sliders</p>
       </div>
       <GlassControlsDemo client:load />
@@ -535,9 +535,9 @@ import { InputFieldsSource } from "@/components/block/InputFieldsSource";
     <div data-section="Layout" class="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
       <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 160px;" />
       <div class="relative flex flex-col gap-1 mb-6 pt-1 pl-1">
-        <span class="text-[10px] font-[650] uppercase tracking-[0.1em] text-black/40 dark:text-white/40 mb-1">Spacing</span>
-        <h2 class="text-[24px] font-[750] tracking-[-0.03em] leading-[1.2] text-black dark:text-white mb-1" style="font-family: var(--font-heading)">Layout Compositions</h2>
-        <p class="text-[13px] leading-[1.6] text-black/60 dark:text-white/55">Stack, inline, center, spacer, and grid primitives</p>
+        <span class="type-overline text-black/40 dark:text-white/40 mb-1">Spacing</span>
+        <h2 class="type-h2 text-black dark:text-white mb-1">Layout Compositions</h2>
+        <p class="type-body-sm text-black/60 dark:text-white/55">Stack, inline, center, spacer, and grid primitives</p>
       </div>
       <LayoutShowcase client:load />
     </div>
@@ -548,9 +548,9 @@ import { InputFieldsSource } from "@/components/block/InputFieldsSource";
     <div data-section="Elevation" class="col-span-full glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
       <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 160px;" />
       <div class="relative flex flex-col gap-1 mb-6 pt-1 pl-1">
-        <span class="text-[10px] font-[650] uppercase tracking-[0.1em] text-black/40 dark:text-white/40 mb-1">Depth & Loading</span>
-        <h2 class="text-[24px] font-[750] tracking-[-0.03em] leading-[1.2] text-black dark:text-white mb-1" style="font-family: var(--font-heading)">Elevation</h2>
-        <p class="text-[13px] leading-[1.6] text-black/60 dark:text-white/55">Shadow depth levels and skeleton loading states</p>
+        <span class="type-overline text-black/40 dark:text-white/40 mb-1">Depth & Loading</span>
+        <h2 class="type-h2 text-black dark:text-white mb-1">Elevation</h2>
+        <p class="type-body-sm text-black/60 dark:text-white/55">Shadow depth levels and skeleton loading states</p>
       </div>
       <ElevationShowcase client:load />
     </div>
@@ -561,9 +561,9 @@ import { InputFieldsSource } from "@/components/block/InputFieldsSource";
     <div data-section="Feedback" class="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
       <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 160px;" />
       <div class="relative flex flex-col gap-1 mb-6 pt-1 pl-1">
-        <span class="text-[10px] font-[650] uppercase tracking-[0.1em] text-black/40 dark:text-white/40 mb-1">Loading</span>
-        <h2 class="text-[24px] font-[750] tracking-[-0.03em] leading-[1.2] text-black dark:text-white mb-1" style="font-family: var(--font-heading)">Feedback</h2>
-        <p class="text-[13px] leading-[1.6] text-black/60 dark:text-white/55">Spinners, progress, skeletons, alerts, and toasts</p>
+        <span class="type-overline text-black/40 dark:text-white/40 mb-1">Loading</span>
+        <h2 class="type-h2 text-black dark:text-white mb-1">Feedback</h2>
+        <p class="type-body-sm text-black/60 dark:text-white/55">Spinners, progress, skeletons, alerts, and toasts</p>
       </div>
       <FeedbackShowcaseV2 client:load />
     </div>
@@ -574,9 +574,9 @@ import { InputFieldsSource } from "@/components/block/InputFieldsSource";
     <div data-section="Navigation" class="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
       <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 160px;" />
       <div class="relative flex flex-col gap-1 mb-6 pt-1 pl-1">
-        <span class="text-[10px] font-[650] uppercase tracking-[0.1em] text-black/40 dark:text-white/40 mb-1">Wayfinding</span>
-        <h2 class="text-[24px] font-[750] tracking-[-0.03em] leading-[1.2] text-black dark:text-white mb-1" style="font-family: var(--font-heading)">Navigation</h2>
-        <p class="text-[13px] leading-[1.6] text-black/60 dark:text-white/55">Interactive tab bars, breadcrumbs, and nav items</p>
+        <span class="type-overline text-black/40 dark:text-white/40 mb-1">Wayfinding</span>
+        <h2 class="type-h2 text-black dark:text-white mb-1">Navigation</h2>
+        <p class="type-body-sm text-black/60 dark:text-white/55">Interactive tab bars, breadcrumbs, and nav items</p>
       </div>
       <PrimitiveNavigation client:load />
     </div>
@@ -587,9 +587,9 @@ import { InputFieldsSource } from "@/components/block/InputFieldsSource";
     <div data-section="Navigation Extras" class="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
       <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 160px;" />
       <div class="relative flex flex-col gap-1 mb-6 pt-1 pl-1">
-        <span class="text-[10px] font-[650] uppercase tracking-[0.1em] text-black/40 dark:text-white/40 mb-1">Wayfinding</span>
-        <h2 class="text-[24px] font-[750] tracking-[-0.03em] leading-[1.2] text-black dark:text-white mb-1" style="font-family: var(--font-heading)">Navigation Extras</h2>
-        <p class="text-[13px] leading-[1.6] text-black/60 dark:text-white/55">Pagination, stepper, and scroll-to-top primitives</p>
+        <span class="type-overline text-black/40 dark:text-white/40 mb-1">Wayfinding</span>
+        <h2 class="type-h2 text-black dark:text-white mb-1">Navigation Extras</h2>
+        <p class="type-body-sm text-black/60 dark:text-white/55">Pagination, stepper, and scroll-to-top primitives</p>
       </div>
       <NavigationExtras client:load />
     </div>
