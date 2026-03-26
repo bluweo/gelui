@@ -1,6 +1,14 @@
 import { useState, useEffect } from "react";
 import { ViewSourceModal } from "@/components/modal/ViewSourceModal";
 
+// Auto-loaded from actual source files at build time
+import IMPL_INPUT from "@/primitives/inputs/Input.tsx?raw";
+import IMPL_SEARCHINPUT from "@/primitives/inputs/SearchInput.tsx?raw";
+import IMPL_SELECT from "@/primitives/inputs/Select.tsx?raw";
+import IMPL_SEARCHABLESELECT from "@/primitives/inputs/SearchableSelect.tsx?raw";
+import IMPL_TEXTAREA from "@/primitives/inputs/Textarea.tsx?raw";
+import IMPL_TAGINPUT from "@/primitives/inputs/TagInput.tsx?raw";
+
 const SOURCE_CODE = `import { Input, SearchInput, Textarea, Select, SearchableSelect, TagInput } from "@/primitives/inputs";
 import { useDarkMode } from "@/primitives/hooks/useDarkMode";
 
@@ -60,71 +68,13 @@ export function InputFieldsDemo() {
   );
 }`;
 
-const IMPL_INPUT = `import { useState, type CSSProperties } from "react";
-import { useDarkMode } from "../hooks/useDarkMode";
-
-interface InputProps {
-  placeholder?: string;
-  value?: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  type?: "text" | "email" | "password" | "number" | "url";
-  size?: "sm" | "md" | "lg";
-  error?: boolean;
-  success?: boolean;
-  disabled?: boolean;
-  icon?: React.ReactNode;
-  style?: CSSProperties;
-}
-
-export function Input({
-  placeholder, value, onChange, type = "text",
-  size = "md", error, success, disabled, icon, style,
-}: InputProps) {
-  const [focused, setFocused] = useState(false);
-  const dark = useDarkMode();
-
-  const borderColor = focused
-    ? (dark ? "#fff" : "#000")
-    : error ? "#FF3B30"
-    : success ? "#34C759"
-    : "transparent";
-
-  return (
-    <input
-      type={type}
-      placeholder={placeholder}
-      value={value}
-      onChange={onChange}
-      disabled={disabled}
-      onFocus={() => setFocused(true)}
-      onBlur={() => setFocused(false)}
-      style={{
-        padding: size === "sm" ? "8px 12px" : "12px 16px",
-        fontSize: "14px",
-        fontFamily: "var(--font-body)",
-        borderRadius: "var(--glass-radius-sm, 10px)",
-        border: \`2px solid \${borderColor}\`,
-        background: focused
-          ? (dark ? "rgba(0,0,0,0.8)" : "rgba(255,255,255,0.95)")
-          : (dark ? "rgba(255,255,255,0.08)" : "rgba(255,255,255,0.6)"),
-        color: dark ? "#fff" : "#000",
-        outline: "none",
-        ...style,
-      }}
-    />
-  );
-}`;
-
 const COMPONENTS = [
   { name: "Input", path: "@/primitives/inputs", description: "Text input with focus, validation, and disabled states", implementation: IMPL_INPUT },
-  { name: "SearchInput", path: "@/primitives/inputs", description: "Input with search icon, bold stroke on focus, clear button" },
-  { name: "Select", path: "@/primitives/inputs", description: "Custom dropdown with keyboard navigation and glass panel" },
-  { name: "SearchableSelect", path: "@/primitives/inputs", description: "Filterable dropdown with type-to-search" },
-  { name: "Textarea", path: "@/primitives/inputs", description: "Multi-line text input with auto-resize" },
-  { name: "PasswordInput", path: "@/primitives/inputs", description: "Input with show/hide password toggle (eye icon)" },
-  { name: "NumberInput", path: "@/primitives/inputs", description: "Input with +/- stepper buttons, min/max/step" },
-  { name: "FormGroup", path: "@/primitives/inputs", description: "Label + input + helper text + error wrapper" },
-  { name: "TagInput", path: "@/primitives/inputs", description: "Type and press Enter to add tag pills, with X to remove" },
+  { name: "SearchInput", path: "@/primitives/inputs", description: "Input with search icon, bold stroke on focus, clear button", implementation: IMPL_SEARCHINPUT },
+  { name: "Select", path: "@/primitives/inputs", description: "Custom dropdown with keyboard navigation and glass panel", implementation: IMPL_SELECT },
+  { name: "SearchableSelect", path: "@/primitives/inputs", description: "Filterable dropdown with type-to-search", implementation: IMPL_SEARCHABLESELECT },
+  { name: "Textarea", path: "@/primitives/inputs", description: "Multi-line text input with theme styling", implementation: IMPL_TEXTAREA },
+  { name: "TagInput", path: "@/primitives/inputs", description: "Type and press Enter to add tag pills, with X to remove", implementation: IMPL_TAGINPUT },
 ];
 
 export function InputFieldsSource() {

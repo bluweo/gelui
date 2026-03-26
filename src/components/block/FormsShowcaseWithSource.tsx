@@ -2,6 +2,14 @@ import { useState, useEffect } from "react";
 import { FormsShowcase } from "./FormsShowcase";
 import { ViewSourceModal } from "@/components/modal/ViewSourceModal";
 
+// Auto-loaded from actual source files at build time
+import IMPL_OTPINPUT from "@/primitives/inputs/OtpInput.tsx?raw";
+import IMPL_PASSWORDINPUT from "@/primitives/inputs/PasswordInput.tsx?raw";
+import IMPL_NUMBERINPUT from "@/primitives/inputs/NumberInput.tsx?raw";
+import IMPL_INPUT from "@/primitives/inputs/Input.tsx?raw";
+import IMPL_FORMGROUP from "@/primitives/inputs/FormGroup.tsx?raw";
+import IMPL_TAGINPUT from "@/primitives/inputs/TagInput.tsx?raw";
+
 const SOURCE_CODE = `import { Input, OtpInput, PasswordInput, NumberInput } from "@/primitives/inputs";
 import { useDarkMode } from "@/primitives/hooks/useDarkMode";
 import { useState } from "react";
@@ -86,100 +94,13 @@ export function AdvancedInputs() {
   );
 }`;
 
-const IMPLEMENTATION = `// OtpInput — multi-digit input with auto-focus, paste, success state
-export function OtpInput({ length = 6, value, onChange, size = "md", error, disabled }) {
-  const digits = value.split("").concat(Array(length).fill("")).slice(0, length);
-  const isComplete = value.replace(/\\s/g, "").length >= length;
-  const showSuccess = isComplete && !error && !disabled;
-
-  const handleChange = (index, digit) => {
-    const arr = [...digits];
-    arr[index] = digit.replace(/[^0-9]/g, "").slice(-1);
-    onChange(arr.join(""));
-    if (digit && index < length - 1) refs[index + 1].focus();
-  };
-
-  const handleKeyDown = (index, e) => {
-    if (e.key === "Backspace" && !digits[index] && index > 0)
-      refs[index - 1].focus();
-  };
-
-  const handlePaste = (e) => {
-    const pasted = e.clipboardData.getData("text").replace(/[^0-9]/g, "").slice(0, length);
-    onChange(pasted);
-  };
-
-  return (
-    <div style={{ display: "flex", gap: sizes[size].gap, alignItems: "center" }}>
-      {digits.map((d, i) => (
-        <input
-          key={i} type="text" inputMode="numeric" maxLength={1}
-          value={d} onChange={(e) => handleChange(i, e.target.value)}
-          style={{
-            width: sizes[size].w, height: sizes[size].h,
-            textAlign: "center", fontSize: sizes[size].font,
-            fontWeight: 650, fontFamily: "var(--font-mono)",
-            borderRadius: "var(--glass-radius-sm)",
-            border: \\\`2px solid \\\${
-              error ? "#FF3B30" : showSuccess ? "#34C759"
-              : focused === i ? "#000" : "rgba(0,0,0,0.1)"
-            }\\\`,
-          }}
-        />
-      ))}
-      {/* Green checkmark when all digits filled */}
-      {showSuccess && (
-        <span style={{ width: 28, height: 28, borderRadius: "50%", background: "#34C759", display: "flex", alignItems: "center", justifyContent: "center" }}>
-          <svg width={12} height={12} viewBox="0 0 16 16"><path d="M3 8.5L6.5 12L13 4" stroke="#fff" strokeWidth="2.5" /></svg>
-        </span>
-      )}
-    </div>
-  );
-}
-
-// PasswordInput — wraps Input with show/hide eye toggle
-export function PasswordInput({ placeholder, value, onChange, disabled, style }) {
-  const [visible, setVisible] = useState(false);
-  return (
-    <div style={{ position: "relative" }}>
-      <Input
-        type={visible ? "text" : "password"}
-        placeholder={placeholder} value={value}
-        onChange={onChange} disabled={disabled}
-        style={style}
-      />
-      <button onClick={() => setVisible(!visible)}
-        style={{ position: "absolute", right: 12, top: "50%", transform: "translateY(-50%)" }}>
-        {visible ? <EyeSlash size={16} /> : <Eye size={16} />}
-      </button>
-    </div>
-  );
-}
-
-// NumberInput — circle +/- buttons with big number
-export function NumberInput({ value, onChange, min, max, step = 1 }) {
-  return (
-    <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-      <button onClick={() => onChange(Math.max(min, value - step))}
-        style={{ width: 36, height: 36, borderRadius: "50%", background: "rgba(0,0,0,0.06)" }}>
-        −
-      </button>
-      <input value={value} style={{ width: 50, textAlign: "center", fontSize: 20, fontWeight: 700, fontFamily: "var(--font-mono)" }} />
-      <button onClick={() => onChange(Math.min(max, value + step))}
-        style={{ width: 36, height: 36, borderRadius: "50%", background: "rgba(0,0,0,0.06)" }}>
-        +
-      </button>
-    </div>
-  );
-}`;
-
 const COMPONENTS = [
-  { name: "OtpInput", path: "@/primitives/inputs", description: "Multi-digit OTP/PIN input with auto-focus, paste support, success checkmark, sizes (sm/md/lg)" },
-  { name: "PasswordInput", path: "@/primitives/inputs", description: "Password input with show/hide eye toggle, wraps Input primitive" },
-  { name: "NumberInput", path: "@/primitives/inputs", description: "Numeric stepper with circle +/- buttons, min/max/step, big number display" },
-  { name: "Input", path: "@/primitives/inputs", description: "Base text input with focus, validation, disabled states" },
-  { name: "FormGroup", path: "@/primitives/inputs", description: "Label + input + helper text + error message wrapper" },
-  { name: "TagInput", path: "@/primitives/inputs", description: "Multi-tag input — type + Enter to add, × to remove" },
+  { name: "OtpInput", path: "@/primitives/inputs", description: "Multi-digit OTP/PIN input with auto-focus, paste support, success checkmark", implementation: IMPL_OTPINPUT },
+  { name: "PasswordInput", path: "@/primitives/inputs", description: "Password input with show/hide eye toggle", implementation: IMPL_PASSWORDINPUT },
+  { name: "NumberInput", path: "@/primitives/inputs", description: "Numeric stepper with +/- buttons, min/max/step", implementation: IMPL_NUMBERINPUT },
+  { name: "Input", path: "@/primitives/inputs", description: "Base text input with focus, validation, disabled states", implementation: IMPL_INPUT },
+  { name: "FormGroup", path: "@/primitives/inputs", description: "Label + input + helper text + error message wrapper", implementation: IMPL_FORMGROUP },
+  { name: "TagInput", path: "@/primitives/inputs", description: "Multi-tag input — type + Enter to add, × to remove", implementation: IMPL_TAGINPUT },
 ];
 
 export function FormsShowcaseWithSource() {
@@ -201,7 +122,6 @@ export function FormsShowcaseWithSource() {
         title="Advanced Inputs"
         code={SOURCE_CODE}
         components={COMPONENTS}
-        extraTabs={[{ label: "Implementation", code: IMPLEMENTATION }]}
       />
     </>
   );

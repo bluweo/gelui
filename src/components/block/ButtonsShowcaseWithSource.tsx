@@ -2,6 +2,12 @@ import { useState, useEffect } from "react";
 import { ButtonsShowcase } from "./ButtonsShowcase";
 import { ViewSourceModal } from "@/components/modal/ViewSourceModal";
 
+// Auto-loaded from actual source files at build time
+import IMPL_BUTTON from "@/primitives/buttons/Button.tsx?raw";
+import IMPL_LINKBUTTON from "@/primitives/buttons/LinkButton.tsx?raw";
+import IMPL_ICONBUTTON from "@/primitives/buttons/IconButton.tsx?raw";
+import IMPL_BUTTONGROUP from "@/primitives/buttons/ButtonGroup.tsx?raw";
+
 const SOURCE_CODE = `// Left Column: Solid, Ghost, Action Pair, Link
 // Contrast-aware — inherits data-contrast from parent/main
 import { Button, LinkButton } from "@/primitives/buttons";
@@ -25,30 +31,20 @@ export function ButtonsShowcase() {
 
       {/* Ghost Buttons */}
       <div className="rounded-[var(--glass-radius-sm)] border contrast-border">
-        <div className="py-2 px-3 border-b contrast-border">
-          <span className="type-overline contrast-muted">Ghost</span>
-        </div>
         <div className="flex items-center justify-between py-3.5 px-4">
-          <span className="type-label contrast-muted">Pill</span>
           <Button variant="ghost" size="md">Button</Button>
         </div>
       </div>
 
       {/* Action Pair */}
-      <div className="rounded-[var(--glass-radius-sm)] border contrast-border">
-        <div className="flex items-center justify-between py-3.5 px-4">
-          <Button variant="ghost" size="md" shape="rounded">Cancel</Button>
-          <Button variant="solid" size="md" shape="rounded">Apply</Button>
-        </div>
+      <div className="flex items-center justify-between py-3.5 px-4">
+        <Button variant="ghost" size="md" shape="rounded">Cancel</Button>
+        <Button variant="solid" size="md" shape="rounded">Apply</Button>
       </div>
 
       {/* Link Buttons */}
-      <div className="rounded-[var(--glass-radius-sm)] border contrast-border">
-        <div className="flex items-center justify-between py-3.5 px-4">
-          <LinkButton underline>Learn more</LinkButton>
-          <LinkButton arrow>Explore</LinkButton>
-        </div>
-      </div>
+      <LinkButton underline>Learn more</LinkButton>
+      <LinkButton arrow>Explore</LinkButton>
     </div>
   );
 }
@@ -57,135 +53,16 @@ export function ButtonsShowcase() {
 import { Button } from "@/primitives/buttons";
 
 export function ButtonsRightColumn() {
-  const ref = useRef<HTMLDivElement>(null);
-  const contrast = useInheritedContrast(ref);
-
   return (
-    <div ref={ref} data-contrast={contrast} className="flex flex-col gap-5">
-      {/* Gel */}
-      <div className="border contrast-border">
-        <span className="type-overline contrast-muted">Gel</span>
-        <Button variant="gel" size="sm">Small</Button>
-        <Button variant="gel" size="md">Medium</Button>
-        <Button variant="gel" size="lg">Large</Button>
-        <Button variant="gel" size="sm" shape="circle">
-          <HeartIcon />
-        </Button>
-        <Button variant="gel" size="md" shape="circle">
-          <SearchIcon />
-        </Button>
-      </div>
-
-      {/* Glass */}
-      <div className="border contrast-border">
-        <span className="type-overline contrast-muted">Glass</span>
-        <Button variant="glass" size="md" shape="pill">Glass Pill</Button>
-        <Button variant="glass" size="md" shape="rounded">Glass Rounded</Button>
-      </div>
-
-      {/* States */}
-      <div className="border contrast-border">
-        <span className="type-overline contrast-muted">States</span>
-        <Button variant="gel" size="md">Default</Button>
-        <Button variant="gel" size="md" disabled>Disabled</Button>
-      </div>
+    <div data-contrast={contrast} className="flex flex-col gap-5">
+      <Button variant="gel" size="sm">Small</Button>
+      <Button variant="gel" size="md">Medium</Button>
+      <Button variant="gel" size="lg">Large</Button>
+      <Button variant="gel" size="sm" shape="circle"><HeartIcon /></Button>
+      <Button variant="glass" size="md" shape="pill">Glass Pill</Button>
+      <Button variant="glass" size="md" shape="rounded">Glass Rounded</Button>
+      <Button variant="gel" size="md" disabled>Disabled</Button>
     </div>
-  );
-}`;
-
-const IMPL_BUTTON = `import type { CSSProperties } from "react";
-import type { BaseProps } from "../types";
-
-interface ButtonProps extends BaseProps {
-  variant?: "solid" | "ghost" | "glass" | "gel" | "link";
-  size?: "sm" | "md" | "lg";
-  shape?: "pill" | "rounded" | "circle";
-  disabled?: boolean;
-  fullWidth?: boolean;
-  onClick?: () => void;
-}
-
-/* Static class maps — Tailwind v4 can't scan template literals */
-const SIZE_CLASSES: Record<string, string> = {
-  sm: "prim-btn-sm",
-  md: "prim-btn-md",
-  lg: "prim-btn-lg",
-};
-const SHAPE_CLASSES: Record<string, string> = {
-  pill: "prim-btn-pill",
-  rounded: "prim-btn-rounded",
-  circle: "prim-btn-circle",
-};
-const VARIANT_CLASSES: Record<string, string> = {
-  solid: "prim-btn-solid",
-  ghost: "prim-btn-ghost",
-  glass: "prim-btn-glass",
-  link: "prim-btn-link",
-  gel: "gel-btn",
-};
-
-export function Button({
-  variant = "solid",
-  size = "md",
-  shape = "pill",
-  disabled = false,
-  fullWidth = false,
-  children,
-  className = "",
-  style,
-  onClick,
-}: ButtonProps) {
-  const sizeClass = shape === "circle" ? "" : (SIZE_CLASSES[size] || SIZE_CLASSES.md);
-  const shapeClass = SHAPE_CLASSES[shape] || SHAPE_CLASSES.pill;
-  const variantClasses =
-    variant === "gel"
-      ? \`gel-btn \${shape === "circle" ? "gel-btn-circle-sm" : "gel-btn-pill"}\`
-      : VARIANT_CLASSES[variant] || VARIANT_CLASSES.solid;
-  const fullClass = fullWidth ? "prim-btn-full" : "";
-
-  return (
-    <button
-      className={\`prim-btn-base \${sizeClass} \${shapeClass} \${variantClasses} \${fullClass} \${className}\`}
-      style={style}
-      onClick={disabled ? undefined : onClick}
-      disabled={disabled}
-      data-disabled={disabled}
-    >
-      {children}
-    </button>
-  );
-}`;
-
-const IMPL_LINKBUTTON = `import type { BaseProps } from "../types";
-
-interface LinkButtonProps extends BaseProps {
-  href?: string;
-  arrow?: boolean;
-  underline?: boolean;
-  onClick?: () => void;
-}
-
-export function LinkButton({
-  children,
-  href,
-  arrow = false,
-  underline = false,
-  className = "",
-  style,
-  onClick,
-}: LinkButtonProps) {
-  return (
-    <button
-      className={\`prim-link-btn \${className}\`}
-      onClick={onClick ?? (() => href && (window.location.href = href))}
-      data-underline={underline}
-      style={style}
-    >
-      {children}
-      {arrow && (
-        <span className="prim-link-btn-arrow">&rarr;</span>
-      )}
-    </button>
   );
 }`;
 
@@ -224,33 +101,7 @@ const COMPONENTS = [
     name: "IconButton",
     path: "@/primitives/buttons",
     description: "Circle icon button with size variants",
-    implementation: `import type { BaseProps } from "../types";
-
-interface IconButtonProps extends BaseProps {
-  icon?: string;
-  size?: "sm" | "md" | "lg";
-  onClick?: () => void;
-}
-
-export function IconButton({
-  icon = "+",
-  size = "md",
-  children,
-  className = "",
-  style,
-  onClick,
-}: IconButtonProps) {
-  return (
-    <button
-      className={\`prim-icon-btn \${className}\`}
-      data-size={size}
-      style={style}
-      onClick={onClick}
-    >
-      {children || icon}
-    </button>
-  );
-}`,
+    implementation: IMPL_ICONBUTTON,
     props: [
       { name: "icon", type: "string", default: '"+"' },
       { name: "size", type: "enum", options: ["sm", "md", "lg"], default: '"md"' },
@@ -263,35 +114,7 @@ export function IconButton({
     name: "ButtonGroup",
     path: "@/primitives/buttons",
     description: "Connected button row for toolbars. Use attached mode for joined buttons.",
-    implementation: `import { type ReactNode, type CSSProperties, Children, cloneElement, isValidElement } from "react";
-
-interface ButtonGroupProps {
-  children: ReactNode;
-  attached?: boolean;
-  className?: string;
-  style?: CSSProperties;
-}
-
-export function ButtonGroup({
-  children,
-  attached = false,
-  className = "",
-  style,
-}: ButtonGroupProps) {
-  const items = Children.toArray(children).filter(isValidElement);
-
-  return (
-    <div className={className} style={{ display: "inline-flex", alignItems: "center", gap: attached ? "0px" : "4px", ...style }}>
-      {items.map((child, i) => {
-        if (!attached) return child;
-        // Adjust border-radius for attached mode
-        return cloneElement(child, { key: i, shape: "rounded",
-          style: { borderRadius: i === 0 ? "8px 0 0 8px" : i === items.length - 1 ? "0 8px 8px 0" : "0" }
-        });
-      })}
-    </div>
-  );
-}`,
+    implementation: IMPL_BUTTONGROUP,
     props: [
       { name: "attached", type: "boolean", default: "false" },
       { name: "className", type: "string" },

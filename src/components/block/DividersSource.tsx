@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import { ViewSourceModal } from "@/components/modal/ViewSourceModal";
 
+// Auto-loaded from actual source file at build time
+import IMPL_DIVIDER from "@/primitives/surfaces/Divider.tsx?raw";
+
 const SOURCE_CODE = `import { Divider } from "@/primitives/surfaces";
 
 {/* Standard horizontal divider */}
@@ -39,65 +42,20 @@ const SOURCE_CODE = `import { Divider } from "@/primitives/surfaces";
 {/* Vertical glass */}
 <Divider direction="vertical" variant="groove" />`;
 
-const IMPL_DIVIDER = `import { useDarkMode } from "../hooks/useDarkMode";
-
-interface DividerProps {
-  variant?: "default" | "bold" | "dashed" | "inset" |
-            "gradient" | "dots" | "etched" | "groove" |
-            "ridge" | "frostedSlit";
-  direction?: "horizontal" | "vertical";
-  label?: string;
-  icon?: React.ReactNode;
-  className?: string;
-  style?: React.CSSProperties;
-}
-
-export function Divider({
-  variant = "default",
-  direction = "horizontal",
-  label,
-  icon,
-  ...props
-}: DividerProps) {
-  const isDark = useDarkMode();
-
-  // Default horizontal line
-  if (variant === "default" && !label && !icon) {
-    return (
-      <div style={{
-        width: direction === "vertical" ? "1px" : "100%",
-        height: direction === "vertical" ? "100%" : "1px",
-        background: isDark
-          ? "rgba(255,255,255,0.15)"
-          : "rgba(0,0,0,0.15)",
-      }} />
-    );
-  }
-
-  // Glass variants use box-shadow pairs
-  // for a slit-like etched effect
-  if (variant === "groove") {
-    return (
-      <div style={{ height: 2, width: "100%", position: "relative" }}>
-        <div style={{
-          position: "absolute", inset: 0,
-          background: "linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.3) 15%, rgba(0,0,0,0.3) 85%, transparent 100%)",
-          height: 1,
-        }} />
-        <div style={{
-          position: "absolute", top: 1, left: 0, right: 0,
-          background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.6) 15%, rgba(255,255,255,0.6) 85%, transparent 100%)",
-          height: 1,
-        }} />
-      </div>
-    );
-  }
-
-  // ... other variants
-}`;
-
 const COMPONENTS = [
-  { name: "Divider", path: "@/primitives/surfaces", description: "Visual separator with 10+ variants including glass effects", implementation: IMPL_DIVIDER },
+  {
+    name: "Divider",
+    path: "@/primitives/surfaces",
+    description: "Visual separator with 10+ variants including glass effects",
+    implementation: IMPL_DIVIDER,
+    props: [
+      { name: "variant", type: "enum", options: ["default", "bold", "dashed", "gradient", "glass", "etched", "groove", "ridge", "frostedSlit"], default: '"default"' },
+      { name: "direction", type: "enum", options: ["horizontal", "vertical"], default: '"horizontal"' },
+      { name: "label", type: "string" },
+      { name: "icon", type: "ReactNode" },
+      { name: "className", type: "string" },
+    ],
+  },
   { name: "default", path: "Variant", description: "Simple 1px line — light gray" },
   { name: "bold", path: "Variant", description: "2px thicker line for emphasis" },
   { name: "dashed", path: "Variant", description: "Dashed border style" },

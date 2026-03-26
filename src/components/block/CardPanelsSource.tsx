@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import { ViewSourceModal } from "@/components/modal/ViewSourceModal";
 
+// Auto-loaded from actual source file at build time
+import IMPL_CARD from "@/primitives/surfaces/Card.tsx?raw";
+
 const SOURCE_CODE = `import { Card } from "@/primitives/surfaces";
 
 {/* 1. Standard — glass + 95% frost */}
@@ -39,61 +42,19 @@ const SOURCE_CODE = `import { Card } from "@/primitives/surfaces";
   <p>Fully opaque. Maximum contrast for critical content.</p>
 </Card>`;
 
-const IMPL_CARD = `import type { BaseProps } from "../types";
-import { useDarkMode } from "../hooks/useDarkMode";
-
-interface CardProps extends BaseProps {
-  variant?: "glass" | "gel" | "solid" | "transparent";
-  frost?: "standard" | "haze" | "directional" | "none";
-}
-
-export function Card({
-  variant = "glass",
-  frost = "standard",
-  children,
-  className = "",
-  style,
-}: CardProps) {
-  const isDark = useDarkMode();
-
-  const variantClasses: Record<string, string> = {
-    glass: "glass-1 glass-specular",
-    gel: "gel-glass glass-specular",
-    solid: "",
-    transparent: "",
-  };
-
-  const frostClass =
-    frost === "standard" ? "ds-card-frost"
-    : frost === "haze" ? "ds-card-frost-haze"
-    : frost === "directional" ? "token-hero-frost"
-    : "";
-
-  return (
-    <div
-      className={\`relative overflow-hidden rounded-[var(--glass-radius)] p-5 \${variantClasses[variant]} \${className}\`}
-      style={{
-        ...(variant === "solid"
-          ? { background: isDark ? "#1a1a1a" : "rgba(255,255,255,0.95)" }
-          : variant === "transparent"
-            ? { border: \`1px solid \${isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)"}\` }
-            : {}),
-        ...style,
-      }}
-    >
-      {frostClass && (
-        <div
-          className={\`absolute inset-x-0 top-0 pointer-events-none \${frostClass}\`}
-          style={{ height: frost === "directional" ? "100%" : "160px" }}
-        />
-      )}
-      <div className="relative z-[1]">{children}</div>
-    </div>
-  );
-}`;
-
 const COMPONENTS = [
-  { name: "Card", path: "@/primitives/surfaces", description: "Glass card container with configurable variant and frost zone", implementation: IMPL_CARD },
+  {
+    name: "Card",
+    path: "@/primitives/surfaces",
+    description: "Glass card container with configurable variant and frost zone",
+    implementation: IMPL_CARD,
+    props: [
+      { name: "variant", type: "enum", options: ["glass", "gel", "solid", "transparent"], default: '"glass"' },
+      { name: "frost", type: "enum", options: ["standard", "haze", "directional", "none"], default: '"standard"' },
+      { name: "className", type: "string" },
+      { name: "style", type: "CSSProperties" },
+    ],
+  },
   { name: "ds-card-frost", path: "CSS class", description: "Standard frost zone — 95% white/black gradient, top-to-bottom" },
   { name: "ds-card-frost-haze", path: "CSS class", description: "Haze frost zone — 35% opacity, subtle see-through" },
   { name: "token-hero-frost", path: "CSS class", description: "Directional frost — left-to-right gradient for text + image layouts" },
