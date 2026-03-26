@@ -1,5 +1,4 @@
 import { type ReactNode, type CSSProperties, useState, useRef } from "react";
-import { useDarkMode } from "../hooks/useDarkMode";
 
 interface TooltipProps {
   content: string;
@@ -16,7 +15,6 @@ export function Tooltip({
   className = "",
   style,
 }: TooltipProps) {
-  const dark = useDarkMode();
   const [visible, setVisible] = useState(false);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -104,10 +102,10 @@ export function Tooltip({
               fontWeight: 500,
               fontFamily: "var(--font-ui)",
               borderRadius: "var(--glass-radius-sm, 8px)",
-              background: dark ? "rgba(50,50,50,0.95)" : "rgba(0,0,0,0.85)",
+              background: "var(--theme-bg-solid)",
               backdropFilter: "blur(12px)",
               WebkitBackdropFilter: "blur(12px)",
-              color: "#fff",
+              color: "var(--theme-fg-on-solid)",
               boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
             }}
           >
@@ -117,7 +115,7 @@ export function Tooltip({
                 position: "absolute",
                 width: "8px",
                 height: "8px",
-                background: dark ? "rgba(50,50,50,0.95)" : "rgba(0,0,0,0.85)",
+                background: "var(--theme-bg-solid)",
                 ...arrowPositions[position],
               }}
             />

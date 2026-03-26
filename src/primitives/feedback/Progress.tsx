@@ -1,5 +1,4 @@
 import { type CSSProperties } from "react";
-import { useDarkMode } from "../hooks/useDarkMode";
 
 interface ProgressProps {
   value?: number;
@@ -12,7 +11,6 @@ export function Progress({
   className = "",
   style,
 }: ProgressProps) {
-  const dark = useDarkMode();
   return (
     <div
       className={className}
@@ -20,7 +18,7 @@ export function Progress({
         width: "100%",
         height: "6px",
         borderRadius: "3px",
-        background: dark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.08)",
+        background: "var(--theme-fg-faint)",
         overflow: "hidden",
         ...style,
       }}
@@ -30,7 +28,7 @@ export function Progress({
           width: `${Math.min(100, Math.max(0, value))}%`,
           height: "100%",
           borderRadius: "3px",
-          background: dark ? "#b0c4af" : "#354334",
+          background: "var(--theme-fg)",
           transition: "width 300ms ease",
         }}
       />

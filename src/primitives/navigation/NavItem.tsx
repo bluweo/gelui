@@ -1,5 +1,4 @@
 import { type ReactNode, type CSSProperties, useState } from "react";
-import { useDarkMode } from "../hooks/useDarkMode";
 
 interface NavItemProps {
   icon?: ReactNode;
@@ -18,7 +17,6 @@ export function NavItem({
   className = "",
   style,
 }: NavItemProps) {
-  const dark = useDarkMode();
   const [hovered, setHovered] = useState(false);
   return (
     <button
@@ -39,21 +37,13 @@ export function NavItem({
         fontWeight: active ? 600 : 400,
         fontFamily: "var(--font-ui)",
         background: active
-          ? dark
-            ? "rgba(255,255,255,0.1)"
-            : "rgba(0,0,0,0.06)"
+          ? "var(--theme-header-bg)"
           : hovered
-            ? dark
-              ? "rgba(255,255,255,0.05)"
-              : "rgba(0,0,0,0.03)"
+            ? "var(--theme-header-bg)"
             : "transparent",
         color: active
-          ? dark
-            ? "#fff"
-            : "#000"
-          : dark
-            ? "rgba(255,255,255,0.6)"
-            : "rgba(0,0,0,0.6)",
+          ? "var(--theme-fg)"
+          : "var(--theme-fg-muted)",
         cursor: "pointer",
         transition: "all 150ms ease",
         outline: "none",

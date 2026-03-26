@@ -1,5 +1,11 @@
 import { type ReactNode, type CSSProperties, useState } from "react";
-import { useDarkMode } from "../hooks/useDarkMode";
+
+const variantColors = {
+  info: { border: "#5AC8FA", bg: "rgba(90,200,250,0.08)", bgDark: "rgba(90,200,250,0.12)" },
+  success: { border: "#34C759", bg: "rgba(52,199,89,0.08)", bgDark: "rgba(52,199,89,0.12)" },
+  warning: { border: "#FF9500", bg: "rgba(255,149,0,0.08)", bgDark: "rgba(255,149,0,0.12)" },
+  error: { border: "#FF3B30", bg: "rgba(255,59,48,0.08)", bgDark: "rgba(255,59,48,0.12)" },
+};
 
 interface AlertProps {
   variant?: "info" | "success" | "warning" | "error";
@@ -10,13 +16,6 @@ interface AlertProps {
   className?: string;
   style?: CSSProperties;
 }
-
-const variantColors = {
-  info: { border: "#5AC8FA", bg: "rgba(90,200,250,0.08)", bgDark: "rgba(90,200,250,0.12)" },
-  success: { border: "#34C759", bg: "rgba(52,199,89,0.08)", bgDark: "rgba(52,199,89,0.12)" },
-  warning: { border: "#FF9500", bg: "rgba(255,149,0,0.08)", bgDark: "rgba(255,149,0,0.12)" },
-  error: { border: "#FF3B30", bg: "rgba(255,59,48,0.08)", bgDark: "rgba(255,59,48,0.12)" },
-};
 
 function AlertIcon({ variant }: { variant: "info" | "success" | "warning" | "error" }) {
   const size = 18;
@@ -60,7 +59,6 @@ export function Alert({
   className = "",
   style,
 }: AlertProps) {
-  const dark = useDarkMode();
   const [dismissed, setDismissed] = useState(false);
   const colors = variantColors[variant];
 
@@ -81,11 +79,11 @@ export function Alert({
         padding: "14px 16px",
         borderRadius: "var(--glass-radius-sm, 10px)",
         borderLeft: `4px solid ${colors.border}`,
-        background: dark ? colors.bgDark : colors.bg,
+        background: `color-mix(in srgb, ${colors.border} 8%, transparent)`,
         backdropFilter: "blur(12px)",
         WebkitBackdropFilter: "blur(12px)",
         fontFamily: "var(--font-body)",
-        color: dark ? "rgba(255,255,255,0.85)" : "rgba(0,0,0,0.85)",
+        color: "var(--theme-fg)",
         position: "relative",
         ...style,
       }}
@@ -101,7 +99,7 @@ export function Alert({
               fontSize: "14px",
               fontFamily: "var(--font-ui)",
               marginBottom: "4px",
-              color: dark ? "#fff" : "#000",
+              color: "var(--theme-fg)",
             }}
           >
             {title}
@@ -118,8 +116,8 @@ export function Alert({
             height: "24px",
             borderRadius: "50%",
             border: "none",
-            background: dark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.05)",
-            color: dark ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.4)",
+            background: "var(--theme-header-bg)",
+            color: "var(--theme-fg-muted)",
             cursor: "pointer",
             display: "flex",
             alignItems: "center",

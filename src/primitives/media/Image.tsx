@@ -1,5 +1,4 @@
 import { useState, type CSSProperties } from "react";
-import { useDarkMode } from "../hooks/useDarkMode";
 
 interface ImageProps {
   src: string;
@@ -24,7 +23,6 @@ export function Image({
   className = "",
   style,
 }: ImageProps) {
-  const dark = useDarkMode();
   const [loaded, setLoaded] = useState(false);
   const showSkeleton = skeleton && !loaded;
 
@@ -40,7 +38,7 @@ export function Image({
         height: typeof height === "number" ? `${height}px` : height,
         borderRadius,
         overflow: "hidden",
-        border: `1px solid ${dark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)"}`,
+        border: "1px solid var(--theme-divider)",
         ...style,
       }}
     >
@@ -49,9 +47,7 @@ export function Image({
           style={{
             position: "absolute",
             inset: 0,
-            background: dark
-              ? "linear-gradient(90deg, rgba(255,255,255,0.06) 25%, rgba(255,255,255,0.12) 50%, rgba(255,255,255,0.06) 75%)"
-              : "linear-gradient(90deg, rgba(0,0,0,0.04) 25%, rgba(0,0,0,0.08) 50%, rgba(0,0,0,0.04) 75%)",
+            background: "linear-gradient(90deg, var(--theme-header-bg) 25%, var(--theme-fg-faint) 50%, var(--theme-header-bg) 75%)",
             backgroundSize: "200% 100%",
             animation: "shimmer 1.5s infinite",
           }}

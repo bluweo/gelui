@@ -1,5 +1,4 @@
 import { type ReactNode, type CSSProperties } from "react";
-import { useDarkMode } from "../hooks/useDarkMode";
 
 interface IconProps {
   children: ReactNode;
@@ -16,7 +15,6 @@ export function Icon({
   className = "",
   style,
 }: IconProps) {
-  const dark = useDarkMode();
 
   return (
     <span
@@ -29,7 +27,7 @@ export function Icon({
         height: `${size}px`,
         fontSize: `${size}px`,
         lineHeight: 1,
-        color: color ?? (dark ? "rgba(255,255,255,0.8)" : "rgba(0,0,0,0.7)"),
+        color: color ?? "var(--theme-fg-muted)",
         flexShrink: 0,
         ...style,
       }}

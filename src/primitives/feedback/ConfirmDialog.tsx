@@ -1,5 +1,4 @@
 import { type CSSProperties, useEffect } from "react";
-import { useDarkMode } from "../hooks/useDarkMode";
 import { Overlay } from "./Overlay";
 
 interface ConfirmDialogProps {
@@ -27,7 +26,6 @@ export function ConfirmDialog({
   className = "",
   style,
 }: ConfirmDialogProps) {
-  const dark = useDarkMode();
 
   // Body scroll lock
   useEffect(() => {
@@ -55,15 +53,11 @@ export function ConfirmDialog({
   const confirmBg =
     variant === "danger"
       ? "#FF3B30"
-      : dark
-        ? "#fff"
-        : "#000";
+      : "var(--theme-bg-solid)";
   const confirmColor =
     variant === "danger"
       ? "#fff"
-      : dark
-        ? "#000"
-        : "#fff";
+      : "var(--theme-fg-on-solid)";
 
   const btnBase: CSSProperties = {
     padding: "10px 20px",
@@ -100,12 +94,10 @@ export function ConfirmDialog({
             width: "100%",
             maxWidth: "420px",
             borderRadius: "var(--glass-radius, 16px)",
-            background: dark
-              ? "rgba(30,30,30,0.92)"
-              : "rgba(255,255,255,0.92)",
+            background: "var(--theme-table-bg)",
             backdropFilter: "blur(40px)",
             WebkitBackdropFilter: "blur(40px)",
-            border: `1px solid ${dark ? "rgba(255,255,255,0.08)" : "rgba(255,255,255,0.2)"}`,
+            border: "1px solid var(--theme-ghost-border)",
             boxShadow: "0 24px 80px rgba(0,0,0,0.18)",
             animation: "modalIn 200ms ease",
             overflow: "hidden",
@@ -119,7 +111,7 @@ export function ConfirmDialog({
               fontSize: "16px",
               fontWeight: 650,
               fontFamily: "var(--font-ui)",
-              color: dark ? "#fff" : "#000",
+              color: "var(--theme-fg)",
             }}
           >
             {title}
@@ -130,7 +122,7 @@ export function ConfirmDialog({
               padding: "12px 20px 20px",
               fontSize: "14px",
               fontFamily: "var(--font-body)",
-              color: dark ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.65)",
+              color: "var(--theme-fg-muted)",
               lineHeight: 1.5,
             }}
           >
@@ -143,17 +135,15 @@ export function ConfirmDialog({
               display: "flex",
               justifyContent: "flex-end",
               gap: "8px",
-              borderTop: `1px solid ${dark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)"}`,
+              borderTop: "1px solid var(--theme-divider)",
             }}
           >
             <button
               onClick={onCancel}
               style={{
                 ...btnBase,
-                background: dark
-                  ? "rgba(255,255,255,0.08)"
-                  : "rgba(0,0,0,0.05)",
-                color: dark ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.6)",
+                background: "var(--theme-header-bg)",
+                color: "var(--theme-fg-muted)",
               }}
             >
               {cancelLabel}

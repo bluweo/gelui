@@ -1,5 +1,4 @@
 import { useState, useEffect, type CSSProperties } from "react";
-import { useDarkMode } from "../hooks/useDarkMode";
 
 interface BackToTopProps {
   threshold?: number;
@@ -14,7 +13,6 @@ export function BackToTop({
   className = "",
   style,
 }: BackToTopProps) {
-  const dark = useDarkMode();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -41,8 +39,8 @@ export function BackToTop({
         width: "44px",
         height: "44px",
         borderRadius: "50%",
-        border: `1px solid ${dark ? "rgba(255,255,255,0.15)" : "rgba(0,0,0,0.1)"}`,
-        background: dark ? "rgba(255,255,255,0.1)" : "rgba(255,255,255,0.7)",
+        border: "1px solid var(--theme-divider)",
+        background: "var(--theme-header-bg)",
         backdropFilter: "blur(16px)",
         WebkitBackdropFilter: "blur(16px)",
         cursor: "pointer",
@@ -50,7 +48,7 @@ export function BackToTop({
         alignItems: "center",
         justifyContent: "center",
         fontSize: "18px",
-        color: dark ? "rgba(255,255,255,0.8)" : "rgba(0,0,0,0.6)",
+        color: "var(--theme-fg-muted)",
         boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
         transition: "opacity 0.25s, transform 0.25s",
         opacity: visible ? 1 : 0,

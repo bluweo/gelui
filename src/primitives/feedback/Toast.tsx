@@ -1,5 +1,4 @@
 import { type CSSProperties, useEffect, useState } from "react";
-import { useDarkMode } from "../hooks/useDarkMode";
 
 interface ToastProps {
   variant?: "info" | "success" | "warning" | "error";
@@ -27,7 +26,6 @@ export function Toast({
   className = "",
   style,
 }: ToastProps) {
-  const dark = useDarkMode();
   const [show, setShow] = useState(false);
   const colors = variantColors[variant];
 
@@ -66,14 +64,14 @@ export function Toast({
         gap: "12px",
         padding: "14px 18px",
         borderRadius: "var(--glass-radius-sm, 10px)",
-        background: dark ? "rgba(30,30,30,0.92)" : "rgba(255,255,255,0.92)",
+        background: "var(--theme-table-bg)",
         backdropFilter: "blur(40px)",
         WebkitBackdropFilter: "blur(40px)",
-        border: `1px solid ${dark ? "rgba(255,255,255,0.08)" : "rgba(255,255,255,0.2)"}`,
+        border: "1px solid var(--theme-ghost-border)",
         boxShadow: "0 8px 32px rgba(0,0,0,0.18)",
         fontFamily: "var(--font-body)",
         fontSize: "13px",
-        color: dark ? "rgba(255,255,255,0.85)" : "rgba(0,0,0,0.85)",
+        color: "var(--theme-fg)",
         transform: show ? "translateX(0)" : "translateX(calc(100% + 32px))",
         opacity: show ? 1 : 0,
         transition: "transform 250ms ease, opacity 250ms ease",
@@ -104,8 +102,8 @@ export function Toast({
           height: "24px",
           borderRadius: "50%",
           border: "none",
-          background: dark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.05)",
-          color: dark ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.4)",
+          background: "var(--theme-header-bg)",
+          color: "var(--theme-fg-muted)",
           cursor: "pointer",
           display: "flex",
           alignItems: "center",

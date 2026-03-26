@@ -1,6 +1,5 @@
 import { useState } from "react";
 import type { BaseProps } from "../types";
-import { useDarkMode } from "../hooks/useDarkMode";
 
 interface LinkButtonProps extends BaseProps {
   href?: string;
@@ -18,7 +17,6 @@ export function LinkButton({
   style,
   onClick,
 }: LinkButtonProps) {
-  const dark = useDarkMode();
   const [hovered, setHovered] = useState(false);
   return (
     <button
@@ -34,7 +32,7 @@ export function LinkButton({
         fontSize: "14px",
         fontWeight: 500,
         fontFamily: "var(--font-ui)",
-        color: dark ? "#b0c4af" : "#354334",
+        color: "var(--theme-fg)",
         textDecoration: underline ? "underline" : "none",
         textUnderlineOffset: "3px",
         opacity: hovered ? 0.7 : 1,

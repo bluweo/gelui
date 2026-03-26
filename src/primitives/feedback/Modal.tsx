@@ -1,5 +1,4 @@
 import { type ReactNode, type CSSProperties, useEffect } from "react";
-import { useDarkMode } from "../hooks/useDarkMode";
 import { Overlay } from "./Overlay";
 
 interface ModalProps {
@@ -23,7 +22,6 @@ export function Modal({
   className = "",
   style,
 }: ModalProps) {
-  const dark = useDarkMode();
 
   // Body scroll lock
   useEffect(() => {
@@ -76,12 +74,10 @@ export function Modal({
             display: "flex",
             flexDirection: "column",
             borderRadius: "var(--glass-radius, 16px)",
-            background: dark
-              ? "rgba(30,30,30,0.92)"
-              : "rgba(255,255,255,0.92)",
+            background: "var(--theme-table-bg)",
             backdropFilter: "blur(40px)",
             WebkitBackdropFilter: "blur(40px)",
-            border: `1px solid ${dark ? "rgba(255,255,255,0.08)" : "rgba(255,255,255,0.2)"}`,
+            border: "1px solid var(--theme-ghost-border)",
             boxShadow: "0 24px 80px rgba(0,0,0,0.18)",
             animation: "modalIn 200ms ease",
             overflow: "hidden",
@@ -96,7 +92,7 @@ export function Modal({
                 alignItems: "center",
                 justifyContent: "space-between",
                 padding: "16px 20px",
-                borderBottom: `1px solid ${dark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)"}`,
+                borderBottom: "1px solid var(--theme-divider)",
               }}
             >
               <span
@@ -104,7 +100,7 @@ export function Modal({
                   fontSize: "16px",
                   fontWeight: 650,
                   fontFamily: "var(--font-heading)",
-                  color: dark ? "#fff" : "#000",
+                  color: "var(--theme-fg)",
                 }}
               >
                 {title}
@@ -116,10 +112,8 @@ export function Modal({
                   height: "28px",
                   borderRadius: "50%",
                   border: "none",
-                  background: dark
-                    ? "rgba(255,255,255,0.08)"
-                    : "rgba(0,0,0,0.05)",
-                  color: dark ? "#fff" : "#000",
+                  background: "var(--theme-header-bg)",
+                  color: "var(--theme-fg)",
                   cursor: "pointer",
                   display: "flex",
                   alignItems: "center",
@@ -139,7 +133,7 @@ export function Modal({
               padding: "20px",
               overflowY: "auto",
               flex: 1,
-              color: dark ? "rgba(255,255,255,0.8)" : "rgba(0,0,0,0.8)",
+              color: "var(--theme-fg-muted)",
             }}
           >
             {children}
@@ -149,7 +143,7 @@ export function Modal({
             <div
               style={{
                 padding: "12px 20px",
-                borderTop: `1px solid ${dark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)"}`,
+                borderTop: "1px solid var(--theme-divider)",
                 display: "flex",
                 justifyContent: "flex-end",
                 gap: "8px",

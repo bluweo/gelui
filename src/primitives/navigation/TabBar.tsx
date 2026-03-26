@@ -1,5 +1,4 @@
 import { type CSSProperties } from "react";
-import { useDarkMode } from "../hooks/useDarkMode";
 
 interface TabBarProps {
   tabs?: string[];
@@ -16,14 +15,13 @@ export function TabBar({
   className = "",
   style,
 }: TabBarProps) {
-  const dark = useDarkMode();
   return (
     <div
       className={className}
       style={{
         display: "flex",
         gap: "0",
-        borderBottom: `1px solid ${dark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.08)"}`,
+        borderBottom: "1px solid var(--theme-divider)",
         ...style,
       }}
     >
@@ -37,16 +35,12 @@ export function TabBar({
             fontWeight: i === active ? 600 : 400,
             color:
               i === active
-                ? dark
-                  ? "#fff"
-                  : "#000"
-                : dark
-                  ? "rgba(255,255,255,0.4)"
-                  : "rgba(0,0,0,0.4)",
+                ? "var(--theme-fg)"
+                : "var(--theme-fg-subtle)",
             border: "none",
             borderBottom:
               i === active
-                ? `2px solid ${dark ? "#fff" : "#000"}`
+                ? "2px solid var(--theme-fg)"
                 : "2px solid transparent",
             background: "transparent",
             cursor: "pointer",

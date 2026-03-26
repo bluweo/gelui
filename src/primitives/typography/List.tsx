@@ -1,5 +1,4 @@
 import { type ReactNode, type CSSProperties } from "react";
-import { useDarkMode } from "../hooks/useDarkMode";
 
 interface ListProps {
   items: (string | ReactNode)[];
@@ -16,7 +15,6 @@ export function List({
   className = "",
   style,
 }: ListProps) {
-  const dark = useDarkMode();
 
   const spacingMap: Record<string, string> = {
     sm: "4px",
@@ -25,7 +23,7 @@ export function List({
   };
 
   const itemStyle: CSSProperties = {
-    color: dark ? "rgba(255,255,255,0.8)" : "rgba(0,0,0,0.75)",
+    color: "var(--theme-fg-muted)",
     fontFamily: "var(--font-body)",
     display: "flex",
     alignItems: "baseline",
@@ -38,7 +36,7 @@ export function List({
     width: "5px",
     height: "5px",
     borderRadius: "50%",
-    background: dark ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.7)",
+    background: "var(--theme-fg-muted)",
     marginTop: "7px",
     alignSelf: "flex-start",
   };
@@ -48,7 +46,7 @@ export function List({
     minWidth: "18px",
     fontSize: "13px",
     fontWeight: 600,
-    color: dark ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.8)",
+    color: "var(--theme-fg-muted)",
   };
 
   return (

@@ -1,5 +1,4 @@
 import { type CSSProperties } from "react";
-import { useDarkMode } from "../hooks/useDarkMode";
 
 interface StepperProps {
   steps: string[];
@@ -16,7 +15,6 @@ export function Stepper({
   className = "",
   style,
 }: StepperProps) {
-  const dark = useDarkMode();
 
   const circleSize = 28;
   const lineHeight = 2;
@@ -52,8 +50,8 @@ export function Stepper({
             }
           : {
               background: "transparent",
-              color: dark ? "rgba(255,255,255,0.35)" : "rgba(0,0,0,0.3)",
-              border: `2px solid ${dark ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.15)"}`,
+              color: "var(--theme-fg-subtle)",
+              border: "2px solid var(--theme-fg-faint)",
             }),
     };
   };
@@ -65,9 +63,7 @@ export function Stepper({
       height: `${lineHeight}px`,
       background: isCompleted
         ? "#007AFF"
-        : dark
-          ? "rgba(255,255,255,0.15)"
-          : "rgba(0,0,0,0.1)",
+        : "var(--theme-fg-faint)",
       transition: "background 0.2s",
     };
   };
@@ -116,12 +112,8 @@ export function Stepper({
                 fontWeight: i === currentStep ? 600 : 400,
                 color:
                   i <= currentStep
-                    ? dark
-                      ? "rgba(255,255,255,0.85)"
-                      : "rgba(0,0,0,0.8)"
-                    : dark
-                      ? "rgba(255,255,255,0.35)"
-                      : "rgba(0,0,0,0.35)",
+                    ? "var(--theme-fg)"
+                    : "var(--theme-fg-subtle)",
                 textAlign: "center",
                 maxWidth: "80px",
                 whiteSpace: "nowrap",

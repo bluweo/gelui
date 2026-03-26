@@ -1,5 +1,4 @@
 import { type CSSProperties } from "react";
-import { useDarkMode } from "../hooks/useDarkMode";
 
 interface PillTabsProps {
   tabs: string[];
@@ -16,7 +15,6 @@ export function PillTabs({
   className = "",
   style,
 }: PillTabsProps) {
-  const dark = useDarkMode();
   return (
     <div
       className={className}
@@ -25,9 +23,7 @@ export function PillTabs({
         gap: "4px",
         padding: "4px",
         borderRadius: "var(--glass-radius-pill, 100px)",
-        background: dark
-          ? "rgba(255,255,255,0.06)"
-          : "rgba(0,0,0,0.04)",
+        background: "var(--theme-header-bg)",
         ...style,
       }}
     >
@@ -45,17 +41,11 @@ export function PillTabs({
               border: "none",
               borderRadius: "var(--glass-radius-pill, 100px)",
               background: isActive
-                ? dark
-                  ? "#fff"
-                  : "#000"
+                ? "var(--theme-bg-solid)"
                 : "transparent",
               color: isActive
-                ? dark
-                  ? "#000"
-                  : "#fff"
-                : dark
-                  ? "rgba(255,255,255,0.5)"
-                  : "rgba(0,0,0,0.5)",
+                ? "var(--theme-fg-on-solid)"
+                : "var(--theme-fg-muted)",
               cursor: "pointer",
               transition: "all 200ms ease",
               outline: "none",

@@ -1,5 +1,4 @@
 import { type ReactNode, type CSSProperties, Children, cloneElement, isValidElement } from "react";
-import { useDarkMode } from "../hooks/useDarkMode";
 
 interface ButtonGroupProps {
   children: ReactNode;
@@ -14,7 +13,6 @@ export function ButtonGroup({
   className = "",
   style,
 }: ButtonGroupProps) {
-  const dark = useDarkMode();
   const items = Children.toArray(children).filter(isValidElement);
   const count = items.length;
 
@@ -43,7 +41,7 @@ export function ButtonGroup({
               : "0",
           borderRight:
             !isLast
-              ? `1px solid ${dark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)"}`
+              ? "1px solid var(--theme-divider)"
               : undefined,
         };
 

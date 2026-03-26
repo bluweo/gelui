@@ -1,5 +1,4 @@
 import { type ReactNode, type CSSProperties } from "react";
-import { useDarkMode } from "../hooks/useDarkMode";
 
 interface BlockquoteProps {
   children: ReactNode;
@@ -16,7 +15,6 @@ export function Blockquote({
   className = "",
   style,
 }: BlockquoteProps) {
-  const dark = useDarkMode();
 
   return (
     <blockquote
@@ -25,7 +23,7 @@ export function Blockquote({
       style={{
         margin: 0,
         padding: "12px 0 12px 20px",
-        borderLeft: `4px solid ${dark ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.7)"}`,
+        borderLeft: "4px solid var(--theme-fg-muted)",
         ...style,
       }}
     >
@@ -33,7 +31,7 @@ export function Blockquote({
         className="type-body"
         style={{
           fontStyle: "italic",
-          color: dark ? "rgba(255,255,255,0.8)" : "rgba(0,0,0,0.75)",
+          color: "var(--theme-fg-muted)",
           fontFamily: "var(--font-body)",
         }}
       >
@@ -44,7 +42,7 @@ export function Blockquote({
           className="type-caption"
           style={{
             marginTop: "8px",
-            color: dark ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.45)",
+            color: "var(--theme-fg-subtle)",
             fontFamily: "var(--font-ui)",
             fontStyle: "normal",
           }}

@@ -1,5 +1,4 @@
 import { type CSSProperties } from "react";
-import { useDarkMode } from "../hooks/useDarkMode";
 
 interface PaginationProps {
   totalPages: number;
@@ -18,7 +17,6 @@ export function Pagination({
   className = "",
   style,
 }: PaginationProps) {
-  const dark = useDarkMode();
 
   const getVisiblePages = (): (number | "ellipsis")[] => {
     if (totalPages <= maxVisible) {
@@ -63,8 +61,8 @@ export function Pagination({
 
   const navButton: CSSProperties = {
     ...buttonBase,
-    background: dark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.05)",
-    color: dark ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.6)",
+    background: "var(--theme-header-bg)",
+    color: "var(--theme-fg-muted)",
     backdropFilter: "blur(12px)",
     WebkitBackdropFilter: "blur(12px)",
   };
@@ -72,19 +70,11 @@ export function Pagination({
   const pageButton = (active: boolean): CSSProperties => ({
     ...buttonBase,
     background: active
-      ? dark
-        ? "rgba(255,255,255,0.9)"
-        : "rgba(0,0,0,0.85)"
-      : dark
-        ? "rgba(255,255,255,0.08)"
-        : "rgba(0,0,0,0.05)",
+      ? "var(--theme-bg-solid)"
+      : "var(--theme-header-bg)",
     color: active
-      ? dark
-        ? "#000"
-        : "#fff"
-      : dark
-        ? "rgba(255,255,255,0.7)"
-        : "rgba(0,0,0,0.6)",
+      ? "var(--theme-fg-on-solid)"
+      : "var(--theme-fg-muted)",
     backdropFilter: "blur(12px)",
     WebkitBackdropFilter: "blur(12px)",
   });
@@ -121,7 +111,7 @@ export function Pagination({
               minWidth: "32px",
               textAlign: "center",
               fontSize: "13px",
-              color: dark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.4)",
+              color: "var(--theme-fg-subtle)",
             }}
           >
             &hellip;
