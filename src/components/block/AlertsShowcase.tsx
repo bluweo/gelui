@@ -12,17 +12,12 @@ export function AlertsShowcase() {
 
   return (
     <div className="flex flex-col gap-4">
-      {/* Alerts */}
-      <div className="rounded-[var(--glass-radius-sm)] overflow-hidden bg-[var(--theme-table-bg)] border border-[var(--theme-divider)]">
-        <div className="py-2 px-3 bg-[var(--theme-header-bg)] border-b border-[var(--theme-divider)]">
-          <span className="type-overline text-[var(--theme-fg-muted)]">Alerts</span>
-        </div>
-        <div className="py-3 px-3.5 flex flex-col gap-2">
-          <Alert variant="info" title="Info">Informational message.</Alert>
-          <Alert variant="success" title="Success">Completed successfully.</Alert>
-          <Alert variant="warning" title="Warning" dismissible>Can be dismissed.</Alert>
-          <Alert variant="error" title="Error" dismissible>Something went wrong.</Alert>
-        </div>
+      {/* Alert cards — standalone with shadows */}
+      <div className="flex flex-col gap-3">
+        <Alert variant="info" title="Information">Anyone with a link can now view this file.</Alert>
+        <Alert variant="success" title="Success">Anyone with a link can now view this file.</Alert>
+        <Alert variant="warning" title="Warning">Anyone with a link can now view this file.</Alert>
+        <Alert variant="error" title="Error">Anyone with a link can now view this file.</Alert>
       </div>
 
       {/* Toast Demo */}

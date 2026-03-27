@@ -64,7 +64,7 @@ export function GlassControlsDemo() {
           <div className="py-3">
             <div className="flex items-center justify-between mb-1">
               <span className="text-[10px] font-[500] contrast-text-muted">Slider</span>
-              <span className="text-[13px] font-[600] font-mono contrast-text">{slider}%</span>
+              <span className="text-[14px] font-[600] font-[family-name:var(--font-body)] contrast-text">{slider}%</span>
             </div>
             <Slider
               min={0}

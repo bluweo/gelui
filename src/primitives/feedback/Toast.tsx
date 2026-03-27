@@ -1,4 +1,4 @@
-import { type CSSProperties, useEffect, useState } from "react";
+import { type CSSProperties, type ReactNode, useEffect, useState } from "react";
 
 interface ToastProps {
   variant?: "info" | "success" | "warning" | "error";
@@ -10,12 +10,46 @@ interface ToastProps {
   style?: CSSProperties;
 }
 
-const variantAccentColors: Record<string, string> = {
-  info: "bg-[#5AC8FA]",
-  success: "bg-[#34C759]",
-  warning: "bg-[#FF9500]",
-  error: "bg-[#FF3B30]",
+const variantColors: Record<string, { color: string; bg: string }> = {
+  info: { color: "#5AC8FA", bg: "rgba(90,200,250,0.1)" },
+  success: { color: "#34C759", bg: "rgba(52,199,89,0.1)" },
+  warning: { color: "#FF9500", bg: "rgba(255,149,0,0.1)" },
+  error: { color: "#FF3B30", bg: "rgba(255,59,48,0.1)" },
 };
+
+function ToastIcon({ variant }: { variant: string }) {
+  const s = 16;
+  const icons: Record<string, ReactNode> = {
+    info: (
+      <svg width={s} height={s} viewBox="0 0 20 20" fill="none">
+        <circle cx="10" cy="10" r="9" stroke="#5AC8FA" strokeWidth="1.5" />
+        <path d="M10 9v5" stroke="#5AC8FA" strokeWidth="1.5" strokeLinecap="round" />
+        <circle cx="10" cy="6.5" r="0.75" fill="#5AC8FA" />
+      </svg>
+    ),
+    success: (
+      <svg width={s} height={s} viewBox="0 0 20 20" fill="none">
+        <circle cx="10" cy="10" r="9" stroke="#34C759" strokeWidth="1.5" />
+        <path d="M6.5 10.5l2.5 2.5 5-5.5" stroke="#34C759" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    ),
+    warning: (
+      <svg width={s} height={s} viewBox="0 0 20 20" fill="none">
+        <path d="M10 2l8.66 15H1.34L10 2z" stroke="#FF9500" strokeWidth="1.5" strokeLinejoin="round" />
+        <path d="M10 8v4" stroke="#FF9500" strokeWidth="1.5" strokeLinecap="round" />
+        <circle cx="10" cy="14.5" r="0.75" fill="#FF9500" />
+      </svg>
+    ),
+    error: (
+      <svg width={s} height={s} viewBox="0 0 20 20" fill="none">
+        <circle cx="10" cy="10" r="9" stroke="#FF3B30" strokeWidth="1.5" />
+        <path d="M10 6v5" stroke="#FF3B30" strokeWidth="1.5" strokeLinecap="round" />
+        <circle cx="10" cy="14" r="0.75" fill="#FF3B30" />
+      </svg>
+    ),
+  };
+  return <>{icons[variant]}</>;
+}
 
 export function Toast({
   variant = "info",
@@ -30,7 +64,6 @@ export function Toast({
 
   useEffect(() => {
     if (visible) {
-      // Small delay to trigger slide-in animation
       const raf = requestAnimationFrame(() => setShow(true));
       return () => cancelAnimationFrame(raf);
     } else {
@@ -42,28 +75,39 @@ export function Toast({
     if (!visible || duration <= 0) return;
     const timer = setTimeout(() => {
       setShow(false);
-      // Wait for slide-out before calling onClose
-      setTimeout(() => onClose?.(), 250);
+      setTimeout(() => onClose?.(), 300);
     }, duration);
     return () => clearTimeout(timer);
   }, [visible, duration, onClose]);
 
   if (!visible) return null;
 
+  const c = variantColors[variant] ?? variantColors.info;
+
   return (
     <div
-      className={`fixed bottom-6 right-6 z-[9999] flex items-center gap-3 py-3.5 px-[18px] rounded-[var(--glass-radius-sm,10px)] bg-[var(--theme-table-bg)] backdrop-blur-[40px] border border-[var(--theme-ghost-border)] shadow-[0_8px_32px_rgba(0,0,0,0.18)] font-[var(--font-body)] text-[13px] text-[var(--theme-fg)] max-w-sm pointer-events-auto transition-all duration-250 ease-in-out ${show ? "translate-x-0 opacity-100" : "translate-x-[calc(100%+32px)] opacity-0"} ${className}`}
-      style={style}
+      className={`prim-toast ${show ? "prim-toast-visible" : "prim-toast-hidden"} ${className}`}
+      style={{ "--toast-color": c.color, "--toast-bg": c.bg, ...style } as CSSProperties}
     >
-      {/* Variant accent dot */}
-      <span className={`w-2 h-2 rounded-full shrink-0 ${variantAccentColors[variant]}`} />
-      <span className="flex-1">{message}</span>
+      {/* Left gradient + bar */}
+      <div className="prim-toast-glow" />
+      <div className="prim-toast-glow-bar" />
+
+      {/* Icon */}
+      <div className="prim-toast-icon">
+        <ToastIcon variant={variant} />
+      </div>
+
+      {/* Message */}
+      <span className="prim-toast-msg">{message}</span>
+
+      {/* Close */}
       <button
         onClick={() => {
           setShow(false);
-          setTimeout(() => onClose?.(), 250);
+          setTimeout(() => onClose?.(), 300);
         }}
-        className="shrink-0 w-6 h-6 rounded-full border-none bg-[var(--theme-header-bg)] text-[var(--theme-fg-muted)] cursor-pointer flex items-center justify-center text-sm font-normal transition-[background] duration-150 ease-in-out p-0"
+        className="prim-alert-dismiss"
       >
         &times;
       </button>

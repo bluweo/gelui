@@ -1,10 +1,10 @@
 import { type ReactNode, type CSSProperties, useState } from "react";
 
-const variantClasses: Record<string, string> = {
-  info: "border-l-[#5AC8FA] bg-[color-mix(in_srgb,#5AC8FA_8%,transparent)]",
-  success: "border-l-[#34C759] bg-[color-mix(in_srgb,#34C759_8%,transparent)]",
-  warning: "border-l-[#FF9500] bg-[color-mix(in_srgb,#FF9500_8%,transparent)]",
-  error: "border-l-[#FF3B30] bg-[color-mix(in_srgb,#FF3B30_8%,transparent)]",
+const variantColors: Record<string, { color: string; bg: string }> = {
+  info: { color: "#5AC8FA", bg: "rgba(90,200,250,0.08)" },
+  success: { color: "#34C759", bg: "rgba(52,199,89,0.08)" },
+  warning: { color: "#FF9500", bg: "rgba(255,149,0,0.08)" },
+  error: { color: "#FF3B30", bg: "rgba(255,59,48,0.08)" },
 };
 
 interface AlertProps {
@@ -17,8 +17,8 @@ interface AlertProps {
   style?: CSSProperties;
 }
 
-function AlertIcon({ variant }: { variant: "info" | "success" | "warning" | "error" }) {
-  const size = 18;
+function AlertIcon({ variant }: { variant: string }) {
+  const size = 20;
   const icons: Record<string, ReactNode> = {
     info: (
       <svg width={size} height={size} viewBox="0 0 20 20" fill="none">
@@ -43,7 +43,8 @@ function AlertIcon({ variant }: { variant: "info" | "success" | "warning" | "err
     error: (
       <svg width={size} height={size} viewBox="0 0 20 20" fill="none">
         <circle cx="10" cy="10" r="9" stroke="#FF3B30" strokeWidth="1.5" />
-        <path d="M7 7l6 6M13 7l-6 6" stroke="#FF3B30" strokeWidth="1.5" strokeLinecap="round" />
+        <path d="M10 6v5" stroke="#FF3B30" strokeWidth="1.5" strokeLinecap="round" />
+        <circle cx="10" cy="14" r="0.75" fill="#FF3B30" />
       </svg>
     ),
   };
@@ -60,7 +61,6 @@ export function Alert({
   style,
 }: AlertProps) {
   const [dismissed, setDismissed] = useState(false);
-
   if (dismissed) return null;
 
   const handleDismiss = () => {
@@ -68,27 +68,36 @@ export function Alert({
     onDismiss?.();
   };
 
+  const c = variantColors[variant] ?? variantColors.info;
+
   return (
     <div
-      className={`flex items-start gap-3 py-3.5 px-4 rounded-[var(--glass-radius-sm,10px)] backdrop-blur-[12px] font-[var(--font-body)] text-[var(--theme-fg)] relative border-l-4 ${variantClasses[variant]} ${className}`}
-      style={style}
+      className={`prim-alert ${className}`}
+      style={{
+        "--alert-color": c.color,
+        "--alert-bg": c.bg,
+        ...style,
+      } as CSSProperties}
     >
-      <span className="shrink-0 flex mt-px">
+      {/* Left glow edge */}
+      <div className="prim-alert-glow" />
+
+      {/* Icon container */}
+      <div className="prim-alert-icon-wrap">
         <AlertIcon variant={variant} />
-      </span>
+      </div>
+
+      {/* Content */}
       <div className="flex-1 min-w-0">
         {title && (
-          <div className="font-semibold text-sm font-[var(--font-ui)] mb-1 text-[var(--theme-fg)]">
-            {title}
-          </div>
+          <div className="prim-alert-title">{title}</div>
         )}
-        <div className="text-[13px] leading-normal">{children}</div>
+        <div className="prim-alert-desc">{children}</div>
       </div>
+
+      {/* Dismiss */}
       {dismissible && (
-        <button
-          onClick={handleDismiss}
-          className="shrink-0 w-6 h-6 rounded-full border-none bg-[var(--theme-header-bg)] text-[var(--theme-fg-muted)] cursor-pointer flex items-center justify-center text-sm font-normal transition-[background] duration-150 ease-in-out p-0"
-        >
+        <button onClick={handleDismiss} className="prim-alert-dismiss">
           &times;
         </button>
       )}

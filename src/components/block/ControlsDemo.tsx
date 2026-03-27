@@ -69,7 +69,7 @@ export function ControlsDemo() {
           <div className="py-2.5">
             <div className="flex items-center justify-between mb-1">
               <span className="text-[10px] font-[500] text-black/45 dark:text-white/40">Slider</span>
-              <span className="text-[13px] font-[600] font-mono text-black/70 dark:text-white/65">{slider}%</span>
+              <span className="text-[14px] font-[600] font-[family-name:var(--font-body)] text-black/70 dark:text-white/65">{slider}%</span>
             </div>
             <Slider value={slider} onChange={setSlider} />
           </div>
