@@ -11,15 +11,20 @@ export function AdaptiveColorToggle() {
   const [active, setActive] = useState(false);
   const savedBgRef = useRef<{ id: string; src: string; type: string } | null>(null);
   const lastRandomIdRef = useRef<string | null>(null);
-  const [allBgs, setAllBgs] = useState<Array<{ id: string; src: string; type: string }>>([]);
+  const [allBgs, setAllBgs] = useState<Array<{ id: string; src: string; type: string; theme: string }>>([]);
+
+  // Get current theme
+  const getTheme = (): "light" | "dark" => {
+    return document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
+  };
 
   // Gather all available backgrounds on mount
   useEffect(() => {
-    const bgs: Array<{ id: string; src: string; type: string }> = [];
+    const bgs: Array<{ id: string; src: string; type: string; theme: string }> = [];
 
-    // Color backgrounds (available immediately)
+    // Color backgrounds
     COLOR_BACKGROUNDS.forEach((c) => {
-      bgs.push({ id: c.id, src: JSON.stringify(c.style), type: "color" });
+      bgs.push({ id: c.id, src: JSON.stringify(c.style), type: "color", theme: c.theme });
     });
 
     // Fetch image + video backgrounds
@@ -27,37 +32,47 @@ export function AdaptiveColorToggle() {
       fetch("/api/backgrounds").then((r) => r.json()).catch(() => []),
       fetch("/api/video-backgrounds").then((r) => r.json()).catch(() => []),
     ]).then(([images, videos]) => {
-      (images as any[]).forEach((img) => bgs.push({ id: img.id, src: img.src, type: "image" }));
-      (videos as any[]).forEach((v) => bgs.push({ id: v.id, src: v.src, type: "video" }));
+      (images as any[]).forEach((img) =>
+        bgs.push({ id: img.id, src: img.src, type: "image", theme: img.theme || "light" }),
+      );
+      (videos as any[]).forEach((v) =>
+        bgs.push({ id: v.id, src: v.src, type: "video", theme: v.theme || "dark" }),
+      );
       setAllBgs([...bgs]);
     });
 
     setAllBgs(bgs);
   }, []);
 
-  // Read current background from localStorage
+  // Read current background from localStorage (per-theme storage)
   const readCurrentBg = useCallback(() => {
     try {
-      const stored = JSON.parse(localStorage.getItem("gelui-background") || "{}");
-      const theme = JSON.parse(localStorage.getItem("gelui-appearance") || "{}").theme || "light";
-      const themeData = stored[theme] || {};
-      return {
-        id: themeData.id || "",
-        src: themeData.src || "",
-        type: themeData.type || "image",
-      };
+      const theme = getTheme();
+      const key = theme === "dark" ? "gelui-background-dark" : "gelui-background-light";
+      const stored = JSON.parse(localStorage.getItem(key) || "null");
+      if (stored?.id && stored?.src) {
+        return { id: stored.id, src: stored.src, type: stored.type || "image" };
+      }
+      // Fallback to defaults
+      return theme === "dark"
+        ? { id: "dark:night-desert", src: "/backgrounds/dark/night-desert.jpg", type: "image" }
+        : { id: "light:green-field", src: "/backgrounds/light/green-field.webp", type: "image" };
     } catch {
-      return { id: "", src: "", type: "image" };
+      return { id: "light:green-field", src: "/backgrounds/light/green-field.webp", type: "image" };
     }
   }, []);
 
   const pickRandom = useCallback(() => {
     if (allBgs.length === 0) return;
-    const candidates = allBgs.filter((b) => b.id !== lastRandomIdRef.current);
-    const pick = candidates[Math.floor(Math.random() * candidates.length)] || allBgs[0];
+    // Filter by current theme only
+    const theme = getTheme();
+    const themed = allBgs.filter((b) => b.theme === theme);
+    const pool = themed.length > 0 ? themed : allBgs;
+    // Exclude last pick
+    const candidates = pool.filter((b) => b.id !== lastRandomIdRef.current);
+    const pick = candidates[Math.floor(Math.random() * candidates.length)] || pool[0];
     lastRandomIdRef.current = pick.id;
 
-    // Dispatch event for BackgroundContext to pick up
     window.dispatchEvent(
       new CustomEvent("gelui:set-background", {
         detail: { id: pick.id, src: pick.src, type: pick.type },
@@ -68,17 +83,18 @@ export function AdaptiveColorToggle() {
   const handleToggle = useCallback(
     (checked: boolean) => {
       if (checked) {
-        // Save current background
+        // Save current background BEFORE changing
         savedBgRef.current = readCurrentBg();
         setActive(true);
         pickRandom();
       } else {
-        // Restore original
+        // Restore saved original background
         setActive(false);
-        if (savedBgRef.current) {
+        const saved = savedBgRef.current;
+        if (saved) {
           window.dispatchEvent(
             new CustomEvent("gelui:set-background", {
-              detail: savedBgRef.current,
+              detail: saved,
             }),
           );
         }
