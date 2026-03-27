@@ -926,6 +926,17 @@ body {
 [data-theme="dark"] :is(.glass-0, .glass-1, .glass-2, .glass-3, .glass-panel) .contrast-muted {
   color: rgba(255, 255, 255, 0.6);
 }
+/* Icon buttons inside glass panels — override contrast vars */
+:is(.glass-0, .glass-1, .glass-2, .glass-3, .glass-panel) {
+  --icon-btn-bg: rgba(0, 0, 0, 0.04);
+  --icon-btn-border: rgba(0, 0, 0, 0.08);
+  --icon-btn-text: rgba(0, 0, 0, 0.45);
+}
+[data-theme="dark"] :is(.glass-0, .glass-1, .glass-2, .glass-3, .glass-panel) {
+  --icon-btn-bg: rgba(255, 255, 255, 0.08);
+  --icon-btn-border: rgba(255, 255, 255, 0.12);
+  --icon-btn-text: rgba(255, 255, 255, 0.5);
+}
 
 /* ─── Hero CTA Buttons (contrast-aware) ─── */
 [data-contrast="light"] .hero-btn-primary {
