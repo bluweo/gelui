@@ -28,6 +28,7 @@ import { CardPanelsSource } from "@/components/block/CardPanelsSource";
 import { DividersSource } from "@/components/block/DividersSource";
 import { InputFieldsSource } from "@/components/block/InputFieldsSource";
 import { AdaptiveColorToggle } from "@/components/block/AdaptiveColorToggle";
+import { DividersShowcase } from "@/components/block/DividersShowcase";
 
 /* Data moved to React islands: LayoutShowcase, ElevationShowcase */
 ---
@@ -357,140 +358,23 @@ import { AdaptiveColorToggle } from "@/components/block/AdaptiveColorToggle";
     <!-- ═══════════════════════════════════
          3c. Dividers
          ═══════════════════════════════════ -->
-    <div data-section="Dividers" class="col-span-2 relative overflow-hidden rounded-[var(--glass-radius)] p-5 border contrast-border">
+    <div data-section="Dividers" class="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
+      <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 160px;" />
       <div class="relative flex items-start justify-between mb-6 pt-1 pl-1">
         <div class="flex flex-col gap-1">
-          <span class="type-overline contrast-muted mb-1">Separator</span>
-          <h2 class="type-h2 contrast-text mb-1">Dividers</h2>
-          <p class="type-body-sm contrast-muted">Visual separators for content sections and groups</p>
+          <span class="type-overline text-black/40 dark:text-white/40 mb-1">Separator</span>
+          <h2 class="type-h2 text-black dark:text-white mb-1">Dividers</h2>
+          <p class="type-body-sm text-black/60 dark:text-white/55">10 variants — horizontal, vertical, labeled, and glass effects</p>
         </div>
         <button
-          class="w-9 h-9 flex items-center justify-center rounded-full transition-all duration-150 cursor-pointer shrink-0 z-10 hover:scale-110"
-
+          class="prim-icon-btn shrink-0 z-10"
           title="View Source Code"
           data-view-source="dividers"
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" /></svg>
         </button>
       </div>
-
-      <div class="flex flex-col gap-4 flex-1">
-        <!-- Horizontal -->
-        <div class="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white dark:bg-[#1a1a1a] flex-1">
-          <div class="px-3 py-2 bg-black/[0.06] dark:bg-white/[0.08] border-b border-black/[0.08] dark:border-white/[0.08]">
-            <span class="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/80 dark:text-white/80">Horizontal</span>
-          </div>
-          <div class="flex flex-col gap-4 p-4">
-            <div>
-              <span class="text-[10px] font-[500] text-black/70 dark:text-white/70 mb-2 block">Default</span>
-              <div class="w-full h-px bg-black/15 dark:bg-white/15"></div>
-            </div>
-            <div>
-              <span class="text-[10px] font-[500] text-black/70 dark:text-white/70 mb-2 block">Bold</span>
-              <div class="w-full h-[2px] bg-black/25 dark:bg-white/25"></div>
-            </div>
-            <div>
-              <span class="text-[10px] font-[500] text-black/70 dark:text-white/70 mb-2 block">Dashed</span>
-              <div class="w-full border-t border-dashed border-black/20 dark:border-white/20"></div>
-            </div>
-            <div>
-              <span class="text-[10px] font-[500] text-black/70 dark:text-white/70 mb-2 block">With label</span>
-              <div class="flex items-center gap-3">
-                <div class="flex-1 h-px bg-black/15 dark:bg-white/15"></div>
-                <span class="text-[10px] font-[550] text-black/50 dark:text-white/50 uppercase tracking-wider">or</span>
-                <div class="flex-1 h-px bg-black/15 dark:bg-white/15"></div>
-              </div>
-            </div>
-            <div>
-              <span class="text-[10px] font-[500] text-black/70 dark:text-white/70 mb-2 block">With icon</span>
-              <div class="flex items-center gap-3">
-                <div class="flex-1 h-px bg-black/15 dark:bg-white/15"></div>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-black/40 dark:text-white/40"><circle cx="12" cy="12" r="3" /></svg>
-                <div class="flex-1 h-px bg-black/15 dark:bg-white/15"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Vertical + Spacing -->
-        <div class="rounded-[var(--glass-radius-sm)] overflow-hidden bg-white dark:bg-[#1a1a1a] flex-1">
-          <div class="px-3 py-2 bg-black/[0.06] dark:bg-white/[0.08] border-b border-black/[0.08] dark:border-white/[0.08]">
-            <span class="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/80 dark:text-white/80">Vertical & Spacing</span>
-          </div>
-          <div class="flex flex-col gap-4 p-4">
-            <div>
-              <span class="text-[10px] font-[500] text-black/70 dark:text-white/70 mb-2 block">Vertical divider</span>
-              <div class="flex items-center gap-4 h-[40px]">
-                <span class="text-[11px] text-black/70 dark:text-white/70">Left</span>
-                <div class="w-px h-full bg-black/20 dark:bg-white/20"></div>
-                <span class="text-[11px] text-black/70 dark:text-white/70">Right</span>
-              </div>
-            </div>
-            <div>
-              <span class="text-[10px] font-[500] text-black/70 dark:text-white/70 mb-2 block">Inset divider</span>
-              <div class="px-4">
-                <div class="w-full h-px bg-black/15 dark:bg-white/15"></div>
-              </div>
-            </div>
-            <div>
-              <span class="text-[10px] font-[500] text-black/70 dark:text-white/70 mb-2 block">Gradient fade</span>
-              <div class="w-full h-px" style="background: linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.2) 30%, rgba(0,0,0,0.2) 70%, transparent 100%)"></div>
-            </div>
-            <div>
-              <span class="text-[10px] font-[500] text-black/70 dark:text-white/70 mb-2 block">Section break</span>
-              <div class="flex items-center gap-2 justify-center">
-                <div class="w-1 h-1 rounded-full bg-black/25 dark:bg-white/25"></div>
-                <div class="w-1 h-1 rounded-full bg-black/25 dark:bg-white/25"></div>
-                <div class="w-1 h-1 rounded-full bg-black/25 dark:bg-white/25"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Glass Dividers — transparent background -->
-        <div class="rounded-[var(--glass-radius-sm)] overflow-hidden border contrast-border flex-1" style="background: transparent;">
-          <div class="px-3 py-2 border-b contrast-border">
-            <span class="text-[10px] font-[650] uppercase tracking-[0.06em] contrast-text-muted">Glass</span>
-          </div>
-          <div class="flex flex-col gap-5 p-4">
-            <div>
-              <span class="text-[10px] font-[500] contrast-text-muted mb-2 block">Etched line</span>
-              <div class="w-full h-px relative">
-                <div class="absolute inset-0" style="background: linear-gradient(180deg, rgba(255,255,255,0.4) 0%, rgba(0,0,0,0.08) 50%, rgba(255,255,255,0.2) 100%); height: 2px;"></div>
-              </div>
-            </div>
-            <div>
-              <span class="text-[10px] font-[500] contrast-text-muted mb-2 block">Groove</span>
-              <div class="w-full relative" style="height: 2px;">
-                <div class="absolute top-0 left-0 right-0 h-px" style="background: linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.3) 15%, rgba(0,0,0,0.3) 85%, transparent 100%);"></div>
-                <div class="absolute top-px left-0 right-0 h-px" style="background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.6) 15%, rgba(255,255,255,0.6) 85%, transparent 100%);"></div>
-              </div>
-            </div>
-            <div>
-              <span class="text-[10px] font-[500] contrast-text-muted mb-2 block">Ridge</span>
-              <div class="w-full relative" style="height: 2px;">
-                <div class="absolute top-0 left-0 right-0 h-px" style="background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.65) 15%, rgba(255,255,255,0.65) 85%, transparent 100%);"></div>
-                <div class="absolute top-px left-0 right-0 h-px" style="background: linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.3) 15%, rgba(0,0,0,0.3) 85%, transparent 100%);"></div>
-              </div>
-            </div>
-            <div>
-              <span class="text-[10px] font-[500] contrast-text-muted mb-2 block">Frosted slit</span>
-              <div class="w-full" style="height: 4px; background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.4) 10%, rgba(255,255,255,0.4) 90%, transparent 100%); backdrop-filter: blur(2px); border-radius: 2px;"></div>
-            </div>
-            <div>
-              <span class="text-[10px] font-[500] contrast-text-muted mb-2 block">Vertical glass</span>
-              <div class="flex items-center gap-4 h-[40px]">
-                <span class="text-[11px] contrast-text-muted">Left</span>
-                <div class="h-full relative" style="width: 2px;">
-                  <div class="absolute top-0 bottom-0 left-0 w-px" style="background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.3) 15%, rgba(0,0,0,0.3) 85%, transparent 100%);"></div>
-                  <div class="absolute top-0 bottom-0 left-px w-px" style="background: linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.6) 15%, rgba(255,255,255,0.6) 85%, transparent 100%);"></div>
-                </div>
-                <span class="text-[11px] contrast-text-muted">Right</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <DividersShowcase client:load />
       <DividersSource client:load />
     </div>
 

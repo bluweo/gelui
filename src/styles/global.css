@@ -3236,6 +3236,109 @@ code:not([data-font-preview]), pre:not([data-font-preview]), kbd, samp { font-fa
 }
 
 /* ── NavItem icon ── */
+/* ── Divider ── */
+@utility prim-divider-default {
+  width: 100%;
+  height: 1px;
+  background: var(--theme-divider);
+}
+
+@utility prim-divider-bold {
+  width: 100%;
+  height: 2px;
+  background: var(--theme-divider-strong);
+}
+
+@utility prim-divider-dashed {
+  width: 100%;
+  height: 0px;
+  border-bottom: 1px dashed var(--theme-divider-strong);
+}
+
+@utility prim-divider-gradient {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--theme-divider-strong), transparent);
+}
+
+@utility prim-divider-glass {
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(to bottom, var(--theme-divider), transparent);
+}
+
+@utility prim-divider-etched {
+  width: 100%;
+  height: 2px;
+  position: relative;
+  background: linear-gradient(180deg, rgba(255,255,255,0.4) 0%, rgba(0,0,0,0.08) 50%, rgba(255,255,255,0.2) 100%);
+}
+
+@utility prim-divider-groove {
+  width: 100%;
+  height: 2px;
+  position: relative;
+  background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(255,255,255,0.3) 100%);
+}
+
+@utility prim-divider-ridge {
+  width: 100%;
+  height: 2px;
+  position: relative;
+  background: linear-gradient(180deg, rgba(255,255,255,0.4) 0%, rgba(0,0,0,0.15) 100%);
+}
+
+@utility prim-divider-frosted {
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.4) 10%, rgba(255,255,255,0.4) 90%, transparent 100%);
+  backdrop-filter: blur(2px);
+  border-radius: 2px;
+}
+
+@utility prim-divider-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+
+  & > span {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--theme-divider-strong);
+  }
+}
+
+@utility prim-divider-vertical {
+  width: 1px;
+  height: 100%;
+  background: var(--theme-divider-strong);
+  flex-shrink: 0;
+}
+
+@utility prim-divider-labeled {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+@utility prim-divider-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--theme-fg-subtle);
+  white-space: nowrap;
+}
+
+@utility prim-divider-icon {
+  display: flex;
+  color: var(--theme-fg-subtle);
+}
+
 @utility prim-nav-icon {
   display: flex;
   flex-shrink: 0;

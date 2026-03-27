@@ -1,4 +1,4 @@
-import { type CSSProperties } from "react";
+import { type ReactNode, type CSSProperties } from "react";
 
 interface DividerProps {
   variant?:
@@ -10,91 +10,80 @@ interface DividerProps {
     | "etched"
     | "groove"
     | "ridge"
-    | "frostedSlit";
+    | "frostedSlit"
+    | "dots";
+  direction?: "horizontal" | "vertical";
   label?: string;
+  icon?: ReactNode;
   className?: string;
   style?: CSSProperties;
 }
 
+const VARIANT_CLASSES: Record<string, string> = {
+  default: "prim-divider-default",
+  bold: "prim-divider-bold",
+  dashed: "prim-divider-dashed",
+  gradient: "prim-divider-gradient",
+  glass: "prim-divider-glass",
+  etched: "prim-divider-etched",
+  groove: "prim-divider-groove",
+  ridge: "prim-divider-ridge",
+  frostedSlit: "prim-divider-frosted",
+  dots: "prim-divider-dots",
+};
+
 export function Divider({
   variant = "default",
+  direction = "horizontal",
   label,
+  icon,
   className = "",
   style,
 }: DividerProps) {
-  if (label) {
+  const isVertical = direction === "vertical";
+
+  // Label or icon divider
+  if (label || icon) {
     return (
       <div
-        className={`flex items-center gap-3 ${className}`}
+        className={`prim-divider-labeled ${className}`}
         style={style}
       >
-        <div
-          style={{
-            flex: 1,
-            height: "1px",
-            background: "var(--theme-divider)",
-          }}
-        />
-        <span
-          style={{
-            fontSize: "11px",
-            fontWeight: 600,
-            opacity: 0.4,
-            textTransform: "uppercase" as const,
-          }}
-        >
-          {label}
-        </span>
-        <div
-          style={{
-            flex: 1,
-            height: "1px",
-            background: "var(--theme-divider)",
-          }}
-        />
+        <div className="prim-divider-default flex-1" />
+        {icon ? (
+          <span className="prim-divider-icon">{icon}</span>
+        ) : (
+          <span className="prim-divider-label">{label}</span>
+        )}
+        <div className="prim-divider-default flex-1" />
       </div>
     );
   }
 
-  const styles: Record<string, CSSProperties> = {
-    default: { height: "1px", background: "var(--theme-divider)" },
-    bold: { height: "2px", background: "var(--theme-divider)" },
-    dashed: {
-      height: "1px",
-      borderBottom: "1px dashed var(--theme-divider)",
-      background: "transparent",
-    },
-    gradient: {
-      height: "1px",
-      background: "linear-gradient(90deg, transparent, var(--theme-divider), transparent)",
-    },
-    glass: {
-      height: "2px",
-      background: "linear-gradient(to bottom, var(--theme-divider), transparent)",
-    },
-    etched: {
-      height: "0px",
-      boxShadow: "0 -1px 0 var(--theme-divider), 0 1px 0 var(--theme-divider)",
-    },
-    groove: {
-      height: "0px",
-      boxShadow: "0 -1px 0 var(--theme-divider), 0 1px 0 var(--theme-divider), 0 -2px 0 var(--theme-divider), 0 2px 0 var(--theme-divider)",
-    },
-    ridge: {
-      height: "0px",
-      boxShadow: "0 -1px 0 var(--theme-divider), 0 1px 0 var(--theme-divider), 0 -2px 0 var(--theme-divider), 0 2px 0 var(--theme-divider)",
-    },
-    frostedSlit: {
-      height: "1px",
-      background: "linear-gradient(90deg, transparent 5%, var(--theme-divider) 30%, var(--theme-divider) 70%, transparent 95%)",
-      boxShadow: "0 1px 2px var(--theme-divider)",
-    },
-  };
+  // Dots variant
+  if (variant === "dots") {
+    return (
+      <div className={`prim-divider-dots ${className}`} style={style}>
+        <span /><span /><span />
+      </div>
+    );
+  }
 
+  // Vertical divider
+  if (isVertical) {
+    return (
+      <div
+        className={`prim-divider-vertical ${className}`}
+        style={style}
+      />
+    );
+  }
+
+  // Standard horizontal divider
   return (
     <div
-      className={className}
-      style={{ width: "100%", ...styles[variant], ...style }}
+      className={`${VARIANT_CLASSES[variant] || VARIANT_CLASSES.default} ${className}`}
+      style={style}
     />
   );
 }

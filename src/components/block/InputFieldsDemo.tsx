@@ -80,26 +80,13 @@ export function InputFieldsDemo() {
 
       <div className="flex flex-col gap-1.5">
         <label className="text-[12px] font-semibold" style={labelStyle}>URL Input</label>
-        <div style={{ display: "flex", alignItems: "center", gap: 0 }}>
-          <div style={{
-            paddingTop: 10, paddingBottom: 10, paddingLeft: 12, paddingRight: 12,
-            fontSize: "14px",
-            fontFamily: "var(--font-mono)",
-            background: "var(--theme-header-bg)",
-            borderTopLeftRadius: "var(--glass-radius-sm, 10px)", borderTopRightRadius: 0, borderBottomRightRadius: 0, borderBottomLeftRadius: "var(--glass-radius-sm, 10px)",
-            border: "1px solid var(--theme-ghost-border)",
-            borderRight: "none",
-            color: "var(--theme-fg-muted)",
-            whiteSpace: "nowrap",
-          }}>
+        <div className="flex items-center">
+          <div className="py-2.5 px-3 text-[14px] font-[family-name:var(--font-mono)] bg-[var(--theme-header-bg)] rounded-l-[var(--glass-radius-sm,10px)] border border-[var(--theme-ghost-border)] border-r-0 text-[var(--theme-fg-muted)] whitespace-nowrap">
             https://
           </div>
           <Input
             placeholder="example.com"
-            style={{
-              borderTopLeftRadius: 0, borderTopRightRadius: "var(--glass-radius-sm, 10px)", borderBottomRightRadius: "var(--glass-radius-sm, 10px)", borderBottomLeftRadius: 0,
-              borderLeft: "none",
-            }}
+            className="rounded-l-none"
           />
         </div>
       </div>

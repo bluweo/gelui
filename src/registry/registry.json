@@ -639,9 +639,9 @@
       "layer": "primitive",
       "category": "surface",
       "status": "stable",
-      "version": "0.8.0",
-      "path": "inline",
-      "isReact": false,
+      "version": "0.45.0",
+      "path": "src/primitives/surfaces/Divider.tsx",
+      "isReact": true,
       "props": {
         "variant": {
           "type": "enum",
@@ -649,10 +649,35 @@
             "default",
             "bold",
             "dashed",
-            "label",
-            "icon"
+            "gradient",
+            "glass",
+            "etched",
+            "groove",
+            "ridge",
+            "frostedSlit",
+            "dots"
           ],
           "default": "default"
+        },
+        "direction": {
+          "type": "enum",
+          "options": [
+            "horizontal",
+            "vertical"
+          ],
+          "default": "horizontal"
+        },
+        "label": {
+          "type": "string"
+        },
+        "icon": {
+          "type": "ReactNode"
+        },
+        "className": {
+          "type": "string"
+        },
+        "style": {
+          "type": "CSSProperties"
         }
       },
       "documentedOn": "/design-system/primitives",
@@ -662,7 +687,8 @@
         "separator",
         "line",
         "horizontal"
-      ]
+      ],
+      "exportName": "Divider"
     },
     {
       "id": "divider-glass",
@@ -672,20 +698,45 @@
       "layer": "primitive",
       "category": "surface",
       "status": "stable",
-      "version": "0.8.0",
-      "path": "inline",
-      "isReact": false,
+      "version": "0.45.0",
+      "path": "src/primitives/surfaces/Divider.tsx",
+      "isReact": true,
       "props": {
         "variant": {
           "type": "enum",
           "options": [
+            "default",
+            "bold",
+            "dashed",
+            "gradient",
+            "glass",
             "etched",
             "groove",
             "ridge",
-            "frosted",
+            "frostedSlit",
+            "dots"
+          ],
+          "default": "default"
+        },
+        "direction": {
+          "type": "enum",
+          "options": [
+            "horizontal",
             "vertical"
           ],
-          "default": "groove"
+          "default": "horizontal"
+        },
+        "label": {
+          "type": "string"
+        },
+        "icon": {
+          "type": "ReactNode"
+        },
+        "className": {
+          "type": "string"
+        },
+        "style": {
+          "type": "CSSProperties"
         }
       },
       "documentedOn": "/design-system/primitives",
@@ -695,7 +746,8 @@
         "glass",
         "slit",
         "groove"
-      ]
+      ],
+      "exportName": "Divider"
     },
     {
       "id": "text-input",
