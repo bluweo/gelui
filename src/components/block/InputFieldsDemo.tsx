@@ -81,7 +81,7 @@ export function InputFieldsDemo() {
       <div className="flex flex-col gap-1.5">
         <label className="text-[12px] font-semibold" style={labelStyle}>URL Input</label>
         <div className="flex items-center">
-          <div className="py-2.5 px-3 text-[14px] font-[family-name:var(--font-mono)] bg-[var(--theme-header-bg)] rounded-l-[var(--glass-radius-sm,10px)] border border-[var(--theme-ghost-border)] border-r-0 text-[var(--theme-fg-muted)] whitespace-nowrap">
+          <div className="py-3 px-4 text-[14px] font-[family-name:var(--font-mono)] bg-[var(--theme-header-bg)] rounded-l-[var(--glass-radius-sm,10px)] border-2 border-transparent border-r-0 text-[var(--theme-fg-muted)] whitespace-nowrap">
             https://
           </div>
           <Input

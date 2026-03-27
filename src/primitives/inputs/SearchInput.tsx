@@ -50,23 +50,7 @@ export function SearchInput({
       {val && (
         <button
           onClick={() => handleChange("")}
-          style={{
-            position: "absolute",
-            right: "12px",
-            width: "20px",
-            height: "20px",
-            borderRadius: "50%",
-            border: "none",
-            background: "var(--theme-ghost-border)",
-            color: "var(--theme-bg-solid)",
-            cursor: "pointer",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            fontSize: "12px",
-            fontWeight: 700,
-            padding: 0,
-          }}
+          className="prim-search-clear"
         >
           &times;
         </button>

@@ -85,13 +85,10 @@ export function SearchableSelect({
       <button
         onClick={() => setOpen(!open)}
         className={[
-          "w-full py-3 px-4 text-sm font-[family-name:var(--font-body)]",
-          "rounded-[var(--glass-radius-sm,10px)]",
-          "border-2 bg-[var(--theme-header-bg)]",
+          "prim-input-field prim-input-md",
           "cursor-pointer text-left flex items-center justify-between",
-          "outline-none transition-all duration-200",
-          open ? "border-[var(--theme-fg)]" : "border-transparent",
-          selected ? "text-[var(--theme-fg)]" : "text-[var(--theme-fg-subtle)]",
+          open ? "border-[var(--theme-bg-solid)]" : "",
+          selected ? "text-[var(--theme-bg-solid)]" : "text-[var(--theme-fg-muted)]",
         ].join(" ")}
       >
         <span>{selected?.label ?? placeholder}</span>

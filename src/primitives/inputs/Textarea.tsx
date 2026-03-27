@@ -23,14 +23,7 @@ export function Textarea({
       rows={rows}
       value={value}
       onChange={(e) => onChange?.(e.target.value)}
-      className={[
-        "w-full py-3 px-4 text-sm font-[family-name:var(--font-body)]",
-        "rounded-[var(--glass-radius-sm,10px)]",
-        "border-2 border-transparent bg-[var(--theme-divider)] text-[var(--theme-bg-solid)]",
-        "outline-none resize-y transition-all duration-200",
-        "focus:border-[var(--theme-bg-solid)]",
-        className,
-      ].join(" ")}
+      className={`prim-input-field prim-input-md resize-y ${className}`}
       style={style}
     />
   );

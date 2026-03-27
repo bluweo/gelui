@@ -54,11 +54,11 @@ export function TagInput({
   return (
     <div
       className={[
-        "flex flex-wrap items-center gap-1.5 py-2 px-3 min-h-[44px]",
+        "flex flex-wrap items-center gap-1.5 py-2.5 px-4 min-h-[48px]",
         "rounded-[var(--glass-radius-sm,10px)]",
-        "border-2 border-transparent bg-[var(--theme-header-bg)]",
+        "border-2 border-transparent bg-[var(--theme-divider)]",
         "transition-[border-color,background] duration-150",
-        "focus-within:border-[var(--theme-fg)] focus-within:bg-[var(--theme-table-bg)]",
+        "focus-within:border-[var(--theme-bg-solid)]",
         disabled ? "cursor-not-allowed opacity-50" : "cursor-text",
         className,
       ].join(" ")}
@@ -90,7 +90,7 @@ export function TagInput({
         onBlur={() => addTag()}
         placeholder={tags.length === 0 ? placeholder : ""}
         disabled={disabled}
-        className="flex-1 min-w-[80px] border-none outline-none bg-transparent text-sm font-[family-name:var(--font-body)] text-[var(--theme-fg)] p-0"
+        className="flex-1 min-w-[80px] border-none outline-none bg-transparent text-[14px] font-[family-name:var(--font-body)] text-[var(--theme-fg)] p-0"
       />
     </div>
   );

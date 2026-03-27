@@ -14,6 +14,12 @@ interface InputProps {
   style?: CSSProperties;
 }
 
+const sizeClass = {
+  sm: "prim-input-sm",
+  md: "prim-input-md",
+  lg: "prim-input-lg",
+} as const;
+
 export function Input({
   placeholder = "",
   value,
@@ -45,7 +51,7 @@ export function Input({
         value={value}
         onChange={(e) => onChange?.(e.target.value)}
         disabled={disabled}
-        className={`prim-input-field prim-input-${size} ${className}`}
+        className={`prim-input-field ${sizeClass[size]} ${className}`}
         data-error={error}
         data-success={success}
         style={style}

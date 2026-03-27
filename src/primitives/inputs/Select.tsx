@@ -64,12 +64,9 @@ export function Select({
       <button
         onClick={() => setOpen(!open)}
         className={[
-          "w-full py-3 px-4 text-sm font-[family-name:var(--font-body)]",
-          "rounded-[var(--glass-radius-sm,10px)]",
-          "border-2 bg-[var(--theme-divider)]",
+          "prim-input-field prim-input-md",
           "cursor-pointer text-left flex items-center justify-between",
-          "outline-none transition-all duration-200",
-          open ? "border-[var(--theme-bg-solid)]" : "border-transparent",
+          open ? "border-[var(--theme-bg-solid)]" : "",
           selected ? "text-[var(--theme-bg-solid)]" : "text-[var(--theme-fg-muted)]",
         ].join(" ")}
       >
@@ -99,7 +96,7 @@ export function Select({
               }}
               onMouseEnter={() => setHighlightIdx(i)}
               className={[
-                "w-full py-2.5 px-3 text-sm font-[family-name:var(--font-body)]",
+                "w-full py-2.5 px-3 text-[14px] font-[family-name:var(--font-body)]",
                 "border-none rounded-[var(--glass-radius-sm,8px)]",
                 "cursor-pointer text-left outline-none transition-colors duration-100",
                 i === highlightIdx ? "bg-[var(--theme-header-bg)]" : "bg-transparent",
