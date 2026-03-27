@@ -2764,8 +2764,8 @@ code:not([data-font-preview]), pre:not([data-font-preview]), kbd, samp { font-fa
 
 @utility prim-icon-btn {
   border-radius: 50%;
-  border: 1px solid var(--theme-divider);
-  background: var(--theme-header-bg);
+  border: 1px solid var(--icon-btn-border);
+  background: var(--icon-btn-bg);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   display: flex;
@@ -2773,8 +2773,10 @@ code:not([data-font-preview]), pre:not([data-font-preview]), kbd, samp { font-fa
   justify-content: center;
   cursor: pointer;
   font-size: 18px;
-  color: var(--theme-fg);
+  color: var(--icon-btn-text);
   transition: all 200ms ease;
+  outline: none;
+  padding: 0;
 
   &[data-size="sm"] {
     width: 32px;
@@ -2782,8 +2784,8 @@ code:not([data-font-preview]), pre:not([data-font-preview]), kbd, samp { font-fa
   }
 
   &[data-size="md"], &:not([data-size]) {
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
   }
 
   &[data-size="lg"] {
@@ -2792,7 +2794,7 @@ code:not([data-font-preview]), pre:not([data-font-preview]), kbd, samp { font-fa
   }
 
   &:hover:not(:disabled):not([data-disabled="true"]) {
-    transform: scale(1.05);
+    transform: scale(1.08);
   }
 }
 
@@ -3376,6 +3378,9 @@ code:not([data-font-preview]), pre:not([data-font-preview]), kbd, samp { font-fa
   --btn-glass-text: var(--theme-bg-solid);
   --btn-glass-shadow: var(--glass-shadow), inset 0 1px 0 rgba(255,255,255,0.25);
   --btn-link-text: var(--theme-fg);
+  --icon-btn-bg: rgba(0, 0, 0, 0.04);
+  --icon-btn-border: rgba(0, 0, 0, 0.08);
+  --icon-btn-text: rgba(0, 0, 0, 0.5);
 }
 [data-contrast="dark"] {
   --btn-solid-bg: rgba(255, 255, 255, 0.92);
@@ -3389,5 +3394,8 @@ code:not([data-font-preview]), pre:not([data-font-preview]), kbd, samp { font-fa
   --btn-glass-text: rgba(255, 255, 255, 0.95);
   --btn-glass-shadow: 0 2px 8px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.15);
   --btn-link-text: rgba(255, 255, 255, 0.9);
+  --icon-btn-bg: rgba(255, 255, 255, 0.12);
+  --icon-btn-border: rgba(255, 255, 255, 0.2);
+  --icon-btn-text: rgba(255, 255, 255, 0.7);
 }
 
