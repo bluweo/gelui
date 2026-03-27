@@ -4381,6 +4381,72 @@
       "props": {},
       "tokenValue": "CSS class",
       "tokenSubcategory": "surface"
+    },
+    {
+      "id": "grid",
+      "name": "Grid",
+      "category": "layout",
+      "layer": "primitive",
+      "path": "src/primitives/layout/Grid.tsx",
+      "exportName": "Grid",
+      "isReact": true,
+      "status": "stable",
+      "version": "0.50.0",
+      "description": "CSS Grid container with configurable columns and gap.",
+      "tags": [
+        "grid",
+        "layout",
+        "columns",
+        "responsive"
+      ],
+      "props": {
+        "cols": {
+          "type": "number",
+          "default": 2
+        },
+        "gap": {
+          "type": "string",
+          "default": "16px"
+        },
+        "children": {
+          "type": "ReactNode"
+        },
+        "className": {
+          "type": "string"
+        },
+        "style": {
+          "type": "CSSProperties"
+        }
+      }
+    },
+    {
+      "id": "box",
+      "name": "Box",
+      "category": "layout",
+      "layer": "primitive",
+      "path": "src/primitives/layout/Box.tsx",
+      "exportName": "Box",
+      "isReact": true,
+      "status": "stable",
+      "version": "0.50.0",
+      "description": "Simple div wrapper with className and style passthrough.",
+      "tags": [
+        "box",
+        "layout",
+        "container",
+        "wrapper"
+      ],
+      "props": {
+        "children": {
+          "type": "ReactNode"
+        },
+        "className": {
+          "type": "string"
+        },
+        "style": {
+          "type": "CSSProperties"
+        }
+      }
     }
   ]
 }

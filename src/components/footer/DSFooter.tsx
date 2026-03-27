@@ -6,7 +6,7 @@ interface DSFooterProps {
 }
 
 export const DSFooter = forwardRef<HTMLElement, DSFooterProps>(
-  ({ contrast, version = "v0.50.0" }, ref) => {
+  ({ contrast, version = "v0.51.0" }, ref) => {
     const textColor = contrast === "dark" ? "#ffffff" : "#000000";
     const dotColor = contrast === "dark" ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.25)";
     const lineColor = contrast === "dark" ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.2)";

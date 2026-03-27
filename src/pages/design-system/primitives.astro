@@ -15,11 +15,11 @@ import { ButtonsRightColumn } from "@/components/block/ButtonsRightColumn";
 import { BadgesShowcaseV2 } from "@/components/block/BadgesShowcaseV2";
 import { BadgesShowcaseWithSource } from "@/components/block/BadgesShowcaseWithSource";
 import { FeedbackShowcaseV2 } from "@/components/block/FeedbackShowcaseV2";
-import { LayoutShowcase } from "@/components/block/LayoutShowcase";
+import { LayoutShowcaseWithSource } from "@/components/block/LayoutShowcaseWithSource";
 import { ElevationShowcase } from "@/components/block/ElevationShowcase";
 import { FormsShowcase } from "@/components/block/FormsShowcase";
 import { FormsShowcaseWithSource } from "@/components/block/FormsShowcaseWithSource";
-import { DataShowcase } from "@/components/block/DataShowcase";
+import { DataShowcaseWithSource } from "@/components/block/DataShowcaseWithSource";
 import { TypographyExtrasWithSource } from "@/components/block/TypographyExtrasWithSource";
 import { NavigationExtras } from "@/components/block/NavigationExtras";
 import { SurfacesExtrasWithSource } from "@/components/block/SurfacesExtrasWithSource";
@@ -28,6 +28,8 @@ import { CardPanelsSource } from "@/components/block/CardPanelsSource";
 import { DividersSource } from "@/components/block/DividersSource";
 import { InputFieldsSource } from "@/components/block/InputFieldsSource";
 import { AdaptiveColorToggle } from "@/components/block/AdaptiveColorToggle";
+import { ElevationShadows } from "@/components/block/ElevationShadows";
+import { AlertsShowcase } from "@/components/block/AlertsShowcase";
 import { DividersShowcase } from "@/components/block/DividersShowcase";
 
 /* Data moved to React islands: LayoutShowcase, ElevationShowcase */
@@ -447,22 +449,50 @@ import { DividersShowcase } from "@/components/block/DividersShowcase";
     </div>
 
     <!-- ═══════════════════════════════════
-         5b. Data Display
+         5b. Data Display (left) + Layout (right)
          ═══════════════════════════════════ -->
     <div data-section="Data Display" class="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
       <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 160px;" />
-      <div class="relative flex flex-col gap-1 mb-6 pt-1 pl-1">
-        <span class="type-overline text-black/40 dark:text-white/40 mb-1">Data</span>
-        <h2 class="type-h2 text-black dark:text-white mb-1">Data Display</h2>
-        <p class="type-body-sm text-black/60 dark:text-white/55">Tables, stat cards, empty states, and color swatches</p>
+      <div class="relative flex items-start justify-between mb-6 pt-1 pl-1">
+        <div class="flex flex-col gap-1">
+          <span class="type-overline text-black/40 dark:text-white/40 mb-1">Data</span>
+          <h2 class="type-h2 text-black dark:text-white mb-1">Data Display</h2>
+          <p class="type-body-sm text-black/60 dark:text-white/55">Tables, stat cards, empty states, and color swatches</p>
+        </div>
+        <button
+          class="prim-icon-btn shrink-0 z-10"
+          title="View Source Code"
+          data-view-source="data-display"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" /></svg>
+        </button>
       </div>
-      <DataShowcase client:load />
+      <DataShowcaseWithSource client:load />
+    </div>
+
+    <div data-section="Layout" class="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
+      <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 160px;" />
+      <div class="relative flex items-start justify-between mb-6 pt-1 pl-1">
+        <div class="flex flex-col gap-1">
+          <span class="type-overline text-black/40 dark:text-white/40 mb-1">Spacing</span>
+          <h2 class="type-h2 text-black dark:text-white mb-1">Layout</h2>
+          <p class="type-body-sm text-black/60 dark:text-white/55">Stack, inline, center, spacer, and grid</p>
+        </div>
+        <button
+          class="prim-icon-btn shrink-0 z-10"
+          title="View Source Code"
+          data-view-source="layout"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" /></svg>
+        </button>
+      </div>
+      <LayoutShowcaseWithSource client:load />
     </div>
 
     <!-- ═══════════════════════════════════
          6. Controls
          ═══════════════════════════════════ -->
-    <div data-section="Controls" class="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
+    <div data-section="Controls" class="col-span-1 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
       <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 160px;" />
       <div class="relative flex flex-col gap-1 mb-6 pt-1 pl-1">
         <span class="type-overline text-black/40 dark:text-white/40 mb-1">Selection</span>
@@ -475,7 +505,7 @@ import { DividersShowcase } from "@/components/block/DividersShowcase";
     <!-- ═══════════════════════════════════
          6b. Glass Controls
          ═══════════════════════════════════ -->
-    <div data-section="Glass Controls" class="col-span-2 relative overflow-hidden rounded-[var(--glass-radius)] p-5 border contrast-border" style="background: transparent;">
+    <div data-section="Glass Controls" class="col-span-1 relative overflow-hidden rounded-[var(--glass-radius)] p-5 border contrast-border" style="background: transparent;">
       <div class="relative flex flex-col gap-1 mb-6 pt-1 pl-1">
         <span class="type-overline contrast-text-muted mb-1">Gel Style</span>
         <h2 class="type-h2 contrast-text mb-1">Glass Controls</h2>
@@ -485,29 +515,29 @@ import { DividersShowcase } from "@/components/block/DividersShowcase";
     </div>
 
     <!-- ═══════════════════════════════════
-         7. Spacing
+         6c. Elevation (shadows only)
          ═══════════════════════════════════ -->
-    <div data-section="Layout" class="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
+    <div data-section="Elevation" class="col-span-1 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
       <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 160px;" />
       <div class="relative flex flex-col gap-1 mb-6 pt-1 pl-1">
-        <span class="type-overline text-black/40 dark:text-white/40 mb-1">Spacing</span>
-        <h2 class="type-h2 text-black dark:text-white mb-1">Layout Compositions</h2>
-        <p class="type-body-sm text-black/60 dark:text-white/55">Stack, inline, center, spacer, and grid primitives</p>
+        <span class="type-overline text-black/40 dark:text-white/40 mb-1">Depth</span>
+        <h2 class="type-h2 text-black dark:text-white mb-1">Elevation</h2>
+        <p class="type-body-sm text-black/60 dark:text-white/55">Shadow depth levels</p>
       </div>
-      <LayoutShowcase client:load />
+      <ElevationShadows client:load />
     </div>
 
     <!-- ═══════════════════════════════════
-         8. Elevation
+         6d. Alerts & Toast
          ═══════════════════════════════════ -->
-    <div data-section="Elevation" class="col-span-full glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
+    <div data-section="Alerts" class="col-span-1 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
       <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 160px;" />
       <div class="relative flex flex-col gap-1 mb-6 pt-1 pl-1">
-        <span class="type-overline text-black/40 dark:text-white/40 mb-1">Depth & Loading</span>
-        <h2 class="type-h2 text-black dark:text-white mb-1">Elevation</h2>
-        <p class="type-body-sm text-black/60 dark:text-white/55">Shadow depth levels and skeleton loading states</p>
+        <span class="type-overline text-black/40 dark:text-white/40 mb-1">Notifications</span>
+        <h2 class="type-h2 text-black dark:text-white mb-1">Alerts</h2>
+        <p class="type-body-sm text-black/60 dark:text-white/55">Alert variants and toast notifications</p>
       </div>
-      <ElevationShowcase client:load />
+      <AlertsShowcase client:load />
     </div>
 
     <!-- ═══════════════════════════════════
