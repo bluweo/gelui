@@ -221,17 +221,17 @@ import { InputFieldsSource } from "@/components/block/InputFieldsSource";
 
       <div class="grid grid-cols-3 gap-5 max-[860px]:grid-cols-2 max-[540px]:grid-cols-1">
 
-        <!-- 1. Standard Card -->
+        <!-- 1. Standard Card (glass + frost = opaque surface → use glass-type text) -->
         <div class="glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5 min-h-[200px] flex flex-col justify-between">
           <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 140px;" />
           <div class="relative z-[1]">
-            <span class="text-[10px] font-[650] uppercase tracking-[0.06em] contrast-text px-2 py-0.5 rounded-full bg-black/[0.06] dark:bg-white/[0.08] inline-block mb-2">Standard</span>
-            <p class="text-[13px] font-[600] contrast-text mb-1">glass-1 + ds-card-frost</p>
-            <p class="text-[11px] contrast-muted">Default card for text-heavy content. 95% frost ensures maximum readability on any background.</p>
+            <span class="text-[10px] font-[650] uppercase tracking-[0.06em] glass-type-title px-2 py-0.5 rounded-full bg-black/[0.06] dark:bg-white/[0.08] inline-block mb-2">Standard</span>
+            <p class="text-[13px] font-[600] glass-type-title mb-1">glass-1 + ds-card-frost</p>
+            <p class="text-[11px] glass-type-sub">Default card for text-heavy content. 95% frost ensures maximum readability on any background.</p>
           </div>
           <div class="relative z-[1] flex items-center gap-2 mt-3">
-            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded-[4px] bg-black/[0.05] dark:bg-white/[0.08] contrast-muted">backdrop-filter</span>
-            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded-[4px] bg-black/[0.05] dark:bg-white/[0.08] contrast-muted">frost-95%</span>
+            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded-[4px] bg-black/[0.05] dark:bg-white/[0.08] glass-type-sub">backdrop-filter</span>
+            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded-[4px] bg-black/[0.05] dark:bg-white/[0.08] glass-type-sub">frost-95%</span>
           </div>
         </div>
 
@@ -262,72 +262,72 @@ import { InputFieldsSource } from "@/components/block/InputFieldsSource";
           </div>
         </div>
 
-        <!-- 4. Plain Glass -->
+        <!-- 4. Plain Glass (glass surface → use glass-type text) -->
         <div class="glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5 min-h-[200px] flex flex-col justify-between">
           <div>
-            <span class="text-[10px] font-[650] uppercase tracking-[0.06em] contrast-text px-2 py-0.5 rounded-full bg-black/[0.06] dark:bg-white/[0.08] inline-block mb-2">Plain Glass</span>
-            <p class="text-[13px] font-[600] contrast-text mb-1">glass-1 — no frost</p>
-            <p class="text-[11px] contrast-muted">Glass blur without frost overlay. For small cards, badges, or elements where content is short and readable.</p>
+            <span class="text-[10px] font-[650] uppercase tracking-[0.06em] glass-type-title px-2 py-0.5 rounded-full bg-black/[0.06] dark:bg-white/[0.08] inline-block mb-2">Plain Glass</span>
+            <p class="text-[13px] font-[600] glass-type-title mb-1">glass-1 — no frost</p>
+            <p class="text-[11px] glass-type-sub">Glass blur without frost overlay. For small cards, badges, or elements where content is short and readable.</p>
           </div>
           <div class="flex items-center gap-2 mt-3">
-            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded-[4px] bg-black/[0.05] dark:bg-white/[0.08] contrast-muted">backdrop-filter</span>
-            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded-[4px] bg-black/[0.05] dark:bg-white/[0.08] contrast-muted">no frost</span>
+            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded-[4px] bg-black/[0.05] dark:bg-white/[0.08] glass-type-sub">backdrop-filter</span>
+            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded-[4px] bg-black/[0.05] dark:bg-white/[0.08] glass-type-sub">no frost</span>
           </div>
         </div>
 
-        <!-- 5. Token Frost (left-to-right) -->
+        <!-- 5. Token Frost (glass + directional frost → use glass-type text) -->
         <div class="glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5 min-h-[200px] flex flex-col justify-between">
           <div class="absolute inset-0 pointer-events-none token-hero-frost" />
           <div class="relative z-[1]">
-            <span class="text-[10px] font-[650] uppercase tracking-[0.06em] contrast-text px-2 py-0.5 rounded-full bg-black/[0.06] dark:bg-white/[0.08] inline-block mb-2">Directional</span>
-            <p class="text-[13px] font-[600] contrast-text mb-1">glass-1 + token-hero-frost</p>
-            <p class="text-[11px] contrast-muted">Left-to-right frost. Text on the left stays readable, image/content on the right shows through.</p>
+            <span class="text-[10px] font-[650] uppercase tracking-[0.06em] glass-type-title px-2 py-0.5 rounded-full bg-black/[0.06] dark:bg-white/[0.08] inline-block mb-2">Directional</span>
+            <p class="text-[13px] font-[600] glass-type-title mb-1">glass-1 + token-hero-frost</p>
+            <p class="text-[11px] glass-type-sub">Left-to-right frost. Text on the left stays readable, image/content on the right shows through.</p>
           </div>
           <div class="relative z-[1] flex items-center gap-2 mt-3">
-            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded-[4px] bg-black/[0.05] dark:bg-white/[0.08] contrast-muted">backdrop-filter</span>
-            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded-[4px] bg-black/[0.05] dark:bg-white/[0.08] contrast-muted">frost-L→R</span>
+            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded-[4px] bg-black/[0.05] dark:bg-white/[0.08] glass-type-sub">backdrop-filter</span>
+            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded-[4px] bg-black/[0.05] dark:bg-white/[0.08] glass-type-sub">frost-L→R</span>
           </div>
         </div>
 
-        <!-- 6. Solid Card -->
+        <!-- 6. Solid Card (opaque bg → use theme text) -->
         <div class="relative overflow-hidden rounded-[var(--glass-radius)] p-5 min-h-[200px] flex flex-col justify-between bg-white dark:bg-[#1a1a1a] border border-black/[0.06] dark:border-white/[0.08]">
           <div>
-            <span class="text-[10px] font-[650] uppercase tracking-[0.06em] contrast-text px-2 py-0.5 rounded-full bg-black/[0.06] dark:bg-white/[0.08] inline-block mb-2">Solid</span>
-            <p class="text-[13px] font-[600] contrast-text mb-1">100% opaque — no glass</p>
-            <p class="text-[11px] contrast-muted">Fully opaque card with no transparency, blur, or frost. Maximum contrast for data-heavy or critical content.</p>
+            <span class="text-[10px] font-[650] uppercase tracking-[0.06em] text-black/80 dark:text-white/80 px-2 py-0.5 rounded-full bg-black/[0.06] dark:bg-white/[0.08] inline-block mb-2">Solid</span>
+            <p class="text-[13px] font-[600] text-black/80 dark:text-white/80 mb-1">100% opaque — no glass</p>
+            <p class="text-[11px] text-black/50 dark:text-white/45">Fully opaque card with no transparency, blur, or frost. Maximum contrast for data-heavy or critical content.</p>
           </div>
           <div class="flex items-center gap-2 mt-3">
-            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded-[4px] bg-black/[0.05] dark:bg-white/[0.08] contrast-muted">no blur</span>
-            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded-[4px] bg-black/[0.05] dark:bg-white/[0.08] contrast-muted">no frost</span>
-            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded-[4px] bg-black/[0.05] dark:bg-white/[0.08] contrast-muted">opaque</span>
+            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded-[4px] bg-black/[0.05] dark:bg-white/[0.08] text-black/40 dark:text-white/35">no blur</span>
+            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded-[4px] bg-black/[0.05] dark:bg-white/[0.08] text-black/40 dark:text-white/35">no frost</span>
+            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded-[4px] bg-black/[0.05] dark:bg-white/[0.08] text-black/40 dark:text-white/35">opaque</span>
           </div>
         </div>
 
-        <!-- 7. Gel Standard -->
+        <!-- 7. Gel Standard (gel surface → use glass-type text) -->
         <div class="gel-glass glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5 min-h-[200px] flex flex-col justify-between">
           <div class="gel-glass-shine"></div>
           <div class="relative z-[1]">
-            <span class="text-[10px] font-[650] uppercase tracking-[0.06em] contrast-text px-2 py-0.5 rounded-full bg-black/[0.06] dark:bg-white/[0.08] inline-block mb-2">Gel Standard</span>
-            <p class="text-[13px] font-[600] contrast-text mb-1">gel-glass + specular shine</p>
-            <p class="text-[11px] contrast-muted">Volumetric gel surface with inset shadows and specular highlight. Premium feel for hero content and featured items.</p>
+            <span class="text-[10px] font-[650] uppercase tracking-[0.06em] glass-type-title px-2 py-0.5 rounded-full bg-black/[0.06] dark:bg-white/[0.08] inline-block mb-2">Gel Standard</span>
+            <p class="text-[13px] font-[600] glass-type-title mb-1">gel-glass + specular shine</p>
+            <p class="text-[11px] glass-type-sub">Volumetric gel surface with inset shadows and specular highlight. Premium feel for hero content and featured items.</p>
           </div>
           <div class="relative z-[1] flex items-center gap-2 mt-3">
-            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded-[4px] bg-black/[0.05] dark:bg-white/[0.08] contrast-muted">gel-glass</span>
-            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded-[4px] bg-black/[0.05] dark:bg-white/[0.08] contrast-muted">volumetric</span>
+            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded-[4px] bg-black/[0.05] dark:bg-white/[0.08] glass-type-sub">gel-glass</span>
+            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded-[4px] bg-black/[0.05] dark:bg-white/[0.08] glass-type-sub">volumetric</span>
           </div>
         </div>
 
-        <!-- 8. Gel Floating -->
+        <!-- 8. Gel Floating (gel surface → use glass-type text) -->
         <div class="gel-glass glass-specular gel-card-floating relative overflow-hidden rounded-[var(--glass-radius)] p-5 min-h-[200px] flex flex-col justify-between">
           <div class="gel-glass-shine"></div>
           <div class="relative z-[1]">
-            <span class="text-[10px] font-[650] uppercase tracking-[0.06em] contrast-text px-2 py-0.5 rounded-full bg-black/[0.06] dark:bg-white/[0.08] inline-block mb-2">Gel Floating</span>
-            <p class="text-[13px] font-[600] contrast-text mb-1">gel-glass + elevated shadow</p>
-            <p class="text-[11px] contrast-muted">Gel surface that appears to float above the background with stronger outer shadows. For modals, popovers, and elevated content.</p>
+            <span class="text-[10px] font-[650] uppercase tracking-[0.06em] glass-type-title px-2 py-0.5 rounded-full bg-black/[0.06] dark:bg-white/[0.08] inline-block mb-2">Gel Floating</span>
+            <p class="text-[13px] font-[600] glass-type-title mb-1">gel-glass + elevated shadow</p>
+            <p class="text-[11px] glass-type-sub">Gel surface that appears to float above the background with stronger outer shadows. For modals, popovers, and elevated content.</p>
           </div>
           <div class="relative z-[1] flex items-center gap-2 mt-3">
-            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded-[4px] bg-black/[0.05] dark:bg-white/[0.08] contrast-muted">gel-glass</span>
-            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded-[4px] bg-black/[0.05] dark:bg-white/[0.08] contrast-muted">floating</span>
+            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded-[4px] bg-black/[0.05] dark:bg-white/[0.08] glass-type-sub">gel-glass</span>
+            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded-[4px] bg-black/[0.05] dark:bg-white/[0.08] glass-type-sub">floating</span>
           </div>
         </div>
 
