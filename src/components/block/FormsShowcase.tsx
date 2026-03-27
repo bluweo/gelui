@@ -64,7 +64,7 @@ export function FormsShowcase() {
               placeholder="Enter username"
               value={username}
               onChange={setUsername}
-              style={{ paddingLeft: 36, background: "var(--theme-divider)" }}
+              style={{ paddingLeft: "36px", background: "var(--theme-divider)" }}
             />
           </div>
         </div>
@@ -81,7 +81,7 @@ export function FormsShowcase() {
               placeholder="Enter password"
               value={password}
               onChange={setPassword}
-              style={{ paddingLeft: 36, background: "var(--theme-divider)" }}
+              style={{ paddingLeft: "36px", background: "var(--theme-divider)" }}
             />
           </div>
         </div>
@@ -94,7 +94,7 @@ export function FormsShowcase() {
                 <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4" />
               </svg>
             </div>
-            <PasswordInput placeholder="Disabled" disabled style={{ paddingLeft: 36, background: "var(--theme-header-bg)" }} />
+            <PasswordInput placeholder="Disabled" disabled style={{ paddingLeft: "36px", background: "var(--theme-header-bg)" }} />
           </div>
         </div>
       </div>

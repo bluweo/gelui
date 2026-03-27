@@ -133,11 +133,58 @@ export function BadgesShowcase() {
 }`;
 
 const COMPONENTS = [
-  { name: "Badge", path: "@/primitives/data", description: "Status indicator with color variants (success, warning, error, info, default)", implementation: IMPL_BADGE },
-  { name: "Tag", path: "@/primitives/data", description: "Removable label with color and onRemove callback", implementation: IMPL_TAG },
-  { name: "Avatar", path: "@/primitives/data", description: "User avatar with initials, image, size, and status dot", implementation: IMPL_AVATAR },
-  { name: "Stat", path: "@/primitives/data", description: "Big number + label + trend indicator", implementation: IMPL_STAT },
-  { name: "ColorSwatch", path: "@/primitives/data", description: "Color preview square with optional hex label", implementation: IMPL_COLORSWATCH },
+  {
+    name: "Badge", path: "@/primitives/data",
+    description: "Status indicator pill with color variants",
+    implementation: IMPL_BADGE,
+    props: [
+      { name: "variant", type: "enum", options: ["default", "success", "warning", "error", "info"], default: '"default"' },
+      { name: "children", type: "ReactNode" },
+    ],
+  },
+  {
+    name: "Tag", path: "@/primitives/data",
+    description: "Removable label with color and onRemove callback",
+    implementation: IMPL_TAG,
+    props: [
+      { name: "label", type: "string" },
+      { name: "color", type: "enum", options: ["blue", "green", "purple", "amber", "red", "gray"], default: '"gray"' },
+      { name: "onRemove", type: "() => void" },
+      { name: "size", type: "enum", options: ["sm", "md"], default: '"md"' },
+    ],
+  },
+  {
+    name: "Avatar", path: "@/primitives/data",
+    description: "User avatar with initials, image, size, and status dot",
+    implementation: IMPL_AVATAR,
+    props: [
+      { name: "name", type: "string" },
+      { name: "src", type: "string" },
+      { name: "size", type: "string", default: '"36px"' },
+      { name: "status", type: "enum", options: ["online", "away", "busy", "offline"] },
+    ],
+  },
+  {
+    name: "Stat", path: "@/primitives/data",
+    description: "Big number + label + trend indicator for dashboards",
+    implementation: IMPL_STAT,
+    props: [
+      { name: "value", type: "string | number" },
+      { name: "label", type: "string" },
+      { name: "trend", type: "enum", options: ["up", "down", "neutral"] },
+      { name: "trendValue", type: "string" },
+    ],
+  },
+  {
+    name: "ColorSwatch", path: "@/primitives/data",
+    description: "Color preview square with optional hex label",
+    implementation: IMPL_COLORSWATCH,
+    props: [
+      { name: "color", type: "string" },
+      { name: "label", type: "string" },
+      { name: "size", type: "number", default: "48" },
+    ],
+  },
   {
     name: "NotificationBadge",
     path: "@/primitives/data",

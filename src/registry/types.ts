@@ -22,7 +22,8 @@ export type Category =
   | "color"
   | "spacing"
   | "motion"
-  | "glass";
+  | "glass"
+  | "class";
 
 /** Component maturity */
 export type Status = "stable" | "beta" | "experimental" | "deprecated" | "planned";
@@ -144,4 +145,5 @@ export const CATEGORY_META: Record<Category, { label: string; icon: string }> = 
   spacing:      { label: "Spacing",      icon: "move" },
   motion:       { label: "Motion",       icon: "zap" },
   glass:        { label: "Glass",        icon: "droplet" },
+  class:        { label: "CSS Class",   icon: "code" },
 };

@@ -95,12 +95,82 @@ export function AdvancedInputs() {
 }`;
 
 const COMPONENTS = [
-  { name: "OtpInput", path: "@/primitives/inputs", description: "Multi-digit OTP/PIN input with auto-focus, paste support, success checkmark", implementation: IMPL_OTPINPUT },
-  { name: "PasswordInput", path: "@/primitives/inputs", description: "Password input with show/hide eye toggle", implementation: IMPL_PASSWORDINPUT },
-  { name: "NumberInput", path: "@/primitives/inputs", description: "Numeric stepper with +/- buttons, min/max/step", implementation: IMPL_NUMBERINPUT },
-  { name: "Input", path: "@/primitives/inputs", description: "Base text input with focus, validation, disabled states", implementation: IMPL_INPUT },
-  { name: "FormGroup", path: "@/primitives/inputs", description: "Label + input + helper text + error message wrapper", implementation: IMPL_FORMGROUP },
-  { name: "TagInput", path: "@/primitives/inputs", description: "Multi-tag input — type + Enter to add, × to remove", implementation: IMPL_TAGINPUT },
+  {
+    name: "OtpInput", path: "@/primitives/inputs",
+    description: "Multi-digit OTP/PIN input with auto-focus, paste support, success checkmark",
+    implementation: IMPL_OTPINPUT,
+    props: [
+      { name: "length", type: "number", default: "6" },
+      { name: "value", type: "string" },
+      { name: "onChange", type: "(v: string) => void" },
+      { name: "error", type: "boolean", default: "false" },
+      { name: "size", type: "enum", options: ["sm", "md"], default: '"md"' },
+      { name: "disabled", type: "boolean", default: "false" },
+    ],
+  },
+  {
+    name: "PasswordInput", path: "@/primitives/inputs",
+    description: "Password input with show/hide eye toggle",
+    implementation: IMPL_PASSWORDINPUT,
+    props: [
+      { name: "placeholder", type: "string" },
+      { name: "value", type: "string" },
+      { name: "onChange", type: "(v: string) => void" },
+      { name: "disabled", type: "boolean", default: "false" },
+    ],
+  },
+  {
+    name: "NumberInput", path: "@/primitives/inputs",
+    description: "Numeric stepper with circle +/- buttons, min/max/step constraints",
+    implementation: IMPL_NUMBERINPUT,
+    props: [
+      { name: "value", type: "number" },
+      { name: "onChange", type: "(v: number) => void" },
+      { name: "min", type: "number" },
+      { name: "max", type: "number" },
+      { name: "step", type: "number", default: "1" },
+    ],
+  },
+  {
+    name: "Input", path: "@/primitives/inputs",
+    description: "Base text input with focus, validation, disabled states",
+    implementation: IMPL_INPUT,
+    props: [
+      { name: "type", type: "string", default: '"text"' },
+      { name: "placeholder", type: "string" },
+      { name: "value", type: "string" },
+      { name: "onChange", type: "(v: string) => void" },
+      { name: "size", type: "enum", options: ["sm", "md", "lg"], default: '"md"' },
+      { name: "error", type: "boolean", default: "false" },
+      { name: "success", type: "boolean", default: "false" },
+      { name: "disabled", type: "boolean", default: "false" },
+      { name: "icon", type: "ReactNode" },
+    ],
+  },
+  {
+    name: "FormGroup", path: "@/primitives/inputs",
+    description: "Label + input + helper text + error message wrapper",
+    implementation: IMPL_FORMGROUP,
+    props: [
+      { name: "label", type: "string" },
+      { name: "required", type: "boolean", default: "false" },
+      { name: "error", type: "string" },
+      { name: "helper", type: "string" },
+      { name: "children", type: "ReactNode" },
+    ],
+  },
+  {
+    name: "TagInput", path: "@/primitives/inputs",
+    description: "Multi-tag input — type + Enter to add, Backspace to remove",
+    implementation: IMPL_TAGINPUT,
+    props: [
+      { name: "value", type: "string[]" },
+      { name: "onChange", type: "(tags: string[]) => void" },
+      { name: "placeholder", type: "string" },
+      { name: "maxTags", type: "number" },
+      { name: "disabled", type: "boolean", default: "false" },
+    ],
+  },
 ];
 
 export function FormsShowcaseWithSource() {

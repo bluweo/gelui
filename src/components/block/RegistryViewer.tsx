@@ -65,6 +65,7 @@ const CATEGORY_LABELS: Record<Category, string> = {
   spacing: "Spacing",
   motion: "Motion",
   glass: "Glass",
+  class: "CSS Class",
 };
 
 /* ── Helpers ── */

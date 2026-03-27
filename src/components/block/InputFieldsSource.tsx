@@ -48,11 +48,11 @@ export function InputFieldsDemo() {
       <TagInput placeholder="Type and press Enter..." />
 
       {/* URL Input with prefix */}
-      <div style={{ display: "flex" }}>
-        <div style={{ paddingTop: 10, paddingBottom: 10, paddingLeft: 12, paddingRight: 12, background: "rgba(0,0,0,0.04)" }}>
+      <div className="flex items-center">
+        <div className="py-3 px-4 text-[14px] font-mono bg-[var(--theme-header-bg)] rounded-l-[var(--glass-radius-sm)] border-2 border-transparent border-r-0 text-[var(--theme-fg-muted)]">
           https://
         </div>
-        <Input placeholder="example.com" style={{ borderTopLeftRadius: 0, borderTopRightRadius: 10, borderBottomRightRadius: 10, borderBottomLeftRadius: 0 }} />
+        <Input placeholder="example.com" className="rounded-l-none" />
       </div>
 
       {/* Textarea */}
@@ -69,12 +69,77 @@ export function InputFieldsDemo() {
 }`;
 
 const COMPONENTS = [
-  { name: "Input", path: "@/primitives/inputs", description: "Text input with focus, validation, and disabled states", implementation: IMPL_INPUT },
-  { name: "SearchInput", path: "@/primitives/inputs", description: "Input with search icon, bold stroke on focus, clear button", implementation: IMPL_SEARCHINPUT },
-  { name: "Select", path: "@/primitives/inputs", description: "Custom dropdown with keyboard navigation and glass panel", implementation: IMPL_SELECT },
-  { name: "SearchableSelect", path: "@/primitives/inputs", description: "Filterable dropdown with type-to-search", implementation: IMPL_SEARCHABLESELECT },
-  { name: "Textarea", path: "@/primitives/inputs", description: "Multi-line text input with theme styling", implementation: IMPL_TEXTAREA },
-  { name: "TagInput", path: "@/primitives/inputs", description: "Type and press Enter to add tag pills, with X to remove", implementation: IMPL_TAGINPUT },
+  {
+    name: "Input", path: "@/primitives/inputs",
+    description: "Text input with focus, validation, and disabled states",
+    implementation: IMPL_INPUT,
+    props: [
+      { name: "type", type: "string", default: '"text"' },
+      { name: "placeholder", type: "string" },
+      { name: "value", type: "string" },
+      { name: "onChange", type: "(v: string) => void" },
+      { name: "size", type: "enum", options: ["sm", "md", "lg"], default: '"md"' },
+      { name: "error", type: "boolean", default: "false" },
+      { name: "success", type: "boolean", default: "false" },
+      { name: "disabled", type: "boolean", default: "false" },
+      { name: "icon", type: "ReactNode" },
+    ],
+  },
+  {
+    name: "SearchInput", path: "@/primitives/inputs",
+    description: "Input with search icon, bold stroke on focus, clear button",
+    implementation: IMPL_SEARCHINPUT,
+    props: [
+      { name: "placeholder", type: "string", default: '"Search..."' },
+      { name: "value", type: "string" },
+      { name: "onChange", type: "(v: string) => void" },
+    ],
+  },
+  {
+    name: "Select", path: "@/primitives/inputs",
+    description: "Custom dropdown with keyboard navigation and glass panel",
+    implementation: IMPL_SELECT,
+    props: [
+      { name: "options", type: "SelectOption[]" },
+      { name: "value", type: "string" },
+      { name: "onChange", type: "(v: string) => void" },
+      { name: "placeholder", type: "string", default: '"Select..."' },
+    ],
+  },
+  {
+    name: "SearchableSelect", path: "@/primitives/inputs",
+    description: "Filterable dropdown with type-to-search and highlight matching",
+    implementation: IMPL_SEARCHABLESELECT,
+    props: [
+      { name: "options", type: "SelectOption[]" },
+      { name: "value", type: "string" },
+      { name: "onChange", type: "(v: string) => void" },
+      { name: "placeholder", type: "string", default: '"Search & select..."' },
+    ],
+  },
+  {
+    name: "Textarea", path: "@/primitives/inputs",
+    description: "Multi-line text input with theme styling and vertical resize",
+    implementation: IMPL_TEXTAREA,
+    props: [
+      { name: "placeholder", type: "string" },
+      { name: "rows", type: "number", default: "3" },
+      { name: "value", type: "string" },
+      { name: "onChange", type: "(v: string) => void" },
+    ],
+  },
+  {
+    name: "TagInput", path: "@/primitives/inputs",
+    description: "Type and press Enter to add tag pills, Backspace to remove last",
+    implementation: IMPL_TAGINPUT,
+    props: [
+      { name: "value", type: "string[]" },
+      { name: "onChange", type: "(tags: string[]) => void" },
+      { name: "placeholder", type: "string" },
+      { name: "maxTags", type: "number" },
+      { name: "disabled", type: "boolean", default: "false" },
+    ],
+  },
 ];
 
 export function InputFieldsSource() {

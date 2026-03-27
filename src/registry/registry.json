@@ -3144,6 +3144,1243 @@
           "type": "CSSProperties"
         }
       }
+    },
+    {
+      "id": "badge",
+      "name": "Badge",
+      "category": "feedback",
+      "layer": "primitive",
+      "path": "src/primitives/data/Badge.tsx",
+      "exportName": "Badge",
+      "isReact": true,
+      "status": "stable",
+      "version": "0.49.0",
+      "description": "Status indicator pill with color variants (success, warning, error, info, default).",
+      "tags": [
+        "badge",
+        "status",
+        "indicator",
+        "label"
+      ],
+      "props": {
+        "variant": {
+          "type": "enum",
+          "options": [
+            "default",
+            "success",
+            "warning",
+            "error",
+            "info"
+          ],
+          "default": "default"
+        },
+        "children": {
+          "type": "ReactNode"
+        },
+        "className": {
+          "type": "string"
+        },
+        "style": {
+          "type": "CSSProperties"
+        }
+      }
+    },
+    {
+      "id": "input",
+      "name": "Input",
+      "category": "form",
+      "layer": "primitive",
+      "path": "src/primitives/inputs/Input.tsx",
+      "exportName": "Input",
+      "isReact": true,
+      "status": "stable",
+      "version": "0.46.0",
+      "description": "Text input with size variants, validation states, icon support, and focus styling.",
+      "tags": [
+        "input",
+        "text",
+        "form",
+        "field"
+      ],
+      "props": {
+        "type": {
+          "type": "string",
+          "default": "text"
+        },
+        "placeholder": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        },
+        "onChange": {
+          "type": "(v: string) => void"
+        },
+        "size": {
+          "type": "enum",
+          "options": [
+            "sm",
+            "md",
+            "lg"
+          ],
+          "default": "md"
+        },
+        "error": {
+          "type": "boolean",
+          "default": false
+        },
+        "success": {
+          "type": "boolean",
+          "default": false
+        },
+        "disabled": {
+          "type": "boolean",
+          "default": false
+        },
+        "icon": {
+          "type": "ReactNode"
+        },
+        "className": {
+          "type": "string"
+        },
+        "style": {
+          "type": "CSSProperties"
+        }
+      }
+    },
+    {
+      "id": "token-theme-fg",
+      "name": "--theme-fg",
+      "category": "color",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "version": "0.49.0",
+      "description": "Primary foreground text color",
+      "tags": [
+        "theme",
+        "color",
+        "token"
+      ],
+      "props": {},
+      "tokenValue": {
+        "light": "rgba(0,0,0,0.88)",
+        "dark": "rgba(255,255,255,0.92)"
+      },
+      "tokenSubcategory": "theme"
+    },
+    {
+      "id": "token-theme-fg-muted",
+      "name": "--theme-fg-muted",
+      "category": "color",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "version": "0.49.0",
+      "description": "Secondary/muted text color",
+      "tags": [
+        "theme",
+        "color",
+        "token"
+      ],
+      "props": {},
+      "tokenValue": {
+        "light": "rgba(0,0,0,0.55)",
+        "dark": "rgba(255,255,255,0.6)"
+      },
+      "tokenSubcategory": "theme"
+    },
+    {
+      "id": "token-theme-fg-subtle",
+      "name": "--theme-fg-subtle",
+      "category": "color",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "version": "0.49.0",
+      "description": "Tertiary/subtle text color",
+      "tags": [
+        "theme",
+        "color",
+        "token"
+      ],
+      "props": {},
+      "tokenValue": {
+        "light": "rgba(0,0,0,0.4)",
+        "dark": "rgba(255,255,255,0.4)"
+      },
+      "tokenSubcategory": "theme"
+    },
+    {
+      "id": "token-theme-fg-faint",
+      "name": "--theme-fg-faint",
+      "category": "color",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "version": "0.49.0",
+      "description": "Faintest text color for hints",
+      "tags": [
+        "theme",
+        "color",
+        "token"
+      ],
+      "props": {},
+      "tokenValue": {
+        "light": "rgba(0,0,0,0.25)",
+        "dark": "rgba(255,255,255,0.25)"
+      },
+      "tokenSubcategory": "theme"
+    },
+    {
+      "id": "token-theme-bg-solid",
+      "name": "--theme-bg-solid",
+      "category": "color",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "version": "0.49.0",
+      "description": "Solid background (black in light, white in dark)",
+      "tags": [
+        "theme",
+        "color",
+        "token"
+      ],
+      "props": {},
+      "tokenValue": {
+        "light": "#000",
+        "dark": "#fff"
+      },
+      "tokenSubcategory": "theme"
+    },
+    {
+      "id": "token-theme-fg-on-solid",
+      "name": "--theme-fg-on-solid",
+      "category": "color",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "version": "0.49.0",
+      "description": "Text color on solid backgrounds",
+      "tags": [
+        "theme",
+        "color",
+        "token"
+      ],
+      "props": {},
+      "tokenValue": {
+        "light": "#fff",
+        "dark": "#000"
+      },
+      "tokenSubcategory": "theme"
+    },
+    {
+      "id": "token-theme-divider",
+      "name": "--theme-divider",
+      "category": "color",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "version": "0.49.0",
+      "description": "Divider/border color and input background",
+      "tags": [
+        "theme",
+        "color",
+        "token"
+      ],
+      "props": {},
+      "tokenValue": {
+        "light": "rgba(0,0,0,0.06)",
+        "dark": "rgba(255,255,255,0.08)"
+      },
+      "tokenSubcategory": "theme"
+    },
+    {
+      "id": "token-theme-card-bg",
+      "name": "--theme-card-bg",
+      "category": "color",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "version": "0.49.0",
+      "description": "Card/container background",
+      "tags": [
+        "theme",
+        "color",
+        "token"
+      ],
+      "props": {},
+      "tokenValue": {
+        "light": "#fff",
+        "dark": "#1a1a1a"
+      },
+      "tokenSubcategory": "theme"
+    },
+    {
+      "id": "token-theme-table-bg",
+      "name": "--theme-table-bg",
+      "category": "color",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "version": "0.49.0",
+      "description": "Table/surface background",
+      "tags": [
+        "theme",
+        "color",
+        "token"
+      ],
+      "props": {},
+      "tokenValue": {
+        "light": "rgba(255,255,255,0.85)",
+        "dark": "rgba(30,30,30,0.85)"
+      },
+      "tokenSubcategory": "theme"
+    },
+    {
+      "id": "token-theme-header-bg",
+      "name": "--theme-header-bg",
+      "category": "color",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "version": "0.49.0",
+      "description": "Header/elevated surface background",
+      "tags": [
+        "theme",
+        "color",
+        "token"
+      ],
+      "props": {},
+      "tokenValue": {
+        "light": "rgba(0,0,0,0.03)",
+        "dark": "rgba(255,255,255,0.04)"
+      },
+      "tokenSubcategory": "theme"
+    },
+    {
+      "id": "token-theme-ghost-border",
+      "name": "--theme-ghost-border",
+      "category": "color",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "version": "0.49.0",
+      "description": "Ghost button border color",
+      "tags": [
+        "theme",
+        "color",
+        "token"
+      ],
+      "props": {},
+      "tokenValue": {
+        "light": "rgba(0,0,0,0.12)",
+        "dark": "rgba(255,255,255,0.15)"
+      },
+      "tokenSubcategory": "theme"
+    },
+    {
+      "id": "token-theme-link",
+      "name": "--theme-link",
+      "category": "color",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "version": "0.49.0",
+      "description": "Link text color",
+      "tags": [
+        "theme",
+        "color",
+        "token"
+      ],
+      "props": {},
+      "tokenValue": {
+        "light": "#007AFF",
+        "dark": "#5AC8FA"
+      },
+      "tokenSubcategory": "theme"
+    },
+    {
+      "id": "token-font-heading",
+      "name": "--font-heading",
+      "category": "typography",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "version": "0.49.0",
+      "description": "Heading font family",
+      "tags": [
+        "family",
+        "typography",
+        "token"
+      ],
+      "props": {},
+      "tokenValue": "system default or user-selected",
+      "tokenSubcategory": "family"
+    },
+    {
+      "id": "token-font-body",
+      "name": "--font-body",
+      "category": "typography",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "version": "0.49.0",
+      "description": "Body text font family",
+      "tags": [
+        "family",
+        "typography",
+        "token"
+      ],
+      "props": {},
+      "tokenValue": "system default or user-selected",
+      "tokenSubcategory": "family"
+    },
+    {
+      "id": "token-font-ui",
+      "name": "--font-ui",
+      "category": "typography",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "version": "0.49.0",
+      "description": "UI labels and controls font family",
+      "tags": [
+        "family",
+        "typography",
+        "token"
+      ],
+      "props": {},
+      "tokenValue": "system default or user-selected",
+      "tokenSubcategory": "family"
+    },
+    {
+      "id": "token-font-mono",
+      "name": "--font-mono",
+      "category": "typography",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "version": "0.49.0",
+      "description": "Code/monospace font family",
+      "tags": [
+        "family",
+        "typography",
+        "token"
+      ],
+      "props": {},
+      "tokenValue": "system default or user-selected",
+      "tokenSubcategory": "family"
+    },
+    {
+      "id": "token-type-scale",
+      "name": "--type-scale",
+      "category": "typography",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "version": "0.49.0",
+      "description": "Global type scale multiplier (user-adjustable)",
+      "tags": [
+        "scale",
+        "typography",
+        "token"
+      ],
+      "props": {},
+      "tokenValue": "1",
+      "tokenSubcategory": "scale"
+    },
+    {
+      "id": "token-glass-radius",
+      "name": "--glass-radius",
+      "category": "spacing",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "version": "0.49.0",
+      "description": "Default glass panel border radius",
+      "tags": [
+        "radius",
+        "spacing",
+        "token"
+      ],
+      "props": {},
+      "tokenValue": "20px",
+      "tokenSubcategory": "radius"
+    },
+    {
+      "id": "token-glass-radius-lg",
+      "name": "--glass-radius-lg",
+      "category": "spacing",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "version": "0.49.0",
+      "description": "Large glass panel border radius",
+      "tags": [
+        "radius",
+        "spacing",
+        "token"
+      ],
+      "props": {},
+      "tokenValue": "28px",
+      "tokenSubcategory": "radius"
+    },
+    {
+      "id": "token-glass-radius-sm",
+      "name": "--glass-radius-sm",
+      "category": "spacing",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "version": "0.49.0",
+      "description": "Small glass panel / input border radius",
+      "tags": [
+        "radius",
+        "spacing",
+        "token"
+      ],
+      "props": {},
+      "tokenValue": "10px",
+      "tokenSubcategory": "radius"
+    },
+    {
+      "id": "token-glass-radius-pill",
+      "name": "--glass-radius-pill",
+      "category": "spacing",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "version": "0.49.0",
+      "description": "Full pill border radius",
+      "tags": [
+        "radius",
+        "spacing",
+        "token"
+      ],
+      "props": {},
+      "tokenValue": "100px",
+      "tokenSubcategory": "radius"
+    },
+    {
+      "id": "token-glass-bg",
+      "name": "--glass-bg",
+      "category": "glass",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "version": "0.49.0",
+      "description": "Glass panel background color",
+      "tags": [
+        "surface",
+        "glass",
+        "token"
+      ],
+      "props": {},
+      "tokenValue": "rgba(255,255,255,0.45)",
+      "tokenSubcategory": "surface"
+    },
+    {
+      "id": "token-glass-border",
+      "name": "--glass-border",
+      "category": "glass",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "version": "0.49.0",
+      "description": "Glass panel border color",
+      "tags": [
+        "surface",
+        "glass",
+        "token"
+      ],
+      "props": {},
+      "tokenValue": "rgba(255,255,255,0.35)",
+      "tokenSubcategory": "surface"
+    },
+    {
+      "id": "token-glass-blur",
+      "name": "--glass-blur",
+      "category": "glass",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "version": "0.49.0",
+      "description": "Default glass blur amount",
+      "tags": [
+        "blur",
+        "glass",
+        "token"
+      ],
+      "props": {},
+      "tokenValue": "24px",
+      "tokenSubcategory": "blur"
+    },
+    {
+      "id": "token-glass-blur-strong",
+      "name": "--glass-blur-strong",
+      "category": "glass",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "version": "0.49.0",
+      "description": "Strong glass blur for modals/overlays",
+      "tags": [
+        "blur",
+        "glass",
+        "token"
+      ],
+      "props": {},
+      "tokenValue": "40px",
+      "tokenSubcategory": "blur"
+    },
+    {
+      "id": "token-glass-saturation",
+      "name": "--glass-saturation",
+      "category": "glass",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "version": "0.49.0",
+      "description": "Glass backdrop saturation filter",
+      "tags": [
+        "effect",
+        "glass",
+        "token"
+      ],
+      "props": {},
+      "tokenValue": "1.8",
+      "tokenSubcategory": "effect"
+    },
+    {
+      "id": "token-glass-shadow",
+      "name": "--glass-shadow",
+      "category": "glass",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "version": "0.49.0",
+      "description": "Default glass panel shadow",
+      "tags": [
+        "shadow",
+        "glass",
+        "token"
+      ],
+      "props": {},
+      "tokenValue": "0 8px 32px rgba(0,0,0,0.08)",
+      "tokenSubcategory": "shadow"
+    },
+    {
+      "id": "token-duration-fast",
+      "name": "--duration-fast",
+      "category": "motion",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "version": "0.49.0",
+      "description": "Fast animation (hover, toggle)",
+      "tags": [
+        "duration",
+        "motion",
+        "token"
+      ],
+      "props": {},
+      "tokenValue": "120ms",
+      "tokenSubcategory": "duration"
+    },
+    {
+      "id": "token-duration-normal",
+      "name": "--duration-normal",
+      "category": "motion",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "version": "0.49.0",
+      "description": "Normal animation (expand, slide)",
+      "tags": [
+        "duration",
+        "motion",
+        "token"
+      ],
+      "props": {},
+      "tokenValue": "250ms",
+      "tokenSubcategory": "duration"
+    },
+    {
+      "id": "token-duration-slow",
+      "name": "--duration-slow",
+      "category": "motion",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "version": "0.49.0",
+      "description": "Slow animation (page transition)",
+      "tags": [
+        "duration",
+        "motion",
+        "token"
+      ],
+      "props": {},
+      "tokenValue": "450ms",
+      "tokenSubcategory": "duration"
+    },
+    {
+      "id": "token-ease-default",
+      "name": "--ease-default",
+      "category": "motion",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "version": "0.49.0",
+      "description": "Default easing curve",
+      "tags": [
+        "easing",
+        "motion",
+        "token"
+      ],
+      "props": {},
+      "tokenValue": "cubic-bezier(0.25, 0.1, 0.25, 1)",
+      "tokenSubcategory": "easing"
+    },
+    {
+      "id": "token-ease-spring",
+      "name": "--ease-spring",
+      "category": "motion",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "version": "0.49.0",
+      "description": "Springy bounce easing",
+      "tags": [
+        "easing",
+        "motion",
+        "token"
+      ],
+      "props": {},
+      "tokenValue": "cubic-bezier(0.34, 1.56, 0.64, 1)",
+      "tokenSubcategory": "easing"
+    },
+    {
+      "id": "token-btn-solid-bg",
+      "name": "--btn-solid-bg",
+      "category": "color",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "version": "0.49.0",
+      "description": "Solid button background",
+      "tags": [
+        "button",
+        "color",
+        "token"
+      ],
+      "props": {},
+      "tokenValue": {
+        "light": "rgba(0,0,0,0.88)",
+        "dark": "rgba(255,255,255,0.92)"
+      },
+      "tokenSubcategory": "button"
+    },
+    {
+      "id": "token-btn-solid-text",
+      "name": "--btn-solid-text",
+      "category": "color",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "version": "0.49.0",
+      "description": "Solid button text color",
+      "tags": [
+        "button",
+        "color",
+        "token"
+      ],
+      "props": {},
+      "tokenValue": {
+        "light": "#fff",
+        "dark": "#000"
+      },
+      "tokenSubcategory": "button"
+    },
+    {
+      "id": "token-btn-ghost-border",
+      "name": "--btn-ghost-border",
+      "category": "color",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "version": "0.49.0",
+      "description": "Ghost button border color",
+      "tags": [
+        "button",
+        "color",
+        "token"
+      ],
+      "props": {},
+      "tokenValue": {
+        "light": "rgba(0,0,0,0.15)",
+        "dark": "rgba(255,255,255,0.2)"
+      },
+      "tokenSubcategory": "button"
+    },
+    {
+      "id": "token-btn-ghost-text",
+      "name": "--btn-ghost-text",
+      "category": "color",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "version": "0.49.0",
+      "description": "Ghost button text color",
+      "tags": [
+        "button",
+        "color",
+        "token"
+      ],
+      "props": {},
+      "tokenValue": {
+        "light": "rgba(0,0,0,0.75)",
+        "dark": "rgba(255,255,255,0.85)"
+      },
+      "tokenSubcategory": "button"
+    },
+    {
+      "id": "token-btn-glass-bg",
+      "name": "--btn-glass-bg",
+      "category": "color",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "version": "0.49.0",
+      "description": "Glass button background",
+      "tags": [
+        "button",
+        "color",
+        "token"
+      ],
+      "props": {},
+      "tokenValue": {
+        "light": "rgba(255,255,255,0.35)",
+        "dark": "rgba(255,255,255,0.1)"
+      },
+      "tokenSubcategory": "button"
+    },
+    {
+      "id": "token-color-success",
+      "name": "--color-success",
+      "category": "color",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "version": "0.49.0",
+      "description": "Success state color (green)",
+      "tags": [
+        "semantic",
+        "color",
+        "token"
+      ],
+      "props": {},
+      "tokenValue": "#34C759",
+      "tokenSubcategory": "semantic"
+    },
+    {
+      "id": "token-color-error",
+      "name": "--color-error",
+      "category": "color",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "version": "0.49.0",
+      "description": "Error state color (red)",
+      "tags": [
+        "semantic",
+        "color",
+        "token"
+      ],
+      "props": {},
+      "tokenValue": "#FF3B30",
+      "tokenSubcategory": "semantic"
+    },
+    {
+      "id": "token-color-warning",
+      "name": "--color-warning",
+      "category": "color",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "version": "0.49.0",
+      "description": "Warning state color (amber)",
+      "tags": [
+        "semantic",
+        "color",
+        "token"
+      ],
+      "props": {},
+      "tokenValue": "#FF9500",
+      "tokenSubcategory": "semantic"
+    },
+    {
+      "id": "token-color-info",
+      "name": "--color-info",
+      "category": "color",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "version": "0.49.0",
+      "description": "Info state color (cyan)",
+      "tags": [
+        "semantic",
+        "color",
+        "token"
+      ],
+      "props": {},
+      "tokenValue": "#5AC8FA",
+      "tokenSubcategory": "semantic"
+    },
+    {
+      "id": "token-z-dropdown",
+      "name": "--z-dropdown",
+      "category": "layout",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "version": "0.49.0",
+      "description": "Dropdown menu z-index",
+      "tags": [
+        "z-index",
+        "layout",
+        "token"
+      ],
+      "props": {},
+      "tokenValue": "100",
+      "tokenSubcategory": "z-index"
+    },
+    {
+      "id": "token-z-overlay",
+      "name": "--z-overlay",
+      "category": "layout",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "version": "0.49.0",
+      "description": "Overlay/backdrop z-index",
+      "tags": [
+        "z-index",
+        "layout",
+        "token"
+      ],
+      "props": {},
+      "tokenValue": "300",
+      "tokenSubcategory": "z-index"
+    },
+    {
+      "id": "token-z-modal",
+      "name": "--z-modal",
+      "category": "layout",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "version": "0.49.0",
+      "description": "Modal dialog z-index",
+      "tags": [
+        "z-index",
+        "layout",
+        "token"
+      ],
+      "props": {},
+      "tokenValue": "400",
+      "tokenSubcategory": "z-index"
+    },
+    {
+      "id": "token-z-toast",
+      "name": "--z-toast",
+      "category": "layout",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "version": "0.49.0",
+      "description": "Toast notification z-index",
+      "tags": [
+        "z-index",
+        "layout",
+        "token"
+      ],
+      "props": {},
+      "tokenValue": "500",
+      "tokenSubcategory": "z-index"
+    },
+    {
+      "id": "token-z-tooltip",
+      "name": "--z-tooltip",
+      "category": "layout",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "version": "0.49.0",
+      "description": "Tooltip z-index",
+      "tags": [
+        "z-index",
+        "layout",
+        "token"
+      ],
+      "props": {},
+      "tokenValue": "600",
+      "tokenSubcategory": "z-index"
+    },
+    {
+      "id": "token-class-glass-1",
+      "name": "glass-1",
+      "category": "class",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "version": "0.49.0",
+      "description": "Standard glass surface with backdrop blur + border + shadow",
+      "tags": [
+        "surface",
+        "class",
+        "token"
+      ],
+      "props": {},
+      "tokenValue": "CSS class",
+      "tokenSubcategory": "surface"
+    },
+    {
+      "id": "token-class-glass-2",
+      "name": "glass-2",
+      "category": "class",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "version": "0.49.0",
+      "description": "Elevated glass surface with stronger blur",
+      "tags": [
+        "surface",
+        "class",
+        "token"
+      ],
+      "props": {},
+      "tokenValue": "CSS class",
+      "tokenSubcategory": "surface"
+    },
+    {
+      "id": "token-class-glass-3",
+      "name": "glass-3",
+      "category": "class",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "version": "0.49.0",
+      "description": "Overlay glass surface (modals, popovers)",
+      "tags": [
+        "surface",
+        "class",
+        "token"
+      ],
+      "props": {},
+      "tokenValue": "CSS class",
+      "tokenSubcategory": "surface"
+    },
+    {
+      "id": "token-class-glass-specular",
+      "name": "glass-specular",
+      "category": "class",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "version": "0.49.0",
+      "description": "Adds noise texture + specular light filter to glass",
+      "tags": [
+        "effect",
+        "class",
+        "token"
+      ],
+      "props": {},
+      "tokenValue": "CSS class",
+      "tokenSubcategory": "effect"
+    },
+    {
+      "id": "token-class-contrast-text",
+      "name": "contrast-text",
+      "category": "class",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "version": "0.49.0",
+      "description": "Text that adapts to background luminance (light/dark)",
+      "tags": [
+        "text",
+        "class",
+        "token"
+      ],
+      "props": {},
+      "tokenValue": "CSS class",
+      "tokenSubcategory": "text"
+    },
+    {
+      "id": "token-class-contrast-muted",
+      "name": "contrast-muted",
+      "category": "class",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "version": "0.49.0",
+      "description": "Muted text that adapts to background luminance",
+      "tags": [
+        "text",
+        "class",
+        "token"
+      ],
+      "props": {},
+      "tokenValue": "CSS class",
+      "tokenSubcategory": "text"
+    },
+    {
+      "id": "token-class-glass-type-title",
+      "name": "glass-type-title",
+      "category": "class",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "version": "0.49.0",
+      "description": "Title text inside glass panels (always dark in light mode)",
+      "tags": [
+        "text",
+        "class",
+        "token"
+      ],
+      "props": {},
+      "tokenValue": "CSS class",
+      "tokenSubcategory": "text"
+    },
+    {
+      "id": "token-class-glass-type-sub",
+      "name": "glass-type-sub",
+      "category": "class",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "version": "0.49.0",
+      "description": "Subtitle text inside glass panels",
+      "tags": [
+        "text",
+        "class",
+        "token"
+      ],
+      "props": {},
+      "tokenValue": "CSS class",
+      "tokenSubcategory": "text"
+    },
+    {
+      "id": "token-class-ds-card-frost",
+      "name": "ds-card-frost",
+      "category": "class",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "version": "0.49.0",
+      "description": "Standard frost overlay gradient for glass cards",
+      "tags": [
+        "surface",
+        "class",
+        "token"
+      ],
+      "props": {},
+      "tokenValue": "CSS class",
+      "tokenSubcategory": "surface"
+    },
+    {
+      "id": "token-class-ds-card-frost-haze",
+      "name": "ds-card-frost-haze",
+      "category": "class",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "version": "0.49.0",
+      "description": "Haze frost — 35% opacity see-through",
+      "tags": [
+        "surface",
+        "class",
+        "token"
+      ],
+      "props": {},
+      "tokenValue": "CSS class",
+      "tokenSubcategory": "surface"
+    },
+    {
+      "id": "token-class-token-hero-frost",
+      "name": "token-hero-frost",
+      "category": "class",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "version": "0.49.0",
+      "description": "Directional left-to-right frost for hero layouts",
+      "tags": [
+        "surface",
+        "class",
+        "token"
+      ],
+      "props": {},
+      "tokenValue": "CSS class",
+      "tokenSubcategory": "surface"
     }
   ]
 }
