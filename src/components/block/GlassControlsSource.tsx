@@ -14,89 +14,85 @@ import { Radio } from "@/primitives/controls";
 import { SegmentedControl } from "@/primitives/controls";
 import { Slider } from "@/primitives/controls";
 
-{/* Toggle */}
-<Toggle checked={true} onChange={setChecked} />
-<Toggle checked={false} onChange={setChecked} />
+{/* All gel variants use variant="gel" */}
 
-{/* Checkbox */}
-<Checkbox checked={true} onChange={setChecked} />
-<Checkbox checked={false} onChange={setChecked} />
+{/* Gel Toggle */}
+<Toggle variant="gel" checked={true} onChange={setChecked} />
+<Toggle variant="gel" checked={false} onChange={setChecked} />
 
-{/* Radio */}
-<Radio selected={false} onChange={setSelected} />
-<Radio selected={true} onChange={setSelected} />
+{/* Gel Checkbox */}
+<Checkbox variant="gel" checked={true} onChange={setChecked} />
+<Checkbox variant="gel" checked={false} onChange={setChecked} />
 
-{/* Segmented Control */}
+{/* Gel Radio */}
+<Radio variant="gel" selected={true} onChange={setSelected} />
+<Radio variant="gel" selected={false} onChange={setSelected} />
+
+{/* Gel Segmented Control */}
 <SegmentedControl
+  variant="gel"
   options={["Day", "Week", "Month"]}
   value={selected}
   onChange={setSelected}
 />
 
-{/* Slider */}
-<Slider value={60} onChange={setValue} showValue />
-
-{/* Gel variants */}
-<Toggle variant="gel" checked={true} onChange={setChecked} />
-<Checkbox variant="gel" checked={true} onChange={setChecked} />
-<Radio variant="gel" selected={true} onChange={setSelected} />
-<SegmentedControl variant="gel" options={["Day", "Week", "Month"]} value="Day" onChange={setSelected} />
+{/* Gel Slider */}
 <Slider variant="gel" value={60} onChange={setValue} showValue />`;
 
 const COMPONENTS = [
   {
-    name: "Toggle",
+    name: "Toggle (gel)",
     path: "@/primitives/controls",
-    description: "On/off switch with flat and gel variants",
+    description: "Volumetric gel-styled on/off switch with glass effect and inset shadows",
     implementation: IMPL_TOGGLE,
     props: [
       { name: "checked", type: "boolean", default: "false" },
       { name: "onChange", type: "(v: boolean) => void" },
-      { name: "variant", type: "enum", options: ["flat", "gel"], default: '"flat"' },
+      { name: "variant", type: "enum", options: ["flat", "gel"], default: '"gel"' },
       { name: "className", type: "string" },
     ],
   },
   {
-    name: "Checkbox",
+    name: "Checkbox (gel)",
     path: "@/primitives/controls",
-    description: "Check/uncheck control with flat and gel variants",
+    description: "Volumetric gel-styled checkbox with specular highlights",
     implementation: IMPL_CHECKBOX,
     props: [
       { name: "checked", type: "boolean", default: "false" },
       { name: "onChange", type: "(v: boolean) => void" },
-      { name: "variant", type: "enum", options: ["flat", "gel"], default: '"flat"' },
+      { name: "variant", type: "enum", options: ["flat", "gel"], default: '"gel"' },
       { name: "className", type: "string" },
     ],
   },
   {
-    name: "Radio",
+    name: "Radio (gel)",
     path: "@/primitives/controls",
-    description: "Single-select radio button with flat and gel variants",
+    description: "Volumetric gel-styled radio button with glass effect",
     implementation: IMPL_RADIO,
     props: [
       { name: "selected", type: "boolean", default: "false" },
       { name: "onChange", type: "(v: boolean) => void" },
-      { name: "variant", type: "enum", options: ["flat", "gel"], default: '"flat"' },
+      { name: "variant", type: "enum", options: ["flat", "gel"], default: '"gel"' },
       { name: "className", type: "string" },
     ],
   },
   {
-    name: "SegmentedControl",
+    name: "SegmentedControl (gel)",
     path: "@/primitives/controls",
-    description: "Tab-like selector with sliding pill indicator. Gel variant uses glass active state.",
+    description: "Gel segmented control with glass active pill and translucent background",
     implementation: IMPL_SEGMENTED,
     props: [
       { name: "options", type: "string[]" },
       { name: "value", type: "string" },
       { name: "onChange", type: "(v: string) => void" },
-      { name: "variant", type: "enum", options: ["flat", "gel"], default: '"flat"' },
+      { name: "variant", type: "enum", options: ["flat", "gel"], default: '"gel"' },
       { name: "className", type: "string" },
     ],
   },
   {
-    name: "Slider",
+    name: "Slider (gel)",
     path: "@/primitives/controls",
-    description: "Range slider. Flat: solid thumb with hover glow. Gel: glass thumb with translucent track.",
+    description: "Gel slider with glass thumb and translucent track",
     implementation: IMPL_SLIDER,
     props: [
       { name: "min", type: "number", default: "0" },
@@ -104,18 +100,18 @@ const COMPONENTS = [
       { name: "value", type: "number" },
       { name: "onChange", type: "(v: number) => void" },
       { name: "showValue", type: "boolean", default: "false" },
-      { name: "variant", type: "enum", options: ["flat", "gel"], default: '"flat"' },
+      { name: "variant", type: "enum", options: ["flat", "gel"], default: '"gel"' },
       { name: "className", type: "string" },
     ],
   },
 ];
 
-export function ControlsSource() {
+export function GlassControlsSource() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
     const handler = () => setOpen(true);
-    const btn = document.querySelector('[data-view-source="controls"]');
+    const btn = document.querySelector('[data-view-source="glass-controls"]');
     btn?.addEventListener("click", handler);
     return () => btn?.removeEventListener("click", handler);
   }, []);
@@ -124,7 +120,7 @@ export function ControlsSource() {
     <ViewSourceModal
       open={open}
       onClose={() => setOpen(false)}
-      title="Controls"
+      title="Glass Controls"
       code={SOURCE_CODE}
       components={COMPONENTS}
     />

@@ -905,7 +905,7 @@
       "id": "toggle",
       "name": "Toggle",
       "displayName": "Toggle Switch",
-      "description": "On/off toggle switch (flat style)",
+      "description": "On/off switch with flat and gel variants. Contrast-aware.",
       "layer": "primitive",
       "category": "form",
       "status": "stable",
@@ -913,9 +913,26 @@
       "path": "src/primitives/controls/Toggle.tsx",
       "isReact": true,
       "props": {
-        "on": {
+        "checked": {
           "type": "boolean",
-          "default": false
+          "default": "false"
+        },
+        "onChange": {
+          "type": "(v: boolean) => void"
+        },
+        "variant": {
+          "type": "enum",
+          "options": [
+            "flat",
+            "gel"
+          ],
+          "default": "flat"
+        },
+        "className": {
+          "type": "string"
+        },
+        "style": {
+          "type": "CSSProperties"
         }
       },
       "documentedOn": "/design-system/primitives",
@@ -931,7 +948,7 @@
       "id": "checkbox",
       "name": "Checkbox",
       "displayName": "Checkbox",
-      "description": "Checkable box with checkmark (flat style)",
+      "description": "Check/uncheck control with flat and gel variants.",
       "layer": "primitive",
       "category": "form",
       "status": "stable",
@@ -941,7 +958,24 @@
       "props": {
         "checked": {
           "type": "boolean",
-          "default": false
+          "default": "false"
+        },
+        "onChange": {
+          "type": "(v: boolean) => void"
+        },
+        "variant": {
+          "type": "enum",
+          "options": [
+            "flat",
+            "gel"
+          ],
+          "default": "flat"
+        },
+        "className": {
+          "type": "string"
+        },
+        "style": {
+          "type": "CSSProperties"
         }
       },
       "documentedOn": "/design-system/primitives",
@@ -956,7 +990,7 @@
       "id": "radio",
       "name": "Radio",
       "displayName": "Radio Button",
-      "description": "Single-select radio button (flat style)",
+      "description": "Single-select radio button with flat and gel variants.",
       "layer": "primitive",
       "category": "form",
       "status": "stable",
@@ -966,7 +1000,24 @@
       "props": {
         "selected": {
           "type": "boolean",
-          "default": false
+          "default": "false"
+        },
+        "onChange": {
+          "type": "(v: boolean) => void"
+        },
+        "variant": {
+          "type": "enum",
+          "options": [
+            "flat",
+            "gel"
+          ],
+          "default": "flat"
+        },
+        "className": {
+          "type": "string"
+        },
+        "style": {
+          "type": "CSSProperties"
         }
       },
       "documentedOn": "/design-system/primitives",
@@ -981,7 +1032,7 @@
       "id": "segmented-control",
       "name": "Segmented Control",
       "displayName": "Segmented Control",
-      "description": "Multi-option pill selector (flat style)",
+      "description": "Tab-like selector with sliding pill indicator. Flat and gel variants.",
       "layer": "primitive",
       "category": "form",
       "status": "stable",
@@ -990,10 +1041,27 @@
       "isReact": true,
       "props": {
         "options": {
-          "type": "string"
+          "type": "string[]"
         },
         "value": {
           "type": "string"
+        },
+        "onChange": {
+          "type": "(v: string) => void"
+        },
+        "variant": {
+          "type": "enum",
+          "options": [
+            "flat",
+            "gel"
+          ],
+          "default": "flat"
+        },
+        "className": {
+          "type": "string"
+        },
+        "style": {
+          "type": "CSSProperties"
         }
       },
       "documentedOn": "/design-system/primitives",
@@ -2362,7 +2430,7 @@
       "status": "stable",
       "path": "src/primitives/feedback/Alert.tsx",
       "exportName": "Alert",
-      "description": "Inline alert box with variant colors and dismiss",
+      "description": "Status alert with icon, title, description. 4 variants: info, success, warning, error. Glass-style with left gradient glow.",
       "version": "0.18.0",
       "tags": [
         "alert",
@@ -2383,9 +2451,21 @@
         "title": {
           "type": "string"
         },
+        "description": {
+          "type": "string"
+        },
         "dismissible": {
           "type": "boolean",
-          "default": false
+          "default": "false"
+        },
+        "onDismiss": {
+          "type": "() => void"
+        },
+        "className": {
+          "type": "string"
+        },
+        "style": {
+          "type": "CSSProperties"
         }
       }
     },
@@ -2398,7 +2478,7 @@
       "status": "stable",
       "path": "src/primitives/feedback/Toast.tsx",
       "exportName": "Toast",
-      "description": "Temporary popup notification",
+      "description": "Temporary notification popup with left gradient glow. Auto-dismisses after duration. Fixed position bottom-right.",
       "version": "0.18.0",
       "tags": [
         "toast",
@@ -2420,9 +2500,22 @@
           "type": "string",
           "required": true
         },
+        "show": {
+          "type": "boolean",
+          "default": "false"
+        },
+        "onClose": {
+          "type": "() => void"
+        },
         "duration": {
           "type": "number",
-          "default": 3000
+          "default": "3000"
+        },
+        "className": {
+          "type": "string"
+        },
+        "style": {
+          "type": "CSSProperties"
         }
       }
     },
