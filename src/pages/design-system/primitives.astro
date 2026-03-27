@@ -235,17 +235,17 @@ import { InputFieldsSource } from "@/components/block/InputFieldsSource";
           </div>
         </div>
 
-        <!-- 2. Haze Card -->
+        <!-- 2. Haze Card (glass + haze frost → use glass-type text) -->
         <div class="glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5 min-h-[200px] flex flex-col justify-between">
           <div class="absolute inset-0 pointer-events-none ds-card-frost-haze" style="height: 140px;" />
           <div class="relative z-[1]">
-            <span class="text-[10px] font-[650] uppercase tracking-[0.06em] contrast-muted px-2 py-0.5 rounded-full bg-black/[0.06] dark:bg-white/[0.08] inline-block mb-2">Haze</span>
-            <p class="text-[13px] font-[600] contrast-text mb-1">glass-1 + ds-card-frost-haze</p>
-            <p class="text-[11px] contrast-muted">Partial see-through card. 35% frost for showcasing visual elements with some background context.</p>
+            <span class="text-[10px] font-[650] uppercase tracking-[0.06em] glass-type-sub px-2 py-0.5 rounded-full bg-black/[0.06] dark:bg-white/[0.08] inline-block mb-2">Haze</span>
+            <p class="text-[13px] font-[600] glass-type-title mb-1">glass-1 + ds-card-frost-haze</p>
+            <p class="text-[11px] glass-type-sub">Partial see-through card. 35% frost for showcasing visual elements with some background context.</p>
           </div>
           <div class="relative z-[1] flex items-center gap-2 mt-3">
-            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded-[4px] bg-black/[0.05] dark:bg-white/[0.08] contrast-muted">backdrop-filter</span>
-            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded-[4px] bg-black/[0.05] dark:bg-white/[0.08] contrast-muted">frost-35%</span>
+            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded-[4px] bg-black/[0.05] dark:bg-white/[0.08] glass-type-sub">backdrop-filter</span>
+            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded-[4px] bg-black/[0.05] dark:bg-white/[0.08] glass-type-sub">frost-35%</span>
           </div>
         </div>
 
