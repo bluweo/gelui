@@ -78,6 +78,9 @@ const COMPONENTS = [
   { name: "token-hero-frost", path: "CSS class", description: "Directional frost — left-to-right gradient for text + image layouts" },
   { name: "glass-1", path: "CSS class", description: "Standard glass surface with backdrop blur" },
   { name: "glass-specular", path: "CSS class", description: "Adds noise texture + specular lighting filter" },
+  { name: "gel-glass", path: "CSS class", description: "Gel standard — volumetric inset shadows + specular highlight" },
+  { name: "gel-card-floating", path: "CSS class", description: "Gel floating — elevated outer shadow, appears to float above background" },
+  { name: "gel-card-inset", path: "CSS class", description: "Gel inset — pressed/recessed look with reversed inset shadows" },
 ];
 
 export function CardPanelsSource() {
