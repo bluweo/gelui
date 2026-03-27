@@ -1,7 +1,7 @@
 import type { BaseProps } from "../types";
 
 interface CardProps extends BaseProps {
-  variant?: "glass" | "gel" | "solid" | "transparent";
+  variant?: "glass" | "gel" | "gel-floating" | "gel-inset" | "solid" | "transparent";
   frost?: "standard" | "haze" | "directional" | "none";
 }
 
@@ -15,6 +15,8 @@ export function Card({
   const variantClasses: Record<string, string> = {
     glass: "glass-1 glass-specular",
     gel: "gel-glass glass-specular",
+    "gel-floating": "gel-glass glass-specular gel-card-floating",
+    "gel-inset": "gel-card-inset",
     solid: "",
     transparent: "",
   };

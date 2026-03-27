@@ -40,16 +40,34 @@ const SOURCE_CODE = `import { Card } from "@/primitives/surfaces";
 <Card variant="solid" frost="none">
   <h3>Solid Card</h3>
   <p>Fully opaque. Maximum contrast for critical content.</p>
+</Card>
+
+{/* 7. Gel Standard — volumetric shadows + specular */}
+<Card variant="gel">
+  <h3>Gel Standard</h3>
+  <p>Premium feel with volumetric inset shadows.</p>
+</Card>
+
+{/* 8. Gel Floating — elevated with stronger outer shadow */}
+<Card variant="gel-floating">
+  <h3>Gel Floating</h3>
+  <p>Appears to float above the background.</p>
+</Card>
+
+{/* 9. Gel Inset — pressed/recessed look */}
+<Card variant="gel-inset">
+  <h3>Gel Inset</h3>
+  <p>Pressed into the background. For input wells and nested containers.</p>
 </Card>`;
 
 const COMPONENTS = [
   {
     name: "Card",
     path: "@/primitives/surfaces",
-    description: "Glass card container with configurable variant and frost zone",
+    description: "Glass card container with 6 variants including 3 gel styles",
     implementation: IMPL_CARD,
     props: [
-      { name: "variant", type: "enum", options: ["glass", "gel", "solid", "transparent"], default: '"glass"' },
+      { name: "variant", type: "enum", options: ["glass", "gel", "gel-floating", "gel-inset", "solid", "transparent"], default: '"glass"' },
       { name: "frost", type: "enum", options: ["standard", "haze", "directional", "none"], default: '"standard"' },
       { name: "className", type: "string" },
       { name: "style", type: "CSSProperties" },
