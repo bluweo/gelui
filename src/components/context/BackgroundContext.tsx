@@ -270,12 +270,25 @@ export function BackgroundProvider({ children }: { children: ReactNode }) {
   const openPicker = useCallback(() => setPickerOpen(true), []);
   const closePicker = useCallback(() => setPickerOpen(false), []);
 
-  // Listen for custom event from Astro components
+  // Listen for custom events from Astro components
   useEffect(() => {
-    const handler = () => setPickerOpen(true);
-    window.addEventListener("gelui:open-background", handler);
-    return () => window.removeEventListener("gelui:open-background", handler);
-  }, []);
+    const openHandler = () => setPickerOpen(true);
+    window.addEventListener("gelui:open-background", openHandler);
+
+    // Set background from external components (e.g., AdaptiveColorToggle)
+    const setHandler = (e: Event) => {
+      const detail = (e as CustomEvent).detail;
+      if (detail?.id && detail?.src) {
+        setBg(detail.id, detail.src, detail.type || "image");
+      }
+    };
+    window.addEventListener("gelui:set-background", setHandler);
+
+    return () => {
+      window.removeEventListener("gelui:open-background", openHandler);
+      window.removeEventListener("gelui:set-background", setHandler);
+    };
+  }, [setBg]);
 
   return (
     <BackgroundContext.Provider
