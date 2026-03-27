@@ -1,6 +1,6 @@
 {
-  "version": "1.0.0",
-  "lastUpdated": "2026-03-25",
+  "version": "1.1.0",
+  "lastUpdated": "2026-03-27",
   "components": [
     {
       "id": "heading",
@@ -84,7 +84,14 @@
       "version": "0.8.0",
       "path": "src/primitives/typography/Caption.tsx",
       "isReact": false,
-      "props": {},
+      "props": {
+        "className": {
+          "type": "string"
+        },
+        "style": {
+          "type": "CSSProperties"
+        }
+      },
       "documentedOn": "/design-system/primitives",
       "section": "Typography",
       "tags": [
@@ -104,7 +111,27 @@
       "version": "0.20.1",
       "path": "src/primitives/typography/Overline.tsx",
       "isReact": false,
-      "props": {},
+      "props": {
+        "size": {
+          "type": "enum",
+          "options": [
+            "sm",
+            "md",
+            "lg"
+          ],
+          "default": "md"
+        },
+        "muted": {
+          "type": "boolean",
+          "default": true
+        },
+        "className": {
+          "type": "string"
+        },
+        "style": {
+          "type": "CSSProperties"
+        }
+      },
       "documentedOn": "/design-system/primitives",
       "section": "Typography",
       "tags": [
@@ -125,7 +152,14 @@
       "version": "0.8.0",
       "path": "src/primitives/typography/Label.tsx",
       "isReact": false,
-      "props": {},
+      "props": {
+        "className": {
+          "type": "string"
+        },
+        "style": {
+          "type": "CSSProperties"
+        }
+      },
       "documentedOn": "/design-system/primitives",
       "section": "Typography",
       "tags": [
@@ -324,11 +358,11 @@
       "id": "icon-button",
       "name": "Icon Button",
       "displayName": "Icon Button",
-      "description": "Circular gel button for icon-only actions",
+      "description": "Contrast-aware circle icon button. Adapts to glass panels and dark backgrounds via --icon-btn-* CSS vars.",
       "layer": "primitive",
       "category": "interactive",
       "status": "stable",
-      "version": "0.1.0",
+      "version": "0.43.0",
       "path": "src/primitives/buttons/IconButton.tsx",
       "isReact": false,
       "props": {
@@ -336,9 +370,22 @@
           "type": "enum",
           "options": [
             "sm",
-            "md"
+            "md",
+            "lg"
           ],
           "default": "md"
+        },
+        "title": {
+          "type": "string"
+        },
+        "onClick": {
+          "type": "() => void"
+        },
+        "className": {
+          "type": "string"
+        },
+        "style": {
+          "type": "CSSProperties"
         }
       },
       "documentedOn": "/design-system/primitives",
@@ -360,7 +407,28 @@
       "version": "0.8.0",
       "path": "src/primitives/buttons/LinkButton.tsx",
       "isReact": false,
-      "props": {},
+      "props": {
+        "href": {
+          "type": "string"
+        },
+        "underline": {
+          "type": "boolean",
+          "default": false
+        },
+        "arrow": {
+          "type": "boolean",
+          "default": false
+        },
+        "onClick": {
+          "type": "() => void"
+        },
+        "className": {
+          "type": "string"
+        },
+        "style": {
+          "type": "CSSProperties"
+        }
+      },
       "documentedOn": "/design-system/primitives",
       "section": "Buttons",
       "tags": [
@@ -472,11 +540,11 @@
       "id": "ds-card",
       "name": "Card",
       "displayName": "DS Card",
-      "description": "Glass card with optional frost zone for readable content",
+      "description": "Glass card container with 6 variants (glass, gel, gel-floating, gel-inset, solid, transparent) and frost overlay options.",
       "layer": "primitive",
       "category": "surface",
       "status": "stable",
-      "version": "0.1.0",
+      "version": "0.42.0",
       "path": "src/components/card/DSCard.astro",
       "isReact": false,
       "props": {
@@ -493,6 +561,18 @@
         },
         "description": {
           "type": "string"
+        },
+        "variant": {
+          "type": "enum",
+          "options": [
+            "glass",
+            "gel",
+            "gel-floating",
+            "gel-inset",
+            "solid",
+            "transparent"
+          ],
+          "default": "glass"
         }
       },
       "slots": {
@@ -1505,7 +1585,14 @@
       "version": "0.8.0",
       "path": "src/primitives/layout/Center.tsx",
       "isReact": false,
-      "props": {},
+      "props": {
+        "className": {
+          "type": "string"
+        },
+        "style": {
+          "type": "CSSProperties"
+        }
+      },
       "slots": {
         "default": {
           "accepts": [
@@ -1533,7 +1620,15 @@
       "version": "0.8.0",
       "path": "src/primitives/layout/Spacer.tsx",
       "isReact": false,
-      "props": {},
+      "props": {
+        "size": {
+          "type": "string",
+          "default": "16px"
+        },
+        "className": {
+          "type": "string"
+        }
+      },
       "documentedOn": "/design-system/primitives",
       "section": "Layout",
       "tags": [
@@ -1929,23 +2024,26 @@
       "description": "Glass-styled dropdown select with keyboard navigation",
       "layer": "primitive",
       "category": "form",
-      "status": "planned",
-      "version": "0.12.0",
+      "status": "stable",
+      "version": "0.33.0",
       "path": "src/primitives/inputs/Select.tsx",
       "exportName": "Select",
       "isReact": true,
       "props": {
         "options": {
-          "type": "string",
-          "description": "Array of {value, label} options"
+          "type": "SelectOption[]"
         },
         "value": {
-          "type": "string",
-          "description": "Selected value"
+          "type": "string"
+        },
+        "onChange": {
+          "type": "(value: string) => void"
         },
         "placeholder": {
-          "type": "string",
-          "default": "Select..."
+          "type": "string"
+        },
+        "className": {
+          "type": "string"
         }
       },
       "documentedOn": "/design-system/primitives",
@@ -1964,8 +2062,8 @@
       "description": "Range slider with flat and glass variants",
       "layer": "primitive",
       "category": "interactive",
-      "status": "planned",
-      "version": "0.12.0",
+      "status": "stable",
+      "version": "0.33.0",
       "path": "src/primitives/controls/Slider.tsx",
       "exportName": "Slider",
       "isReact": true,
@@ -1978,9 +2076,23 @@
           "type": "number",
           "default": 100
         },
-        "value": {
+        "step": {
           "type": "number",
-          "default": 50
+          "default": 1
+        },
+        "value": {
+          "type": "number"
+        },
+        "onChange": {
+          "type": "(value: number) => void"
+        },
+        "variant": {
+          "type": "enum",
+          "options": [
+            "flat",
+            "gel"
+          ],
+          "default": "flat"
         }
       },
       "documentedOn": "/design-system/primitives",
@@ -1999,15 +2111,17 @@
       "description": "Draggable glass modal with backdrop blur",
       "layer": "primitive",
       "category": "overlay",
-      "status": "planned",
-      "version": "0.12.0",
+      "status": "stable",
+      "version": "0.33.0",
       "path": "src/primitives/feedback/Modal.tsx",
       "exportName": "Modal",
       "isReact": true,
       "props": {
         "open": {
-          "type": "boolean",
-          "default": false
+          "type": "boolean"
+        },
+        "onClose": {
+          "type": "() => void"
         },
         "title": {
           "type": "string"
@@ -2020,6 +2134,9 @@
             "lg"
           ],
           "default": "md"
+        },
+        "footer": {
+          "type": "ReactNode"
         }
       },
       "documentedOn": "/design-system/components",
@@ -2038,15 +2155,14 @@
       "description": "Hover-triggered glass tooltip with arrow",
       "layer": "primitive",
       "category": "overlay",
-      "status": "planned",
-      "version": "0.12.0",
+      "status": "stable",
+      "version": "0.33.0",
       "path": "src/primitives/feedback/Tooltip.tsx",
       "exportName": "Tooltip",
       "isReact": true,
       "props": {
         "content": {
-          "type": "string",
-          "required": true
+          "type": "string"
         },
         "position": {
           "type": "enum",
@@ -2057,6 +2173,9 @@
             "right"
           ],
           "default": "top"
+        },
+        "className": {
+          "type": "string"
         }
       },
       "documentedOn": "/design-system/primitives",
@@ -2075,19 +2194,24 @@
       "description": "Semi-transparent backdrop with blur option",
       "layer": "primitive",
       "category": "overlay",
-      "status": "planned",
-      "version": "0.12.0",
+      "status": "stable",
+      "version": "0.33.0",
       "path": "src/primitives/feedback/Overlay.tsx",
       "exportName": "Overlay",
       "isReact": true,
       "props": {
         "open": {
-          "type": "boolean",
-          "default": false
+          "type": "boolean"
+        },
+        "onClick": {
+          "type": "() => void"
         },
         "blur": {
           "type": "boolean",
           "default": true
+        },
+        "className": {
+          "type": "string"
         }
       },
       "documentedOn": "/design-system/components",
@@ -2764,7 +2888,14 @@
         "key",
         "kbd"
       ],
-      "props": {}
+      "props": {
+        "keys": {
+          "type": "string[]"
+        },
+        "className": {
+          "type": "string"
+        }
+      }
     },
     {
       "id": "view-source-modal",
