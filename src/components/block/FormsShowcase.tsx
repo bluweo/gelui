@@ -15,10 +15,10 @@ export function FormsShowcase() {
         <div className="py-2.5 px-3.5 bg-[var(--theme-header-bg)] border-b border-[var(--theme-divider)]">
           <span className="type-overline text-[var(--theme-fg-muted)]">OTP / Pin Input</span>
         </div>
-        <div className="p-4 flex flex-col gap-4">
-          {/* 6-digit OTP */}
-          <div>
-            <span className="type-caption text-[var(--theme-fg-subtle)] block mb-2.5">6-digit verification code</span>
+        {/* 6-digit verification code */}
+        <div className="flex items-center justify-between py-3.5 px-4 border-b border-[var(--theme-divider)]">
+          <span className="type-label text-[var(--theme-fg)]">6-digit code</span>
+          <div className="w-[70%] flex justify-end">
             <OtpInput
               length={6}
               value={otp}
@@ -28,16 +28,19 @@ export function FormsShowcase() {
               }}
             />
           </div>
-          {/* 4-digit PIN + Error state — side by side */}
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <span className="type-caption text-[var(--theme-fg-subtle)] block mb-2.5">4-digit PIN (compact)</span>
-              <OtpInput length={4} size="sm" />
-            </div>
-            <div>
-              <span className="type-caption text-[var(--theme-fg-subtle)] block mb-2.5">Error state</span>
-              <OtpInput length={6} error value="12" size="sm" disabled />
-            </div>
+        </div>
+        {/* 4-digit PIN compact */}
+        <div className="flex items-center justify-between py-3.5 px-4 border-b border-[var(--theme-divider)]">
+          <span className="type-label text-[var(--theme-fg)]">4-digit PIN</span>
+          <div className="w-[70%] flex justify-end">
+            <OtpInput length={4} size="sm" />
+          </div>
+        </div>
+        {/* Error state */}
+        <div className="flex items-center justify-between py-3.5 px-4">
+          <span className="type-label text-[var(--theme-fg-subtle)]">Error state</span>
+          <div className="w-[70%] flex justify-end">
+            <OtpInput length={6} error value="12" size="sm" disabled />
           </div>
         </div>
       </div>
