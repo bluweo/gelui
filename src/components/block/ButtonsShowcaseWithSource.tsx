@@ -62,6 +62,11 @@ export function ButtonsRightColumn() {
       <Button variant="glass" size="md" shape="pill">Glass Pill</Button>
       <Button variant="glass" size="md" shape="rounded">Glass Rounded</Button>
       <Button variant="gel" size="md" disabled>Disabled</Button>
+
+      {/* Icon Buttons — utility/tool actions */}
+      <IconButton size="sm" title="Code"><CodeIcon /></IconButton>
+      <IconButton size="md" title="Settings"><SettingsIcon /></IconButton>
+      <IconButton size="lg" title="Search"><SearchIcon /></IconButton>
     </div>
   );
 }`;
@@ -100,11 +105,11 @@ const COMPONENTS = [
   {
     name: "IconButton",
     path: "@/primitives/buttons",
-    description: "Circle icon button with size variants",
+    description: "Contrast-aware circle icon button. Adapts to glass panels and dark backgrounds via --icon-btn-* CSS vars. Use for tool/utility actions (settings, close, code view).",
     implementation: IMPL_ICONBUTTON,
     props: [
-      { name: "icon", type: "string", default: '"+"' },
       { name: "size", type: "enum", options: ["sm", "md", "lg"], default: '"md"' },
+      { name: "title", type: "string" },
       { name: "onClick", type: "() => void" },
       { name: "className", type: "string" },
       { name: "style", type: "CSSProperties" },
