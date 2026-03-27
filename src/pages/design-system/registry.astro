@@ -2,6 +2,7 @@
 import DSLayout from "@/components/layout/DSLayout.astro";
 import RegistryHero from "@/components/block/RegistryHero.astro";
 import { RegistryViewer } from "@/components/block/RegistryViewer";
+import { RegistryJsonViewer } from "@/components/block/RegistryJsonViewer";
 import registryData from "@/registry/registry.json";
 
 const components = registryData.components;
@@ -31,28 +32,49 @@ const byStatus = components.reduce((acc: Record<string, number>, c: any) => {
          ═══════════════════════════════════ -->
     <div data-section="Registry" class="col-span-full glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
       <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 160px;" />
-      <div class="relative flex flex-col gap-1 mb-6 pt-1 pl-1">
-        <span class="type-overline text-black/40 dark:text-white/40 mb-1">Developer Tools</span>
-        <h2 class="type-h2 text-black dark:text-white mb-1">Component Registry</h2>
-        <p class="type-body-sm text-black/60 dark:text-white/55">Search, filter, and explore all registered components</p>
-        <!-- Validation indicator -->
-        <div class="flex items-center gap-3 mt-3 flex-wrap">
-          <span class="inline-flex items-center gap-1.5 text-[11px] font-mono px-2.5 py-1 rounded-full bg-green-500/10 text-green-600 dark:text-green-400">
-            <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
-            {totalComponents} components
-          </span>
-          <span class="inline-flex items-center gap-1.5 text-[11px] font-mono px-2.5 py-1 rounded-full bg-black/[0.04] dark:bg-white/[0.06] text-black/50 dark:text-white/40">
-            Updated {lastUpdated}
-          </span>
-          {Object.entries(byLayer).map(([layer, count]) => (
-            <span class="text-[10px] font-mono text-black/35 dark:text-white/30">
-              {layer}: {count}
-            </span>
-          ))}
+      <div class="relative flex items-start justify-between mb-6 pt-1 pl-1">
+        <div class="flex flex-col gap-1">
+          <span class="type-overline text-black/40 dark:text-white/40 mb-1">Developer Tools</span>
+          <h2 class="type-h2 text-black dark:text-white mb-1">Component Registry</h2>
+          <p class="type-body-sm text-black/60 dark:text-white/55">Search, filter, and explore all registered components</p>
         </div>
+        <button
+          id="view-registry-json"
+          class="prim-btn-base prim-btn-md prim-btn-pill prim-btn-ghost shrink-0 mt-1"
+          title="View registry.json — master file for AI automation"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="16" y1="13" x2="8" y2="13" /><line x1="16" y1="17" x2="8" y2="17" /><polyline points="10 9 9 9 8 9" /></svg>
+          registry.json
+        </button>
+      </div>
+      <!-- Validation indicator -->
+      <div class="relative flex items-center gap-3 mb-6 pl-1 flex-wrap">
+        <span class="inline-flex items-center gap-1.5 text-[11px] font-mono px-2.5 py-1 rounded-full bg-green-500/10 text-green-600 dark:text-green-400">
+          <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+          {totalComponents} components
+        </span>
+        <span class="inline-flex items-center gap-1.5 text-[11px] font-mono px-2.5 py-1 rounded-full bg-black/[0.04] dark:bg-white/[0.06] text-black/50 dark:text-white/40">
+          Updated {lastUpdated}
+        </span>
+        {Object.entries(byLayer).map(([layer, count]) => (
+          <span class="text-[10px] font-mono text-black/35 dark:text-white/30">
+            {layer}: {count}
+          </span>
+        ))}
       </div>
 
+      <script>
+        function initRegistryJsonBtn() {
+          document.getElementById('view-registry-json')?.addEventListener('click', () => {
+            window.dispatchEvent(new CustomEvent('gelui:view-registry-json'));
+          });
+        }
+        initRegistryJsonBtn();
+        document.addEventListener('astro:page-load', initRegistryJsonBtn);
+      </script>
+
       <RegistryViewer client:load components={components} />
+      <RegistryJsonViewer client:load />
     </div>
 
   </div>
