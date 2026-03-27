@@ -34,7 +34,7 @@ export function BadgesShowcaseV2() {
         ]).map((dot, i) => (
           <div key={dot.label} className={`flex items-center justify-between py-2.5 px-3.5 ${i < 3 ? "border-b border-[var(--theme-divider)]" : ""}`}>
             <span className="type-label text-[var(--theme-fg)]">{dot.label}</span>
-            <span className="w-3 h-3 rounded-full shrink-0" style={{ background: dot.color }} />
+            <span className="w-3 h-3 rounded-full shrink-0 transition-transform duration-150 hover:scale-150" style={{ background: dot.color }} />
           </div>
         ))}
       </div>
@@ -68,7 +68,7 @@ export function BadgesShowcaseV2() {
             {["Active", "Inactive", "Another"].map((chip) => (
               <button
                 key={chip}
-                className={`type-overline py-[5px] px-3.5 rounded-[var(--glass-radius-pill)] border border-[var(--theme-ghost-border)] cursor-pointer transition-all duration-150 ease-in-out ${activeChip === chip ? "bg-[var(--theme-bg-solid)] text-[var(--theme-fg-on-solid)]" : "bg-transparent text-[var(--theme-fg)]"}`}
+                className={`type-overline py-[5px] px-3.5 rounded-[var(--glass-radius-pill)] border border-[var(--theme-ghost-border)] cursor-pointer transition-all duration-150 ease-in-out hover:scale-105 hover:shadow-sm ${activeChip === chip ? "bg-[var(--theme-bg-solid)] text-[var(--theme-fg-on-solid)]" : "bg-transparent text-[var(--theme-fg)]"}`}
                 onClick={() => setActiveChip(chip)}
               >
                 {chip}
@@ -95,7 +95,7 @@ export function BadgesShowcaseV2() {
             ]).map((a) => (
               <div key={a.label} className="flex flex-col items-center gap-1">
                 <div
-                  className="rounded-full flex items-center justify-center font-semibold text-white overflow-hidden"
+                  className="rounded-full flex items-center justify-center font-semibold text-white overflow-hidden transition-transform duration-150 hover:scale-110 cursor-default"
                   style={{
                     width: a.size,
                     height: a.size,
