@@ -3099,6 +3099,51 @@
           "default": false
         }
       }
+    },
+    {
+      "id": "notification-badge",
+      "name": "NotificationBadge",
+      "category": "data",
+      "layer": "primitive",
+      "path": "src/primitives/data/NotificationBadge.tsx",
+      "exportName": "NotificationBadge",
+      "isReact": true,
+      "status": "stable",
+      "version": "0.47.0",
+      "description": "Counter badge overlay on icons — supports count, max, dot mode, and custom colors.",
+      "tags": [
+        "badge",
+        "notification",
+        "counter",
+        "dot",
+        "indicator"
+      ],
+      "props": {
+        "count": {
+          "type": "number"
+        },
+        "max": {
+          "type": "number",
+          "default": 99
+        },
+        "dot": {
+          "type": "boolean",
+          "default": false
+        },
+        "color": {
+          "type": "string",
+          "default": "#FF3B30"
+        },
+        "children": {
+          "type": "ReactNode"
+        },
+        "className": {
+          "type": "string"
+        },
+        "style": {
+          "type": "CSSProperties"
+        }
+      }
     }
   ]
 }

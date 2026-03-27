@@ -3010,6 +3010,42 @@ code:not([data-font-preview]), pre:not([data-font-preview]), kbd, samp { font-fa
   color: var(--badge-text, var(--theme-badge-text));
 }
 
+/* ── Notification Badge ── */
+@utility prim-notif-badge {
+  position: relative;
+  display: inline-flex;
+}
+
+@utility prim-notif-badge-count {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 9999px;
+  background: var(--notif-color, #FF3B30);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  font-family: var(--font-ui);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  border: 2px solid var(--theme-table-bg, #fff);
+  box-sizing: content-box;
+}
+
+@utility prim-notif-badge-dot {
+  min-width: 8px;
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  top: -2px;
+  right: -2px;
+}
+
 /* ── Stat ── */
 @utility prim-stat {
   padding: 20px;

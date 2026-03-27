@@ -8,6 +8,8 @@ import IMPL_TAG from "@/primitives/data/Tag.tsx?raw";
 import IMPL_AVATAR from "@/primitives/data/Avatar.tsx?raw";
 import IMPL_STAT from "@/primitives/data/Stat.tsx?raw";
 import IMPL_COLORSWATCH from "@/primitives/data/ColorSwatch.tsx?raw";
+import IMPL_NOTIFBADGE from "@/primitives/data/NotificationBadge.tsx?raw";
+import IMPL_TOOLTIP from "@/primitives/feedback/Tooltip.tsx?raw";
 
 const SOURCE_CODE = `import { Badge, Tag, Avatar } from "@/primitives/data";
 import { useDarkMode } from "@/primitives/hooks/useDarkMode";
@@ -136,6 +138,30 @@ const COMPONENTS = [
   { name: "Avatar", path: "@/primitives/data", description: "User avatar with initials, image, size, and status dot", implementation: IMPL_AVATAR },
   { name: "Stat", path: "@/primitives/data", description: "Big number + label + trend indicator", implementation: IMPL_STAT },
   { name: "ColorSwatch", path: "@/primitives/data", description: "Color preview square with optional hex label", implementation: IMPL_COLORSWATCH },
+  {
+    name: "NotificationBadge",
+    path: "@/primitives/data",
+    description: "Counter badge overlay on icons — count, max, dot mode",
+    implementation: IMPL_NOTIFBADGE,
+    props: [
+      { name: "count", type: "number" },
+      { name: "max", type: "number", default: "99" },
+      { name: "dot", type: "boolean", default: "false" },
+      { name: "color", type: "string", default: '"#FF3B30"' },
+      { name: "children", type: "ReactNode" },
+    ],
+  },
+  {
+    name: "Tooltip",
+    path: "@/primitives/feedback",
+    description: "Hover tooltip with arrow — top, bottom, left, right positions",
+    implementation: IMPL_TOOLTIP,
+    props: [
+      { name: "content", type: "string" },
+      { name: "position", type: "enum", options: ["top", "bottom", "left", "right"], default: '"top"' },
+      { name: "children", type: "ReactNode" },
+    ],
+  },
 ];
 
 export function BadgesShowcaseWithSource() {

@@ -5,3 +5,4 @@ export { ColorSwatch } from "./ColorSwatch";
 export { Table } from "./Table";
 export { Stat } from "./Stat";
 export { EmptyState } from "./EmptyState";
+export { NotificationBadge } from "./NotificationBadge";
