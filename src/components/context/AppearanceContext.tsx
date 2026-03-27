@@ -464,9 +464,14 @@ export function AppearanceProvider({ children }: { children: ReactNode }) {
     };
     window.addEventListener("gelui:reset-fonts", resetHandler);
 
+    // Open appearance modal from Astro
+    const openAppHandler = () => setModalOpen(true);
+    window.addEventListener("gelui:open-appearance", openAppHandler);
+
     return () => {
       window.removeEventListener("gelui:open-font-picker", handler);
       window.removeEventListener("gelui:reset-fonts", resetHandler);
+      window.removeEventListener("gelui:open-appearance", openAppHandler);
     };
   }, []);
 

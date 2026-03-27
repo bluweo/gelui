@@ -270,6 +270,13 @@ export function BackgroundProvider({ children }: { children: ReactNode }) {
   const openPicker = useCallback(() => setPickerOpen(true), []);
   const closePicker = useCallback(() => setPickerOpen(false), []);
 
+  // Listen for custom event from Astro components
+  useEffect(() => {
+    const handler = () => setPickerOpen(true);
+    window.addEventListener("gelui:open-background", handler);
+    return () => window.removeEventListener("gelui:open-background", handler);
+  }, []);
+
   return (
     <BackgroundContext.Provider
       value={{
