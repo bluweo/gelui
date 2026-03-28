@@ -3272,31 +3272,48 @@ code:not([data-font-preview]), pre:not([data-font-preview]), kbd, samp { font-fa
 
 /* ── Stat ── */
 @utility prim-stat {
+  --stat-card-bg: #ffffff;
   padding: 20px;
   border-radius: var(--glass-radius-sm, 10px);
-  background: var(--theme-header-bg);
+  background: var(--stat-card-bg);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--theme-divider);
   font-family: var(--font-body);
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 
-@utility prim-stat-icon {
+[data-theme="dark"] .prim-stat {
+  --stat-card-bg: #1a1a1e;
+}
+
+@utility prim-stat-icon-badge {
   display: flex;
-  color: var(--theme-fg-subtle);
-  margin-bottom: 4px;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  flex-shrink: 0;
 }
 
 @utility prim-stat-value {
-  font-size: 32px;
+  font-size: 28px;
   font-weight: 700;
-  font-family: var(--font-ui);
+  font-family: var(--font-body);
   color: var(--theme-fg);
-  line-height: 1;
+  line-height: 1.1;
   font-variant-numeric: tabular-nums;
+  margin-top: 4px;
+}
+
+@utility prim-stat-trend-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
 }
 
 @utility prim-stat-trend {
@@ -3305,16 +3322,23 @@ code:not([data-font-preview]), pre:not([data-font-preview]), kbd, samp { font-fa
   gap: 2px;
   font-size: 13px;
   font-weight: 600;
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
 }
 
-@utility prim-stat-label {
-  font-size: 12px;
+@utility prim-stat-trend-label {
+  font-size: 10px;
   font-weight: 500;
   font-family: var(--font-ui);
   text-transform: uppercase;
   letter-spacing: 0.04em;
   color: var(--theme-fg-subtle);
+}
+
+@utility prim-stat-label {
+  font-size: 13px;
+  font-weight: 500;
+  font-family: var(--font-body);
+  color: var(--theme-fg-muted);
 }
 
 /* ── Avatar ── */

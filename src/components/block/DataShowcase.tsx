@@ -30,32 +30,39 @@ export function DataShowcase() {
       </div>
 
       {/* Stat Cards */}
-      <div className="rounded-[var(--glass-radius-sm)] overflow-hidden bg-[var(--theme-table-bg)] border border-[var(--theme-divider)]">
+      <div className="rounded-[var(--glass-radius-sm)] overflow-hidden bg-[var(--theme-divider)] border border-[var(--theme-divider)]">
         <div className="py-2 px-3 bg-[var(--theme-header-bg)] border-b border-[var(--theme-divider)]">
           <span className="type-overline text-[var(--theme-fg-muted)]">Stat Cards</span>
         </div>
-        <div className="p-4 grid grid-cols-3 gap-3">
+        <div className="p-3 grid grid-cols-3 gap-3">
           <Stat
-            value="1,234"
-            label="Users"
+            value="1.39K"
+            label="New Users"
             trend="up"
-            trendValue="+12%"
+            trendValue="147%"
+            iconColor="#C0392B"
+            iconBg="rgba(192,57,43,0.1)"
             icon={
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2" />
                 <circle cx="9" cy="7" r="4" />
-                <path d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+                <line x1="19" y1="8" x2="19" y2="14" />
+                <line x1="22" y1="11" x2="16" y2="11" />
               </svg>
             }
           />
           <Stat
-            value="98.5%"
-            label="Uptime"
-            trend="neutral"
-            trendValue="0.0%"
+            value="4.53%"
+            label="Week 1 Retention"
+            trend="down"
+            trendValue="10.7%"
+            iconColor="#2980B9"
+            iconBg="rgba(41,128,185,0.1)"
             icon={
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M12 2a10 10 0 100 20 10 10 0 000-20z" />
+                <path d="M8.5 14.5s1.5 2 3.5 2 3.5-2 3.5-2" />
+                <path d="M17 12c-1-4-3.5-4-5-4s-4 0-5 4" />
               </svg>
             }
           />
@@ -63,9 +70,11 @@ export function DataShowcase() {
             value="$12.4k"
             label="Revenue"
             trend="up"
-            trendValue="+8.3%"
+            trendValue="8.3%"
+            iconColor="#27AE60"
+            iconBg="rgba(39,174,96,0.1)"
             icon={
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="12" y1="1" x2="12" y2="23" />
                 <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" />
               </svg>
@@ -99,18 +108,19 @@ export function DataShowcase() {
         />
       </div>
 
-      {/* ColorSwatch */}
+      {/* ColorSwatch — bento grid */}
       <div className="rounded-[var(--glass-radius-sm)] overflow-hidden bg-[var(--theme-table-bg)] border border-[var(--theme-divider)]">
         <div className="py-2 px-3 bg-[var(--theme-header-bg)] border-b border-[var(--theme-divider)]">
           <span className="type-overline text-[var(--theme-fg-muted)]">Color Swatches</span>
         </div>
-        <div className="p-4 flex gap-4 flex-wrap justify-center">
-          <ColorSwatch color="#007AFF" label="Primary" showHex />
-          <ColorSwatch color="#34C759" label="Success" showHex />
-          <ColorSwatch color="#FF9500" label="Warning" showHex />
-          <ColorSwatch color="#FF3B30" label="Error" showHex />
-          <ColorSwatch color="#5856D6" label="Accent" showHex />
-          <ColorSwatch color="#8E8E93" label="Neutral" showHex />
+        <div className="p-3 grid grid-cols-3 gap-2" style={{ gridTemplateRows: "auto auto" }}>
+          {/* Row 1: Info (large) + Success */}
+          <ColorSwatch color="#5AC8FA" label="Info" variant="card" textColor="dark" className="col-span-2 min-h-[100px]" />
+          <ColorSwatch color="#34C759" label="Success" variant="card" />
+          {/* Row 2: Warning + Error + Neutral */}
+          <ColorSwatch color="#FF9500" label="Warning" variant="card" textColor="dark" />
+          <ColorSwatch color="#FF3B30" label="Error" variant="card" />
+          <ColorSwatch color="#8E8E93" label="Neutral" variant="card" textColor="dark" />
         </div>
       </div>
     </div>

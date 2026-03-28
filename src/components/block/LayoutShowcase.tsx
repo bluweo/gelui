@@ -1,8 +1,11 @@
 import { Box, Stack, Inline, Center, Spacer, Grid } from "@/primitives/layout";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 export function LayoutShowcase() {
   const [activeGap, setActiveGap] = useState<"8px" | "16px">("8px");
+  const [activeCols, setActiveCols] = useState<1 | 2 | 3>(3);
+  const resizeRef = useRef<HTMLDivElement>(null);
+  const [resizeW, setResizeW] = useState(100); // percentage
 
   const placeholderBg = "var(--theme-divider)";
   const dashedBorder = "var(--theme-ghost-border)";
@@ -112,6 +115,35 @@ export function LayoutShowcase() {
               <Box
                 key={i}
                 className="h-10 rounded-[var(--glass-radius-sm)] bg-[var(--theme-divider)] flex items-center justify-center"
+              >
+                <span className="text-[9px] font-mono text-[var(--theme-fg-faint)]">{i + 1}</span>
+              </Box>
+            ))}
+          </Grid>
+        </div>
+      </div>
+      {/* Responsive Columns */}
+      <div className="rounded-[var(--glass-radius-sm)] overflow-hidden bg-[var(--theme-table-bg)] border border-[var(--theme-divider)]">
+        <div className="py-2.5 px-4 bg-[var(--theme-header-bg)] border-b border-[var(--theme-divider)] flex items-center justify-between">
+          <span className="text-[10px] font-[650] tracking-[0.06em] uppercase text-[var(--theme-fg-muted)]">Responsive Columns</span>
+          <div className="flex gap-1">
+            {([1, 2, 3] as const).map((c) => (
+              <button
+                key={c}
+                onClick={() => setActiveCols(c)}
+                className={`text-[9px] font-semibold py-[3px] px-2 rounded-[var(--glass-radius-pill)] text-[var(--theme-fg)] cursor-pointer ${activeCols === c ? "border border-[var(--theme-fg-faint)] bg-[var(--theme-header-bg)]" : "border border-[var(--theme-divider)] bg-transparent"}`}
+              >
+                {c} col{c > 1 ? "s" : ""}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div className="p-4">
+          <Grid cols={activeCols} gap="8px">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <Box
+                key={i}
+                className="h-8 rounded-[6px] bg-[var(--theme-divider)] flex items-center justify-center transition-all duration-300"
               >
                 <span className="text-[9px] font-mono text-[var(--theme-fg-faint)]">{i + 1}</span>
               </Box>

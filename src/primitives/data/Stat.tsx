@@ -4,30 +4,35 @@ interface StatProps {
   value: string | number;
   label: string;
   icon?: ReactNode;
+  iconColor?: string;
+  iconBg?: string;
   trend?: "up" | "down" | "neutral";
   trendValue?: string;
+  trendLabel?: string;
   className?: string;
   style?: CSSProperties;
 }
 
-function TrendArrow({ direction }: { direction: "up" | "down" | "neutral" }) {
+function TrendIcon({ direction }: { direction: "up" | "down" | "neutral" }) {
   if (direction === "neutral") {
     return (
-      <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-        <path d="M2 6h8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M3 8h10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
       </svg>
     );
   }
-  const isUp = direction === "up";
+  if (direction === "up") {
+    return (
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M3 12l4-4 2 2 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M10 6h3v3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    );
+  }
   return (
-    <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-      <path
-        d={isUp ? "M6 10V2M6 2l3.5 3.5M6 2L2.5 5.5" : "M6 2v8M6 10l3.5-3.5M6 10L2.5 6.5"}
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <path d="M3 4l4 4 2-2 4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M10 10h3v-3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
@@ -42,27 +47,51 @@ export function Stat({
   value,
   label,
   icon,
+  iconColor = "var(--theme-fg)",
+  iconBg = "var(--theme-header-bg)",
   trend,
   trendValue,
+  trendLabel = "VS PREV. 28 DAYS",
   className = "",
   style,
 }: StatProps) {
+  const cardStyle: CSSProperties = iconColor && iconColor !== "var(--theme-fg)"
+    ? {
+        background: `linear-gradient(135deg, color-mix(in srgb, ${iconColor} 8%, var(--stat-card-bg, #fff)), var(--stat-card-bg, #fff))`,
+        ...style,
+      }
+    : { ...style };
+
   return (
-    <div className={`prim-stat ${className}`} style={style}>
-      {icon && <span className="prim-stat-icon">{icon}</span>}
-      <div className="flex items-baseline gap-2">
-        <span className="prim-stat-value">{value}</span>
-        {trend && (
+    <div className={`prim-stat ${className}`} style={cardStyle}>
+      {/* Top row: label + icon */}
+      <div className="flex items-start justify-between">
+        <span className="prim-stat-label">{label}</span>
+        {icon && (
           <span
-            className="prim-stat-trend"
-            style={{ color: trendColors[trend] }}
+            className="prim-stat-icon-badge"
+            style={{ color: iconColor, background: iconBg }}
           >
-            <TrendArrow direction={trend} />
-            {trendValue}
+            {icon}
           </span>
         )}
       </div>
-      <span className="prim-stat-label">{label}</span>
+
+      {/* Value */}
+      <span className="prim-stat-value">{value}</span>
+
+      {/* Trend row */}
+      {trend && (
+        <div className="prim-stat-trend-row">
+          <span className="prim-stat-trend" style={{ color: trendColors[trend] }}>
+            <TrendIcon direction={trend} />
+            {trendValue}
+          </span>
+          {trendLabel && (
+            <span className="prim-stat-trend-label">{trendLabel}</span>
+          )}
+        </div>
+      )}
     </div>
   );
 }
