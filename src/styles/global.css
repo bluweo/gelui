@@ -2370,8 +2370,9 @@ code:not([data-font-preview]), pre:not([data-font-preview]), kbd, samp { font-fa
   justify-content: flex-start;
 
   &[data-checked="true"] {
-    background: #354334;
+    background: var(--theme-fg);
     justify-content: flex-end;
+    --toggle-thumb: var(--theme-fg-on-solid);
   }
 
   &:disabled, &[data-disabled="true"] {
@@ -2384,7 +2385,7 @@ code:not([data-font-preview]), pre:not([data-font-preview]), kbd, samp { font-fa
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: #fff;
+  background: var(--toggle-thumb, #fff);
   box-shadow: 0 1px 4px rgba(0,0,0,0.15);
   transition: all 200ms;
 }
@@ -3934,5 +3935,24 @@ code:not([data-font-preview]), pre:not([data-font-preview]), kbd, samp { font-fa
   --icon-btn-bg: rgba(255, 255, 255, 0.12);
   --icon-btn-border: rgba(255, 255, 255, 0.2);
   --icon-btn-text: rgba(255, 255, 255, 0.7);
+}
+
+/* Glass panel overrides — buttons inside glass panels use dark text (light glass surface) */
+.glass-1, .glass-2, .glass-3 {
+  --btn-ghost-border: rgba(0, 0, 0, 0.15);
+  --btn-ghost-text: rgba(0, 0, 0, 0.7);
+  --btn-ghost-hover-bg: rgba(0, 0, 0, 0.06);
+  --icon-btn-bg: rgba(0, 0, 0, 0.04);
+  --icon-btn-border: rgba(0, 0, 0, 0.08);
+  --icon-btn-text: rgba(0, 0, 0, 0.5);
+}
+
+:is([data-theme="dark"]) :is(.glass-1, .glass-2, .glass-3) {
+  --btn-ghost-border: rgba(255, 255, 255, 0.2);
+  --btn-ghost-text: rgba(255, 255, 255, 0.7);
+  --btn-ghost-hover-bg: rgba(255, 255, 255, 0.1);
+  --icon-btn-bg: rgba(255, 255, 255, 0.08);
+  --icon-btn-border: rgba(255, 255, 255, 0.12);
+  --icon-btn-text: rgba(255, 255, 255, 0.5);
 }
 

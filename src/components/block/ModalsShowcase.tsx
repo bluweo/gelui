@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { useDraggableModal } from "@/components/hooks/useDraggableModal";
+import { PillTabs } from "@/primitives/navigation/PillTabs";
+import { Toggle } from "@/primitives/controls/Toggle";
+import { Button } from "@/primitives/buttons/Button";
 
 /* ── Solid inner panel used inside all modals ── */
 function SolidPanel({ children, className = "" }: { children: React.ReactNode; className?: string }) {
@@ -95,8 +98,8 @@ function BasicDemo({ open, onClose }: { open: boolean; onClose: () => void }) {
     <DemoModal open={open} onClose={onClose} title="Confirm Action" width={400}
       footer={
         <>
-          <button className="prim-btn-base prim-btn-sm prim-btn-pill prim-btn-ghost" onClick={onClose} onMouseDown={(e) => e.stopPropagation()}>Cancel</button>
-          <button className="prim-btn-base prim-btn-sm prim-btn-pill prim-btn-solid" onClick={onClose} onMouseDown={(e) => e.stopPropagation()}>Confirm</button>
+          <span onMouseDown={(e) => e.stopPropagation()}><Button variant="ghost" size="sm" onClick={onClose}>Cancel</Button></span>
+          <span onMouseDown={(e) => e.stopPropagation()}><Button variant="solid" size="sm" onClick={onClose}>Confirm</Button></span>
         </>
       }
     >
@@ -114,8 +117,8 @@ function FormDemo({ open, onClose }: { open: boolean; onClose: () => void }) {
     <DemoModal open={open} onClose={onClose} title="Edit Profile" width={460}
       footer={
         <>
-          <button className="prim-btn-base prim-btn-sm prim-btn-pill prim-btn-ghost" onClick={onClose} onMouseDown={(e) => e.stopPropagation()}>Cancel</button>
-          <button className="prim-btn-base prim-btn-sm prim-btn-pill prim-btn-solid" onClick={onClose} onMouseDown={(e) => e.stopPropagation()}>Save</button>
+          <span onMouseDown={(e) => e.stopPropagation()}><Button variant="ghost" size="sm" onClick={onClose}>Cancel</Button></span>
+          <span onMouseDown={(e) => e.stopPropagation()}><Button variant="solid" size="sm" onClick={onClose}>Save</Button></span>
         </>
       }
     >
@@ -137,29 +140,33 @@ function FormDemo({ open, onClose }: { open: boolean; onClose: () => void }) {
 
 function TabbedDemo({ open, onClose }: { open: boolean; onClose: () => void }) {
   const [tab, setTab] = useState("General");
+  const [toggles, setToggles] = useState({ theme: true, lang: false, notif: false, save: false });
+
+  const settings = [
+    { key: "theme" as const, label: "Theme Mode" },
+    { key: "lang" as const, label: "Language" },
+    { key: "notif" as const, label: "Notifications" },
+    { key: "save" as const, label: "Auto-save" },
+  ];
+
   return (
     <DemoModal open={open} onClose={onClose} title="Settings" width={520}>
       <div className="flex flex-col gap-4">
-        {/* Tab bar */}
-        <div className="flex gap-1 p-1 rounded-full bg-black/[0.06] dark:bg-white/[0.1]" onMouseDown={(e) => e.stopPropagation()}>
-          {["General", "Appearance", "Advanced"].map((t) => (
-            <button
-              key={t}
-              onClick={() => setTab(t)}
-              className={`px-4 py-2 rounded-full text-xs font-medium border-none cursor-pointer transition-all duration-200 ${tab === t ? "bg-black text-white dark:bg-white dark:text-black shadow-sm" : "bg-transparent text-black/50 dark:text-white/50 hover:text-black/80 dark:hover:text-white/80"}`}
-            >
-              {t}
-            </button>
-          ))}
+        {/* Tab bar — using PillTabs primitive */}
+        <div onMouseDown={(e) => e.stopPropagation()}>
+          <PillTabs
+            tabs={["General", "Appearance", "Advanced"]}
+            activeTab={tab}
+            onChange={setTab}
+            className="w-full"
+          />
         </div>
-        {/* Setting rows inside solid panel */}
+        {/* Setting rows with Toggle primitives */}
         <SolidPanel className="!p-0">
-          {["Theme Mode", "Language", "Notifications", "Auto-save"].map((item, i, arr) => (
-            <div key={item} className={`flex items-center justify-between px-4 py-3.5 ${i < arr.length - 1 ? "border-b border-black/[0.06] dark:border-white/[0.08]" : ""}`} onMouseDown={(e) => e.stopPropagation()}>
-              <span className="text-[13px] text-black dark:text-white">{item}</span>
-              <div className={`w-[38px] h-[22px] rounded-full cursor-pointer transition-colors duration-200 ${i === 0 ? "bg-black dark:bg-white" : "bg-black/15 dark:bg-white/20"}`}>
-                <div className={`w-[18px] h-[18px] rounded-full bg-white dark:bg-black shadow-sm transition-transform duration-200 mt-[2px] ${i === 0 ? "translate-x-[18px]" : "translate-x-[2px]"}`} />
-              </div>
+          {settings.map((item, i, arr) => (
+            <div key={item.key} className={`flex items-center justify-between px-4 py-3.5 ${i < arr.length - 1 ? "border-b border-black/[0.06] dark:border-white/[0.08]" : ""}`} onMouseDown={(e) => e.stopPropagation()}>
+              <span className="text-[13px] text-black dark:text-white">{item.label}</span>
+              <Toggle checked={toggles[item.key]} onChange={(v) => setToggles(prev => ({ ...prev, [item.key]: v }))} />
             </div>
           ))}
         </SolidPanel>
@@ -173,8 +180,8 @@ function ConfirmDemo({ open, onClose }: { open: boolean; onClose: () => void }) 
     <DemoModal open={open} onClose={onClose} title="Delete Item" width={380}
       footer={
         <>
-          <button className="prim-btn-base prim-btn-sm prim-btn-pill prim-btn-ghost" onClick={onClose} onMouseDown={(e) => e.stopPropagation()}>Cancel</button>
-          <button className="prim-btn-base prim-btn-sm prim-btn-pill prim-btn-solid !bg-[var(--color-error)] !text-white" onClick={onClose} onMouseDown={(e) => e.stopPropagation()}>Delete</button>
+          <span onMouseDown={(e) => e.stopPropagation()}><Button variant="ghost" size="sm" onClick={onClose}>Cancel</Button></span>
+          <span onMouseDown={(e) => e.stopPropagation()}><Button variant="solid" size="sm" onClick={onClose} className="!bg-[var(--color-error)] !text-white">Delete</Button></span>
         </>
       }
     >
@@ -198,8 +205,8 @@ function MediaDemo({ open, onClose }: { open: boolean; onClose: () => void }) {
     <DemoModal open={open} onClose={onClose} title="Upload Image" width={460}
       footer={
         <>
-          <button className="prim-btn-base prim-btn-sm prim-btn-pill prim-btn-ghost" onClick={onClose} onMouseDown={(e) => e.stopPropagation()}>Cancel</button>
-          <button className="prim-btn-base prim-btn-sm prim-btn-pill prim-btn-solid" onClick={onClose} onMouseDown={(e) => e.stopPropagation()}>Upload</button>
+          <span onMouseDown={(e) => e.stopPropagation()}><Button variant="ghost" size="sm" onClick={onClose}>Cancel</Button></span>
+          <span onMouseDown={(e) => e.stopPropagation()}><Button variant="solid" size="sm" onClick={onClose}>Upload</Button></span>
         </>
       }
     >
@@ -260,12 +267,9 @@ export function ModalsShowcase() {
               <span className="text-[13px] font-semibold text-black dark:text-white">{demo.label}</span>
               <span className="text-[11px] text-black/55 dark:text-white/55">{demo.desc}</span>
             </div>
-            <button
-              onClick={() => setActiveModal(demo.id)}
-              className="px-4 py-1.5 rounded-full text-[12px] font-medium border border-black/15 dark:border-white/20 bg-transparent text-black/70 dark:text-white/70 cursor-pointer transition-all duration-200 hover:bg-black/5 dark:hover:bg-white/10 hover:text-black dark:hover:text-white"
-            >
+            <Button variant="ghost" size="sm" onClick={() => setActiveModal(demo.id)}>
               Open
-            </button>
+            </Button>
           </div>
         ))}
       </div>
