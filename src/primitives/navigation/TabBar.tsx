@@ -20,22 +20,26 @@ export function TabBar({
       className={`flex gap-0 border-b border-[var(--theme-divider)] ${className}`}
       style={style}
     >
-      {tabs.map((tab, i) => (
-        <button
-          key={tab}
-          onClick={() => onChange?.(i)}
-          data-active={i === active || undefined}
-          className={[
-            "py-2.5 px-4 text-[13px] border-none bg-transparent cursor-pointer",
-            "transition-all duration-200 -mb-px border-b-2",
-            i === active
-              ? "font-semibold text-[var(--theme-fg)] border-b-[var(--theme-fg)]"
-              : "font-normal text-[var(--theme-fg-subtle)] border-b-transparent",
-          ].join(" ")}
-        >
-          {tab}
-        </button>
-      ))}
+      {tabs.map((tab, i) => {
+        const isActive = i === active;
+        return (
+          <button
+            key={tab}
+            onClick={() => onChange?.(i)}
+            data-active={isActive || undefined}
+            className={[
+              "py-2.5 px-4 text-[13px] border-none bg-transparent cursor-pointer",
+              "transition-all duration-200 -mb-[3px] rounded-t-[8px]",
+              "hover:text-[var(--theme-fg)] hover:bg-[var(--theme-fg)]/[0.05]",
+              isActive
+                ? "font-semibold text-[var(--theme-fg)] shadow-[inset_0_-3px_0_var(--theme-fg)]"
+                : "font-normal text-[var(--theme-fg-subtle)] shadow-none",
+            ].join(" ")}
+          >
+            {tab}
+          </button>
+        );
+      })}
     </div>
   );
 }

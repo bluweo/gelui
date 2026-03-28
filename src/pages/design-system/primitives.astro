@@ -64,7 +64,7 @@ import { DividersShowcase } from "@/components/block/DividersShowcase";
     <!-- ═══════════════════════════════════
          1b. Typography Extras
          ═══════════════════════════════════ -->
-    <div data-section="Typography Extras" class="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
+    <div data-section="Typography Extras" class="col-span-2 max-[540px]:col-span-1 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
       <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 160px;" />
       <div class="relative flex items-start justify-between mb-6 pt-1 pl-1">
         <div class="flex flex-col gap-1">
@@ -86,7 +86,7 @@ import { DividersShowcase } from "@/components/block/DividersShowcase";
     <!-- ═══════════════════════════════════
          2. Buttons
          ═══════════════════════════════════ -->
-    <div data-section="Buttons" class="col-span-2 relative overflow-hidden rounded-[var(--glass-radius)] p-5 border contrast-border">
+    <div data-section="Buttons" class="col-span-2 max-[540px]:col-span-1 relative overflow-hidden rounded-[var(--glass-radius)] p-5 border contrast-border">
       <div class="relative flex items-start justify-between mb-6 pt-1 pl-1">
         <div class="flex flex-col gap-1">
           <span class="type-overline contrast-muted mb-1">Interactive</span>
@@ -117,7 +117,7 @@ import { DividersShowcase } from "@/components/block/DividersShowcase";
     <!-- ═══════════════════════════════════
          3. Glass Surfaces
          ═══════════════════════════════════ -->
-    <div data-section="Surfaces" class="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5 flex flex-col">
+    <div data-section="Surfaces" class="col-span-2 max-[540px]:col-span-1 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5 flex flex-col">
       <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 160px;" />
       <div class="relative flex items-start justify-between mb-5 pt-1 pl-1 shrink-0">
         <div class="flex flex-col gap-1">
@@ -166,7 +166,7 @@ import { DividersShowcase } from "@/components/block/DividersShowcase";
     <!-- ═══════════════════════════════════
          3a. Surfaces Extras (Accordion + ScrollArea)
          ═══════════════════════════════════ -->
-    <div data-section="Surfaces Extras" class="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
+    <div data-section="Surfaces Extras" class="col-span-2 max-[540px]:col-span-1 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
       <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 160px;" />
       <div class="relative flex items-start justify-between mb-6 pt-1 pl-1">
         <div class="flex flex-col gap-1">
@@ -188,14 +188,14 @@ import { DividersShowcase } from "@/components/block/DividersShowcase";
     <!-- ═══════════════════════════════════
          3b. Card Panels
          ═══════════════════════════════════ -->
-    <div data-section="Card Panels" class="col-span-2 min-[861px]:col-span-full">
-      <div class="flex items-start justify-between mb-5 pl-1">
+    <div data-section="Card Panels" class="col-span-2 max-[540px]:col-span-1 min-[861px]:col-span-full">
+      <div class="flex items-start justify-between mb-5 pl-1 max-[540px]:flex-col max-[540px]:gap-3">
         <div class="flex flex-col gap-1">
           <span class="type-overline contrast-muted mb-1">Containers</span>
           <h2 class="type-h2 contrast-text mb-1">Card Panels</h2>
           <p class="type-body-sm contrast-muted">9 panel recipes — glass, gel, and solid variants with frost options</p>
         </div>
-        <div class="flex items-center gap-2 shrink-0 z-10">
+        <div class="flex items-center gap-2 shrink-0 z-10 max-[540px]:w-full">
           <button
             id="card-bg-btn"
             class="prim-btn-base prim-btn-md prim-btn-pill prim-btn-solid"
@@ -363,7 +363,7 @@ import { DividersShowcase } from "@/components/block/DividersShowcase";
     <!-- ═══════════════════════════════════
          3c. Dividers
          ═══════════════════════════════════ -->
-    <div data-section="Dividers" class="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
+    <div data-section="Dividers" class="col-span-2 max-[540px]:col-span-1 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
       <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 160px;" />
       <div class="relative flex items-start justify-between mb-6 pt-1 pl-1">
         <div class="flex flex-col gap-1">
@@ -387,7 +387,7 @@ import { DividersShowcase } from "@/components/block/DividersShowcase";
     <!-- ═══════════════════════════════════
          4. Input Fields
          ═══════════════════════════════════ -->
-    <div data-section="Inputs" class="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
+    <div data-section="Inputs" class="col-span-2 max-[540px]:col-span-1 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
       <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 160px;" />
       <div class="relative flex items-start justify-between mb-6 pt-1 pl-1">
         <div class="flex flex-col gap-1">
@@ -410,7 +410,7 @@ import { DividersShowcase } from "@/components/block/DividersShowcase";
     <!-- ═══════════════════════════════════
          4b. Advanced Inputs
          ═══════════════════════════════════ -->
-    <div data-section="Advanced Inputs" class="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
+    <div data-section="Advanced Inputs" class="col-span-2 max-[540px]:col-span-1 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
       <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 160px;" />
       <div class="relative flex items-start justify-between mb-6 pt-1 pl-1">
         <div class="flex flex-col gap-1">
@@ -432,7 +432,7 @@ import { DividersShowcase } from "@/components/block/DividersShowcase";
     <!-- ═══════════════════════════════════
          5. Badges & Labels
          ═══════════════════════════════════ -->
-    <div data-section="Badges" class="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
+    <div data-section="Badges" class="col-span-2 max-[540px]:col-span-1 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
       <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 160px;" />
       <div class="relative flex items-start justify-between mb-6 pt-1 pl-1">
         <div class="flex flex-col gap-1">
@@ -454,7 +454,7 @@ import { DividersShowcase } from "@/components/block/DividersShowcase";
     <!-- ═══════════════════════════════════
          5b. Data Display (left) + Layout (right)
          ═══════════════════════════════════ -->
-    <div data-section="Data Display" class="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
+    <div data-section="Data Display" class="col-span-2 max-[540px]:col-span-1 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
       <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 160px;" />
       <div class="relative flex items-start justify-between mb-6 pt-1 pl-1">
         <div class="flex flex-col gap-1">
@@ -473,7 +473,7 @@ import { DividersShowcase } from "@/components/block/DividersShowcase";
       <DataShowcaseWithSource client:load />
     </div>
 
-    <div data-section="Layout" class="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
+    <div data-section="Layout" class="col-span-2 max-[540px]:col-span-1 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
       <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 160px;" />
       <div class="relative flex items-start justify-between mb-6 pt-1 pl-1">
         <div class="flex flex-col gap-1">
@@ -540,7 +540,7 @@ import { DividersShowcase } from "@/components/block/DividersShowcase";
     <!-- ═══════════════════════════════════
          6c. Alerts & Toast (col-span-2 to fill row with Controls + Glass Controls)
          ═══════════════════════════════════ -->
-    <div data-section="Alerts" class="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
+    <div data-section="Alerts" class="col-span-2 max-[540px]:col-span-1 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
       <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 160px;" />
       <div class="relative flex items-start justify-between mb-6 pt-1 pl-1">
         <div class="flex flex-col gap-1">
@@ -563,20 +563,10 @@ import { DividersShowcase } from "@/components/block/DividersShowcase";
     <!-- ═══════════════════════════════════
          9. Feedback
          ═══════════════════════════════════ -->
-    <div data-section="Feedback" class="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
-      <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 160px;" />
-      <div class="relative flex flex-col gap-1 mb-6 pt-1 pl-1">
-        <span class="type-overline text-black/40 dark:text-white/40 mb-1">Loading</span>
-        <h2 class="type-h2 text-black dark:text-white mb-1">Feedback</h2>
-        <p class="type-body-sm text-black/60 dark:text-white/55">Spinners, progress, skeletons, alerts, and toasts</p>
-      </div>
-      <FeedbackShowcaseV2 client:load />
-    </div>
-
     <!-- ═══════════════════════════════════
          10. Navigation
          ═══════════════════════════════════ -->
-    <div data-section="Navigation" class="col-span-1 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
+    <div data-section="Navigation" class="col-span-2 max-[540px]:col-span-1 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
       <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 160px;" />
       <div class="relative flex flex-col gap-1 mb-6 pt-1 pl-1">
         <span class="type-overline text-black/40 dark:text-white/40 mb-1">Wayfinding</span>
@@ -584,6 +574,16 @@ import { DividersShowcase } from "@/components/block/DividersShowcase";
         <p class="type-body-sm text-black/60 dark:text-white/55">Interactive tab bars, breadcrumbs, and nav items</p>
       </div>
       <PrimitiveNavigation client:load />
+    </div>
+
+    <div data-section="Feedback" class="col-span-1 max-[540px]:col-span-1 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
+      <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 160px;" />
+      <div class="relative flex flex-col gap-1 mb-6 pt-1 pl-1">
+        <span class="type-overline text-black/40 dark:text-white/40 mb-1">Loading</span>
+        <h2 class="type-h2 text-black dark:text-white mb-1">Feedback</h2>
+        <p class="type-body-sm text-black/60 dark:text-white/55">Spinners, progress, skeletons, alerts, and toasts</p>
+      </div>
+      <FeedbackShowcaseV2 client:load />
     </div>
 
     <!-- ═══════════════════════════════════
@@ -602,7 +602,7 @@ import { DividersShowcase } from "@/components/block/DividersShowcase";
     <!-- ═══════════════════════════════════
          10b. Navigation Extras
          ═══════════════════════════════════ -->
-    <div data-section="Navigation Extras" class="col-span-2 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
+    <div data-section="Navigation Extras" class="col-span-2 max-[540px]:col-span-1 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
       <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 160px;" />
       <div class="relative flex flex-col gap-1 mb-6 pt-1 pl-1">
         <span class="type-overline text-black/40 dark:text-white/40 mb-1">Wayfinding</span>

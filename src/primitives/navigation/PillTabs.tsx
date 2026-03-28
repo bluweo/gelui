@@ -32,8 +32,8 @@ export function PillTabs({
               "border-none rounded-[var(--glass-radius-pill,100px)]",
               "cursor-pointer transition-all duration-200 outline-none whitespace-nowrap",
               isActive
-                ? "bg-[var(--theme-bg-solid)] text-[var(--theme-fg-on-solid)]"
-                : "bg-transparent text-[var(--theme-fg-muted)]",
+                ? "bg-[var(--theme-bg-solid)] text-[var(--theme-fg-on-solid)] shadow-[0_1px_3px_rgba(0,0,0,0.12)]"
+                : "bg-transparent text-[var(--theme-fg-muted)] hover:text-[var(--theme-fg)] hover:bg-[var(--theme-fg)]/[0.06]",
             ].join(" ")}
           >
             {tab}

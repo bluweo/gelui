@@ -51,7 +51,7 @@ export function FeedbackShowcaseV2() {
               </div>
             </div>
           </div>
-          <div>
+          <div className="mb-4">
             <span className="type-caption text-[var(--theme-fg-subtle)] block mb-2">List Loading</span>
             {[1, 2, 3].map((i) => (
               <div key={i} className="flex gap-2.5 items-center mb-2">
@@ -62,6 +62,15 @@ export function FeedbackShowcaseV2() {
                 </div>
               </div>
             ))}
+          </div>
+          <div>
+            <span className="type-caption text-[var(--theme-fg-subtle)] block mb-2">Text Block</span>
+            <div className="flex flex-col gap-2">
+              <Skeleton width="40%" height="18px" />
+              <Skeleton width="100%" height="10px" />
+              <Skeleton width="95%" height="10px" />
+              <Skeleton width="70%" height="10px" />
+            </div>
           </div>
         </div>
       </div>
