@@ -157,28 +157,16 @@ export function SectionNav() {
             <button
               key={s.label}
               onClick={() => handleClick(s.label, s.el)}
-              className="relative flex items-center text-left py-[7px] bg-transparent border-none cursor-pointer transition-all duration-200 group"
+              className="prim-section-nav-item"
+              data-active={isActive || undefined}
               style={{
-                color: isActive ? activeTextColor : textColor,
-                fontWeight: isActive ? 600 : 450,
-                fontSize: 11,
-                lineHeight: 1.3,
-                fontFamily: "var(--font-ui)",
-              }}
+                "--nav-color": isActive ? activeTextColor : textColor,
+                "--nav-dot-bg": isActive ? dotActiveColor : lineColor,
+              } as React.CSSProperties}
             >
               {/* Dot on the line */}
-              <div
-                className="absolute -left-3 top-1/2 -translate-y-1/2 rounded-full transition-all duration-200"
-                style={{
-                  width: isActive ? 5 : 3,
-                  height: isActive ? 5 : 3,
-                  background: isActive ? dotActiveColor : lineColor,
-                  transform: `translateX(${isActive ? -1 : 0}px) translateY(-50%)`,
-                }}
-              />
-              <span className="transition-opacity duration-200 group-hover:opacity-100" style={{ opacity: isActive ? 1 : 0.65 }}>
-                {s.label}
-              </span>
+              <div className={`prim-section-nav-dot ${isActive ? "prim-section-nav-dot-active" : ""}`} />
+              <span>{s.label}</span>
             </button>
           );
         })}

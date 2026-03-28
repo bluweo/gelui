@@ -1,19 +1,18 @@
-import { useState, useEffect, type CSSProperties } from "react";
+import { useState, useEffect } from "react";
 
 interface BackToTopProps {
   threshold?: number;
   smooth?: boolean;
   className?: string;
-  style?: CSSProperties;
 }
 
 export function BackToTop({
   threshold = 400,
   smooth = true,
   className = "",
-  style,
 }: BackToTopProps) {
   const [visible, setVisible] = useState(false);
+  const [contrast, setContrast] = useState<"light" | "dark">("light");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,41 +23,34 @@ export function BackToTop({
     return () => window.removeEventListener("scroll", handleScroll);
   }, [threshold]);
 
+  // Watch contrast from main element
+  useEffect(() => {
+    const mainEl = document.querySelector("main[data-contrast]");
+    if (!mainEl) return;
+
+    const check = () => {
+      setContrast((mainEl.getAttribute("data-contrast") as "light" | "dark") || "light");
+    };
+    check();
+
+    const obs = new MutationObserver(check);
+    obs.observe(mainEl, { attributes: true, attributeFilter: ["data-contrast"] });
+    return () => obs.disconnect();
+  }, []);
+
   const handleClick = () => {
     window.scrollTo({ top: 0, behavior: smooth ? "smooth" : "auto" });
   };
 
   return (
     <button
-      className={className}
+      className={`prim-back-to-top ${visible ? "prim-back-to-top-visible" : "prim-back-to-top-hidden"} ${contrast === "dark" ? "prim-back-to-top-dark" : ""} ${className}`}
       onClick={handleClick}
-      style={{
-        position: "fixed",
-        bottom: "24px",
-        right: "24px",
-        width: "44px",
-        height: "44px",
-        borderRadius: "50%",
-        border: "1px solid var(--theme-divider)",
-        background: "var(--theme-header-bg)",
-        backdropFilter: "blur(16px)",
-        WebkitBackdropFilter: "blur(16px)",
-        cursor: "pointer",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        fontSize: "18px",
-        color: "var(--theme-fg-muted)",
-        boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
-        transition: "opacity 0.25s, transform 0.25s",
-        opacity: visible ? 1 : 0,
-        transform: visible ? "translateY(0)" : "translateY(12px)",
-        pointerEvents: visible ? "auto" : "none",
-        zIndex: 1000,
-        ...style,
-      }}
+      aria-label="Back to top"
     >
-      &#8593;
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <polyline points="18 15 12 9 6 15" />
+      </svg>
     </button>
   );
 }
