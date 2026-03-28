@@ -1405,7 +1405,7 @@
       "id": "spinner",
       "name": "Spinner",
       "displayName": "Spinner",
-      "description": "Animated loading spinner in brand color",
+      "description": "Animated loading spinner. Border width scales with size (3-5px) to match progress bar visual weight.",
       "layer": "primitive",
       "category": "feedback",
       "status": "stable",
@@ -1414,13 +1414,14 @@
       "isReact": false,
       "props": {
         "size": {
-          "type": "enum",
-          "options": [
-            "sm",
-            "md",
-            "lg"
-          ],
-          "default": "md"
+          "type": "string",
+          "default": "\"24px\""
+        },
+        "className": {
+          "type": "string"
+        },
+        "style": {
+          "type": "CSSProperties"
         }
       },
       "documentedOn": "/design-system/primitives",
@@ -1435,7 +1436,7 @@
       "id": "progress-bar",
       "name": "Progress Bar",
       "displayName": "Progress Bar",
-      "description": "Horizontal progress bar with label and percentage",
+      "description": "Horizontal progress bar with animated fill. 6px track height, rounded ends.",
       "layer": "primitive",
       "category": "feedback",
       "status": "stable",
@@ -1445,21 +1446,13 @@
       "props": {
         "value": {
           "type": "number",
-          "min": 0,
-          "max": 100,
-          "default": 0
+          "default": "60"
         },
-        "label": {
+        "className": {
           "type": "string"
         },
-        "color": {
-          "type": "enum",
-          "options": [
-            "primary",
-            "warning",
-            "success"
-          ],
-          "default": "primary"
+        "style": {
+          "type": "CSSProperties"
         }
       },
       "documentedOn": "/design-system/primitives",
@@ -1475,7 +1468,7 @@
       "id": "skeleton-loader",
       "name": "Skeleton Loader",
       "displayName": "Skeleton Loader",
-      "description": "Shimmer loading placeholder for content",
+      "description": "Shimmer loading placeholder. Supports custom width, height, and border radius for cards, lists, and text blocks.",
       "layer": "primitive",
       "category": "feedback",
       "status": "stable",
@@ -1483,14 +1476,23 @@
       "path": "inline",
       "isReact": false,
       "props": {
-        "variant": {
-          "type": "enum",
-          "options": [
-            "card",
-            "list",
-            "media"
-          ],
-          "default": "card"
+        "width": {
+          "type": "string",
+          "default": "\"100%\""
+        },
+        "height": {
+          "type": "string",
+          "default": "\"16px\""
+        },
+        "rounded": {
+          "type": "string",
+          "default": "\"4px\""
+        },
+        "className": {
+          "type": "string"
+        },
+        "style": {
+          "type": "CSSProperties"
         }
       },
       "documentedOn": "/design-system/primitives",
@@ -1506,7 +1508,7 @@
       "id": "tab-bar",
       "name": "Tab Bar",
       "displayName": "Tab Bar",
-      "description": "Underline-style tab navigation",
+      "description": "Underline-style tab navigation with active indicator, thick bottom border, and rounded-top hover background",
       "layer": "primitive",
       "category": "navigation",
       "status": "stable",
@@ -1516,11 +1518,17 @@
       "isReact": true,
       "props": {
         "tabs": {
-          "type": "string",
-          "required": true,
-          "description": "Array of tab labels"
+          "type": "string[]",
+          "default": "[\"Tab 1\", \"Tab 2\", \"Tab 3\"]"
         },
-        "defaultTab": {
+        "active": {
+          "type": "number",
+          "default": "0"
+        },
+        "onChange": {
+          "type": "(i: number) => void"
+        },
+        "className": {
           "type": "string"
         }
       },
@@ -1536,7 +1544,7 @@
       "id": "pill-tabs",
       "name": "Pill Tabs",
       "displayName": "Pill Tabs",
-      "description": "Pill-style tab selector with active highlight",
+      "description": "Pill-style tab selector with solid active highlight, shadow, and hover transitions",
       "layer": "primitive",
       "category": "navigation",
       "status": "stable",
@@ -1546,10 +1554,15 @@
       "isReact": true,
       "props": {
         "tabs": {
-          "type": "string",
-          "required": true
+          "type": "string[]"
         },
-        "defaultTab": {
+        "activeTab": {
+          "type": "string"
+        },
+        "onChange": {
+          "type": "(v: string) => void"
+        },
+        "className": {
           "type": "string"
         }
       },
@@ -1565,7 +1578,7 @@
       "id": "breadcrumb",
       "name": "Breadcrumb",
       "displayName": "Breadcrumb",
-      "description": "Path navigation with slash separators",
+      "description": "Path breadcrumb trail with hover underline on clickable items",
       "layer": "primitive",
       "category": "navigation",
       "status": "stable",
@@ -1574,8 +1587,11 @@
       "isReact": true,
       "props": {
         "items": {
-          "type": "string",
-          "description": "Array of {label, href} objects"
+          "type": "string[]",
+          "default": "[\"Home\", \"Page\"]"
+        },
+        "className": {
+          "type": "string"
         }
       },
       "documentedOn": "/design-system/primitives",
@@ -1590,7 +1606,7 @@
       "id": "nav-item",
       "name": "Nav Item",
       "displayName": "Nav Item",
-      "description": "Sidebar navigation item with icon and active state",
+      "description": "Sidebar navigation item with icon, label, and active/hover states",
       "layer": "primitive",
       "category": "navigation",
       "status": "stable",
@@ -1598,13 +1614,21 @@
       "path": "src/primitives/navigation/NavItem.tsx",
       "isReact": true,
       "props": {
+        "icon": {
+          "type": "ReactNode"
+        },
         "label": {
-          "type": "string",
-          "required": true
+          "type": "string"
         },
         "active": {
           "type": "boolean",
-          "default": false
+          "default": "false"
+        },
+        "onClick": {
+          "type": "() => void"
+        },
+        "className": {
+          "type": "string"
         }
       },
       "documentedOn": "/design-system/primitives",
