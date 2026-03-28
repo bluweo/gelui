@@ -516,6 +516,19 @@ export function RegistryViewer({ components }: Props) {
     return { primitives, tokens, comps, planned, total: filtered.length };
   }, [filtered]);
 
+  // AI readiness stats
+  const aiStats = useMemo(() => {
+    const all = components;
+    const withImport = all.filter((c: any) => c.importPath || c.cssClass).length;
+    const withAI = all.filter((c: any) => c.ai).length;
+    const withExamples = all.filter((c: any) => c.examples && c.examples.length > 0).length;
+    const withComposition = all.filter((c: any) => c.composition).length;
+    const withRendering = all.filter((c: any) => c.rendering).length;
+    const prims = all.filter((c: any) => c.layer === "primitive").length;
+    const primsReady = all.filter((c: any) => c.layer === "primitive" && (c.importPath || c.cssClass) && c.props && Object.keys(c.props).length > 0).length;
+    return { total: all.length, withImport, withAI, withExamples, withComposition, withRendering, prims, primsReady };
+  }, [components]);
+
   // Row numbering
   let rowIndex = 0;
 
@@ -531,6 +544,40 @@ export function RegistryViewer({ components }: Props) {
 
   return (
     <div id="registry-table" style={{ fontFamily: "var(--font-body, system-ui, sans-serif)" }}>
+      {/* ── AI Readiness Dashboard ── */}
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))", gap: "10px", marginBottom: "20px" }}>
+        {[
+          { label: "Primitives Ready", value: `${aiStats.primsReady}/${aiStats.prims}`, pct: Math.round(aiStats.primsReady / (aiStats.prims || 1) * 100), color: "#34C759" },
+          { label: "With AI Hints", value: `${aiStats.withAI}`, pct: Math.round(aiStats.withAI / (aiStats.total || 1) * 100), color: "#007AFF" },
+          { label: "With Examples", value: `${aiStats.withExamples}`, pct: Math.round(aiStats.withExamples / (aiStats.total || 1) * 100), color: "#FF9500" },
+          { label: "With Composition", value: `${aiStats.withComposition}`, pct: Math.round(aiStats.withComposition / (aiStats.total || 1) * 100), color: "#5AC8FA" },
+          { label: "SSR Metadata", value: `${aiStats.withRendering}`, pct: Math.round(aiStats.withRendering / (aiStats.total || 1) * 100), color: "#AF52DE" },
+        ].map((s) => (
+          <div key={s.label} style={{ background: bgCard, borderRadius: "var(--glass-radius-sm, 10px)", border: `1px solid ${borderColor}`, padding: "14px 16px", display: "flex", flexDirection: "column", gap: "6px" }}>
+            <span style={{ fontSize: "10px", fontWeight: 650, textTransform: "uppercase", letterSpacing: "0.06em", color: textMuted }}>{s.label}</span>
+            <span style={{ fontSize: "22px", fontWeight: 700, color: textPrimary, fontFamily: "var(--font-heading)" }}>{s.value}</span>
+            <div style={{ height: "4px", borderRadius: "2px", background: `${borderColor}`, overflow: "hidden" }}>
+              <div style={{ height: "100%", width: `${s.pct}%`, borderRadius: "2px", background: s.color, transition: "width 0.5s ease" }} />
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* ── Schema Info ── */}
+      <div style={{ background: bgCard, borderRadius: "var(--glass-radius-sm, 10px)", border: `1px solid ${borderColor}`, padding: "16px 20px", marginBottom: "20px", display: "flex", flexWrap: "wrap", gap: "20px", alignItems: "center" }}>
+        <div style={{ flex: 1, minWidth: "200px" }}>
+          <span style={{ fontSize: "11px", fontWeight: 650, textTransform: "uppercase", letterSpacing: "0.06em", color: textMuted, display: "block", marginBottom: "4px" }}>Registry Schema v2</span>
+          <span style={{ fontSize: "13px", color: textSecondary, lineHeight: 1.5 }}>
+            AI-ready registry with <strong style={{ color: textPrimary }}>ai</strong>, <strong style={{ color: textPrimary }}>composition</strong>, <strong style={{ color: textPrimary }}>constraints</strong>, <strong style={{ color: textPrimary }}>rendering</strong>, and <strong style={{ color: textPrimary }}>examples</strong> fields.
+          </span>
+        </div>
+        <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
+          {["ai", "composition", "constraints", "rendering", "examples"].map((field) => (
+            <span key={field} style={{ fontSize: "10px", fontWeight: 600, padding: "4px 10px", borderRadius: "100px", background: bgHover, color: textSecondary, border: `1px solid ${borderColor}` }}>{field}</span>
+          ))}
+        </div>
+      </div>
+
       {/* ── Filters ── */}
       <div
         style={{
@@ -886,6 +933,57 @@ export function RegistryViewer({ components }: Props) {
                         )}
                         {comp.documentedOn && (
                           <MetaRow label="Documented" value={comp.documentedOn + (comp.section ? ` #${comp.section}` : "")} />
+                        )}
+                        {(comp as any).importPath && (
+                          <MetaRow label="Import" value={(comp as any).importPath} />
+                        )}
+                        {(comp as any).exportName && (
+                          <MetaRow label="Export" value={(comp as any).exportName} />
+                        )}
+
+                        {/* AI Metadata */}
+                        {(comp as any).ai && (
+                          <div style={{ marginTop: "8px", paddingTop: "8px", borderTop: `1px solid ${borderColor}` }}>
+                            <div style={{ fontWeight: 700, fontSize: "10px", textTransform: "uppercase", letterSpacing: "0.08em", color: textMuted, marginBottom: "6px" }}>
+                              AI Intelligence
+                            </div>
+                            {(comp as any).ai.useWhen && (
+                              <div style={{ marginBottom: "4px" }}>
+                                <span style={{ fontSize: "10px", fontWeight: 600, color: "#34C759" }}>Use when: </span>
+                                <span style={{ fontSize: "10px", color: textSecondary }}>{(comp as any).ai.useWhen.join(", ")}</span>
+                              </div>
+                            )}
+                            {(comp as any).ai.avoidWhen && (
+                              <div style={{ marginBottom: "4px" }}>
+                                <span style={{ fontSize: "10px", fontWeight: 600, color: "#FF3B30" }}>Avoid: </span>
+                                <span style={{ fontSize: "10px", color: textSecondary }}>{(comp as any).ai.avoidWhen.join(", ")}</span>
+                              </div>
+                            )}
+                            {(comp as any).ai.keywords && (
+                              <div>
+                                <span style={{ display: "inline-flex", flexWrap: "wrap", gap: "3px", marginTop: "2px" }}>
+                                  {(comp as any).ai.keywords.map((k: string) => (
+                                    <span key={k} style={{ fontSize: "9px", fontWeight: 550, padding: "1px 6px", borderRadius: "4px", background: "rgba(0,122,255,0.08)", color: "#007AFF" }}>{k}</span>
+                                  ))}
+                                </span>
+                              </div>
+                            )}
+                          </div>
+                        )}
+
+                        {/* Examples */}
+                        {(comp as any).examples && (comp as any).examples.length > 0 && (
+                          <div style={{ marginTop: "8px", paddingTop: "8px", borderTop: `1px solid ${borderColor}` }}>
+                            <div style={{ fontWeight: 700, fontSize: "10px", textTransform: "uppercase", letterSpacing: "0.08em", color: textMuted, marginBottom: "6px" }}>
+                              Examples
+                            </div>
+                            {(comp as any).examples.map((ex: any, idx: number) => (
+                              <div key={idx} style={{ marginBottom: "6px" }}>
+                                {ex.title && <span style={{ fontSize: "10px", fontWeight: 600, color: textSecondary, display: "block", marginBottom: "2px" }}>{ex.title}</span>}
+                                <code style={{ fontSize: "10px", fontFamily: "var(--font-mono, monospace)", color: textMuted, lineHeight: 1.5, display: "block", whiteSpace: "pre-wrap", wordBreak: "break-all" }}>{ex.jsx}</code>
+                              </div>
+                            ))}
+                          </div>
                         )}
                       </div>
 

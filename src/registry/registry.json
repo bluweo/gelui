@@ -12,7 +12,7 @@
       "status": "stable",
       "version": "0.8.0",
       "path": "src/primitives/typography/Heading.tsx",
-      "isReact": false,
+      "isReact": true,
       "props": {
         "level": {
           "type": "enum",
@@ -41,6 +41,70 @@
         "h2",
         "h3",
         "text"
+      ],
+      "importPath": "@/primitives/typography",
+      "exportName": "Heading",
+      "ai": {
+        "useWhen": [
+          "page titles",
+          "section headings",
+          "card titles",
+          "modal titles"
+        ],
+        "avoidWhen": [
+          "body text",
+          "labels",
+          "button text"
+        ],
+        "priority": "high",
+        "semanticRole": "heading",
+        "keywords": [
+          "title",
+          "heading",
+          "h1",
+          "h2",
+          "h3",
+          "section title"
+        ]
+      },
+      "composition": {
+        "allowedChildren": [
+          "text"
+        ],
+        "allowedParents": [
+          "card",
+          "section",
+          "stack",
+          "modal"
+        ],
+        "commonSiblings": [
+          "text",
+          "overline",
+          "badge"
+        ]
+      },
+      "constraints": {
+        "maxPerPage": 15,
+        "doNotUseFor": [
+          "paragraph text",
+          "form labels",
+          "button labels"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Page title",
+          "jsx": "<Heading level={1}>Dashboard</Heading>"
+        },
+        {
+          "title": "Section heading",
+          "jsx": "<Heading level={2}>Recent Activity</Heading>"
+        }
       ]
     },
     {
@@ -53,7 +117,7 @@
       "status": "stable",
       "version": "0.8.0",
       "path": "inline",
-      "isReact": false,
+      "isReact": true,
       "props": {
         "size": {
           "type": "enum",
@@ -71,6 +135,59 @@
         "paragraph",
         "text",
         "p"
+      ],
+      "importPath": "@/primitives/typography",
+      "exportName": "Text",
+      "ai": {
+        "useWhen": [
+          "paragraphs",
+          "descriptions",
+          "content text"
+        ],
+        "avoidWhen": [
+          "headings",
+          "labels",
+          "code"
+        ],
+        "priority": "high",
+        "semanticRole": "paragraph",
+        "keywords": [
+          "text",
+          "paragraph",
+          "body",
+          "content",
+          "description"
+        ]
+      },
+      "composition": {
+        "allowedParents": [
+          "card",
+          "stack",
+          "section",
+          "modal"
+        ],
+        "commonSiblings": [
+          "heading",
+          "button",
+          "divider"
+        ]
+      },
+      "constraints": {
+        "doNotUseFor": [
+          "headings",
+          "form labels"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Body text",
+          "jsx": "<Text>Your content here.</Text>"
+        }
       ]
     },
     {
@@ -83,7 +200,7 @@
       "status": "stable",
       "version": "0.8.0",
       "path": "src/primitives/typography/Caption.tsx",
-      "isReact": false,
+      "isReact": true,
       "props": {
         "className": {
           "type": "string"
@@ -98,6 +215,56 @@
         "caption",
         "small",
         "meta"
+      ],
+      "importPath": "@/primitives/typography",
+      "exportName": "Caption",
+      "ai": {
+        "useWhen": [
+          "metadata",
+          "timestamps",
+          "secondary info",
+          "image captions"
+        ],
+        "avoidWhen": [
+          "primary text",
+          "headings"
+        ],
+        "priority": "low",
+        "semanticRole": "caption",
+        "keywords": [
+          "caption",
+          "meta",
+          "small text",
+          "secondary"
+        ]
+      },
+      "composition": {
+        "allowedParents": [
+          "card",
+          "stack",
+          "inline"
+        ],
+        "commonSiblings": [
+          "avatar",
+          "badge"
+        ]
+      },
+      "constraints": {
+        "doNotUseFor": [
+          "primary content",
+          "headings"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Caption",
+          "jsx": "<Caption>Last updated 2 hours ago</Caption>"
+        }
       ]
     },
     {
@@ -139,7 +306,54 @@
         "label",
         "uppercase"
       ],
-      "exportName": "Overline"
+      "exportName": "Overline",
+      "ai": {
+        "useWhen": [
+          "section labels",
+          "category tags",
+          "above headings"
+        ],
+        "avoidWhen": [
+          "body text",
+          "long content"
+        ],
+        "priority": "medium",
+        "semanticRole": "label",
+        "keywords": [
+          "overline",
+          "label",
+          "category",
+          "section label",
+          "uppercase"
+        ]
+      },
+      "composition": {
+        "allowedParents": [
+          "card",
+          "stack",
+          "section"
+        ],
+        "commonSiblings": [
+          "heading"
+        ]
+      },
+      "constraints": {
+        "doNotUseFor": [
+          "body text",
+          "paragraphs"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Section label",
+          "jsx": "<Overline>Featured</Overline>"
+        }
+      ]
     },
     {
       "id": "label",
@@ -151,7 +365,7 @@
       "status": "stable",
       "version": "0.8.0",
       "path": "src/primitives/typography/Label.tsx",
-      "isReact": false,
+      "isReact": true,
       "props": {
         "className": {
           "type": "string"
@@ -166,6 +380,54 @@
         "label",
         "form",
         "ui"
+      ],
+      "importPath": "@/primitives/typography",
+      "exportName": "Label",
+      "ai": {
+        "useWhen": [
+          "form labels",
+          "input labels",
+          "field names"
+        ],
+        "avoidWhen": [
+          "headings",
+          "body text"
+        ],
+        "priority": "medium",
+        "semanticRole": "label",
+        "keywords": [
+          "label",
+          "form label",
+          "field name"
+        ]
+      },
+      "composition": {
+        "allowedParents": [
+          "form-group",
+          "stack"
+        ],
+        "commonSiblings": [
+          "input",
+          "select",
+          "textarea"
+        ]
+      },
+      "constraints": {
+        "doNotUseFor": [
+          "headings",
+          "paragraphs"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Form label",
+          "jsx": "<Label htmlFor=\"email\">Email Address</Label>"
+        }
       ]
     },
     {
@@ -178,7 +440,7 @@
       "status": "stable",
       "version": "0.8.0",
       "path": "inline",
-      "isReact": false,
+      "isReact": true,
       "props": {
         "size": {
           "type": "enum",
@@ -196,6 +458,52 @@
         "mono",
         "syntax",
         "pre"
+      ],
+      "importPath": "@/primitives/typography",
+      "exportName": "Code",
+      "ai": {
+        "useWhen": [
+          "code snippets",
+          "technical content",
+          "API examples"
+        ],
+        "avoidWhen": [
+          "body text",
+          "headings"
+        ],
+        "priority": "medium",
+        "semanticRole": "code",
+        "keywords": [
+          "code",
+          "snippet",
+          "mono",
+          "technical",
+          "pre"
+        ]
+      },
+      "composition": {
+        "allowedParents": [
+          "card",
+          "stack",
+          "section"
+        ]
+      },
+      "constraints": {
+        "doNotUseFor": [
+          "body text",
+          "navigation"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Inline code",
+          "jsx": "<Code>npm install gelui</Code>"
+        }
       ]
     },
     {
@@ -208,7 +516,7 @@
       "status": "stable",
       "version": "0.8.0",
       "path": "src/primitives/typography/Link.tsx",
-      "isReact": false,
+      "isReact": true,
       "props": {
         "href": {
           "type": "string",
@@ -221,6 +529,51 @@
         "link",
         "anchor",
         "href"
+      ],
+      "importPath": "@/primitives/typography",
+      "exportName": "Link",
+      "ai": {
+        "useWhen": [
+          "inline links",
+          "text navigation",
+          "references"
+        ],
+        "avoidWhen": [
+          "buttons",
+          "primary actions"
+        ],
+        "priority": "medium",
+        "semanticRole": "link",
+        "keywords": [
+          "link",
+          "anchor",
+          "href",
+          "navigate"
+        ]
+      },
+      "composition": {
+        "allowedParents": [
+          "text",
+          "inline",
+          "stack"
+        ]
+      },
+      "constraints": {
+        "doNotUseFor": [
+          "primary actions",
+          "form submission"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Text link",
+          "jsx": "<Link href=\"/docs\">Documentation</Link>"
+        }
       ]
     },
     {
@@ -233,7 +586,7 @@
       "status": "stable",
       "version": "0.1.0",
       "path": "src/styles/global.css",
-      "isReact": false,
+      "isReact": true,
       "props": {
         "size": {
           "type": "enum",
@@ -262,7 +615,39 @@
         "volumetric",
         "action"
       ],
-      "nodeColor": "#354334"
+      "nodeColor": "#354334",
+      "importPath": "@/primitives/buttons",
+      "exportName": "Button",
+      "usageNote": "variant=\"gel\"",
+      "ai": {
+        "useWhen": [
+          "volumetric/3D button style",
+          "premium UI",
+          "hero actions"
+        ],
+        "avoidWhen": [
+          "standard forms",
+          "simple layouts"
+        ],
+        "priority": "low",
+        "keywords": [
+          "gel",
+          "3d",
+          "volumetric",
+          "button"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Gel button",
+          "jsx": "<Button variant=\"gel\" size=\"md\">Premium Action</Button>"
+        }
+      ]
     },
     {
       "id": "glass-button",
@@ -274,7 +659,7 @@
       "status": "stable",
       "version": "0.1.0",
       "path": "src/styles/global.css",
-      "isReact": false,
+      "isReact": true,
       "props": {
         "shape": {
           "type": "enum",
@@ -291,6 +676,35 @@
         "button",
         "glass",
         "transparent"
+      ],
+      "importPath": "@/primitives/buttons",
+      "exportName": "Button",
+      "usageNote": "variant=\"glass\"",
+      "ai": {
+        "useWhen": [
+          "glass/translucent surfaces",
+          "overlay actions"
+        ],
+        "avoidWhen": [
+          "solid backgrounds"
+        ],
+        "priority": "medium",
+        "keywords": [
+          "glass",
+          "transparent",
+          "button"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Glass button",
+          "jsx": "<Button variant=\"glass\" size=\"md\">Glass Action</Button>"
+        }
       ]
     },
     {
@@ -303,7 +717,7 @@
       "status": "stable",
       "version": "0.8.0",
       "path": "inline",
-      "isReact": false,
+      "isReact": true,
       "props": {
         "shape": {
           "type": "enum",
@@ -321,6 +735,42 @@
         "ghost",
         "outline",
         "border"
+      ],
+      "importPath": "@/primitives/buttons",
+      "exportName": "Button",
+      "usageNote": "variant=\"ghost\"",
+      "ai": {
+        "useWhen": [
+          "secondary actions",
+          "cancel buttons",
+          "toolbar items"
+        ],
+        "avoidWhen": [
+          "primary CTAs"
+        ],
+        "priority": "high",
+        "keywords": [
+          "ghost",
+          "outline",
+          "secondary",
+          "cancel"
+        ]
+      },
+      "composition": {
+        "commonSiblings": [
+          "solid-button"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Ghost button",
+          "jsx": "<Button variant=\"ghost\" size=\"md\">Cancel</Button>"
+        }
       ]
     },
     {
@@ -333,7 +783,7 @@
       "status": "stable",
       "version": "0.8.0",
       "path": "inline",
-      "isReact": false,
+      "isReact": true,
       "props": {
         "shape": {
           "type": "enum",
@@ -352,6 +802,37 @@
         "solid",
         "filled",
         "primary"
+      ],
+      "importPath": "@/primitives/buttons",
+      "exportName": "Button",
+      "usageNote": "variant=\"solid\"",
+      "ai": {
+        "useWhen": [
+          "primary actions",
+          "form submit",
+          "CTAs"
+        ],
+        "avoidWhen": [
+          "secondary actions"
+        ],
+        "priority": "high",
+        "keywords": [
+          "solid",
+          "primary",
+          "submit",
+          "cta"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Solid button",
+          "jsx": "<Button variant=\"solid\" size=\"md\">Save</Button>"
+        }
       ]
     },
     {
@@ -364,7 +845,7 @@
       "status": "stable",
       "version": "0.43.0",
       "path": "src/primitives/buttons/IconButton.tsx",
-      "isReact": false,
+      "isReact": true,
       "props": {
         "size": {
           "type": "enum",
@@ -394,6 +875,49 @@
         "button",
         "icon",
         "circle"
+      ],
+      "importPath": "@/primitives/buttons",
+      "exportName": "IconButton",
+      "ai": {
+        "useWhen": [
+          "toolbar icons",
+          "close buttons",
+          "utility actions"
+        ],
+        "avoidWhen": [
+          "text actions",
+          "primary CTAs"
+        ],
+        "priority": "high",
+        "semanticRole": "button",
+        "keywords": [
+          "icon",
+          "toolbar",
+          "close",
+          "action",
+          "circle button"
+        ]
+      },
+      "composition": {
+        "allowedParents": [
+          "inline",
+          "card",
+          "modal"
+        ]
+      },
+      "constraints": {
+        "contrastAware": true
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Icon button",
+          "jsx": "<IconButton title=\"Close\" onClick={close}><XIcon /></IconButton>"
+        }
       ]
     },
     {
@@ -406,7 +930,7 @@
       "status": "stable",
       "version": "0.8.0",
       "path": "src/primitives/buttons/LinkButton.tsx",
-      "isReact": false,
+      "isReact": true,
       "props": {
         "href": {
           "type": "string"
@@ -435,20 +959,55 @@
         "button",
         "link",
         "text"
+      ],
+      "importPath": "@/primitives/buttons",
+      "exportName": "LinkButton",
+      "ai": {
+        "useWhen": [
+          "text links with arrow",
+          "learn more links",
+          "inline navigation"
+        ],
+        "avoidWhen": [
+          "primary buttons",
+          "form submit"
+        ],
+        "priority": "medium",
+        "keywords": [
+          "link",
+          "text button",
+          "learn more",
+          "arrow"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Link button",
+          "jsx": "<LinkButton underline arrow>Learn more</LinkButton>"
+        }
       ]
     },
     {
       "id": "action-pair",
       "name": "Action Pair",
       "displayName": "Action Pair (Cancel/Apply)",
-      "description": "Cancel + Apply button combination for modals and forms",
+      "description": "Cancel + Apply button pair pattern using Button ghost + solid variants",
       "layer": "primitive",
       "category": "interactive",
       "status": "stable",
       "version": "0.8.0",
       "path": "inline",
       "isReact": false,
-      "props": {},
+      "props": {
+        "className": {
+          "type": "string"
+        }
+      },
       "composedOf": [
         "ghost-button",
         "solid-button"
@@ -461,6 +1020,35 @@
         "apply",
         "action",
         "pair"
+      ],
+      "cssClass": "prim-btn-base prim-btn-solid + prim-btn-ghost",
+      "usage": "<Button variant=\"ghost\">Cancel</Button> <Button variant=\"solid\">Apply</Button>",
+      "ai": {
+        "useWhen": [
+          "cancel+confirm pattern",
+          "modal footers",
+          "form actions"
+        ],
+        "avoidWhen": [
+          "single actions"
+        ],
+        "priority": "medium",
+        "keywords": [
+          "action pair",
+          "cancel apply",
+          "confirm"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Action pair",
+          "jsx": "<Inline gap=\"8px\"><Button variant=\"ghost\">Cancel</Button><Button variant=\"solid\">Apply</Button></Inline>"
+        }
       ]
     },
     {
@@ -475,15 +1063,9 @@
       "path": "src/styles/global.css",
       "isReact": false,
       "props": {
-        "level": {
-          "type": "enum",
-          "options": [
-            "0",
-            "1",
-            "2",
-            "3"
-          ],
-          "default": "1"
+        "className": {
+          "type": "string",
+          "description": "CSS class — apply directly to any element"
         }
       },
       "documentedOn": "/design-system/primitives",
@@ -493,6 +1075,37 @@
         "surface",
         "blur",
         "transparent"
+      ],
+      "cssClass": "glass-1",
+      "usage": "<div className=\"glass-1 glass-specular\">...</div>",
+      "ai": {
+        "useWhen": [
+          "translucent panels",
+          "frosted glass cards",
+          "overlay surfaces"
+        ],
+        "avoidWhen": [
+          "solid opaque backgrounds"
+        ],
+        "priority": "high",
+        "keywords": [
+          "glass",
+          "frost",
+          "translucent",
+          "blur",
+          "surface"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Glass panel",
+          "jsx": "<div className=\"glass-1 glass-specular p-5\">Content</div>"
+        }
       ]
     },
     {
@@ -506,7 +1119,12 @@
       "version": "0.1.0",
       "path": "src/styles/global.css",
       "isReact": false,
-      "props": {},
+      "props": {
+        "className": {
+          "type": "string",
+          "description": "CSS class — apply directly to any element"
+        }
+      },
       "documentedOn": "/design-system/primitives",
       "section": "Surfaces",
       "tags": [
@@ -514,6 +1132,35 @@
         "surface",
         "volumetric",
         "shadow"
+      ],
+      "cssClass": "gel-glass",
+      "usage": "<div className=\"gel-glass\">...</div>",
+      "ai": {
+        "useWhen": [
+          "volumetric/3D surfaces",
+          "premium panels"
+        ],
+        "avoidWhen": [
+          "standard layouts"
+        ],
+        "priority": "low",
+        "keywords": [
+          "gel",
+          "3d",
+          "volumetric",
+          "surface"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Gel surface",
+          "jsx": "<div className=\"gel-glass p-5\">Content</div>"
+        }
       ]
     },
     {
@@ -527,13 +1174,47 @@
       "version": "0.8.0",
       "path": "inline",
       "isReact": false,
-      "props": {},
+      "props": {
+        "className": {
+          "type": "string",
+          "description": "CSS class — apply directly to any element"
+        }
+      },
       "documentedOn": "/design-system/primitives",
       "section": "Surfaces",
       "tags": [
         "solid",
         "surface",
         "opaque"
+      ],
+      "cssClass": "bg-[var(--theme-bg-solid)]",
+      "usage": "<div className=\"bg-[var(--theme-bg-solid)] text-[var(--theme-fg-on-solid)]\">...</div>",
+      "ai": {
+        "useWhen": [
+          "opaque backgrounds",
+          "card backgrounds",
+          "form containers"
+        ],
+        "avoidWhen": [
+          "glass panels"
+        ],
+        "priority": "medium",
+        "keywords": [
+          "solid",
+          "opaque",
+          "background"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Solid bg",
+          "jsx": "<div className=\"bg-[var(--theme-bg-solid)] text-[var(--theme-fg-on-solid)] p-5\">Content</div>"
+        }
       ]
     },
     {
@@ -546,7 +1227,7 @@
       "status": "stable",
       "version": "0.42.0",
       "path": "src/components/card/DSCard.astro",
-      "isReact": false,
+      "isReact": true,
       "props": {
         "frost": {
           "type": "boolean",
@@ -594,6 +1275,74 @@
         "container",
         "glass",
         "frost"
+      ],
+      "importPath": "@/primitives/surfaces",
+      "exportName": "Card",
+      "ai": {
+        "useWhen": [
+          "content containers",
+          "data grouping",
+          "form sections",
+          "feature cards"
+        ],
+        "avoidWhen": [
+          "full-page backgrounds",
+          "inline elements"
+        ],
+        "priority": "high",
+        "semanticRole": "article",
+        "keywords": [
+          "card",
+          "panel",
+          "container",
+          "box",
+          "surface"
+        ]
+      },
+      "composition": {
+        "allowedChildren": [
+          "heading",
+          "text",
+          "button",
+          "input",
+          "divider",
+          "badge",
+          "avatar",
+          "stat",
+          "table",
+          "list"
+        ],
+        "allowedParents": [
+          "grid",
+          "stack",
+          "inline",
+          "section"
+        ],
+        "commonSiblings": [
+          "card"
+        ]
+      },
+      "constraints": {
+        "doNotUseFor": [
+          "inline text",
+          "single buttons"
+        ],
+        "contrastAware": false
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Glass card",
+          "jsx": "<Card variant=\"glass\" frost=\"standard\"><Heading level={3}>Title</Heading><Text>Content</Text></Card>"
+        },
+        {
+          "title": "Solid card",
+          "jsx": "<Card variant=\"solid\"><Stat value=\"1,234\" label=\"Users\" /></Card>"
+        }
       ]
     },
     {
@@ -629,7 +1378,30 @@
         "gradient",
         "readability",
         "overlay"
-      ]
+      ],
+      "cssClass": "ds-card-frost",
+      "usage": "<div className=\"ds-card-frost\" />",
+      "ai": {
+        "useWhen": [
+          "card top frost overlay",
+          "decorative frost gradient"
+        ],
+        "avoidWhen": [
+          "content areas"
+        ],
+        "priority": "low",
+        "keywords": [
+          "frost",
+          "gradient",
+          "decorative",
+          "overlay"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      }
     },
     {
       "id": "divider-horizontal",
@@ -688,7 +1460,35 @@
         "line",
         "horizontal"
       ],
-      "exportName": "Divider"
+      "exportName": "Divider",
+      "importPath": "@/primitives/surfaces",
+      "ai": {
+        "useWhen": [
+          "horizontal separators",
+          "section breaks"
+        ],
+        "avoidWhen": [
+          "vertical dividers"
+        ],
+        "priority": "medium",
+        "keywords": [
+          "divider",
+          "separator",
+          "horizontal",
+          "line"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Divider",
+          "jsx": "<Divider />"
+        }
+      ]
     },
     {
       "id": "divider-glass",
@@ -747,7 +1547,36 @@
         "slit",
         "groove"
       ],
-      "exportName": "Divider"
+      "exportName": "Divider",
+      "importPath": "@/primitives/surfaces",
+      "usageNote": "variant=\"glass\"",
+      "ai": {
+        "useWhen": [
+          "glass surface separators",
+          "etched/groove effects"
+        ],
+        "avoidWhen": [
+          "opaque backgrounds"
+        ],
+        "priority": "low",
+        "keywords": [
+          "divider",
+          "glass",
+          "etched",
+          "groove"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Glass divider",
+          "jsx": "<Divider variant=\"etched\" />"
+        }
+      ]
     },
     {
       "id": "text-input",
@@ -785,6 +1614,33 @@
         "text",
         "form",
         "field"
+      ],
+      "ai": {
+        "useWhen": [
+          "text entry",
+          "form fields"
+        ],
+        "avoidWhen": [
+          "multi-line (use Textarea)"
+        ],
+        "priority": "high",
+        "keywords": [
+          "input",
+          "text",
+          "field",
+          "form"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Input",
+          "jsx": "<Input placeholder=\"Enter text\" />"
+        }
       ]
     },
     {
@@ -811,6 +1667,37 @@
         "input",
         "find",
         "filter"
+      ],
+      "importPath": "@/primitives/inputs",
+      "exportName": "SearchInput",
+      "ai": {
+        "useWhen": [
+          "search bars",
+          "filter inputs",
+          "autocomplete"
+        ],
+        "avoidWhen": [
+          "form fields (use Input)"
+        ],
+        "priority": "high",
+        "semanticRole": "search",
+        "keywords": [
+          "search",
+          "filter",
+          "find",
+          "autocomplete"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Search",
+          "jsx": "<SearchInput placeholder=\"Search...\" />"
+        }
       ]
     },
     {
@@ -841,6 +1728,36 @@
         "select",
         "dropdown",
         "picker"
+      ],
+      "ai": {
+        "useWhen": [
+          "dropdown selection",
+          "option picker",
+          "category filter"
+        ],
+        "avoidWhen": [
+          "text input",
+          "toggle (use Toggle)"
+        ],
+        "priority": "high",
+        "semanticRole": "listbox",
+        "keywords": [
+          "select",
+          "dropdown",
+          "picker",
+          "option"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": true,
+        "hydrationRisk": "low"
+      },
+      "examples": [
+        {
+          "title": "Select",
+          "jsx": "<Select options={[\"Option A\",\"Option B\"]} placeholder=\"Choose...\" />"
+        }
       ]
     },
     {
@@ -871,7 +1788,29 @@
         "search",
         "autocomplete",
         "select2"
-      ]
+      ],
+      "importPath": "@/primitives/inputs",
+      "ai": {
+        "useWhen": [
+          "large option lists",
+          "filterable dropdowns"
+        ],
+        "avoidWhen": [
+          "small option lists (use Select)"
+        ],
+        "priority": "medium",
+        "keywords": [
+          "searchable",
+          "select",
+          "filter",
+          "dropdown"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": true,
+        "hydrationRisk": "low"
+      }
     },
     {
       "id": "textarea",
@@ -899,6 +1838,38 @@
         "textarea",
         "multiline",
         "text"
+      ],
+      "importPath": "@/primitives/inputs",
+      "exportName": "Textarea",
+      "ai": {
+        "useWhen": [
+          "multi-line text",
+          "comments",
+          "descriptions",
+          "bio fields"
+        ],
+        "avoidWhen": [
+          "single-line input (use Input)"
+        ],
+        "priority": "high",
+        "semanticRole": "textbox",
+        "keywords": [
+          "textarea",
+          "multi-line",
+          "comment",
+          "description"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Textarea",
+          "jsx": "<Textarea placeholder=\"Write something...\" rows={4} />"
+        }
       ]
     },
     {
@@ -942,6 +1913,56 @@
         "switch",
         "on",
         "off"
+      ],
+      "importPath": "@/primitives/controls",
+      "exportName": "Toggle",
+      "ai": {
+        "useWhen": [
+          "on/off settings",
+          "boolean preferences",
+          "feature flags"
+        ],
+        "avoidWhen": [
+          "multiple choice (use Radio)",
+          "yes/no questions (use Checkbox)"
+        ],
+        "priority": "medium",
+        "semanticRole": "switch",
+        "keywords": [
+          "toggle",
+          "switch",
+          "on off",
+          "setting"
+        ]
+      },
+      "composition": {
+        "allowedParents": [
+          "inline",
+          "stack",
+          "card",
+          "modal"
+        ],
+        "commonSiblings": [
+          "label",
+          "text"
+        ]
+      },
+      "constraints": {
+        "doNotUseFor": [
+          "multi-select",
+          "form submission"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Setting row",
+          "jsx": "<Inline justify=\"between\"><Text>Dark Mode</Text><Toggle checked={isDark} onChange={setIsDark} /></Inline>"
+        }
       ]
     },
     {
@@ -984,6 +2005,38 @@
         "checkbox",
         "check",
         "tick"
+      ],
+      "importPath": "@/primitives/controls",
+      "exportName": "Checkbox",
+      "ai": {
+        "useWhen": [
+          "multi-select options",
+          "agree/disagree",
+          "feature toggles"
+        ],
+        "avoidWhen": [
+          "single toggle (use Toggle)",
+          "single select (use Radio)"
+        ],
+        "priority": "high",
+        "semanticRole": "checkbox",
+        "keywords": [
+          "checkbox",
+          "check",
+          "multi-select",
+          "agree"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Checkbox",
+          "jsx": "<Checkbox checked={agreed} onChange={setAgreed} />"
+        }
       ]
     },
     {
@@ -1026,6 +2079,37 @@
         "radio",
         "option",
         "select"
+      ],
+      "importPath": "@/primitives/controls",
+      "exportName": "Radio",
+      "ai": {
+        "useWhen": [
+          "single selection from group",
+          "option picking"
+        ],
+        "avoidWhen": [
+          "multi-select (use Checkbox)",
+          "on/off (use Toggle)"
+        ],
+        "priority": "high",
+        "semanticRole": "radio",
+        "keywords": [
+          "radio",
+          "select one",
+          "option",
+          "group"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Radio",
+          "jsx": "<Radio selected={choice === \"A\"} onChange={() => setChoice(\"A\")} />"
+        }
       ]
     },
     {
@@ -1070,6 +2154,37 @@
         "segment",
         "tabs",
         "option"
+      ],
+      "importPath": "@/primitives/controls",
+      "exportName": "SegmentedControl",
+      "ai": {
+        "useWhen": [
+          "view switcher",
+          "mode toggle",
+          "time period selector"
+        ],
+        "avoidWhen": [
+          "many options (use TabBar)",
+          "boolean (use Toggle)"
+        ],
+        "priority": "medium",
+        "keywords": [
+          "segment",
+          "switcher",
+          "toggle group",
+          "day week month"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Segmented",
+          "jsx": "<SegmentedControl options={[\"Day\",\"Week\",\"Month\"]} value={period} onChange={setPeriod} />"
+        }
       ]
     },
     {
@@ -1103,7 +2218,26 @@
         "slider",
         "range",
         "flat"
-      ]
+      ],
+      "importPath": "@/primitives/controls",
+      "exportName": "Slider",
+      "usageNote": "variant=\"flat\"",
+      "ai": {
+        "useWhen": [
+          "flat/standard slider style"
+        ],
+        "priority": "low",
+        "keywords": [
+          "slider",
+          "flat",
+          "range"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      }
     },
     {
       "id": "liquid-glass-slider",
@@ -1115,7 +2249,7 @@
       "status": "stable",
       "version": "0.3.0",
       "path": "src/components/glass/LiquidGlassSlider.tsx",
-      "exportName": "LiquidGlassSlider",
+      "exportName": "Slider",
       "isReact": true,
       "props": {
         "min": {
@@ -1142,7 +2276,26 @@
         "glass",
         "gel",
         "range"
-      ]
+      ],
+      "importPath": "@/primitives/controls",
+      "usageNote": "variant=\"gel\"",
+      "ai": {
+        "useWhen": [
+          "gel/glass slider style",
+          "premium controls"
+        ],
+        "priority": "low",
+        "keywords": [
+          "slider",
+          "gel",
+          "glass"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      }
     },
     {
       "id": "gel-toggle",
@@ -1168,7 +2321,26 @@
         "gel",
         "glass",
         "switch"
-      ]
+      ],
+      "importPath": "@/primitives/controls",
+      "exportName": "Toggle",
+      "usageNote": "variant=\"gel\"",
+      "ai": {
+        "useWhen": [
+          "glass/gel toggle style"
+        ],
+        "priority": "low",
+        "keywords": [
+          "toggle",
+          "gel",
+          "glass"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      }
     },
     {
       "id": "gel-checkbox",
@@ -1193,7 +2365,26 @@
         "checkbox",
         "gel",
         "glass"
-      ]
+      ],
+      "importPath": "@/primitives/controls",
+      "exportName": "Checkbox",
+      "usageNote": "variant=\"gel\"",
+      "ai": {
+        "useWhen": [
+          "glass/gel checkbox style"
+        ],
+        "priority": "low",
+        "keywords": [
+          "checkbox",
+          "gel",
+          "glass"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      }
     },
     {
       "id": "gel-radio",
@@ -1218,7 +2409,26 @@
         "radio",
         "gel",
         "glass"
-      ]
+      ],
+      "importPath": "@/primitives/controls",
+      "exportName": "Radio",
+      "usageNote": "variant=\"gel\"",
+      "ai": {
+        "useWhen": [
+          "glass/gel radio style"
+        ],
+        "priority": "low",
+        "keywords": [
+          "radio",
+          "gel",
+          "glass"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      }
     },
     {
       "id": "status-badge",
@@ -1230,7 +2440,7 @@
       "status": "stable",
       "version": "0.8.0",
       "path": "inline",
-      "isReact": false,
+      "isReact": true,
       "props": {
         "variant": {
           "type": "enum",
@@ -1251,6 +2461,63 @@
         "status",
         "pill",
         "indicator"
+      ],
+      "importPath": "@/primitives/data",
+      "exportName": "Badge",
+      "ai": {
+        "useWhen": [
+          "status indicators",
+          "tags",
+          "count badges",
+          "labels"
+        ],
+        "avoidWhen": [
+          "action buttons",
+          "navigation items"
+        ],
+        "priority": "medium",
+        "semanticRole": "status",
+        "keywords": [
+          "badge",
+          "status",
+          "tag",
+          "label",
+          "indicator",
+          "pill"
+        ]
+      },
+      "composition": {
+        "allowedParents": [
+          "inline",
+          "card",
+          "heading",
+          "table"
+        ],
+        "commonSiblings": [
+          "text",
+          "avatar"
+        ]
+      },
+      "constraints": {
+        "doNotUseFor": [
+          "clickable actions",
+          "form inputs"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Status badge",
+          "jsx": "<Badge variant=\"success\">Active</Badge>"
+        },
+        {
+          "title": "With heading",
+          "jsx": "<Inline gap=\"8px\"><Heading level={3}>Users</Heading><Badge variant=\"info\">12 new</Badge></Inline>"
+        }
       ]
     },
     {
@@ -1263,7 +2530,7 @@
       "status": "stable",
       "version": "0.8.0",
       "path": "inline",
-      "isReact": false,
+      "isReact": true,
       "props": {
         "variant": {
           "type": "enum",
@@ -1283,7 +2550,31 @@
         "status",
         "online",
         "presence"
-      ]
+      ],
+      "importPath": "@/primitives/data",
+      "exportName": "Badge",
+      "usageNote": "variant=\"dot\"",
+      "ai": {
+        "useWhen": [
+          "online/offline status",
+          "small indicators"
+        ],
+        "avoidWhen": [
+          "text badges"
+        ],
+        "priority": "low",
+        "keywords": [
+          "dot",
+          "status",
+          "online",
+          "indicator"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      }
     },
     {
       "id": "tag",
@@ -1295,7 +2586,7 @@
       "status": "stable",
       "version": "0.8.0",
       "path": "src/primitives/data/Tag.tsx",
-      "isReact": false,
+      "isReact": true,
       "props": {
         "removable": {
           "type": "boolean",
@@ -1308,6 +2599,36 @@
         "tag",
         "removable",
         "label"
+      ],
+      "importPath": "@/primitives/data",
+      "exportName": "Tag",
+      "ai": {
+        "useWhen": [
+          "removable labels",
+          "color-coded tags",
+          "category markers"
+        ],
+        "avoidWhen": [
+          "status badges (use Badge)"
+        ],
+        "priority": "medium",
+        "keywords": [
+          "tag",
+          "label",
+          "removable",
+          "category"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Tag",
+          "jsx": "<Tag color=\"blue\" onRemove={remove}>Design</Tag>"
+        }
       ]
     },
     {
@@ -1320,7 +2641,7 @@
       "status": "stable",
       "version": "0.8.0",
       "path": "inline",
-      "isReact": false,
+      "isReact": true,
       "props": {
         "active": {
           "type": "boolean",
@@ -1333,7 +2654,30 @@
         "chip",
         "filter",
         "select"
-      ]
+      ],
+      "importPath": "@/primitives/data",
+      "exportName": "Tag",
+      "usageNote": "removable",
+      "ai": {
+        "useWhen": [
+          "filter chips",
+          "selected options"
+        ],
+        "avoidWhen": [
+          "tags without remove"
+        ],
+        "priority": "low",
+        "keywords": [
+          "chip",
+          "filter",
+          "selected"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      }
     },
     {
       "id": "avatar",
@@ -1345,7 +2689,7 @@
       "status": "stable",
       "version": "0.8.0",
       "path": "src/primitives/data/Avatar.tsx",
-      "isReact": false,
+      "isReact": true,
       "props": {
         "size": {
           "type": "enum",
@@ -1371,6 +2715,59 @@
         "profile",
         "image",
         "user"
+      ],
+      "importPath": "@/primitives/data",
+      "exportName": "Avatar",
+      "ai": {
+        "useWhen": [
+          "user profiles",
+          "comment authors",
+          "team members",
+          "contact lists"
+        ],
+        "avoidWhen": [
+          "product images",
+          "logos",
+          "icons"
+        ],
+        "priority": "medium",
+        "semanticRole": "img",
+        "keywords": [
+          "avatar",
+          "profile",
+          "user",
+          "photo",
+          "picture"
+        ]
+      },
+      "composition": {
+        "allowedParents": [
+          "inline",
+          "card",
+          "stack"
+        ],
+        "commonSiblings": [
+          "text",
+          "badge",
+          "heading"
+        ]
+      },
+      "constraints": {
+        "doNotUseFor": [
+          "product images",
+          "decorative images"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "User avatar",
+          "jsx": "<Avatar src=\"/photo.jpg\" name=\"John Doe\" size=\"md\" status=\"online\" />"
+        }
       ]
     },
     {
@@ -1383,7 +2780,7 @@
       "status": "stable",
       "version": "0.8.0",
       "path": "inline",
-      "isReact": false,
+      "isReact": true,
       "props": {
         "max": {
           "type": "number",
@@ -1399,6 +2796,35 @@
         "avatar",
         "group",
         "stack"
+      ],
+      "importPath": "@/primitives/data",
+      "exportName": "AvatarGroup",
+      "ai": {
+        "useWhen": [
+          "team member stacks",
+          "user group display"
+        ],
+        "avoidWhen": [
+          "single avatars"
+        ],
+        "priority": "low",
+        "keywords": [
+          "avatar group",
+          "team",
+          "users",
+          "stacked"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Avatar group",
+          "jsx": "<AvatarGroup users={[{name:\"Alice\"},{name:\"Bob\"}]} max={3} />"
+        }
       ]
     },
     {
@@ -1411,7 +2837,7 @@
       "status": "stable",
       "version": "0.8.0",
       "path": "src/primitives/feedback/Spinner.tsx",
-      "isReact": false,
+      "isReact": true,
       "props": {
         "size": {
           "type": "string",
@@ -1430,6 +2856,53 @@
         "spinner",
         "loading",
         "progress"
+      ],
+      "importPath": "@/primitives/feedback",
+      "exportName": "Spinner",
+      "ai": {
+        "useWhen": [
+          "loading states",
+          "async operations",
+          "data fetching"
+        ],
+        "avoidWhen": [
+          "content loading (use Skeleton)",
+          "progress tracking (use Progress)"
+        ],
+        "priority": "medium",
+        "semanticRole": "progressbar",
+        "keywords": [
+          "spinner",
+          "loading",
+          "loader",
+          "wait"
+        ]
+      },
+      "composition": {
+        "allowedParents": [
+          "center",
+          "card",
+          "button",
+          "inline"
+        ]
+      },
+      "constraints": {
+        "maxPerPage": 3,
+        "doNotUseFor": [
+          "static content",
+          "decorative animation"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Loading state",
+          "jsx": "<Center><Spinner size=\"32px\" /></Center>"
+        }
       ]
     },
     {
@@ -1442,7 +2915,7 @@
       "status": "stable",
       "version": "0.8.0",
       "path": "inline",
-      "isReact": false,
+      "isReact": true,
       "props": {
         "value": {
           "type": "number",
@@ -1462,6 +2935,37 @@
         "bar",
         "loading",
         "percentage"
+      ],
+      "importPath": "@/primitives/feedback",
+      "exportName": "Progress",
+      "ai": {
+        "useWhen": [
+          "progress tracking",
+          "loading bars",
+          "completion percentage"
+        ],
+        "avoidWhen": [
+          "indeterminate loading (use Spinner)"
+        ],
+        "priority": "medium",
+        "semanticRole": "progressbar",
+        "keywords": [
+          "progress",
+          "bar",
+          "loading",
+          "percentage"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Progress",
+          "jsx": "<Progress value={67} />"
+        }
       ]
     },
     {
@@ -1474,7 +2978,7 @@
       "status": "stable",
       "version": "0.8.0",
       "path": "inline",
-      "isReact": false,
+      "isReact": true,
       "props": {
         "width": {
           "type": "string",
@@ -1502,6 +3006,37 @@
         "shimmer",
         "loading",
         "placeholder"
+      ],
+      "importPath": "@/primitives/feedback",
+      "exportName": "Skeleton",
+      "ai": {
+        "useWhen": [
+          "content loading placeholders",
+          "lazy loading",
+          "skeleton screens"
+        ],
+        "avoidWhen": [
+          "spinner loading",
+          "progress bars"
+        ],
+        "priority": "medium",
+        "keywords": [
+          "skeleton",
+          "loading",
+          "placeholder",
+          "shimmer"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Skeleton",
+          "jsx": "<Skeleton width=\"60%\" height=\"14px\" />"
+        }
       ]
     },
     {
@@ -1538,6 +3073,55 @@
         "tabs",
         "navigation",
         "underline"
+      ],
+      "importPath": "@/primitives/navigation",
+      "ai": {
+        "useWhen": [
+          "content switching",
+          "section navigation",
+          "view toggles"
+        ],
+        "avoidWhen": [
+          "page navigation (use NavItem)",
+          "single selections (use SegmentedControl)"
+        ],
+        "priority": "high",
+        "semanticRole": "tablist",
+        "keywords": [
+          "tabs",
+          "tab bar",
+          "navigation",
+          "switch",
+          "view"
+        ]
+      },
+      "composition": {
+        "allowedParents": [
+          "card",
+          "modal",
+          "section"
+        ],
+        "composedWith": [
+          "stack"
+        ]
+      },
+      "constraints": {
+        "maxPerPage": 3,
+        "doNotUseFor": [
+          "form inputs",
+          "buttons"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Tab navigation",
+          "jsx": "<TabBar tabs={[\"Overview\",\"Settings\",\"Activity\"]} active={0} onChange={setTab} />"
+        }
       ]
     },
     {
@@ -1572,6 +3156,35 @@
         "tabs",
         "pill",
         "selector"
+      ],
+      "importPath": "@/primitives/navigation",
+      "ai": {
+        "useWhen": [
+          "pill-style tab selector",
+          "filter tabs",
+          "category selector"
+        ],
+        "avoidWhen": [
+          "underline tabs (use TabBar)"
+        ],
+        "priority": "medium",
+        "keywords": [
+          "pill",
+          "tabs",
+          "filter",
+          "category"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Pill tabs",
+          "jsx": "<PillTabs tabs={[\"All\",\"Active\",\"Archived\"]} activeTab={tab} onChange={setTab} />"
+        }
       ]
     },
     {
@@ -1600,6 +3213,37 @@
         "breadcrumb",
         "path",
         "navigation"
+      ],
+      "importPath": "@/primitives/navigation",
+      "exportName": "Breadcrumb",
+      "ai": {
+        "useWhen": [
+          "page path navigation",
+          "hierarchical navigation"
+        ],
+        "avoidWhen": [
+          "tab navigation",
+          "pagination"
+        ],
+        "priority": "medium",
+        "semanticRole": "navigation",
+        "keywords": [
+          "breadcrumb",
+          "path",
+          "navigation",
+          "hierarchy"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Breadcrumb",
+          "jsx": "<Breadcrumb items={[\"Home\",\"Products\",\"Detail\"]} />"
+        }
       ]
     },
     {
@@ -1638,6 +3282,36 @@
         "sidebar",
         "menu",
         "item"
+      ],
+      "importPath": "@/primitives/navigation",
+      "exportName": "NavItem",
+      "ai": {
+        "useWhen": [
+          "sidebar navigation items",
+          "menu items"
+        ],
+        "avoidWhen": [
+          "tab bars",
+          "breadcrumbs"
+        ],
+        "priority": "medium",
+        "keywords": [
+          "nav",
+          "menu",
+          "sidebar",
+          "navigation item"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Nav item",
+          "jsx": "<NavItem icon={<HomeIcon />} label=\"Dashboard\" active />"
+        }
       ]
     },
     {
@@ -1650,7 +3324,7 @@
       "status": "stable",
       "version": "0.8.0",
       "path": "src/primitives/layout/Stack.tsx",
-      "isReact": false,
+      "isReact": true,
       "props": {
         "gap": {
           "type": "string",
@@ -1672,6 +3346,62 @@
         "vertical",
         "flex",
         "column"
+      ],
+      "importPath": "@/primitives/layout",
+      "exportName": "Stack",
+      "ai": {
+        "useWhen": [
+          "vertical layouts",
+          "form fields",
+          "card content",
+          "stacked sections"
+        ],
+        "avoidWhen": [
+          "horizontal layouts (use Inline)",
+          "grid layouts (use Grid)"
+        ],
+        "priority": "high",
+        "semanticRole": "group",
+        "keywords": [
+          "stack",
+          "vertical",
+          "column",
+          "flex column",
+          "layout"
+        ]
+      },
+      "composition": {
+        "allowedChildren": [
+          "heading",
+          "text",
+          "card",
+          "input",
+          "button",
+          "divider",
+          "alert"
+        ],
+        "allowedParents": [
+          "card",
+          "section",
+          "modal",
+          "center"
+        ]
+      },
+      "constraints": {
+        "doNotUseFor": [
+          "horizontal button groups"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Form layout",
+          "jsx": "<Stack gap=\"16px\"><FormGroup label=\"Name\"><Input /></FormGroup><FormGroup label=\"Email\"><Input type=\"email\" /></FormGroup><Button variant=\"solid\">Submit</Button></Stack>"
+        }
       ]
     },
     {
@@ -1684,7 +3414,7 @@
       "status": "stable",
       "version": "0.8.0",
       "path": "src/primitives/layout/Inline.tsx",
-      "isReact": false,
+      "isReact": true,
       "props": {
         "gap": {
           "type": "string",
@@ -1716,6 +3446,59 @@
         "horizontal",
         "flex",
         "row"
+      ],
+      "importPath": "@/primitives/layout",
+      "exportName": "Inline",
+      "ai": {
+        "useWhen": [
+          "horizontal layouts",
+          "button groups",
+          "icon + text rows",
+          "toolbar items"
+        ],
+        "avoidWhen": [
+          "vertical stacking (use Stack)",
+          "grid layouts (use Grid)"
+        ],
+        "priority": "high",
+        "semanticRole": "group",
+        "keywords": [
+          "inline",
+          "horizontal",
+          "row",
+          "flex row",
+          "layout"
+        ]
+      },
+      "composition": {
+        "allowedChildren": [
+          "button",
+          "badge",
+          "avatar",
+          "text",
+          "icon"
+        ],
+        "allowedParents": [
+          "card",
+          "stack",
+          "section"
+        ]
+      },
+      "constraints": {
+        "doNotUseFor": [
+          "page-level layout"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Button pair",
+          "jsx": "<Inline gap=\"8px\" justify=\"end\"><Button variant=\"ghost\">Cancel</Button><Button variant=\"solid\">Save</Button></Inline>"
+        }
       ]
     },
     {
@@ -1728,7 +3511,7 @@
       "status": "stable",
       "version": "0.8.0",
       "path": "src/primitives/layout/Center.tsx",
-      "isReact": false,
+      "isReact": true,
       "props": {
         "className": {
           "type": "string"
@@ -1751,6 +3534,36 @@
         "center",
         "align",
         "justify"
+      ],
+      "importPath": "@/primitives/layout",
+      "exportName": "Center",
+      "ai": {
+        "useWhen": [
+          "centering content",
+          "login forms",
+          "hero sections"
+        ],
+        "avoidWhen": [
+          "left-aligned content"
+        ],
+        "priority": "medium",
+        "keywords": [
+          "center",
+          "align",
+          "middle",
+          "flex center"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Center",
+          "jsx": "<Center className=\"min-h-screen\"><Card>Centered content</Card></Center>"
+        }
       ]
     },
     {
@@ -1763,7 +3576,7 @@
       "status": "stable",
       "version": "0.8.0",
       "path": "src/primitives/layout/Spacer.tsx",
-      "isReact": false,
+      "isReact": true,
       "props": {
         "size": {
           "type": "string",
@@ -1779,6 +3592,35 @@
         "spacer",
         "gap",
         "flex"
+      ],
+      "importPath": "@/primitives/layout",
+      "exportName": "Spacer",
+      "ai": {
+        "useWhen": [
+          "vertical spacing between elements",
+          "flex space filler"
+        ],
+        "avoidWhen": [
+          "gap property (use Stack gap)"
+        ],
+        "priority": "low",
+        "keywords": [
+          "spacer",
+          "space",
+          "gap",
+          "filler"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Spacer",
+          "jsx": "<Spacer size=\"24px\" />"
+        }
       ]
     },
     {
@@ -1792,7 +3634,12 @@
       "version": "0.8.0",
       "path": "inline",
       "isReact": false,
-      "props": {},
+      "props": {
+        "className": {
+          "type": "string",
+          "description": "CSS class — apply to any element for shadow depth"
+        }
+      },
       "documentedOn": "/design-system/primitives",
       "section": "Elevation",
       "tags": [
@@ -1800,7 +3647,26 @@
         "flat",
         "shadow",
         "none"
-      ]
+      ],
+      "cssClass": "elevation-flat",
+      "usage": "<div className=\"elevation-flat\">...</div>",
+      "ai": {
+        "useWhen": [
+          "no shadow needed",
+          "flat elements"
+        ],
+        "priority": "low",
+        "keywords": [
+          "flat",
+          "no shadow",
+          "elevation"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      }
     },
     {
       "id": "elevation-raised",
@@ -1813,14 +3679,40 @@
       "version": "0.8.0",
       "path": "inline",
       "isReact": false,
-      "props": {},
+      "props": {
+        "className": {
+          "type": "string",
+          "description": "CSS class — apply to any element for shadow depth"
+        }
+      },
       "documentedOn": "/design-system/primitives",
       "section": "Elevation",
       "tags": [
         "elevation",
         "raised",
         "shadow"
-      ]
+      ],
+      "cssClass": "elevation-raised",
+      "usage": "<div className=\"elevation-raised\">...</div>",
+      "ai": {
+        "useWhen": [
+          "subtle elevation",
+          "dropdown shadows",
+          "cards"
+        ],
+        "priority": "medium",
+        "keywords": [
+          "raised",
+          "shadow",
+          "dropdown",
+          "elevation"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      }
     },
     {
       "id": "elevation-floating",
@@ -1833,7 +3725,12 @@
       "version": "0.8.0",
       "path": "inline",
       "isReact": false,
-      "props": {},
+      "props": {
+        "className": {
+          "type": "string",
+          "description": "CSS class — apply to any element for shadow depth"
+        }
+      },
       "documentedOn": "/design-system/primitives",
       "section": "Elevation",
       "tags": [
@@ -1841,7 +3738,28 @@
         "floating",
         "shadow",
         "popover"
-      ]
+      ],
+      "cssClass": "elevation-floating",
+      "usage": "<div className=\"elevation-floating\">...</div>",
+      "ai": {
+        "useWhen": [
+          "floating panels",
+          "popovers",
+          "tooltips"
+        ],
+        "priority": "medium",
+        "keywords": [
+          "floating",
+          "popover",
+          "shadow",
+          "elevation"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      }
     },
     {
       "id": "ds-nav",
@@ -1959,7 +3877,12 @@
       "path": "src/components/modal/AppearanceModal.tsx",
       "exportName": "AppearanceModal",
       "isReact": true,
-      "props": {},
+      "props": {
+        "internal": {
+          "type": "internal",
+          "description": "Internal component — not intended for direct use"
+        }
+      },
       "composedOf": [
         "liquid-glass-slider",
         "segmented-control",
@@ -1987,7 +3910,12 @@
       "path": "src/components/modal/ContextMenu.tsx",
       "exportName": "ContextMenu",
       "isReact": true,
-      "props": {},
+      "props": {
+        "internal": {
+          "type": "internal",
+          "description": "Internal component — not intended for direct use"
+        }
+      },
       "documentedOn": "/design-system/components",
       "section": "Overlay",
       "tags": [
@@ -2009,7 +3937,12 @@
       "path": "src/components/modal/BackgroundPicker.tsx",
       "exportName": "BackgroundPicker",
       "isReact": true,
-      "props": {},
+      "props": {
+        "internal": {
+          "type": "internal",
+          "description": "Internal component — not intended for direct use"
+        }
+      },
       "documentedOn": "/design-system/components",
       "section": "Overlay",
       "tags": [
@@ -2031,7 +3964,12 @@
       "path": "src/components/modal/FontPickerModal.tsx",
       "exportName": "FontPickerModal",
       "isReact": true,
-      "props": {},
+      "props": {
+        "internal": {
+          "type": "internal",
+          "description": "Internal component — not intended for direct use"
+        }
+      },
       "documentedOn": "/design-system/components",
       "section": "Overlay",
       "tags": [
@@ -2054,7 +3992,12 @@
       "path": "src/components/modal/PresetEditorModal.tsx",
       "exportName": "PresetEditorModal",
       "isReact": true,
-      "props": {},
+      "props": {
+        "internal": {
+          "type": "internal",
+          "description": "Internal component — not intended for direct use"
+        }
+      },
       "documentedOn": "/design-system/components",
       "section": "Overlay",
       "tags": [
@@ -2069,7 +4012,7 @@
       "id": "section-nav",
       "name": "Section Nav",
       "displayName": "Section Navigation",
-      "description": "Floating side navigation with scroll-aware active section",
+      "description": "Sticky right-side table of contents. Auto-discovers sections via [data-section] attributes. Contrast-aware, hover text scaling.",
       "layer": "component",
       "category": "navigation",
       "status": "stable",
@@ -2077,7 +4020,12 @@
       "path": "src/components/block/SectionNav.tsx",
       "exportName": "SectionNav",
       "isReact": true,
-      "props": {},
+      "props": {
+        "internal": {
+          "type": "internal",
+          "description": "Internal component — not intended for direct use"
+        }
+      },
       "documentedOn": "/design-system/components",
       "section": "Navigation",
       "tags": [
@@ -2092,7 +4040,7 @@
       "id": "features-grid",
       "name": "Features Grid",
       "displayName": "Features Grid",
-      "description": "Interactive feature cards with tag-based filtering",
+      "description": "Grid of feature cards for the home page hero section.",
       "layer": "component",
       "category": "data",
       "status": "stable",
@@ -2100,7 +4048,12 @@
       "path": "src/components/block/FeaturesGrid.tsx",
       "exportName": "FeaturesGrid",
       "isReact": true,
-      "props": {},
+      "props": {
+        "internal": {
+          "type": "internal",
+          "description": "Internal component — not intended for direct use"
+        }
+      },
       "documentedOn": "/design-system/components",
       "section": "Data",
       "tags": [
@@ -2115,7 +4068,7 @@
       "id": "type-presets-table",
       "name": "Type Presets Table",
       "displayName": "Type Presets Table",
-      "description": "Interactive typography table with editable size/weight/line-height and scale presets",
+      "description": "Interactive table showing all 14 type presets with live samples. Includes preset size selector (small/medium/large) that sets --type-scale globally.",
       "layer": "component",
       "category": "data",
       "status": "stable",
@@ -2123,7 +4076,12 @@
       "path": "src/components/block/TypePresetsTable.tsx",
       "exportName": "TypePresetsTable",
       "isReact": true,
-      "props": {},
+      "props": {
+        "internal": {
+          "type": "internal",
+          "description": "Internal component — not intended for direct use"
+        }
+      },
       "composedOf": [
         "heading",
         "body-text",
@@ -2151,7 +4109,12 @@
       "path": "src/components/glass/LiquidGlassFilter.tsx",
       "exportName": "LiquidGlassFilter",
       "isReact": true,
-      "props": {},
+      "props": {
+        "internal": {
+          "type": "internal",
+          "description": "Core infrastructure — not intended for direct use"
+        }
+      },
       "documentedOn": "/design-system",
       "tags": [
         "svg",
@@ -2197,7 +4160,23 @@
         "dropdown",
         "form",
         "input"
-      ]
+      ],
+      "importPath": "@/primitives/inputs",
+      "ai": {
+        "useWhen": [
+          "dropdown selection"
+        ],
+        "priority": "high",
+        "keywords": [
+          "select",
+          "dropdown"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": true,
+        "hydrationRisk": "low"
+      }
     },
     {
       "id": "slider",
@@ -2252,6 +4231,36 @@
         "range",
         "input",
         "control"
+      ],
+      "importPath": "@/primitives/controls",
+      "ai": {
+        "useWhen": [
+          "range selection",
+          "volume control",
+          "value adjustment"
+        ],
+        "avoidWhen": [
+          "exact number input (use NumberInput)"
+        ],
+        "priority": "medium",
+        "semanticRole": "slider",
+        "keywords": [
+          "slider",
+          "range",
+          "value",
+          "drag"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Slider",
+          "jsx": "<Slider value={60} onChange={setValue} showValue />"
+        }
       ]
     },
     {
@@ -2306,6 +4315,62 @@
         "dialog",
         "overlay",
         "popup"
+      ],
+      "importPath": "@/primitives/feedback",
+      "ai": {
+        "useWhen": [
+          "confirmation dialogs",
+          "form overlays",
+          "detail views",
+          "settings panels"
+        ],
+        "avoidWhen": [
+          "inline content",
+          "tooltips (use Tooltip)",
+          "toasts (use Toast)"
+        ],
+        "priority": "high",
+        "semanticRole": "dialog",
+        "keywords": [
+          "modal",
+          "dialog",
+          "popup",
+          "overlay",
+          "lightbox"
+        ]
+      },
+      "composition": {
+        "allowedChildren": [
+          "heading",
+          "text",
+          "input",
+          "button",
+          "form-group",
+          "divider",
+          "tab-bar"
+        ],
+        "composedWith": [
+          "overlay",
+          "button"
+        ]
+      },
+      "constraints": {
+        "maxPerPage": 3,
+        "doNotUseFor": [
+          "inline messages",
+          "navigation"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": true,
+        "hydrationRisk": "low"
+      },
+      "examples": [
+        {
+          "title": "Confirm dialog",
+          "jsx": "<Modal open={isOpen} onClose={close} title=\"Confirm\" footer={<><Button variant=\"ghost\" onClick={close}>Cancel</Button><Button variant=\"solid\" onClick={confirm}>OK</Button></>}><Text>Are you sure?</Text></Modal>"
+        }
       ]
     },
     {
@@ -2345,6 +4410,37 @@
         "hover",
         "popup",
         "info"
+      ],
+      "importPath": "@/primitives/feedback",
+      "ai": {
+        "useWhen": [
+          "hover hints",
+          "icon explanations",
+          "help text"
+        ],
+        "avoidWhen": [
+          "long content (use Modal)",
+          "notifications (use Toast)"
+        ],
+        "priority": "medium",
+        "semanticRole": "tooltip",
+        "keywords": [
+          "tooltip",
+          "hover",
+          "hint",
+          "help"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": true,
+        "hydrationRisk": "low"
+      },
+      "examples": [
+        {
+          "title": "Tooltip",
+          "jsx": "<Tooltip content=\"Delete item\"><IconButton><TrashIcon /></IconButton></Tooltip>"
+        }
       ]
     },
     {
@@ -2381,7 +4477,29 @@
         "backdrop",
         "modal",
         "dim"
-      ]
+      ],
+      "importPath": "@/primitives/feedback",
+      "ai": {
+        "useWhen": [
+          "modal backdrops",
+          "dimmed backgrounds"
+        ],
+        "avoidWhen": [
+          "content areas"
+        ],
+        "priority": "low",
+        "keywords": [
+          "overlay",
+          "backdrop",
+          "dim",
+          "blur"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": true,
+        "hydrationRisk": "low"
+      }
     },
     {
       "id": "drawer",
@@ -2501,7 +4619,64 @@
         "style": {
           "type": "CSSProperties"
         }
-      }
+      },
+      "importPath": "@/primitives/feedback",
+      "isReact": true,
+      "ai": {
+        "useWhen": [
+          "status messages",
+          "validation feedback",
+          "important notices"
+        ],
+        "avoidWhen": [
+          "temporary notifications (use Toast)",
+          "inline help text"
+        ],
+        "priority": "medium",
+        "semanticRole": "alert",
+        "keywords": [
+          "alert",
+          "notification",
+          "message",
+          "info",
+          "warning",
+          "error",
+          "success"
+        ]
+      },
+      "composition": {
+        "allowedParents": [
+          "stack",
+          "card",
+          "section"
+        ],
+        "commonSiblings": [
+          "text",
+          "button"
+        ]
+      },
+      "constraints": {
+        "maxPerPage": 5,
+        "doNotUseFor": [
+          "decorative elements",
+          "navigation"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Info alert",
+          "jsx": "<Alert variant=\"info\" title=\"Information\">Your changes have been saved.</Alert>"
+        },
+        {
+          "title": "Error alert",
+          "jsx": "<Alert variant=\"error\" title=\"Error\" dismissible>Something went wrong.</Alert>"
+        }
+      ]
     },
     {
       "id": "toast",
@@ -2551,7 +4726,51 @@
         "style": {
           "type": "CSSProperties"
         }
-      }
+      },
+      "importPath": "@/primitives/feedback",
+      "isReact": true,
+      "ai": {
+        "useWhen": [
+          "temporary notifications",
+          "action confirmations",
+          "background process updates"
+        ],
+        "avoidWhen": [
+          "persistent messages (use Alert)",
+          "critical errors (use Modal)"
+        ],
+        "priority": "medium",
+        "semanticRole": "status",
+        "keywords": [
+          "toast",
+          "notification",
+          "snackbar",
+          "popup"
+        ]
+      },
+      "composition": {
+        "composedWith": [
+          "button"
+        ]
+      },
+      "constraints": {
+        "maxPerPage": 1,
+        "doNotUseFor": [
+          "persistent content",
+          "forms"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": true,
+        "hydrationRisk": "low"
+      },
+      "examples": [
+        {
+          "title": "Success toast",
+          "jsx": "<Toast variant=\"success\" message=\"File uploaded successfully\" show={true} onClose={close} />"
+        }
+      ]
     },
     {
       "id": "confirm-dialog",
@@ -2586,7 +4805,38 @@
           "type": "string",
           "required": true
         }
-      }
+      },
+      "importPath": "@/primitives/feedback",
+      "isReact": true,
+      "ai": {
+        "useWhen": [
+          "destructive action confirmation",
+          "delete confirmation"
+        ],
+        "avoidWhen": [
+          "info modals",
+          "form modals"
+        ],
+        "priority": "medium",
+        "keywords": [
+          "confirm",
+          "dialog",
+          "delete",
+          "warning",
+          "destructive"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": true,
+        "hydrationRisk": "low"
+      },
+      "examples": [
+        {
+          "title": "Confirm",
+          "jsx": "<ConfirmDialog open={show} onConfirm={del} onCancel={close} title=\"Delete?\" message=\"Cannot be undone\" />"
+        }
+      ]
     },
     {
       "id": "table",
@@ -2613,7 +4863,59 @@
           "type": "boolean",
           "default": false
         }
-      }
+      },
+      "importPath": "@/primitives/data",
+      "isReact": true,
+      "ai": {
+        "useWhen": [
+          "tabular data",
+          "data lists",
+          "comparison tables"
+        ],
+        "avoidWhen": [
+          "single items (use Card)",
+          "key-value pairs (use Stack)"
+        ],
+        "priority": "high",
+        "semanticRole": "table",
+        "keywords": [
+          "table",
+          "data",
+          "grid",
+          "rows",
+          "columns",
+          "list"
+        ]
+      },
+      "composition": {
+        "allowedParents": [
+          "card",
+          "stack",
+          "section"
+        ],
+        "composedWith": [
+          "pagination",
+          "search-input",
+          "empty-state"
+        ]
+      },
+      "constraints": {
+        "doNotUseFor": [
+          "layout grids",
+          "image galleries"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Striped table",
+          "jsx": "<Table columns={[{key:\"name\",label:\"Name\"},{key:\"role\",label:\"Role\"}]} data={users} striped />"
+        }
+      ]
     },
     {
       "id": "stat",
@@ -2649,7 +4951,57 @@
             "neutral"
           ]
         }
-      }
+      },
+      "importPath": "@/primitives/data",
+      "isReact": true,
+      "ai": {
+        "useWhen": [
+          "metrics display",
+          "KPI cards",
+          "dashboard numbers"
+        ],
+        "avoidWhen": [
+          "body text",
+          "form fields"
+        ],
+        "priority": "medium",
+        "semanticRole": "figure",
+        "keywords": [
+          "stat",
+          "metric",
+          "number",
+          "kpi",
+          "dashboard",
+          "count"
+        ]
+      },
+      "composition": {
+        "allowedParents": [
+          "card",
+          "grid",
+          "inline"
+        ],
+        "commonSiblings": [
+          "stat"
+        ]
+      },
+      "constraints": {
+        "doNotUseFor": [
+          "paragraph text",
+          "navigation"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Stat card",
+          "jsx": "<Stat label=\"Users\" value=\"1,234\" trend=\"up\" trendValue=\"+12%\" icon={<UsersIcon />} />"
+        }
+      ]
     },
     {
       "id": "empty-state",
@@ -2674,7 +5026,37 @@
         "description": {
           "type": "string"
         }
-      }
+      },
+      "importPath": "@/primitives/data",
+      "isReact": true,
+      "ai": {
+        "useWhen": [
+          "no data placeholder",
+          "empty lists",
+          "search no results"
+        ],
+        "avoidWhen": [
+          "loading states (use Skeleton)"
+        ],
+        "priority": "medium",
+        "keywords": [
+          "empty",
+          "no data",
+          "placeholder",
+          "no results"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Empty state",
+          "jsx": "<EmptyState icon={<SearchIcon />} title=\"No results\" description=\"Try a different search\" action={<Button>Clear</Button>} />"
+        }
+      ]
     },
     {
       "id": "color-swatch",
@@ -2706,6 +5088,30 @@
           ],
           "default": "md"
         }
+      },
+      "importPath": "@/primitives/data",
+      "isReact": true,
+      "ai": {
+        "useWhen": [
+          "color display",
+          "palette preview",
+          "theme colors"
+        ],
+        "avoidWhen": [
+          "interactive color picking"
+        ],
+        "priority": "low",
+        "keywords": [
+          "color",
+          "swatch",
+          "palette",
+          "preview"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
       }
     },
     {
@@ -2729,7 +5135,34 @@
           "type": "boolean",
           "default": false
         }
-      }
+      },
+      "ai": {
+        "useWhen": [
+          "connected button toolbar",
+          "toggle group",
+          "segmented actions"
+        ],
+        "avoidWhen": [
+          "separate buttons"
+        ],
+        "priority": "low",
+        "keywords": [
+          "button group",
+          "toolbar",
+          "connected"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Button group",
+          "jsx": "<ButtonGroup><Button>Left</Button><Button>Center</Button><Button>Right</Button></ButtonGroup>"
+        }
+      ]
     },
     {
       "id": "password-input",
@@ -2753,7 +5186,38 @@
           "type": "boolean",
           "default": true
         }
-      }
+      },
+      "importPath": "@/primitives/inputs",
+      "isReact": true,
+      "ai": {
+        "useWhen": [
+          "password fields",
+          "login forms",
+          "sign up forms"
+        ],
+        "avoidWhen": [
+          "text input",
+          "search"
+        ],
+        "priority": "high",
+        "keywords": [
+          "password",
+          "login",
+          "secret",
+          "hidden"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Password",
+          "jsx": "<PasswordInput placeholder=\"Enter password\" />"
+        }
+      ]
     },
     {
       "id": "number-input",
@@ -2783,7 +5247,38 @@
           "type": "number",
           "default": 1
         }
-      }
+      },
+      "importPath": "@/primitives/inputs",
+      "isReact": true,
+      "ai": {
+        "useWhen": [
+          "numeric values",
+          "quantity selectors",
+          "price input"
+        ],
+        "avoidWhen": [
+          "text input",
+          "sliders"
+        ],
+        "priority": "medium",
+        "keywords": [
+          "number",
+          "quantity",
+          "numeric",
+          "stepper"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Number input",
+          "jsx": "<NumberInput value={qty} onChange={setQty} min={1} max={99} />"
+        }
+      ]
     },
     {
       "id": "form-group",
@@ -2814,7 +5309,51 @@
           "type": "boolean",
           "default": false
         }
-      }
+      },
+      "importPath": "@/primitives/inputs",
+      "isReact": true,
+      "ai": {
+        "useWhen": [
+          "wrapping inputs with label+helper+error"
+        ],
+        "avoidWhen": [
+          "standalone labels"
+        ],
+        "priority": "high",
+        "semanticRole": "group",
+        "keywords": [
+          "form group",
+          "label",
+          "helper",
+          "error",
+          "field wrapper"
+        ]
+      },
+      "composition": {
+        "allowedChildren": [
+          "input",
+          "select",
+          "textarea",
+          "password-input",
+          "number-input"
+        ],
+        "allowedParents": [
+          "stack",
+          "card",
+          "modal"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Form group",
+          "jsx": "<FormGroup label=\"Email\" required helper=\"We will not share your email\"><Input type=\"email\" /></FormGroup>"
+        }
+      ]
     },
     {
       "id": "pagination",
@@ -2852,7 +5391,58 @@
         "style": {
           "type": "CSSProperties"
         }
-      }
+      },
+      "importPath": "@/primitives/navigation",
+      "isReact": true,
+      "ai": {
+        "useWhen": [
+          "paginated data",
+          "table navigation",
+          "content browsing"
+        ],
+        "avoidWhen": [
+          "infinite scroll",
+          "single page content"
+        ],
+        "priority": "medium",
+        "semanticRole": "navigation",
+        "keywords": [
+          "pagination",
+          "pages",
+          "next",
+          "previous",
+          "page numbers"
+        ]
+      },
+      "composition": {
+        "allowedParents": [
+          "card",
+          "stack",
+          "section"
+        ],
+        "composedWith": [
+          "table",
+          "grid"
+        ]
+      },
+      "constraints": {
+        "maxPerPage": 1,
+        "doNotUseFor": [
+          "tab switching",
+          "step wizards"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Table pagination",
+          "jsx": "<Pagination totalPages={10} currentPage={page} onPageChange={setPage} />"
+        }
+      ]
     },
     {
       "id": "stepper",
@@ -2895,7 +5485,62 @@
         "style": {
           "type": "CSSProperties"
         }
-      }
+      },
+      "importPath": "@/primitives/navigation",
+      "isReact": true,
+      "ai": {
+        "useWhen": [
+          "multi-step forms",
+          "wizard flows",
+          "progress tracking",
+          "onboarding"
+        ],
+        "avoidWhen": [
+          "tab switching (use TabBar)",
+          "pagination (use Pagination)"
+        ],
+        "priority": "medium",
+        "semanticRole": "navigation",
+        "keywords": [
+          "stepper",
+          "wizard",
+          "steps",
+          "progress",
+          "multi-step"
+        ]
+      },
+      "composition": {
+        "allowedParents": [
+          "card",
+          "modal",
+          "stack"
+        ],
+        "composedWith": [
+          "button"
+        ]
+      },
+      "constraints": {
+        "maxPerPage": 1,
+        "doNotUseFor": [
+          "tab navigation",
+          "page pagination"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Horizontal",
+          "jsx": "<Stepper steps={[\"Account\",\"Profile\",\"Review\"]} currentStep={1} onChange={setStep} />"
+        },
+        {
+          "title": "Vertical with descriptions",
+          "jsx": "<Stepper steps={[{label:\"Account\",description:\"Create credentials\"},{label:\"Profile\",description:\"Personal info\"}]} currentStep={0} direction=\"vertical\" />"
+        }
+      ]
     },
     {
       "id": "back-to-top",
@@ -2925,6 +5570,28 @@
         "className": {
           "type": "string"
         }
+      },
+      "importPath": "@/primitives/navigation",
+      "isReact": true,
+      "ai": {
+        "useWhen": [
+          "long scrollable pages",
+          "page-level scroll-to-top"
+        ],
+        "avoidWhen": [
+          "short pages"
+        ],
+        "priority": "low",
+        "keywords": [
+          "back to top",
+          "scroll",
+          "floating button"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": true,
+        "hydrationRisk": "low"
       }
     },
     {
@@ -2949,7 +5616,47 @@
           "type": "boolean",
           "default": false
         }
-      }
+      },
+      "importPath": "@/primitives/surfaces",
+      "isReact": true,
+      "ai": {
+        "useWhen": [
+          "expandable sections",
+          "FAQ lists",
+          "collapsible content"
+        ],
+        "avoidWhen": [
+          "tabs (use TabBar)",
+          "always-visible content"
+        ],
+        "priority": "medium",
+        "semanticRole": "region",
+        "keywords": [
+          "accordion",
+          "expand",
+          "collapse",
+          "faq",
+          "toggle"
+        ]
+      },
+      "composition": {
+        "allowedParents": [
+          "card",
+          "stack",
+          "section"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "FAQ",
+          "jsx": "<Accordion items={[{title:\"Question\",content:\"Answer\"}]} />"
+        }
+      ]
     },
     {
       "id": "scroll-area",
@@ -2972,6 +5679,31 @@
           "type": "string",
           "required": true
         }
+      },
+      "importPath": "@/primitives/surfaces",
+      "isReact": true,
+      "ai": {
+        "useWhen": [
+          "constrained scrollable content",
+          "long lists",
+          "overflow containers"
+        ],
+        "avoidWhen": [
+          "short content",
+          "page-level scroll"
+        ],
+        "priority": "low",
+        "keywords": [
+          "scroll",
+          "overflow",
+          "scrollbar",
+          "container"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
       }
     },
     {
@@ -3003,6 +5735,29 @@
           "type": "boolean",
           "default": true
         }
+      },
+      "ai": {
+        "useWhen": [
+          "image display",
+          "photos",
+          "illustrations"
+        ],
+        "avoidWhen": [
+          "avatars (use Avatar)",
+          "icons (use Icon)"
+        ],
+        "priority": "medium",
+        "keywords": [
+          "image",
+          "photo",
+          "picture",
+          "illustration"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
       }
     },
     {
@@ -3029,6 +5784,29 @@
         "color": {
           "type": "string"
         }
+      },
+      "ai": {
+        "useWhen": [
+          "UI icons",
+          "decorative icons",
+          "action indicators"
+        ],
+        "avoidWhen": [
+          "images",
+          "avatars"
+        ],
+        "priority": "medium",
+        "keywords": [
+          "icon",
+          "svg",
+          "symbol",
+          "indicator"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
       }
     },
     {
@@ -3054,7 +5832,44 @@
         "source": {
           "type": "string"
         }
-      }
+      },
+      "ai": {
+        "useWhen": [
+          "quotes",
+          "testimonials",
+          "citations"
+        ],
+        "avoidWhen": [
+          "body text",
+          "code"
+        ],
+        "priority": "low",
+        "semanticRole": "blockquote",
+        "keywords": [
+          "quote",
+          "blockquote",
+          "citation",
+          "testimonial"
+        ]
+      },
+      "composition": {
+        "allowedParents": [
+          "card",
+          "stack",
+          "section"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Quote",
+          "jsx": "<Blockquote author=\"Dieter Rams\">Good design is as little design as possible.</Blockquote>"
+        }
+      ]
     },
     {
       "id": "list",
@@ -3087,7 +5902,45 @@
           ],
           "default": "md"
         }
-      }
+      },
+      "ai": {
+        "useWhen": [
+          "bullet points",
+          "ordered steps",
+          "feature lists"
+        ],
+        "avoidWhen": [
+          "tables",
+          "grids"
+        ],
+        "priority": "medium",
+        "semanticRole": "list",
+        "keywords": [
+          "list",
+          "bullets",
+          "ordered",
+          "unordered",
+          "items"
+        ]
+      },
+      "composition": {
+        "allowedParents": [
+          "card",
+          "stack",
+          "section"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Unordered",
+          "jsx": "<List items={[\"First item\",\"Second item\"]} />"
+        }
+      ]
     },
     {
       "id": "kbd",
@@ -3113,7 +5966,44 @@
         "className": {
           "type": "string"
         }
-      }
+      },
+      "ai": {
+        "useWhen": [
+          "keyboard shortcuts",
+          "hotkeys",
+          "key combinations"
+        ],
+        "avoidWhen": [
+          "body text",
+          "labels"
+        ],
+        "priority": "low",
+        "semanticRole": "kbd",
+        "keywords": [
+          "keyboard",
+          "shortcut",
+          "hotkey",
+          "key"
+        ]
+      },
+      "composition": {
+        "allowedParents": [
+          "inline",
+          "text",
+          "table"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Shortcut",
+          "jsx": "<Kbd>Cmd</Kbd> + <Kbd>K</Kbd>"
+        }
+      ]
     },
     {
       "id": "view-source-modal",
@@ -3221,7 +6111,38 @@
           "type": "boolean",
           "default": false
         }
-      }
+      },
+      "importPath": "@/primitives/inputs",
+      "isReact": true,
+      "ai": {
+        "useWhen": [
+          "tag entry",
+          "multi-value input",
+          "skill selection"
+        ],
+        "avoidWhen": [
+          "single text input",
+          "select dropdown"
+        ],
+        "priority": "medium",
+        "keywords": [
+          "tag",
+          "multi-value",
+          "chips",
+          "tokens"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": true,
+        "hydrationRisk": "low"
+      },
+      "examples": [
+        {
+          "title": "Tag input",
+          "jsx": "<TagInput tags={tags} onChange={setTags} placeholder=\"Add tag...\" />"
+        }
+      ]
     },
     {
       "id": "otp-input",
@@ -3264,7 +6185,38 @@
           "type": "boolean",
           "default": false
         }
-      }
+      },
+      "importPath": "@/primitives/inputs",
+      "isReact": true,
+      "ai": {
+        "useWhen": [
+          "verification codes",
+          "PIN entry",
+          "2FA"
+        ],
+        "avoidWhen": [
+          "regular text input"
+        ],
+        "priority": "medium",
+        "keywords": [
+          "otp",
+          "pin",
+          "verification",
+          "code",
+          "2fa"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": true,
+        "hydrationRisk": "low"
+      },
+      "examples": [
+        {
+          "title": "OTP input",
+          "jsx": "<OtpInput length={6} value={code} onChange={setCode} />"
+        }
+      ]
     },
     {
       "id": "notification-badge",
@@ -3309,7 +6261,36 @@
         "style": {
           "type": "CSSProperties"
         }
-      }
+      },
+      "importPath": "@/primitives/data",
+      "ai": {
+        "useWhen": [
+          "unread count on icons",
+          "notification indicators"
+        ],
+        "avoidWhen": [
+          "status badges"
+        ],
+        "priority": "medium",
+        "keywords": [
+          "notification",
+          "count",
+          "unread",
+          "badge",
+          "bell"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Notification",
+          "jsx": "<NotificationBadge count={5}><BellIcon /></NotificationBadge>"
+        }
+      ]
     },
     {
       "id": "badge",
@@ -3349,7 +6330,35 @@
         "style": {
           "type": "CSSProperties"
         }
-      }
+      },
+      "ai": {
+        "useWhen": [
+          "status indicators",
+          "count badges",
+          "labels"
+        ],
+        "avoidWhen": [
+          "clickable actions"
+        ],
+        "priority": "medium",
+        "keywords": [
+          "badge",
+          "count",
+          "indicator",
+          "pill"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Badge",
+          "jsx": "<Badge variant=\"success\">Active</Badge>"
+        }
+      ]
     },
     {
       "id": "input",
@@ -3412,7 +6421,68 @@
         "style": {
           "type": "CSSProperties"
         }
-      }
+      },
+      "importPath": "@/primitives/inputs",
+      "ai": {
+        "useWhen": [
+          "text input fields",
+          "form data entry",
+          "search fields"
+        ],
+        "avoidWhen": [
+          "multi-line text (use Textarea)",
+          "selection (use Select)",
+          "toggles (use Toggle)"
+        ],
+        "priority": "high",
+        "semanticRole": "textbox",
+        "keywords": [
+          "input",
+          "text field",
+          "form",
+          "text input",
+          "field"
+        ]
+      },
+      "composition": {
+        "allowedParents": [
+          "form-group",
+          "card",
+          "stack",
+          "modal"
+        ],
+        "commonSiblings": [
+          "label",
+          "button"
+        ],
+        "composedWith": [
+          "form-group",
+          "label"
+        ]
+      },
+      "constraints": {
+        "doNotUseFor": [
+          "multi-line content",
+          "rich text",
+          "file uploads"
+        ],
+        "requiresParent": "FormGroup (recommended)"
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Basic input",
+          "jsx": "<Input placeholder=\"Enter name\" />"
+        },
+        {
+          "title": "With FormGroup",
+          "jsx": "<FormGroup label=\"Email\" required><Input type=\"email\" placeholder=\"you@example.com\" /></FormGroup>"
+        }
+      ]
     },
     {
       "id": "token-theme-fg",
@@ -3429,7 +6499,12 @@
         "color",
         "token"
       ],
-      "props": {},
+      "props": {
+        "value": {
+          "type": "css-variable",
+          "description": "CSS custom property — set on :root"
+        }
+      },
       "tokenValue": {
         "light": "rgba(0,0,0,0.88)",
         "dark": "rgba(255,255,255,0.92)"
@@ -3451,7 +6526,12 @@
         "color",
         "token"
       ],
-      "props": {},
+      "props": {
+        "value": {
+          "type": "css-variable",
+          "description": "CSS custom property — set on :root"
+        }
+      },
       "tokenValue": {
         "light": "rgba(0,0,0,0.55)",
         "dark": "rgba(255,255,255,0.6)"
@@ -3473,7 +6553,12 @@
         "color",
         "token"
       ],
-      "props": {},
+      "props": {
+        "value": {
+          "type": "css-variable",
+          "description": "CSS custom property — set on :root"
+        }
+      },
       "tokenValue": {
         "light": "rgba(0,0,0,0.4)",
         "dark": "rgba(255,255,255,0.4)"
@@ -3495,7 +6580,12 @@
         "color",
         "token"
       ],
-      "props": {},
+      "props": {
+        "value": {
+          "type": "css-variable",
+          "description": "CSS custom property — set on :root"
+        }
+      },
       "tokenValue": {
         "light": "rgba(0,0,0,0.25)",
         "dark": "rgba(255,255,255,0.25)"
@@ -3517,7 +6607,12 @@
         "color",
         "token"
       ],
-      "props": {},
+      "props": {
+        "value": {
+          "type": "css-variable",
+          "description": "CSS custom property — set on :root"
+        }
+      },
       "tokenValue": {
         "light": "#000",
         "dark": "#fff"
@@ -3539,7 +6634,12 @@
         "color",
         "token"
       ],
-      "props": {},
+      "props": {
+        "value": {
+          "type": "css-variable",
+          "description": "CSS custom property — set on :root"
+        }
+      },
       "tokenValue": {
         "light": "#fff",
         "dark": "#000"
@@ -3561,7 +6661,12 @@
         "color",
         "token"
       ],
-      "props": {},
+      "props": {
+        "value": {
+          "type": "css-variable",
+          "description": "CSS custom property — set on :root"
+        }
+      },
       "tokenValue": {
         "light": "rgba(0,0,0,0.06)",
         "dark": "rgba(255,255,255,0.08)"
@@ -3583,7 +6688,12 @@
         "color",
         "token"
       ],
-      "props": {},
+      "props": {
+        "value": {
+          "type": "css-variable",
+          "description": "CSS custom property — set on :root"
+        }
+      },
       "tokenValue": {
         "light": "#fff",
         "dark": "#1a1a1a"
@@ -3605,7 +6715,12 @@
         "color",
         "token"
       ],
-      "props": {},
+      "props": {
+        "value": {
+          "type": "css-variable",
+          "description": "CSS custom property — set on :root"
+        }
+      },
       "tokenValue": {
         "light": "rgba(255,255,255,0.85)",
         "dark": "rgba(30,30,30,0.85)"
@@ -3627,7 +6742,12 @@
         "color",
         "token"
       ],
-      "props": {},
+      "props": {
+        "value": {
+          "type": "css-variable",
+          "description": "CSS custom property — set on :root"
+        }
+      },
       "tokenValue": {
         "light": "rgba(0,0,0,0.03)",
         "dark": "rgba(255,255,255,0.04)"
@@ -3649,7 +6769,12 @@
         "color",
         "token"
       ],
-      "props": {},
+      "props": {
+        "value": {
+          "type": "css-variable",
+          "description": "CSS custom property — set on :root"
+        }
+      },
       "tokenValue": {
         "light": "rgba(0,0,0,0.12)",
         "dark": "rgba(255,255,255,0.15)"
@@ -3671,7 +6796,12 @@
         "color",
         "token"
       ],
-      "props": {},
+      "props": {
+        "value": {
+          "type": "css-variable",
+          "description": "CSS custom property — set on :root"
+        }
+      },
       "tokenValue": {
         "light": "#007AFF",
         "dark": "#5AC8FA"
@@ -3693,7 +6823,12 @@
         "typography",
         "token"
       ],
-      "props": {},
+      "props": {
+        "value": {
+          "type": "css-variable",
+          "description": "CSS custom property — set on :root"
+        }
+      },
       "tokenValue": "system default or user-selected",
       "tokenSubcategory": "family"
     },
@@ -3712,7 +6847,12 @@
         "typography",
         "token"
       ],
-      "props": {},
+      "props": {
+        "value": {
+          "type": "css-variable",
+          "description": "CSS custom property — set on :root"
+        }
+      },
       "tokenValue": "system default or user-selected",
       "tokenSubcategory": "family"
     },
@@ -3731,7 +6871,12 @@
         "typography",
         "token"
       ],
-      "props": {},
+      "props": {
+        "value": {
+          "type": "css-variable",
+          "description": "CSS custom property — set on :root"
+        }
+      },
       "tokenValue": "system default or user-selected",
       "tokenSubcategory": "family"
     },
@@ -3750,7 +6895,12 @@
         "typography",
         "token"
       ],
-      "props": {},
+      "props": {
+        "value": {
+          "type": "css-variable",
+          "description": "CSS custom property — set on :root"
+        }
+      },
       "tokenValue": "system default or user-selected",
       "tokenSubcategory": "family"
     },
@@ -3769,7 +6919,12 @@
         "typography",
         "token"
       ],
-      "props": {},
+      "props": {
+        "value": {
+          "type": "css-variable",
+          "description": "CSS custom property — set on :root"
+        }
+      },
       "tokenValue": "1",
       "tokenSubcategory": "scale"
     },
@@ -3788,7 +6943,12 @@
         "spacing",
         "token"
       ],
-      "props": {},
+      "props": {
+        "value": {
+          "type": "css-variable",
+          "description": "CSS custom property — set on :root"
+        }
+      },
       "tokenValue": "20px",
       "tokenSubcategory": "radius"
     },
@@ -3807,7 +6967,12 @@
         "spacing",
         "token"
       ],
-      "props": {},
+      "props": {
+        "value": {
+          "type": "css-variable",
+          "description": "CSS custom property — set on :root"
+        }
+      },
       "tokenValue": "28px",
       "tokenSubcategory": "radius"
     },
@@ -3826,7 +6991,12 @@
         "spacing",
         "token"
       ],
-      "props": {},
+      "props": {
+        "value": {
+          "type": "css-variable",
+          "description": "CSS custom property — set on :root"
+        }
+      },
       "tokenValue": "10px",
       "tokenSubcategory": "radius"
     },
@@ -3845,7 +7015,12 @@
         "spacing",
         "token"
       ],
-      "props": {},
+      "props": {
+        "value": {
+          "type": "css-variable",
+          "description": "CSS custom property — set on :root"
+        }
+      },
       "tokenValue": "100px",
       "tokenSubcategory": "radius"
     },
@@ -3864,7 +7039,12 @@
         "glass",
         "token"
       ],
-      "props": {},
+      "props": {
+        "value": {
+          "type": "css-variable",
+          "description": "CSS custom property — set on :root"
+        }
+      },
       "tokenValue": "rgba(255,255,255,0.45)",
       "tokenSubcategory": "surface"
     },
@@ -3883,7 +7063,12 @@
         "glass",
         "token"
       ],
-      "props": {},
+      "props": {
+        "value": {
+          "type": "css-variable",
+          "description": "CSS custom property — set on :root"
+        }
+      },
       "tokenValue": "rgba(255,255,255,0.35)",
       "tokenSubcategory": "surface"
     },
@@ -3902,7 +7087,12 @@
         "glass",
         "token"
       ],
-      "props": {},
+      "props": {
+        "value": {
+          "type": "css-variable",
+          "description": "CSS custom property — set on :root"
+        }
+      },
       "tokenValue": "24px",
       "tokenSubcategory": "blur"
     },
@@ -3921,7 +7111,12 @@
         "glass",
         "token"
       ],
-      "props": {},
+      "props": {
+        "value": {
+          "type": "css-variable",
+          "description": "CSS custom property — set on :root"
+        }
+      },
       "tokenValue": "40px",
       "tokenSubcategory": "blur"
     },
@@ -3940,7 +7135,12 @@
         "glass",
         "token"
       ],
-      "props": {},
+      "props": {
+        "value": {
+          "type": "css-variable",
+          "description": "CSS custom property — set on :root"
+        }
+      },
       "tokenValue": "1.8",
       "tokenSubcategory": "effect"
     },
@@ -3959,7 +7159,12 @@
         "glass",
         "token"
       ],
-      "props": {},
+      "props": {
+        "value": {
+          "type": "css-variable",
+          "description": "CSS custom property — set on :root"
+        }
+      },
       "tokenValue": "0 8px 32px rgba(0,0,0,0.08)",
       "tokenSubcategory": "shadow"
     },
@@ -3978,7 +7183,12 @@
         "motion",
         "token"
       ],
-      "props": {},
+      "props": {
+        "value": {
+          "type": "css-variable",
+          "description": "CSS custom property — set on :root"
+        }
+      },
       "tokenValue": "120ms",
       "tokenSubcategory": "duration"
     },
@@ -3997,7 +7207,12 @@
         "motion",
         "token"
       ],
-      "props": {},
+      "props": {
+        "value": {
+          "type": "css-variable",
+          "description": "CSS custom property — set on :root"
+        }
+      },
       "tokenValue": "250ms",
       "tokenSubcategory": "duration"
     },
@@ -4016,7 +7231,12 @@
         "motion",
         "token"
       ],
-      "props": {},
+      "props": {
+        "value": {
+          "type": "css-variable",
+          "description": "CSS custom property — set on :root"
+        }
+      },
       "tokenValue": "450ms",
       "tokenSubcategory": "duration"
     },
@@ -4035,7 +7255,12 @@
         "motion",
         "token"
       ],
-      "props": {},
+      "props": {
+        "value": {
+          "type": "css-variable",
+          "description": "CSS custom property — set on :root"
+        }
+      },
       "tokenValue": "cubic-bezier(0.25, 0.1, 0.25, 1)",
       "tokenSubcategory": "easing"
     },
@@ -4054,7 +7279,12 @@
         "motion",
         "token"
       ],
-      "props": {},
+      "props": {
+        "value": {
+          "type": "css-variable",
+          "description": "CSS custom property — set on :root"
+        }
+      },
       "tokenValue": "cubic-bezier(0.34, 1.56, 0.64, 1)",
       "tokenSubcategory": "easing"
     },
@@ -4073,7 +7303,12 @@
         "color",
         "token"
       ],
-      "props": {},
+      "props": {
+        "value": {
+          "type": "css-variable",
+          "description": "CSS custom property — set on :root"
+        }
+      },
       "tokenValue": {
         "light": "rgba(0,0,0,0.88)",
         "dark": "rgba(255,255,255,0.92)"
@@ -4095,7 +7330,12 @@
         "color",
         "token"
       ],
-      "props": {},
+      "props": {
+        "value": {
+          "type": "css-variable",
+          "description": "CSS custom property — set on :root"
+        }
+      },
       "tokenValue": {
         "light": "#fff",
         "dark": "#000"
@@ -4117,7 +7357,12 @@
         "color",
         "token"
       ],
-      "props": {},
+      "props": {
+        "value": {
+          "type": "css-variable",
+          "description": "CSS custom property — set on :root"
+        }
+      },
       "tokenValue": {
         "light": "rgba(0,0,0,0.15)",
         "dark": "rgba(255,255,255,0.2)"
@@ -4139,7 +7384,12 @@
         "color",
         "token"
       ],
-      "props": {},
+      "props": {
+        "value": {
+          "type": "css-variable",
+          "description": "CSS custom property — set on :root"
+        }
+      },
       "tokenValue": {
         "light": "rgba(0,0,0,0.75)",
         "dark": "rgba(255,255,255,0.85)"
@@ -4161,7 +7411,12 @@
         "color",
         "token"
       ],
-      "props": {},
+      "props": {
+        "value": {
+          "type": "css-variable",
+          "description": "CSS custom property — set on :root"
+        }
+      },
       "tokenValue": {
         "light": "rgba(255,255,255,0.35)",
         "dark": "rgba(255,255,255,0.1)"
@@ -4183,7 +7438,12 @@
         "color",
         "token"
       ],
-      "props": {},
+      "props": {
+        "value": {
+          "type": "css-variable",
+          "description": "CSS custom property — set on :root"
+        }
+      },
       "tokenValue": "#34C759",
       "tokenSubcategory": "semantic"
     },
@@ -4202,7 +7462,12 @@
         "color",
         "token"
       ],
-      "props": {},
+      "props": {
+        "value": {
+          "type": "css-variable",
+          "description": "CSS custom property — set on :root"
+        }
+      },
       "tokenValue": "#FF3B30",
       "tokenSubcategory": "semantic"
     },
@@ -4221,7 +7486,12 @@
         "color",
         "token"
       ],
-      "props": {},
+      "props": {
+        "value": {
+          "type": "css-variable",
+          "description": "CSS custom property — set on :root"
+        }
+      },
       "tokenValue": "#FF9500",
       "tokenSubcategory": "semantic"
     },
@@ -4240,7 +7510,12 @@
         "color",
         "token"
       ],
-      "props": {},
+      "props": {
+        "value": {
+          "type": "css-variable",
+          "description": "CSS custom property — set on :root"
+        }
+      },
       "tokenValue": "#5AC8FA",
       "tokenSubcategory": "semantic"
     },
@@ -4259,7 +7534,12 @@
         "layout",
         "token"
       ],
-      "props": {},
+      "props": {
+        "value": {
+          "type": "css-variable",
+          "description": "CSS custom property — set on :root"
+        }
+      },
       "tokenValue": "100",
       "tokenSubcategory": "z-index"
     },
@@ -4278,7 +7558,12 @@
         "layout",
         "token"
       ],
-      "props": {},
+      "props": {
+        "value": {
+          "type": "css-variable",
+          "description": "CSS custom property — set on :root"
+        }
+      },
       "tokenValue": "300",
       "tokenSubcategory": "z-index"
     },
@@ -4297,7 +7582,12 @@
         "layout",
         "token"
       ],
-      "props": {},
+      "props": {
+        "value": {
+          "type": "css-variable",
+          "description": "CSS custom property — set on :root"
+        }
+      },
       "tokenValue": "400",
       "tokenSubcategory": "z-index"
     },
@@ -4316,7 +7606,12 @@
         "layout",
         "token"
       ],
-      "props": {},
+      "props": {
+        "value": {
+          "type": "css-variable",
+          "description": "CSS custom property — set on :root"
+        }
+      },
       "tokenValue": "500",
       "tokenSubcategory": "z-index"
     },
@@ -4335,7 +7630,12 @@
         "layout",
         "token"
       ],
-      "props": {},
+      "props": {
+        "value": {
+          "type": "css-variable",
+          "description": "CSS custom property — set on :root"
+        }
+      },
       "tokenValue": "600",
       "tokenSubcategory": "z-index"
     },
@@ -4354,7 +7654,12 @@
         "class",
         "token"
       ],
-      "props": {},
+      "props": {
+        "value": {
+          "type": "css-variable",
+          "description": "CSS custom property — set on :root"
+        }
+      },
       "tokenValue": "CSS class",
       "tokenSubcategory": "surface"
     },
@@ -4373,7 +7678,12 @@
         "class",
         "token"
       ],
-      "props": {},
+      "props": {
+        "value": {
+          "type": "css-variable",
+          "description": "CSS custom property — set on :root"
+        }
+      },
       "tokenValue": "CSS class",
       "tokenSubcategory": "surface"
     },
@@ -4392,7 +7702,12 @@
         "class",
         "token"
       ],
-      "props": {},
+      "props": {
+        "value": {
+          "type": "css-variable",
+          "description": "CSS custom property — set on :root"
+        }
+      },
       "tokenValue": "CSS class",
       "tokenSubcategory": "surface"
     },
@@ -4411,7 +7726,12 @@
         "class",
         "token"
       ],
-      "props": {},
+      "props": {
+        "value": {
+          "type": "css-variable",
+          "description": "CSS custom property — set on :root"
+        }
+      },
       "tokenValue": "CSS class",
       "tokenSubcategory": "effect"
     },
@@ -4430,7 +7750,12 @@
         "class",
         "token"
       ],
-      "props": {},
+      "props": {
+        "value": {
+          "type": "css-variable",
+          "description": "CSS custom property — set on :root"
+        }
+      },
       "tokenValue": "CSS class",
       "tokenSubcategory": "text"
     },
@@ -4449,7 +7774,12 @@
         "class",
         "token"
       ],
-      "props": {},
+      "props": {
+        "value": {
+          "type": "css-variable",
+          "description": "CSS custom property — set on :root"
+        }
+      },
       "tokenValue": "CSS class",
       "tokenSubcategory": "text"
     },
@@ -4468,7 +7798,12 @@
         "class",
         "token"
       ],
-      "props": {},
+      "props": {
+        "value": {
+          "type": "css-variable",
+          "description": "CSS custom property — set on :root"
+        }
+      },
       "tokenValue": "CSS class",
       "tokenSubcategory": "text"
     },
@@ -4487,7 +7822,12 @@
         "class",
         "token"
       ],
-      "props": {},
+      "props": {
+        "value": {
+          "type": "css-variable",
+          "description": "CSS custom property — set on :root"
+        }
+      },
       "tokenValue": "CSS class",
       "tokenSubcategory": "text"
     },
@@ -4506,7 +7846,12 @@
         "class",
         "token"
       ],
-      "props": {},
+      "props": {
+        "value": {
+          "type": "css-variable",
+          "description": "CSS custom property — set on :root"
+        }
+      },
       "tokenValue": "CSS class",
       "tokenSubcategory": "surface"
     },
@@ -4525,7 +7870,12 @@
         "class",
         "token"
       ],
-      "props": {},
+      "props": {
+        "value": {
+          "type": "css-variable",
+          "description": "CSS custom property — set on :root"
+        }
+      },
       "tokenValue": "CSS class",
       "tokenSubcategory": "surface"
     },
@@ -4544,7 +7894,12 @@
         "class",
         "token"
       ],
-      "props": {},
+      "props": {
+        "value": {
+          "type": "css-variable",
+          "description": "CSS custom property — set on :root"
+        }
+      },
       "tokenValue": "CSS class",
       "tokenSubcategory": "surface"
     },
@@ -4583,7 +7938,52 @@
         "style": {
           "type": "CSSProperties"
         }
-      }
+      },
+      "importPath": "@/primitives/layout",
+      "ai": {
+        "useWhen": [
+          "card grids",
+          "dashboard layouts",
+          "gallery views",
+          "multi-column content"
+        ],
+        "avoidWhen": [
+          "single column (use Stack)",
+          "horizontal row (use Inline)"
+        ],
+        "priority": "high",
+        "semanticRole": "group",
+        "keywords": [
+          "grid",
+          "columns",
+          "layout",
+          "dashboard",
+          "gallery"
+        ]
+      },
+      "composition": {
+        "allowedChildren": [
+          "card",
+          "stat",
+          "heading"
+        ],
+        "allowedParents": [
+          "section",
+          "stack",
+          "card"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Stats grid",
+          "jsx": "<Grid cols={3} gap=\"16px\"><Stat value=\"1,234\" label=\"Users\" /><Stat value=\"98.5%\" label=\"Uptime\" /><Stat value=\"$12.4k\" label=\"Revenue\" /></Grid>"
+        }
+      ]
     },
     {
       "id": "box",
@@ -4612,6 +8012,29 @@
         "style": {
           "type": "CSSProperties"
         }
+      },
+      "importPath": "@/primitives/layout",
+      "ai": {
+        "useWhen": [
+          "generic container",
+          "wrapper div",
+          "spacing container"
+        ],
+        "avoidWhen": [
+          "semantic containers (use Card/Stack)"
+        ],
+        "priority": "low",
+        "keywords": [
+          "box",
+          "div",
+          "container",
+          "wrapper"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
       }
     },
     {
@@ -4642,6 +8065,258 @@
         "edgePadding": {
           "type": "number",
           "default": "40"
+        }
+      }
+    },
+    {
+      "id": "type-h1",
+      "name": "type-h1",
+      "category": "token",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "tags": [
+        "typography",
+        "css-class",
+        "token"
+      ],
+      "description": "Heading 1 — 30px × --type-scale, weight 700, --font-heading",
+      "props": {
+        "className": {
+          "type": "string",
+          "description": "CSS class — apply to text elements"
+        }
+      }
+    },
+    {
+      "id": "type-h2",
+      "name": "type-h2",
+      "category": "token",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "tags": [
+        "typography",
+        "css-class",
+        "token"
+      ],
+      "description": "Heading 2 — 22px × --type-scale, weight 700, --font-heading",
+      "props": {
+        "className": {
+          "type": "string",
+          "description": "CSS class — apply to text elements"
+        }
+      }
+    },
+    {
+      "id": "type-h3",
+      "name": "type-h3",
+      "category": "token",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "tags": [
+        "typography",
+        "css-class",
+        "token"
+      ],
+      "description": "Heading 3 — 18px × --type-scale, weight 650, --font-heading",
+      "props": {
+        "className": {
+          "type": "string",
+          "description": "CSS class — apply to text elements"
+        }
+      }
+    },
+    {
+      "id": "type-h4",
+      "name": "type-h4",
+      "category": "token",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "tags": [
+        "typography",
+        "css-class",
+        "token"
+      ],
+      "description": "Heading 4 — 15px × --type-scale, weight 600, --font-heading",
+      "props": {
+        "className": {
+          "type": "string",
+          "description": "CSS class — apply to text elements"
+        }
+      }
+    },
+    {
+      "id": "type-display",
+      "name": "type-display",
+      "category": "token",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "tags": [
+        "typography",
+        "css-class",
+        "token"
+      ],
+      "description": "Display — 40px × --type-scale, weight 750, --font-heading",
+      "props": {
+        "className": {
+          "type": "string",
+          "description": "CSS class — apply to text elements"
+        }
+      }
+    },
+    {
+      "id": "type-body",
+      "name": "type-body",
+      "category": "token",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "tags": [
+        "typography",
+        "css-class",
+        "token"
+      ],
+      "description": "Body — 15px × --type-scale, weight 400, --font-body",
+      "props": {
+        "className": {
+          "type": "string",
+          "description": "CSS class — apply to text elements"
+        }
+      }
+    },
+    {
+      "id": "type-body-sm",
+      "name": "type-body-sm",
+      "category": "token",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "tags": [
+        "typography",
+        "css-class",
+        "token"
+      ],
+      "description": "Body Small — 13px × --type-scale, weight 400, --font-body",
+      "props": {
+        "className": {
+          "type": "string",
+          "description": "CSS class — apply to text elements"
+        }
+      }
+    },
+    {
+      "id": "type-label",
+      "name": "type-label",
+      "category": "token",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "tags": [
+        "typography",
+        "css-class",
+        "token"
+      ],
+      "description": "Label — 12px × --type-scale, weight 600, --font-ui",
+      "props": {
+        "className": {
+          "type": "string",
+          "description": "CSS class — apply to text elements"
+        }
+      }
+    },
+    {
+      "id": "type-overline",
+      "name": "type-overline",
+      "category": "token",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "tags": [
+        "typography",
+        "css-class",
+        "token"
+      ],
+      "description": "Overline — 10px × --type-scale, weight 650, uppercase, --font-ui",
+      "props": {
+        "className": {
+          "type": "string",
+          "description": "CSS class — apply to text elements"
+        }
+      }
+    },
+    {
+      "id": "type-caption",
+      "name": "type-caption",
+      "category": "token",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "tags": [
+        "typography",
+        "css-class",
+        "token"
+      ],
+      "description": "Caption — 11px × --type-scale, weight 400, --font-body",
+      "props": {
+        "className": {
+          "type": "string",
+          "description": "CSS class — apply to text elements"
+        }
+      }
+    },
+    {
+      "id": "type-code",
+      "name": "type-code",
+      "category": "token",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "tags": [
+        "typography",
+        "css-class",
+        "token"
+      ],
+      "description": "Code — 13px × --type-scale, weight 500, --font-mono",
+      "props": {
+        "className": {
+          "type": "string",
+          "description": "CSS class — apply to text elements"
+        }
+      }
+    },
+    {
+      "id": "type-link",
+      "name": "type-link",
+      "category": "token",
+      "layer": "token",
+      "path": "src/styles/global.css",
+      "isReact": false,
+      "status": "stable",
+      "tags": [
+        "typography",
+        "css-class",
+        "token"
+      ],
+      "description": "Link — 15px × --type-scale, weight 550, --font-body",
+      "props": {
+        "className": {
+          "type": "string",
+          "description": "CSS class — apply to text elements"
         }
       }
     }

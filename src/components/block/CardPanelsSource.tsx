@@ -87,10 +87,12 @@ export function CardPanelsSource() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const handler = () => setOpen(true);
-    const btn = document.querySelector('[data-view-source="card-panels"]');
-    btn?.addEventListener("click", handler);
-    return () => btn?.removeEventListener("click", handler);
+    const handler = (e: MouseEvent) => {
+      const target = (e.target as HTMLElement).closest('[data-view-source="card-panels"]');
+      if (target) setOpen(true);
+    };
+    document.addEventListener("click", handler);
+    return () => document.removeEventListener("click", handler);
   }, []);
 
   return (

@@ -70,26 +70,27 @@ To audit all blocks systematically:
 
 ## Quick Reference: Existing Block Files
 
-| Block | Demo Component | WithSource File | data-view-source |
-|-------|---------------|-----------------|-----------------|
-| Typography | TypePresetsTable | — | — |
+| Block | Demo Component | Source File | data-view-source |
+|-------|---------------|-------------|-----------------|
+| Typography | TypePresetsTable | TypographySource | typography |
 | Typography Extras | TypographyExtras | TypographyExtrasWithSource | typography-extras |
 | Buttons | ButtonsShowcase + ButtonsRightColumn | ButtonsShowcaseWithSource | buttons |
 | Glass Surfaces | (Astro inline) | GlassSurfacesSource | glass-surfaces |
 | Surfaces Extras | SurfacesExtras | SurfacesExtrasWithSource | surfaces-extras |
 | Card Panels | (Astro inline) | CardPanelsSource | card-panels |
-| Dividers | (Astro inline) | DividersSource | dividers |
+| Dividers | DividersShowcase | DividersSource | dividers |
 | Input Fields | InputFieldsDemo | InputFieldsSource | input-fields |
 | Advanced Inputs | FormsShowcase | FormsShowcaseWithSource | advanced-inputs |
 | Badges & Labels | BadgesShowcaseV2 | BadgesShowcaseWithSource | badges |
-| Data Display | DataShowcase | — | — |
-| Controls | ControlsDemo | — | — |
-| Glass Controls | GlassControlsDemo | — | — |
-| Layout | LayoutShowcase | — | — |
-| Elevation | ElevationShowcase | — | — |
-| Feedback | FeedbackShowcaseV2 | — | — |
-| Navigation | PrimitiveNavigation | — | — |
-| Navigation Extras | NavigationExtras | — | — |
+| Data Display | DataShowcase | DataShowcaseWithSource | data-display |
+| Layout | LayoutShowcase | LayoutShowcaseWithSource | layout |
+| Controls | ControlsDemo | ControlsSource | controls |
+| Glass Controls | GlassControlsDemo | GlassControlsSource | glass-controls |
+| Alerts | AlertsShowcase | AlertsSource | alerts |
+| Elevation | ElevationShadows | ElevationSource | elevation |
+| Feedback | FeedbackShowcaseV2 | FeedbackSource | feedback |
+| Navigation | PrimitiveNavigation | NavigationSource | navigation |
+| Navigation Extras | NavigationExtras | NavigationExtrasSource | navigation-extras |
+| Modals | ModalsShowcase | ModalsSource | modals |
 
-**Blocks without `WithSource` files need them created.**
-**Blocks without `data-view-source` need the `<>` icon button added.**
+**All 20 blocks have code icon buttons and source files. ✅**

@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GelUI Component Registry Schema v2",
+  "description": "AI-ready component registry for automated UI generation",
+  "type": "object",
+  "required": ["version", "components"],
+  "properties": {
+    "version": { "type": "string" },
+    "lastUpdated": { "type": "string" },
+    "components": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/component" }
+    }
+  },
+  "$defs": {
+    "component": {
+      "type": "object",
+      "required": ["id", "name", "layer"],
+      "properties": {
+        "id": { "type": "string", "description": "Unique kebab-case identifier" },
+        "name": { "type": "string", "description": "Display name" },
+        "description": { "type": "string" },
+        "layer": { "type": "string", "enum": ["token", "primitive", "component", "pattern", "core"] },
+        "category": { "type": "string" },
+        "status": { "type": "string", "enum": ["experimental", "stable", "deprecated", "planned"] },
+        "version": { "type": "string" },
+        "path": { "type": "string", "description": "Source file path" },
+        "importPath": { "type": "string", "description": "Import path for AI: import { X } from 'importPath'" },
+        "exportName": { "type": "string", "description": "Exported name: import { exportName } from ..." },
+        "cssClass": { "type": "string", "description": "CSS class name for non-React entries" },
+        "usage": { "type": "string", "description": "JSX usage example" },
+        "usageNote": { "type": "string", "description": "Extra usage hint (e.g. variant prop)" },
+        "isReact": { "type": "boolean" },
+        "tags": { "type": "array", "items": { "type": "string" } },
+        "props": {
+          "type": "object",
+          "additionalProperties": { "$ref": "#/$defs/prop" }
+        },
+        "ai": { "$ref": "#/$defs/ai" },
+        "composition": { "$ref": "#/$defs/composition" },
+        "constraints": { "$ref": "#/$defs/constraints" },
+        "rendering": { "$ref": "#/$defs/rendering" },
+        "examples": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/example" }
+        }
+      }
+    },
+    "prop": {
+      "type": "object",
+      "properties": {
+        "type": { "type": "string" },
+        "options": { "type": "array", "items": { "type": "string" } },
+        "default": {},
+        "description": { "type": "string" },
+        "required": { "type": "boolean" }
+      }
+    },
+    "ai": {
+      "type": "object",
+      "description": "Usage intelligence for AI component selection",
+      "properties": {
+        "useWhen": { "type": "array", "items": { "type": "string" }, "description": "Scenarios when AI should pick this component" },
+        "avoidWhen": { "type": "array", "items": { "type": "string" }, "description": "Scenarios when AI should NOT use this" },
+        "priority": { "type": "string", "enum": ["low", "medium", "high"] },
+        "semanticRole": { "type": "string", "description": "HTML/ARIA semantic role" },
+        "keywords": { "type": "array", "items": { "type": "string" }, "description": "Search keywords for AI retrieval" }
+      }
+    },
+    "composition": {
+      "type": "object",
+      "description": "Rules for how components combine",
+      "properties": {
+        "allowedChildren": { "type": "array", "items": { "type": "string" } },
+        "allowedParents": { "type": "array", "items": { "type": "string" } },
+        "commonSiblings": { "type": "array", "items": { "type": "string" } },
+        "composedWith": { "type": "array", "items": { "type": "string" }, "description": "Components frequently used together" }
+      }
+    },
+    "constraints": {
+      "type": "object",
+      "description": "Usage constraints and rules",
+      "properties": {
+        "maxPerPage": { "type": "number" },
+        "doNotUseFor": { "type": "array", "items": { "type": "string" } },
+        "requiresParent": { "type": "string", "description": "Must be inside this component" },
+        "contrastAware": { "type": "boolean", "description": "Adapts to background contrast automatically" }
+      }
+    },
+    "rendering": {
+      "type": "object",
+      "description": "SSR and hydration safety metadata",
+      "properties": {
+        "ssrSafe": { "type": "boolean" },
+        "requiresClient": { "type": "boolean" },
+        "hydrationRisk": { "type": "string", "enum": ["none", "low", "medium", "high"] }
+      }
+    },
+    "example": {
+      "type": "object",
+      "description": "JSX usage example for AI to copy",
+      "properties": {
+        "title": { "type": "string" },
+        "jsx": { "type": "string", "description": "Complete JSX snippet" }
+      }
+    }
+  }
+}
