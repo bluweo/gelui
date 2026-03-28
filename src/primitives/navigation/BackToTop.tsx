@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { useContrastColor } from "@/components/hooks/useContrastColor";
 
 interface BackToTopProps {
   threshold?: number;
@@ -12,7 +13,8 @@ export function BackToTop({
   className = "",
 }: BackToTopProps) {
   const [visible, setVisible] = useState(false);
-  const [contrast, setContrast] = useState<"light" | "dark">("light");
+  const btnRef = useRef<HTMLButtonElement>(null);
+  const contrast = useContrastColor(btnRef);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,27 +25,13 @@ export function BackToTop({
     return () => window.removeEventListener("scroll", handleScroll);
   }, [threshold]);
 
-  // Watch contrast from main element
-  useEffect(() => {
-    const mainEl = document.querySelector("main[data-contrast]");
-    if (!mainEl) return;
-
-    const check = () => {
-      setContrast((mainEl.getAttribute("data-contrast") as "light" | "dark") || "light");
-    };
-    check();
-
-    const obs = new MutationObserver(check);
-    obs.observe(mainEl, { attributes: true, attributeFilter: ["data-contrast"] });
-    return () => obs.disconnect();
-  }, []);
-
   const handleClick = () => {
     window.scrollTo({ top: 0, behavior: smooth ? "smooth" : "auto" });
   };
 
   return (
     <button
+      ref={btnRef}
       className={`prim-back-to-top ${visible ? "prim-back-to-top-visible" : "prim-back-to-top-hidden"} ${contrast === "dark" ? "prim-back-to-top-dark" : ""} ${className}`}
       onClick={handleClick}
       aria-label="Back to top"

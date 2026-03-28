@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from "react";
+import { useContrastColor } from "@/components/hooks/useContrastColor";
 
 /**
  * SectionNav — sticky right-side table of contents
@@ -16,7 +17,8 @@ export function SectionNav() {
   const [sections, setSections] = useState<Section[]>([]);
   const [activeId, setActiveId] = useState<string>("");
   const [visible, setVisible] = useState(false);
-  const [contrast, setContrast] = useState<"light" | "dark">("light");
+  const navRef = useRef<HTMLElement>(null);
+  const contrast = useContrastColor(navRef);
   const observerRef = useRef<IntersectionObserver | null>(null);
   const clickLockRef = useRef<string | null>(null);
   const clickLockTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -27,21 +29,6 @@ export function SectionNav() {
     check();
     window.addEventListener("resize", check);
     return () => window.removeEventListener("resize", check);
-  }, []);
-
-  // Watch contrast from main element
-  useEffect(() => {
-    const mainEl = document.querySelector("main[data-contrast]");
-    if (!mainEl) return;
-
-    const check = () => {
-      setContrast((mainEl.getAttribute("data-contrast") as "light" | "dark") || "light");
-    };
-    check();
-
-    const obs = new MutationObserver(check);
-    obs.observe(mainEl, { attributes: true, attributeFilter: ["data-contrast"] });
-    return () => obs.disconnect();
   }, []);
 
   // Discover sections and observe
@@ -134,12 +121,13 @@ export function SectionNav() {
 
   return (
     <nav
+      ref={navRef}
       className="fixed z-50 flex flex-col"
       style={{
         top: "50%",
-        right: 20,
+        right: "20px",
         transform: "translateY(-50%)",
-        width: 120,
+        width: "120px",
         pointerEvents: "auto",
       }}
       aria-label="Page sections"

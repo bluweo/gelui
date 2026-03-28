@@ -1,7 +1,6 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
 import { DSShell } from "@/components/layout/DSShell";
-import { BackToTop } from "@/primitives/navigation/BackToTop";
 
 interface Props {
   title?: string;
@@ -17,5 +16,4 @@ const currentPath = Astro.url.pathname;
   <DSShell client:load currentPath={currentPath}>
     <slot />
   </DSShell>
-  <BackToTop client:load />
 </BaseLayout>
