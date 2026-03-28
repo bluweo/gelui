@@ -4,6 +4,7 @@ import { useState } from "react";
 export function NavigationExtras() {
   const [page, setPage] = useState(1);
   const [step, setStep] = useState(1);
+  const [vStep, setVStep] = useState(1);
 
   return (
     <div className="flex flex-col gap-5">
@@ -50,6 +51,44 @@ export function NavigationExtras() {
             >
               Next
             </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Vertical Stepper */}
+      <div className="rounded-[var(--glass-radius-sm)] overflow-hidden bg-[var(--theme-table-bg)] border border-[var(--theme-divider)]">
+        <div className="py-2 px-3 bg-[var(--theme-header-bg)] border-b border-[var(--theme-divider)]">
+          <span className="type-overline text-[var(--theme-fg-muted)]">Vertical Stepper</span>
+        </div>
+        <div className="py-5 px-4 flex gap-6">
+          <Stepper
+            steps={[
+              { label: "Account", description: "Create your account credentials" },
+              { label: "Profile", description: "Add your personal information" },
+              { label: "Settings", description: "Configure your preferences" },
+              { label: "Review", description: "Confirm and submit" },
+            ]}
+            currentStep={vStep}
+            onChange={setVStep}
+            direction="vertical"
+          />
+          <div className="flex-1 flex flex-col justify-end gap-2">
+            <div className="flex gap-2">
+              <button
+                onClick={() => setVStep(Math.max(0, vStep - 1))}
+                disabled={vStep <= 0}
+                className={`py-1.5 px-4 rounded-[var(--glass-radius-pill)] border border-[var(--theme-divider)] bg-transparent text-[var(--theme-fg)] text-xs font-[550] font-[var(--font-ui)] ${vStep <= 0 ? "cursor-not-allowed opacity-40" : "cursor-pointer opacity-100"}`}
+              >
+                Back
+              </button>
+              <button
+                onClick={() => setVStep(Math.min(3, vStep + 1))}
+                disabled={vStep >= 3}
+                className={`py-1.5 px-4 rounded-[var(--glass-radius-pill)] border-none bg-[var(--theme-bg-solid)] text-[var(--theme-fg-on-solid)] text-xs font-semibold font-[var(--font-ui)] ${vStep >= 3 ? "cursor-not-allowed opacity-60" : "cursor-pointer opacity-100"}`}
+              >
+                Next
+              </button>
+            </div>
           </div>
         </div>
       </div>
