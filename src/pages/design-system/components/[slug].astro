@@ -1,0 +1,34 @@
+---
+import ComponentsLayout from "@/components/layout/ComponentsLayout.astro";
+import { ComponentsGallery } from "@/components/block/ComponentsGallery";
+import registryData from "@/registry/registry.json";
+
+// Generate static paths for all component slugs
+export function getStaticPaths() {
+  const componentIds = registryData.components
+    .filter((c: any) => c.layer === "component" && c.status === "stable")
+    .map((c: any) => c.id);
+
+  return componentIds.map((id: string) => ({
+    params: { slug: id },
+  }));
+}
+
+const { slug } = Astro.params;
+const comp = registryData.components.find((c: any) => c.id === slug);
+const title = comp ? `${comp.exportName || comp.name} — GelUI Components` : "Component — GelUI";
+const description = comp?.description || "GelUI component detail";
+---
+
+<ComponentsLayout title={title} description={description}>
+  <div class="w-full">
+    <div class="mb-8">
+      <span class="type-overline contrast-text-muted mb-1 block">Layer 4</span>
+      <h1 class="type-h1 contrast-text mb-2">Components</h1>
+      <p class="type-body-sm contrast-text-muted max-w-[600px]">
+        Production-ready UI blocks composed from primitives. Click any component to preview, inspect, and copy.
+      </p>
+    </div>
+    <ComponentsGallery client:load initialSlug={slug} />
+  </div>
+</ComponentsLayout>
