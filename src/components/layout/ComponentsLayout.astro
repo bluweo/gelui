@@ -1,0 +1,19 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import { ComponentsShell } from "./ComponentsShell";
+
+interface Props {
+  title?: string;
+  description?: string;
+  keywords?: string;
+}
+
+const { title = "Components — GelUI", description, keywords } = Astro.props;
+const currentPath = Astro.url.pathname;
+---
+
+<BaseLayout title={title} description={description} keywords={keywords}>
+  <ComponentsShell client:load currentPath={currentPath}>
+    <slot />
+  </ComponentsShell>
+</BaseLayout>

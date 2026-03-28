@@ -1,0 +1,121 @@
+---
+import DSLayout from "@/components/layout/DSLayout.astro";
+import ComponentsHero from "@/components/block/ComponentsHero.astro";
+import { AuthShowcase } from "@/components/block/AuthShowcase";
+import { CompDataShowcase } from "@/components/block/CompDataShowcase";
+import { CompFormsShowcase } from "@/components/block/CompFormsShowcase";
+import { CompCardsShowcase } from "@/components/block/CompCardsShowcase";
+import { CompNavShowcase } from "@/components/block/CompNavShowcase";
+import { CompAuthSource } from "@/components/block/CompAuthSource";
+import { CompDataSource } from "@/components/block/CompDataSource";
+import { CompFormsSource } from "@/components/block/CompFormsSource";
+import { CompCardsSource } from "@/components/block/CompCardsSource";
+import { CompNavSource } from "@/components/block/CompNavSource";
+---
+
+<DSLayout
+  title="Components — GelUI Design System"
+  description="Multi-primitive compositions in GelUI: production-ready UI blocks with adaptive theming, responsive behavior, and accessibility built in."
+  keywords="UI components, glass cards, modals, data tables, forms, navigation, glassmorphism, adaptive theming"
+>
+  <div class="w-full grid grid-cols-4 gap-5 max-[860px]:grid-cols-2 max-[860px]:gap-4 max-[540px]:grid-cols-1 max-[540px]:gap-3">
+
+    <ComponentsHero />
+
+    <!-- ═══════════════════════════════════
+         1. Auth & Account
+         ═══════════════════════════════════ -->
+    <div data-section="Auth & Account" class="col-span-2 max-[540px]:col-span-1 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
+      <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 160px;" />
+      <div class="relative flex items-start justify-between mb-6 pt-1 pl-1">
+        <div class="flex flex-col gap-1">
+          <span class="type-overline text-black/40 dark:text-white/40 mb-1">Authentication</span>
+          <h2 class="type-h2 text-black dark:text-white mb-1">Auth & Account</h2>
+          <p class="type-body-sm text-black/60 dark:text-white/55">Login, signup, verification, and profile cards</p>
+        </div>
+        <button class="prim-icon-btn shrink-0 z-10" title="View Source Code" data-view-source="comp-auth">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" /></svg>
+        </button>
+      </div>
+      <AuthShowcase client:load />
+      <CompAuthSource client:load />
+    </div>
+
+    <!-- ═══════════════════════════════════
+         2. Data & Tables
+         ═══════════════════════════════════ -->
+    <div data-section="Data & Tables" class="col-span-2 max-[540px]:col-span-1 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
+      <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 160px;" />
+      <div class="relative flex items-start justify-between mb-6 pt-1 pl-1">
+        <div class="flex flex-col gap-1">
+          <span class="type-overline text-black/40 dark:text-white/40 mb-1">Data</span>
+          <h2 class="type-h2 text-black dark:text-white mb-1">Data & Tables</h2>
+          <p class="type-body-sm text-black/60 dark:text-white/55">Stats dashboard, searchable tables, and paginated data</p>
+        </div>
+        <button class="prim-icon-btn shrink-0 z-10" title="View Source Code" data-view-source="comp-data">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" /></svg>
+        </button>
+      </div>
+      <CompDataShowcase client:load />
+      <CompDataSource client:load />
+    </div>
+
+    <!-- ═══════════════════════════════════
+         3. Forms & Input
+         ═══════════════════════════════════ -->
+    <div data-section="Forms & Input" class="col-span-2 max-[540px]:col-span-1 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
+      <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 160px;" />
+      <div class="relative flex items-start justify-between mb-6 pt-1 pl-1">
+        <div class="flex flex-col gap-1">
+          <span class="type-overline text-black/40 dark:text-white/40 mb-1">Forms</span>
+          <h2 class="type-h2 text-black dark:text-white mb-1">Forms & Input</h2>
+          <p class="type-body-sm text-black/60 dark:text-white/55">Contact forms, settings panels, and filter controls</p>
+        </div>
+        <button class="prim-icon-btn shrink-0 z-10" title="View Source Code" data-view-source="comp-forms">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" /></svg>
+        </button>
+      </div>
+      <CompFormsShowcase client:load />
+      <CompFormsSource client:load />
+    </div>
+
+    <!-- ═══════════════════════════════════
+         4. Cards & Content
+         ═══════════════════════════════════ -->
+    <div data-section="Cards & Content" class="col-span-2 max-[540px]:col-span-1 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
+      <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 160px;" />
+      <div class="relative flex items-start justify-between mb-6 pt-1 pl-1">
+        <div class="flex flex-col gap-1">
+          <span class="type-overline text-black/40 dark:text-white/40 mb-1">Content</span>
+          <h2 class="type-h2 text-black dark:text-white mb-1">Cards & Content</h2>
+          <p class="type-body-sm text-black/60 dark:text-white/55">Pricing tiers, feature cards, and content blocks</p>
+        </div>
+        <button class="prim-icon-btn shrink-0 z-10" title="View Source Code" data-view-source="comp-cards">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" /></svg>
+        </button>
+      </div>
+      <CompCardsShowcase client:load />
+      <CompCardsSource client:load />
+    </div>
+
+    <!-- ═══════════════════════════════════
+         5. Navigation & Layout
+         ═══════════════════════════════════ -->
+    <div data-section="Navigation & Layout" class="col-span-2 max-[540px]:col-span-1 glass-1 glass-specular relative overflow-hidden rounded-[var(--glass-radius)] p-5">
+      <div class="absolute inset-0 pointer-events-none ds-card-frost" style="height: 160px;" />
+      <div class="relative flex items-start justify-between mb-6 pt-1 pl-1">
+        <div class="flex flex-col gap-1">
+          <span class="type-overline text-black/40 dark:text-white/40 mb-1">Navigation</span>
+          <h2 class="type-h2 text-black dark:text-white mb-1">Navigation & Layout</h2>
+          <p class="type-body-sm text-black/60 dark:text-white/55">Navbar, page headers, and structural navigation</p>
+        </div>
+        <button class="prim-icon-btn shrink-0 z-10" title="View Source Code" data-view-source="comp-nav">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" /></svg>
+        </button>
+      </div>
+      <CompNavShowcase client:load />
+      <CompNavSource client:load />
+    </div>
+
+  </div>
+</DSLayout>
