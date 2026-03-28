@@ -1,9 +1,8 @@
 ---
 import ComponentsLayout from "@/components/layout/ComponentsLayout.astro";
-import { ComponentsGallery } from "@/components/block/ComponentsGallery";
+import { ComponentPreview } from "@/components/block/ComponentPreview";
 import registryData from "@/registry/registry.json";
 
-// Generate static paths for all component slugs
 export function getStaticPaths() {
   const componentIds = registryData.components
     .filter((c: any) => c.layer === "component" && c.status === "stable")
@@ -15,20 +14,209 @@ export function getStaticPaths() {
 }
 
 const { slug } = Astro.params;
-const comp = registryData.components.find((c: any) => c.id === slug);
-const title = comp ? `${comp.exportName || comp.name} — GelUI Components` : "Component — GelUI";
-const description = comp?.description || "GelUI component detail";
+const comp = registryData.components.find((c: any) => c.id === slug) as any;
+
+if (!comp) {
+  return Astro.redirect("/design-system/components");
+}
+
+const title = `${comp.exportName || comp.name} — GelUI Components`;
+const description = comp.description || "GelUI component";
+const importPath = comp.importPath || "";
+const exportName = comp.exportName || comp.name;
+const category = comp.category || "Other";
+const usedPrimitives: string[] = comp.composition?.usedPrimitives || [];
+const useWhen: string[] = comp.ai?.useWhen || [];
+const avoidWhen: string[] = comp.ai?.avoidWhen || [];
+const examples: { title: string; jsx: string }[] = comp.examples || [];
+const keywords: string[] = comp.ai?.keywords || comp.tags || [];
+const props = comp.props ? Object.entries(comp.props).map(([name, p]: [string, any]) => ({
+  name,
+  type: p.type || "string",
+  default: p.default,
+  required: p.required,
+})) : [];
 ---
 
-<ComponentsLayout title={title} description={description}>
-  <div class="w-full">
-    <div class="mb-8">
-      <span class="type-overline contrast-text-muted mb-1 block">Layer 4</span>
-      <h1 class="type-h1 contrast-text mb-2">Components</h1>
-      <p class="type-body-sm contrast-text-muted max-w-[600px]">
-        Production-ready UI blocks composed from primitives. Click any component to preview, inspect, and copy.
-      </p>
+<ComponentsLayout title={title} description={description} keywords={keywords.join(", ")}>
+  <div class="w-full max-w-[1000px] mx-auto">
+
+    {/* Back link */}
+    <a
+      href="/design-system/components"
+      class="inline-flex items-center gap-1.5 text-[13px] font-[500] contrast-text-muted hover:contrast-text transition-colors mb-6"
+      style="font-family: var(--font-body);"
+    >
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      Back to Components
+    </a>
+
+    {/* Page header */}
+    <div class="mb-6">
+      <div class="flex items-center gap-3 mb-2">
+        <h1 class="type-h1 contrast-text">{exportName}</h1>
+        <span class="text-[11px] font-[600] uppercase tracking-[0.04em] px-2 py-0.5 rounded-full bg-white/20 dark:bg-white/10 contrast-text-muted border border-white/20 dark:border-white/10">
+          {category}
+        </span>
+      </div>
+      <p class="type-body contrast-text-muted max-w-[600px]">{description}</p>
     </div>
-    <ComponentsGallery client:load initialSlug={slug} />
+
+    {/* Live preview (React island — only interactive part) */}
+    <div class="mb-8">
+      <ComponentPreview
+        client:load
+        id={slug!}
+        name={exportName}
+        description={description}
+        importPath={importPath}
+        exportName={exportName}
+        props={props}
+        examples={examples}
+      />
+    </div>
+
+    {/* Component info — server-rendered HTML (SEO-visible) */}
+    <div class="grid grid-cols-2 gap-6 max-[540px]:grid-cols-1 mb-8">
+
+      {/* Left column */}
+      <div class="flex flex-col gap-6">
+
+        {/* Meta info */}
+        <div class="rounded-[var(--glass-radius-sm)] bg-white dark:bg-[#1a1a1a] p-5 border border-[var(--theme-divider)]">
+          <h2 class="text-[11px] font-[650] uppercase tracking-[0.06em] text-[var(--theme-fg-muted)] mb-3">Component Info</h2>
+          <dl class="flex flex-col gap-2 text-[13px]" style="font-family: var(--font-body);">
+            <div class="flex gap-3">
+              <dt class="text-[var(--theme-fg-muted)] w-[70px] shrink-0">ID</dt>
+              <dd class="text-[var(--theme-fg)] font-[550]">{slug}</dd>
+            </div>
+            <div class="flex gap-3">
+              <dt class="text-[var(--theme-fg-muted)] w-[70px] shrink-0">Slug</dt>
+              <dd class="text-[var(--theme-fg)]">/components/{slug}</dd>
+            </div>
+            <div class="flex gap-3">
+              <dt class="text-[var(--theme-fg-muted)] w-[70px] shrink-0">Layer</dt>
+              <dd class="text-[var(--theme-fg)]">Component</dd>
+            </div>
+            <div class="flex gap-3">
+              <dt class="text-[var(--theme-fg-muted)] w-[70px] shrink-0">Category</dt>
+              <dd class="text-[var(--theme-fg)]">{category}</dd>
+            </div>
+            <div class="flex gap-3">
+              <dt class="text-[var(--theme-fg-muted)] w-[70px] shrink-0">Status</dt>
+              <dd class="text-green-600 font-[550]">Stable</dd>
+            </div>
+          </dl>
+        </div>
+
+        {/* Import */}
+        <div class="rounded-[var(--glass-radius-sm)] bg-white dark:bg-[#1a1a1a] p-5 border border-[var(--theme-divider)]">
+          <h2 class="text-[11px] font-[650] uppercase tracking-[0.06em] text-[var(--theme-fg-muted)] mb-3">Import</h2>
+          <pre class="text-[12px] p-3 rounded-[var(--glass-radius-sm)] bg-[#1e1e1e] text-[#d4d4d4] overflow-x-auto" style="font-family: var(--font-mono);">
+{`import { ${exportName} } from "${importPath}";`}
+          </pre>
+        </div>
+
+        {/* Usage */}
+        {examples.length > 0 && (
+          <div class="rounded-[var(--glass-radius-sm)] bg-white dark:bg-[#1a1a1a] p-5 border border-[var(--theme-divider)]">
+            <h2 class="text-[11px] font-[650] uppercase tracking-[0.06em] text-[var(--theme-fg-muted)] mb-3">Usage</h2>
+            <pre class="text-[12px] p-3 rounded-[var(--glass-radius-sm)] bg-[#1e1e1e] text-[#d4d4d4] overflow-x-auto" style="font-family: var(--font-mono);">
+{examples[0].jsx}
+            </pre>
+          </div>
+        )}
+
+        {/* Props table */}
+        {props.length > 0 && (
+          <div class="rounded-[var(--glass-radius-sm)] bg-white dark:bg-[#1a1a1a] p-5 border border-[var(--theme-divider)]">
+            <h2 class="text-[11px] font-[650] uppercase tracking-[0.06em] text-[var(--theme-fg-muted)] mb-3">Props</h2>
+            <div class="overflow-x-auto">
+              <table class="w-full text-[12px]" style="font-family: var(--font-body);">
+                <thead>
+                  <tr class="border-b border-[var(--theme-divider)]">
+                    <th class="text-left py-2 pr-4 text-[var(--theme-fg-muted)] font-[600]">Prop</th>
+                    <th class="text-left py-2 pr-4 text-[var(--theme-fg-muted)] font-[600]">Type</th>
+                    <th class="text-left py-2 text-[var(--theme-fg-muted)] font-[600]">Default</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {props.map((p) => (
+                    <tr class="border-b border-[var(--theme-divider)] last:border-0">
+                      <td class="py-2 pr-4 text-[var(--theme-fg)] font-[550]">{p.name}{p.required ? <span class="text-red-500 ml-0.5">*</span> : ''}</td>
+                      <td class="py-2 pr-4 text-[var(--theme-fg-muted)]" style="font-family: var(--font-mono);">{p.type}</td>
+                      <td class="py-2 text-[var(--theme-fg-muted)]" style="font-family: var(--font-mono);">{p.default || '—'}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Right column */}
+      <div class="flex flex-col gap-6">
+
+        {/* Based on Primitives */}
+        {usedPrimitives.length > 0 && (
+          <div class="rounded-[var(--glass-radius-sm)] bg-white dark:bg-[#1a1a1a] p-5 border border-[var(--theme-divider)]">
+            <h2 class="text-[11px] font-[650] uppercase tracking-[0.06em] text-[var(--theme-fg-muted)] mb-3">Based on Primitives</h2>
+            <div class="flex flex-wrap gap-2">
+              {usedPrimitives.map((p: string) => (
+                <span class="text-[12px] font-[500] px-2.5 py-1 rounded-full bg-[var(--theme-header-bg)] text-[var(--theme-fg-muted)] border border-[var(--theme-divider)]">
+                  {p}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Use When */}
+        {useWhen.length > 0 && (
+          <div class="rounded-[var(--glass-radius-sm)] bg-white dark:bg-[#1a1a1a] p-5 border border-[var(--theme-divider)]">
+            <h2 class="text-[11px] font-[650] uppercase tracking-[0.06em] text-green-600 mb-3">Use When</h2>
+            <ul class="flex flex-col gap-2">
+              {useWhen.map((u: string) => (
+                <li class="text-[13px] text-[var(--theme-fg)] flex items-center gap-2" style="font-family: var(--font-body);">
+                  <span class="w-1.5 h-1.5 rounded-full bg-green-500 shrink-0" />
+                  {u}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {/* Avoid When */}
+        {avoidWhen.length > 0 && (
+          <div class="rounded-[var(--glass-radius-sm)] bg-white dark:bg-[#1a1a1a] p-5 border border-[var(--theme-divider)]">
+            <h2 class="text-[11px] font-[650] uppercase tracking-[0.06em] text-red-500 mb-3">Avoid When</h2>
+            <ul class="flex flex-col gap-2">
+              {avoidWhen.map((a: string) => (
+                <li class="text-[13px] text-[var(--theme-fg)] flex items-center gap-2" style="font-family: var(--font-body);">
+                  <span class="w-1.5 h-1.5 rounded-full bg-red-400 shrink-0" />
+                  {a}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {/* Keywords */}
+        {keywords.length > 0 && (
+          <div class="rounded-[var(--glass-radius-sm)] bg-white dark:bg-[#1a1a1a] p-5 border border-[var(--theme-divider)]">
+            <h2 class="text-[11px] font-[650] uppercase tracking-[0.06em] text-[var(--theme-fg-muted)] mb-3">Keywords</h2>
+            <div class="flex flex-wrap gap-1.5">
+              {keywords.map((k: string) => (
+                <span class="text-[11px] px-2 py-0.5 rounded-full bg-[var(--theme-header-bg)] text-[var(--theme-fg-muted)]">
+                  {k}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+
   </div>
 </ComponentsLayout>
