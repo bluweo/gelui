@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { useDraggableModal } from "@/components/hooks/useDraggableModal";
 import { PillTabs } from "@/primitives/navigation/PillTabs";
@@ -239,6 +239,219 @@ function MediaDemo({ open, onClose }: { open: boolean; onClose: () => void }) {
   );
 }
 
+/* ── Resizable Modal ── */
+
+type ModalViewState = "normal" | "maximized" | "minimized";
+
+function ResizableDemo({ open, onClose }: { open: boolean; onClose: () => void }) {
+  const [mounted, setMounted] = useState(false);
+  const { panelRef, panelStyle, backdropDragged, onDragStart } = useDraggableModal({
+    isOpen: open,
+    onClose,
+  });
+  const [viewState, setViewState] = useState<ModalViewState>("normal");
+  const [size, setSize] = useState({ width: 520, height: 400 });
+  const resizingRef = useRef({ current: false, edge: "", startX: 0, startY: 0, startW: 0, startH: 0 });
+
+  useEffect(() => { setMounted(true); }, []);
+  useEffect(() => {
+    if (open) setViewState("normal");
+  }, [open]);
+
+  useEffect(() => {
+    if (!open) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = prev; };
+  }, [open]);
+
+  // Resize handlers
+  useEffect(() => {
+    if (!open) return;
+
+    const onMove = (e: MouseEvent) => {
+      const r = resizingRef.current;
+      if (!r.current) return;
+      const dx = e.clientX - r.startX;
+      const dy = e.clientY - r.startY;
+
+      let newW = r.startW;
+      let newH = r.startH;
+
+      if (r.edge.includes("e")) newW = Math.max(320, Math.min(r.startW + dx, window.innerWidth - 40));
+      if (r.edge.includes("w")) newW = Math.max(320, Math.min(r.startW - dx, window.innerWidth - 40));
+      if (r.edge.includes("s")) newH = Math.max(200, Math.min(r.startH + dy, window.innerHeight - 40));
+
+      setSize({ width: newW, height: newH });
+    };
+
+    const onUp = () => {
+      resizingRef.current.current = false;
+      document.body.style.userSelect = "";
+      document.body.style.cursor = "";
+    };
+
+    document.addEventListener("mousemove", onMove);
+    document.addEventListener("mouseup", onUp);
+    return () => {
+      document.removeEventListener("mousemove", onMove);
+      document.removeEventListener("mouseup", onUp);
+    };
+  }, [open]);
+
+  const startResize = (edge: string, e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const r = resizingRef.current;
+    r.current = true;
+    r.edge = edge;
+    r.startX = e.clientX;
+    r.startY = e.clientY;
+    r.startW = size.width;
+    r.startH = size.height;
+    document.body.style.userSelect = "none";
+  };
+
+  if (!mounted || !open) return null;
+
+  const isMax = viewState === "maximized";
+  const isMin = viewState === "minimized";
+
+  const panelW = isMax ? "calc(100vw - 40px)" : `min(${size.width}px, 92vw)`;
+  const panelH = isMax ? "calc(100vh - 40px)" : isMin ? "auto" : "auto";
+
+  const headerBtnClass = "w-6 h-6 flex items-center justify-center border-none bg-black/[0.06] rounded-full cursor-pointer text-[var(--theme-fg-muted)] transition-all duration-200 hover:bg-black/10 hover:text-[var(--theme-fg)] dark:bg-white/[0.08] dark:hover:bg-white/[0.14]";
+
+  return createPortal(
+    <div
+      className={`fixed inset-0 z-[900] bg-black/20 backdrop-blur-[var(--glass-blur-overlay)] flex items-center justify-center overflow-y-auto p-5 dark:bg-black/40 animate-backdrop-fade-in ${backdropDragged && !isMax ? "items-start justify-start p-0" : ""}`}
+      onClick={onClose}
+    >
+      <div
+        ref={panelRef}
+        className={`glass-panel select-none flex flex-col overflow-hidden animate-panel-enter relative rounded-[var(--glass-radius,16px)]`}
+        style={{
+          ...(isMax ? {} : panelStyle),
+          width: panelW,
+          height: panelH,
+          maxWidth: "calc(100vw - 20px)",
+          maxHeight: "calc(100vh - 40px)",
+          cursor: isMax ? "default" : "grab",
+          transition: "width 250ms ease, height 250ms ease",
+        }}
+        onClick={(e) => e.stopPropagation()}
+        onMouseDown={isMax ? undefined : onDragStart}
+      >
+        {/* Header */}
+        <div className="flex items-center justify-between px-5 pt-4 pb-2 shrink-0">
+          <span className="text-[14px] font-[650] text-[var(--theme-fg)] tracking-[-0.01em]">
+            Resizable Modal
+          </span>
+          <div className="flex items-center gap-1.5">
+            {/* Minimize — minus-square icon */}
+            <button
+              className={headerBtnClass}
+              onClick={() => setViewState(isMin ? "normal" : "minimized")}
+              onMouseDown={(e) => e.stopPropagation()}
+              title={isMin ? "Restore" : "Minimize"}
+            >
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="5" />
+                <line x1="8" y1="12" x2="16" y2="12" />
+              </svg>
+            </button>
+            {/* Maximize / Restore — maximize-2 / minus-square icon */}
+            <button
+              className={headerBtnClass}
+              onClick={() => setViewState(isMax ? "normal" : "maximized")}
+              onMouseDown={(e) => e.stopPropagation()}
+              title={isMax ? "Restore" : "Maximize"}
+            >
+              {isMax ? (
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="3" y="3" width="18" height="18" rx="5" />
+                  <line x1="8" y1="12" x2="16" y2="12" />
+                </svg>
+              ) : (
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M2 9V6.5C2 4.01 4.01 2 6.5 2H9" />
+                  <path d="M15 2h2.5C19.99 2 22 4.01 22 6.5V9" />
+                  <path d="M22 15v2.5c0 2.49-2.01 4.5-4.5 4.5H15" />
+                  <path d="M9 22H6.5C4.01 22 2 19.99 2 17.5V15" />
+                </svg>
+              )}
+            </button>
+            {/* Close */}
+            <button
+              className={headerBtnClass}
+              onClick={onClose}
+              onMouseDown={(e) => e.stopPropagation()}
+              title="Close"
+            >
+              &times;
+            </button>
+          </div>
+        </div>
+
+        {/* Body — hidden when minimized */}
+        {!isMin && (
+          <div className="px-5 pb-4 overflow-y-auto flex-1 scrollbar-thin" onMouseDown={(e) => e.stopPropagation()}>
+            <SolidPanel>
+              <div className="flex flex-col gap-3">
+                <p className="text-sm text-black dark:text-white font-semibold">Resizable & Expandable</p>
+                <p className="text-xs text-black/60 dark:text-white/60 leading-relaxed">
+                  This modal supports drag-to-resize from the right and bottom edges. Use the header buttons to maximize (full screen), minimize (title bar only), or restore to the original size.
+                </p>
+                <div className="flex flex-wrap gap-2 mt-1">
+                  <span className="text-[10px] px-2 py-1 rounded-full bg-black/[0.06] dark:bg-white/[0.1] text-black/60 dark:text-white/60">Draggable</span>
+                  <span className="text-[10px] px-2 py-1 rounded-full bg-black/[0.06] dark:bg-white/[0.1] text-black/60 dark:text-white/60">Resizable</span>
+                  <span className="text-[10px] px-2 py-1 rounded-full bg-black/[0.06] dark:bg-white/[0.1] text-black/60 dark:text-white/60">Maximize</span>
+                  <span className="text-[10px] px-2 py-1 rounded-full bg-black/[0.06] dark:bg-white/[0.1] text-black/60 dark:text-white/60">Minimize</span>
+                </div>
+                <p className="text-xs text-black/60 dark:text-white/60 leading-relaxed mt-2">
+                  Set <code className="text-[10px] bg-black/[0.06] dark:bg-white/[0.1] px-1.5 py-0.5 rounded">resizable=true</code> on any modal to enable this behavior. All other modals default to <code className="text-[10px] bg-black/[0.06] dark:bg-white/[0.1] px-1.5 py-0.5 rounded">resizable=false</code>.
+                </p>
+              </div>
+            </SolidPanel>
+          </div>
+        )}
+
+        {/* Footer — hidden when minimized */}
+        {!isMin && (
+          <div className="px-5 pb-4 flex justify-end gap-2 shrink-0" onMouseDown={(e) => e.stopPropagation()}>
+            <span onMouseDown={(e) => e.stopPropagation()}><Button variant="ghost" size="sm" onClick={onClose}>Cancel</Button></span>
+            <span onMouseDown={(e) => e.stopPropagation()}><Button variant="solid" size="sm" onClick={onClose}>Done</Button></span>
+          </div>
+        )}
+
+        {/* Resize handles — only in normal state */}
+        {!isMax && !isMin && (
+          <>
+            {/* Right edge */}
+            <div
+              className="absolute top-4 right-0 w-1.5 bottom-4 cursor-ew-resize z-10 hover:bg-black/[0.06] dark:hover:bg-white/[0.08] rounded-full transition-colors duration-150"
+              onMouseDown={(e) => startResize("e", e)}
+            />
+            {/* Bottom edge */}
+            <div
+              className="absolute bottom-0 left-4 right-4 h-1.5 cursor-ns-resize z-10 hover:bg-black/[0.06] dark:hover:bg-white/[0.08] rounded-full transition-colors duration-150"
+              onMouseDown={(e) => startResize("s", e)}
+            />
+            {/* Bottom-right corner */}
+            <div
+              className="absolute bottom-1 right-1 w-3 h-3 cursor-nwse-resize z-10 opacity-30 hover:opacity-60 transition-opacity duration-150"
+              onMouseDown={(e) => startResize("se", e)}
+            >
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M11 1L1 11M11 5L5 11M11 9L9 11" stroke="currentColor" strokeWidth="1" strokeLinecap="round" /></svg>
+            </div>
+          </>
+        )}
+      </div>
+    </div>,
+    document.body
+  );
+}
+
 /* ── Main showcase — table layout ── */
 
 const DEMOS = [
@@ -247,6 +460,7 @@ const DEMOS = [
   { id: "tabbed", label: "Tabbed", desc: "Settings with tab navigation" },
   { id: "confirm", label: "Confirm", desc: "Destructive action warning" },
   { id: "media", label: "Media", desc: "File upload with progress" },
+  { id: "resizable", label: "Resizable", desc: "Drag edges to resize, maximize & minimize" },
 ];
 
 export function ModalsShowcase() {
@@ -280,6 +494,7 @@ export function ModalsShowcase() {
       <TabbedDemo open={activeModal === "tabbed"} onClose={() => setActiveModal(null)} />
       <ConfirmDemo open={activeModal === "confirm"} onClose={() => setActiveModal(null)} />
       <MediaDemo open={activeModal === "media"} onClose={() => setActiveModal(null)} />
+      <ResizableDemo open={activeModal === "resizable"} onClose={() => setActiveModal(null)} />
     </div>
   );
 }
