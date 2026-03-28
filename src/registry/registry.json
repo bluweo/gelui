@@ -8319,6 +8319,754 @@
           "description": "CSS class — apply to text elements"
         }
       }
+    },
+    {
+      "id": "login-form",
+      "name": "LoginForm",
+      "displayName": "Login Form",
+      "description": "Email + password login with remember me, social login options, and signup link",
+      "layer": "component",
+      "category": "form",
+      "status": "stable",
+      "path": "src/components/composed/LoginForm.tsx",
+      "importPath": "@/components/composed",
+      "exportName": "LoginForm",
+      "isReact": true,
+      "props": {
+        "onSubmit": {
+          "type": "(data) => void"
+        },
+        "showSocial": {
+          "type": "boolean",
+          "default": "true"
+        },
+        "className": {
+          "type": "string"
+        },
+        "style": {
+          "type": "CSSProperties"
+        }
+      },
+      "ai": {
+        "useWhen": [
+          "login page",
+          "authentication",
+          "sign in form"
+        ],
+        "avoidWhen": [
+          "signup (use SignupForm)",
+          "profile editing"
+        ],
+        "priority": "high",
+        "keywords": [
+          "login",
+          "signin",
+          "auth",
+          "email",
+          "password"
+        ]
+      },
+      "composition": {
+        "usedPrimitives": [
+          "card",
+          "input",
+          "password-input",
+          "form-group",
+          "checkbox",
+          "button",
+          "link-button",
+          "divider",
+          "stack"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": true,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Login form",
+          "jsx": "<LoginForm onSubmit={handleLogin} showSocial />"
+        }
+      ],
+      "tags": [
+        "login",
+        "auth",
+        "form",
+        "signin",
+        "email",
+        "password"
+      ],
+      "documentedOn": "/design-system/components",
+      "section": "Auth & Account"
+    },
+    {
+      "id": "profile-card",
+      "name": "ProfileCard",
+      "displayName": "Profile Card",
+      "description": "User info card with avatar, name, role, status badge, and edit button",
+      "layer": "component",
+      "category": "data",
+      "status": "stable",
+      "path": "src/components/composed/ProfileCard.tsx",
+      "importPath": "@/components/composed",
+      "exportName": "ProfileCard",
+      "isReact": true,
+      "props": {
+        "name": {
+          "type": "string",
+          "required": true
+        },
+        "role": {
+          "type": "string",
+          "required": true
+        },
+        "avatar": {
+          "type": "string"
+        },
+        "status": {
+          "type": "enum",
+          "options": [
+            "active",
+            "away",
+            "offline"
+          ],
+          "default": "active"
+        },
+        "onEdit": {
+          "type": "() => void"
+        },
+        "className": {
+          "type": "string"
+        }
+      },
+      "ai": {
+        "useWhen": [
+          "user cards",
+          "team member display",
+          "profile display"
+        ],
+        "avoidWhen": [
+          "user tables",
+          "simple avatar"
+        ],
+        "priority": "medium",
+        "keywords": [
+          "profile",
+          "user",
+          "card",
+          "team",
+          "member"
+        ]
+      },
+      "composition": {
+        "usedPrimitives": [
+          "avatar",
+          "badge",
+          "heading",
+          "caption",
+          "button",
+          "stack",
+          "inline"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Profile card",
+          "jsx": "<ProfileCard name=\"Alice\" role=\"Engineer\" status=\"active\" />"
+        }
+      ],
+      "tags": [
+        "profile",
+        "user",
+        "card",
+        "avatar",
+        "team"
+      ],
+      "documentedOn": "/design-system/components",
+      "section": "Auth & Account"
+    },
+    {
+      "id": "pricing-card",
+      "name": "PricingCard",
+      "displayName": "Pricing Card",
+      "description": "Plan name, price, feature list with checkmarks, and CTA. Popular variant inverts colors.",
+      "layer": "component",
+      "category": "data",
+      "status": "stable",
+      "path": "src/components/composed/PricingCard.tsx",
+      "importPath": "@/components/composed",
+      "exportName": "PricingCard",
+      "isReact": true,
+      "props": {
+        "plan": {
+          "type": "string",
+          "required": true
+        },
+        "price": {
+          "type": "string",
+          "required": true
+        },
+        "period": {
+          "type": "string",
+          "default": "/mo"
+        },
+        "description": {
+          "type": "string"
+        },
+        "features": {
+          "type": "string[]",
+          "required": true
+        },
+        "popular": {
+          "type": "boolean",
+          "default": "false"
+        },
+        "ctaLabel": {
+          "type": "string",
+          "default": "Get Started"
+        },
+        "onSelect": {
+          "type": "() => void"
+        },
+        "className": {
+          "type": "string"
+        }
+      },
+      "ai": {
+        "useWhen": [
+          "pricing pages",
+          "plan comparison",
+          "subscription tiers"
+        ],
+        "avoidWhen": [
+          "product cards",
+          "feature cards"
+        ],
+        "priority": "high",
+        "keywords": [
+          "pricing",
+          "plan",
+          "subscription",
+          "tier",
+          "price"
+        ]
+      },
+      "composition": {
+        "usedPrimitives": [
+          "card",
+          "overline",
+          "heading",
+          "caption",
+          "text",
+          "badge",
+          "button",
+          "divider",
+          "stack"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Pricing card",
+          "jsx": "<PricingCard plan=\"Pro\" price=\"\" popular features={[\"Unlimited\"]} />"
+        }
+      ],
+      "tags": [
+        "pricing",
+        "plan",
+        "card",
+        "subscription"
+      ],
+      "documentedOn": "/design-system/components",
+      "section": "Cards & Content"
+    },
+    {
+      "id": "stats-row",
+      "name": "StatsRow",
+      "displayName": "Stats Row",
+      "description": "Responsive row of KPI metric cards with icons, values, labels, and trends",
+      "layer": "component",
+      "category": "data",
+      "status": "stable",
+      "path": "src/components/composed/StatsRow.tsx",
+      "importPath": "@/components/composed",
+      "exportName": "StatsRow",
+      "isReact": true,
+      "props": {
+        "stats": {
+          "type": "StatItem[]",
+          "required": true
+        },
+        "cols": {
+          "type": "number"
+        },
+        "className": {
+          "type": "string"
+        }
+      },
+      "ai": {
+        "useWhen": [
+          "dashboard KPIs",
+          "metrics display",
+          "stats overview"
+        ],
+        "avoidWhen": [
+          "single stat",
+          "detailed analytics"
+        ],
+        "priority": "high",
+        "keywords": [
+          "stats",
+          "kpi",
+          "metrics",
+          "dashboard",
+          "numbers"
+        ]
+      },
+      "composition": {
+        "usedPrimitives": [
+          "grid",
+          "stat"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Stats row",
+          "jsx": "<StatsRow stats={[{value:\"1,234\",label:\"Users\",trend:\"up\"}]} />"
+        }
+      ],
+      "tags": [
+        "stats",
+        "kpi",
+        "metrics",
+        "dashboard"
+      ],
+      "documentedOn": "/design-system/components",
+      "section": "Data & Tables"
+    },
+    {
+      "id": "data-table",
+      "name": "DataTable",
+      "displayName": "Data Table",
+      "description": "Searchable, paginated data table with column headers and optional action button",
+      "layer": "component",
+      "category": "data",
+      "status": "stable",
+      "path": "src/components/composed/DataTable.tsx",
+      "importPath": "@/components/composed",
+      "exportName": "DataTable",
+      "isReact": true,
+      "props": {
+        "title": {
+          "type": "string"
+        },
+        "columns": {
+          "type": "Column[]",
+          "required": true
+        },
+        "data": {
+          "type": "Record[]",
+          "required": true
+        },
+        "searchPlaceholder": {
+          "type": "string",
+          "default": "Search..."
+        },
+        "actionLabel": {
+          "type": "string"
+        },
+        "onAction": {
+          "type": "() => void"
+        },
+        "pageSize": {
+          "type": "number",
+          "default": "5"
+        },
+        "className": {
+          "type": "string"
+        }
+      },
+      "ai": {
+        "useWhen": [
+          "data management",
+          "user lists",
+          "admin tables",
+          "CRUD interfaces"
+        ],
+        "avoidWhen": [
+          "simple lists",
+          "card grids"
+        ],
+        "priority": "high",
+        "keywords": [
+          "table",
+          "data",
+          "search",
+          "paginate",
+          "CRUD"
+        ]
+      },
+      "composition": {
+        "usedPrimitives": [
+          "table",
+          "search-input",
+          "pagination",
+          "badge",
+          "heading",
+          "button",
+          "stack",
+          "inline"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": true,
+        "hydrationRisk": "low"
+      },
+      "examples": [
+        {
+          "title": "Data table",
+          "jsx": "<DataTable title=\"Users\" columns={cols} data={users} pageSize={5} />"
+        }
+      ],
+      "tags": [
+        "table",
+        "data",
+        "search",
+        "paginate",
+        "admin"
+      ],
+      "documentedOn": "/design-system/components",
+      "section": "Data & Tables"
+    },
+    {
+      "id": "contact-form",
+      "name": "ContactForm",
+      "displayName": "Contact Form",
+      "description": "Name, email, subject dropdown, and message textarea with submit",
+      "layer": "component",
+      "category": "form",
+      "status": "stable",
+      "path": "src/components/composed/ContactForm.tsx",
+      "importPath": "@/components/composed",
+      "exportName": "ContactForm",
+      "isReact": true,
+      "props": {
+        "onSubmit": {
+          "type": "(data) => void"
+        },
+        "subjects": {
+          "type": "string[]"
+        },
+        "className": {
+          "type": "string"
+        }
+      },
+      "ai": {
+        "useWhen": [
+          "contact pages",
+          "feedback forms",
+          "inquiry forms"
+        ],
+        "avoidWhen": [
+          "login forms",
+          "settings"
+        ],
+        "priority": "medium",
+        "keywords": [
+          "contact",
+          "form",
+          "message",
+          "email",
+          "inquiry"
+        ]
+      },
+      "composition": {
+        "usedPrimitives": [
+          "heading",
+          "text",
+          "input",
+          "textarea",
+          "select",
+          "form-group",
+          "button",
+          "stack",
+          "inline"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": true,
+        "hydrationRisk": "none"
+      },
+      "tags": [
+        "contact",
+        "form",
+        "message"
+      ],
+      "documentedOn": "/design-system/components",
+      "section": "Forms & Input"
+    },
+    {
+      "id": "settings-panel",
+      "name": "SettingsPanel",
+      "displayName": "Settings Panel",
+      "description": "Tabbed settings with General, Appearance, and Notifications tabs",
+      "layer": "component",
+      "category": "form",
+      "status": "stable",
+      "path": "src/components/composed/SettingsPanel.tsx",
+      "importPath": "@/components/composed",
+      "exportName": "SettingsPanel",
+      "isReact": true,
+      "props": {
+        "className": {
+          "type": "string"
+        }
+      },
+      "ai": {
+        "useWhen": [
+          "settings pages",
+          "preferences panel",
+          "app configuration"
+        ],
+        "avoidWhen": [
+          "simple forms",
+          "profile editing"
+        ],
+        "priority": "medium",
+        "keywords": [
+          "settings",
+          "preferences",
+          "config",
+          "options",
+          "panel"
+        ]
+      },
+      "composition": {
+        "usedPrimitives": [
+          "heading",
+          "text",
+          "tab-bar",
+          "toggle",
+          "select",
+          "input",
+          "form-group",
+          "divider",
+          "button",
+          "stack",
+          "inline"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": true,
+        "hydrationRisk": "none"
+      },
+      "tags": [
+        "settings",
+        "preferences",
+        "tabs",
+        "config"
+      ],
+      "documentedOn": "/design-system/components",
+      "section": "Forms & Input"
+    },
+    {
+      "id": "page-header",
+      "name": "PageHeader",
+      "displayName": "Page Header",
+      "description": "Page title with optional overline, description, breadcrumbs, and action button",
+      "layer": "component",
+      "category": "navigation",
+      "status": "stable",
+      "path": "src/components/composed/PageHeader.tsx",
+      "importPath": "@/components/composed",
+      "exportName": "PageHeader",
+      "isReact": true,
+      "props": {
+        "title": {
+          "type": "string",
+          "required": true
+        },
+        "overline": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "breadcrumbs": {
+          "type": "string[]"
+        },
+        "actionLabel": {
+          "type": "string"
+        },
+        "action": {
+          "type": "ReactNode"
+        },
+        "onAction": {
+          "type": "() => void"
+        },
+        "className": {
+          "type": "string"
+        }
+      },
+      "ai": {
+        "useWhen": [
+          "page top section",
+          "admin page titles",
+          "dashboard headers"
+        ],
+        "avoidWhen": [
+          "hero sections",
+          "navigation bars"
+        ],
+        "priority": "high",
+        "keywords": [
+          "page header",
+          "title",
+          "breadcrumb",
+          "heading"
+        ]
+      },
+      "composition": {
+        "usedPrimitives": [
+          "heading",
+          "text",
+          "overline",
+          "breadcrumb",
+          "button",
+          "stack",
+          "inline"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Page header",
+          "jsx": "<PageHeader title=\"Users\" breadcrumbs={[\"Home\",\"Users\"]} actionLabel=\"Add\" />"
+        }
+      ],
+      "tags": [
+        "header",
+        "page",
+        "title",
+        "breadcrumb"
+      ],
+      "documentedOn": "/design-system/components",
+      "section": "Navigation & Layout"
+    },
+    {
+      "id": "navbar",
+      "name": "Navbar",
+      "displayName": "Navbar",
+      "description": "Top navigation bar with brand, links, notification badge, and user avatar",
+      "layer": "component",
+      "category": "navigation",
+      "status": "stable",
+      "path": "src/components/composed/Navbar.tsx",
+      "importPath": "@/components/composed",
+      "exportName": "Navbar",
+      "isReact": true,
+      "props": {
+        "brand": {
+          "type": "string",
+          "default": "GelUI"
+        },
+        "links": {
+          "type": "NavLink[]"
+        },
+        "userName": {
+          "type": "string"
+        },
+        "userAvatar": {
+          "type": "string"
+        },
+        "showNotifications": {
+          "type": "boolean",
+          "default": "true"
+        },
+        "notificationCount": {
+          "type": "number",
+          "default": "0"
+        },
+        "onLogin": {
+          "type": "() => void"
+        },
+        "className": {
+          "type": "string"
+        }
+      },
+      "ai": {
+        "useWhen": [
+          "top navigation",
+          "app header",
+          "site header"
+        ],
+        "avoidWhen": [
+          "sidebar navigation",
+          "footer"
+        ],
+        "priority": "high",
+        "keywords": [
+          "navbar",
+          "header",
+          "navigation",
+          "top bar",
+          "menu"
+        ]
+      },
+      "composition": {
+        "usedPrimitives": [
+          "heading",
+          "avatar",
+          "badge",
+          "notification-badge",
+          "button",
+          "icon-button",
+          "link-button",
+          "inline"
+        ]
+      },
+      "rendering": {
+        "ssrSafe": true,
+        "requiresClient": false,
+        "hydrationRisk": "none"
+      },
+      "examples": [
+        {
+          "title": "Navbar",
+          "jsx": "<Navbar brand=\"Acme\" links={[{label:\"Home\",active:true}]} userName=\"Alice\" />"
+        }
+      ],
+      "tags": [
+        "navbar",
+        "header",
+        "navigation",
+        "menu"
+      ],
+      "documentedOn": "/design-system/components",
+      "section": "Navigation & Layout"
     }
   ]
 }
