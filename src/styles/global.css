@@ -3010,14 +3010,23 @@ code:not([data-font-preview]), pre:not([data-font-preview]), kbd, samp { font-fa
 }
 
 @utility prim-table-tr {
-  transition: background 120ms ease;
+  transition: all 150ms ease;
+  position: relative;
 
   &:hover {
-    background: var(--theme-header-bg);
+    background: linear-gradient(90deg, color-mix(in srgb, var(--theme-fg) 4%, transparent), transparent);
+  }
+
+  &:hover td {
+    border-bottom-color: var(--theme-fg-subtle);
   }
 
   &[data-striped]:nth-child(even) {
     background: var(--theme-header-bg);
+  }
+
+  &[data-striped]:nth-child(even):hover {
+    background: linear-gradient(90deg, color-mix(in srgb, var(--theme-fg) 6%, var(--theme-header-bg)), var(--theme-header-bg));
   }
 }
 
