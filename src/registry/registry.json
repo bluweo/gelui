@@ -2258,7 +2258,7 @@
       "id": "modal",
       "name": "Modal",
       "displayName": "Modal",
-      "description": "Draggable glass modal with backdrop blur",
+      "description": "Centered dialog overlay with Overlay backdrop, Escape/click-outside close, body scroll lock. For draggable modals use useDraggableModal hook instead.",
       "layer": "primitive",
       "category": "overlay",
       "status": "stable",
@@ -2268,13 +2268,20 @@
       "isReact": true,
       "props": {
         "open": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": "false"
         },
         "onClose": {
           "type": "() => void"
         },
         "title": {
           "type": "string"
+        },
+        "children": {
+          "type": "ReactNode"
+        },
+        "footer": {
+          "type": "ReactNode"
         },
         "size": {
           "type": "enum",
@@ -2285,8 +2292,11 @@
           ],
           "default": "md"
         },
-        "footer": {
-          "type": "ReactNode"
+        "className": {
+          "type": "string"
+        },
+        "style": {
+          "type": "CSSProperties"
         }
       },
       "documentedOn": "/design-system/components",
@@ -2815,8 +2825,8 @@
       "status": "stable",
       "path": "src/primitives/navigation/Pagination.tsx",
       "exportName": "Pagination",
-      "description": "Page numbers with prev/next",
-      "version": "0.18.0",
+      "description": "Page navigation with icon-only prev/next arrows. Hover inverts to solid color and scales up 1.1x.",
+      "version": "0.62.0",
       "tags": [
         "pagination",
         "pages",
@@ -2824,12 +2834,23 @@
       ],
       "props": {
         "totalPages": {
-          "type": "number",
-          "required": true
+          "type": "number"
         },
         "currentPage": {
+          "type": "number"
+        },
+        "onPageChange": {
+          "type": "(page: number) => void"
+        },
+        "maxVisible": {
           "type": "number",
-          "required": true
+          "default": "5"
+        },
+        "className": {
+          "type": "string"
+        },
+        "style": {
+          "type": "CSSProperties"
         }
       }
     },
@@ -2842,8 +2863,8 @@
       "status": "stable",
       "path": "src/primitives/navigation/Stepper.tsx",
       "exportName": "Stepper",
-      "description": "Step progress indicator",
-      "version": "0.18.0",
+      "description": "Multi-step wizard indicator. Horizontal or vertical layout, supports { label, description } objects for vertical descriptions. Theme-aware colors.",
+      "version": "0.63.0",
       "tags": [
         "stepper",
         "progress",
@@ -2852,12 +2873,27 @@
       ],
       "props": {
         "steps": {
-          "type": "array",
-          "required": true
+          "type": "string[] | { label, description }[]"
         },
         "currentStep": {
-          "type": "number",
-          "required": true
+          "type": "number"
+        },
+        "onChange": {
+          "type": "(step: number) => void"
+        },
+        "direction": {
+          "type": "enum",
+          "options": [
+            "horizontal",
+            "vertical"
+          ],
+          "default": "horizontal"
+        },
+        "className": {
+          "type": "string"
+        },
+        "style": {
+          "type": "CSSProperties"
         }
       }
     },
@@ -2870,8 +2906,8 @@
       "status": "stable",
       "path": "src/primitives/navigation/BackToTop.tsx",
       "exportName": "BackToTop",
-      "description": "Floating scroll-to-top button",
-      "version": "0.18.0",
+      "description": "Floating scroll-to-top button. Appears after scrolling past threshold. Contrast-aware via useContrastColor hook.",
+      "version": "0.58.0",
       "tags": [
         "scroll",
         "navigation",
@@ -2880,7 +2916,14 @@
       "props": {
         "threshold": {
           "type": "number",
-          "default": 400
+          "default": "400"
+        },
+        "smooth": {
+          "type": "boolean",
+          "default": "true"
+        },
+        "className": {
+          "type": "string"
         }
       }
     },
@@ -4568,6 +4611,37 @@
         },
         "style": {
           "type": "CSSProperties"
+        }
+      }
+    },
+    {
+      "id": "use-draggable-modal",
+      "name": "useDraggableModal",
+      "category": "hook",
+      "layer": "component",
+      "path": "src/components/hooks/useDraggableModal.ts",
+      "exportName": "useDraggableModal",
+      "isReact": true,
+      "status": "stable",
+      "version": "0.64.0",
+      "tags": [
+        "modal",
+        "drag",
+        "hook",
+        "glass-panel"
+      ],
+      "description": "Shared hook for draggable glass-panel modals. Handles mouse drag, viewport clamping, resize re-clamp, Escape key, position reset on re-open. Used by ViewSourceModal, AppearanceModal, BackgroundPicker, FontPickerModal.",
+      "props": {
+        "isOpen": {
+          "type": "boolean",
+          "default": "false"
+        },
+        "onClose": {
+          "type": "() => void"
+        },
+        "edgePadding": {
+          "type": "number",
+          "default": "40"
         }
       }
     }

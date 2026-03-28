@@ -251,7 +251,7 @@ function ResizableDemo({ open, onClose }: { open: boolean; onClose: () => void }
   });
   const [viewState, setViewState] = useState<ModalViewState>("normal");
   const [size, setSize] = useState({ width: 520, height: 400 });
-  const resizingRef = useRef({ current: false, edge: "", startX: 0, startY: 0, startW: 0, startH: 0 });
+  const resizingRef = useRef({ current: false, edge: "", startX: 0, startY: 0, startW: 0, startH: 0, justResized: false });
 
   useEffect(() => { setMounted(true); }, []);
   useEffect(() => {
@@ -286,7 +286,12 @@ function ResizableDemo({ open, onClose }: { open: boolean; onClose: () => void }
     };
 
     const onUp = () => {
-      resizingRef.current.current = false;
+      if (resizingRef.current.current) {
+        resizingRef.current.current = false;
+        // Prevent the click event from closing the modal
+        setTimeout(() => { resizingRef.current.justResized = false; }, 100);
+        resizingRef.current.justResized = true;
+      }
       document.body.style.userSelect = "";
       document.body.style.cursor = "";
     };
@@ -325,7 +330,7 @@ function ResizableDemo({ open, onClose }: { open: boolean; onClose: () => void }
   return createPortal(
     <div
       className={`fixed inset-0 z-[900] bg-black/20 backdrop-blur-[var(--glass-blur-overlay)] flex items-center justify-center overflow-y-auto p-5 dark:bg-black/40 animate-backdrop-fade-in ${backdropDragged && !isMax ? "items-start justify-start p-0" : ""}`}
-      onClick={onClose}
+      onClick={() => { if (!resizingRef.current.justResized) onClose(); }}
     >
       <div
         ref={panelRef}

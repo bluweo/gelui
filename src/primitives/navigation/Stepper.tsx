@@ -43,7 +43,7 @@ export function Stepper({
         return (
           <div
             key={i}
-            className={`flex ${isVertical ? "flex-col" : "items-center"} ${i < steps.length - 1 ? "flex-1" : ""}`}
+            className={`flex ${isVertical ? "flex-col" : "items-center"} ${!isVertical && i < steps.length - 1 ? "flex-1" : ""}`}
           >
             <div className={`flex ${isVertical ? "flex-row items-start gap-3" : "flex-col items-center gap-1.5"}`}>
               <div
@@ -88,15 +88,16 @@ export function Stepper({
               </div>
             </div>
             {i < steps.length - 1 && (
-              <div
-                className={[
-                  "transition-colors duration-200",
-                  isCompleted ? "bg-[var(--theme-fg)]" : "bg-[var(--theme-fg-faint)]",
-                  isVertical
-                    ? "w-0.5 h-6 ml-[13px] my-1"
-                    : "flex-1 h-0.5 self-start mt-3.5 mx-2",
-                ].join(" ")}
-              />
+              isVertical ? (
+                <div
+                  className={`transition-colors duration-200 rounded-full ${isCompleted ? "bg-[var(--theme-fg)]" : "bg-[var(--theme-fg-faint)]"}`}
+                  style={{ width: "2px", height: "24px", marginLeft: "13px", marginTop: "4px", marginBottom: "4px" }}
+                />
+              ) : (
+                <div
+                  className={`flex-1 h-0.5 self-start mt-3.5 mx-2 transition-colors duration-200 ${isCompleted ? "bg-[var(--theme-fg)]" : "bg-[var(--theme-fg-faint)]"}`}
+                />
+              )
             )}
           </div>
         );
