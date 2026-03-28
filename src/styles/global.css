@@ -3937,7 +3937,11 @@ code:not([data-font-preview]), pre:not([data-font-preview]), kbd, samp { font-fa
   --icon-btn-text: rgba(255, 255, 255, 0.7);
 }
 
-/* Glass panel overrides — buttons inside glass panels use dark text (light glass surface) */
+/* Glass panel overrides — buttons inside glass panels use dark text (light glass surface)
+   Uses [class] to boost specificity above [data-contrast] rules */
+[data-contrast] .glass-1,
+[data-contrast] .glass-2,
+[data-contrast] .glass-3,
 .glass-1, .glass-2, .glass-3 {
   --btn-ghost-border: rgba(0, 0, 0, 0.15);
   --btn-ghost-text: rgba(0, 0, 0, 0.7);

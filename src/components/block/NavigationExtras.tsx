@@ -55,12 +55,12 @@ export function NavigationExtras() {
       </div>
 
       {/* BackToTop note */}
-      <div className="rounded-[var(--glass-radius-sm)] overflow-hidden bg-[var(--theme-table-bg)] border border-[var(--theme-divider)] py-3.5 px-4 flex items-center gap-2.5">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-[#007AFF] shrink-0">
-          <circle cx="12" cy="12" r="10" />
-          <line x1="12" y1="16" x2="12" y2="8" />
-          <polyline points="8 12 12 8 16 12" />
-        </svg>
+      <div className="rounded-[var(--glass-radius-sm)] overflow-hidden bg-[var(--theme-table-bg)] border border-[var(--theme-divider)] py-3.5 px-4 flex items-center gap-3">
+        <div className="w-10 h-10 rounded-full border border-[var(--theme-divider)] bg-[var(--theme-header-bg)] flex items-center justify-center shrink-0">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--theme-fg-muted)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="18 15 12 9 6 15" />
+          </svg>
+        </div>
         <span className="text-xs text-[var(--theme-fg)] leading-normal">
           <strong className="font-semibold">BackToTop</strong> is a floating button primitive that appears on scroll. It is available via <code className="text-[11px] font-mono py-px px-1 rounded-[3px] bg-[var(--theme-divider)]">@/primitives/navigation</code> and can be placed at the page level.
         </span>

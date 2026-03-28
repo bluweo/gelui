@@ -43,13 +43,13 @@ export function Pagination({
     return pages;
   };
 
-  const navBtnClass = [
+  const pageBtnBase = [
     "inline-flex items-center justify-center min-w-8 h-8 px-2",
     "border-none rounded-[var(--glass-radius-pill,100px)]",
     "cursor-pointer text-[13px] font-medium font-[family-name:var(--font-ui)]",
-    "transition-[background,opacity] duration-150",
-    "bg-[var(--theme-header-bg)] text-[var(--theme-fg-muted)]",
+    "transition-all duration-200",
     "backdrop-blur-[12px]",
+    "hover:scale-110",
   ].join(" ");
 
   const pages = getVisiblePages();
@@ -59,14 +59,16 @@ export function Pagination({
       className={`flex items-center gap-1 ${className}`}
       style={style}
     >
+      {/* Prev arrow */}
       <button
-        className={`${navBtnClass} ${currentPage <= 1 ? "opacity-40 cursor-default" : ""}`}
+        className={`${pageBtnBase} bg-[var(--theme-header-bg)] text-[var(--theme-fg-muted)] hover:bg-[var(--theme-fg)] hover:text-[var(--theme-fg-on-solid)] ${currentPage <= 1 ? "opacity-40 cursor-default pointer-events-none" : ""}`}
         disabled={currentPage <= 1}
         onClick={() => onPageChange(currentPage - 1)}
       >
-        &#8249; Prev
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6" /></svg>
       </button>
 
+      {/* Page numbers */}
       {pages.map((page, i) =>
         page === "ellipsis" ? (
           <span
@@ -80,14 +82,10 @@ export function Pagination({
             key={page}
             data-active={page === currentPage || undefined}
             className={[
-              "inline-flex items-center justify-center min-w-8 h-8 px-2",
-              "border-none rounded-[var(--glass-radius-pill,100px)]",
-              "cursor-pointer text-[13px] font-medium font-[family-name:var(--font-ui)]",
-              "transition-[background,opacity] duration-150",
-              "backdrop-blur-[12px]",
+              pageBtnBase,
               page === currentPage
                 ? "bg-[var(--theme-bg-solid)] text-[var(--theme-fg-on-solid)]"
-                : "bg-[var(--theme-header-bg)] text-[var(--theme-fg-muted)]",
+                : "bg-[var(--theme-header-bg)] text-[var(--theme-fg-muted)] hover:bg-[var(--theme-fg)] hover:text-[var(--theme-fg-on-solid)]",
             ].join(" ")}
             onClick={() => onPageChange(page)}
           >
@@ -96,12 +94,13 @@ export function Pagination({
         ),
       )}
 
+      {/* Next arrow */}
       <button
-        className={`${navBtnClass} ${currentPage >= totalPages ? "opacity-40 cursor-default" : ""}`}
+        className={`${pageBtnBase} bg-[var(--theme-header-bg)] text-[var(--theme-fg-muted)] hover:bg-[var(--theme-fg)] hover:text-[var(--theme-fg-on-solid)] ${currentPage >= totalPages ? "opacity-40 cursor-default pointer-events-none" : ""}`}
         disabled={currentPage >= totalPages}
         onClick={() => onPageChange(currentPage + 1)}
       >
-        Next &#8250;
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
       </button>
     </nav>
   );

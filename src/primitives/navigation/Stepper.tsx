@@ -40,9 +40,9 @@ export function Stepper({
                   "transition-[background,border-color] duration-200 border-2",
                   onChange ? "cursor-pointer" : "cursor-default",
                   isCompleted
-                    ? "bg-[#007AFF] text-white border-[#007AFF]"
+                    ? "bg-[var(--theme-fg)] text-[var(--theme-fg-on-solid)] border-[var(--theme-fg)]"
                     : isCurrent
-                      ? "bg-transparent text-[#007AFF] border-[#007AFF]"
+                      ? "bg-transparent text-[var(--theme-fg)] border-[var(--theme-fg)]"
                       : "bg-transparent text-[var(--theme-fg-subtle)] border-[var(--theme-fg-faint)]",
                 ].join(" ")}
               >
@@ -66,7 +66,7 @@ export function Stepper({
               <div
                 className={[
                   "flex-1 h-0.5 self-start mt-3.5 mx-2 transition-colors duration-200",
-                  isCompleted ? "bg-[#007AFF]" : "bg-[var(--theme-fg-faint)]",
+                  isCompleted ? "bg-[var(--theme-fg)]" : "bg-[var(--theme-fg-faint)]",
                 ].join(" ")}
               />
             )}
